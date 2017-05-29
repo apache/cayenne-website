@@ -1,0 +1,4 @@
+Title: Remote Object Persistence Coding Server
+
+	<P><BR>
+In the simplest case, there is no custom code on the server. The server would only contain Cayenne mapping files, persistent classes and web.xml descriptor <A href="remote-object-persistence-cws-deployment.html" title="Remote Object Persistence CWS Deployment">specifying deployment parameters</A> of the service. Customization is done via subclassing <TT>org.apache.cayenne.remote.hessian.service.HessianServlet</TT>, and adding business logic to the server-side persistent objects (e.g. in the validation methods).</P>

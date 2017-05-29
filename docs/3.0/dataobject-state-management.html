@@ -1,0 +1,128 @@
+Title: DataObject State Management
+
+<H2>DataObject State Management</H2>
+	<P>Arguably the second most important function of DataContext (first is performing queries) is keeping track of changes made to the registered DataObjects. &quot;Registered&quot; is a keyword here - registering an object with DataContext is what gives this object its persistent qualities.</P>
+
+<H3><A name="DataObjectStateManagement-HowtoRegisteraDataObject"></A>How to Register a DataObject</H3>
+
+<P>Behind the scenes &quot;registering an object&quot; results in storing this object in a map using its ObjectId as a key, setting &quot;dataContext&quot; property of a DataObject to the current DataContext, and taking a snapshot of all persistent properties to be able to track later modifications. Objects can become &quot;registered&quot; in two ways:</P>
+
+<UL>
+	<LI>automatically when they are fetched via query API</LI>
+	<LI>explicitly for the newly created objects</LI>
+</UL>
+
+
+<P>Whenever a selecting query is executed by a DataContext, all fetched objects are automatically registered with this DataContext. On the other hand, newly created objects must be registered explicitly:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataContext;
+...
+DataContext context; <SPAN class="code-comment">// assume <SPAN class="code-keyword">this</SPAN> exists
+</SPAN>
+Artist artist = <SPAN class="code-keyword">new</SPAN> Artist();
+context.registerNewObject(artist);
+
+<SPAN class="code-comment">// after the line above is executed, artist object acquired <SPAN class="code-quote">&quot;persistent&quot;</SPAN> behavior
+</SPAN><SPAN class="code-comment">// and is said to be <SPAN class="code-quote">&quot;managed&quot;</SPAN> by DataContext</SPAN></PRE>
+</DIV></DIV>
+
+<P>This code can be simplified - object creation and registrations steps can be combined in one method call:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataContext;
+...
+DataContext context; <SPAN class="code-comment">// assume <SPAN class="code-keyword">this</SPAN> exists
+</SPAN>
+Artist artist = (Artist) context.newObject(Artist.class);</PRE>
+</DIV></DIV>
+
+<P>This method relies on the presence of a no-argument constructor in the DataObject class.</P>
+
+<H3><A name="DataObjectStateManagement-CheckingtheStateofRegisteredDataObjects"></A>Checking the State of Registered DataObjects</H3>
+
+<P>State transitions of DataObjects from persistence point of view are discussed in the &quot;Design&quot; chapter. State of each individual object is described by an integer constant obtained via a call to DataObject.getPeristenceState(). Allowed states are defined as static variables in PersistenceState class.</P>
+
+<P>When a new object is inserted to the DataContext as described above, it becomes &quot;NEW&quot;:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataContext;
+...
+DataContext context; <SPAN class="code-comment">// assume <SPAN class="code-keyword">this</SPAN> exists
+</SPAN>
+<SPAN class="code-comment">// artist will become PersistenceState.NEW
+</SPAN>Artist artist = (Artist) context.newObject(Artist.class);</PRE>
+</DIV></DIV>
+
+<P>When a DataContext is committed, such object becomes &quot;COMMITTED&quot;:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-comment">// artist will become PersistenceState.COMMITTED
+</SPAN>context.commitChanges();</PRE>
+</DIV></DIV>
+
+<P>When any of the attributes or relationships of the fetched or committed object are changed, such an object becomes MODIFIED:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> will change the object state to PersistenceState.MODIFIED
+</SPAN>artist.setName(<SPAN class="code-quote">&quot;NewName&quot;</SPAN>);</PRE>
+</DIV></DIV>
+
+<P>When a fetched or committed object is explicitly deleted from the DataContext, object becomes DELETED:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> will change the object state to PersistenceState.DELETED
+</SPAN>context.deleteObject(artist);</PRE>
+</DIV></DIV>
+
+<P>DataContext is said to have changes if it has one or more registered objects in a state PersistenceState.MODIFIED, PersistenceState.NEW or PersistenceState.DELETED. DataContext provides the following method to check if it has any changed objects:</P>
+
+<UL>
+	<LI><TT>public boolean hasChanges()</TT></LI>
+</UL>
+
+
+<P>There is also a way to obtain a list of changed objects in each one of the above states:</P>
+
+<UL>
+	<LI><TT>public java.util.Collection newObjects()</TT></LI>
+	<LI><TT>public java.util.Collection deletedObjects()</TT></LI>
+	<LI><TT>public java.util.Collection modifiedObjects()</TT></LI>
+</UL>
+
+
+<H3><A name="DataObjectStateManagement-SavingAllUncommittedDataObjects"></A>Saving All Uncommitted DataObjects</H3>
+
+<P>All of the uncommitted objects (&quot;uncommitted&quot; means &quot;new&quot;, &quot;modified&quot; or &quot;deleted&quot;) are saved (&quot;committed&quot;) to the database with a single method call on the DataContext:</P>
+
+<UL>
+	<LI><TT>public void commitChanges()</TT></LI>
+</UL>
+
+
+<P>Method commitChanges takes care of building correct SQL statements, generating primary keys and transactional behaviour. It roughly follows this scenario:</P>
+
+<UL>
+	<LI>Checks if there are any changed objects (also detecting &quot;phantom&quot; modifications, e.g. if an object property was &quot;updated&quot; with the equivalent value).</LI>
+	<LI>Validates &quot;dirty&quot; objects (for more information on validation see <A href="dataobject-validation.html" title="DataObject Validation">this page</A>).</LI>
+	<LI>Generates primary keys for any NEW objects that require autogenerated key.</LI>
+	<LI>Builds any needed INSERT, UPDATE, DELETE queries.</LI>
+	<LI>Starts the database transaction.</LI>
+	<LI>Runs the queries.</LI>
+	<LI>Commits transaction.</LI>
+	<LI>Changes all committed objects state to PersistenceState.COMMITTED.</LI>
+	<LI>Updates internally stored snapshots of the recently saved objects.</LI>
+</UL>
+
+
+
+<H3><A name="DataObjectStateManagement-UndoingAllUncommittedChanges"></A>Undoing All Uncommitted Changes</H3>
+
+<P>There is a way for the DataContext to undo all uncommitted changes:</P>
+
+<UL>
+	<LI><TT>public void rollbackChanges()</TT></LI>
+</UL>
+
+
+<P>This will restore the persistence state and the values of all registered objects to the values that objects had when they were fetched or the last commitChanges was executed. This effectively restores previously committed state of the object graph. Note that any NEW objects are unregistered from the context.</P>

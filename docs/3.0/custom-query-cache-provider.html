@@ -1,0 +1,24 @@
+Title: Custom Query Cache Provider
+
+	<P>By default Cayenne stores cached query results in an LRUMap (<TT>'org.apache.cayenne.cache.MapQueryCacheFactory'</TT>) and can also be configured to use OSCache (via <TT>'org.apache.cayenne.cache.OSQueryCacheFactory'</TT>). If none of these cache engines suit specific application needs, users can hook up their own. </P>
+
+<P>Assuming you have some cache management library that you want to integrate with Cayenne, you need to implement a <TT>'org.apache.cayenne.cache.QueryCacheFactory'</TT> interface that creates an instance of <TT>'org.apache.cayenne.cache.QueryCache'</TT> that is a facade to your cache engine.</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">class MyFactory <SPAN class="code-keyword">implements</SPAN> QueryCacheFactory {
+   <SPAN class="code-keyword">public</SPAN> QueryCache getQueryCache(Map properties) {
+      <SPAN class="code-keyword">return</SPAN> <SPAN class="code-keyword">new</SPAN> MyQueryCache(properties);
+   }
+}
+</PRE>
+</DIV></DIV>
+
+<P>Custom factory can be set on the DataDomain:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataDomain domain = Configuration.getSharedConfiguration().getDomain();
+domain.setQueryCacheFactory(<SPAN class="code-keyword">new</SPAN> MyFactory());
+</PRE>
+</DIV></DIV>
+
+<P><EM>TODO: pending <A href="https://issues.apache.org/cayenne/browse/CAY-825" class="external-link" rel="nofollow">CAY-825 implementation</A>, setting custom factory should be possible via CayenneModeler.</EM> </P>

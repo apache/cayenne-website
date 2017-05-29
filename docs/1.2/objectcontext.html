@@ -1,0 +1,7 @@
+Title: ObjectContext
+
+	
+
+<P><TT>org.objectstyle.cayenne.ObjectContext</TT> is an interface that defines API for the application interaction with Cayenne. Two most notable implementors are <A href="datacontext.html" title="DataContext">DataContext</A>, used in most Cayenne applications, and <TT>CayenneContext</TT> used on the <A href="remote-object-persistence-coding-client.html" title="Remote Object Persistence Coding Client">remote client</A>. </P>
+
+<P>ObjectContext accesses the underlying persistence stack via a parent <A href="datachannel.html" title="DataChannel">DataChannel</A>. ObjectContexts that support multiple levels of nesting (such as DataContext) themselves implement a <TT>org.objectstyle.cayenne.DataChannel</TT> interface.</P>

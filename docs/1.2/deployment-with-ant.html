@@ -1,0 +1,13 @@
+Title: Deployment with Ant
+
+	
+
+<P>There is a number of cases when it is highly desirable to automate changing of Cayenne configuration files, including cayenne.xml and driver information files:</P>
+
+<UL>
+	<LI>Changing connection information when porting an application from one environment to another: Deployment environment uses different information for the database connections from what was used in development.</LI>
+	<LI>Deployment of Cayenne libraries: Third party Cayenne libraries may contain DataMaps and business classes, but they normally do not have cayenne.xml file, since ultimate deployment configuration is unknown when the library is created.</LI>
+</UL>
+
+
+<P>Cayenne provides an Ant task called cdeploy that takes care of such things. More information on cdeploy is available <A href="cdeploy.html" title="cdeploy">here</A>.</P>

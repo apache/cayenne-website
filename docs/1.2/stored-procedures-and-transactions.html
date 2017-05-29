@@ -1,0 +1,5 @@
+Title: Stored Procedures and Transactions
+
+	<P><BR>
+<BR>
+There maybe a situations when stored procedures handle their own transactions and an application is configured to use Cayenne-managed transactions. This is obviously conflicting and undesirable behavior. In this case ProcedureQueries should be executed explicitly wrapped in an &quot;external&quot; Transaction. This is one of the few cases when a user should worry about transactions at all. Read more about manual transactions <A href="understanding-transactions.html" title="Understanding Transactions">here</A>.</P>

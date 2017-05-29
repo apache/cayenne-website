@@ -1,0 +1,65 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;3.&nbsp;Getting started with Object Relational Mapping (ORM)</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 3.1 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 3.1"><link rel="home" href="index.html" title="Getting Started with Cayenne"><link rel="up" href="getting-started-part2.html" title="Part&nbsp;II.&nbsp;Learning mapping basics"><link rel="prev" href="ch02.html" title="Chapter&nbsp;2.&nbsp;Starting a project"><link rel="next" href="ch04.html" title="Chapter&nbsp;4.&nbsp;Creating Java Classes"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.3.1 (3.1)</th><th align="center">Chapter&nbsp;3.&nbsp;Getting started with Object Relational Mapping (ORM)</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a>&nbsp;</td><th width="60%" align="center"><a accesskey="u" href="getting-started-part2.html">Part&nbsp;II.&nbsp;Learning mapping basics</a></th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;3.&nbsp;Getting started with Object Relational Mapping (ORM)"><div class="titlepage"><div><div><h2 class="title"><a name="d0e157"></a>Chapter&nbsp;3.&nbsp;Getting started with Object Relational Mapping (ORM)</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="ch03.html#mapping-db-tables-and-columns">Mapping Database Tables and Columns</a></span></dt><dt><span class="section"><a href="ch03.html#mapping-db-relationships">Mapping Database Relationships</a></span></dt><dt><span class="section"><a href="ch03.html#mapping-java-classes">Mapping Java Classes</a></span></dt></dl></div><p> The goal of this section is to learn how to create a simple Object-Relational model with
+        CayenneModeler. We will create a complete ORM model for the following database
+        schema:</p><p><span class="inlinemediaobject"><img src="images/database-schema.jpg"></span>
+    </p><p>
+        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Very often you'd have an existing database already, and
+            it can be quickly imported in Cayenne via "Tools &gt; Reengineer Database
+            Schema". This will save you lots of time compared to manual mapping. However
+            understanding how to create the mapping by hand is important, so we are showing
+            the "manual" approach below.</p></div><p>
+    </p><div class="section" title="Mapping Database Tables and Columns"><div class="titlepage"><div><div><h2 class="title"><a name="mapping-db-tables-and-columns"></a>Mapping Database Tables and Columns</h2></div></div></div><p>Lets go back to CayenneModeler where we have the newly created project open and start
+            by adding the ARTIST table. Database tables are called <span class="bold"><strong>"DbEntities"</strong></span> in Cayenne mapping (those can be actual tables or database
+            views). </p><p>Select "datamap" on the left-hand side project tree and click "Create DbEntity" button
+            (or use "Project &gt; Create DbEntity" menu). A new DbEntity is created. In "DbEntity
+            Name" field enter "ARTIST". Then click on "Create Attribute" button on the entity
+            toolbar (third button from the left). This action changes the view to the "Attribute"
+            tab and adds a new attribute (attribute means a "table column" in this case) called
+            "untitledAttr". Let's rename it to ID, make it an INTEGER and make it a PK:</p><p><span class="inlinemediaobject"><img src="images/modeler-artistid.png"></span></p><p>Similarly add NAME VARCHAR(200) and DATE_OF_BIRTH DATE attributes. After that repeat
+            this procedure for PAINTING and GALLERY entities to match DB schema shown above.</p><p>
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Don't forget to save your project periodically to
+                    avoid losing your work. You will also have to refresh the project in Eclipse
+                    after every CayenneModeler save, as Eclipse is by default unaware of any
+                    changes made in the Modeler.</p></div><p>
+        </p></div><div class="section" title="Mapping Database Relationships"><div class="titlepage"><div><div><h2 class="title"><a name="mapping-db-relationships"></a>Mapping Database Relationships</h2></div></div></div><p>Now we need to specify relationships between ARTIST, PAINTING and GALLERY tables.
+            Start by creating a one-to-many ARTIST/PAINTING relationship:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Select the ARTIST DbEntity on the left and click on the "Relationships"
+                    tab.</p></li><li class="listitem"><p>Click on "Create Relationship" button on the entity toolbar (second button
+                    from the left) - a relationship called "untitledRel" is created.</p></li><li class="listitem"><p>Choose the "Target" to be "Painting".</p></li><li class="listitem"><p>Click on the "Database Mapping" button (letter "I" in a circle) - relationship
+                    configuration dialog is presented. Here you can assign a name to the
+                    relationship and also its complimentary reverse relationship. This name can be
+                    anything (this is really a symbolic name of the database referential
+                    constraint), but it is recommended to use a valid Java identifier, as this will
+                    save some typing later. We'll call the relationship "paintings" and reverse
+                    relationship "artist".</p></li><li class="listitem"><p>Click on "Add" button on the right to add a join</p></li><li class="listitem"><p>Select "ID" column for the "Source" and "ARTIST_ID" column for the
+                    target.</p></li><li class="listitem"><p>Relationship information should now look like this:</p></li></ul></div><p><span class="inlinemediaobject"><img src="images/modeler-dbrelationship.png"></span></p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Click "Done" to confirm the changes and close the dialog.</p></li><li class="listitem"><p>Two complimentary relationships have been created - from ARTIST to PAINTING
+                    and back. Still you may have noticed one thing is missing - "paintings"
+                    relationship should be to-many, but "To Many" checkbox is not checked. Let's
+                    change that - check the checkbox for "paintings" relationship, and then click on
+                    PAINTING DbEntity, and uncheck "artist" relationship "To Many" to make the
+                    reverse relationship "to-one" as it should be.</p></li><li class="listitem"><p>Repeat the steps above to create a many-to-one relationship from PAINTING to
+                    GALLERY, calling the relationships pair "gallery" and "paintings".</p></li></ul></div></div><div class="section" title="Mapping Java Classes"><div class="titlepage"><div><div><h2 class="title"><a name="mapping-java-classes"></a>Mapping Java Classes</h2></div></div></div><p>Now that the database schema mapping is complete, CayenneModeler can create mappings
+            of Java classes (aka "ObjEntities") by deriving everything from DbEntities. At present
+            there is no way to do it for the entire DataMap in one click, so we'll do it for each
+            table individually.</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Select "ARTIST" DbEntity and click on "Create ObjEntity" button (a green class
+                    icon) either on the entity toolbar or on the main toolbar. An ObjEntity called
+                    "Artist" is created with a Java class field set to
+                    "org.example.cayenne.persistent.Artist". The modeler transformed the database
+                    names to the Java-friendly names (e.g., if you click on the "Attributes" tab,
+                    you'll see that "DATE_OF_BIRTH" column was converted to "dateOfBirth" Java class
+                    attribute).</p></li><li class="listitem"><p>Select "GALLERY" DbEntity and click on "Create ObjEntity" button again -
+                    you'll see a "Gallery" ObjEntity created.</p></li><li class="listitem"><p>Finally, do the same thing for "PAINTING".</p></li></ul></div><p>Now you need to synchronize relationships. Artist and Gallery entities were created
+            when there was no related "Painting" entity, so their relationships were not set. </p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Click on the "Artist" ObjEntity and (optinally) change to the
+                        "Relationships" tab. Now click on "Sync ObjEntity with DbEntity" button on
+                        the toolbar (two yellow arrows) - you will see the "paintings" relationship
+                        appear.</p></li><li class="listitem"><p>Do the same for the "Gallery" entity.</p></li></ul></div><p>Unless you want to customize the Java class and property names (which you can do
+            easily) the mapping is complete. </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="getting-started-part2.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;2.&nbsp;Starting a project&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;Creating Java Classes</td></tr></table></div></body></html>

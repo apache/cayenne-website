@@ -1,0 +1,92 @@
+Title: Handling Inheritance
+
+	
+
+<P>&quot;Inheritance&quot; is an Object Oriented concept absent in traditional RDBMS. Cayenne however allows to map a hierarchical class tree to a single base table (so called &quot;single table inheritance&quot;). Such mapping is described in detail in the <A href="modeling-inheritance.html" title="Modeling Inheritance">Modeler Guide</A>. The idea of single table inheritance is that a &quot;class&quot; of a database row is determined from the values in one or more columns of the base table. These columns are called &quot;class designator columns&quot;.</P>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/1.2/images/icons/emoticons/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Initial Values of the Classs Designator Columns</B><BR>Assigning correct values to the &quot;class designator columns&quot; mentioned above is one task that is not yet automated in Cayenne and requires user code in the DataObject, as discussed in the next subsection. In the future versions this will likely be handled in the mapping and completely outside of the Java classes, so the advise below will become obsolete.</TD></TR></TABLE></DIV>
+
+<H3><A name="HandlingInheritance-InheritanceandnewDataObjects"></A>Inheritance and new DataObjects</H3>
+<P>Consider the following class hierarchy (also used in the Modeler Guide example):<BR>
+<SPAN class="image-wrap" style=""><IMG src="handling-inheritance.data/inheritance-diagram.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>If a class designator column is &quot;PERSON_TYPE&quot;, AbstractPerson class should define an attribute (for instance called &quot;personType&quot;) that maps to PERSON_TYPE. This attribute is redundant and meanigless in Java, since person type is defined already by the Java class of the object, however we still have to keep it around so that when the new objects are saved, correct PERSON_TYPE data is stored in the database. Currently it is a developer responsibility to set &quot;personType&quot; value (or values of any other attributes that map to &quot;class designator columns&quot;) when the new object is registered with DataContext. One way to take care of this is to override &quot;setPersistenceState(..)&quot; method on each DataObject class in the inheritance hierarchy to catch when the object is registered with DataContext:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">public</SPAN> class Employee <SPAN class="code-keyword">extends</SPAN> _Employee {
+    <SPAN class="code-keyword">public</SPAN> void setPersistenceState(<SPAN class="code-object">int</SPAN> state) {
+        <SPAN class="code-keyword">super</SPAN>.setPersistenceState(state);
+        
+        <SPAN class="code-comment">// <SPAN class="code-keyword">if</SPAN> object was just created
+</SPAN>        <SPAN class="code-keyword">if</SPAN>(state == PersistenceState.NEW) {
+           setPersonType(<SPAN class="code-quote">&quot;EMPLOYEE&quot;</SPAN>);
+        }
+    }
+...
+}
+
+<SPAN class="code-keyword">public</SPAN> class Manager <SPAN class="code-keyword">extends</SPAN> _Manager {
+    <SPAN class="code-keyword">public</SPAN> void setPersistenceState(<SPAN class="code-object">int</SPAN> state) {
+        <SPAN class="code-keyword">super</SPAN>.setPersistenceState(state);
+        
+        <SPAN class="code-comment">// <SPAN class="code-keyword">if</SPAN> object was just created
+</SPAN>        <SPAN class="code-keyword">if</SPAN>(state == PersistenceState.NEW) {
+           setPersonType(<SPAN class="code-quote">&quot;MANAGER&quot;</SPAN>);
+        }
+    }
+...
+}
+
+<SPAN class="code-keyword">public</SPAN> class CustomerContact <SPAN class="code-keyword">extends</SPAN> _CustomerContact {
+    <SPAN class="code-keyword">public</SPAN> void setPersistenceState(<SPAN class="code-object">int</SPAN> state) {
+        <SPAN class="code-keyword">super</SPAN>.setPersistenceState(state);
+        
+        <SPAN class="code-comment">// <SPAN class="code-keyword">if</SPAN> object was just created
+</SPAN>        <SPAN class="code-keyword">if</SPAN>(state == PersistenceState.NEW) {
+           setPersonType(<SPAN class="code-quote">&quot;CUSTOMER&quot;</SPAN>);
+        }
+    }
+...
+}
+</PRE>
+</DIV></DIV>
+
+<H3><A name="HandlingInheritance-InheritanceandSelectQueries"></A>Inheritance and SelectQueries</H3>
+<P>When performing SelectQuery on a table that maps to inheritance hierarchy, Cayenne will only return rows that belong to root class of the query and all its subclasses. No superclasses or objects from parallel inheritance branches will be returned. For example executing a SelectQuery with Employee class as root will potentially return a mix of Employees and Managers (who are also Employees of course), but no CustomerContact objects:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context;
+...
+SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Employee.class);
+List employees = context.performQuery(query);
+ 
+<SPAN class="code-comment">// employees list will contain <SPAN class="code-quote">&quot;regular&quot;</SPAN> employees and managers
+</SPAN>Iterator it = employees.iterator();
+<SPAN class="code-keyword">while</SPAN>(it.hasNext()) {
+   Employee e = (Employee) it.next();
+   <SPAN class="code-keyword">if</SPAN>(e <SPAN class="code-keyword">instanceof</SPAN> Manager) {
+   	<SPAN class="code-comment">// <SPAN class="code-keyword">do</SPAN> something with manager...
+</SPAN>   }
+}
+</PRE>
+</DIV></DIV>
+
+<P>The need to determine the correct class for each fetched database row makes queries on entities that use inheritance less efficient than the regular queries. If an application doesn't care about the query root class subclasses, the query can be optimized by explicitly turning off inheritance resolution. If this is done, the example above will return all Managers as instances of Employee class, not Manager class:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context;
+...
+SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Employee.class);
+ 
+<SPAN class="code-comment">// *** explicitly turn off inheritance resolution
+</SPAN>query.setResolvingInherited(<SPAN class="code-keyword">false</SPAN>);
+ 
+List employees = context.performQuery(query);
+ 
+<SPAN class="code-comment">// employees list will contain no Manager instances...
+</SPAN><SPAN class="code-comment">// all Managers will be returned as regular Employees</SPAN>
+</PRE>
+</DIV></DIV>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/1.2/images/icons/emoticons/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Whenever an object is obtained via a relationship, it is always fully resolved to the lowest possible subclass in an entity inheritance tree.</TD></TR></TABLE></DIV>
+
+<DIV class="panelMacro"><TABLE class="warningMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/1.2/images/icons/emoticons/forbidden.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Use <TT>setResolvingInherited(false)</TT> with caution, and only if you never plan to work with subclasses. The downside of it is that the DataContext may end up with two objects pointing to the same database row, thus violating uniquing principle. With the above example, this may happen if at a later time user decides to fetch Managers directly, or if a Manager object is obtained via a relationship.</TD></TR></TABLE></DIV>

@@ -1,0 +1,36 @@
+Title: Migrate Changes between Model and Database
+
+	<H3><A name="MigrateChangesbetweenModelandDatabase-IntroductiontoMerging"></A>Introduction to Merging</H3>
+
+<P>After working some time with the model and/or the database, it can be a lot of work to make sure they are in sync. E.g. A table has been added/removed, a varchar column has a different max length and so on. The merge functionality in the modeler handle all of this.</P>
+
+<H3><A name="MigrateChangesbetweenModelandDatabase-Stepbystep"></A>Step by step</H3>
+
+<P>Open the model in the modeler and select the DataMap.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-select-datamap.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Select Tools-&gt;Migrate Database Schema.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-menu.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Enter or select data source information.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-db-connect.png" style="border: 0px solid black"></SPAN></P>
+
+<P>All detected changes will be listed as separate tokens.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-detected-changes.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Select tokens and their direction. &quot;To Model&quot; mean that the change is to be made from the database to the model. &quot;To DB&quot; mean that opposite.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-select-tokens.png" style="border: 0px solid black"></SPAN></P>
+
+<P>It is also possible to see the generated SQL for the selected &quot;To DB&quot; tokens.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-generated-sql.png" style="border: 0px solid black"></SPAN></P>
+
+<P>At last, press Migrate to execute the selected operations. Problems will be reported in a dialog. Operations that succeeded will be removed from the list.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="migrate-changes-between-model-and-database.data/merge-complete.png" style="border: 0px solid black"></SPAN></P>
+

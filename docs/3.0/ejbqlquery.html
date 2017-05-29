@@ -1,0 +1,61 @@
+Title: EJBQLQuery
+
+	<P><EM>(available since 3.0 in both classic and JPA modes; as of June 2007 only a subset of EJBQL syntax is supported)</EM></P>
+
+<P>EJBQL is an object query language that is not unlike SQL, only it operates in terms of the Java object model. In fact &quot;EJB&quot; in its name is entirely misleading - the language is applicable in the non-&quot;enterprise&quot; environments just as well. Standard EJBQL syntax is specified in the <A href="../CAYJPA/jpa-guide.html" title="JPA Guide">JPA specification</A>, still Cayenne supports it in a classic mode, and no JPA runtime is required to execute such queries. This chapter deals specifically with classic mode operation. </P>
+
+<H3><A name="EJBQLQuery-EJBQLSyntax"></A>EJBQL Syntax</H3>
+
+<P>Details of the syntax are available in various JPA literature. Here is an example of an EJBQL query:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">select p from Painting p WHERE p.estimatedPrice &gt; 3000</PRE>
+</DIV></DIV>
+
+<P>Visually it looks like SQL, only instead of tables, object entities are used; and instead of columns and joins, path expressions are used (not unlike Cayenne <A href="path-expressions.html" title="Path Expressions">path expressions</A>).</P>
+
+<P><EM>(TODO: <B>more examples</B>)</EM></P>
+
+<H3><A name="EJBQLQuery-CreatinganEJBQLQuery"></A>Creating an EJBQLQuery</H3>
+
+<P>Creating an EJBQLQuery is simple - just pass a valid EJBQL string to the constructor:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">EJBQLQuery query = <SPAN class="code-keyword">new</SPAN> EJBQLQuery(<SPAN class="code-quote">&quot;select a FROM Artist a&quot;</SPAN>);</PRE>
+</DIV></DIV> 
+
+<P>Further you can use the query object the same way as any other Cayenne query to select objects or to modify the database.</P>
+
+<P>Select objects:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">List artists = context.performQuery(query);</PRE>
+</DIV></DIV>
+
+
+<H3><A name="EJBQLQuery-EJBQLQueryvs.SelectQuery"></A>EJBQLQuery vs. SelectQuery</H3>
+
+<P><EM>TODO: general comparison</EM> </P>
+
+
+<P>Aside from noted different capabilities, EJBQLQuery and SelectQuery differ in some areas where they provide similar functionality. These differences are caused by the need for EJBQL syntax to follow the official specification, so it can't work &quot;the Cayenne way&quot;:</P>
+
+<UL>
+	<LI><B>Null Handling</B>: SelectQuery <A href="null-handling.html" title="NULL Handling">would translate</A> the expressions matching NULL values to the corresponding &quot;X IS NULL&quot; or &quot;X IS NOT NULL&quot; SQL syntax. EJBQLQuery on the other hand requires explicit &quot;IS NULL&quot; (or &quot;IS NOT NULL&quot;) syntax to be used, otherwise the generated SQL will look like &quot;X = NULL&quot; (or &quot;X &lt;&gt; NULL&quot;), which will evaluate differently.</LI>
+</UL>
+
+
+<UL>
+	<LI><B>Expression Parameters</B>: SelectQuery <A href="building-expressions.html" title="Building Expressions">uses &quot;$&quot;</A> to denote named parameters (e.g. &quot;$myParam&quot;), while EJBQL uses &quot;:&quot; (e.g. &quot;:myParam&quot;). Also EJBQL supports positional parameters denoted by the question mark: &quot;?3&quot;.</LI>
+</UL>
+
+
+
+<H3><A name="EJBQLQuery-EJBQLQueryvs.SQLTemplate"></A>EJBQLQuery vs. SQLTemplate</H3>
+
+<P><EM>TODO: general comparison</EM> </P>
+
+<UL>
+	<LI><B>Null Handling</B>:</LI>
+</UL>
+

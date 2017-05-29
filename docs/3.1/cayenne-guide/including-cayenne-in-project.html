@@ -1,0 +1,372 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;4.&nbsp;Including Cayenne in a Project</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 3.1 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 3.1"><link rel="home" href="index.html" title="Cayenne Guide"><link rel="up" href="cayenne-guide-part2.html" title="Part&nbsp;II.&nbsp;Cayenne Framework"><link rel="prev" href="cayenne-guide-part2.html" title="Part&nbsp;II.&nbsp;Cayenne Framework"><link rel="next" href="starting-cayenne.html" title="Chapter&nbsp;5.&nbsp;Starting Cayenne"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.3.1 (3.1)</th><th align="center">Chapter&nbsp;4.&nbsp;Including Cayenne in a Project</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="cayenne-guide-part2.html">Prev</a>&nbsp;</td><th width="60%" align="center"><a accesskey="u" href="cayenne-guide-part2.html">Part&nbsp;II.&nbsp;Cayenne Framework</a></th><td width="20%" align="right">&nbsp;<a accesskey="n" href="starting-cayenne.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;4.&nbsp;Including Cayenne in a Project"><div class="titlepage"><div><div><h2 class="title"><a name="including-cayenne-in-project"></a>Chapter&nbsp;4.&nbsp;Including Cayenne in a Project</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="including-cayenne-in-project.html#jar-files-and-depdendencies">Jar Files and Dependencies</a></span></dt><dt><span class="section"><a href="including-cayenne-in-project.html#maven-projects">Maven Projects</a></span></dt><dt><span class="section"><a href="including-cayenne-in-project.html#ant-projects">Ant Projects</a></span></dt></dl></div><div class="section" title="Jar Files and Dependencies"><div class="titlepage"><div><div><h2 class="title"><a name="jar-files-and-depdendencies"></a>Jar Files and Dependencies</h2></div></div></div><p>Cayenne distribution contains the following core runtime jars in the distribution
+                <code class="code">lib</code> directory: </p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><span class="italic">cayenne-server-x.x.jar</span> - contains full
+                        Cayenne runtime (DI, adapters, DB access classes, etc.). Most applications
+                        will use only this file.</p></li><li class="listitem"><p>cayenne-client-x.x.jar - a subset of cayenne-server.jar trimmed for use on
+                        the client in an ROP application.</p></li><li class="listitem"><p>Other cayenne-* jars - various Cayenne extensions.</p></li></ul></div><p>When using <code class="code">cayenne-server-x.x.jar</code> you'll need a few third party jars (all
+            included in <code class="code">lib/third-party</code> directory of the distribution): </p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><a class="link" href="http://velocity.apache.org/" target="_top">Apache Velocity
+                            Template Engine</a>, version 1.6.x (and all its dependencies bundled
+                        with velocity-dep)</p></li><li class="listitem"><p><a class="link" href="http://commons.apache.org/collections/" target="_top">Apache Commons
+                            Collections</a>, version 3.2.1</p></li><li class="listitem"><p><a class="link" href="http://commons.apache.org/logging/" target="_top">Apache
+                            Commons Logging</a>, version 1.1</p></li></ul></div><p>Cayenne integrates with various caching, clustering and other frameworks. These
+            optional integrations will require other third-party jars that the users will need to
+            obtain on their own.</p></div><div class="section" title="Maven Projects"><div class="titlepage"><div><div><h2 class="title"><a name="maven-projects"></a>Maven Projects</h2></div></div></div><p>If you are using Maven, you won't have to deal with figuring out the dependencies. You
+            can simply include cayenne-server artifact in your
+            POM:</p><pre class="programlisting">&lt;dependency&gt;
+   &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+   &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
+   &lt;version&gt;X.Y.Z&lt;/version&gt;
+&lt;/dependency&gt;</pre><p>Additionally Cayenne provides a Maven plugin with a set of goals to perform various project
+            tasks, such as synching generated Java classes with the mapping, described in the
+            following subsection. The full plugin name is
+                <code class="code">org.apache.cayenne.plugins:maven-cayenne-plugin</code>.</p><div class="section" title="cgen"><div class="titlepage"><div><div><h3 class="title"><a name="mvn-cgen"></a>cgen</h3></div></div></div><p><code class="code">cgen</code> is a <code class="code">maven-cayenne-plugin</code> goal that generates and maintains
+                source (.java) files of persistent objects based on a DataMap. By default, it is
+                bound to the generate-sources phase. If "makePairs" is set to "true" (which is the
+                recommended default), this task will generate a pair of classes
+                (superclass/subclass) for each ObjEntity in the DataMap. Superclasses should not be
+                changed manually, since they are always overwritten. Subclasses are never
+                overwritten and may be later customized by the user. If "makePairs" is set to
+                "false", a single class will be generated for each ObjEntity. </p><p>By creating custom templates, you can use cgen to generate other output (such as
+                web pages, reports, specialized code templates) based on DataMap information.</p><p>
+                </p><table frame="void" id="d0e269"><caption>Table&nbsp;4.1.&nbsp;cgen required parameters</caption><col width="14%"><col width="6%"><col width="80%"><thead><tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr></thead><tbody><tr>
+                            <td><code class="code">map</code>
+                            </td>
+                            <td>File</td>
+                            <td>DataMap XML file which serves as a source of metadata for class
+                                generation. E.g.
+                                    <code class="code">${project.basedir}/src/main/resources/my.map.xml</code></td>
+                        </tr><tr>
+                            <td><code class="code">destDir</code></td>
+                            <td>File</td>
+                            <td>Root destination directory for Java classes (ignoring their package
+                                names).</td>
+                        </tr></tbody></table><p>
+                </p><table frame="void" id="d0e316"><caption>Table&nbsp;4.2.&nbsp;cgen optional parameters</caption><col width="33%"><col width="8%"><col width="59%"><thead><tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr></thead><tbody><tr>
+                            <td><code class="code">additionalMaps</code>
+                            </td>
+                            <td>File</td>
+                            <td>A directory that contains additional DataMap XML files that may be
+                                needed to resolve cross-DataMap relationships for the the main
+                                DataMap, for which class generation occurs.</td>
+                        </tr><tr>
+                            <td><code class="code">client</code></td>
+                            <td>boolean</td>
+                            <td>Whether we are generating classes for the client tier in a Remote
+                                Object Persistence application. "False" by default.</td>
+                        </tr><tr>
+                            <td><code class="code">embeddableTemplate</code></td>
+                            <td>String</td>
+                            <td>Location of a custom Velocity template file for Embeddable class
+                                generation. If omitted, default template is used.</td>
+                        </tr><tr>
+                            <td><code class="code">embeddableSuperTemplate</code></td>
+                            <td>String</td>
+                            <td>Location of a custom Velocity template file for Embeddable
+                                superclass generation. Ignored unless "makepairs" set to "true". If
+                                omitted, default template is used.</td>
+                        </tr><tr>
+                            <td><code class="code">encoding</code></td>
+                            <td>String</td>
+                            <td>Generated files encoding if different from the default on current
+                                platform. Target encoding must be supported by the JVM running the
+                                build. Standard encodings supported by Java on all platforms are
+                                US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See
+                                javadocs for java.nio.charset.Charset for more information.</td>
+                        </tr><tr>
+                            <td><code class="code">excludeEntities</code></td>
+                            <td>String</td>
+                            <td>A comma-separated list of ObjEntity patterns (expressed as a perl5
+                                regex) to exclude from template generation. By default none of the
+                                DataMap entities are excluded.</td>
+                        </tr><tr>
+                            <td><code class="code">includeEntities</code></td>
+                            <td>String</td>
+                            <td>A comma-separated list of ObjEntity patterns (expressed as a perl5
+                                regex) to include from template generation. By default all DataMap
+                                entities are included.</td>
+                        </tr><tr>
+                            <td><code class="code">makePairs</code></td>
+                            <td>boolean</td>
+                            <td>If "true" (a recommended default), will generate subclass/superclass
+                                pairs, with all generated code placed in superclass.</td>
+                        </tr><tr>
+                            <td><code class="code">mode</code></td>
+                            <td>String</td>
+                            <td>Specifies class generator iteration target. There are three possible
+                                values: "entity" (default), "datamap", "all". "entity" performs one
+                                generator iteration for each included ObjEntity, applying either
+                                standard to custom entity templates. "datamap" performs a single
+                                iteration, applying DataMap templates. "All" is a combination of
+                                entity and datamap.</td>
+                        </tr><tr>
+                            <td><code class="code">overwrite</code></td>
+                            <td>boolean</td>
+                            <td>Only has effect when "makePairs" is set to "false". If "overwrite"
+                                os "true", will overwrite older versions of generated classes.</td>
+                        </tr><tr>
+                            <td><code class="code">superPkg</code></td>
+                            <td>String</td>
+                            <td>Java package name of generated superclasses. Only has effect if
+                                "makepairs" and "usePkgPath" are set to "true" (both are true by
+                                default). Defines a common package for all generated Java classes.
+                                If omitted, each superclass will be placed in the same package as
+                                subclass.</td>
+                        </tr><tr>
+                            <td><code class="code">superTemplate</code></td>
+                            <td>String</td>
+                            <td>Location of a custom Velocity template file for ObjEntity superclass
+                                generation. Only has effect if "makepairs" set to "true". If
+                                omitted, default template is used.</td>
+                        </tr><tr>
+                            <td><code class="code">template</code></td>
+                            <td>String</td>
+                            <td>Location of a custom Velocity template file for ObjEntity class
+                                generation. If omitted, default template is used.</td>
+                        </tr><tr>
+                            <td><code class="code">usePkgPath</code></td>
+                            <td>boolean</td>
+                            <td>If set to "true" (default), a directory tree will be generated in
+                                "destDir" corresponding to the class package structure, if set to
+                                "false", classes will be generated in "destDir" ignoring their
+                                package.</td>
+                        </tr></tbody></table><p>
+                Example - a typical class generation scenario, where pairs of classes are
+                generated, and superclasses are placed in a separate package:
+                </p><pre class="programlisting">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-cayenne-plugin&lt;/artifactId&gt;
+    &lt;version&gt;X.Y.Z&lt;/version&gt;
+
+    &lt;!--
+    There's an intermittent problem when using Maven/cgen in Eclipse with  m2eclipse plugin that
+    requires placing "configuration" section at the plugin level, instead of execution
+    level.
+    --&gt;
+    &lt;configuration&gt;
+        &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+        &lt;destDir&gt;${project.basedir}/src/main/java&lt;/destDir&gt;
+        &lt;superPkg&gt;org.example.model.auto&lt;/superPkg&gt;
+    &lt;/configuration&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cgen&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</pre></div><div class="section" title="cdbgen"><div class="titlepage"><div><div><h3 class="title"><a name="mvn-cdbgen"></a>cdbgen</h3></div></div></div><p><code class="code">cdbgen</code> is a <code class="code">maven-cayenne-plugin</code> goal that drops and/or generates
+                tables in a database on Cayenne DataMap. By default, it is bound to the
+                pre-integration-test phase.</p><table frame="void" id="d0e517"><caption>Table&nbsp;4.3.&nbsp;cdbgen required parameters</caption><col width="14%"><col width="10%"><col width="76%"><thead><tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr></thead><tbody><tr>
+                            <td><code class="code">map</code>
+                            </td>
+                            <td>File</td>
+                            <td>DataMap XML file which serves as a source of metadata for DB schema
+                                generation. E.g.
+                                    <code class="code">${project.basedir}/src/main/resources/my.map.xml</code></td>
+                        </tr><tr>
+                            <td><code class="code">driver</code></td>
+                            <td>String</td>
+                            <td>A class of JDBC driver to use for the target database.</td>
+                        </tr><tr>
+                            <td><code class="code">url</code></td>
+                            <td>String</td>
+                            <td>JDBC connection URL of a target database.</td>
+                        </tr></tbody></table><p>
+                </p><table frame="void" id="d0e577"><caption>Table&nbsp;4.4.&nbsp;cdbgen optional parameters</caption><col width="18%"><col width="11%"><col width="75%"><thead><tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr></thead><tbody><tr>
+                            <td><code class="code">adapter</code>
+                            </td>
+                            <td>String</td>
+                            <td>Java class name implementing org.apache.cayenne.dba.DbAdapter. While
+                                this attribute is optional (a generic JdbcAdapter is used if not
+                                set), it is highly recommended to specify correct target
+                                adapter.</td>
+                        </tr><tr>
+                            <td><code class="code">createFK</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether cdbgen should create foreign key constraints. Default is "true".</td>
+                        </tr><tr>
+                            <td><code class="code">createPK</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether cdbgen should create Cayenne-specific auto PK objects. Default is
+                                "true".</td>
+                        </tr><tr>
+                            <td><code class="code">createTables</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether cdbgen should create new tables. Default is "true".</td>
+                        </tr><tr>
+                            <td><code class="code">dropPK</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether cdbgen should drop Cayenne primary key support objects. Default is
+                                "false".</td>
+                        </tr><tr>
+                            <td><code class="code">dropTables</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether cdbgen should drop the tables before attempting to create new ones.
+                                Default is "false".</td>
+                        </tr><tr>
+                            <td><code class="code">password</code></td>
+                            <td>String</td>
+                            <td>Database user password.</td>
+                        </tr><tr>
+                            <td><code class="code">username</code></td>
+                            <td>String</td>
+                            <td>Database user name.</td>
+                        </tr></tbody></table><p>
+            </p><p>Example - creating a DB schema on a local HSQLDB
+                database:</p><pre class="programlisting">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-cayenne-plugin&lt;/artifactId&gt;
+    &lt;version&gt;X.Y.Z&lt;/version&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;configuration&gt;
+                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+                &lt;url&gt;jdbc:hsqldb:hsql://localhost/testdb&lt;/url&gt;
+                &lt;adapter&gt;org.apache.cayenne.dba.hsqldb.HSQLDBAdapter&lt;/adapter&gt;
+                &lt;driver&gt;org.hsqldb.jdbcDriver&lt;/driver&gt;
+                &lt;username&gt;sa&lt;/username&gt;
+            &lt;/configuration&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cdbgen&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</pre></div><div class="section" title="cdbimport"><div class="titlepage"><div><div><h3 class="title"><a name="mvn-cdbimport"></a>cdbimport</h3></div></div></div><p><code class="code">cdbimport</code> is a <code class="code">maven-cayenne-plugin</code> goal that generates
+                a DataMap based on an existing database schema. By default, it is bound to the
+                generate-sources phase. This allows you to generate your DataMap prior to building
+                your project, which may be necessary if you are also using the cgen task.</p><table frame="void" id="d0e708"><caption>Table&nbsp;4.5.&nbsp;cdbimport required parameters</caption><col width="14%"><col width="10%"><col width="76%"><thead><tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr></thead><tbody><tr>
+                            <td><code class="code">map</code>
+                            </td>
+                            <td>File</td>
+                            <td>DataMap XML file which is the destination of the schema import.
+                                Maybe an existing file. If this file does not exist, it is created
+                                when cdbimport is executed. E.g.
+                                    <code class="code">${project.basedir}/src/main/resources/my.map.xml</code></td>
+                        </tr><tr>
+                            <td><code class="code">driver</code></td>
+                            <td>String</td>
+                            <td>A class of JDBC driver to use for the target database.</td>
+                        </tr><tr>
+                            <td><code class="code">url</code></td>
+                            <td>String</td>
+                            <td>JDBC connection URL of a target database.</td>
+                        </tr></tbody></table><p>
+                </p><table frame="void" id="d0e768"><caption>Table&nbsp;4.6.&nbsp;cdbimport optional parameters</caption><col width="25%"><col width="10%"><col width="65%"><thead><tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr></thead><tbody><tr>
+                            <td><code class="code">adapter</code>
+                            </td>
+                            <td>String</td>
+                            <td>Java class name implementing org.apache.cayenne.dba.DbAdapter. While
+                                this attribute is optional (a generic JdbcAdapter is used if not
+                                set), it is highly recommended to specify correct target
+                                adapter.</td>
+                        </tr><tr>
+                            <td><code class="code">importProcedures</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether stored procedures should be imported from the
+                                database. Default is false. </td>
+                        </tr><tr>
+                            <td><code class="code">meaningfulPk</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether primary keys should be mapped as attributes of the
+                                ObjEntity. Default is false. </td>
+                        </tr><tr>
+                            <td><code class="code">namingStrategy</code></td>
+                            <td>String</td>
+                            <td>The naming strategy used for mapping database names to object entity
+                                names. Default is
+                                    <code class="code">org.apache.cayenne.map.naming.SmartNamingStrategy</code>.
+                            </td>
+                        </tr><tr>
+                            <td><code class="code">overwriteExisting</code></td>
+                            <td>boolean</td>
+                            <td>Indicates whether existing DB and object entities should be
+                                overwritten. This is an all-or-nothing setting. If you need finer
+                                granularity, use the CayenneModeler. Default is "true". </td>
+                        </tr><tr>
+                            <td><code class="code">password</code></td>
+                            <td>String</td>
+                            <td>Database user password.</td>
+                        </tr><tr>
+                            <td><code class="code">procedurePattern</code></td>
+                            <td>String</td>
+                            <td>Pattern to match stored procedure names against for import. Default
+                                is to match all stored procedures. This value is only meaningful if
+                                importProcedures is true. </td>
+                        </tr><tr>
+                            <td><code class="code">schemaName</code></td>
+                            <td>String</td>
+                            <td>Database schema to import tables/stored procedures from. </td>
+                        </tr><tr>
+                            <td><code class="code">tablePattern</code></td>
+                            <td>String</td>
+                            <td>Pattern to match table names against for import. Default is to match
+                                all tables. </td>
+                        </tr><tr>
+                            <td><code class="code">username</code></td>
+                            <td>String</td>
+                            <td>Database user name.</td>
+                        </tr></tbody></table><p>
+            </p><p>Example - loading a DB schema from a local HSQLDB database (essentially a reverse operation
+                compared to the cdbgen example above)
+                :</p><pre class="programlisting">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-cayenne-plugin&lt;/artifactId&gt;
+    &lt;version&gt;X.Y.Z&lt;/version&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;configuration&gt;
+                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+                &lt;url&gt;jdbc:mysql://127.0.0.1/mydb&lt;/url&gt;
+                &lt;adapter&gt;org.apache.cayenne.dba.hsqldb.HSQLDBAdapter&lt;/adapter&gt;
+                &lt;driver&gt;com.mysql.jdbc.Driver&lt;/driver&gt;
+                &lt;username&gt;sa&lt;/username&gt;
+            &lt;/configuration&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cdbimport&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</pre></div></div><div class="section" title="Ant Projects"><div class="titlepage"><div><div><h2 class="title"><a name="ant-projects"></a>Ant Projects</h2></div></div></div><div class="section" title="cgen"><div class="titlepage"><div><div><h3 class="title"><a name="ant-cgen"></a>cgen</h3></div></div></div></div><div class="section" title="cdbgen"><div class="titlepage"><div><div><h3 class="title"><a name="ant-cdbgen"></a>cdbgen</h3></div></div></div></div><div class="section" title="cdbimport"><div class="titlepage"><div><div><h3 class="title"><a name="ant-cdbimport"></a>cdbimport</h3></div></div></div><p>This is an Ant counterpart of "cdbimport" goal of maven-cayenne-plugin described
+                above. It has exactly the same properties. Here is a usage
+                example:</p><pre class="programlisting"> &lt;cdbimport map="${context.dir}/WEB-INF/my.map.xml"
+    driver="com.mysql.jdbc.Driver" 
+    url="jdbc:mysql://127.0.0.1/mydb" 
+    username="sa"/&gt; </pre><p>
+            </p></div><div class="section" title="cdataport"><div class="titlepage"><div><div><h3 class="title"><a name="ant-cdataport"></a>cdataport</h3></div></div></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="cayenne-guide-part2.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="cayenne-guide-part2.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="starting-cayenne.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Part&nbsp;II.&nbsp;Cayenne Framework&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;5.&nbsp;Starting Cayenne</td></tr></table></div></body></html>

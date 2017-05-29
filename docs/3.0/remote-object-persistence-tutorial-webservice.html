@@ -1,0 +1,116 @@
+Title: Remote Object Persistence Tutorial WebService
+
+	<H2><A name="RemoteObjectPersistenceTutorialWebService-SettingupDependencies"></A>Setting up Dependencies</H2>
+
+<P>Now lets get back to the <TT>&quot;tutorial&quot;</TT> project that contains a web application and set up dependencies. The only extra one that we don't have yet is <TT>resin-hessian.jar</TT>, just like the client, so let's add it (and the caucho repo declaration) to the <TT>pom.xml</TT>.</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">&lt;project xmlns=<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//maven.apache.org/POM/4.0.0&quot;</SPAN> xmlns:xsi=<SPAN class="code-quote">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</SPAN>
+</SPAN>	xsi:schemaLocation=<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</SPAN>&gt;
+</SPAN>	...
+	&lt;dependencies&gt;
+		...
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.caucho&lt;/groupId&gt;
+			&lt;artifactId&gt;resin-hessian&lt;/artifactId&gt;
+			&lt;version&gt;3.1.6&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+
+	&lt;build&gt;
+	...
+	&lt;/build&gt;
+	
+	&lt;repositories&gt;
+		&lt;repository&gt;
+			&lt;id&gt;caucho&lt;/id&gt;
+			&lt;name&gt;Caucho Repository&lt;/name&gt;
+			&lt;url&gt;http:<SPAN class="code-comment">//caucho.com/m2&lt;/url&gt;
+</SPAN>			&lt;layout&gt;<SPAN class="code-keyword">default</SPAN>&lt;/layout&gt;
+			&lt;snapshots&gt;
+				&lt;enabled&gt;<SPAN class="code-keyword">false</SPAN>&lt;/enabled&gt;
+			&lt;/snapshots&gt;
+			&lt;releases&gt;
+				&lt;enabled&gt;<SPAN class="code-keyword">true</SPAN>&lt;/enabled&gt;
+			&lt;/releases&gt;
+		&lt;/repository&gt;
+	&lt;/repositories&gt;
+&lt;/project&gt;</PRE>
+</DIV></DIV>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/3.0/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Maven Optimization Hint</B><BR>On a real project both server and client modules will likely share a common parent pom.xml where common repository delcaration can be placed, with child pom's &quot;inheriting&quot; it from parent. This would reduce build code duplication.</TD></TR></TABLE></DIV>
+
+<H2><A name="RemoteObjectPersistenceTutorialWebService-ClientClassesontheServer"></A>Client Classes on the Server</H2>
+
+<P>Since ROP web service requires both server and client persistent classes, we need to generate a second copy of the client classes inside the server project (see instructions <A href="remote-object-persistence-tutorial-client-project.html" title="Remote Object Persistence Tutorial Client Project">here</A>, just pick the server project as a class generation target). This is a minor inconvenience that will hopefully go away in the future versions of Cayenne. <EM>Don't forget to refresh the project in Eclipse after class generation is done.</EM></P>
+
+<H2><A name="RemoteObjectPersistenceTutorialWebService-Configuring%7B%7Bweb.xml%7D%7D"></A>Configuring <TT>web.xml</TT></H2>
+
+<P>Cayenne web service is declared in the <TT>web.xml</TT>. It is implemented as a servlet <TT>&quot;org.apache.cayenne.remote.hessian.service.HessianServlet&quot;</TT>. Open <TT>tutorial/src/main/webapp/WEB-INF/web.xml</TT> in Eclipse and add a service declaration (you may keep the Cayenne filter declaration left there <A href="tutorial-webapp.html" title="Tutorial Webapp">from the previous tutorial</A>, or you can start clean, either way will work) : </P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">&lt;?xml version=<SPAN class="code-quote">&quot;1.0&quot;</SPAN> encoding=<SPAN class="code-quote">&quot;utf-8&quot;</SPAN>?&gt;
+ &lt;!DOCTYPE web-app
+   PUBLIC <SPAN class="code-quote">&quot;-<SPAN class="code-comment">//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</SPAN>
+</SPAN>   <SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//java.sun.com/dtd/web-app_2_3.dtd&quot;</SPAN>&gt;
+</SPAN>&lt;web-app&gt;
+	&lt;display-name&gt;Cayenne Tutorial&lt;/display-name&gt;
+	&lt;servlet&gt;
+		&lt;servlet-name&gt;cayenne-service&lt;/servlet-name&gt;
+		&lt;servlet-class&gt;org.apache.cayenne.remote.hessian.service.HessianServlet&lt;/servlet-class&gt;
+	&lt;/servlet&gt;
+	&lt;servlet-mapping&gt;
+		&lt;servlet-name&gt;cayenne-service&lt;/servlet-name&gt;
+		&lt;url-pattern&gt;/cayenne-service&lt;/url-pattern&gt;
+	&lt;/servlet-mapping&gt;
+&lt;/web-app&gt;</PRE>
+</DIV></DIV>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/3.0/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Extending Server Behavior via Callbacks</B><BR>While no custom Java code is required on the server, just a service declaration, it is possible to customizing server-side behavior via <A href="lifecycle-callbacks.html" title="Lifecycle Callbacks">callbacks and listeners</A> (not shown in the tutorial).</TD></TR></TABLE></DIV>
+
+
+<H2><A name="RemoteObjectPersistenceTutorialWebService-RunningROPServer"></A>Running ROP Server</H2>
+
+<P>Use <A href="tutorial-webapp.html" title="Tutorial Webapp">previosly created</A> Eclipse Jetty run configuration available via <TT>&quot;Run &gt; Run Configurations...&quot;</TT>  (or <A href="tutorial-webapp.html" title="Tutorial Webapp">create a new one</A> if none exists yet). You should see output in the Eclipse console similar to the following:</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Cayenne Tutorial
+[INFO] 
+[INFO] Id: org.example.cayenne:tutorial:jar:0.0.1-SNAPSHOT
+[INFO] task-segment: [jetty:run]
+[INFO] ------------------------------------------------------------------------
+...
+[INFO] [jetty:run]
+[INFO] Configuring Jetty for project: Cayenne Tutorial
+[INFO] Webapp source directory = /Users/andrus-tutorial/Desktop/work/tutorial/src/main/webapp
+...
+[INFO] Starting jetty 6.1.22 ...
+2010-01-16 17:22:16.906:INFO::jetty-6.1.22
+2010-01-16 17:22:17.027:INFO::No Transaction manager found - if your webapp requires one, please configure one.
+INFO: started configuration loading.
+INFO: loaded domain: UntitledDomain
+INFO: loaded &lt;map name='UntitledDomainMap' location='UntitledDomainMap.map.xml'&gt;.
+INFO: loading &lt;node name='UntitledDomainNode' datasource='UntitledDomainNode.driver.xml' 
+factory='org.apache.cayenne.conf.DriverDataSourceFactory' schema-update-strategy='org.apache.cayenne.access.dbsync.CreateIfNoSchemaStrategy'&gt;.
+INFO: using factory: org.apache.cayenne.conf.DriverDataSourceFactory
+INFO: loading driver information from 'UntitledDomainNode.driver.xml'.
+INFO: loading driver org.apache.derby.jdbc.EmbeddedDriver
+INFO: loading user name and password.
+INFO: Created connection pool: jdbc:derby:memory:testdb;create=true 
+	Driver class: org.apache.derby.jdbc.EmbeddedDriver
+	Min. connections in the pool: 1
+	Max. connections in the pool: 1
+INFO: loaded datasource.
+INFO: no adapter set, using automatic adapter.
+INFO: loaded map-ref: UntitledDomainMap.
+INFO: finished configuration loading in 549 ms.
+2010-01-16 17:22:17.960:INFO::Started SelectChannelConnector@0.0.0.0:8080</PRE>
+</DIV></DIV>
+
+<P>Cayenne ROP service URL is <A href="http://localhost:8080/tutorial/cayenne-service" class="external-link" rel="nofollow">http://localhost:8080/tutorial/cayenne-service</A>. If you click on it, you will see <TT>&quot;Hessian Requires POST&quot;</TT> message, that means that the service is alive, but you need a client other than the web browser to access it.</P>
+
+<HR>
+<P><B>Next Step: <A href="remote-object-persistence-tutorial-client-code.html" title="Remote Object Persistence Tutorial Client Code">Remote Object Persistence Tutorial Client Code</A></B></P>
+<HR>

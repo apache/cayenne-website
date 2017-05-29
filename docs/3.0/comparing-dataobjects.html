@@ -1,0 +1,13 @@
+Title: Comparing DataObjects
+
+	<P>If you have two objects a and b in the same DataContext, then you can check to see if they refer to the same database entity as simply as this:</P>
+
+<P>{{ if (a == b) }}</P>
+
+<P>If the objects are not in the same DataContext then this will not be true.</P>
+
+
+<P>To compare objects in separate contexts, then you can compare the object ids.</P>
+
+<P>{{ if (a.getObjectId().equals(b.getObjectId()) }}</P>
+

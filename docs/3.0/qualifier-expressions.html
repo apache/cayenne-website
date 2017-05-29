@@ -1,0 +1,21 @@
+Title: Qualifier Expressions
+
+	<P>This chapter is dedicated to the use of expressions as qualifiers in SelectQuery. Expressions in general are discussed <A href="expressions.html" title="Expressions">here</A>.</P>
+
+<H3><A name="QualifierExpressions-BuildingQualifier"></A>Building Qualifier </H3>
+
+<P>The previous chapter showed how to build a query to fetch all data from a single table. In most situations though only a subset of data matching a certain criteria is needed. Cayenne provides an expressions package to control the filtering behavior of the queries. Expressions applied to queries are called &quot;qualifiers&quot;.</P>
+
+<P>SelectQuery provides a few ways to initialize and modify the qualifier:</P>
+
+<UL>
+	<LI><TT>public <B>SelectQuery</B>(Class&lt;?&gt; objectClass, Expression e)</TT> : Passing expression as a second argument in constructor.</LI>
+	<LI><TT>public void <B>setQualifier</B>(Expression qualifier)</TT> : Explicitly setting the qualifier expression.</LI>
+	<LI><TT>public void <B>andQualifier</B>(Expression e)</TT> : Chaining an expression with an already existing qualifier using logical AND.</LI>
+	<LI><TT>public void <B>orQualifier</B>(Expression e)</TT> : Chaining an expression with an already existing qualifier using logical OR.</LI>
+</UL>
+
+
+<H3><A name="QualifierExpressions-SpecifyingJoinSemantics"></A>Specifying Join Semantics</H3>
+
+<P>Each <A href="path-expressions.html" title="Path Expressions">path expression</A> in a qualifier results in a SQL JOIN in a generated SQL. By default all joins are INNER joins. If LEFT OUTER joins are desirable, users can specify them with a plus sign (&quot;&#43;&quot;) after each affected relationship segment in a path expression. E.g. a path like <TT>&quot;paintingArray&#43;.name&quot;</TT> would result in a LEFT OUTER JOIN for an Artist SelectQuery, ensuring that artists without joins are also included in the query result.</P>

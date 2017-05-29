@@ -1,0 +1,94 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;3.&nbsp;Setting up Hessian Web Service</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 3.1 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 3.1"><link rel="home" href="index.html" title="Getting Started with Cayenne ROP (Remote Object Persistence)"><link rel="up" href="getting-started-rop-part2.html" title="Part&nbsp;II.&nbsp;Remote Object Persistence Quick Start"><link rel="prev" href="ch02.html" title="Chapter&nbsp;2.&nbsp;Starting Client Project"><link rel="next" href="ch04.html" title="Chapter&nbsp;4.&nbsp;Porting Existing Code to Connect to a Web Service Instead of a Database"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.3.1 (3.1)</th><th align="center">Chapter&nbsp;3.&nbsp;Setting up Hessian Web Service</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a>&nbsp;</td><th width="60%" align="center"><a accesskey="u" href="getting-started-rop-part2.html">Part&nbsp;II.&nbsp;Remote Object Persistence Quick Start</a></th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;3.&nbsp;Setting up Hessian Web Service"><div class="titlepage"><div><div><h2 class="title"><a name="d0e110"></a>Chapter&nbsp;3.&nbsp;Setting up Hessian Web Service</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="ch03.html#setting-up-dependencies">Setting up Dependencies</a></span></dt><dt><span class="section"><a href="ch03.html#client-classes-on-server">Client Classes on the Server</a></span></dt><dt><span class="section"><a href="ch03.html#configuring-web-xml">Configuring web.xml</a></span></dt><dt><span class="section"><a href="ch03.html#running-rop-server">Running ROP Server</a></span></dt></dl></div><div class="section" title="Setting up Dependencies"><div class="titlepage"><div><div><h2 class="title"><a name="setting-up-dependencies"></a>Setting up Dependencies</h2></div></div></div><p>Now lets get back to the "tutorial" project that contains a web application and set up
+            dependencies. The only extra one that we don't have yet is resin-hessian.jar, just like
+            the client, so let's add it (and the caucho repo declaration) to the pom.xml.</p><pre class="programlisting">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+    ...
+    &lt;dependencies&gt;
+        ...
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.caucho&lt;/groupId&gt;
+            &lt;artifactId&gt;resin-hessian&lt;/artifactId&gt;
+            &lt;version&gt;3.1.6&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+    ...
+    &lt;/build&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;caucho&lt;/id&gt;
+            &lt;name&gt;Caucho Repository&lt;/name&gt;
+            &lt;url&gt;http://caucho.com/m2&lt;/url&gt;
+            &lt;layout&gt;default&lt;/layout&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+            &lt;releases&gt;
+                &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;/releases&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+    &lt;/project&gt;</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p><span class="bold"><strong>Maven Optimization
+                Hint</strong></span> On a real project both server and client modules will
+                likely share a common parent pom.xml where common repository delcaration can
+                be placed, with child pom's "inheriting" it from parent. This would reduce
+                build code duplication.</p></div></div><div class="section" title="Client Classes on the Server"><div class="titlepage"><div><div><h2 class="title"><a name="client-classes-on-server"></a>Client Classes on the Server</h2></div></div></div><p>Since ROP web service requires both server and client persistent classes, we need to
+            generate a second copy of the client classes inside the server project. This is a minor
+            inconvenience that will hopefully go away in the future versions of Cayenne. <span class="italic">Don't forget to refresh the project in Eclipse after class generation
+                is done.</span></p></div><div class="section" title="Configuring web.xml"><div class="titlepage"><div><div><h2 class="title"><a name="configuring-web-xml"></a>Configuring web.xml</h2></div></div></div><p>Cayenne web service is declared in the web.xml. It is implemented as a servlet
+            "org.apache.cayenne.configuration.rop.server.ROPHessianServlet". Open
+            tutorial/src/main/webapp/WEB-INF/web.xml in Eclipse and add a service declaration: </p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+ &lt;!DOCTYPE web-app
+   PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+   "http://java.sun.com/dtd/web-app_2_3.dtd"&gt;
+&lt;web-app&gt;
+    &lt;display-name&gt;Cayenne Tutorial&lt;/display-name&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;cayenne-project&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.apache.cayenne.configuration.rop.server.ROPHessianServlet&lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;0&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;cayenne-project&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/cayenne-service&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;/web-app&gt;</pre><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p><span class="bold"><strong>Extending Server Behavior via
+                Callbacks</strong></span> While no custom Java code is required on the
+                server, just a service declaration, it is possible to customizing
+                server-side behavior via callbacks and listeners (not shown in the
+                tutorial).</p></div></div><div class="section" title="Running ROP Server"><div class="titlepage"><div><div><h2 class="title"><a name="running-rop-server"></a>Running ROP Server</h2></div></div></div><p>Use previosly
+                created Eclipse Jetty run configuration available via "Run &gt; Run
+            Configurations..." (or create a new
+                one if none exists yet). You should see output in the Eclipse console similar
+            to the following:</p><pre class="programlisting">[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building tutorial 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+...
+[INFO] Starting jetty 6.1.22 ...
+INFO::jetty-6.1.22
+INFO::No Transaction manager found - if your webapp requires one, please configure one.
+INFO::Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+INFO: Loading XML configuration resource from file:cayenne-project.xml
+INFO: loading user name and password.
+INFO: Created connection pool: jdbc:derby:memory:testdb;create=true
+    Driver class: org.apache.derby.jdbc.EmbeddedDriver
+    Min. connections in the pool: 1
+    Max. connections in the pool: 1</pre><p>Cayenne ROP service URL is <span class="italic">http://localhost:8080/tutorial/cayenne-service</span>. If you click on it, you
+            will see "Hessian Requires POST" message, that means that the service is alive, but you
+            need a client other than the web browser to access it.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="getting-started-rop-part2.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;2.&nbsp;Starting Client Project&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;Porting Existing Code to Connect to a Web Service Instead of a Database</td></tr></table></div></body></html>

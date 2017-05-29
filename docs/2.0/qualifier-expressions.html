@@ -1,0 +1,21 @@
+Title: Qualifier Expressions
+
+	
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/1.2/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>This chapter is dedicated to the use of expressions as qualifiers. A detailed discussion on expressions in general is provided at <A href="expressions.html" title="Expressions">Expressions</A>.</TD></TR></TABLE></DIV>
+
+<P>The previous chapter showed how to build a query to fetch all data from a single table. In most situations though only a subset of data matching a certain criteria is needed. Cayenne provides an expressions package to control the filtering behavior of the queries. Expressions applied to queries are called &quot;qualifiers&quot;.</P>
+
+<P>SelectQuery provides a few ways to initialize and modify the qualifier:</P>
+
+<UL>
+	<LI>public <B>SelectQuery</B>(Class objectClass, Expression e)<BR>
+      Passing expression as a second argument in constructor.</LI>
+	<LI>public void <B>setQualifier</B>(Expression qualifier)<BR>
+      Explicitly setting the qualifier expression.</LI>
+	<LI>public void <B>andQualifier</B>(Expression e)<BR>
+      Adding an expression to an already existing qualifier using logical AND.</LI>
+	<LI>public void <B>orQualifier</B>(Expression e)<BR>
+      Adding an expression to an already existing qualifier using logical OR.</LI>
+</UL>
+

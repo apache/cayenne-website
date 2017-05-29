@@ -1,0 +1,139 @@
+Title: Remote Object Persistence Tutorial Client Code
+
+	
+
+<H3><A name="RemoteObjectPersistenceTutorialClientCode-StartingCommandLineClient"></A>Starting Command Line Client</H3>
+
+<P>One of the benefits of Cayenne remote object persistence technology is that the client persistence code uses the same API as the server code. We will demonstrate this by porting the command-line Cayenne application developed as a part of <A href="quick-start.html" title="Quick Start">Quick Start</A> tutorial to a remote client.</P>
+
+
+<UL>
+	<LI>Go to <TT>cayenne-tutorial-client</TT> project in Eclipse and create a new class called &quot;Main&quot; in <TT>cayenne.tutorial.client</TT> package.</LI>
+	<LI>Now open <TT>cayenne.tutorial.Main.java</TT> file in <TT>cayenne-tutorial</TT> and copy all contents except for the first line (i.e. skip the package declaration) and paste it to the client main class created above. You will see a bunch of errors in Eclipse. Don't worry about them - we'll address them as we go. Here is how a new Main class may look like in Eclipse:</LI>
+</UL>
+
+
+<P><SPAN class="image-wrap" style=""><IMG src="remote-object-persistence-tutorial-client-code.data/main-errors.jpg" style="border: 0px solid black"></SPAN></P>
+
+<H3><A name="RemoteObjectPersistenceTutorialClientCode-ClientMigrationStrategy"></A>Client Migration Strategy</H3>
+
+<P>An explanation of the migration strategy is due before we go further. For simplicity we will call (somewhat inaccurately) the original tutorial code &quot;server code&quot; and the resulting remote client - &quot;client code&quot;. There are the following differences between the server and the client persistence code:</P>
+
+<OL>
+	<LI>Attaching to the Cayenne stack is done differently.</LI>
+	<LI>Server code uses DataContext, while client uses CayenneContext</LI>
+	<LI>Server and client are using different sets of persistent classes.</LI>
+</OL>
+
+
+<P>We will discuss these differences in detail below. Here we will just note that the first two items do not significantly affect the code portability (by &quot;portability&quot; we mean the ability to reuse the same persistence code on the client and on the server). The trick is to use interfaces common to the server and the client, but provide different implementations. However the last issue (already mentioned earlier) complicates code reuse and portability. Still it is certainly not a show-stopper.</P>
+
+<H3><A name="RemoteObjectPersistenceTutorialClientCode-BuildingtheStack"></A>Building the Stack</H3>
+
+<P>Traditionally Cayenne initializes the shared stack (everything below the DataContext) using the information from cayenne.xml descriptor. On the client there are no descriptors present, so a simple API call is normally used.</P>
+
+<UL>
+	<LI>Add the following code in the beginning of the <TT>main</TT> method, and press &quot;Ctrl-Shift-O&quot; to add missing imports (this would be &quot;Cmd-Shift-O&quot; on Mac OS X):</LI>
+</UL>
+
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeHeader panelHeader" style="border-bottom-width: 1px;"><B>Main.java</B></DIV><DIV class="codeContent panelContent">
+<PRE class="code-java">		ClientConnection connection = <SPAN class="code-keyword">new</SPAN> HessianConnection(<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//localhost:8080/cayenne-service&quot;</SPAN>);
+</SPAN>DataChannel channel = <SPAN class="code-keyword">new</SPAN> ClientChannel(connection);
+</PRE>
+</DIV></DIV>
+
+<P>This is all you need to connect to the remote service. Note that DataChannel abstraction is used on the server as well, it is just not as visible - DataDomain implements DataChannel.</P>
+
+<H3><A name="RemoteObjectPersistenceTutorialClientCode-XyzContext"></A>XyzContext</H3>
+
+<P>There is no DataContext on the client (hence Eclipse errors highlighting the attempts to use it). So let's convert the code to a portable code that would work on both client and server the same way. This is done by using <TT><B>ObjectContext</B></TT> interface that is implemented by DataContext and also by <TT><B>CayenneContext</B></TT> that we should be using on the client.</P>
+
+<UL>
+	<LI>Replace this line</LI>
+</UL>
+
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context = DataContext.createDataContext();</PRE>
+</DIV></DIV>
+
+<P>with this</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">ObjectContext context = <SPAN class="code-keyword">new</SPAN> CayenneContext(channel);</PRE>
+</DIV></DIV>
+
+<UL>
+	<LI>Now change the signature of all methods that previously accepted DataContext to take ObjectContext instead. Now we are down to just one error. We just replaced concrete class with the interface, but did not change any code. <EM>Note that we could've used ObjectContext in the server code as well.</EM></LI>
+</UL>
+
+
+<H3><A name="RemoteObjectPersistenceTutorialClientCode-Reconcilebusinesslogic"></A>Reconcile business logic</H3>
+
+<P>The only remaining error is caused by this line:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">picasso.setDateOfBirthString(<SPAN class="code-quote">&quot;18811025&quot;</SPAN>);</PRE>
+</DIV></DIV>
+
+<P>As was mentioned earlier, this piece needs improvement in Cayenne. As of release 1.2 the client and the server classes, while sharing all properties, do not share the business logic. So it has to be copy/paste, and this is what we are going to do.</P>
+
+<UL>
+	<LI>Open server <TT>cayenne.tutorial.Artist.java</TT> class and copy the class contents (everything inside <TT>public class Artist extends _Artist {..</TT>}). Paste them to the client <TT>cayenne.tutorial.client.Artist.java</TT> and save the file. The last error in the Main class should now be cleared.</LI>
+</UL>
+
+
+<H3><A name="RemoteObjectPersistenceTutorialClientCode-RunningtheClient"></A>Running the Client</H3>
+
+<UL>
+	<LI>Start the server in Eclipse using JettyLauncher.</LI>
+	<LI>Right click the <TT>cayenne.tutorial.client.Main</TT> in Eclipse and select <TT>&quot;Run As.. &gt; Java Application</TT>. You should see a bunch of logs on the client and the server Eclipse consoles showing that the client has connected and executed a number of operations. Specifically the client output may look like this, displaying messages sent to the server:</LI>
+</UL>
+
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>ul 4, 2006 2:18:23 PM org.objectstyle.cayenne.remote.hessian.HessianConnection connect
+INFO: Connecting to [http://localhost:8080/cayenne-service] - dedicated session.
+Jul 4, 2006 2:18:24 PM org.objectstyle.cayenne.remote.hessian.HessianConnection connect
+INFO: === Connected, session: org.objectstyle.cayenne.remote.RemoteSession@7918f0[sessionId=k2h7fmgw8ecd] - took 672 ms.
+Jul 4, 2006 2:18:24 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 0: Bootstrap
+Jul 4, 2006 2:18:24 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 0: Bootstrap done - took 235 ms.
+Jul 4, 2006 2:18:24 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 1: Query
+Jul 4, 2006 2:18:27 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 1: Query done - took 2588 ms.
+Jul 4, 2006 2:18:27 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 2: flush-cascade-sync
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 2: flush-cascade-sync done - took 608 ms.
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 3: Query
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 3: Query done - took 220 ms.
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 4: Query
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 4: Query done - took 40 ms.
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 5: Query
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 5: Query done - took 94 ms.
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 6: Query
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 6: Query done - took 81 ms.
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: --- Message 7: flush-cascade-sync
+Jul 4, 2006 2:18:28 PM org.objectstyle.cayenne.remote.BaseConnection sendMessage
+INFO: === Message 7: flush-cascade-sync done - took 155 ms.</PRE>
+</DIV></DIV>
+
+<P>You are done with a basic client!</P>
+
+<HR>
+<P><B>Next Step: <A href="remote-object-persistence-tutorial-authentication.html" title="Remote Object Persistence Tutorial Authentication">Remote Object Persistence Tutorial Authentication</A></B></P>
+<HR>
+

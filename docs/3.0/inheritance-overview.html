@@ -1,0 +1,91 @@
+Title: Inheritance Overview
+
+	<H2><A name="InheritanceOverview-Overview"></A>Overview</H2>
+
+<P>Inheritance is a familiar and a very useful concept to any Java developer. There are three common ways of mapping it to a relational schema. In Cayenne we are calling them &quot;single table&quot;, &quot;vertical&quot; and &quot;horizontal&quot;. Other ORM frameworks may use different terms for those (e.g. in JPA &quot;single table&quot; is called &quot;single table per class&quot;, &quot;vertical&quot; - &quot;joined subclass&quot;, and &quot;horizontal&quot; - &quot;table per concrete class&quot;, still they are referring to the same types of mapping). The picture below is a high-level representation of these three strategies. We'll discuss them in general terms in this chapter and provide Cayenne-specific details in dedicated chapters. </P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/3.0/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>As of this writing Cayenne does not support horizontal inheritance. It may in the future.</TD></TR></TABLE></DIV>
+
+
+<H2><A name="InheritanceOverview-TypesofInheritance"></A>Types of Inheritance</H2>
+
+<P><SPAN class="image-wrap" style=""><IMG src="inheritance-overview.data/inheritance-overview.png" style="border: 0px solid black"></SPAN></P>
+
+
+<H3><A name="InheritanceOverview-SingleTableInheritance"></A>Single Table Inheritance</H3>
+
+<P>One database table is used to map all the subclasses and the superclass. So Superclass, Subclass1 and Subclass2 are all mapped to a single table. Such table has to contain columns to store the attributes of an entire class hierarchy. One or more columns are used as &quot;discriminator columns&quot; that tell Cayenne what type of record is stored in a given row. Single table inheritance provides good select performance, however the storage of data is not optimized.</P>
+
+<H3><A name="InheritanceOverview-VerticalInheritance"></A>Vertical Inheritance</H3>
+
+<P>One database table is used to map superclass columns, additionally one table per subclass is joined via a 1..1 relationship with the superclass table. So &quot;Superclass&quot; will have its own table, and extra attributes found in Subclass1 and Subclass2 will be stored in two separate tables joined with the superclass table. Discriminator columns are required for the same reason as with Single Table Inheritance. Vertical inheritance optimizes the data storage and provides a view of data very close to that of the Java classes. However that comes at a cost of doing one or more joins in every query, which may not scale into deep and wide inheritance hierarchies.</P>
+
+<H3><A name="InheritanceOverview-HorizontalInheritance"></A>Horizontal Inheritance</H3>
+
+<P><EM>(Currently unsupported by Cayenne)</EM></P>
+
+<P>With horizontal inheritance a superclass is usually abstract, and each subclass is mapped to its own independent database table. In our example &quot;Superclass&quot; will not have a table, all attributes, including inherited, of Subclass1 and Subclass2 will be stored in separate tables. Discriminator column is not required. Select performance of the horizontal inheritance mapping is not very good, as a union or a separate query per subclass is used to get the data.</P>
+
+<H3><A name="InheritanceOverview-ComparingORMInheritanceTypes"></A>Comparing ORM Inheritance Types</H3>
+
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Inheritance Type</TH>
+<TH class="confluenceTh">Discriminator Column</TH>
+<TH class="confluenceTh">Primary Key</TH>
+<TH class="confluenceTh">Pros and Cons</TH>
+</TR>
+<TR>
+<TD class="confluenceTd"><A href="modeling-single-table-inheritance.html" title="Modeling Single Table Inheritance">Single Table</A></TD>
+<TD class="confluenceTd">required</TD>
+<TD class="confluenceTd">shared by superclasses and subclasses</TD>
+<TD class="confluenceTd">good select performance (no joins). Storage is not optimized.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd"><A href="modeling-vertical-inheritance.html" title="Modeling Vertical Inheritance">Vertical</A></TD>
+<TD class="confluenceTd">required</TD>
+<TD class="confluenceTd">propagated from superclass to subclasses via a join</TD>
+<TD class="confluenceTd">optimized data storage and a data view close to object oriented one. Adds (N - 1) joins to select, where N is the number of classes in the hierarchy</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">Horizontal <EM>(unsupported)</EM></TD>
+<TD class="confluenceTd">not needed</TD>
+<TD class="confluenceTd">independent in each table</TD>
+<TD class="confluenceTd">selects normally require a UNION across tables</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<H2><A name="InheritanceOverview-MappingInheritanceinCayenne"></A>Mapping Inheritance in Cayenne</H2>
+
+<P>Now that we discussed various types of inheritance, it should be noted that the type of inheritance <EM>is not specified explicitly</EM>. Instead Cayenne guesses it from the mapping. This allows for mixing multiple types in a single hierarchy. The following chapters will explain how the mapping is done in each case:</P>
+
+
+<OL>
+	<LI><A href="modeling-single-table-inheritance.html" title="Modeling Single Table Inheritance">Modeling Single Table Inheritance</A></LI>
+	<LI><A href="modeling-vertical-inheritance.html" title="Modeling Vertical Inheritance">Modeling Vertical Inheritance</A></LI>
+</OL>
+
+
+
+
+	<HR>
+	<P id="footer">Copyright &copy; 2001-2010 Apache Software Foundation. <A href="http://cayenne.apache.org/privacy-policy.html">Privacy policy.</A></P>
+</DIV>
+
+</DIV>
+
+</DIV></DIV>
+<SCRIPT type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</SCRIPT>
+<SCRIPT type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7036673-1");
+pageTracker._trackPageview();
+} catch(err) {}</SCRIPT>
+</BODY>
+</HTML>

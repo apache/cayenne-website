@@ -1,0 +1,50 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;2.&nbsp;Cayenne Mapping Structure</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 3.1 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 3.1"><link rel="home" href="index.html" title="Cayenne Guide"><link rel="up" href="cayenne-guide-part1.html" title="Part&nbsp;I.&nbsp;Object Relational Mapping with Cayenne"><link rel="prev" href="setup.html" title="Chapter&nbsp;1.&nbsp;Setup"><link rel="next" href="cayennemodeler-application.html" title="Chapter&nbsp;3.&nbsp;CayenneModeler Application"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.3.1 (3.1)</th><th align="center">Chapter&nbsp;2.&nbsp;Cayenne Mapping Structure</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup.html">Prev</a>&nbsp;</td><th width="60%" align="center"><a accesskey="u" href="cayenne-guide-part1.html">Part&nbsp;I.&nbsp;Object Relational Mapping with Cayenne</a></th><td width="20%" align="right">&nbsp;<a accesskey="n" href="cayennemodeler-application.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;2.&nbsp;Cayenne Mapping Structure"><div class="titlepage"><div><div><h2 class="title"><a name="cayenne-mapping-structure"></a>Chapter&nbsp;2.&nbsp;Cayenne Mapping Structure</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="cayenne-mapping-structure.html#cayenne-project">Cayenne Project</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#datamap">DataMap</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#datanode">DataNode</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#dbentity">DbEntity</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#objentity">ObjEntity</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#embeddable">Embeddable</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#procedure">Procedure</a></span></dt><dt><span class="section"><a href="cayenne-mapping-structure.html#query">Query</a></span></dt></dl></div><div class="section" title="Cayenne Project"><div class="titlepage"><div><div><h2 class="title"><a name="cayenne-project"></a>Cayenne Project</h2></div></div></div><p>A Cayenne project is an XML representation of a model connecting database schema with
+            Java classes. A project is normally created and manipulated via CayenneModeler GUI and
+            then used to initialize Cayenne runtime. A project is made of one or more files. There's
+            always a root project descriptor file in any valid project. It is normally called
+                <code class="code">cayenne-xyz.xml</code>, where "xyz" is the name of the project.</p><p>Project descriptor can reference DataMap files, one per DataMap. DataMap files are
+            normally called <code class="code">xyz.map.xml</code>, where "xyz" is the name of the DataMap. For
+            legacy reasons this naming convention is different from the convention for the root
+            project descriptor above, and we may align it in the future versions. Here is how a
+            typical project might look on the file
+            system:</p><pre class="programlisting">~: ls -l
+total 24
+-rw-r--r--  1 cayenne  staff  491 Jan 28 18:25 cayenne-project.xml
+-rw-r--r--  1 cayenne  staff  313 Jan 28 18:25 datamap.map.xml</pre><p>DataMap are referenced by name in the root
+            descriptor:</p><pre class="programlisting">&lt;map name="datamap"/&gt;</pre><p>Map files are resolved by Cayenne by appending <code class="code">.map.xml</code>" extension to the
+            map name, and resolving the resulting string relative to the root descriptor URI. The
+            following sections discuss varios ORM model objects, without regards to their XML
+            representation. XML format details are really unimportant to the Cayenne users.</p></div><div class="section" title="DataMap"><div class="titlepage"><div><div><h2 class="title"><a name="datamap"></a>DataMap</h2></div></div></div><p>DataMap is a container of persistent entities and other object-relational metadata.
+            DataMap provides developers with a scope to organize their entities, but it does not
+            provide a namespace for entities. In fact all DataMaps present in runtime are combined
+            in a single namespace. Each DataMap must be associated with a DataNode. This is how
+            Cayenne knows which database to use when running a query.</p></div><div class="section" title="DataNode"><div class="titlepage"><div><div><h2 class="title"><a name="datanode"></a>DataNode</h2></div></div></div><p>DataNode is model of a database. It is actually pretty simple. It has an arbitrary
+            user-provided name and information needed to create or locate a JDBC DataSource. Most
+            projects only have one DataNode, though there may be any number of nodes if
+            needed.</p></div><div class="section" title="DbEntity"><div class="titlepage"><div><div><h2 class="title"><a name="dbentity"></a>DbEntity</h2></div></div></div><p>DbEntity is a model of a single DB table or view. DbEntity is made of DbAttributes
+            that correspond to columns, and DbRelationships that map PK/FK pairs. DbRelationships
+            are not strictly tied to FK constraints in DB, and should be mapped for all logical
+            "relationships" between the tables.</p></div><div class="section" title="ObjEntity"><div class="titlepage"><div><div><h2 class="title"><a name="objentity"></a>ObjEntity</h2></div></div></div><p>ObjEntity is a model of a single persistent Java class. ObjEntity is made of
+            ObjAttributes and ObjRelationships. Both correspond to entity class properties. However
+            ObjAttributes represent "simple" properties (normally things like String, numbers,
+            dates, etc.), while ObjRelationships correspond to properties that have a type of
+            another entity. </p><p>ObjEntity maps to one or more DbEntities. There's always one "root" DbEntity for each
+            ObjEntity. ObjAttribiute maps to a DbAttribute or an Embeddable. Most often mapped
+            DbAttribute is from the root DbEntity. Sometimes mapping is done to a DbAttribute from
+            another DbEntity somehow related to the root DbEntity. Such ObjAttribute is called
+            "flattened". Similarly ObjRelationship maps either to a single DbRelationship, or to a
+            chain of DbRelationships ("flattened" ObjRelationship).</p><p>ObjEntities may also contain mapping of their lifecycle callback methods.</p></div><div class="section" title="Embeddable"><div class="titlepage"><div><div><h2 class="title"><a name="embeddable"></a>Embeddable</h2></div></div></div><p>Embeddable is a model of a Java class that acts as a single attribute of an ObjEntity,
+            but maps to multiple columns in the database.</p></div><div class="section" title="Procedure"><div class="titlepage"><div><div><h2 class="title"><a name="procedure"></a>Procedure</h2></div></div></div><p>A model of a stored procedure in the database.</p></div><div class="section" title="Query"><div class="titlepage"><div><div><h2 class="title"><a name="query"></a>Query</h2></div></div></div><p>A model of a query. Cayenne allows queries to be mapped in Cayenne project, or created
+            in the code. Depending on the circumstances the users may take one or the other
+            approach.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="cayenne-guide-part1.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="cayennemodeler-application.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Setup&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;CayenneModeler Application</td></tr></table></div></body></html>

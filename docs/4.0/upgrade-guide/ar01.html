@@ -1,0 +1,105 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Guide to 4.0 Features</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 4.0 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 4.0"><link rel="home" href="index.html" title="Cayenne 4.0 New Features and Upgrade Guide"><link rel="up" href="index.html" title="Cayenne 4.0 New Features and Upgrade Guide"><link rel="prev" href="index.html" title="Cayenne 4.0 New Features and Upgrade Guide"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.4.0 (4.0.M5)</th><th align="center">Guide to 4.0 Features</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;</td></tr></table><hr></div><div class="article"><div class="titlepage"><div><div><h1 class="title"><a name="d0e19"></a>Guide to 4.0 Features</h1></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="ar01.html#java-version">Java Version</a></span></dt><dt><span class="section"><a href="ar01.html#cayenne-configuration">Cayenne Configuration</a></span></dt><dt><span class="section"><a href="ar01.html#framework-api">Framework API</a></span></dt><dt><span class="section"><a href="ar01.html#cayenne-modeler">CayenneModeler</a></span></dt><dt><span class="section"><a href="ar01.html#build-tools">Build Tools</a></span></dt></dl></div><p>This guide highlights the new features and changes introduced in Apache Cayenne 4.0. For a full list of changes consult
+		RELEASE-NOTES.txt included in Cayenne download. For release-specific upgrade instructions check UPGRADE.txt.</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="java-version"></a>Java Version</h2></div></div></div><p>Minimum required JDK version is 1.7 or newer. Cayenne 4.0 is fully tested with Java 1.7,
+			1.8. </p><p>The examples below often use Java 8 syntax. But those same examples should work without lambdas just as well.</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="cayenne-configuration"></a>Cayenne Configuration</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e34"></a>ServerRuntimeBuilder</h3></div></div></div><p>Cayenne 3.1 introduced dependency injection and ServerRuntime. 4.0 provides a very convenient utility to create a custom runtime
+				with various extensions. This reduces the code needed to integrate Cayenne in your environment to just a few lines and no
+				boilerplate.
+				E.g.:</p><pre class="programlisting">ServerRuntime runtime = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> ServerRuntimeBuilder(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"myproject"</span>)
+        .addConfigs(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"cayenne-project1.xml"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"cayenne-project2.xml"</span>)
+        .addModule(binder -&gt; binder.bind(JdbcEventLogger.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).toInstance(myLogger))
+        .dataSource(myDataSource)
+        .build();</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e41"></a>Mapping-free ServerRuntime</h3></div></div></div><p>ServerRuntime can now be started without any ORM mapping at all. This is useful in situations when Cayenne is used as a stack to
+				execute raw SQL, in unit tests, etc.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e46"></a>DI Container Decorators</h3></div></div></div><p>In addition to overriding services in DI container, Cayenne now allows to supply
+				decorators. True to the "smallest-footprint" DI philosophy, decorator approach is
+				very simple and does not require proxies or class enhancement. Just implement the
+				decorated interface and provide a constructor that takes a delegate instance being
+				decorated:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> MyInterfaceDecorator <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">implements</span> MyInterface {
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">private</span> MyInterface delegate;
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> MockInterface1_Decorator3(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Inject</span> MyInterface delegate) {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">this</span>.delegate = delegate;
+    }
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Override</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> String getName() {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"&lt;"</span> + delegate.getName() + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"&gt;"</span>;
+    }
+}
+
+Module module = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> Module() {
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Override</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">void</span> configure(Binder binder) {
+        binder.decorate(MyInterface.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).before(MyInterfaceDecorator.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+    }
+};</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="framework-api"></a>Framework API</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e56"></a>Fluent Query API</h3></div></div></div><p>Fluent Query API is one of the most exciting new features in Cayenne 4.0. This syntax is "chainable" so you can write query
+				assembly and execution code on one line. The most useful fluent queries are ObjectSelect, SQLSelect and SelectById:</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d0e61"></a>ObjectSelect</h4></div></div></div><p>A "chainable" analog of SelectQuery.
+					</p><pre class="programlisting">Artist a = ObjectSelect
+     .query(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>)
+     .where(Artist.ARTIST_NAME.eq(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"Picasso"</span>))
+     .selectOne(context);</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d0e68"></a>SQLSelect</h4></div></div></div><p>A "chainable" analog of SQLTemplate used specifically to run selecting raw
+					SQL:</p><pre class="programlisting">List&lt;Long&gt; ids = SQLSelect
+     .scalarQuery(Long.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT ARTIST_ID FROM ARTIST ORDER BY ARTIST_ID"</span>)
+     .select(context);</pre></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d0e75"></a>SelectById</h4></div></div></div><p>There's really no good analog of SelectById in Cayenne prior to 4.0. Previously available ObjectIdQuery didn't support half of
+					the features of SelectById (e.g. caching consistent with other queries, prefetches, etc.)
+					:</p><pre class="programlisting">Artist a = SelectById
+     .query(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">3</span>)
+     .useLocalCache(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"g1"</span>)
+     .selectOne(context)</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="objectcontext"></a>ObjectContext</h3></div></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="d0e85"></a>Callback-based Object Iterator</h4></div></div></div><p>ObjectContext now features a simpler way to iterate over large result sets, based on callback interface that can be
+					implemented with a
+					lambda:</p><pre class="programlisting">SelectQuery&lt;Artist&gt; q = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SelectQuery&lt;Artist&gt;(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+
+context.iterate(q, (Artist a) -&gt; {
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// do something with the object...</span>
+    ...
+});</pre></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e92"></a>Generics in Expressions and Queries</h3></div></div></div><p>We finished the work of "genericizing" Cayenne APIs started in 3.1. Now all APIs dealing with persistent objects (Expressions,
+				Queries, ObjectContext, etc.) support generics of Persistent object type or attribute property type.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e97"></a>Property API</h3></div></div></div><p>Persistent superclasses (_MyEntity) now contain a set of static Property&lt;T&gt; variables generated from the model. These
+				metadata objects make possible to create type-safe Expressions and other query parts.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e102"></a>Positional Parameter Bindings </h3></div></div></div><p>Expressions and SQLTemplate traditionally supported binding of parameters by name as a map. Cayenne 4.0 introduces a very easy
+				form of positional bindings. It works with the same named template format, only parameters are bound by position, left-to-right.
+				Here we showing a more complex example with the same parameter name being used more than once in the
+				query:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// two distinct names, 3 positional parameters.</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// "price" is set to 23, "maxPrice" - to 50</span>
+Expression e = ExpressionFactory.exp(
+     <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"price = $price or averagePrice = $price and maxPrice = $maxPrice"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">23</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">50</span>);</pre><p>This
+				API is supported in Expressions, SQLTemplate as well as new SQLSelect and can be used interchnageably with named parameters with a
+				single template flavor.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e110"></a>Improved Transaction API</h3></div></div></div><p>Transaction factory is now setup via DI (instead of being configured in the Modeler). There's a utility method on ServerRuntime
+				to perform multiple operations as one
+				transaction:</p><pre class="programlisting">runtime.performInTransaction(() -&gt; {
+	<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// ... do some changes</span>
+	context.commitChanges();
+
+	<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// ... do more changes</span>
+	context.commitChanges();
+
+	<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> true;
+});</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e117"></a>Transparent Database Cryptography with "cayenne-crypto" Module</h3></div></div></div><p>Cayenne includes a new module called "cayenne-crypto" that enables transparent cryptography for designated data columns. This is
+				a pretty cool feature that allows to enable encryption/decryption of your sensitive data pretty much declaratively using your
+				regular DB storage. Encrypted values can be stored in (VAR)BINARY and (VAR)CHAR columns. Currently "cayenne-crypto" supports
+				AES/CBC/PKCS5Padding encryption (though other cyphers can be added). It also supports encrypted data compression. Here is an example
+				of building a crypto DI module that can be added to
+				ServerRuntime:</p><pre class="programlisting">Module cryptoExtensions = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> CryptoModuleBuilder()
+	.keyStore(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"file:///mykeystore"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"keystorepassword"</span>.toCharArray(), <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"keyalias"</span>)
+	.compress()
+	.build();</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="cayenne-modeler"></a>CayenneModeler</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e127"></a>Improved UI</h3></div></div></div><p>CayenneModeler features a number of UI improvements. Attributes and relationships are now edited in the same view (no need to
+				switch between the tabs). Project tree allows to easily filter elements by type and quickly collapse the tree.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e132"></a>Dropped Support for Mapping Listeners</h3></div></div></div><p>Managing listeners in the DataMap XML model is counterproductive and confusing, so support for listeners was removed from both
+				the XML and the Modeler. If you previously had listeners mapped in the model, annotate their callback methods, and perform listener
+				registration in the code: </p><pre class="programlisting">runtime.getDataDomain().addListener(myListener);</pre><p>
+				Entity callbacks on the other hand are managed in the Modeler as before.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="build-tools"></a>Build Tools</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e143"></a>cdbimport</h3></div></div></div><p>"cdbimport" has evolved from an experiment to a full-featured production tool that significantly reduces (and sometimes
+				eliminates) the need for manual maintenance of the DataMaps in CayenneModeler. Two improvements made this possible. First, smart
+				merge algorithm will ensure that custom changes to the model are not overridden on subsequent runs of "cdbimport". Second, the
+				mechanism for specifing DB reverse-engineering parameters, such as name filtering, is made much more powerful with many new options.
+				E.g. we started supporting filters by catalogs and schemas, table name filters can be added per catalog/schema or at the top level,
+				etc.
+			</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e148"></a>cgen</h3></div></div></div><p>As was mentioned above, cgen now includes Property&lt;T&gt; static variables for expression building. It is also made smarter about
+				its defaults for "destDir" and "superPkg".</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;</td></tr><tr><td width="40%" align="left" valign="top">Cayenne 4.0 New Features and Upgrade Guide&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;</td></tr></table></div></body></html>

@@ -1,0 +1,45 @@
+Title: Tutorial Starting Mapping Project
+
+	
+
+<H3><A name="TutorialStartingMappingProject-StartCayenneModeler"></A>Start CayenneModeler</H3>
+
+<P>Start CayenneModeler by doubleclicking the appropriate startup file in the <TT>bin</TT> directory of Cayenne installation (if the Modeler does not start, see <A href="running-cayennemodeler.html" title="Running CayenneModeler">this page</A> for more information).</P>
+
+<P>Go to <TT>&quot;Tools &gt; Preferences &gt; ClassPath&quot;</TT> and add a <TT>derby.jar</TT> file to the list of &quot;Custom ClassPath&quot; entries to allow CayenneModeler to work with Derby. When done click &quot;Save&quot;. If you are using a database other then Derby, you should enter a location of that database JDBC driver instead.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="tutorial-starting-mapping-project.data/modeler-classpath.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>Now you will create both database schema definition and object mapping from scratch using CayenneModeler. Note that in cases when you already have a legacy database, this process can be automated by using reverse engineering features of the Modeler (<TT>&quot;Tools &gt; Reengineer Database Schema&quot;</TT>). Still understanding how manual mapping works is important.</P>
+
+<H3><A name="TutorialStartingMappingProject-CreateNewCayenneProject"></A>Create New Cayenne Project</H3>
+
+<P>Click on the &quot;New Project&quot; button on the toolbar (leftmost button). A new project will appear that contains a single DataDomain. The meaning of a DataDomain is explained elsewhere in the User Guide. For now it is sufficient to understand that DataDomain is the root of your mapping project:</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="tutorial-starting-mapping-project.data/modeler-datadomain.jpg" style="border: 0px solid black"></SPAN></P>
+
+<H3><A name="TutorialStartingMappingProject-CreateDataNode"></A>Create DataNode</H3>
+
+<P>The next project object you will create is a DataNode that is a descriptor of the physical database. With &quot;UntitledDomain&quot; selected on the left, click on &quot;Create DataNode&quot; button on the toolbar (or select <TT>&quot;Project &gt; Create DataNode&quot;</TT> from the menu.</P>
+
+<P>A new DataNode is displayed. You can leave the defaults in the &quot;DataNode Configuration&quot; section unchanged, but you need to specify JDBC Configuration parameters. For embedded Derby database you can enter the following settings, replacing &quot;testdb&quot; with an absolute path of the directory on your filesystem where you want the database to be created (e.g., on Windows you may specify <TT>jdbc:derby:c:/testdb;create=true</TT>):</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="tutorial-starting-mapping-project.data/modeler-datanode.jpg" style="border: 0px solid black"></SPAN></P>
+
+<H3><A name="TutorialStartingMappingProject-CreateDataMap"></A>Create DataMap</H3>
+
+<P>Now you will create a DataMap - an object that holds all the mapping information. To do this, click on &quot;Create DataMap&quot; button (or select a corresponding menu item). Note that the newly created DataMap is automatically linked to the DataNode that you created in the previous step. If there is more than one DataNode, you may need to link a DataMap to the correct node manually. In other words a DataMap within DataDomain must point to a database described by the map.</P>
+
+<P>You can leave all the DataMap defaults unchanged except for one - Java Package. Enter &quot;cayenne.tutorial&quot; for the default package name that later will be used for all persistent classes:</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="tutorial-starting-mapping-project.data/modeler-datamap.jpg" style="border: 0px solid black"></SPAN></P>
+
+<H3><A name="TutorialStartingMappingProject-SavetheProject"></A>Save the Project</H3>
+
+<P>Before you proceed with the actual mapping, let's save the project. Click on &quot;Save&quot; button in the toolbar and navigate to the &quot;cayenne-tutorial&quot; Eclipse project folder that was created earlier. Cayenne mapping files must be accessible in the application CLASSPATH, so let's save them under &quot;cayenne-tutorial/src&quot; folder. Now if you go back to Eclipse, right click on &quot;cayenne-tutorial&quot; project and select &quot;Refresh&quot;, you will see three Cayenne XML files:</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="tutorial-starting-mapping-project.data/eclipse-xmlfiles.jpg" style="border: 0px solid black"></SPAN></P>
+
+<HR>
+<P><B>Next Step: <A href="tutorial-object-relational-mapping.html" title="Tutorial Object Relational Mapping">Tutorial Object Relational Mapping</A></B></P>
+<HR>

@@ -1,0 +1,15 @@
+Title: QueryChain
+
+	
+
+<P><TT>QueryChain</TT>, as the name implies, is a Query that is itself a collection of other queries. It simplifies an execution of multiple queries in a single batch. E.g.:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">QueryChain query = <SPAN class="code-keyword">new</SPAN> QueryChain();
+query.addQuery(<SPAN class="code-keyword">new</SPAN> SQLTemplate(Project.class, <SPAN class="code-quote">&quot;delete from project&quot;</SPAN>));
+query.addQuery(<SPAN class="code-keyword">new</SPAN> SQLTemplate(Project.class, <SPAN class="code-quote">&quot;delete from person&quot;</SPAN>));
+query.addQuery(<SPAN class="code-keyword">new</SPAN> SQLTemplate(Project.class, <SPAN class="code-quote">&quot;delete from department&quot;</SPAN>));
+
+DataContext context = ...
+context.performNonSelectingQuery(query);
+</PRE>
+</DIV></DIV>

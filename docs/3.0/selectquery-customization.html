@@ -1,0 +1,18 @@
+Title: SelectQuery Customization
+
+	<P><A href="selectquery.html" title="SelectQuery">SelectQueries</A> allow to fine tune the behavior of the fetch using the following API:</P>
+<UL>
+	<LI>public void <B>setFetchLimit</B>(int fetchLimit)<BR>
+ If set to a value greater than zero, tells Cayenne that query should never retrieve more than X objects (X == fetchLimit) from the database. If a result set contains more rows, they are simply ignored and never read. This is a &quot;safety&quot; feature that can be used to prevent the application from crashing when an unexpectedly high number of records exists for a given query.</LI>
+</UL>
+
+
+<UL>
+	<LI>public void <B>setDistinct</B>(boolean distinct)<BR>
+ If set to true (default is false), tells Cayenne that query should fetch distinct rows.</LI>
+	<LI>public void <B>setFetchingDataRows</B>(boolean flag)<BR>
+ If set to true (default is false), tells Cayenne that instead of creating DataObjects, it should fetch &quot;data rows&quot; - dictionaries containing database values, using table column names for the keys. &quot;Performance Tuning&quot; chapter explains how data rows can improve performance and how and when to use them.</LI>
+	<LI>public void <B>setPageSize</B>(int pageSize)<BR>
+ If set to a value greater than zero, tells Cayenne that query should do a &quot;lazy&quot; fetch, breaking result into &quot;pages&quot;. <A href="performance-tuning.html" title="Performance Tuning">Performance Tuning</A> has a detailed discussion of paged queries.</LI>
+</UL>
+

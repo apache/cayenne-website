@@ -1,0 +1,30 @@
+Title: Deployment
+
+	<H2><A name="Deployment-Deployment"></A>Deployment</H2>
+
+<P>Cayenne application deployment is about configuring the application so that at runtime it can find a main project file (cayenne.xml) and associated resources, such as DataMap and DataNode XML files.</P>
+
+<P>The central point in Cayenne deployment is the <A href="http://incubator.apache.org/cayenne/2_0/api/cayenne/org/apache/cayenne/conf/Configuration.html" class="external-link" rel="nofollow">Configuration</A> class. It locates and loads all the mapping and configuration information required for Cayenne at runtime. By default Configuration uses a singleton model, i.e. normally there is only one instance of Configuration (or a subclass) that exists in the application. This shared instance can be accessed in the following way:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.conf.Configuration;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataDomain;
+...
+Configuration conf = Configuration.getSharedConfiguration();
+DataDomain domain = conf.getDomain();
+</PRE>
+</DIV></DIV>
+<P>As discussed in the following chapters Configuration works behind the scenes and users rarely care about it. Application code is normally only concerned with obtaining a DataContext.</P>
+
+<H3><A name="Deployment-Sections"></A>Sections</H3>
+
+<OL>
+	<LI><A href="standalone-applications.html" title="Standalone Applications">Standalone Applications</A></LI>
+	<LI><A href="web-applications.html" title="Web Applications">Web Applications</A></LI>
+	<LI><A href="customizing-configuration.html" title="Customizing Configuration">Customizing Configuration</A></LI>
+	<LI><A href="dbcpdatasourcefactory.html" title="DBCPDataSourceFactory">DBCPDataSourceFactory</A></LI>
+	<LI><A href="using-jndi.html" title="Using JNDI">Using JNDI</A></LI>
+	<LI><A href="configuring-logging.html" title="Configuring Logging">Configuring Logging</A></LI>
+</OL>
+
+

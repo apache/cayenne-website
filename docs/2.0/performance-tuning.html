@@ -1,0 +1,25 @@
+Title: Performance Tuning
+
+	
+<P>Most performance problems in database applications, including those using ORM, are related to the inefficient queries and/or large volumes of data in the database. Here is a few common issues that a typical application may run into:</P>
+
+<UL>
+	<LI>Converting a large ResultSet into objects takes very long time.</LI>
+	<LI>Storing objects from a large ResultSet takes large amounts of memory. Application may eventually run out of memory and crash.</LI>
+	<LI>Given a list of objects, there may be a need to retrieve a list of related objects. Often this is done in a suboptimal way, by issuing a single query for each dependent object.</LI>
+</UL>
+
+
+<P>There is no single solution to all performance problems. Cayenne offers a few strategies to improve performance. They should be applied where appropriate.</P>
+
+<H3><A name="PerformanceTuning-Sections"></A>Sections</H3>
+
+<OL>
+	<LI><A href="prefetching.html" title="Prefetching">Prefetching</A></LI>
+	<LI><A href="data-rows.html" title="Data Rows">Data Rows</A></LI>
+	<LI><A href="iterating-through-data-rows.html" title="Iterating Through Data Rows">Iterating Through Data Rows</A></LI>
+	<LI><A href="paginated-queries.html" title="Paginated Queries">Paginated Queries</A></LI>
+	<LI><A href="caching-lookup-tables.html" title="Caching Lookup Tables">Caching Lookup Tables</A></LI>
+	<LI><A href="turning-off-context-synchronization.html" title="Turning off Context Synchronization">Turning off Context Synchronization</A></LI>
+</OL>
+

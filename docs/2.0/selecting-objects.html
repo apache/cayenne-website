@@ -1,0 +1,35 @@
+Title: Selecting Objects
+
+	
+
+<P>If a stored procedure is known to return at least one result set, procedure queries can be executed just like normal select queries. Of course in addtion to returning data, such procedures can perform any other database operations.</P>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/2.0/images/icons/emoticons/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Currently all procedure queries will return data rows, not DataObjects. If the returned row (Map) contains all the attributes needed to recreate a DataObject, this can be done by calling <TT>DataContext.objectFromDataRow()</TT>.</TD></TR></TABLE></DIV>
+
+<P>Below is an example of creating a ProcedureQuery, initializing its parameters, and processing execution results.</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext ctxt;
+
+<SPAN class="code-comment">// <SPAN class="code-quote">&quot;my_procedure&quot;</SPAN> is a name of a stored procedure,
+</SPAN><SPAN class="code-comment">// that must exist in the DataMap
+</SPAN>ProcedureQuery query = <SPAN class="code-keyword">new</SPAN> ProcedureQuery(<SPAN class="code-quote">&quot;my_procedure&quot;</SPAN>);
+
+<SPAN class="code-comment">// Set <SPAN class="code-quote">&quot;IN&quot;</SPAN> parameter values
+</SPAN>query.addParam(<SPAN class="code-quote">&quot;paramter1&quot;</SPAN>, <SPAN class="code-quote">&quot;abc&quot;</SPAN>);
+query.addParam(<SPAN class="code-quote">&quot;parameter2&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Integer</SPAN>(3000));
+
+<SPAN class="code-comment">// run query as a normal select query
+</SPAN>List rows = ctxt.performQuery(query);
+
+<SPAN class="code-comment">// process results
+</SPAN>Iterator it = rows.iterator();
+<SPAN class="code-keyword">while</SPAN>(it.hasNext()) {
+  Map row = (Map)it.next();
+  
+  <SPAN class="code-comment">// <SPAN class="code-keyword">do</SPAN> something with result, e.g. instantiate a real DataObject
+</SPAN>  MyDataObject object = (MyDataObject)ctxt.objectFromDataRow(<SPAN class="code-quote">&quot;MyDataObject&quot;</SPAN>, row);
+  ....
+}
+</PRE>
+</DIV></DIV>

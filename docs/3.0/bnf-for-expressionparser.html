@@ -1,0 +1,49 @@
+Title: BNF for ExpressionParser
+
+	<H2><A name="BNFforExpressionParser-BNFforExpressionParser.jj"></A>BNF for ExpressionParser.jj</H2>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>NON-TERMINALS
+expression 	::= 	orCondition &lt;EOF&gt;
+orCondition 	::= 	andCondition ( &quot;or&quot; andCondition )*
+andCondition 	::= 	notCondition ( &quot;and&quot; notCondition )*
+notCondition 	::= 	( &quot;not&quot; | &quot;!&quot; ) simpleCondition
+                 | 	simpleCondition
+simpleCondition 	::= 	scalarExpression ( simpleNotCondition | 
+                                     ( &quot;=&quot; | &quot;==&quot; ) scalarExpression | 
+                                     ( &quot;!=&quot; | &quot;&lt;&gt;&quot; ) scalarExpression | 
+                                     &quot;&lt;=&quot; scalarExpression | 
+                                     &quot;&lt;&quot; scalarExpression | 
+                                     &quot;&gt;&quot; scalarExpression | 
+                                     &quot;&gt;=&quot; scalarExpression | 
+                                     &quot;like&quot; scalarExpression | 
+                                     &quot;likeIgnoreCase&quot; scalarExpression | 
+                                     &quot;in&quot; ( namedParameter | &quot;(&quot; scalarCommaList &quot;)&quot; ) 
+                                     | &quot;between&quot; scalarExpression &quot;and&quot; scalarExpression )?
+simpleNotCondition 	::= 	( &quot;not&quot; | &quot;!&quot; ) ( &quot;like&quot; scalarExpression | 
+                                                  &quot;likeIgnoreCase&quot; scalarExpression | 
+                                                  &quot;in&quot; ( namedParameter | &quot;(&quot; scalarCommaList &quot;)&quot; ) | 
+                                                  &quot;between&quot; scalarExpression &quot;and&quot; scalarExpression )
+scalarCommaList 	::= 	( scalarConstExpression ( &quot;,&quot; scalarConstExpression )* )
+scalarExpression 	::= 	scalarNumericExpression
+                 | 	&lt;SINGLE_QUOTED_STRING&gt;
+                 | 	&lt;DOUBLE_QUOTED_STRING&gt;
+                 | 	&lt;NULL&gt;
+scalarConstExpression 	::= 	&lt;SINGLE_QUOTED_STRING&gt;
+                 | 	&lt;DOUBLE_QUOTED_STRING&gt;
+                 | 	namedParameter
+                 | 	&lt;INT_LITERAL&gt;
+                 | 	&lt;FLOAT_LITERAL&gt;
+scalarNumericExpression 	::= 	multiplySubtractExp ( &quot;+&quot; multiplySubtractExp | &quot;-&quot; multiplySubtractExp )*
+multiplySubtractExp 	::= 	numericTerm ( &quot;*&quot; numericTerm | &quot;/&quot; numericTerm )*
+numericTerm 	::= 	( &quot;+&quot; )? numericPrimary
+                 | 	&quot;-&quot; numericPrimary
+numericPrimary 	::= 	&quot;(&quot; orCondition &quot;)&quot;
+                 | 	pathExpression
+                 | 	namedParameter
+                 | 	&lt;INT_LITERAL&gt;
+                 | 	&lt;FLOAT_LITERAL&gt;
+namedParameter 	::= 	&quot;$&quot; &lt;PROPERTY_PATH&gt;
+pathExpression 	::= 	( &lt;PROPERTY_PATH&gt; | &quot;obj:&quot; &lt;PROPERTY_PATH&gt; | &quot;db:&quot; &lt;PROPERTY_PATH&gt; )
+</PRE>
+</DIV></DIV>

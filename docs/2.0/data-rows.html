@@ -1,0 +1,43 @@
+Title: Data Rows
+
+	
+<P>DataObjects creation and registering with DataContext is an expensive operation. There are cases when only a few objects are really used, but the application still has to fetch a lot of objects. For instance when a user performs a search, result may contain thousands of records, but user will only check 2-3 of them. Cayenne allows programmers to explicitly disable objects creation for such cases. Results will be returned in the form of java.util.Map's. In Cayenne such maps are called <TT>DataRows</TT>.</P>
+
+<P>Benefits of Data Rows:</P>
+
+<UL>
+	<LI>Fetch speed increase. Our tests show 2x to 5x performance increase.</LI>
+	<LI>Using regular Cayenne query API.</LI>
+	<LI>Using same DataMaps.</LI>
+	<LI>Easy to convert to DataObjects.</LI>
+</UL>
+
+
+<P>Data rows don't have all the object-oriented features of DataObjects. In particular, data rows don't support relationships. It is easy to create a DataObject from a row though. See examples below.</P>
+
+<P>Data rows example:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> java.util.List;
+<SPAN class="code-keyword">import</SPAN> java.util.Map;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataContext;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.query.SelectQuery;
+<SPAN class="code-keyword">import</SPAN> org.apache.art.Artist;
+...
+DataContext ctxt;
+
+<SPAN class="code-comment">// create a query returning data rows
+</SPAN>SelectQuery q = <SPAN class="code-keyword">new</SPAN> SelectQuery(Artist.class);
+q.setFetchingDataRows(<SPAN class="code-keyword">true</SPAN>);
+
+List artistRows = ctxt.performQuery(q);
+
+<SPAN class="code-comment">// since query was configured to <SPAN class="code-keyword">return</SPAN> data rows,
+</SPAN><SPAN class="code-comment">// result list elements are java.util.Map's
+</SPAN>Map row = (Map)artistRows.get(0);
+
+<SPAN class="code-comment">// convert row to an artist
+</SPAN>Artist artist = (Artist)ctxt.objectFromDataRow(<SPAN class="code-quote">&quot;Artist&quot;</SPAN>, row);
+...
+</PRE>
+</DIV></DIV>

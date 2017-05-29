@@ -1,0 +1,198 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;12.&nbsp;Customizing Cayenne Runtime</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 3.1 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 3.1"><link rel="home" href="index.html" title="Cayenne Guide"><link rel="up" href="cayenne-guide-part2.html" title="Part&nbsp;II.&nbsp;Cayenne Framework"><link rel="prev" href="performance-tuning.html" title="Chapter&nbsp;11.&nbsp;Performance Tuning"><link rel="next" href="cayenne-guide-part3.html" title="Part&nbsp;III.&nbsp;Cayenne Framework - Remote Object Persistence"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.3.1 (3.1)</th><th align="center">Chapter&nbsp;12.&nbsp;Customizing Cayenne Runtime</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="performance-tuning.html">Prev</a>&nbsp;</td><th width="60%" align="center"><a accesskey="u" href="cayenne-guide-part2.html">Part&nbsp;II.&nbsp;Cayenne Framework</a></th><td width="20%" align="right">&nbsp;<a accesskey="n" href="cayenne-guide-part3.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;12.&nbsp;Customizing Cayenne Runtime"><div class="titlepage"><div><div><h2 class="title"><a name="customizing-cayenne-runtime"></a>Chapter&nbsp;12.&nbsp;Customizing Cayenne Runtime</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="customizing-cayenne-runtime.html#depdendency-injection-container">Dependency Injection Container</a></span></dt><dt><span class="section"><a href="customizing-cayenne-runtime.html#ways-to-customize-runtime"> Customization Strategies</a></span></dt><dt><span class="section"><a href="customizing-cayenne-runtime.html#noteworthy-runtime-components">Noteworthy Built-in Services</a></span></dt></dl></div><div class="section" title="Dependency Injection Container"><div class="titlepage"><div><div><h2 class="title"><a name="depdendency-injection-container"></a>Dependency Injection Container</h2></div></div></div><p>Cayenne runtime is built around a small powerful dependency injection (DI) container. Just
+            like other popular DI technologies, such as Spring or Guice, Cayenne DI container
+            manages sets of interdependent objects  and allows users to configure them. These
+            objects are regular Java objects. We are calling them "services" in this document to
+            distinguish from all other objects that are not configured in the container and are not
+            managed. DI container is responsible for service instantiation, injecting correct
+            dependencies, maintaining service instances scope, and dispatching scope events to
+            services. </p><p>The services are configured in special Java classes called "modules". Each module
+            defines binding of service interfaces to implementation instances, implementation types
+            or providers of implementation instances. There are no XML configuration files, and all
+            the bindings are type-safe. The container supports injection into instance variables and
+            constructor parameters based on the <code class="code">@Inject</code> annotation. This mechanism is
+            very close to Google Guice.</p><p>The discussion later in this chapter demonstrates a standalone DI container. But keep in
+            mind that Cayenne already has a built-in Injector, and a set of default modules. A
+            Cayenne user would normally only use the API below to write custom extension modules
+            that will be loaded in that existing container when creating ServerRuntime. See
+            "Starting and Stopping ServerRuntime" chapter for an example of passing an extension
+            module to Cayenne.</p><p>Cayenne DI probably has ~80% of the features expected in a DI container and has no
+            dependency on the rest of Cayenne, so in theory can be used as an application-wide DI
+            engine. But it's primary purpose is still to serve Cayenne. Hence there are no plans to
+            expand it beyond Cayenne needs. It is an ideal "embedded" DI that does not interfere
+            with Spring, Guice or any other such framework present elsewhere in the
+            application.</p><div class="section" title="DI Bindings API"><div class="titlepage"><div><div><h3 class="title"><a name="di-bindings-api"></a>DI Bindings API</h3></div></div></div><p>To have a working DI container, we need three things: service interfaces and
+                classes, a module that describes service bindings, a container that loads the
+                module, and resolves the depedencies. Let's start with service interfaces and
+                classes:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">interface</span> Service1 {
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> String getString();
+}</pre><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">interface</span> Service2 {
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">int</span> getInt();
+}</pre><p>A service implementation using instance variable
+                injection:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> Service1Impl <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">implements</span> Service1 {
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Inject</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">private</span> Service2 service2;
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> String getString() {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> service2.getInt() + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"_Service1Impl"</span>;
+    }
+}</pre><p>Same
+                thing, but using constructor
+                injection:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> Service1Impl <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">implements</span> Service1 {
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">private</span> Service2 service2;
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> Service1Impl(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Inject</span> Service2 service2) {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">this</span>.service2 = service2;
+    }
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> String getString() {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> service2.getInt() + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"_Service1Impl"</span>;
+    }
+}
+</pre><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> Service2Impl <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">implements</span> Service2 {
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">private</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">int</span> i;
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">int</span> getInt() {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> i++;
+    }
+}</pre><p>Now let's create a module implementing
+                    <code class="code">org.apache.cayenne.tutorial.di.Module</code> interface that will contain
+                DI configuration. A module binds service objects to keys that are reference. Binder
+                provided by container implements fluent API to connect the key to implementation,
+                and to configure various binding options (the options, such as scope, are
+                demonstrated later in this chapter). The simplest form of a key is a Java Class
+                object representing service interface. Here is a module that binds Service1 and
+                Service2 to corresponding default implementations:</p><p>
+                </p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> Module1 <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">implements</span> Module {
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">void</span> configure(Binder binder) {
+        binder.bind(Service1.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).to(Service1Impl.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+        binder.bind(Service2.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).to(Service2Impl.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+    }
+}</pre><p>
+            </p><p>Once we have at least one module, we can create a DI container.
+                    <code class="code">org.apache.cayenne.di.Injector</code> is the container class in
+                Cayenne:</p><pre class="programlisting">Injector injector = DIBootstrap.createInjector(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> Module1());</pre><p>Now that we have created the container, we can obtain services from it and call
+                their
+                methods:</p><pre class="programlisting">Service1 s1 = injector.getInstance(Service1.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">for</span> (<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">int</span> i = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">0</span>; i &lt; <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">5</span>; i++) {
+    System.out.println(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"S1 String: "</span> + s1.getString());
+}</pre><p>This outputs the following lines, demonstrating that s1 was Service1Impl and
+                Service2 injected into it was
+                Service2Impl:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">0</span>_Service1Impl
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">1</span>_Service1Impl
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">2</span>_Service1Impl
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">3</span>_Service1Impl
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">4</span>_Service1Impl</pre><p>There are more flavors of bindings:
+                </p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// binding to instance - allowing user to create and configure instance</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// inside the module class</span>
+binder.bind(Service2.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).toInstance(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> Service2Impl());
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// binding to provider - delegating instance creation to a special</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// provider class</span>
+binder.bind(Service1.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).toProvider(Service1Provider.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// binding to provider instance</span>
+binder.bind(Service1.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).toProviderInstance(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> Service1Provider());
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// multiple bindings of the same type using Key</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// injection can reference the key name in annotation:</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// @Inject("i1")</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// private Service2 service2;</span>
+binder.bind(Key.get(Service2.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"i1"</span>)).to(Service2Impl.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+binder.bind(Key.get(Service2.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"i2"</span>)).to(Service2Impl.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);</pre><p>Another types of confiuguration that can be bound in the container are lists and
+                maps. They will be discussed in the following chapters. </p></div><div class="section" title="Service Lifecycle"><div class="titlepage"><div><div><h3 class="title"><a name="managing-services-lifecycle"></a>Service Lifecycle</h3></div></div></div><p>An important feature of the Cayenne DI container is instance <span class="italic">scope</span>. The default scope (implicitly used in all examples above) is
+                "singleton", meaning that a binding would result in creation of only one service
+                instance, that will be repeatedly returned from
+                    <code class="code">Injector.getInstance(..)</code>, as well as injected into classes that
+                declare it as a dependency. </p><p>Singleton scope dispatches a "BeforeScopeEnd" event to interested services. This
+                event occurs before the scope is shutdown, i.e. when
+                    <code class="code">Injector.shutdown()</code> is called. Note that the built-in Cayenne
+                injector is shutdown behind the scenes when <code class="code">ServerRuntime.shutdown()</code>
+                is invoked. Services may register as listeners for this event by annotating a
+                no-argument method with <code class="code">@BeforeScopeEnd</code> annotation. Such method should
+                be implemented if a service needs to clean up some resources, stop threads,
+                etc.</p><p>Another useful scope is "no scope", meaning that every time a container is asked to provide
+                a service instance for a given key, a new instance will be created and
+                returned:</p><pre class="programlisting">binder.bind(Service2.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).to(Service2Impl.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).withoutScope();</pre><p>Users
+                can also create their own scopes, e.g. a web application request scope or a session
+                scope. Most often than not custom scopes can be created as instances of
+                    <code class="code">org.apache.cayenne.di.spi.DefaultScope</code> with startup and shutdown
+                managed by the application (e.g. singleton scope is a DefaultScope managed by the
+                Injector) . </p></div><div class="section" title="Overriding Services"><div class="titlepage"><div><div><h3 class="title"><a name="overriding-services"></a>Overriding Services</h3></div></div></div><p>Cayenne DI allows to override services already definied in the current module, or
+                more commonly - some other module in the the same container. Actually there's no
+                special API to override a service, you'd just bind the service key again with a new
+                implementation or provider. The last binding for a key takes precedence. This means
+                that the order of modules is important when configuring a container. The built-in
+                Cayenne injector ensures that Cayenne standard modules are loaded first, followed by
+                optional user extension modules. This way the application can override the standard
+                services in Cayenne.</p></div></div><div class="section" title="Customization Strategies"><div class="titlepage"><div><div><h2 class="title"><a name="ways-to-customize-runtime"></a> Customization Strategies</h2></div></div></div><p>The previous section discussed how Cayenne DI works in general terms. Since Cayenne users
+            will mostly be dealing with an existing Injector provided by ServerRuntime, it is
+            important to understand how to build custom extensions to a preconfigured container. As
+            shown in "Starting and Stopping ServerRuntime" chapter, custom extensions are done by
+            writing an aplication DI module (or multiple modules) that configures service overrides.
+            This section shows all the configuration possibilities in detail, including changing
+            properties of the existing services, contributing services to standard service lists and
+            maps, and overriding service implementations. All the code examples later in this
+            section are assumed to be placed in an application module "configure" method:</p><pre class="programlisting">public class MyExtensionsModule implements Module {
+    public void configure(Binder binder) {
+        // customizations go here...
+    }
+}</pre><pre class="programlisting">Module extensions = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> MyExtensionsModule();
+ServerRuntime runtime = 
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> ServerRuntime(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"com/example/cayenne-mydomain.xml"</span>, extensions);</pre><div class="section" title="Changing Properties of Existing Services"><div class="titlepage"><div><div><h3 class="title"><a name="changing-properties-of-existing-services"></a>Changing Properties of Existing Services</h3></div></div></div><p>Many built-in Cayenne services change their behavior based on a value of some
+                environment property. A user may change Cayenne behavior without even knowing which
+                services are responsible for it, but setting a specific value of a known property.
+                Supported property names are listed in "Appendix A".</p><p>There are two ways to set service properties. The most obvious one is to pass it
+                to the JVM with -D flag on startup.
+                E.g.</p><pre class="programlisting">java -Dcayenne.server.contexts_sync_strategy=false ...</pre><p>A second one is to contribute a property to
+                    <code class="code">org.apache.cayenne.configuration.DefaultRuntimeProperties.properties
+                </code>map (see the next section on how to do that). This map contains the default
+                property values and can accept application-specific values, overrding the defaults. </p><p>Note that if a property value is a name of a Java class, when this Java class is
+                instantiated by Cayenne, the container performs injection of instance variables. So
+                even the dynamically specified Java classes can use @Inject annotation to get a hold
+                of other Cayenne services.</p><p>If the same property is specified both in the command line and in the properties
+                map, the command-line value takes precedence. The map value will be ignored. This
+                way Cayenne runtime can be reconfigured during deployment.</p></div><div class="section" title="Contributing to Service Collections"><div class="titlepage"><div><div><h3 class="title"><a name="contributing-to-service-lists-maps"></a>Contributing to Service Collections</h3></div></div></div><p>Cayenne can be extended by adding custom objects to named maps or lists bound in
+                DI. We are calling these lists/maps "service collections". A service collection
+                allows things like appending a custom strategy to a list of built-in strategies.
+                E.g. an application that needs to install a custom DbAdapter for some database type
+                may contribute an instance of custom DbAdapterDetector to a
+                    <code class="code">org.apache.cayenne.configuration.server.DefaultDbAdapterFactory.detectors</code>
+                list:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> MyDbAdapterDetector <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">implements</span> DbAdapterDetector {
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> DbAdapter createAdapter(DatabaseMetaData md) <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">throws</span> SQLException {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// check if we support this database and retun custom adapter</span>
+        ...
+    }
+}</pre><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// since build-in list for this key is a singleton, repeated</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// calls to 'bindList' will return the same instance </span>
+binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
+       .add(MyDbAdapterDetector.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);</pre><p>Maps are customized using a similar "<code class="code">bindMap</code>" method.</p><p>The names of built-in collections are listed in "Appendix B".</p></div><div class="section" title="Alternative Service Implementations"><div class="titlepage"><div><div><h3 class="title"><a name="alternative-service-implementations"></a>Alternative Service Implementations</h3></div></div></div><p>As mentioned above, custom modules are loaded by ServerRuntime after the built-in
+                modules. So it is easy to redefine a built-in service in Cayenne by rebinding
+                desired implementations or providers. To do that, first we need to know what those
+                services to redefine are. While we describe some of them in the following sections,
+                the best way to get a full list is to check the source code of the Cayenne version
+                you are using and namely look in
+                    <code class="code">org.apache.cayenne.configuration.server.ServerModule</code> - the main
+                built-in module in Cayenne. </p><p>Now an example of overriding <code class="code">QueryCache</code> service. The default
+                implementation of this service is provided by <code class="code">MapQueryCacheProvider</code>.
+                But if we want to use <code class="code">EhCacheQueryCache</code> (a Cayenne wrapper for the
+                EhCache framework), we can define it like
+                this:</p><pre class="programlisting">binder.bind(QueryCache.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>).to(EhCacheQueryCache.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);</pre></div></div><div class="section" title="Noteworthy Built-in Services"><div class="titlepage"><div><div><h2 class="title"><a name="noteworthy-runtime-components"></a>Noteworthy Built-in Services</h2></div></div></div><div class="section" title="JdbcEventLogger"><div class="titlepage"><div><div><h3 class="title"><a name="jdbceventlogger"></a>JdbcEventLogger</h3></div></div></div><p><code class="code">org.apache.cayenne.log.JdbcEventLogger</code> is the service that defines
+                logging API for Cayenne internals. It provides facilities for logging queries,
+                commits, transactions, etc. The default implementation is
+                    <code class="code">org.apache.cayenne.log.CommonsJdbcEventLogger</code> that performs logging
+                via commons-logging library. Cayenne library includes another potentially useful
+                logger - <code class="code">org.apache.cayenne.log.FormattedCommonsJdbcEventLogger</code> that
+                produces formatted multiline SQL output that can be easier to read.</p></div><div class="section" title="DataSourceFactory"><div class="titlepage"><div><div><h3 class="title"><a name="datasourcefactory"></a>DataSourceFactory</h3></div></div></div></div><div class="section" title="DataChannelFilter"><div class="titlepage"><div><div><h3 class="title"><a name="datachannelfilter"></a>DataChannelFilter</h3></div></div></div></div><div class="section" title="QueryCache"><div class="titlepage"><div><div><h3 class="title"><a name="querycache"></a>QueryCache</h3></div></div></div></div><div class="section" title="ExtendedTypes"><div class="titlepage"><div><div><h3 class="title"><a name="extendedtypes"></a>ExtendedTypes</h3></div></div></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="performance-tuning.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="cayenne-guide-part2.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="cayenne-guide-part3.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Performance Tuning&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Part&nbsp;III.&nbsp;Cayenne Framework - Remote Object Persistence </td></tr></table></div></body></html>

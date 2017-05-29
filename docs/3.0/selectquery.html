@@ -1,0 +1,81 @@
+Title: SelectQuery
+
+	<P>The most commonly used query is SelectQuery. It is a descriptor that allows DataContext to fetch lists of DataObjects of the right type matching the specified criteria. SelectQuery together with the DataMap provides just enough information to the Cayenne runtime objects to build the right SQL SELECT statement and control various execution parameters.</P>
+
+<H3><A name="SelectQuery-SelectQueryParts"></A>SelectQuery Parts</H3>
+
+<P>A SelectQuery consists of a root object, qualifier expression and orderings list. Here is a logical correspondence of Cayenne SelectQuery parts and SQL constructs:</P>
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh"> Cayenne SelectQuery </TH>
+<TH class="confluenceTh"> SQL SELECT statement </TH>
+<TH class="confluenceTh"> Required </TH>
+</TR>
+<TR>
+<TD class="confluenceTd"> Root </TD>
+<TD class="confluenceTd"> FROM clause </TD>
+<TD class="confluenceTd"> yes </TD>
+</TR>
+<TR>
+<TD class="confluenceTd"> Qualifier Expression </TD>
+<TD class="confluenceTd"> WHERE clause </TD>
+<TD class="confluenceTd"> no </TD>
+</TR>
+<TR>
+<TD class="confluenceTd"> Orderings </TD>
+<TD class="confluenceTd"> ORDER BY clause </TD>
+<TD class="confluenceTd"> no </TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+<P>The only required query part is root. Query root tells Cayenne what kind of objects to fetch. It can be one of the following:</P>
+<UL>
+	<LI><EM>(most commonly used)</EM> Java class for the type of persistent objects in question.</LI>
+	<LI>ObjEntity that provides the mapping for the class in question.</LI>
+	<LI>A String that is an ObjEntity name.</LI>
+</UL>
+
+
+<P>SelectQuery provides constructors for all three types. For example:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.query.SelectQuery;
+...
+<SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> is a valid Cayenne query that would allow to fetch
+</SPAN><SPAN class="code-comment">// all records from the ARTIST table as Artist objects
+</SPAN>SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Artist.class);
+</PRE>
+</DIV></DIV>
+<P>Other components of the SelectQuery are discussed in the following sections.</P>
+
+<H3><A name="SelectQuery-ExecutingSelectQueries"></A>Executing SelectQueries</H3>
+
+<P>As mentioned earlier, queries are executed via <TT>DataContext.performQuery()</TT>. For instance to fetch all Artists existing in the database the following code is used:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.query.SelectQuery;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataContext;
+<SPAN class="code-keyword">import</SPAN> java.util.List;
+...
+DataContext ctxt; <SPAN class="code-comment">// assume <SPAN class="code-keyword">this</SPAN> exists
+</SPAN>SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Artist.class);
+
+<SPAN class="code-comment">// The query would fetch *ALL* rows from the ARTIST table
+</SPAN><SPAN class="code-comment">// The list returned contains Artist objects, one object per row
+</SPAN>List artists = ctxt.performQuery(query);
+</PRE>
+</DIV></DIV>
+<P>There is a special case when a query is run using <TT>DataContext.performIteratedQuery()</TT>. This is discussed in &quot;Performance Tuning&quot; chapter.</P>
+
+<H3><A name="SelectQuery-Sections"></A>Sections</H3>
+
+
+<OL>
+	<LI><A href="parameterized-queries.html" title="Parameterized Queries">Parameterized Queries</A></LI>
+	<LI><A href="qualifier-expressions.html" title="Qualifier Expressions">Qualifier Expressions</A></LI>
+	<LI><A href="using-orderings.html" title="Using Orderings">Using Orderings</A></LI>
+	<LI><A href="selectquery-customization.html" title="SelectQuery Customization">SelectQuery Customization</A></LI>
+</OL>
+

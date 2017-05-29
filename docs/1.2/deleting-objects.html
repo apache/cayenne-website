@@ -1,0 +1,44 @@
+Title: Deleting Objects
+
+	
+
+<P>As discussed before, an object must be deleted in the DataContext to trigger a removal of the corresponding row from the database on commit. There are few simple ways to delete individual objects and collections of objects. Quiet naturally delete operation changes object state to PersistenceState.DELETED. However there maybe other consequences of such operation for the overall object graph. Such consequences are controlled via <A href="delete-rules.html" title="Delete Rules">Delete Rules</A> configured for object relationships. Properly configuring delete rules will simplify the application code, as you no longer need to track related objects and do the right thing with them. Other delete rule effects are discussed for each DataContext deletion method individually.</P>
+
+<H5><A name="DeletingObjects-Deletingasingleobject"></A>Deleting a single object</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context = ...;
+Artist artist = ....;
+
+<SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> will trigger delete rules <SPAN class="code-keyword">for</SPAN> artist, <SPAN class="code-keyword">if</SPAN> any
+</SPAN>context.deleteObject(artist);
+</PRE>
+</DIV></DIV>
+<H5><A name="DeletingObjects-Deletingacollectionofobjects"></A>Deleting a collection of objects</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context = ...;
+Artist artist = ....;
+
+context.deleteObjects(artist.getPaintings());
+</PRE>
+</DIV></DIV>
+<H5><A name="DeletingObjects-DeletinginanIterator"></A>Deleting in an Iterator</H5>
+<P>This case can be complicated if an iteration is performed over a relationship list and an object being deleted has a nullify delete rule. Such combination may result in ConcurrencyModificationExceptions as collection underlying the iterator is being modified. If ALL objects in the collection have to be deleted, use &quot;deleteObjects()&quot; method shown above - it will do the right thing. If only a subset of collection objects has to be deleted, you can use the following technique:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context = ...;
+Artist artist = ....;
+
+Iterator it = artist.getPaintings().iterator();
+<SPAN class="code-keyword">while</SPAN>(it.hasNext()) {
+   DataObject object = it.next();
+   
+   <SPAN class="code-keyword">if</SPAN>(some_condition) {
+      <SPAN class="code-comment">// jump ahead of the delete rule and unset the relationship
+</SPAN>      it.remove();
+   
+      <SPAN class="code-comment">// now <SPAN class="code-keyword">do</SPAN> the actual delete
+</SPAN>      context.deleteObject(object); 
+   }
+}
+</PRE>
+</DIV></DIV>

@@ -1,0 +1,28 @@
+Title: Caching and Fresh Data
+
+	<H2><A name="CachingandFreshData-CachingandFreshData"></A>Caching and Fresh Data</H2>
+
+<P>Caching is used by Cayenne to reduce database access and improve performance of your application. Sometimes caching automatically happens behind the scenes, and in other places the user must declare an intent to cache data. Configuring caching parameters beyond the provided reasonable defaults is an art of balancing performance with the need to see the fresh data.</P>
+
+<P>The are two types of cache in Cayenne:</P>
+
+<H3><A name="CachingandFreshData-QueryCache"></A>Query Cache</H3>
+
+<P>This cache retains the results of a query in memory. When this cache is utilised by the second and successive queries, no further SELECT is performed on the database to determine which records match your query parameters. </P>
+
+<H3><A name="CachingandFreshData-ObjectCache"></A>Object Cache</H3>
+
+<P>This cache stores the actual objects and not only eliminates the time required to fetch data from the database, but also the time required to instantiate that data into Java objects.</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/3.0/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>As of Cayenne 3.0, two types of caches (individual object and query results) are separate from each other. Query cache can be extended and managed, while individual object cache has fewer configuration options - just max size and synchronization strategy. There are plans to reconcile both caches in the following releases.</TD></TR></TABLE></DIV>
+
+<H3><A name="CachingandFreshData-Sections"></A>Sections</H3>
+
+<OL>
+	<LI><A href="individual-object-caching.html" title="Individual Object Caching">Individual object caching</A></LI>
+	<LI><A href="query-result-caching.html" title="Query Result Caching">Query result caching</A></LI>
+</OL>
+
+
+
+

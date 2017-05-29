@@ -1,0 +1,14 @@
+Title: Persistent Object Lifecycle
+
+	
+
+<P>A lifecycle of a persistent object can be represented as a number of states and transitions between them. These states are formally defined as &quot;int&quot; constants in <TT>org.objectstyle.cayenne.PersistenceState</TT> class. Transitions between states (see the diagram below) occur in response to the application interacting with either persistent objects or Cayenne context. Whenever a transition occurs, Cayenne automatically updates &quot;persistenceState&quot; property of all affected objects by calling <TT>setPersistenceState()</TT>.</P>
+
+<TABLE class="sectionMacro" border="0" cellpadding="5" cellspacing="0" width="100%"><TBODY><TR>
+<TD class="confluenceTd" valign="top">
+<P>A new object state transformations:<BR>
+<SPAN class="image-wrap" style=""><IMG src="persistent-object-lifecycle.data/new-persistent-object.png" style="border: 0px solid black"></SPAN></P></TD>
+
+<TD class="confluenceTd" valign="top">
+<P>A feteched or committed object state transformations:<BR>
+<SPAN class="image-wrap" style=""><IMG src="persistent-object-lifecycle.data/fetched-persistent-object.png" style="border: 0px solid black"></SPAN></P></TD></TR></TBODY></TABLE>

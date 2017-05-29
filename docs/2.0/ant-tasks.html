@@ -1,0 +1,35 @@
+Title: Ant Tasks
+
+	<P>Cayenne ships with Ant tasks that provide Ant frontend to a number of useful operations in Cayenne. The following tasks are included:</P>
+
+<UL>
+	<LI><B><A href="cgen.html" title="cgen">cgen</A></B> - Java class generator</LI>
+	<LI><B><A href="cdbgen.html" title="cdbgen">cdbgen</A></B> - Database schema generator</LI>
+	<LI><B><A href="cdeploy.html" title="cdeploy">cdeploy</A></B> - Deployment configurator</LI>
+	<LI><B><A href="cdataport.html" title="cdataport">cdataport</A></B> - Data porting tool.</LI>
+</UL>
+
+
+<H3><A name="AntTasks-ImportingCayenneTasksinbuild.xml"></A>Importing Cayenne Tasks in build.xml</H3>
+<P>Cayenne tasks above can be imported individually using Ant taskdef, as described in each task documentation page. However the users of Ant 1.6 and newer can take advantage of Antlib Ant feature. <A href="http://ant.apache.org/manual/CoreTypes/antlib.html" class="external-link" rel="nofollow">Antlib</A> allows 3rd party tasks and types to be defined easily. Cayenne has an embedded antlib.xml descriptor file in the package <TT>org.apache.cayenne.tools</TT>. All of Cayenne's Ant tasks can be defined at once using the following definition in your Ant build file:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml">
+<SPAN class="code-tag">&lt;typedef resource=<SPAN class="code-quote">&quot;org/apache/cayenne/tools/antlib.xml&quot;</SPAN>&gt;</SPAN> 
+   <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;classpath&quot;</SPAN>/&gt;</SPAN> 
+<SPAN class="code-tag">&lt;/typedef&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+
+<P>When using the Antlib construct, omit the <TT>&lt;taskdef&gt;</TT> elements shown in the examples of each task, as the antlib.xml file defines all of the Cayenne Ant tasks. </P>
+
+<H3><A name="AntTasks-Sections"></A>Sections</H3>
+
+<OL>
+	<LI><A href="cgen.html" title="cgen">cgen</A></LI>
+	<LI><A href="cdbgen.html" title="cdbgen">cdbgen</A></LI>
+	<LI><A href="cdeploy.html" title="cdeploy">cdeploy</A></LI>
+	<LI><A href="cdataport.html" title="cdataport">cdataport</A></LI>
+</OL>
+
+

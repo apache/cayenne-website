@@ -1,0 +1,51 @@
+Title: Tutorial Java Classes
+
+<h2>Tutorial Java Classes</h2>
+
+	<P>Here we'll generate the Java classes from the model that was created in the previous section. CayenneModeler can be used to also generate the database schema, but since we specified &quot;CreateIfNoSchemaStrategy&quot; earlier when we created a DataNode, we'll skip the database schema step. Still be aware that you can do it if you need to via <TT>&quot;Tools &gt; Create Database Schema&quot;</TT>.</P>
+
+<H3>Creating Java Classes</H3>
+
+<UL>
+	<LI>Select <TT>&quot;Tools &gt; Generate Classes&quot;</TT> menu.</LI>
+	<LI>For &quot;Type&quot; select &quot;Standard Persistent Objects&quot;, if it is not already selected.</LI>
+	<LI>For the &quot;Output Directory&quot; select <TT>&quot;src/main/java&quot;</TT> folder under your Eclipse project folder (this is a &quot;peer&quot; location to the cayenne.xml location we selected before).</LI>
+	<LI>Click on &quot;Entities&quot; tab and check the &quot;Check All Entities&quot; checkbox (unless it is already checked and reads &quot;Uncheck all Entities&quot;).</LI>
+	<LI>Click &quot;Generate&quot;</LI>
+</UL>
+
+
+<P>Now go back to Eclipse, right click on &quot;tutorial&quot; project and select &quot;Refresh&quot; - you should see pairs of classes generated for each mapped entity. You probably also see that there's a bunch of red squiggles next to the newly generated Java classes in Eclipse. This is because our project does not include Cayenne as a Maven dependency yet. Let's fix it now by adding &quot;cayenne-server&quot; artifact in the bottom of the <TT>pom.xml</TT> file. The resulting POM should look like this:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">&lt;project xmlns=<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//maven.apache.org/POM/4.0.0&quot;</SPAN> xmlns:xsi=<SPAN class="code-quote">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</SPAN>
+</SPAN>	xsi:schemaLocation=<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</SPAN>&gt;
+</SPAN>	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
+	&lt;artifactId&gt;tutorial&lt;/artifactId&gt;
+	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+			&lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
+   &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
+			&lt;version&gt;3.0RC2&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+&lt;/project&gt;</PRE>
+</DIV></DIV>
+
+<P>Your computer must be connected to the internet. Once you save the pom.xml, Eclipse will download the needed Cayenne jar file and add it to the project build path. As a result, all the errors should disappear.</P>
+
+<P>Now let's check the entity class pairs. Each one is made of a superclass (e.g. <EM>Artist) and a subclass (e.g. Artist). You <B>should not</B> modify the superclasses whose names start with &quot;</EM>&quot; (underscore), as they will be replaced on subsequent generator runs. Instead all custom logic should be placed in the subclasses in <TT>&quot;org.example.cayenne.persistent&quot;</TT> package - those will never be overwritten by the class generator.</P>
+
+<P><SPAN class="image-wrap" style=""><IMG src="tutorial-java-classes.data/eclipse-generatedclasses.png" style="border: 0px solid black"></SPAN></P>
+
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/3.0/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Class Generation Hint</B><BR>Often you'd start by generating classes from the Modeler, but at the later stages of the project the generation is usually automated either via <A href="cgen.html" title="cgen">Ant cgen task</A> or <A href="maven2-cgen.html" title="maven2-cgen">Maven cgen mojo</A>. All three methods are interchangeable, however Ant and Maven methods would ensure that you never forget to regenerate classes on mapping changes, as they are integrated into the build cycle.</TD></TR></TABLE></DIV>
+
+
+<HR>
+<P><B>Next Step: <A href="tutorial-objectcontext.html" title="Tutorial ObjectContext">Tutorial ObjectContext</A></B></P>
+<HR>

@@ -1,0 +1,56 @@
+Title: Iterating Through Data Rows
+
+	<P>There are cases when the result sets are so large that even when fetching data rows, application can run out of memory. For instance, a user may be creating a report that requires in-memory processing of hundreds of thousands of database rows. In such cases normal Cayenne behavior of reading the whole java.sql.ResultSet in the memory before returning it to the user may result in an application exhausing all memory and crashing.</P>
+
+<P>Cayenne solves this by allowing to obtain results in the form of ResultIterator. ResultIterator is connected to an open java.sql.ResultSet, therefore its methods may throw checked exceptions. ResultIterator returns data rows (not DataObjects) one at a time, reading them on demand from the open ResultSet. Each data row can be converted to a DataObject or accessed directly. Open ResultIterator locks the database connection, therefore <B>ResultIterator always requires explicit closing in the user code</B>.</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/3.0/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>In web applications, programmers must ensure that no open ResultIterators are kept between HTTP requests. Failure to do so may result in too many database connections being locked, thus quickly exhausting connection pool.</TD></TR></TABLE></DIV>
+
+<P>When working with open ResultIterator, users still can perform any other database operations: select queries, traversing object relationships, etc. Any parallel data operation will internally check out an unused connection from the connection pool as it would normally do, while ResultIterator still locks its own connection.</P>
+
+<P>ResultIterator annotated example:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-keyword">import</SPAN> java.util.List;
+<SPAN class="code-keyword">import</SPAN> java.util.Map;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.DataContext;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.access.ResultIterator;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.query.SelectQuery;
+<SPAN class="code-keyword">import</SPAN> org.apache.cayenne.CayenneException;
+<SPAN class="code-keyword">import</SPAN> org.apache.art.Artist;
+...
+DataContext context;
+
+<SPAN class="code-comment">// create a usual query
+</SPAN>SelectQuery q = <SPAN class="code-keyword">new</SPAN> SelectQuery(Artist.class);
+ResultIterator it = <SPAN class="code-keyword">null</SPAN>;
+
+<SPAN class="code-comment">// ResultIterator operations all <SPAN class="code-keyword">throw</SPAN> checked CayenneException
+</SPAN><SPAN class="code-keyword">try</SPAN> {
+   <SPAN class="code-comment">// special <SPAN class="code-quote">&quot;performIteratedQuery&quot;</SPAN> method is used
+</SPAN>   it = context.performIteratedQuery(q);
+
+   <SPAN class="code-keyword">while</SPAN>(it.hasNextRow()) {
+      <SPAN class="code-comment">// ResultIterator always returns data rows 
+</SPAN>      Map row = (Map) it.nextRow();
+      
+      <SPAN class="code-comment">// <SPAN class="code-keyword">do</SPAN> something with the row...
+</SPAN>      ...
+   }
+}
+<SPAN class="code-keyword">catch</SPAN>(CayenneException ex) {
+   ex.printStackTrace();
+}
+<SPAN class="code-keyword">finally</SPAN> {
+   <SPAN class="code-keyword">try</SPAN> {
+      <SPAN class="code-comment">// explicit closing of the iterator is required !!!
+</SPAN>      it.close();
+   }
+   <SPAN class="code-keyword">catch</SPAN>(CayenneException closeEx) {
+       closeEx.printStackTrace();
+   }
+}
+...
+</PRE>
+</DIV></DIV>

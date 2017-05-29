@@ -1,0 +1,12 @@
+Title: Remote Object Persistence Security
+
+	
+
+<H3><A name="RemoteObjectPersistenceSecurity-SecuringCayenneWebServiceAccess"></A>Securing Cayenne Web Service Access</H3>
+
+<UL>
+	<LI><A href="remote-object-persistence-tutorial-authentication.html" title="Remote Object Persistence Tutorial Authentication">Use HTTP(S) BASIC authentication</A> to authenticate the clients.</LI>
+	<LI>Explicitly check &quot;Not for Client Use&quot; for entities that should stay server-only.</LI>
+	<LI>Subclass <TT>org.objectstyle.cayenne.remote.hessian.service.HessianServlet</TT> for user-defined fine-grained access control.</LI>
+</UL>
+

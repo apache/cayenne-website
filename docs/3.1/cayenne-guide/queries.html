@@ -1,0 +1,438 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;9.&nbsp;Queries</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 3.1 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 3.1"><link rel="home" href="index.html" title="Cayenne Guide"><link rel="up" href="cayenne-guide-part2.html" title="Part&nbsp;II.&nbsp;Cayenne Framework"><link rel="prev" href="orderings.html" title="Chapter&nbsp;8.&nbsp;Orderings"><link rel="next" href="lifecycle-events.html" title="Chapter&nbsp;10.&nbsp;Lifecycle Events"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.3.1 (3.1)</th><th align="center">Chapter&nbsp;9.&nbsp;Queries</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="orderings.html">Prev</a>&nbsp;</td><th width="60%" align="center"><a accesskey="u" href="cayenne-guide-part2.html">Part&nbsp;II.&nbsp;Cayenne Framework</a></th><td width="20%" align="right">&nbsp;<a accesskey="n" href="lifecycle-events.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;9.&nbsp;Queries"><div class="titlepage"><div><div><h2 class="title"><a name="queries"></a>Chapter&nbsp;9.&nbsp;Queries</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="queries.html#selectquery">SelectQuery</a></span></dt><dt><span class="section"><a href="queries.html#ejbqlquery">EJBQLQuery</a></span></dt><dt><span class="section"><a href="queries.html#sqltemplate">SQLTemplate</a></span></dt><dt><span class="section"><a href="queries.html#procedurequery">ProcedureQuery</a></span></dt><dt><span class="section"><a href="queries.html#namedquery">NamedQuery</a></span></dt><dt><span class="section"><a href="queries.html#custom-queries">Custom Queries</a></span></dt></dl></div><p>Queries are Java objects used by the application to communicate with the database. Cayenne
+        knows how to translate queries into SQL statements appropriate for a particular database
+        engine. Most often queries are used to find objects matching certain criteria, but there are
+        other types of queries too. E.g. those allowing to run native SQL, call DB stored
+        procedures, etc. When committing objects, Cayenne itself creates special queries to
+        insert/update/delete rows in the dabase.</p><p>There is a number of built-in queries in Cayenne, described later in this chapter. Users can
+        also define their own query types to abstract certain DB interactions that for whatever
+        reason can not be adequately described by the built-in set. </p><p>Queries can be roughly categorized as "object" and "native". Object queries (most notably
+        SelectQuery and EJBQLQuery) are built with abstractions originating in the object model (the
+        "object" side in the "object-relational" divide). E.g. SelectQuery is assembled from a Java
+        class of the objects to fetch, a qualifier expression, orderings, etc. - all of this
+        expressed in terms of the object model.</p><p>Native queries describe a desired DB operation as SQL code (SQLTemplate query) or a
+        reference to a stored procedure (ProcedureQuery), etc. The results of native queries are
+        usually presented as Lists of Maps, with each map representing a row in the DB (a term "data
+        row" is often used to describe such a map). They can potentially be converted to objects,
+        however it may take a considerable effort to do so. Native queries are also less (if at all)
+        portable across databases than object queries. </p><div class="section" title="SelectQuery"><div class="titlepage"><div><div><h2 class="title"><a name="selectquery"></a>SelectQuery</h2></div></div></div><p>SelectQuery is the most commonly used query in user applications. This may be the only
+            query you will need in most appplications. It returns a list of persistent objects of a
+            certain type specified in the
+            query:</p><pre class="programlisting">SelectQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SelectQuery(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+List&lt;Artist&gt; objects = context.performQuery(query);</pre><p>This
+            returned all rows in the "ARTIST" table. If the logs were turned on, you might see the
+            following SQL
+            printed:</p><pre class="programlisting">INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0
+INFO: === returned <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">5</span> row. - took <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">5</span> ms.</pre><p>This SQL was generated by Cayenne from the SelectQuery above. SelectQuery can have a
+            qualifier to select only the data that you care about. Qualifier is simply an Expression
+            (Expressions where discussed in the previous chapter). If you only want artists whose
+            name begins with 'Pablo', you might use the following qualifier expression:
+            </p><pre class="programlisting">SelectQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SelectQuery(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, 
+        ExpressionFactory.likeExp(Artist.NAME_PROPERTY, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"Pablo%"</span>));
+List&lt;Artist&gt; objects = context.performQuery(query);</pre><p>The
+            SQL will look different this
+            time:</p><pre class="programlisting">INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0 WHERE t0.NAME LIKE ?
+[bind: <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">1</span>-&gt;NAME:<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'Pablo%'</span>]
+INFO: === returned <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">1</span> row. - took <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">6</span> ms.</pre><p>SelectQuery allows to append parts of qualifier to
+            self:</p><pre class="programlisting">SelectQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SelectQuery(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+query.setQualifier(ExpressionFactory.likeExp(Artist.NAME_PROPERTY, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"A%"</span>));
+query.andQualifier(ExpressionFactory.greaterExp(Artist.DATE_OF_BIRTH_PROPERTY, someDate));</pre><p>To order the results of SelectQuery, one or more Orderings can be applied. Ordering
+            were already discussed earlier.
+            E.g.:</p><pre class="programlisting">SelectQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SelectQuery(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// create Ordering object explicitly</span>
+query.addOrdering(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> Ordering(Artist.DATE_OF_BIRTH_PROPERTY, SortOrder.DESCENDING));
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// or let SelectQuery create it behind the scenes</span>
+query.addOrdering(Artist.NAME_PROPERTY, SortOrder.ASCENDING);</pre><p>There's a number of other useful properties in SelectQuery that define what to select
+            and how to optimize database interaction (prefetching, caching, fetch offset and limit,
+            pagination, etc.). Some of them are discussed in separate chapters on caching and
+            performance optimization. Others are fairly self-explanatory. Please check the API docs
+            for the full extent of the SelectQuery features.</p></div><div class="section" title="EJBQLQuery"><div class="titlepage"><div><div><h2 class="title"><a name="ejbqlquery"></a>EJBQLQuery</h2></div></div></div><p>EJBQLQuery was created as a part of an experiment in adopting some of Java Persistence
+            API (JPA) approaches in Cayenne. It is a parameterized object query that is created from
+            query String. A String used to build EJBQLQuery must conform to JPQL (JPA query
+            language):</p><pre class="programlisting">EJBQLQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EJBQLQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"select a FROM Artist a"</span>);</pre><p>JPQL details can be found in any JPA manual. Here we'll mention only how this fits
+            into Cayenne and what are the differences between EJBQL and other Cayenne
+            queries.</p><p>Although most frequently EJBQLQuery is used as an alternative to SelectQuery, there
+            are also DELETE and UPDATE varieties available. </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>As of this version of Cayenne, DELETE and UPDATE do not change the state of
+                    objects in the ObjectContext. They are run directly against the database
+                    instead.&nbsp;</p></div><pre class="programlisting">EJBQLQuery select = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EJBQLQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"select a FROM Artist a WHERE a.name = 'Salvador Dali'"</span>);
+List&lt;Artist&gt; artists = context.performQuery(select);</pre><pre class="programlisting">EJBQLQuery delete = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EJBQLQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"delete from Painting"</span>);
+context.performGenericQuery(delete);</pre><pre class="programlisting">EJBQLQuery update = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EJBQLQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"UPDATE Painting AS p SET p.name = 'P2' WHERE p.name = 'P1'"</span>);
+context.performGenericQuery(update);</pre><p>In
+            most cases SelectQuery is preferred to EJBQLQuery, as it is API-based, and provides you
+            with better compile-time checks. However sometimes you may want a completely scriptable
+            object query. This is when you might prefer EJBQL. A more practical reason for picking
+            EJBQL over SelectQuery though is that the former offers some extra selecting
+            capabilities, namely aggregate functions and
+            subqueries:</p><pre class="programlisting">EJBQLQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EJBQLQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"select a, COUNT(p) FROM Artist a JOIN a.paintings p GROUP BY a"</span>);
+List&lt;Object[]&gt; result = context.performQuery(query);
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">for</span>(Object[] artistWithCount : result) {
+    Artist a = (Artist) artistWithCount[<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">0</span>];
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">int</span> hasPaintings = (Integer) artistWithCount[<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">1</span>];
+}</pre><p>This
+            also demonstrates a previously unseen type of select result - a List of Object[]
+            elements, where each entry in an Object[] is either a DataObject or a scalar, depending
+            on the query SELECT clause. A result can also be a list of
+            scalars:</p><pre class="programlisting">EJBQLQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EJBQLQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"select a.name FROM Artist a"</span>);
+List&lt;String&gt; names = context.performQuery(query);</pre><p>While
+            Cayenne Expressions discussed previously can be thought of as identical to JPQL WHERE
+            clause, and indeed they are very close, there are a few noteable differences:</p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p>Null handling: SelectQuery would translate the expressions matching NULL
+                        values to the corresponding "X IS NULL" or "X IS NOT NULL" SQL syntax.
+                        EJBQLQuery on the other hand requires explicit "IS NULL" (or "IS NOT NULL")
+                        syntax to be used, otherwise the generated SQL will look like "X = NULL" (or
+                        "X &lt;&gt; NULL"), which will evaluate differently.</p></li><li class="listitem"><p>Expression Parameters: SelectQuery uses "$" to denote named parameters
+                        (e.g. "$myParam"), while EJBQL uses ":" (e.g. ":myParam"). Also EJBQL
+                        supports positional parameters denoted by the question mark: "?3".</p></li></ul></div></div><div class="section" title="SQLTemplate"><div class="titlepage"><div><div><h2 class="title"><a name="sqltemplate"></a>SQLTemplate</h2></div></div></div><p>SQLTemplate is a query that allows to run native SQL from a Cayenne application. It
+            comes handy when the standard ORM concepts are not sufficient for a given query or an
+            update. SQL is too powerful and allows to manipulate data in ways that are not easily
+            described as a graph of related entities. Cayenne acknowledges this fact and provides
+            this facility to execute SQL, mapping the result to objects when possible. Here are
+            examples of selecting and non-selecting
+            SQLTemplates:</p><pre class="programlisting">SQLTemplate select = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"select * from ARTIST"</span>); 
+List&lt;Artist&gt; result = context.performQuery(select);</pre><pre class="programlisting">SQLTemplate update = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"delete from ARTIST"</span>);
+QueryResponse response = context.performGenericQuery(update);</pre><p>Cayenne doesn't make any attempt to make sense of the SQL semantics, so it doesn't
+            know whether a given query is performing a select or update, etc. It is the the user's
+            decision to run a given query as a selecting or "generic".</p><p>
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Any data modifications done to DB as a result of SQLTemplate execution do not
+                    change the state of objects in the ObjectContext. So some objects in the context
+                    may become stale as a result.</p></div><p>
+        </p><p>Another point to note is that the first argument to the SQLTemplate constructor - the
+            Java class - has the same meaning as in SelectQuery only when the result can be
+            converted to objects (e.g. when this is a selecting query and it is selecting all
+            columns from one table). In this case it denotes the "root" entity of this query result.
+            If the query does not denote a single entity result, this argument is only used for
+            query routing, i.e. determining which database it should be run against. You are free to
+            use any persistent class or even a DataMap instance in such situation. It will work as
+            long as the passed "root" maps to the same database as the current query.</p><p>To achieve interoperability between mutliple RDBMS a user can specify multiple SQL
+            statements for the same SQLTemplate, each corresponding to a native SQL dialect. A key
+            used to look up the right dialect during execution is a fully qualified class name of
+            the corresponding DbAdapter. If no DB-specific statement is present for a given DB, a
+            default generic statement is used. E.g. in all the examples above a default statement
+            will be used regardless of the runtime database. So in most cases you won't need to
+            explicitly "translate" your SQL to all possible dialects. Here is how this works in
+            practice:</p><pre class="programlisting">SQLTemplate select = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"select * from ARTIST"</span>); 
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// For Postgres it would be nice to trim padding of all CHAR columns.</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// Otherwise those will be returned with whitespace on the right.</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// assuming "NAME" is defined as CHAR...</span>
+String pgSQL = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT ARTIST_ID, RTRIM(NAME), DATE_OF_BIRTH FROM ARTIST"</span>;
+query.setTemplate(PostgresAdapter.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>.getName(), pgSQL);</pre><div class="section" title="Scripting SQLTemplate with Velocity"><div class="titlepage"><div><div><h3 class="title"><a name="sqltemplate-scripting"></a>Scripting SQLTemplate with Velocity</h3></div></div></div><p>The most interesting aspect of SQLTemplate (and the reason why it is called a
+                "template") is that a SQL string is treated by Cayenne as an Apache Velocity
+                template. Before sending it to DB as a PreparedStatement, the String is evaluated in
+                the Velocity context, that does variable substitutions, and performs special
+                callbacks in response to various directives, thus controlling query interaction with
+                the JDBC layer. </p><p>Check Velocity docs for the syntax details. Here we'll just mention the two main
+                scripting elements - "variables" (that look like <code class="code">$var</code>) and "directives"
+                (that look like <code class="code">#directive(p1 p2 p3)</code>). All built-in Velocity directives
+                are supported. Additionally Cayenne defines a number of its own directives to bind
+                parameters to PreparedStatements and to control the structure of the ResultSet.
+                These directives are described in the following sections.</p></div><div class="section" title="Variable Substitution"><div class="titlepage"><div><div><h3 class="title"><a name="sqltemplate-parameters"></a>Variable Substitution</h3></div></div></div><p>All variables in the template string are replaced from query
+                parameters:</p><pre class="programlisting">SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"delete from $tableName"</span>);
+query.setParameters(Collections.singletonMap(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"tableName"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"mydb.PAINTING"</span>));
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// this will generate SQL like this: "delete from mydb.PAINTING"</span></pre><p>The
+                example above demonstrates the point made earlier in this chapter - even if we don't
+                know upfront which table the query will run against, we can still use a fixed "root"
+                in constructor (<code class="code">Artist.class</code> in this case) , as we are not planning on
+                converting the result to objects.</p><p>Variable substitution within the text uses "<code class="code">object.toString()</code>" method to replace the
+                variable value. Keep in mind that this may not be appropriate in all situations.
+                E.g. passing a date object in a WHERE clause expression may be converted to a String
+                not understood by the target RDBMS SQL parser. In such cases variable should be wrapped in <code class="code">#bind</code>
+                directive as described below.</p></div><div class="section" title="Directives"><div class="titlepage"><div><div><h3 class="title"><a name="sqltemplate-bind-directive"></a>Directives</h3></div></div></div><p>These are the Cayenne directives used to customize SQLTemplate parsing and
+                integrate it with the JDBC layer: </p><div class="section" title="#bind"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1579"></a>#bind</h4></div></div></div><p>Creates a PreparedStatement positional parameter in place of the directive,
+                    binding the value to it before statement execution. <code class="code">#bind</code> is
+                    allowed in places where a "?" would be allowed in a PreparedStatement. And in
+                    such places it almost always makes sense to pass objects to the template via
+                    this or other forms of <code class="code">#bind</code> instead of inserting them
+                    inline.</p><p><span class="italic">Semantics:</span></p><pre class="programlisting">#bind(value)
+#bind(value jdbcType)
+#bind(value jdbcType scale)</pre><p><span class="italic">Arguments:</span>
+                    </p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="code">value</code> - can either be a char constant or a variable
+                                that is resolved from the query parameters. Note that the variable
+                                can be a collection, that will be automatically expanded into a list
+                                of individual value bindings. This is useful for instance to build
+                                IN conditions. </p></li><li class="listitem"><p><code class="code">jdbcType</code> - is a JDBC data type of the parameter as
+                                defined in <code class="code">java.sql.Types</code>.</p></li><li class="listitem"><p><code class="code">scale</code> - An optional scale of the numeric value. Same
+                                as "scale" in PreparedStatement.</p></li></ul></div><p>
+                    <span class="italic">Usage</span>:</p><pre class="programlisting">#bind($xyz)
+#bind(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'str'</span>)
+#bind($xyz <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'VARCHAR'</span>)
+#bind($xyz <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DECIMAL'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">2</span>)</pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">update ARTIST set NAME = #bind($name) where ID = #bind($id)</pre></div><div class="section" title="#bindEqual"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1630"></a>#bindEqual</h4></div></div></div><p>Same as #bind, but also includes the "=" sign in front of the value binding.
+                    Look at the example below - we took the #bind example and replaced "<code class="code">ID =
+                        #bind(..)</code>" with "<code class="code">ID #bindEqual(..)</code>". While it looks like
+                    a clumsy shortcut to eliminate the equal sign, the actual reason why this is
+                    useful is that it allows the value to be null. If the value is not null,
+                        "<code class="code">= ?</code>" is generated, but if it is, the resulting chunk of the
+                    SQL would look like "<code class="code">IS NULL</code>" and will be compilant with what the
+                    DB expects.</p><p><span class="italic">Semantics:</span></p><pre class="programlisting">#bindEqual(value)
+#bindEqual(value jdbcType)
+#bindEqual(value jdbcType scale)</pre><p><span class="italic">Arguments: (same as #bind)</span>
+                </p><p>
+                    <span class="italic">Usage</span>:</p><pre class="programlisting">#bindEqual($xyz)
+#bindEqual(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'str'</span>)
+#bindEqual($xyz <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'VARCHAR'</span>)
+#bindEqual($xyz <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DECIMAL'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">2</span>)</pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">update ARTIST set NAME = #bind($name) where ID #bindEqual($id)</pre></div><div class="section" title="#bindNotEqual"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1668"></a>#bindNotEqual</h4></div></div></div><p>This directive deals with the same issue as <code class="code">#bindEqual</code> above,
+                    only it generates "not equal" in front of the value (or IS NOT NULL).</p><p><span class="italic">Semantics:</span></p><pre class="programlisting">#bindNotEqual(value)
+#bindNotEqual(value jdbcType)
+#bindNotEqual(value jdbcType scale)</pre><p><span class="italic">Arguments: (same as #bind)</span></p><p>
+                    <span class="italic">Usage</span>:</p><pre class="programlisting">#bindNotEqual($xyz)
+#bindNotEqual(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'str'</span>)
+#bindNotEqual($xyz <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'VARCHAR'</span>)
+#bindNotEqual($xyz <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DECIMAL'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">2</span>)</pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">update ARTIST set NAME = #bind($name) where ID #bindEqual($id)</pre></div><div class="section" title="#bindObjectEqual"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1696"></a>#bindObjectEqual</h4></div></div></div><p>It can be tricky to use a Persistent object or an ObjectId in a binding,
+                    especially for tables with compound primary keys. This directive helps to handle
+                    such binding. It maps columns in the query to the names of Persistent object ID
+                    columns, extracts ID values from the object, and generates SQL like "COL1 = ?
+                    AND COL2 = ? ..." , binding positional parameters to ID values. It can also
+                    correctly handle null object. Also notice how we are specifying a Velocity array
+                    for multi-column PK.</p><p><span class="italic">Semantics:</span></p><pre class="programlisting">#bindObjectEqual(value columns idColumns)</pre><p><span class="italic">Arguments:</span>
+                    </p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="code">value</code> - must be a variable that is resolved from the
+                                query parameters to a Persistent or ObjectId.</p></li><li class="listitem"><p><code class="code">columns</code> - the names of the columns to generate in the
+                                SQL.</p></li><li class="listitem"><p><code class="code">idColumn</code> - the names of the ID columns for a given
+                                entity. Must match the order of "columns" to match against.</p></li></ul></div><p>
+                    <span class="italic">Usage</span>:</p><pre class="programlisting">#bindObjectEqual($a <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'t0.ID'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'ID'</span>)
+#bindObjectEqual($b [<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'t0.FK1'</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'t0.FK2'</span>] [<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'PK1'</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'PK2'</span>])</pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">String sql = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT * FROM PAINTING t0 WHERE #bindObjectEqual($a 't0.ARTIST_ID' 'ARTIST_ID' ) ORDER BY PAINTING_ID"</span>;
+SQLTemplate select = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, sql);
+
+Artist a = ....
+select.setParameters(Collections.singletonMap(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"a"</span>, a)); </pre></div><div class="section" title="#bindObjectNotEqual"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1738"></a>#bindObjectNotEqual</h4></div></div></div><p>Same as #bindObjectEqual above, only generates "not equal" operator for value
+                    comparison (or IS NOT NULL).</p><p><span class="italic">Semantics:</span></p><pre class="programlisting">#bindObjectNotEqual(value columns idColumns)</pre><p><span class="italic">Arguments: (same as #bindObjectEqual)</span>
+                </p><p>
+                    <span class="italic">Usage</span>:</p><pre class="programlisting">#bindObjectNotEqual($a <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'t0.ID'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'ID'</span>)
+#bindObjectNotEqual($b [<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'t0.FK1'</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'t0.FK2'</span>] [<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'PK1'</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'PK2'</span>])</pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">String sql = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT * FROM PAINTING t0 WHERE #bindObjectNotEqual($a 't0.ARTIST_ID' 'ARTIST_ID' ) ORDER BY PAINTING_ID"</span>;
+SQLTemplate select = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, sql);
+
+Artist a = ....
+select.setParameters(Collections.singletonMap(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"a"</span>, a)); </pre></div><div class="section" title="#result"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1764"></a>#result</h4></div></div></div><p>Renders a column in SELECT clause of a query and maps it to a key in the
+                    result DataRow. Also ensures the value read is of the correct type. This allows
+                    to create a DataRow (and ultimately - a persistent object) from an arbitrary
+                    ResultSet.</p><p><span class="italic">Semantics:</span></p><pre class="programlisting">#result(column)
+#result(column javaType)
+#result(column javaType alias)
+#result(column javaType alias dataRowKey)</pre><p><span class="italic">Arguments:</span>
+                    </p><div class="itemizedlist"><ul class="itemizedlist"><li class="listitem"><p><code class="code">column</code> - the name of the column to render in SQL
+                                SELECT clause.</p></li><li class="listitem"><p><code class="code">javaType</code> - a fully-qualified Java class name for a
+                                given result column. For simplicity most common Java types used in
+                                JDBC can be specified without a package. These include all numeric
+                                types, primitives, String, SQL dates, BigDecimal and BigInteger. So
+                                    "<code class="code">#result('A' 'String')</code>", "<code class="code">#result('B'
+                                    'java.lang.String')</code>" and "<code class="code">#result('C'
+                                'int')</code>" are all valid</p></li><li class="listitem"><p><code class="code">alias</code> - specifies both the SQL alias of the column
+                                and the value key in the DataRow. If omitted, "column" value is
+                                used.</p></li><li class="listitem"><p><code class="code">dataRowKey</code> - needed if SQL 'alias' is not appropriate
+                                as a DataRow key on the Cayenne side. One common case when this
+                                happens is when a DataRow retrieved from a query is mapped using
+                                joint prefetch keys (see below). In this case DataRow must use
+                                database path expressions for joint column keys, and their format is
+                                incompatible with most databases alias format. </p></li></ul></div><p>
+                    <span class="italic">Usage</span>:</p><pre class="programlisting">#result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'NAME'</span>)
+#result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DATE_OF_BIRTH'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'java.util.Date'</span>) 
+#result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DOB'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'java.util.Date'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DATE_OF_BIRTH'</span>)
+#result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DOB'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'java.util.Date'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">''</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'artist.DATE_OF_BIRTH'</span>) 
+#result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'SALARY'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'float'</span>) </pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">SELECT #result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'ID'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'int'</span>), #result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'NAME'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'String'</span>), #result(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'DATE_OF_BIRTH'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'java.util.Date'</span>) FROM ARTIST</pre></div><div class="section" title="#chain and #chunk"><div class="titlepage"><div><div><h4 class="title"><a name="d0e1820"></a>#chain and #chunk</h4></div></div></div><p><code class="code">#chain</code> and <code class="code">#chunk</code> directives are used for
+                    conditional inclusion of SQL code. They are used together with
+                        <code class="code">#chain</code> wrapping multiple <code class="code">#chunks</code>. A chunk
+                    evaluates its parameter expression and if it is NULL suppresses rendering of the
+                    enclosed SQL block. A chain renders its prefix and its chunks joined by the
+                    operator. If all the chunks are suppressed, the chain itself is suppressed. This
+                    allows to work with otherwise hard to script SQL semantics. E.g. a WHERE clause
+                    can contain multiple conditions joined with AND or OR. Application code would
+                    like to exclude a condition if its right-hand parameter is not present (similar
+                    to Expression pruning discussed above). If all conditions are excluded, the
+                    entire WHERE clause should be excluded. chain/chunk allows to do that.</p><p>
+                    <span class="italic">Semantics</span>:</p><pre class="programlisting">#chain(operator) ... #end
+#chain(operator prefix) ... #end
+#chunk() ... #end
+#chunk(param) ... #end </pre><p><span class="italic">Full
+                    example:</span></p><pre class="programlisting">#chain(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'OR'</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">'WHERE'</span>) 
+	#chunk($name) NAME LIKE #bind($name) #end<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">" 
+</span>	#chunk($id) ARTIST_ID &gt; #bind($id) #end<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">" 
+</span>#end<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">" </span></pre></div></div><div class="section" title="Mapping SQLTemplate Results"><div class="titlepage"><div><div><h3 class="title"><a name="d0e1848"></a>Mapping SQLTemplate Results</h3></div></div></div><p>Here we'll discuss how to convert the data selected via SQLTemplate to some
+                useable format, compatible with other query results. It can either be very simple or
+                very complex, depending on the structure of the SQL, JDBC driver nature and the
+                desired result structure. This section presents various tips and tricks dealing with
+                result mapping. </p><p>By default SQLTemplate is expected to return a List of Persistent objects of its
+                root type. This is the simple
+                case:</p><pre class="programlisting">SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT * FROM ARTIST"</span>);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// List of Artists</span>
+List&lt;Artist&gt; artists = context.performQuery(query);</pre><p>Just
+                like SelectQuery, SQLTemplate can fetch DataRows. In fact DataRows option is very
+                useful with SQLTemplate, as the result type most often than not does not represent a
+                Cayenne entity, but instead may be some aggregated report or any other data whose
+                object structure is opaque to
+                Cayenne:</p><pre class="programlisting">String sql = SELECT t0.NAME, COUNT(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">1</span>) FROM ARTIST t0 JOIN PAINTING t1 ON (t0.ID = t1.ARTIST_ID) <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"
+</span>    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"GROUP BY t0.NAME ORDER BY COUNT(1)"</span>;
+SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, sql);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// ensure we are fetching DataRows</span>
+query.setFetchingDataRows(true);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// List of DataRow</span>
+List&lt;DataRow&gt; rows = context.performQuery(query);</pre><p>In
+                the example above, even though the query root is Artist. the result is a list of
+                artist names with painting counts (as mentioned before in such case "root" is only
+                used to find the DB to fetch against, but has no bearning on the result). The
+                DataRows here are the most appropriate and desired result type.</p><p>In a more advanced case you may decide to fetch a list of scalars or a list of
+                Object[] with each array entry being either an entity or a scalar. You probably
+                won't be doing this too often and it requires quite a lot of work to setup, but if
+                you want your SQLTemplate to return results similar to EJBQLQuery, it is doable
+                using SQLResult as described
+                below:</p><pre class="programlisting">SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Painting.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT ESTIMATED_PRICE P FROM PAINTING"</span>);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// let Cayenne know that result is a scalar</span>
+SQLResult resultDescriptor = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLResult();
+resultDescriptor.addColumnResult(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"P"</span>);
+query.setResult(resultDescriptor);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// List of BigDecimals</span>
+List&lt;BigDecimal&gt; prices = context.performQuery(query); </pre><pre class="programlisting">SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT t0.ID, t0.NAME, t0.DATE_OF_BIRTH, COUNT(t1.PAINTING_ID) C "</span> +
+      <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"FROM ARTIST t0 LEFT JOIN PAINTING t1 ON (t0.ID = t1.ARTIST_ID) "</span> +
+      <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"GROUP BY t0.ID, t0.NAME, t0.DATE_OF_BIRTH"</span>);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// let Cayenne know that result is a mix of Artist objects and the count of their paintings</span>
+EntityResult artistResult = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> EntityResult(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+artistResult.addDbField(Artist.ID_PK_COLUMN, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"ARTIST_ID"</span>);
+artistResult.addObjectField(Artist.NAME_PROPERTY, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"NAME"</span>);
+artistResult.addObjectField(Artist.DATE_OF_BIRTH_PROPERTY, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"DATE_OF_BIRTH"</span>);
+
+SQLResult resultDescriptor = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLResult();
+resultDescriptor.addEntityResult(artistResult);
+resultDescriptor.addColumnResult(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"C"</span>);
+query.setResult(resultDescriptor);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// List of Object[]</span>
+List&lt;Object[]&gt; data = context.performQuery(query);</pre><p>Another trick related to mapping result sets is making Cayenne recognize
+                prefetched entities in the result set. This emulates "joint" prefetching of
+                SelectQuery, and is achieved by special column naming. Columns belonging to the
+                "root" entity of the query should use unqualified names corresponding to the root
+                DbEntity columns. For each related entity column names must be prefixed with
+                relationship name and a dot (e.g. "toArtist.ID"). Column naming can be controlled
+                with "#result"
+                directive:</p><pre class="programlisting">String sql = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT distinct "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('t1.ESTIMATED_PRICE' 'BigDecimal' '' 'paintings.ESTIMATED_PRICE'), "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('t1.PAINTING_TITLE' 'String' '' 'paintings.PAINTING_TITLE'), "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('t1.GALLERY_ID' 'int' '' 'paintings.GALLERY_ID'), "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('t1.ID' 'int' '' 'paintings.ID'), "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('NAME' 'String'), "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('DATE_OF_BIRTH' 'java.util.Date'), "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"#result('t0.ID' 'int' '' 'ID') "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"FROM ARTIST t0, PAINTING t1 "</span>
+    + <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"WHERE t0.ID = t1.ARTIST_ID"</span>;
+
+SQLTemplate q = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, sql);
+q.addPrefetch(Artist.PAINTINGS_PROPERTY)
+List&lt;Artist&gt; objects = context.performQuery(query);</pre><p>And the final tip deals with capitalization of the DataRow keys. Queries like
+                    "<code class="code">SELECT * FROM...</code>" and even "<code class="code">SELECT COLUMN1, COLUMN2, ...
+                    FROM ...</code>" can sometimes result in Cayenne exceptions on attempts to
+                convert fetched DataRows to objects. Essentially any query that is not using a
+                    <code class="code">#result</code> directive to describe the result set is prone to this
+                problem, as different databases may produce different capitalization of the
+                java.sql.ResultSet columns. </p><p>The most universal way to address this issue is to describe each column explicitly
+                in the SQLTemplate via <code class="code">#result</code>, e.g.: "<code class="code">SELECT #result('column1'),
+                    #result('column2'), ..</code>". However this quickly becomes impractical for
+                tables with lots of columns. For such cases Cayenne provides a shortcut based on the
+                fact that an ORM mapping usually follows some naming convention for the column
+                names. Simply put, for case-insensitive databases developers normally use either all
+                lowercase or all uppercase column names. Here is the API that takes advantage of
+                that user knowledge and forces Cayenne to follow a given naming convention for the
+                DataRow keys (this is also available as a dropdown in the
+                Modeler):</p><pre class="programlisting">SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT * FROM ARTIST"</span>);
+query.setColumnNamesCapitalization(CapsStrategy.LOWER);
+List objects = context.performQuery(query);</pre><p>or</p><pre class="programlisting">SQLTemplate query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"SELECT * FROM ARTIST"</span>);
+query.setColumnNamesCapitalization(CapsStrategy.UPPER);
+List objects = context.performQuery(query); </pre><p>None of this affects the generated SQL, but the resulting DataRows are using
+                correct capitalization. Note that you probably shouldn't bother with this unless you
+                are getting CayenneRuntimeExceptions when fetching with SQLTemplate.</p></div></div><div class="section" title="ProcedureQuery"><div class="titlepage"><div><div><h2 class="title"><a name="procedurequery"></a>ProcedureQuery</h2></div></div></div><p>Stored procedures are mapped as separate objects in CayenneModeler. ProcedureQuery
+            provides a way to execute them with a certain set of parameters. Just like with
+            SQLTemplate, the outcome of a procedure can be anything - a single result set, mutliple
+            result sets, some data modification (returned as an update count), or a combination of
+            these. So use "performQuery" to get a single result set, and use "performGenericQuery"
+            for anything
+            else:</p><pre class="programlisting">ProcedureQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> ProcedureQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"my_procedure"</span>, Artist.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// Set "IN" parameter values</span>
+query.addParam(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"p1"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"abc"</span>);
+query.addParam(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"p2"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">3000</span>);
+
+List&lt;Artist&gt; result = context.performQuery(query);</pre><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// here we do not bother with root class. </span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// Procedure name gives us needed routing information</span>
+ProcedureQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> ProcedureQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"my_procedure"</span>);
+
+query.addParam(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"p1"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"abc"</span>);
+query.addParam(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"p2"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">3000</span>);
+
+QueryResponse response = context.performGenericQuery(query); </pre><p>A stored procedure can return data back to the application as result sets or via OUT
+            parameters. To simplify the processing of the query output, QueryResponse treats OUT
+            parameters as if it was a separate result set. If a stored procedure declares any OUT or
+            INOUT parameters, QueryResponse will contain their returned values in the very first
+            result
+            list:</p><pre class="programlisting">ProcedureQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> ProcedureQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"my_procedure"</span>);
+QueryResponse response = context.performGenericQuery(query);
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// read OUT parameters</span>
+List out = response.firstList();
+
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">if</span>(!out.isEmpty()) {
+    Map outParameterValues = (Map) outList.get(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-number">0</span>);
+}</pre><p>There maybe a situation when a stored procedure handles its own transactions, but an
+            application is configured to use Cayenne-managed transactions. This is obviously
+            conflicting and undesirable behavior. In this case ProcedureQueries should be executed
+            explicitly wrapped in an "external" Transaction. This is one of the few cases when a
+            user should worry about transactions at all. See Transactions section for more
+            details.</p></div><div class="section" title="NamedQuery"><div class="titlepage"><div><div><h2 class="title"><a name="namedquery"></a>NamedQuery</h2></div></div></div><p>NamedQuery is a query that is a reference to another query stored in the DataMap. The
+            actual stored query can be SelectQuery, SQLTemplate, EJBQLQuery, etc. It doesn't matter
+            - the API for calling them is the same - via a
+            NamedQuery:</p><pre class="programlisting">String[] keys = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> String[] {<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"loginid"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"password"</span>};
+Object[] values = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> String[] {<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"joe"</span>, <span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"secret"</span>};
+
+NamedQuery query = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> NamedQuery(<span xmlns="http://www.w3.org/1999/xhtml" class="hl-string">"Login"</span>, keys, values);
+
+List&lt;User&gt; matchingUsers = context.performQuery(query); </pre></div><div class="section" title="Custom Queries"><div class="titlepage"><div><div><h2 class="title"><a name="custom-queries"></a>Custom Queries</h2></div></div></div><p>If a user needs some extra functionality not addressed by the existing set of Cayenne
+            queries, he can write his own. The only requirement is to implement
+                <code class="code">org.apache.cayenne.query.Query</code> interface. The easiest way to go about
+            it is to subclass some of the base queries in Cayenne. </p><p>E.g. to do something directly in the JDBC layer, you might subclass
+            AbstractQuery:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> MyQuery <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">extends</span> AbstractQuery {
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Override</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> SQLAction createSQLAction(SQLActionVisitor visitor) {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLAction() {
+
+            <span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Override</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">void</span> performAction(Connection connection, OperationObserver observer) <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">throws</span> SQLException, Exception {
+                <span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// 1. do some JDBC work using provided connection... </span>
+                <span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// 2. push results back to Cayenne via OperationObserver</span>
+            }
+        };
+    }
+}</pre><p>To delegate the actual query execution to a standard Cayenne query, you may subclass
+            IndirectQuery:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">public</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span> MyDelegatingQuery <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">extends</span> IndirectQuery {
+    
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-annotation">@Override</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">protected</span> Query createReplacementQuery(EntityResolver resolver) {
+        SQLTemplate delegate = <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">new</span> SQLTemplate(SomeClass.<span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">class</span>, generateRawSQL());
+        delegate.setFetchingDataRows(true);
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">return</span> delegate;
+    }
+    
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-keyword">protected</span> String generateRawSQL() {
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">// build some SQL string</span>
+    }
+}</pre><p>In fact many internal Cayenne queries are IndirectQueries, delegating to SelectQuery
+            or SQLTemplate after some preprocessing.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="orderings.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="cayenne-guide-part2.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="lifecycle-events.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;8.&nbsp;Orderings&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;10.&nbsp;Lifecycle Events</td></tr></table></div></body></html>

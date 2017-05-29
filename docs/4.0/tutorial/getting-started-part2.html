@@ -1,0 +1,174 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title xmlns:d="http://docbook.org/ns/docbook">Chapter&nbsp;2.&nbsp;Learning mapping basics</title><link rel="stylesheet" type="text/css" href="css/cayenne-doc.css"><meta xmlns:d="http://docbook.org/ns/docbook" name="keywords" content="Cayenne 4.0 documentation"><meta xmlns:d="http://docbook.org/ns/docbook" name="description" content="User documentation for Apache Cayenne version 4.0"><link rel="home" href="index.html" title="Getting Started with Cayenne"><link rel="up" href="index.html" title="Getting Started with Cayenne"><link rel="prev" href="getting-started-part1.html" title="Chapter&nbsp;1.&nbsp;Setting up the environment"><link rel="next" href="getting-started-part3.html" title="Chapter&nbsp;3.&nbsp;Learning Cayenne API"><script xmlns:d="http://docbook.org/ns/docbook" type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-7036673-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+        </script></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:d="http://docbook.org/ns/docbook" class="navheader"><table width="100%" summary="Navigation header"><tr><th class="versioninfo">v.4.0 (4.0.M5)</th><th align="center">Chapter&nbsp;2.&nbsp;Learning mapping basics</th><th></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="getting-started-part1.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="getting-started-part3.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="getting-started-part2"></a>Chapter&nbsp;2.&nbsp;Learning mapping basics</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="getting-started-part2.html#d0e47">Starting a project</a></span></dt><dt><span class="section"><a href="getting-started-part2.html#d0e202">Getting started with Object Relational Mapping (ORM)</a></span></dt><dt><span class="section"><a href="getting-started-part2.html#d0e342">Creating Java Classes</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="d0e47"></a>Starting a project</h2></div></div></div><p>
+        The goal of this chapter is to create a new Java project in IntelliJ IDEA
+        containing a basic Cayenne mapping. It presents an introduction to 
+        CayenneModeler GUI tool, showing how to create the initial mapping 
+        objects: <code class="code">DataDomain</code>, <code class="code">DataNode</code>, <code class="code">DataMap</code>.
+    </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="create-new-project"></a>Create a new Project in IntelliJ IDEA</h3></div></div></div><p>
+            In IntelliJ IDEA select "<span class="guimenu">File</span> &gt; <span class="guimenuitem">New</span> &gt; <span class="guimenuitem">Project...</span>" and then
+            select "Maven" and click "Next".
+            In the dialog shown on the screenshot below, fill the "Group Id"
+            and "Artifact Id" fields and click "Next".
+        </p><p>
+            <span class="inlinemediaobject"><img src="images/tutorial-idea-project.png"></span>
+        </p><p>
+            On next dialog screen you can customize directory for your project and click "Finish".
+            Now you should have a new empty project.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="download-and-start-cayenne-modeler"></a>Download and Start CayenneModeler</h3></div></div></div><p>
+            Although later in this tutorial we'll be using Maven to include Cayenne 
+            runtime jars in the project, you'll still need to download Cayenne to 
+            get access to the CayenneModeler tool. 
+        </p><p>
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>If you are really into Maven, you can start
+                CayenneModeler from Maven too. We'll do it in a more traditional way
+                here.</p></div><p>
+        </p><p>Download the <a class="link" href="http://cayenne.apache.org/download.html" target="_top">latest release</a>. Unpack the distribution somewhere in the file system and
+            start CayenneModeler, following platform-specific instructions. On most platforms it is
+            done simply by doubleclicking the Modeler icon. The welcome screen of the Modeler looks
+            like this:
+        </p><p>
+            <span class="inlinemediaobject"><img src="images/modeler-started.png"></span>
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="create-new-mapping-project"></a>Create a New Mapping Project in CayenneModeler</h3></div></div></div><p>Click on the "New Project" button on Welcome screen. A new mapping project will appear
+            that contains a single <span class="bold"><strong>DataDomain</strong></span>. The meaning of a
+            DataDomain is explained elsewhere in the User Guide. For now it is sufficient to
+            understand that DataDomain is the root of your mapping project.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="create-datanode"></a>Create a DataNode</h3></div></div></div><p>The next project object you will create is a <span class="bold"><strong>DataNode</strong></span>. DataNode is a descriptor of a single database your application
+            will connect to. Cayenne mapping project can use more than one database, but for now,
+            we'll only use one. With "project" selected on the left, click on "Create DataNode"
+            button <span class="inlinemediaobject"><img src="images/icon-node.gif"></span> on the toolbar (or select "Project &gt; Create DataNode" from the menu.
+        </p><p>A new DataNode is displayed. Now you need to specify JDBC connection parameters. For
+            an in-memory Derby database you can enter the following settings: </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>JDBC Driver: org.apache.derby.jdbc.EmbeddedDriver</p></li><li class="listitem"><p>DB URL: jdbc:derby:memory:testdb;create=true</p></li></ul></div><p>
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>We are creating an in-memory database here. So when
+                you stop your application, all the data will be lost. In most real-life
+                cases you'll be connecting to a database that actually persists its data on
+                disk, but an in-memory DB will do for the simple tutorial.</p></div><p>
+        </p><p>Also you will need to change "Schema Update Strategy". Select
+            "<code class="code">org.apache.cayenne.access.dbsync.CreateIfNoSchemaStrategy</code>" from the dropdown, so that
+            Cayenne creates a new schema on Derby based on the ORM mapping when the application
+            starts.</p><p>
+            <span class="inlinemediaobject"><img src="images/base-datanode.png"></span>
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="create-datamap"></a>Create a DataMap</h3></div></div></div><p>Now you will create a <span class="bold"><strong>DataMap</strong></span>. DataMap is an object
+            that holds all the mapping information. To create it, click on "Create DataMap" button
+            <span class="inlinemediaobject"><img src="images/icon-datamap.gif"></span>
+            (or select a corresponding menu item). Note that the newly created DataMap is
+            automatically linked to the DataNode that you created in the previous step. If there is
+            more than one DataNode, you may need to link a DataMap to the correct node manually. In
+            other words a DataMap within DataDomain must point to a database described by the
+            map.
+        </p><p>You can leave all the DataMap defaults unchanged except for one - "Java Package".
+            Enter "<code class="code">org.example.cayenne.persistent</code>". This name will later be used for all persistent
+            classes.
+        </p><p>
+            <span class="inlinemediaobject"><img src="images/base-datamap.png"></span>
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="save-project"></a>Save the Project</h3></div></div></div><p>Before you proceed with the actual mapping, let's save the project. Click on "Save"
+            button in the toolbar and navigate to the "<code class="code">tutorial</code>" IDEA project folder that was
+            created earlier in this section and its "<code class="code">src/main/resources</code>" subfolder and save the
+            project there. Now go back to IDEA and you will see two Cayenne XML files.</p><p><span class="inlinemediaobject"><img src="images/idea-xmlfiles.png"></span></p><p>Note that the location of the XML files is not coincidental. Cayenne runtime looks for
+            "<code class="code">cayenne-*.xml</code>" file in the application <code class="code">CLASSPATH</code> and "<code class="code">src/main/resources</code>" folder should
+            already be a "class folder" in IDEA for our project (and is also a standard location
+            that Maven would copy to a jar file, if we were using Maven from command-line).</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="d0e202"></a>Getting started with Object Relational Mapping (ORM)</h2></div></div></div><p> The goal of this section is to learn how to create a simple Object-Relational model with
+        CayenneModeler. We will create a complete ORM model for the following database
+        schema:</p><p><span class="inlinemediaobject"><img src="images/database-schema.jpg"></span>
+    </p><p>
+        </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Very often you'd have an existing database already, and
+            it can be quickly imported in Cayenne via "Tools &gt; Reengineer Database
+            Schema". This will save you lots of time compared to manual mapping. However
+            understanding how to create the mapping by hand is important, so we are showing
+            the "manual" approach below.</p></div><p>
+    </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-db-tables-and-columns"></a>Mapping Database Tables and Columns</h3></div></div></div><p>Lets go back to CayenneModeler where we have the newly created project open and start
+            by adding the ARTIST table. Database tables are called <span class="bold"><strong>"DbEntities"</strong></span>
+            in Cayenne mapping (those can be actual tables or database views).
+        </p><p>Select "datamap" on the left-hand side project tree and click "Create DbEntity" button <span class="inlinemediaobject"><img src="images/icon-dbentity.gif"></span>
+            (or use "Project &gt; Create DbEntity" menu). A new DbEntity is created. In "DbEntity
+            Name" field enter "ARTIST". Then click on "Create Attribute" button <span class="inlinemediaobject"><img src="images/icon-attribute.gif"></span> on the entity
+            toolbar. This action changes the view to the "Attribute"
+            tab and adds a new attribute (attribute means a "table column" in this case) called
+            "untitledAttr". Let's rename it to ID, make it an <code class="code">INTEGER</code> and make it a PK:
+        </p><p><span class="inlinemediaobject"><img src="images/modeler-artistid.png"></span></p><p>Similarly add NAME <code class="code">VARCHAR(200)</code> and DATE_OF_BIRTH <code class="code">DATE</code> attributes. After that repeat
+            this procedure for PAINTING and GALLERY entities to match DB schema shown above.</p><p>
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                    Don't forget to save your project periodically to avoid losing your work.
+                </p></div><p>
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-db-relationships"></a>Mapping Database Relationships</h3></div></div></div><p>Now we need to specify relationships between ARTIST, PAINTING and GALLERY tables.
+            Start by creating a one-to-many ARTIST/PAINTING relationship:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Select the ARTIST DbEntity on the left and click on the "Properties"
+                    tab.</p></li><li class="listitem"><p>Click on "Create Relationship" button on the entity toolbar <span class="inlinemediaobject"><img src="images/icon-relationship.png"></span> - a relationship called "untitledRel" is created.</p></li><li class="listitem"><p>Choose the "Target" to be "Painting".</p></li><li class="listitem"><p>Click on the "Database Mapping" button <span class="inlinemediaobject"><img src="images/icon-info.png"></span> - relationship
+                    configuration dialog is presented. Here you can assign a name to the
+                    relationship and also its complimentary reverse relationship. This name can be
+                    anything (this is really a symbolic name of the database referential
+                    constraint), but it is recommended to use a valid Java identifier, as this will
+                    save some typing later. We'll call the relationship "paintings" and reverse
+                    relationship "artist".</p></li><li class="listitem"><p>Click on "Add" button on the right to add a join</p></li><li class="listitem"><p>Select "ID" column for the "Source" and "ARTIST_ID" column for the
+                    target.</p></li><li class="listitem"><p>Relationship information should now look like this:</p></li></ul></div><p><span class="inlinemediaobject"><img src="images/modeler-dbrelationship.png"></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Click "Done" to confirm the changes and close the dialog.</p></li><li class="listitem"><p>Two complimentary relationships have been created - from ARTIST to PAINTING
+                    and back. Still you may have noticed one thing is missing - "paintings"
+                    relationship should be to-many, but "To Many" checkbox is not checked. Let's
+                    change that - check the checkbox for "paintings" relationship, and then click on
+                    PAINTING DbEntity, and uncheck "artist" relationship "To Many" to make the
+                    reverse relationship "to-one" as it should be.</p></li><li class="listitem"><p>Repeat the steps above to create a many-to-one relationship from PAINTING to
+                    GALLERY, calling the relationships pair "gallery" and "paintings".</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-java-classes"></a>Mapping Java Classes</h3></div></div></div><p>Now that the database schema mapping is complete, CayenneModeler can create mappings
+            of Java classes (aka "ObjEntities") by deriving everything from DbEntities. At present
+            there is no way to do it for the entire DataMap in one click, so we'll do it for each
+            table individually.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Select "ARTIST" DbEntity and click on "Create ObjEntity" button <span class="inlinemediaobject"><img src="images/icon-objentity.gif"></span> either on the entity toolbar or on the main toolbar. An ObjEntity called
+                    "Artist" is created with a Java class field set to
+                    "org.example.cayenne.persistent.Artist". The modeler transformed the database
+                    names to the Java-friendly names (e.g., if you click on the "Attributes" tab,
+                    you'll see that "DATE_OF_BIRTH" column was converted to "dateOfBirth" Java class
+                    attribute).</p></li><li class="listitem"><p>Select "GALLERY" DbEntity and click on "Create ObjEntity" button again -
+                    you'll see a "Gallery" ObjEntity created.</p></li><li class="listitem"><p>Finally, do the same thing for "PAINTING".</p></li></ul></div><p>Now you need to synchronize relationships. Artist and Gallery entities were created
+            when there was no related "Painting" entity, so their relationships were not set. </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Click on the "Artist" ObjEntity. Now click on "Sync ObjEntity with DbEntity" button on
+                        the toolbar <span class="inlinemediaobject"><img src="images/icon-sync.gif"></span> - you will see the "paintings" relationship
+                        appear.</p></li><li class="listitem"><p>Do the same for the "Gallery" entity.</p></li></ul></div><p>Unless you want to customize the Java class and property names (which you can do
+            easily) the mapping is complete. </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a name="d0e342"></a>Creating Java Classes</h2></div></div></div><p>Here we'll generate the Java classes from the model that was created in the previous
+        section. CayenneModeler can be used to also generate the database schema, but since we
+        specified "<code class="code">CreateIfNoSchemaStrategy</code>" earlier when we created a DataNode, we'll skip the
+        database schema step. Still be aware that you can do it if you need to via "Tools &gt;
+        Create Database Schema".
+    </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="creating-java-classes"></a>Creating Java Classes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Select "Tools &gt; Generate Classes" menu.</p></li><li class="listitem"><p>For "Type" select "Standard Persistent Objects", if it is not already
+                    selected.</p></li><li class="listitem"><p>For the "Output Directory" select "<code class="code">src/main/java</code>" folder under your IDEA
+                    project folder (this is a "peer" location to the <code class="code">cayenne-*.xml</code> location we
+                    selected before).</p></li><li class="listitem"><p>Click on "Classes" tab and check the "Check All Classes" checkbox (unless it
+                    is already checked and reads "Uncheck all Classes").</p></li><li class="listitem"><p>Click "Generate"</p></li></ul></div><p>Now go back to IDEA - you
+            should see pairs of classes generated for each mapped entity. You probably also see that
+            there's a bunch of red squiggles next to the newly generated Java classes in IDEA.
+            This is because our project does not include Cayenne as a Maven dependency yet. Let's
+            fix it now by adding "cayenne-server" artifact in the bottom of the <code class="code">pom.xml</code> file. The
+            resulting POM should look like
+            this:</p><pre class="programlisting"><span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;project</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-attribute">xmlns</span>=<span xmlns="http://www.w3.org/1999/xhtml" class="hl-value">"http://maven.apache.org/POM/4.0.0"</span> <span xmlns="http://www.w3.org/1999/xhtml" class="hl-attribute">xmlns:xsi</span>=<span xmlns="http://www.w3.org/1999/xhtml" class="hl-value">"http://www.w3.org/2001/XMLSchema-instance"</span>
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-attribute">xsi:schemaLocation</span>=<span xmlns="http://www.w3.org/1999/xhtml" class="hl-value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&gt;</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;modelVersion&gt;</span>4.0.0<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/modelVersion&gt;</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;groupId&gt;</span>org.example.cayenne<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/groupId&gt;</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;artifactId&gt;</span>tutorial<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/artifactId&gt;</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;version&gt;</span>0.0.1-SNAPSHOT<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/version&gt;</span>
+
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;dependencies&gt;</span>
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;dependency&gt;</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;groupId&gt;</span>org.apache.cayenne<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/groupId&gt;</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;artifactId&gt;</span>cayenne-server<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/artifactId&gt;</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" class="hl-comment">&lt;!-- Here specify the version of Cayenne you are actually using --&gt;</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;version&gt;</span>4.0.M5<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/version&gt;</span>
+        <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/dependency&gt;</span>
+    <span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/dependencies&gt;</span>
+<span xmlns="http://www.w3.org/1999/xhtml" class="hl-tag">&lt;/project&gt;</span></pre><p>Your computer must be connected to the internet. Once you edit the <code class="code">pom.xml</code>, IDEA
+            will download the needed Cayenne jar file and add it to the project build path. As a
+            result, all the errors should disappear.</p><p><span class="inlinemediaobject"><img src="images/idea-generated-classes.png"></span></p><p>Now let's check the entity class pairs. Each one is made of a superclass (e.g. Artist)
+            and a subclass (e.g. Artist). You <span class="bold"><strong>should not</strong></span> modify the
+            superclasses whose names start with "_" (underscore), as they will be replaced on
+            subsequent generator runs. Instead all custom logic should be placed in the subclasses
+            in "<code class="code">org.example.cayenne.persistent</code>" package - those will never be overwritten by the
+            class generator.</p><p>
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Class Generation Hint</h3><p> Often you'd start by generating classes from the
+                    Modeler, but at the later stages of the project the generation is usually
+                    automated either via Ant cgen task or Maven cgen mojo. All three methods are
+                    interchangeable, however Ant and Maven methods would ensure that you never
+                    forget to regenerate classes on mapping changes, as they are integrated into
+                    the build cycle.</p></div><p>
+        </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="getting-started-part1.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="getting-started-part3.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Setting up the environment&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;Learning Cayenne API</td></tr></table></div></body></html>

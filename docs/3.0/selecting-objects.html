@@ -1,0 +1,29 @@
+Title: Selecting Objects
+
+	<P>If a stored procedure is known to return at least one result set, procedure queries can be executed just like normal select queries. Of course in addition to returning data, such procedures can perform any other database operations.</P>
+
+<P>Below is an example of creating a ProcedureQuery, initializing its parameters, and processing execution results.</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DataContext ctxt;
+
+<SPAN class="code-comment">// <SPAN class="code-quote">&quot;my_procedure&quot;</SPAN> is a name of a stored procedure,
+</SPAN><SPAN class="code-comment">// that must exist in the DataMap
+</SPAN>ProcedureQuery query = <SPAN class="code-keyword">new</SPAN> ProcedureQuery(<SPAN class="code-quote">&quot;my_procedure&quot;</SPAN>, Artist.class);
+
+<SPAN class="code-comment">// Set <SPAN class="code-quote">&quot;IN&quot;</SPAN> parameter values
+</SPAN>query.addParam(<SPAN class="code-quote">&quot;paramter1&quot;</SPAN>, <SPAN class="code-quote">&quot;abc&quot;</SPAN>);
+query.addParam(<SPAN class="code-quote">&quot;parameter2&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Integer</SPAN>(3000));
+
+<SPAN class="code-comment">// run query as a normal select query
+</SPAN>List objects = ctxt.performQuery(query);
+
+<SPAN class="code-comment">// process results
+</SPAN>Iterator it = objects.iterator();
+<SPAN class="code-keyword">while</SPAN>(it.hasNext()) {
+  Artist artist = (Artist) it.next();
+  ....
+}
+</PRE>
+</DIV></DIV>

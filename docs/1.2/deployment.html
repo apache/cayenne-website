@@ -1,0 +1,18 @@
+Title: Deployment
+
+	
+
+<P>Cayenne application deployment is about configuring the application so that at runtime it can find a main project file (cayenne.xml) and associated resources, such as DataMap and DataNode XML files.</P>
+
+<P>The central point in Cayenne deployment is the <A href="http://objectstyle.org/cayenne/api/cayenne/org/objectstyle/cayenne/conf/Configuration.html" class="external-link" rel="nofollow">Configuration</A> class. It locates and loads all the mapping and configuration information required for Cayenne at runtime. By default Configuration uses a singleton model, i.e. normally there is only one instance of Configuration (or a subclass) that exists in the application. This shared instance can be accessed in the following way:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> org.objectstyle.cayenne.conf.Configuration;
+<SPAN class="code-keyword">import</SPAN> org.objectstyle.cayenne.access.DataDomain;
+...
+Configuration conf = Configuration.getSharedConfiguration();
+DataDomain domain = conf.getDomain();
+</PRE>
+</DIV></DIV>
+<P>As discussed in the following chapters Configuration works behind the scenes and users rarely care about it. Application code is normally only concered with obtaining a DataContext.</P>
+
+

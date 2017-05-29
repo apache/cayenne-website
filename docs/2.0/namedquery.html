@@ -1,0 +1,16 @@
+Title: NamedQuery
+
+	
+
+<P><TT>NamedQuery</TT> is a query that is a reference to another query stored in the DataMap. It can hold named parameters that will be passed to the named query on execution.</P>
+
+<P>Assuming that there a query called &quot;Login&quot; was previously mapped in the Modeler, we can do this:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-object">String</SPAN>[] keys = <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">String</SPAN>[] {<SPAN class="code-quote">&quot;loginid&quot;</SPAN>, <SPAN class="code-quote">&quot;password&quot;</SPAN>};
+<SPAN class="code-object">Object</SPAN>[] values = <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">String</SPAN>[] {<SPAN class="code-quote">&quot;joe&quot;</SPAN>, <SPAN class="code-quote">&quot;secret&quot;</SPAN>};
+
+NamedQuery query = <SPAN class="code-keyword">new</SPAN> NamedQuery(<SPAN class="code-quote">&quot;Login&quot;</SPAN>, keys, values);
+
+List matchingUsers = context.performQuery(query);
+</PRE>
+</DIV></DIV>
