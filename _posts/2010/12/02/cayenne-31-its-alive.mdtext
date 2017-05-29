@@ -1,7 +1,8 @@
-Title:  Cayenne 3.1 - it's alive!
-
-## Cayenne 3.1 - it's alive!
-_December 2, 2010_
+---
+layout: post
+title:  Cayenne 3.1 - it's alive!
+date:   2010-12-2
+---
 
 Cayenne 3 isn't resting on its laurels. It is still growing and developing, and today we are pleased to announce the first milestone of version 3.1. This is not a beta and 3.1 is not yet feature-complete, but it gives users an insight into the direction Cayenne is heading in and an opportunity to give us feedback.
 

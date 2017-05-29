@@ -1,7 +1,8 @@
-Title:  Cayenne 3.1 Release Candidate is Available
-
-## Cayenne 3.1 Release Candidate
-_Feb 16, 2014_
+---
+layout: post
+title:  Cayenne 3.1 Release Candidate is Available
+date:   2014-2-16
+---
 
 We are glad to announce a release candidate of Cayenne 3.1. Apache Cayenne is one of the leading open source Java ORMs with a simple learning curve and many unique features like generic objects, remote object persistence, etc. It's been a while since the last beta, giving us an opportunity to collect feedback from the community, fix bugs and improve the documentation. Still 3.1 has remained very stable, and the new RC1 is really a drop-in replacement for the previous beta version. The next 3.1 release will likely be a "final" (aka "GA"). Most of the remaining work will focus on user documentation. 
 

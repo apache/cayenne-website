@@ -1,7 +1,8 @@
-Title: Cayenne 3.1M2 is Released
-
-## Cayenne 3.1M2 is Released
-_March 8, 2011_
+---
+layout: post
+title:  Cayenne 3.1M2 is Released
+date:   2011-3-8
+---
 
 We keep improving Cayenne 3.1 with the new M2 milestone release. If you've already experimented with 3.1, M2 is a must-have upgrade - it fixes a number of bugs that affected runtime stability (CAY-1515, CAY-1519). If you haven't, maybe it is time to try it out? ;) Usual disclaimer applies about M2 being an early alpha and the new APIs being subject to change. In addition to the numerous bugfixes in the runtime and the Modeler, the new release introduces a set of brand new powerful tools for object lifecycle management. We'll briefly describe them here. Please check Guide to 3.1 Features for more details.
 
@@ -10,7 +11,7 @@ We keep improving Cayenne 3.1 with the new M2 milestone release. If you've alrea
         MyListener listener = new MyListener();
         runtime.getChannel().getEntityResolver().getCallbackRegistry().addListener(listener);
 
-    While JPA users may think that lifecycle annotations is old news, Cayenne goes a bit further than JPA here. Cayenne annotations let you attach a listener not just to specific entities, but also to entities whose names are not known to the listener upfront. A listener annotation may reference an arbitrary user-defined annotation which is then placed on entity classes. All of this completely changes how you manage your listeners. It becomes simple, clear and flexible.
+While JPA users may think that lifecycle annotations is old news, Cayenne goes a bit further than JPA here. Cayenne annotations let you attach a listener not just to specific entities, but also to entities whose names are not known to the listener upfront. A listener annotation may reference an arbitrary user-defined annotation which is then placed on entity classes. All of this completely changes how you manage your listeners. It becomes simple, clear and flexible.
 
 * Another cool lifecycle management tool is DataChannelFilter. A chain of filters can be configured by the user to intercept and react to the data traffic (selects, commits) between DataContext and DataDomain. This was sort of possible before by decorating a DataChannel, however the new approach is much less invasive, and more importantly, the filter object can also have annotated listener methods that are aware of the ongoing select or commit operation. That's what ultimately makes it usable in real-life situations. CacheInvalidationFilter in cayenne-lifeycle module (cayenne-lifecycle is described below) is a good example of how a filter collects some information about an ongoing persistence operation in a ThreadLocal object, and then processes aggregated information at the end of this operation.
 

@@ -1,7 +1,8 @@
-Title: Cayenne 3.0.2 is Released
-
-## Cayenne 3.0.2 is Released
-_June 21, 2011_
+---
+layout: post
+title:  Cayenne 3.0.2 is Released
+date:   2011-6-21
+---
 
 We just released a maintenance version of stable Cayenne 3.0 branch. It has 19 bug fixes and minor improvements, e.g. a performance improvement for MySQL (JDBC batching). If you are a 3.0.x user, this is certainly a recommended upgrade. A full list of closed jiras is below:
 

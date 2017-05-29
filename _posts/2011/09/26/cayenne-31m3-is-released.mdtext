@@ -1,8 +1,8 @@
-Title: Cayenne 3.1M3 is Released
-
-## Cayenne 3.1M3 is Released
-_September 26, 2011_
-
+---
+layout: post
+title:  Cayenne 3.1M3 is Released
+date:   2011-9-26
+---
 
 We are glad to announce 3.1M3 release of Cayenne. This is an important milestone on our way to Beta. In fact there is a good chance that the next release will be announced as Beta. Upgrade to M3 is strongly recommended to all 3.1 users, as it contains some critical bug fixes. The highlights of the M3:
 
@@ -16,7 +16,7 @@ We are glad to announce 3.1M3 release of Cayenne. This is an important milestone
 
 And now the full release notes:
 
-Changes/New Features:
+## Changes/New Features
 
 * CAY-943 Support multiple cayenne.xml files in the project
 * CAY-1266 Joint prefetches with fetch limit and offset do not work on Oracle
@@ -42,7 +42,7 @@ Changes/New Features:
 * CAY-1610 ObjectContext API to use varargs
 * CAY-1611 ObjectContext API improvement - better 'localObect' method
 
-Bug Fixes:
+## Bug Fixes
 
 * CAY-1469 Modeler: dbRelationships renaming problem
 * CAY-1526 Preferences: java.lang.IllegalArgumentException: Key too long

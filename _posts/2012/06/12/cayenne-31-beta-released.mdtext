@@ -1,7 +1,8 @@
-Title:  Cayenne 3.1 Beta Released
-
-## Cayenne 3.1 Beta Released
-_June 12, 2012_
+---
+layout: post
+title:  Cayenne 3.1 Beta Released
+date:   2012-6-12
+---
 
 Very happy to announce Cayenne 3.1 beta! Apache Cayenne is one of the leading open source Java ORMs with a simple learning curve and a set of unique functionality like generic objects, remote object persistence, etc. Cayenne 3.1 features a small (only 40K), but very powerful built-in dependency injection container, declarative object lifecycle support and dozens of improvements in all areas of the framework and the modeling tools. 
 

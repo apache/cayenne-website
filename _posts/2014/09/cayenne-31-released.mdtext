@@ -1,7 +1,8 @@
-Title:  The Apache Software Foundation Announces Apache™ Cayenne™ v3.1
-
-## The Apache Software Foundation Announces Apache™ Cayenne™ v3.1
-_Sep 29, 2014_
+---
+layout: post
+title:  The Apache Software Foundation Announces Apache™ Cayenne™ v3.1
+date:   2014-9-29
+---
 
 The Apache Software Foundation (ASF), the all-volunteer developers, stewards, and incubators of more than 200 Open Source projects and initiatives, announced today the availability of Apache™ Cayenne™ v3.1, the Open Source Java framework for object relational mapping (ORM), persistence, and caching.
 
