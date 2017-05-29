@@ -1,0 +1,40 @@
+Title:
+Notice:    Licensed to the Apache Software Foundation (ASF) under one
+           or more contributor license agreements.  See the NOTICE file
+           distributed with this work for additional information
+           regarding copyright ownership.  The ASF licenses this file
+           to you under the Apache License, Version 2.0 (the
+           "License"); you may not use this file except in compliance
+           with the License.  You may obtain a copy of the License at
+           .
+             http://www.apache.org/licenses/LICENSE-2.0
+           .
+           Unless required by applicable law or agreed to in writing,
+           software distributed under the License is distributed on an
+           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+           KIND, either express or implied.  See the License for the
+           specific language governing permissions and limitations
+           under the License.
+
+## Cayenne 3.1.1 Released
+_May 16, 2016_ 
+
+
+This new maintenance release has a few major bug fixes and improvements.
+It can be downloaded from [here](/download.html).
+
+### A full list of changes in this release:
+
+* CAY-1862 MySQL - allow specifying a length for TIMESTAMP and TIME columns
+* CAY-2042 Remove an arbitrary limitation on 1000 runtime DbRelationships
+
+### Bug Fixes:
+
+* CAY-1863 Make determining whether a particular database type supports length adapter-specific not universal
+* CAY-1964 Fix convertAdditionalDataMaps() in CayenneGeneratorMojo.java
+* CAY-1973 error while generating classes
+* CAY-1978 ESCAPE clause should be included in LIKE parenthesis
+* CAY-1979 Prefetches on Many-to-Many Relationships with Longvarchar
+* CAY-2047 Relationship mapping with target inheritance
+* CAY-2049 Changing the Relationship name in ObjRelationship Inspector has no effect
+* CAY-2066 Memory leak in ExtendedTypeMap for inner classes

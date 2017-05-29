@@ -1,0 +1,106 @@
+Title:  Cayenne 3.2 Milestone 1 Released
+
+## Cayenne 3.2 Milestone 1 Released
+_Jul 19, 2013_ 
+
+While Cayenne 3.1 release is in Beta and frozen, we are moving ahead with new development. Today we are glad to announce
+the first milestone of Cayenne 3.2. You may remember that 3.1 was all about dependency injection. 
+Well, 3.2 is becoming all about improving user-facing APIs (Query, ObjectContext, etc.). We are finally fully taking 
+advantage of generics to make your code type-safe, and otherwise ensuring that the code you write is more 
+concise and readable. Some of these improvements are achieved via smart class generation 
+that creates type-safe static "properties", allowing to build type-safe expressions. Just to give a taste of Cayenne 3.2:
+
+    // 3.1 style:
+    Expression e = ExpressionFactory.matchExp(Painting.ARTIST_PROPERTY, artist);
+    SelectQuery q = new SelectQuery(Painting.class, e);
+    @SuppressWarnings("unchecked")
+    List<Painting> paintings = context.performQuery(q);
+
+    // 3.2 style:
+    Expression e = Painting.ARTIST.eq(artist);
+    SelectQuery<Painting> q = SelectQuery.query(Painting.class, e);
+    List<Painting> paintings = context.select(q);
+
+3.2 style results in less code, type-safe expressions and results, and no compiler warnings. Another noteable 
+improvement is a reworked 'cdbimport' that enabled Modeler-free workflow for some databases. So there's a lot to like for 
+the early 3.2 adopters.
+
+Cayenne can be downloaded from [here](/download.html).
+
+A full list of changes in this release:
+
+* CAY-1294 Generify query
+* CAY-1646 Synchronize tabs in Modeler between ObjEntity and DbEntity editor panes
+* CAY-1647 Easily switch to/from ObjEntity and DbEntity in Modeler
+* CAY-1717 [PATCH] Implement JDBC compatibility layer methods
+* CAY-1718 Remove everything deprecated in 3.1
+* CAY-1724 Add 'Property' class for easier and better Expression creation
+* CAY-1726 Expression parser support for bit operators, support for << and >>
+* CAY-1737 ObjectContexts listening to DataChannel events must be non-blocking
+* CAY-1748 IdCoder/EntityIdCoder improvements to work with ObjectIds, including temp ones
+* CAY-1753 remove light-superclass.vm class template
+* CAY-1754 Modeler suggested URL for SQLServer should start with 'jdbc:sqlserver:' instead of 'jdbc:microsoft:sqlserver:'
+* CAY-1758 cdbimport improvements
+* CAY-1759 cdbimport improvements: add 'catalog', rename 'schemaName' to 'schema'
+* CAY-1760 cdbimport improvements: Default adapter (if none specified) must be AutoAdapter, not JdbcAdapter 
+* CAY-1761 cdbimport improvements: DbLoader must reverse engineer PK auto-increment state. 
+* CAY-1762 cdbimport improvements: Support for "defaultPackage" parameter, as the new DataMaps ends up placing entities in the root package 
+* CAY-1763 cdbimport improvements: specified "schema" should become the default schema of the generated DataMap 
+* CAY-1764 cdbimport improvements: "overwrite" flag
+* CAY-1765 cdbimport improvements: add excludeTables/includeTables parameters
+* CAY-1766 Deprecating DataPort ant task
+* CAY-1768 cdbimport improvements: DataMap "project-version" attribute is skipped when DM is saved
+* CAY-1769 cdbimport improvements: meaningfulPk flag must be turned into a pattern
+* CAY-1771 cdbimport improvements: "usePrimitives" flag
+* CAY-1772 Real support for DbEntity catalogs
+* CAY-1778 TransactionManager to simplify user-managed transactions 
+* CAY-1779 Flatten object entities for many to many relationships on reverse engineering 
+* CAY-1781 Add StatelessContextRequestHandler as an alternative to the Session-based one
+* CAY-1785 SelectQuery<T> for DataRows
+* CAY-1789 Lock-free EntityResolver 
+* CAY-1792 [PATCH] Supply additional factory methods for generic SelectQueries 
+* CAY-1803 Optimize Expression conversion to String and EJBQL 
+* CAY-1809 Remove 'final' modifier from Cayenne, HessianUtil, PropertyComparator, ConversionUtil, and LinkedDeque
+* CAY-1813 Missing ObjEntity Attribute Validation with Duplicate DbEntity Columns
+* CAY-1814 Support Property.nin 
+* CAY-1819 When adding a filter, auto-register it as a listener 
+* CAY-1820 DataDomain.addListener(Object) - a shortcut for adding annotated listeners 
+* CAY-1821 AuditableFilter and friends should explicitly work with Persistent instead of Object
+* CAY-1822 Make DataMap editor fields wider 
+* CAY-1823 remove ":sync w/DbEntity" button from ObjEntity - it is redundant and already present on the entity toolbar. 
+* CAY-1825 Simplify API for setting up query caching
+* CAY-1828 SQLSelect - generics friendly fluent selecting sql query
+* CAY-1829 Make ResultIterator implement Iterable<T>, create ObjectContext.iterate method
+* CAY-1836 Firebird Adapter 
+* CAY-1838 Deprecate EntityResolver.indexedByClassProperty
+
+Bug Fixes:
+
+* CAY-957 Deadlock in nested contexts
+* CAY-1522 EJBQL query don't support quotes
+* CAY-1677 Modeler: text fields discard input unless you press enter
+* CAY-1701 Modeler cannot undo pasting of obj (db) entity
+* CAY-1708 Modeler error when pasting datamap with EJBQL query
+* CAY-1714 ROP: Cayenne tries to build a query for non committed object when using more than 2 nested contexts 
+* CAY-1721 Writing blobs fails (Oracle)
+* CAY-1725 NullPointerException from call to removeToManyTarget
+* CAY-1719 Modeler - Obj Attribute Java Type editor won't focus sometimes
+* CAY-1727 Modeler thinks entity is using inheritance when it doesn't
+* CAY-1729 PersistentDescriptor must have predictable property iteration order
+* CAY-1738 Tutorial cayenne-rop-server should be packaged as a war
+* CAY-1739 Cayenne ROP server resets session on every request if BASIC auth is used
+* CAY-1742 ObjRelationship inspector says "ObjAttribute Inspector"
+* CAY-1744 Unexpected read-only relationships in vertical inheritance mapping
+* CAY-1749 NPE on simple nested context commit
+* CAY-1755 FaultFailureException resolving relationships to UNIQUE non-PK columns
+* CAY-1757 ROP: Faulting entity relationship resets uncommitted modifications made to its reverse relationship 
+* CAY-1774 EhCacheQueryCache.get(QueryMetadata, QueryCacheEntryFactory) returns null if EhCache instance for group is not present
+* CAY-1780 cdbimport do not create xml file in resource folder
+* CAY-1782 Deadlock when performing many concurrent inserts
+* CAY-1783 JdbcPkGenerator.longPkFromDatabase would throw an exception if the PK value exceeds a range of Java int
+* CAY-1794 Duplicate attributes in discriminator columns of PersistentDescriptor
+* CAY-1804 Serialisation of long[] type was not working correctly. 
+* CAY-1806 Error importing eomodel 
+* CAY-1817 NPE during Validate Project 
+* CAY-1827 EhCache region corresponding to a cache group loses its settings after 'removeGroup'
+* CAY-1832 Exception when modifying objects in postLoad callback
