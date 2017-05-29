@@ -35,11 +35,14 @@ services.
 
 ## News
 
-* Mar 06, 2017 - [4.0 Milestone 5 released](/2017/03/cayenne-40M5-released.html)
-* Dec 13, 2016 - [4.0 Milestone 4 released](/2016/12/cayenne-40M4-released.html)
-* May 16, 2016 - [3.1.1 released](/2016/05/cayenne-311-released.html)
-* Feb 12, 2016 - [4.0 Milestone 3 released](/2016/02/cayenne-40m3-released.html) 
-* Mar 18, 2015 - [4.0 Milestone 2 released](/2015/03/cayenne-40m2-released.html) 
+<ul>
+  {% for post in site.posts limit:6 %}
+    <li>
+      <a href="{{ post.url }}"><span class="date">{{ post.date }}</span> {{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
 
 ## Cayenne Modeler
 <span style="float: right"><img style="border: 0px solid black" src="/img/modeler-thumb.png"></span>
