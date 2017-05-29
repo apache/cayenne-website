@@ -21,6 +21,7 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.txt
 
 markdown: kramdown
 kramdown:
