@@ -1,6 +1,6 @@
 ---
 title:  Contributors
-permalink: /vontributors/
+permalink: /contributors/
 ---
 
 ### Committers and Project Management Committee

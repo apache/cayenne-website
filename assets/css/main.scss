@@ -11,3 +11,6 @@ $basePath: '{{ site.baseurl }}';
 @import "bootstrap/bootstrap-grid";
 @import "bootstrap-slider/bootstrap-slider";
 @import "bootstrap-toggle";
+
+@import "base";
+@import "layout";
