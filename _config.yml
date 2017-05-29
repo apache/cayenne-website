@@ -15,9 +15,9 @@ encoding: utf-8
 
 # Build settings
 
-theme: minima
+# theme: minima
 gems:
-  - jekyll-feed
+#  - jekyll-feed
 exclude:
   - Gemfile
   - Gemfile.lock

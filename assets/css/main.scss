@@ -1,0 +1,13 @@
+---
+---
+
+@charset "utf-8";
+
+$basePath: '{{ site.baseurl }}';
+@import "settings";
+
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import "bootstrap/bootstrap";
+@import "bootstrap/bootstrap-grid";
+@import "bootstrap-slider/bootstrap-slider";
+@import "bootstrap-toggle";

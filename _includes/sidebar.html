@@ -1,0 +1,19 @@
+<ul class="children nav-children">
+  {% assign pages = site.html_pages | sort: "path" %}
+  {% for entry in pages %}
+    {% assign entry_path = entry.url | split: "/" | pop | join: '/' | append: '/' %}
+    {% assign file_ext = entry.url | slice: -5, 5 %}
+    {% if file_ext != '.html' and entry_path contains include.path  %}
+      <li class="nav-item{% if page.url contains entry.url %} active-item{% endif %}">
+        <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
+        {% include sidebar.html path=entry.url %}
+      </li>
+    {% else %}
+      {% if entry_path == include.path %}
+        <li class="nav-item{% if page.url contains entry.url %} active-item{% endif %}">
+          <a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
+        </li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ul>
