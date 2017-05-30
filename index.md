@@ -35,10 +35,10 @@ services.
 
 ## News
 
-<ul>
+<ul class="news">
   {% for post in site.posts limit:6 %}
     <li>
-      <a href="{{ post.url }}"><span class="date">{{ post.date }}</span> {{ post.title }}</a>
+      <span class="date">{{ post.date | date: "%-d %b %Y" }}</span><a href="{{ post.url }}"> {{ post.title }}</a>
       {{ post.excerpt }}
     </li>
   {% endfor %}

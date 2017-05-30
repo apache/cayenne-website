@@ -5,3 +5,20 @@
 		color: $footer-text-color;
 	}
 }
+
+.news {
+	ul {
+		margin-left: 0;
+	}
+
+	li {
+		list-style: none;
+		a {
+			font-weight: bold;
+		}
+	}
+}
+
+a {
+	font-weight: 400;
+}
