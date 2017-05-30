@@ -20,7 +20,7 @@ design. To that end, Cayenne supports database reverse engineering and
 generation, as well as a Velocity-based class generation engine. All of
 these functions can be controlled directly through the CayenneModeler, a
 fully functional GUI tool. No cryptic XML or annotation based configuration
-is required\! An entire database schema can be mapped directly to Java
+is required! An entire database schema can be mapped directly to Java
 objects within minutes, all from the comfort of the GUI-based
 CayenneModeler.
 
@@ -43,6 +43,8 @@ services.
     </li>
   {% endfor %}
 </ul>
+
+<a href="/news">More news...</a>
 
 ## Cayenne Modeler
 <span style="float: right"><img style="border: 0px solid black" src="/img/modeler-thumb.png"></span>
