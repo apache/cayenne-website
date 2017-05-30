@@ -1,6 +1,6 @@
 ---
 title:  Download
-permalink: /download/
+permalink: /download
 ---
 
 _KEYS file to verify the file signatures can be [found here](http://www.apache.org/dist/cayenne/KEYS)._

@@ -1,6 +1,6 @@
 ---
 title:  Success stories
-permalink: /success-stories/
+permalink: /success-stories
 ---
 
 Not the full list by any means, but here is a number of organizations and

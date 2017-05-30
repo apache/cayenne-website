@@ -1,6 +1,7 @@
-Title: How can I help?
-<a name="HowcanIhelp?-HowCanIHelp?"></a>
-## How Can I Help?
+---
+title:  How can I help?
+permalink: /how-can-i-help
+---
 
 Every volunteer project gets its strength from its participants. We invite
 everybody to participate in Cayenne. If you are willing to help,

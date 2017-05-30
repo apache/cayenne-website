@@ -1,6 +1,6 @@
 ---
 title:  Mailing Lists
-permalink: /mailing-lists/
+permalink: /mailing-lists
 ---
 
 ### User Mailing List

@@ -1,6 +1,6 @@
 ---
 title:  Thanks
-permalink: /thanks/
+permalink: /thanks
 ---
 
 ### License Donations
