@@ -2,13 +2,10 @@
 title:  Cayenne Documentation
 ---
 
-Documentation, the JavaDoc API, examples and articles can all be found
-here.
+User documentation, tutorials and JavaDoc for each major release of Cayenne.
 
-* [Getting Started (4.0)](/docs/4.0/tutorial/index.html)
-* [Version 4.0 (alpha)](/docs/4.0/index.html)
-* [Version 3.1 (stable)](/docs/3.1/index.html)
-
-## Legacy Documentation
-
-* [Legacy Releases](/legacy.html)
+* [Version 4.0](/docs/4.0/index.html)
+* [Version 3.1](/docs/3.1/index.html)
+* [Version 3.0](/docs/3.0/index.html)
+* [Version 2.0](/docs/2.0/index.html)
+* [Version 1.2](/docs/1.2/index.html)

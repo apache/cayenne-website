@@ -82,7 +82,4 @@ Requires Java 1.5 or above.
 
 ### Maven
 
-Cayenne artifacts are available from [Maven Central][1] for use with Maven, Ivy, Gradle or any other dependency management tool. 
-
-
-  [1]: http://search.maven.org/#search|ga|1|g%3A%22org.apache.cayenne%22
+Cayenne artifacts are available from [Maven Central](http://search.maven.org) for use with Maven, Ivy, Gradle or any other dependency management tool. 
