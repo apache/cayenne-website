@@ -5,6 +5,9 @@ permalink: /contributors/
 
 ### Committers and Project Management Committee
 
+The most important part of Apache Cayenne project are the people who contribute to it. Contributions come from developers who use Cayenne in their projects and submit bug reports, feature requests or patches. If those developers show an ongoing high quality engagement with the Cayenne project they will be given the ability to commit their changes directly to our version control.
+
+A subset of those committers are the project management committee (PMC) who provide oversight of the project, legal compliance and quality. Finally the chair is out point of contact with the Apache Foundation board, reporting regardly to them on the health of the project.
 
 Name | Role | Email | Website
 -----|------|-------|--------
