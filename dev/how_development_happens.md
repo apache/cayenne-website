@@ -4,9 +4,6 @@ title:  How development happens
 
 There are several levels of access to the Cayenne project and source.
 
-1. Documentation only access. Access to the Confluence system for creating
-documentation means that these users are able to edit and create content
-which then available on this web site and bundled with the download.
 1. Committers have direct access to Git and are able to make changes to the
 entire source repository.
 1. Project Management Committee (PMC) members have further responsibility

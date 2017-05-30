@@ -22,3 +22,16 @@
 a {
 	font-weight: 400;
 }
+
+a.jira {
+    text-decoration: $text-color underline dashed;
+    color: $text-color;
+    &:visited {
+        color: $text-color;
+    }
+
+    &:hover {
+        color: darken($text-color, 15%);
+        text-decoration: $text-color underline solid;
+    }
+}
