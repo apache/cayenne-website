@@ -11,7 +11,7 @@
                 <span class="font-weight-xlight">with</span>
                 <span class="font-weight-semibold">character</span>
             </h1>
-            <p class="small  font-italic">Apache Cayenne™ is an open source persistence framework providing object-relational mapping (ORM) and remoting services</p>
+            <p class="small  font-italic">Apache Cayenne™ is an open source Java ORM (object-to-relational mapping) framework</p>
         </div>
         <div class="col-md  d-none">Video</div>
     </div>
