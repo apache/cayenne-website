@@ -1,6 +1,6 @@
-# cayenne.apache.org sources 
+# Apache Cayenne Website Sources 
 
-This is a new version of http://cayenne.apache.org 
+Contains sources of [Cayenne website](http://cayenne.apache.org).
 
 ## How To Run
 
