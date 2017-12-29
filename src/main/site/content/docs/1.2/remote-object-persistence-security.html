@@ -1,0 +1,33 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Remote Object Persistence Security
+url: /docs/1.2/remote-object-persistence-security.html
+layout: docs_legacy
+---
+
+	
+
+<H3><A name="RemoteObjectPersistenceSecurity-SecuringCayenneWebServiceAccess"></A>Securing Cayenne Web Service Access</H3>
+
+<UL>
+	<LI><A href="remote-object-persistence-tutorial-authentication.html" title="Remote Object Persistence Tutorial Authentication">Use HTTP(S) BASIC authentication</A> to authenticate the clients.</LI>
+	<LI>Explicitly check &quot;Not for Client Use&quot; for entities that should stay server-only.</LI>
+	<LI>Subclass <TT>org.objectstyle.cayenne.remote.hessian.service.HessianServlet</TT> for user-defined fine-grained access control.</LI>
+</UL>
+

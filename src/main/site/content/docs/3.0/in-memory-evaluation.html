@@ -1,0 +1,77 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: In-Memory Evaluation
+url: /docs/3.0/in-memory-evaluation.html
+layout: docs_legacy
+---
+
+	
+<P>In additions to providing a database-independent WHERE clause for SQL queries, expressions support in-memory evaluation. An expressions can be evaluated with any type of objects that follow Java Beans method naming convention. Of course this includes DataObjects. The following API is used for expressions evaluation:</P>
+
+<UL>
+	<LI>public Object <B>evaluate</B>(Object object)<BR>
+      Evaluates expression with object, returning the result.</LI>
+	<LI>public boolean <B>match</B>(Object object)<BR>
+      Returns true if an object &quot;matches&quot; expression criteria.</LI>
+	<LI>public java.util.List <B>filterObjects</B>(java.util.List objects)<BR>
+      Returns a list of objects from the original list that match expression criteria.</LI>
+</UL>
+
+
+<DIV class="panelMacro"><TABLE class="warningMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/forbidden.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Limitation of In-Memory Expressions</B><BR>Current limitation of in-memory expressions is that no collections are permitted in the object property path. In case of DataObjects that means that path containing to-many relationships may not work for in-memory evaluation.</TD></TR></TABLE></DIV>
+
+<P>Here is an example of evaluating expression with a single object:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">public</SPAN> class User <SPAN class="code-keyword">extends</SPAN> CayenneDataObject {
+     <SPAN class="code-keyword">public</SPAN> <SPAN class="code-object">String</SPAN> getName() {
+         ...
+     }
+}
+... 
+<SPAN class="code-keyword">public</SPAN> class NonPersistentUser <SPAN class="code-keyword">extends</SPAN> <SPAN class="code-object">Object</SPAN> {
+     <SPAN class="code-keyword">protected</SPAN> <SPAN class="code-object">String</SPAN> name;
+     <SPAN class="code-keyword">public</SPAN> <SPAN class="code-object">String</SPAN> getName() {
+         <SPAN class="code-keyword">return</SPAN> name;
+     }
+     ...
+}
+... 
+Expression exp = ExpressionFactory.inExp(<SPAN class="code-quote">&quot;name&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Object</SPAN>[] {<SPAN class="code-quote">&quot;John&quot;</SPAN>, <SPAN class="code-quote">&quot;Bob&quot;</SPAN>});  
+User persistentObject;
+NonPersistentUser nonPersistentBean;
+... 
+<SPAN class="code-comment">// evaluate with DataObject
+</SPAN><SPAN class="code-keyword">if</SPAN>(exp.match(persistentObject)) {
+    <SPAN class="code-comment">// <SPAN class="code-keyword">do</SPAN> something
+</SPAN>}
+
+<SPAN class="code-keyword">if</SPAN>(exp.match(nonPersistentBean)) {
+    <SPAN class="code-comment">// <SPAN class="code-keyword">do</SPAN> something <SPAN class="code-keyword">else</SPAN>
+</SPAN>}
+</PRE>
+</DIV></DIV>
+
+<P>Another example - using expression to filter a list objects:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">Expression exp = ExpressionFactory.likeExp(<SPAN class="code-quote">&quot;artistName&quot;</SPAN>, <SPAN class="code-quote">&quot;A%&quot;</SPAN>);  
+List startWithA = exp.filterObjects(artists);
+</PRE>
+</DIV></DIV>

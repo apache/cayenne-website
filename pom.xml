@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed to the Apache Software Foundation (ASF) under one
+	or more contributor license agreements.  See the NOTICE file
+	distributed with this work for additional information
+	regarding copyright ownership.  The ASF licenses this file
+	to you under the Apache License, Version 2.0 (the
+	"License"); you may not use this file except in compliance
+	with the License.  You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing,
+	software distributed under the License is distributed on an
+	"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+	KIND, either express or implied.  See the License for the
+	specific language governing permissions and limitations
+	under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.apache.cayenne.site</groupId>
+    <artifactId>cayenne-website</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>cayenne.apache.org website</name>
+    <description>Sources for http://cayenne.apache.org website</description>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <node.version>v8.9.1</node.version>
+        <yarn.version>v1.3.2</yarn.version>
+        <frontend.plugin.version>1.6</frontend.plugin.version>
+        <gulp.task>serve</gulp.task>
+        <!-- Host and port for dev mode, can be set via mvn (e.g. -Ddev.host="192.168.1.2" -Ddev.port=80) -->
+        <dev.host>localhost</dev.host>
+        <dev.port>3000</dev.port>
+    </properties>
+
+    <build>
+        <!-- dev version can be build by simple `mvn` command -->
+        <defaultGoal>clean package</defaultGoal>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>${frontend.plugin.version}</version>
+
+                <executions>
+                    <!-- check and install node and yarn -->
+                    <execution>
+                        <id>install node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- check and install project dependencies -->
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- launch gulp tasks execution -->
+                    <execution>
+                        <id>gulp</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>${gulp.task} --host ${dev.host} --port ${dev.port}</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <yarnVersion>${yarn.version}</yarnVersion>
+                    <workingDirectory>src/main/assets</workingDirectory>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!--
+    By default mvn will start gulp task dev build with live reload.
+    Use `mvn -Ppublish -Dmsg="commit message"` to build and publish production version of site.
+    -->
+    <profiles>
+        <profile>
+            <id>publish</id>
+            <properties>
+                <gulp.task>publish</gulp.task>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- Require commit message parameter -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>3.0.0-M1</version>
+                        <executions>
+                            <execution>
+                                <id>enforce-property</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireProperty>
+                                            <property>msg</property>
+                                            <message>Please specify a commit message for publishing the website (-Dmsg="...")</message>
+                                        </requireProperty>
+                                    </rules>
+                                    <fail>true</fail>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Push public content to "asf-site" branch -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-scm-publish-plugin</artifactId>
+                        <version>1.1</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <content>target/site/public</content>
+                            <checkinComment>${msg}</checkinComment>
+                            <pubScmUrl>scm:git:git@github.com:stariy95/cayenne-website-demo.git</pubScmUrl>
+                            <scmBranch>asf-site</scmBranch>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>publish-site</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>publish-scm</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

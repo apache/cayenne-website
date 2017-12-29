@@ -1,0 +1,52 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Setting DataMap Defaults
+url: /docs/3.0/setting-datamap-defaults.html
+layout: docs_legacy
+---
+
+	
+<H3><A name="SettingDataMapDefaults-SettingDataMapDefaults"></A>Setting DataMap Defaults</H3>
+
+<P>DataMap editing panel allows to define a number of default values for the entities in this map.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/datamap-defaults.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>Defaults are stored in the DataMap XML file and used in CayenneModeler to make entity creation/modification easier. The following defaults are supported:</P>
+<UL>
+	<LI><B>DB Schema.</B> Default schema for newly created DbEntities and Procedures. Clicking &quot;Update..&quot; button next to default schema will reset the schema of all existing DbEntities and Procedures to match the default.</LI>
+</UL>
+
+
+<UL>
+	<LI><B>Java Package.</B> Default package for newly created ObjEntities. When specified, newly created ObjEntities will be assigned a class name that is a combination of default package and initial entity name. Clicking &quot;Update..&quot; button next to default package will reset the package of the existing Java classes in the DataMap.</LI>
+</UL>
+
+
+<UL>
+	<LI><B>DataObject Superclass.</B> DataObject superclass allows to specify default superclass for the DataObject classes mapped via ObjEntities. Clicking &quot;Update..&quot; button next to DataObject superclass field will reset the superclass of all existing Java classes in the DataMap.</LI>
+</UL>
+
+
+<UL>
+	<LI><B>Optimistic Locking.</B> Default optimistic locking policy for ObjEntities. Clicking &quot;Update..&quot; button next to the optimistic locking checkbox will reset the optimistic locking policy of all existing ObjEntities to match the default.</LI>
+	<LI><B>Client Entities.</B> Allows you to specify remote persistence client classes. Clicking &quot;Update..&quot; button next to Client Java Package field will reset the client java package of all existing Java classes in the DataMap.
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Defaults are ignored in runtime</B><BR>Note that none of the defaults affect entities runtime behavior. For example if a DbEntity &quot;ARTIST&quot; has empty schema, and a DataMap defines a default schema to be &quot;SCHEMA1&quot;, Cayenne will assume that ARTIST entity does not use schema.</TD></TR></TABLE></DIV></LI>
+</UL>
+

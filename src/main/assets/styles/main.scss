@@ -1,0 +1,520 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+// MAIN
+
+// Theming Bootstrap v4 bet2
+// Bootstrap v4 bet2
+@import "../node_modules/bootstrap/scss/functions";
+@import "variables";
+
+// MIXINS
+@import "mixins/custom-font-face";
+@import "mixins/animation";
+
+// FONTS BASE FONT (with filename)
+@include customFontFace('montserrat', 'fonts/montserrat-extralight', 200);
+@include customFontFace('montserrat', 'fonts/montserrat-light', 300);
+@include customFontFace('montserrat', 'fonts/montserrat-regular', 400);
+@include customFontFace('montserrat', 'fonts/montserrat-italic', 400, italic);
+@include customFontFace('montserrat', 'fonts/montserrat-medium', 500);
+@include customFontFace('montserrat', 'fonts/montserrat-mediumitalic', 500, italic);
+@include customFontFace('montserrat', 'fonts/montserrat-semibold', 600);
+@include customFontFace('montserrat', 'fonts/montserrat-bold', 700);
+@include customFontFace('montserrat', 'fonts/montserrat-bolditalic', 700, italic);
+
+// FA ICONS
+@import "../node_modules/font-awesome/scss/font-awesome";
+@include customFontFace('fontawesome', 'fonts/fontawesome-webfont', 400);
+
+// Bootstrap v4 bet2
+//@import "../node_modules/bootstrap/scss/bootstrap";
+// this is for future, when we understand we can exclude
+ @import 'bootstrap-optimized';
+// Highlight.js
+@import '../node_modules/highlight.js/styles/github.css';
+// INNER PAGE
+@import "cd";
+
+
+//
+// [Extend] Text utilities
+//
+.font-weight-xlight  { font-weight: $font-weight-xlight !important; }
+.font-weight-medium { font-weight: $font-weight-medium !important; }
+.font-weight-semibold   { font-weight: $font-weight-semibold !important; }
+
+.font-size-1rem { font-size: 1rem; }
+
+//
+// [Extend] Border utilities
+//
+.round-corners {border-radius: 500px !important;}
+.bt { border-top: 1px solid $border-color !important;}
+.br { border-right: 1px solid $border-color !important;}
+.bl { border-left: 1px solid $border-color !important;}
+.bb { border-bottom: 1px solid $border-color !important;}
+
+//
+// [Extend] Sizing utilities
+// 
+	// max-width
+	.mw-50 { max-width: 50% !important; }
+	.mw-75 { max-width: 75% !important; }
+
+	.mw-500px { max-width: 500px !important; }
+	// max height
+	.mh-26px {max-height: 26px;}
+
+
+
+// Components	
+	// _breadcrumb.scss
+		// dark theme
+		.breadcrumb-dark,
+		.bg-dark.breadcrumb {
+			&.breadcrumb {
+				background-color: transparent;// $breadcrumb-dark-bg;
+			}
+
+			.breadcrumb-item {
+				+ .breadcrumb-item::before {
+					color: $breadcrumb-dark-divider-color;
+				}
+			}
+
+			.breadcrumb-item,
+			.breadcrumb-item > a {
+				color: $breadcrumb-dark-color;
+			}
+
+			.breadcrumb-item.active {
+				color: $breadcrumb-dark-active-color;
+			}
+
+			.breadcrumb-item > a {
+				@include hover-focus {
+					color: $breadcrumb-dark-hover-color;
+				}
+			}
+		}
+
+		// size `sm`
+		.breadcrumb-sm * {
+			font-size: $small-font-size;
+		}
+
+	// _type.scss
+		//
+		// Headings
+		//
+		h1, .h1 {
+			margin-bottom: 1em;
+		}
+
+		h4, h5, h6,
+		.h4, .h5, .h6 {
+		  	font-weight: $font-weight-normal;
+		}
+
+		//
+		// Emphasis
+		//
+
+		.xsmall {
+			font-size: $xsmall-font-size;
+		  	font-weight: inherit;
+		}
+
+	// _button.scss
+		// Button sizes
+		.btn-xlg {
+			@include button-size(.9rem, 4.3rem, 1.125rem, 1.6, 50px);
+			padding-bottom: .7rem;
+
+			@include media-breakpoint-down(xs) {
+				padding-left: 3rem;
+				padding-right: 3rem;
+			}
+		}
+
+	// _dropdown.scss
+    .dropdown-item {
+		font-weight: $font-weight-light;
+    }
+
+		// caret
+		.dropdown-toggle:after {
+			margin-left: 0.5em;
+			// vertical-align: middle;
+			top: .1em;
+			position: relative;
+		}
+
+	// _tables.scss
+		.table {
+
+			@include media-breakpoint-down(sm) {
+				th,
+				td {
+					padding: $table-cell-padding-sm;
+				}
+			}
+
+			thead th {
+				font-weight: $font-weight-medium;
+				border-bottom: (1 * $table-border-width) solid $table-border-color;
+			}
+		}
+
+
+// MAIN
+	body {
+		@include media-breakpoint-up(lg) {
+			padding-top: $topbar-navbar-height;
+		}
+	}
+
+	// COMPONENTS
+  	.solid-heading {
+  		display: flex;
+      	align-items: center;
+
+      	&:before,
+      	&:after {
+  			content: '';
+  			display: flex;
+  			flex-grow: 1;
+  			background: rgba($black,.1);
+  			height: 1px;
+      	}
+
+      	h1, h2, h3, h4, h5, h6,
+  		.h1, .h2, .h3, .h4, .h5, .h6  {
+  			margin-bottom: 0;
+  		}
+  	}
+
+	
+	// TYPE
+    // RESPONSIVE TYPOGRAPHY
+    @include media-breakpoint-down(xs) {
+		html {
+			font-size: .8rem;
+		}
+
+		h1 {
+			font-size: $font-size-base * 2.8;
+		}
+    }
+
+    // LINKS
+		a {
+			@include addAnimation(all, .1s, linear);
+		}
+
+		a, button {
+			outline: 0 !important;
+		}
+	
+		// LISTS
+			article {
+
+				// Lists general
+				li {
+					position: relative;
+			    	margin-bottom: .5em; //.675
+					list-style: none inside;
+				}
+
+				// UL `black circle`
+				ul {
+					padding: 0 0 0 2.5em;
+					// margin-bottom: 0;
+
+					li:before {
+						counter-increment: term;
+						content: '\25CF';
+
+						color: rgba(#000, .5); //$body-color;
+
+						width: 2em;
+						margin-right: .5em;
+						margin-left: -2.5em;
+						text-align: center;
+
+						// Adjust
+						font-size: .8em;
+						float: left;
+						padding-top: .2em;
+					}
+				}
+
+				// OL LIST `numbers`
+				ol {
+					counter-reset: term;
+					padding: 0 0 0 2.5em;
+					margin-bottom: 0;
+
+					li:before {
+						counter-increment: term;
+		   				content: " ." counter(term);
+
+						font-weight: $font-weight-normal;
+						color: $body-color;
+
+						float: left; // display: inline-block; - works only for text content, any other element e.g. <p>, <div> or 
+												 // or whatever will break layout, so we need to wrest :before-el from context
+
+						width: 2em;
+						margin-right: .5em;
+						margin-left: -2.5em;
+						text-align: center;
+						direction: rtl;
+					}
+				}
+
+				// Dates
+				.list-dates li:before {
+					content: attr(data-date);
+					direction: rtl;
+					text-align: right;
+				}
+			}
+
+			footer ul {
+				line-height: 2rem;
+			}
+
+			.list-multiline-items li {
+				line-height: 1.5;
+				display: inline-block;
+				width: 100%;
+				margin-bottom: .4rem;
+				margin-top: .4rem;
+
+				time {
+					line-height: 1.25;
+				}
+			}
+
+		// PRE, CODE
+			// from hljs
+			pre:not(.highlight) {
+				display: block;
+				overflow-x: auto;
+				padding: .5em;
+				margin-top: 0;
+				margin-bottom: 1rem;
+
+				color: #333;
+				background: #f8f8f8 !important; // for some of news(? /2015/03/cayenne-40m2-released.html)
+				
+				color: #212529;
+				font-size: 90%;
+			}
+
+
+	// NAV
+		.page-header {
+			@include media-breakpoint-up(lg) {
+				position: fixed;
+				width: 100%;
+				top: 0;
+				z-index: $zindex-navbars;
+			}
+		}
+
+		// TOPBAR
+		#topbar .breadcrumb {
+			padding-top: $topbar-nav-pt; 			//.375rem; //6px;
+			padding-bottom: $topbar-nav-pb; 	//.125rem; //2px; 
+		}
+
+		// NAVBAR
+		.navbar-brand {
+			margin-right: 3rem;
+		}
+
+		#mainMenu .nav-link {
+			text-transform: uppercase;
+			font-weight: 400;
+			letter-spacing: 0.025em;
+
+			padding-top: .7rem;
+			padding-bottom: .3rem;
+			
+			@include media-breakpoint-down(md) { 
+				text-align: center;
+			}
+		}
+
+		@include media-breakpoint-up(lg) { 
+			.navbar-expand-lg .navbar-nav .nav-link {
+			    padding-right: 1rem;
+			    padding-left: 1rem;
+			}
+		}
+		@include media-breakpoint-up(xl) { 
+			.navbar-expand-lg .navbar-nav .nav-link {
+			    padding-right: 1.4rem;
+			    padding-left: 1.4rem;
+			}
+		}
+		
+		// SOCIAL LINKS
+		#social-links-menu .nav-link {
+			padding-right: .5rem;
+			padding-left: .5rem;
+
+			color: $white;
+			opacity: .5;
+			
+			@include hover-focus {
+				opacity: .8;
+			}
+
+			img {
+		    max-height: 27px;
+			}
+		}
+
+		// PILLS
+		.nav-pills {
+			overflow-y: auto;
+
+			.nav-link {
+				color: $headings-color;
+				font-weight: $display4-weight;
+				line-height: 1.4;
+				padding: 1rem;
+
+				@include media-breakpoint-down(xs) {
+					padding-left: 1rem;
+					padding-right: 1rem;
+				}
+			}
+		}
+
+    // TABS
+	.nav-tabs {
+		.nav-link {
+			color: #777;
+			border-width: 0 0 1px;
+		}
+
+		.nav-link.active,
+		.nav-item.show .nav-link {
+			color: #444;
+			border-width: 0 0 2px;
+			border-color: #dc5656;
+		}
+	}
+
+
+	// FOOTER
+		footer {
+			h1, h2, h3, h4, h5, h6,
+			.h1, .h2, .h3, .h4, .h5, .h6 {
+				margin-top: .8rem;
+				margin-bottom: 1.3rem;
+			}
+			
+			.symbol {
+				font-size: 18px;
+				margin-left: 1rem;
+				// vertical-align: middle;
+				// display: inline-block;
+			}
+
+			.fa-lg.fa-long-arrow-right {
+				transform: scale(.7);
+				margin-left: .6rem;
+				line-height:  .6em;
+			}
+		}
+
+		// Layout
+		.footer-nav .row [class^='col'] {
+			padding-bottom: 2rem;
+		}
+
+		$footer-nav-gutter-width: 74px;
+		@include media-breakpoint-up(lg) { 
+			.footer-nav {
+			overflow: hidden;
+			// padding-right: $footer-nav-gutter-width / 2;
+			// padding-left: $footer-nav-gutter-width / 2;
+
+				.row {
+					margin-left: ($footer-nav-gutter-width / -2);
+					margin-right: ($footer-nav-gutter-width / -2);
+				}
+
+				[class^='col'] {
+					padding-right: $footer-nav-gutter-width / 2;
+					padding-left: $footer-nav-gutter-width / 2;
+				}
+			}
+		}
+
+		// Dark theme
+		footer.bg-dark {
+			h1, h2, h3, h4, h5, h6,
+			.h1, .h2, .h3, .h4, .h5, .h6 {
+				color: rgba($white, .85);
+			}
+
+			a:not(.btn):not(.btn-link) {
+			    color: rgba($white, .6);
+
+			    @include hover-focus {
+					color: rgba($white, .9);	    	
+			    }
+			}
+
+			hr {
+				border-top-color: rgba($white, .05);
+			}
+
+			p {
+				color: rgba($white, .6);
+			}
+
+			time {
+				color: rgba($white, .35);
+			}
+
+			.copy {
+				color: rgba($white, .2);
+
+				a {
+					color: rgba($white, .35) !important;	
+
+					@include hover-focus {
+						color: rgba($white, .5) !important;
+					}
+				}
+
+				img {
+					opacity: .15;
+				}
+			}
+		}
+

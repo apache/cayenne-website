@@ -1,0 +1,48 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Generate Java Classes
+url: /docs/2.0/generate-java-classes.html
+layout: docs_legacy
+---
+
+	
+
+<P>First we'd like to mention an alternative way of generating classes from the model, that can save time in many situtations compared to using the GUI: <A href="cgen.html" title="cgen">cgen Ant task</A> would automatically refresh generated classes when needed during the build.</P>
+
+<P>To generate classes from the Modeler, you must select either a DataMap or an ObjEntity in the project tree and then select <TT>&quot;Tools &gt; Generate Classes&quot;</TT> from the menu. A &quot;Code Generation&quot; dialog opens:</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/2.0/images/generator1.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>It has two tabs - &quot;Code Generator&quot; for setting generator parameters, and &quot;Entities&quot; for entity selection. If you had an ObjEntity selected prior to opening the dialog, only this entity will be selected. Otherwise all entities that do not have validation failures will be selected. Users of course can change the selection to run generator for an arbitrary subset of entities.</P>
+
+<P>Generator provides three modes of operation that can be chosen from the &quot;Type:&quot; dropdown. </P>
+
+<H3><A name="GenerateJavaClasses-%22StandardPersistentObjects%22GenerationMode"></A>&quot;Standard Persistent Objects&quot; Generation Mode</H3>
+
+<P>The first type, shown above, is &quot;Standard Persistent Objects&quot; - it will generate class pairs (&quot;auto&quot; superclass, and an empty subclass that can be later customized by users). All you need is to select a root directory of your source code (nested package subdirectories will be created automatically), and check that the default superclass package is what you want. If you previously set a Java package for the DataMap, the default superclass package will appen &quot;.auto&quot; to that package name</P>
+
+<H3><A name="GenerateJavaClasses-%22ClientPersistentObjects%22GenerationMode"></A>&quot;Client Persistent Objects&quot; Generation Mode</H3>
+
+<P>&quot;Client Persistent Objects&quot; type is not much different from the standard objects type. The main difference is that it uses a template appropriate for the client classes for applications using <A href="remote-object-persistence-guide.html" title="Remote Object Persistence Guide">remote object persistence</A>. Default entity selection is also different - only entities that are allowed to be used on the client are preselected.</P>
+
+<H3><A name="GenerateJavaClasses-%22Advanced%22GeneratonMode"></A>&quot;Advanced&quot; Generaton Mode</H3>
+
+<P>As the name implies this mode allows much more customization of the generation procedure, such as custom Velocity templates (that are configured in Modeler Preferences), single run per entity or single run for the entire DataMap, etc. The options available in the dialog closely mirror those of the <A href="cgen.html" title="cgen">cgen</A> Ant task.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/2.0/images/generator2.jpg" style="border: 0px solid black"></SPAN></P>

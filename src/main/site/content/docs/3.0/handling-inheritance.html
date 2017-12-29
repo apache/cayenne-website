@@ -1,0 +1,79 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Handling Inheritance
+url: /docs/3.0/handling-inheritance.html
+layout: docs_legacy
+---
+
+	<P>&quot;Inheritance&quot; is an Object Oriented concept absent in traditional RDBMS. Cayenne however allows to map a hierarchical class tree to a single base table (so called &quot;single table inheritance&quot;). Such mapping is described in detail in the <A href="modeling-single-table-inheritance.html" title="Modeling Single Table Inheritance">Modeler Guide</A>. The idea of single table inheritance is that a &quot;class&quot; of a database row is determined from the values in one or more columns of the base table. These columns are called &quot;class designator columns&quot;.</P>
+
+<H3><A name="HandlingInheritance-InheritanceandnewDataObjects"></A>Inheritance and new DataObjects</H3>
+<P>Consider the following class hierarchy (also used in the Modeler Guide example):<BR>
+<SPAN class="image-wrap" style=""><img src="/docs/3.0/images/inheritance-diagram.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>If a class designator column is &quot;PERSON_TYPE&quot;, AbstractPerson class should define an attribute (for instance called &quot;personType&quot;) that maps to PERSON_TYPE. This attribute is redundant and meanigless in Java, since person type is defined already by the Java class of the object, however we still have to keep it around so that when the new objects are saved, correct PERSON_TYPE data is stored in the database. </P>
+
+<P>Cayenne 3.0 has an ability to inject values of designator columns in new objects automatically. In the example above, if ObjEntity Employee has declared qualifier &quot;personType='EMPLOYEE'&quot;, a new Employee instance, created using &quot;context.newObject(Employee.class)&quot; will already have a personType attribute set to &quot;EMPLOYEE&quot;.</P>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Auto-Injection Limitations</B><BR>The mechanism of injecting values of class designator columns currently supports qualifiers of form &quot;attr=value [AND attr=value]*&quot;. Thus, flattened paths, db-paths and other than equality comparisons are not supported. Cayenne will try inject as much as possible, e.g. if ObjEntity &quot;GoodEmployee&quot; has qualifier &quot;personType='EMPLOYEE' and salary&gt;10000&quot;, only personType attribute value will be injected.</TD></TR></TABLE></DIV>
+
+<P>Whenever manual injecting is required, it is a good practice to perform such operations <A href="lifecycle-callbacks.html" title="Lifecycle Callbacks">in PrePersist lifecycle listeners or callbacks</A></P>
+
+
+<H3><A name="HandlingInheritance-InheritanceandSelectQueries"></A>Inheritance and SelectQueries</H3>
+<P>When performing SelectQuery on a table that maps to inheritance hierarchy, Cayenne will only return rows that belong to root class of the query and all its subclasses. No superclasses or objects from parallel inheritance branches will be returned. For example executing a SelectQuery with Employee class as root will potentially return a mix of Employees and Managers (who are also Employees of course), but no CustomerContact objects:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DataContext context;
+...
+SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Employee.class);
+List employees = context.performQuery(query);
+ 
+<SPAN class="code-comment">// employees list will contain <SPAN class="code-quote">&quot;regular&quot;</SPAN> employees and managers
+</SPAN>Iterator it = employees.iterator();
+<SPAN class="code-keyword">while</SPAN>(it.hasNext()) {
+   Employee e = (Employee) it.next();
+   <SPAN class="code-keyword">if</SPAN>(e <SPAN class="code-keyword">instanceof</SPAN> Manager) {
+   	<SPAN class="code-comment">// <SPAN class="code-keyword">do</SPAN> something with manager...
+</SPAN>   }
+}
+</PRE>
+</DIV></DIV>
+
+<P>The need to determine the correct class for each fetched database row makes queries on entities that use inheritance less efficient than the regular queries. If an application doesn't care about the query root class subclasses, the query can be optimized by explicitly turning off inheritance resolution. If this is done, the example above will return all Managers as instances of Employee class, not Manager class:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DataContext context;
+...
+SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Employee.class);
+ 
+<SPAN class="code-comment">// *** explicitly turn off inheritance resolution
+</SPAN>query.setResolvingInherited(<SPAN class="code-keyword">false</SPAN>);
+ 
+List employees = context.performQuery(query);
+ 
+<SPAN class="code-comment">// employees list will contain no Manager instances...
+</SPAN><SPAN class="code-comment">// all Managers will be returned as regular Employees</SPAN>
+</PRE>
+</DIV></DIV>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Whenever an object is obtained via a relationship, it is always fully resolved to the lowest possible subclass in an entity inheritance tree.</TD></TR></TABLE></DIV>
+
+<DIV class="panelMacro"><TABLE class="warningMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/forbidden.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Use <TT>setResolvingInherited(false)</TT> with caution, and only if you never plan to work with subclasses. The downside of it is that the DataContext may end up with two objects pointing to the same database row, thus violating uniquing principle. With the above example, this may happen if at a later time user decides to fetch Managers directly, or if a Manager object is obtained via a relationship.</TD></TR></TABLE></DIV>

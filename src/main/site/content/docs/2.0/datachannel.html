@@ -1,0 +1,47 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: DataChannel
+url: /docs/2.0/datachannel.html
+layout: docs_legacy
+---
+
+	
+<P><TT>&quot;org.apache.cayenne.DataChannel&quot;</TT> is an abstraction of Cayenne persistence stack. It is very simple - it defines only 4 methods, two for actually performing persistent operations, one to access metadata, and one - to access EventManager:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeHeader panelHeader" style="border-bottom-width: 1px;"><B>DataChannel.java</B></DIV><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">public</SPAN> <SPAN class="code-keyword">interface</SPAN> DataChannel {
+
+    QueryResponse onQuery(ObjectContext originatingContext, Query query);
+
+    GraphDiff onSync(ObjectContext originatingContext, GraphDiff changes, <SPAN class="code-object">int</SPAN> syncType);
+
+    EventManager getEventManager();
+
+    EntityResolver getEntityResolver();
+}</PRE>
+</DIV></DIV>
+
+<P>DataChannel is rarely used by the application directly. Instead ObjectContexts use it internally as an abstract persistent store. There are few kinds of DataChannels in Cayenne:</P>
+
+<UL>
+	<LI>DataDomain (the most commonly used DataChannel) connects to one or more databases via DataNodes.</LI>
+	<LI>DataContext can serve as a DataChannel for other DataContexts</LI>
+	<LI>ClientChannel is a DataChannel that connects to a remote Cayenne service.</LI>
+</UL>
+

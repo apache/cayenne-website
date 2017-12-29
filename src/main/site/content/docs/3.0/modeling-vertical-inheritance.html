@@ -1,0 +1,38 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Modeling Vertical Inheritance
+url: /docs/3.0/modeling-vertical-inheritance.html
+layout: docs_legacy
+---
+
+	<H2><A name="ModelingVerticalInheritance-ModelingVerticalInheritance"></A>Modeling Vertical Inheritance</H2>
+
+<P>Continuing with the example used for <A href="modeling-single-table-inheritance.html" title="Modeling Single Table Inheritance">single table mapping</A>, let's re-map it as vertical inheritance.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/vertical-inheritance.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Note that in Cayenne <B>vertical</B> is essentially <B>single table with flattened attributes in subclasses</B>. We'll demonstrate this below.</P>
+
+<P>We need to start by mapping all 3 tables, and creating 1..1 relationship between BOOK and subclass tables (&quot;To Dep PK&quot; must be checked on BOOK side of relationships).</P>
+
+<P>On the ObjEntity end, there is no difference in mapping qualifier (it is needed), superclass, root table (&quot;Table/View&quot; for subclasses is still &quot;BOOK&quot;). The only difference is that subclass-specific attributes are mapped as &quot;flattened attributes&quot;:</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/flattened_attribute.png" style="border: 0px solid black"></SPAN></P>
+
+<BLOCKQUOTE><P>Note that flattened attributes can be used with or without inheritance, however in combination with single-table inheritance mapping, they give us &quot;vertical&quot; inheritance.</P></BLOCKQUOTE>

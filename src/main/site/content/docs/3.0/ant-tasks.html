@@ -1,0 +1,70 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Ant Tasks
+url: /docs/3.0/ant-tasks.html
+layout: docs_legacy
+---
+
+	<H2><A name="AntTasks-Anttasks"></A>Ant tasks</H2>
+
+<P>Cayenne ships with Ant tasks that provide Ant frontend to a number of useful operations in Cayenne.  These tasks are part of the cayenne-tools JAR. The following tasks are included:</P>
+
+<UL>
+	<LI><B><A href="cgen.html" title="cgen">cgen</A></B> - Java class generator</LI>
+	<LI><B><A href="cdbgen.html" title="cdbgen">cdbgen</A></B> - Database schema generator</LI>
+	<LI><B><A href="cdeploy.html" title="cdeploy">cdeploy</A></B> - Deployment configurator <EM>(deprecated; will be removed after 3.0)</EM></LI>
+	<LI><B><A href="cdataport.html" title="cdataport">cdataport</A></B> - Data porting tool.</LI>
+	<LI><B><A href="cdbimport.html" title="cdbimport">cdbimport</A></B> - Database schema importer.</LI>
+</UL>
+
+
+<H3><A name="AntTasks-ImportingCayenneTasksinbuild.xml"></A>Importing Cayenne Tasks in build.xml</H3>
+
+<P>All Cayenne tasks above can be imported at once with &quot;typedef&quot;. First a user needs to define Classpath structure to include cayenne-tools and a few depdendencies. Here they are shown relative to the Cayenne distro folder. In a real project they may be copied to the appropriate project folders and referenced accordingly:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml">
+<SPAN class="code-tag">&lt;path id=<SPAN class="code-quote">&quot;classpath&quot;</SPAN>&gt;</SPAN>
+   <SPAN class="code-tag">&lt;fileset dir=<SPAN class="code-quote">&quot;lib&quot;</SPAN> &gt;</SPAN>
+      <SPAN class="code-tag">&lt;include name=<SPAN class="code-quote">&quot;cayenne-tools-X.X.jar&quot;</SPAN> /&gt;</SPAN>
+      <SPAN class="code-tag">&lt;include name=<SPAN class="code-quote">&quot;cayenne-server-X.X.jar&quot;</SPAN> /&gt;</SPAN>
+      <SPAN class="code-tag">&lt;include name=<SPAN class="code-quote">&quot;third-party/vpp-2.2.1.jar&quot;</SPAN> /&gt;</SPAN>
+   <SPAN class="code-tag">&lt;/fileset&gt;</SPAN>
+<SPAN class="code-tag">&lt;/path&gt;</SPAN></PRE>
+</DIV></DIV>
+
+<P>And then import all tasks with &quot;typedef&quot;, referencing Antlib descriptor in Cayenne:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml"><SPAN class="code-tag">&lt;typedef resource=<SPAN class="code-quote">&quot;org/apache/cayenne/tools/antlib.xml&quot;</SPAN>&gt;</SPAN> 
+   <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;classpath&quot;</SPAN>/&gt;</SPAN> 
+<SPAN class="code-tag">&lt;/typedef&gt;</SPAN></PRE>
+</DIV></DIV>
+
+<H3><A name="AntTasks-Sections"></A>Sections</H3>
+
+<OL>
+	<LI><A href="cgen.html" title="cgen">cgen</A></LI>
+	<LI><A href="cdbgen.html" title="cdbgen">cdbgen</A></LI>
+	<LI><A href="cdeploy.html" title="cdeploy">cdeploy</A></LI>
+	<LI><A href="cdataport.html" title="cdataport">cdataport</A></LI>
+	<LI><A href="cdbimport.html" title="cdbimport">cdbimport</A></LI>
+</OL>
+
+

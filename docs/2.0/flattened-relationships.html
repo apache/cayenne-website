@@ -1,6 +1,0 @@
-Title: Flattened Relationships
-
-	
-
-<P>Flattened relationships represent relationship between two types of DataObjects that is not direct in the underlying relational storage. Instead it is mapped across one or more &quot;join&quot; tables. Still from the application point of view there is no diffrence in working with flattened relationships compared to the &quot;normal&quot; ones. Cayenne internally figures out how to build the needed query joins to retrieve related objects. On adding or removing an object to/from a flattened relationship via a corresponding &quot;addTo...&quot; / &quot;removeFrom...&quot; method an appropriate join record is created or removed.</P>
-<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cayenne.apache.org/docs/2.0/images/icons/emoticons/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Flattened Relationships Limitations</B><BR>Currently only many-to-many flattened relatationships with a single join table can be modified. All other types of flattened relationships can be used as &quot;read-only&quot;. This is reflected in the DataObject code generated for such relationships - no set/addTo/RemoveFrom methods are created for read-only relationships.</TD></TR></TABLE></DIV>

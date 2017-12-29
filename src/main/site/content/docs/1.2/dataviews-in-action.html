@@ -1,0 +1,77 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: DataViews in Action
+url: /docs/1.2/dataviews-in-action.html
+layout: docs_legacy
+---
+
+	
+
+<P>Here we illustrate the discussion of DataViews with configuration samples and code snippets. Cayenne project DTD file supports references to data view configuration files. This information is loaded into the Cayenne Configuration instance along with the DataDomain, DataNode, and DataMap entries. Since the DataView functionality is optional and would not be very useful in some deployment scenarios (server-side applications) the DataView configiuration itself is not loaded at the time of initialization. Neither DataView instances are created by the configuration process. A DataView can be created in a Swing application with the code similar to the following:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-comment">//Assume, <SPAN class="code-keyword">this</SPAN> is your Cayenne Configuration instance.
+</SPAN>Configuration cayenneConfiguration = ...;
+
+<SPAN class="code-comment">//You will need to setup a Cayenne EntityResolver in your DataView
+</SPAN><SPAN class="code-comment">//For example you can retrieve it from the DataContext in use
+</SPAN><SPAN class="code-comment">//with dataContext.getEntityResolver();
+</SPAN><SPAN class="code-comment">//or construct your own composite one, spanning several Data Domains.
+</SPAN>EntityResolver entityResolver = ...;
+
+<SPAN class="code-comment">//Create <SPAN class="code-keyword">new</SPAN> DataView instance, and set its entityResolver
+</SPAN><SPAN class="code-comment">//*before* loading the actual configuration
+</SPAN>DataView dataView = <SPAN class="code-keyword">new</SPAN> DataView();
+dataView.setEntityResolver(entityResolver);
+
+<SPAN class="code-comment">//Load the configuration
+</SPAN>cayenneConfiguration.loadDataView(dataView);
+
+<SPAN class="code-comment">//Here we go. Our Data View is ready to be used in the application
+</SPAN><SPAN class="code-comment">//This way you can create several of them, completely separated <SPAN class="code-keyword">if</SPAN> needed.</SPAN>
+</PRE>
+</DIV></DIV>     
+
+<P>It is worth mentioning one instance of DataView serves to incorporate several Data View configurations saved in different files. Therefore it defines single namespace and easily resolves inter-configuration references among the ObjEntityViews</P>
+
+<P>Next, let us see how a Swing table model and JTable can be configured with our Data View to display and edit a list of data objects.</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataView dataView = ...;
+
+JTable featureTable = ...;
+ObjEntityView featureView = dataView.getObjEntityView(<SPAN class="code-quote">&quot;ProductFeatureView&quot;</SPAN>);
+
+<SPAN class="code-comment">// This is a descendant of javax.swing.table.AbstractTableModel
+</SPAN>DOTableModel tableModel = <SPAN class="code-keyword">new</SPAN> DOTableModel();
+tableModel.setView(featureView);
+
+<SPAN class="code-comment">// Retrieve a list of data objects (with SelectQuery, say)
+</SPAN><SPAN class="code-comment">// and initialize the model with it
+</SPAN>DataObjectList featureDataObjects = ...;
+tableModel.setDataObjects(matrixEntries);
+
+featureTable.setModel(tableModel);
+
+<SPAN class="code-comment">// set the apropriate TableCellRenderers and Editors
+</SPAN><SPAN class="code-keyword">new</SPAN> CellRenderers().installRenderers(featureTable);
+<SPAN class="code-keyword">new</SPAN> CellEditors().installEditors(featureTable);
+</PRE>
+</DIV></DIV>  
+
+<P>In fact, there is many more cool things you could do with DataViews to build your Cayenne enabled Swing rich client faster and cleaner, and separate the GUI related stuff from your domain logic defining the clear declarative rules telling the framework how to interprete, render, and edit the ObjEntities and DataObjects your application relies upon. </P>

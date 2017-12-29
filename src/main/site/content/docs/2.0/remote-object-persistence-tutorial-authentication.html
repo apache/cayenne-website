@@ -1,0 +1,167 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Remote Object Persistence Tutorial Authentication
+url: /docs/2.0/remote-object-persistence-tutorial-authentication.html
+layout: docs_legacy
+---
+
+	
+<P>You probably don't want everybody in the world to connect to your service and access (and update!) arbitrary data. The first step in securing Cayenne service is implementing client authentication. The easiest way to do it is to delegate the authentication task to the web container that is running the service. HessianConnection used in the <A href="remote-object-persistence-tutorial-client-code.html" title="Remote Object Persistence Tutorial Client Code">previous chapter</A> supports such authentication on the client side.</P>
+
+<H3><A name="RemoteObjectPersistenceTutorialAuthentication-ConfiguringJettyLauncher"></A>Configuring JettyLauncher</H3>
+
+<P>First we need to setup support for BASIC authentication in Jetty. </P>
+
+<UL>
+	<LI>In <TT>cayenne-tutorial</TT> project folder create a file called <TT>&quot;jetty-realm.properties&quot;</TT> with the following line of text:</LI>
+</UL>
+
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>cayenne-user: secret,cayenne-service-user</PRE>
+</DIV></DIV>
+
+<P>This file will store our user database. In each line the first word is a user name, the second - password, the rest are the roles of this user. So we've created a single user with login id &quot;cayenne-user&quot;, password &quot;secret&quot; and &quot;cayenne-service-user&quot; role.</P>
+
+<UL>
+	<LI>In the same folder create another file called &quot;jetty-run-config.xml&quot; with the following contents:</LI>
+</UL>
+
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeHeader panelHeader" style="border-bottom-width: 1px;"><B>jetty-run-config.xml</B></DIV><DIV class="codeContent panelContent">
+<PRE class="code-java">&lt;?xml version=<SPAN class="code-quote">&quot;1.0&quot;</SPAN>  encoding=<SPAN class="code-quote">&quot;UTF-8&quot;</SPAN>?&gt;
+&lt;!DOCTYPE Configure PUBLIC <SPAN class="code-quote">&quot;-<SPAN class="code-comment">//Mort Bay Consulting//DTD Configure//EN&quot;</SPAN> <SPAN class="code-quote">&quot;http://jetty.mortbay.org/configure.dtd&quot;</SPAN>&gt;
+</SPAN>
+&lt;Configure class=<SPAN class="code-quote">&quot;org.mortbay.jetty.Server&quot;</SPAN>&gt;
+
+    &lt;Call name=<SPAN class="code-quote">&quot;addListener&quot;</SPAN>&gt;
+        &lt;Arg&gt;
+            &lt;New class=<SPAN class="code-quote">&quot;org.mortbay.http.SocketListener&quot;</SPAN>&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;Port&quot;</SPAN>&gt;&lt;SystemProperty name=<SPAN class="code-quote">&quot;jetty.port&quot;</SPAN> <SPAN class="code-keyword">default</SPAN>=<SPAN class="code-quote">&quot;8080&quot;</SPAN>/&gt;
+                &lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;MinThreads&quot;</SPAN>&gt;2&lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;MaxThreads&quot;</SPAN>&gt;100&lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;MaxIdleTimeMs&quot;</SPAN>&gt;30000&lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;LowResourcePersistTimeMs&quot;</SPAN>&gt;5000&lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;PoolName&quot;</SPAN>&gt;Listener&lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;ConfidentialPort&quot;</SPAN>&gt;8443&lt;/Set&gt;
+                &lt;Set name=<SPAN class="code-quote">&quot;IntegralPort&quot;</SPAN>&gt;8443&lt;/Set&gt;
+            &lt;/New&gt;
+        &lt;/Arg&gt;
+    &lt;/Call&gt;
+
+    &lt;Set name=<SPAN class="code-quote">&quot;WebApplicationConfigurationClassNames&quot;</SPAN>&gt;
+        &lt;Array type=<SPAN class="code-quote">&quot;java.lang.<SPAN class="code-object">String</SPAN>&quot;</SPAN>&gt;
+            &lt;Item&gt;org.mortbay.jetty.servlet.XMLConfiguration&lt;/Item&gt;
+        &lt;/Array&gt;
+    &lt;/Set&gt;
+	
+    &lt;Call name=<SPAN class="code-quote">&quot;addRealm&quot;</SPAN>&gt;
+        &lt;Arg&gt;
+            &lt;New class=<SPAN class="code-quote">&quot;org.mortbay.http.HashUserRealm&quot;</SPAN>&gt;
+                &lt;Arg&gt;Cayenne Realm&lt;/Arg&gt;
+                &lt;Arg&gt;&lt;SystemProperty name=<SPAN class="code-quote">&quot;user.dir&quot;</SPAN> <SPAN class="code-keyword">default</SPAN>=<SPAN class="code-quote">&quot;.&quot;</SPAN>/&gt;/jetty-realm.properties&lt;/Arg&gt;
+            &lt;/New&gt;
+        &lt;/Arg&gt;
+    &lt;/Call&gt;
+
+    &lt;Call name=<SPAN class="code-quote">&quot;addWebApplication&quot;</SPAN>&gt;
+        &lt;Arg&gt;/&lt;/Arg&gt;
+        &lt;Arg&gt;webapp&lt;/Arg&gt;
+    &lt;/Call&gt;
+&lt;/Configure&gt;</PRE>
+</DIV></DIV>
+
+<P>This file is a Jetty-specific descriptor that emulates your existing JettyLauncher setup with one extra twist - an authentication realm.</P>
+
+<UL>
+	<LI>In Eclipse go to <TT>&quot;Run &gt; Run...&quot;</TT> and select &quot;cayenne-tutorial&quot; Jetty configuration.</LI>
+	<LI>Select a &quot;Use a Jetty XML Configuration File&quot; radio button and navigate to &quot;jetty-run-config.xml&quot; file that we just created:</LI>
+</UL>
+
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/2.0/images/custom-jetty.jpg" style="border: 0px solid black"></SPAN></P>
+
+<UL>
+	<LI>Click &quot;Apply&quot; and close the dialog.</LI>
+</UL>
+
+
+<P>As you may have guessed the procedure above is Jetty-specific and will be different on other servers (such as Tomcat) or with other authentication mechanisms (such as database realms).</P>
+
+<H3><A name="RemoteObjectPersistenceTutorialAuthentication-ConfiguringSecurityConstraints"></A>Configuring Security Constraints</H3>
+
+<UL>
+	<LI>open <TT>web.xml</TT> and add security constraints for the web service, just like you would do in a normal web application. The following XML has to be added just before 	the closing &quot;web-app&quot; tag:</LI>
+</UL>
+
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeHeader panelHeader" style="border-bottom-width: 1px;"><B>&quot;web.xml&quot;</B></DIV><DIV class="codeContent panelContent">
+<PRE class="code-java">    
+    &lt;security-constraint&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;CayenneService&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;/cayenne-service&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;auth-constraint&gt;
+            &lt;role-name&gt;cayenne-service-user&lt;/role-name&gt;
+        &lt;/auth-constraint&gt;
+    &lt;/security-constraint&gt;
+    
+    &lt;login-config&gt;
+        &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+        &lt;realm-name&gt;Cayenne Realm&lt;/realm-name&gt;
+    &lt;/login-config&gt;
+	
+    &lt;security-role&gt;
+        &lt;role-name&gt;cayenne-service-user&lt;/role-name&gt;
+    &lt;/security-role&gt;</PRE>
+</DIV></DIV>
+
+<UL>
+	<LI>Save the file, shut down and restart the server and try to run the client. This time you should get an exception similar to this one:</LI>
+</UL>
+
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>Exception in thread &quot;main&quot; org.apache.cayenne.CayenneRuntimeException: [v.2.0.1 September 23 2006] Error establishing remote session. URL - http://localhost:8080/cayenne-service
+	at org.apache.cayenne.remote.hessian.HessianConnection.connect(HessianConnection.java:257)
+	at org.apache.cayenne.remote.hessian.HessianConnection.getServerEventBridge(HessianConnection.java:147)
+	at org.apache.cayenne.remote.ClientChannel.setupRemoteChannelListener(ClientChannel.java:254)
+	at org.apache.cayenne.remote.ClientChannel.&lt;init&gt;(ClientChannel.java:115)
+	at org.apache.cayenne.remote.ClientChannel.&lt;init&gt;(ClientChannel.java:105)
+	at org.apache.cayenne.remote.ClientChannel.&lt;init&gt;(ClientChannel.java:101)</PRE>
+</DIV></DIV>
+
+<UL>
+	<LI>Go to the client Main class, and change the line that creates ClientConnection to take user name and password:</LI>
+</UL>
+
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeHeader panelHeader" style="border-bottom-width: 1px;"><B>Main.java</B></DIV><DIV class="codeContent panelContent">
+<PRE class="code-java">ClientConnection connection = <SPAN class="code-keyword">new</SPAN> HessianConnection(<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//localhost:8080/cayenne-service&quot;</SPAN>, 
+</SPAN>   <SPAN class="code-quote">&quot;cayenne-user&quot;</SPAN>,
+   <SPAN class="code-quote">&quot;secret&quot;</SPAN>, 
+   <SPAN class="code-keyword">null</SPAN>);</PRE>
+</DIV></DIV>
+
+<P>Now if you start the client again, it should successfully connect to the server and print the output similar to what <A href="remote-object-persistence-tutorial-client-code.html" title="Remote Object Persistence Tutorial Client Code">we've seen before</A>. Of course in a real application you might want secure the autentication with SSL. The technique above still applies, but you'll need to do some setup on the server. Consult your server documentation on how to enable HTTPS. On the client you would simply replace &quot;http://&quot; with &quot;https://&quot; in the server URL.</P>
+
+<P>You are done with the tutorial!</P>
+

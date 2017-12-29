@@ -1,0 +1,175 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+#
+# List of Cayenne contributors, used on /contributors.html page.
+#
+contributors:
+  - name: "Andrus Adamchik"
+    role: "PMC"
+    email: "aadamchik at apache dot org"
+    # markdown can be used in "website" field
+    website: "[http://adamchik.org](http://adamchik.org) (personal) [http://objectstyle.com](http://objectstyle.com) (business)"
+    active: true
+
+  - name: "Cris Daniluk"
+    role: "Committer"
+    email: "cdaniluk at apache dot org"
+    website: 
+    active: true
+    
+  - name: "Bill Dudney"
+    role: "PMC"
+    email: "bdudney at apache dot org"
+    website:
+    active: true
+    
+  - name: "Malcolm Edgar"
+    role: "Committer"
+    email: "medgar at apache dot org"
+    website: 
+    active: true
+ 
+  - name: "Michael Gentry"
+    role: "PMC, Chair"
+    email: "mgentry at apache dot org"
+    website: 
+    active: true
+
+  - name: "Tore Halset"
+    role: "Committer"
+    email: "torehalset at apache dot org"
+    website: 
+    active: true
+
+  - name: "John Huss"
+    role: "PMC"
+    email: "johnthuss at apache dot org"
+    website: 
+    active: true
+
+  - name: "Dzmitry Kazimirchyk"
+    role: "Committer"
+    email: "dkazimirchyk at apache dot org"
+    website: 
+    active: true
+
+  - name: "Xenia Khailenka"
+    role: "Committer"
+    email: "kseniak at apache dot org"
+    website: 
+    active: true
+
+  - name: "Mike Kienenberger"
+    role: "PMC"
+    email: "mkienenb at apache dot org"
+    website: 
+    active: true
+
+  - name: "Kevin Menard"
+    role: "PMC"
+    email: "kmenard at apache dot org"
+    website: "[http://www.servprise.com/](http://www.servprise.com/)"
+    active: true
+
+  - name: "Aristedes Maniatis"
+    role: "PMC"
+    email: "amaniatis at apache dot org"
+    website: "[http://www.ish.com.au](http://www.ish.com.au)"
+    active: true
+
+  - name: "Andrey Razumovsky"
+    role: "Committer"
+    email: "andrey at apache dot org"
+    website: 
+    active: true
+
+  - name: "Andriy Shapochka"
+    role: "Committer"
+    email: "ashapochka at apache dot org"
+    website: 
+    active: true
+
+  - name: "Olga Tkachova"
+    role: "Committer"
+    email: "oltka at apache dot org"
+    website:
+    active: true 
+
+  - name: "Robert Zeigler"
+    role: "Committer"
+    email: "robertdzeigler at apache dot org"
+    website: 
+    active: true
+
+  - name: "Evgeny Ryabitskiy"
+    role: "Committer"
+    email: "evgeny at apache dot org"
+    website: "[http://www.diasoft.ru/](http://www.diasoft.ru/)"
+    active: true
+
+  - name: "Andrew Lindesay"
+    role: "Committer"
+    email: "apl at apache dot org"
+    website: 
+    active: true
+
+  - name: "Alex Kolonitsky"
+    role: "Committer "
+    email: "kolonitsky at apache dot org "
+    website: 
+    active: true
+    
+  - name: "Savva Kolbachev"
+    role: "PMC"
+    email: "skolbachev at apache dot org"
+    website: 
+    active: true
+    
+  - name: "Nikita Timofeev"
+    role: "PMC"
+    email: "ntimofeev at apache dot org"
+    website:
+    active: true 
+    
+### Inactive commiters
+    
+  - name: "Holger Hoffstaette"
+    role: 
+    email: "holger at wizards dot de"
+    website: 
+    active: false  
+ 
+  - name: "Craig Miskell"
+    role: 
+    email: 
+    website:
+    active: false  
+    
+  - name: "Michael Shengaout"
+    role: 
+    email: "mshenga at pobox dot org"
+    website: "[http://reusablesoftwarecomponents.com](http://reusablesoftwarecomponents.com)"
+    active: false 
+
+  - name: "Eric Schneider"
+    role: 
+    email: "eric at centralparksoftware dot com"
+    website: "[http://www.centralparksoftware.com/](http://www.centralparksoftware.com/)"
+    active: false     

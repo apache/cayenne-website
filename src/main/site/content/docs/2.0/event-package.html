@@ -1,0 +1,38 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Event Package
+url: /docs/2.0/event-package.html
+layout: docs_legacy
+---
+
+	
+
+<P>Cayenne includes a full-featured events mechanism. It allows creation of local and distributed event queues. It is very powerful and generic; it is not tied to Cayenne persistence features in any way and can be used in any application. The most important features are:</P>
+
+<UL>
+	<LI>Event senders do not have to deal with event dispatching details - listener handling and dispatches are done via instances of EventManager.</LI>
+	<LI>Any types of listeners can be registered. Listeners do not have to implement a specific interface.</LI>
+	<LI>No explicit unregistering of listeners is required. Listeners are cleaned up when they go out of scope, or when the event subject goes out of scope.</LI>
+	<LI>Supports local and remote dispatches. Remote dispatches can be done via arbitrary transport by implementing transport-specific EventBridge. There are two existing EventBridge implementations - using JMS and using JavaGroups.</LI>
+	<LI>Dispatches can be done both synchronously (sender waits till all listeners finish) or asyncronously (sender posts an event to the queue, and returns without waiting for the processing to complete).</LI>
+	<LI>In a similar manner individual listeners can register as blocking or non-blocking.</LI>
+</UL>
+
+
+<DIV class="panelMacro"><TABLE class="tipMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/2.0/images/check.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>The most common error when using EventSubject is not storing a reference to it. This may result in a premature cleanup of a given subject, and automatic unregistering of all listeners. Good practice is to make subject a &quot;public static final&quot; variable of the event sender class if a subject is common for all instances of senders; or make it an ivar of a sender instance if subject is only related to this instance.</TD></TR></TABLE></DIV>

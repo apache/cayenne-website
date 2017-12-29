@@ -1,0 +1,14 @@
+{{ partial "docs_head.html" . }}
+{{ partial "header.html" . }}
+{{ partial "docs_header.html" . }}
+
+            <!-- Only difference from "normal" docs is that here is no title rendered as it's embedded into markup. -->
+            <article>
+                <section>
+                    {{ .Content }}
+                </section>
+            </article>
+
+{{ partial "docs_footer.html" . }}
+{{ partial "footer.html" . }}
+{{ partial "tail.html" . }}

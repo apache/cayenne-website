@@ -1,0 +1,26 @@
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+    <main class="container  py-5">
+        <section>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <h1 class="text-center">{{.Title}}</h1>
+                    {{ .Content }}
+                    <ul class="list-group list-unstyled  bb">
+                        {{ range .Data.Pages }}
+                            <li class="list-group-item list-group-item-action flex-column  border-0 bt">
+                                <a class="d-flex w-100 justify-content-between align-items-start align-items-sm-center" href="{{ .Permalink }}">
+                                    {{ .Title }}
+                                    <span class="xsmall  text-muted text-nowrap  ml-3l2">{{ .Date.Format "02 Jan 2006" }}</span>
+                                </a>
+                            </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{{ partial "footer.html" . }}
+{{ partial "tail.html" . }}

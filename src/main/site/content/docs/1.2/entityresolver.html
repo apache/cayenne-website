@@ -1,0 +1,28 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: EntityResolver
+url: /docs/1.2/entityresolver.html
+layout: docs_legacy
+---
+
+	
+
+<P>In runtime the mapping metadata is accessed via a <A href="datachannel.html" title="DataChannel">DataChannel</A> in a form of <TT>org.objectstyle.cayenne.map.EntityResolver</TT> (EntityResolver available via ObjectContext is usually obtained from the channel behind the scenes). EntityResolver provides a single namespace for multiple DataMaps. </P>
+
+<P>Another important function of the EntityResolver is providing access to the <TT>org.objectstyle.cayenne.property.ClassDescriptor</TT> instances for each persistent entity. Those a compiled by Cayenne on the fly using EntityResolver's <TT>org.objectstyle.cayenne.property.ClassDescriptorFactory</TT>.</P>

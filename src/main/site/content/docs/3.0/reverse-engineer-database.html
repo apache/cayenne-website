@@ -1,0 +1,47 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Reverse Engineer Database
+url: /docs/3.0/reverse-engineer-database.html
+layout: docs_legacy
+---
+
+	<H3><A name="ReverseEngineerDatabase-ReverseEngineerDatabase"></A>Reverse Engineer Database</H3>
+
+
+<P><B>Start Reverse Engineering.</B> To reverse engineer a database you need to select either a DataDomain or one of its children on the project tree. Then select &quot;Tools &gt; Reengineer Database Schema&quot; from the menu. &quot;Connect to Database&quot; dialog will be presented.</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Reverse-engineering behavior is sensitive to the current project tree selection. If you selected a DataDomain or a DataNode, a new DataMap will be created and all reengineered tables will be put in this DataMap. If you had an existing DataMap (or one of its entities) selected when you started reverse engineering, new tables will be merged into the existing DataMap.</TD></TR></TABLE></DIV>
+
+<P><B>Configure Database Connection.</B> &quot;Connect to Database&quot; dialog allows to specify alternative connection parameters. If a DataNode was selected when reverse engineering started, its connection information is shown by default. You can use suggested default connection, select one of the stored local DataSources from &quot;Saved DataSources&quot; dropdown (those can be edited on the spot by clicking &quot;...&quot; button), or type your own info. When desired connection is selected, click &quot;Continue&quot;. Cayenne will attempt to connect to the database and if connection is successful, &quot;Select Options&quot; dialog is presented.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/reengineer-connect.png" style="border: 0px solid black"></SPAN></P>
+
+<P><B>Configure Options.</B> &quot;Select Options&quot; dialog allows to specify what needs to be reverse engineered. If a database supports schemas, one of the listed schemas should be selected. Table and stored procedure patterns allow to control which tables/procedures are included in reverse engineering. Patterns should be in the format used by SQL LIKE clause (e.g. &quot;ABC&quot;, &quot;ABC%&quot; or&quot; %&quot; or &quot;A%T&quot;, etc.).</P>
+
+<P><B>Naming strategies.</B> Since Cayenne 3.0 you can obtain control over DbRelationship, ObjEntity, ObjAttribute and ObjRelationship names generation. This is achieved by implementing org.apache.cayenne.map.naming.NamingStrategy interface. Modeler itself is distrubuted with two default strategies.</P>
+
+<P>org.apache.cayenne.map.naming.BasicNamingStrategy generates names in Cayenne 2.0-style. Thus, to-one relationships will be prefixed by &quot;to&quot;, to-many relationships will be postfixed by 'Array'. Examples of such names are &quot;toArtist&quot; and &quot;paintingArray&quot;.</P>
+
+<P>org.apache.cayenne.modeler.util.SmartNamingStrategy uses FK column names for to-one relationship names (e.g. if FK column is called &quot;ARTIST_ID&quot; or &quot;ARTISTID&quot; the relationship's name will be just &quot;artist&quot;). To-many relationship names are pluralized forms of other-side entities names, e.g. &quot;paintings&quot;. Pluralization is done in rules of English language using <A href="https://inflector.dev.java.net/" class="external-link" rel="nofollow">Inflector</A>.</P>
+
+<P>To use one of predefined strategies or your own one you must specify strategy class name in &quot;Naming Stragegy&quot; field of &quot;Select Options&quot; dialog. JAR with user strategy must be attached using Tools-&gt;Preferences-&gt;ClassPath bookmark. NamingStrategy implementation must have a public default constructor.</P>
+
+<P><B>Running Reverse Engineering.</B> After desired options are selected, click &quot;Continue&quot;. Progress dialog will open. It will close automatically when reverse-engineering is done. After that all database tables and stored procedures that matched selected criteria will be added to the DataMap. Default ObjEntity mapping will be created as well.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/reengineer-schema.png" style="border: 0px solid black"></SPAN></P>

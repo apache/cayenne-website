@@ -1,0 +1,57 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Migrate Changes between Model and Database
+url: /docs/3.0/migrate-changes-between-model-and-database.html
+layout: docs_legacy
+---
+
+	<H3><A name="MigrateChangesbetweenModelandDatabase-IntroductiontoMerging"></A>Introduction to Merging</H3>
+
+<P>After working some time with the model and/or the database, it can be a lot of work to make sure they are in sync. E.g. A table has been added/removed, a varchar column has a different max length and so on. The merge functionality in the modeler handle all of this.</P>
+
+<H3><A name="MigrateChangesbetweenModelandDatabase-Stepbystep"></A>Step by step</H3>
+
+<P>Open the model in the modeler and select the DataMap.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-select-datamap.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Select Tools-&gt;Migrate Database Schema.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-menu.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Enter or select data source information.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-db-connect.png" style="border: 0px solid black"></SPAN></P>
+
+<P>All detected changes will be listed as separate tokens.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-detected-changes.png" style="border: 0px solid black"></SPAN></P>
+
+<P>Select tokens and their direction. &quot;To Model&quot; mean that the change is to be made from the database to the model. &quot;To DB&quot; mean that opposite.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-select-tokens.png" style="border: 0px solid black"></SPAN></P>
+
+<P>It is also possible to see the generated SQL for the selected &quot;To DB&quot; tokens.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-generated-sql.png" style="border: 0px solid black"></SPAN></P>
+
+<P>At last, press Migrate to execute the selected operations. Problems will be reported in a dialog. Operations that succeeded will be removed from the list.</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/merge-complete.png" style="border: 0px solid black"></SPAN></P>
+

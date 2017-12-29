@@ -1,0 +1,47 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: maven2-modeler
+url: /docs/3.0/maven2-modeler.html
+layout: docs_legacy
+---
+
+	<P><TT>modeler</TT> is an Maven 2 mojo that runs the latest version of Cayenne Modeler.  It saves you from having to download the modeler and installing it manually, which is really nice if you're following the latest changes in the snapshot builds.</P>
+
+<P>There is no configuration of this plugin, but you do need to add to add the plugin to your POM:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml">
+<SPAN class="code-tag">&lt;build&gt;</SPAN>
+    <SPAN class="code-tag">&lt;plugins&gt;</SPAN>
+        <SPAN class="code-tag">&lt;plugin&gt;</SPAN>
+            <SPAN class="code-tag">&lt;groupId&gt;</SPAN>org.apache.cayenne.plugins<SPAN class="code-tag">&lt;/groupId&gt;</SPAN>
+      	    <SPAN class="code-tag">&lt;artifactId&gt;</SPAN>maven-cayenne-modeler-plugin<SPAN class="code-tag">&lt;/artifactId&gt;</SPAN>
+        <SPAN class="code-tag">&lt;/plugin&gt;</SPAN>
+    <SPAN class="code-tag">&lt;/plugins&gt;</SPAN>
+<SPAN class="code-tag">&lt;/build&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+
+<P>It can be started from the root of your project by running:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+$ mvn cayenne-modeler:run
+</PRE>
+</DIV></DIV>

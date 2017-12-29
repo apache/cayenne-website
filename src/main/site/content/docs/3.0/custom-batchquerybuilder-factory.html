@@ -1,0 +1,53 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Custom BatchQueryBuilder Factory
+url: /docs/3.0/custom-batchquerybuilder-factory.html
+layout: docs_legacy
+---
+
+	<P>Cayenne allows plugging user-defined behavior to the process of performing commit actions in ObjectContext. Imagine situation when you need to perform UPDATE queries to mark records in database as deleted, instead of using common DELETE queries, e.g. something like</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+UPDATE ARTIST SET DELETED = <SPAN class="code-keyword">true</SPAN> WHERE ARTIST_ID = 1987
+</PRE>
+</DIV></DIV>
+<P>instead of</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DELETE FROM ARTIST WHERE ARTIST_ID = 1987
+</PRE>
+</DIV></DIV>
+<P>In such cases you need to intercept Cayenne's process of generating SQL queries. This can be obtained by providing custom <TT>org.apache.cayenne.access.jdbc.BatchQueryBuilderFactory</TT> to a DataDomain, for example:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DataDomain domain = Configuration.getSharedConfiguration().getDomain();
+domain.setQueryBuilderFactory(<SPAN class="code-keyword">new</SPAN> SoftDeleteQueryBuilderFactory());
+</PRE>
+</DIV></DIV>
+<P><TT>org.apache.cayenne.access.jdbc.SoftDeleteQueryBuilderFactory</TT> is a custom factory built into Cayenne which replaces DELETE queries with UPDATEs as described above.</P>
+
+<P>You can plug in your own factories. BatchQueryBuilderFactory interface is very simple and contains methods for creating query builders for objects that were inserted, updated or deleted:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-keyword">public</SPAN> BatchQueryBuilder createInsertQueryBuilder(DbAdapter adapter);
+<SPAN class="code-keyword">public</SPAN> BatchQueryBuilder createUpdateQueryBuilder(DbAdapter adapter);
+<SPAN class="code-keyword">public</SPAN> BatchQueryBuilder createDeleteQueryBuilder(DbAdapter adapter);
+</PRE>
+</DIV></DIV>
+<P>Note that BatchQueryBuilder factory only affects queries being created during commit for NEW, MODIFIED or DELETED objects in ObjectContext. It has no effect on database modifications that are made with, say, EJBQLQuery or SQLTemplate.</P>

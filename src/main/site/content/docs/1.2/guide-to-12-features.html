@@ -1,0 +1,179 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Guide to 1.2 Features
+url: /docs/1.2/guide-to-12-features.html
+layout: docs_legacy
+---
+
+	
+
+<P>This page describes new features and other changes introduced in 1.2 release.</P>
+
+<H2><A name="Guideto1.2Features-CoreFramework"></A>Core Framework </H2>
+
+<H4><A name="Guideto1.2Features-RemoteObjectPersistenceRemoteObjectPersistenceGuide"></A><A href="remote-object-persistence-guide.html" title="Remote Object Persistence Guide">Remote Object Persistence</A> </H4>
+
+<P>Cayenne Remote Object Persistence is a low-overhead web services-based technology that provides lightweight  generic object persistence and data query functionality to 'remote' applications. It allows to use the same object model and the same context capabilities in a system with more than one Java tier. Now persistence features can be implemented consistently across a set of collaborating applications with different responsibilities and security context.</P>
+
+
+<H4><A name="Guideto1.2Features-ObjectContextAPIObjectContext"></A><A href="objectcontext.html" title="ObjectContext">ObjectContext API</A></H4>
+
+<P><A href="objectcontext.html" title="ObjectContext">ObjectContext</A> is a new interface that is a generalization of the traditional DataContext. In fact DataContext is one of its main implementors. Another implementation is <TT>CayenneContext</TT> used on remote clients.</P>
+
+<H4><A name="Guideto1.2Features-QueryEnhancements"></A>Query Enhancements</H4>
+
+<UL>
+	<LI><A href="prefetching.html" title="Prefetching">Prefetching</A>
+	<UL>
+		<LI>Cayenne now supports prefetching of flattened relationships.</LI>
+		<LI>New &quot;joint&quot; prefetch semantics is introduced.</LI>
+		<LI>Semantics of prefetching now can be customized by users via <TT>PrefetchTreeNode</TT> API.</LI>
+		<LI>SQLTemplate and ProcedureQuery can be configured to emulate joint prefetching behavior.</LI>
+	</UL>
+	</LI>
+</UL>
+
+
+<UL>
+	<LI><A href="customizing-queries.html" title="Customizing Queries">Customizing Queries</A>: In 1.2 Queries can have behavior in addition to storing query parameters. Now queries can route themselves and also handle their own execution at the JDBC level. This opens endless possibilities for custom extensions.</LI>
+</UL>
+
+
+<UL>
+	<LI>New Query Types: <A href="customizing-queries.html" title="Customizing Queries">Customizing Queries</A> support in the access stack made it possible to include new useful types of queries:
+	<UL>
+		<LI><A href="querychain.html" title="QueryChain">QueryChain</A></LI>
+		<LI><A href="objectidquery.html" title="ObjectIdQuery">ObjectIdQuery</A></LI>
+		<LI><A href="relationshipquery.html" title="RelationshipQuery">RelationshipQuery</A></LI>
+		<LI><A href="namedquery.html" title="NamedQuery">NamedQuery</A></LI>
+	</UL>
+	</LI>
+</UL>
+
+
+<UL>
+	<LI>More consistent <A href="caching-query-results.html" title="Caching Query Results">cache/refresh API</A></LI>
+</UL>
+
+
+<H4><A name="Guideto1.2Features-GeneratedColumns"></A><A href="generated-columns.html" title="Generated Columns">Generated Columns</A></H4>
+
+<P>Cayenne now supports auto-increment/identity columns as an alternative mechanism for primary key generation.</P>
+
+<H4><A name="Guideto1.2Features-DTDChanges"></A>DTD Changes</H4>
+
+<P>...</P>
+
+<H4><A name="Guideto1.2Features-JDK1.5FeaturesSupport"></A>JDK 1.5 Features Support</H4>
+
+<UL>
+	<LI>Mapping Properties as Enums. Numeric or character database columns can now be mapped as custom Enums. Cayenne supports this out of the box without any special configuration. Assumption is made that character columns store the <B>name</B> of a given Enum object, while numeric columns store a position of a given Enum object in the Enum class.</LI>
+</UL>
+
+
+<H4><A name="Guideto1.2Features-GenericPersistentClass"></A><A href="generic-persistent-class.html" title="Generic Persistent Class">Generic Persistent Class</A></H4>
+
+<P>Cayenne allows CayenneDataObject (or its subclass) to be used as a generic persistent object, skipping class generation and compilation steps. Use only when appropriate!</P>
+
+<H4><A name="Guideto1.2Features-WebApplicationContextFilter"></A>WebApplicationContextFilter</H4>
+
+<P>A Servlet Specification 2.3 compatible way to bind DataContext to the request thread. See chapter 12.2.4 of the new User Guide shipped with 1.2 milestones for details.</P>
+
+<H4><A name="Guideto1.2Features-DBCPDataSourceFactory%3ADBCPPoolSupport"></A>DBCPDataSourceFactory: DBCP Pool Support</H4>
+
+<P>A connection pool from jakarta-commons DBCP project is now supported via the modeler - just select DBCPDataSourceFactory from the DataSource factories dropdown. The new factory loads its configuration from a specified properties file (see DBCPDataSourcefactory Javadocs for supported properties). DBCP connection pool is much more advanced than the one provided by Cayenne and supports a dozen or so runtime parameters. See Javadocs for org.objectsyle.cayenne.conf.DBCPDataSourceFactory for details.</P>
+
+<H4><A name="Guideto1.2Features-DatabaseAdapterImprovements%2FNewAdapters"></A>Database Adapter Improvements/New Adapters</H4>
+
+<UL>
+	<LI>New adapter for Cloudscape/Derby</LI>
+	<LI>New adapter for FrontBase</LI>
+	<LI>New adapter for Ingres</LI>
+	<LI>MySQL adapter is improved to support referential integrity constraints for InnoDB tables.</LI>
+	<LI>Adapter Auto Detection. Users no longer need to specify DbAdapter in the Modeler. All standard adapters are &quot;guessed&quot; by Cayenne in runtime using database metadata. Only custom adapters need to be set explicitly, using the new &quot;Adapter&quot; tab in the DataNode Editor panel. This simplifies configuration, makes deployment more transparent, and allows Cayenne to dynamically tweak adapter settings depending on the underlying database version and runtime parameters.</LI>
+	<LI><A href="http://objectstyle.org/cayenne/userguide/access-stack/extended-types.html" class="external-link" rel="nofollow">Extended type mechanism</A> now allows mapping a persistent property as an interface. This can be achieved via ExtendedTypeFactory API. A custom <TT>ExtendedTypeFactory</TT> is registered in a manner similar to ExtendedType with adapter's <TT>ExtendedTypeMap</TT>: <TT>extendedTypeMap.addFactory(myFactory)</TT>. Cayenne already takes advantage of this API by providing a factory that handles an arbitrary JDK 1.5 Enum via reflection.</LI>
+</UL>
+
+
+
+<H4><A name="Guideto1.2Features-DataContextImprovements"></A>DataContext Improvements</H4>
+
+<UL>
+	<LI>User Properties Map. DataContext now maintains an internal map of user-defined values. This allows users to associate certain data with a given DataContext.</LI>
+</UL>
+
+
+<UL>
+	<LI><A href="datacontextfactory.html" title="DataContextFactory">DataContextFactory</A>. DataContext allows to register an optional factory class (via the Modeler or in the API) that will be used to create DataContexts. This way users can implement DataContext subclasses that will seamlessly integrate in  the existing Cayenne stack.</LI>
+</UL>
+
+
+<UL>
+	<LI><A href="nested-datacontexts.html" title="Nested DataContexts">DataContexts Nesting</A> that allows to perform partial in-memory commits/rollbacks.</LI>
+</UL>
+
+
+<H4><A name="Guideto1.2Features-XMLSerializationCAY%3AXMLSerialization"></A><A href="../CAY/xml-serialization.html" title="XML Serialization">XML Serialization</A></H4>
+
+<P>A new package <TT>org.objectstyle.cayenne.xml</TT> provides a way to encode arbitrary Java objects to XML and decode them from XML. It allows a great degree of control over the XML structure, thus simplifying integration with third party XML message systems. M5 features the first usable release of this feature. However there may be more changes in the course of 1.2.</P>
+
+<P><EM>Need to document this better, for now see Javadocs for <TT>org.objectstyle.cayenne.xml.XMLEncoder</TT> and <TT>org.objectstyle.cayenne.xml.XMLDecoder</TT>.</EM></P>
+
+<H4><A name="Guideto1.2Features-LoadingJNDIDataNodesfromLocalPreferencesUsingJNDI"></A><A href="using-jndi.html" title="Using JNDI">Loading JNDI DataNodes from Local Preferences</A></H4>
+
+<P>If a DataNode is configured to use JNDIDataSourceFactory, you can setup a &quot;Local DataSource&quot; via Modeler preferences with the name matching the JNDI name. After that when you run your application locally without a JNDI container, Cayenne would use local preferences database.</P>
+
+<H4><A name="Guideto1.2Features-WebObjectsIntegration"></A>WebObjects Integration</H4>
+
+<P>EOModel importer now correctly imports EOFetchSpecification qualifiers, prefetches and a number of other previously ignored parameters.</P>
+
+<H2><A name="Guideto1.2Features-Tools%3ACayenneModeler%2CAntTools"></A>Tools: CayenneModeler, Ant Tools</H2>
+
+<H4><A name="Guideto1.2Features-GeneralUIRework"></A>General UI Rework</H4>
+
+<P>CayenneModeler is significantly more user friendly compared to 1.1.</P>
+
+<UL>
+	<LI>Modeler is packaged as a native application for Windows and Mac OS X.</LI>
+	<LI>Entity editors have their own &quot;local&quot; toolbars for working with attributes and relationships instead of trying to locate a needed button in the common top toolbar.</LI>
+	<LI>There are two history navigation buttons allowing to quickly return back to the places that you've recently visited.</LI>
+	<LI>There are new PK generator options at the DbEntity level.</LI>
+	<LI>A class generator dialog is completely redesigned to provide a number of advanced options and better general usability.</LI>
+	<LI>A number of visual bug fixes, new icons, etc.</LI>
+	<LI>A number of performance enhancements.</LI>
+</UL>
+
+
+
+<H4><A name="Guideto1.2Features-AntTaskImprovements"></A>Ant Task Improvements</H4>
+
+<UL>
+	<LI>Antlib descriptor for Cayenne Ant Tasks</LI>
+	<LI>Vastly extended and improved <TT>cgen</TT>. See <TT>cgen</TT> task documetation in the user guide shipped with release for more details. Note that cgen maybe split in two tasks to make it simpler.</LI>
+	<LI>New <TT>cdbgen</TT> task</LI>
+	<LI>New <TT>cdataport</TT> database data porting task. <EM>(moved from examples with improvements)</EM></LI>
+</UL>
+
+
+<H4><A name="Guideto1.2Features-CodeGenerationImprovements"></A>Code Generation Improvements</H4>
+
+<UL>
+	<LI>Customizable Encoding Of Generated Files. Desired encoding for generated Java files can be specified in the Modeler in Preferences and as an &quot;encoding&quot; attribute of the cgen Ant task. This is helpful in cross-platform development situations.</LI>
+</UL>
+

@@ -1,3 +1,11 @@
-_site
-.sass-cache
-.jekyll-metadata
+.idea
+*.iml
+*.cloud
+*.cloudf
+.DS_Store
+target
+src/main/assets/node
+src/main/assets/node_modules
+src/main/site/static/js
+src/main/site/static/css
+src/main/site/static/img

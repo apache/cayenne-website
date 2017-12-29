@@ -1,0 +1,94 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Web Applications
+url: /docs/2.0/web-applications.html
+layout: docs_legacy
+---
+
+	
+<H3><A name="WebApplications-PuttingCayenneFilesinWebApplicationCLASSPATH"></A>Putting Cayenne Files in Web Application CLASSPATH</H3>
+
+<P>When deploying an application in a web container it is possible to follow the procedure for the standalone applications, i.e. put all XML files in the application CLASSPATH (e.g. in &quot;mywebapp/WEB-INF/classes/&quot;, but DON'T put it in container shared locations!). Session DataContext can be obtained via ServletUtil:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">HttpSession session = ...;
+DataContext context = ServletUtil.getSessionContext(session);</PRE>
+</DIV></DIV>
+
+<P>However you may consider a deployment procedure described below, as it provides more flexibility and a number of additional useful features.</P>
+
+<H3><A name="WebApplications-CayenneServletFilter"></A>Cayenne Servlet Filter</H3>
+
+<P>Adding the following filter to the <TT>web.xml</TT> would automate Cayenne setup in the web application:</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>&lt;filter&gt;
+    &lt;filter-name&gt;CayenneFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.apache.cayenne.conf.WebApplicationContextFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;CayenneFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</PRE>
+</DIV></DIV>
+
+<P>The filter will ensure that for each matching request a DataContext is bound to the request thread. So you can retrieve it anywhere in the application, even if you don't have a reference to the web environment:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">DataContext context = DataContext.getThreadDataContext();</PRE>
+</DIV></DIV>
+
+<P>Filter can match a specific URL as shown above, or a specific servlet:</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>&lt;servlet&gt;
+   &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+   &lt;servlet-class&gt;org.example.MyServlet&lt;/servlet-class&gt;
+   &lt;load-on-startup&gt;0&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+		
+&lt;filter&gt;
+    &lt;filter-name&gt;CayenneFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.apache.cayenne.conf.WebApplicationContextFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;CayenneFilter&lt;/filter-name&gt;
+    &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;
+&lt;/filter-mapping&gt;</PRE>
+</DIV></DIV>
+
+
+<P>Additionally the filter supports putting files in <TT>myapp/WEB-INF/</TT> directory instead of the CLASSPATH, so a .war file may look like this:</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>index.jsp
+WEB-INF/cayenne.xml
+WEB-INF/xyz.map.xml
+WEB-INF/lib/...</PRE>
+</DIV></DIV>
+
+<P>Actually, Cayenne files can be stored in any subdirectory of <TT>myapp/WEB-INF/</TT>. To specify a subdirectory, you'll need to add <TT>&lt;context-param&gt;</TT> named <TT>cayenne.configuration.path</TT> to your application descriptor:</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>&lt;context-param&gt;
+    &lt;param-name&gt;cayenne.configuration.path&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/config/cayenne-files&lt;/param-value&gt;
+&lt;/context-param&gt;</PRE>
+</DIV></DIV>

@@ -1,0 +1,51 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Tutorial
+url: /docs/3.0/tutorial.html
+layout: docs_legacy
+---
+
+	<H2><A name="Tutorial-Tutorial"></A>Tutorial</H2>
+
+<P>This is a step-by-step tutorial showing how to write a database application with Cayenne. When you are done with it, you should have an understanding of the basics of object-relational mapping using CayenneModeler and how to use the Cayenne framework in standalone (command-line or otherwise) and web applications. The tutorial uses Maven, Eclipse IDE and Derby database, however it can be easily recreated with another combination of a database, an IDE and a build system. Full tutorial source code in a form of Eclipse project is distributed with Cayenne (see <TT>&quot;tutorials/tutorial&quot;</TT> folder).</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Note about Maven</B><BR>The only potentially controversial choice here is Maven. Not everybody is familiar with Maven, and not everybody likes it. However we decided that the benefits of the setup simplicity outweigh any downsides. Note that the tutorial is using <TT>m2eclipse</TT> plugin and doesn't even require a command-line Maven installation. Moreover most of the useful Cayenne Maven hackery is presented in boxed inserts throughout the text, while a Maven-agnostic alternative is shown in the main text.</TD></TR></TABLE></DIV>
+
+<H3><A name="Tutorial-Sections"></A>Sections</H3>
+
+<OL>
+	<LI><A href="tutorial-setup.html" title="Tutorial Setup">Setting up the environment...</A></LI>
+	<LI>Learning mapping basics
+	<OL>
+		<LI><A href="tutorial-starting-project.html" title="Tutorial Starting Project">Starting a project...</A></LI>
+		<LI><A href="tutorial-object-relational-mapping.html" title="Tutorial Object Relational Mapping">Getting started with Object Relational Mapping (ORM)...</A></LI>
+		<LI><A href="tutorial-java-classes.html" title="Tutorial Java Classes">Creating Java classes...</A></LI>
+	</OL>
+	</LI>
+	<LI>Learning Cayenne API
+	<OL>
+		<LI><A href="tutorial-objectcontext.html" title="Tutorial ObjectContext">Getting started with ObjectContext...</A></LI>
+		<LI><A href="tutorial-persistent-objects.html" title="Tutorial Persistent Objects">Getting started with persistent objects...</A></LI>
+		<LI><A href="tutorial-selectquery.html" title="Tutorial SelectQuery">Selecting objects...</A></LI>
+		<LI><A href="tutorial-delete.html" title="Tutorial Delete">Deleting objects...</A></LI>
+	</OL>
+	</LI>
+	<LI><A href="tutorial-webapp.html" title="Tutorial Webapp">Converting to web application...</A></LI>
+</OL>
+

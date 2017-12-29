@@ -1,0 +1,84 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Executing a Stored Procedure
+url: /docs/3.0/executing-a-stored-procedure.html
+layout: docs_legacy
+---
+
+	<H3><A name="ExecutingaStoredProcedure-UsingQueryResponsetoProcessComplexResults"></A>Using QueryResponse to Process Complex Results</H3>
+
+<P>Previous chapter showed how to select a single set of data rows using a ProcedureQuery. In a more general case stored procedures can return multiple sets of data, either as ResultSets or via OUT parameters, execute update/delete/insert queries, etc. To collect the results of execution of such stored procedure, you need to run a query using context's <TT>&quot;performGenericQuery&quot;</TT> method and inspect returned QueryResponse.</P>
+
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DataContext context;
+
+<SPAN class="code-comment">// <SPAN class="code-quote">&quot;my_procedure&quot;</SPAN> is a name of a stored procedure,
+</SPAN><SPAN class="code-comment">// that must exist in the DataMap
+</SPAN>ProcedureQuery query = <SPAN class="code-keyword">new</SPAN> ProcedureQuery(<SPAN class="code-quote">&quot;my_procedure&quot;</SPAN>);
+
+<SPAN class="code-comment">// Set <SPAN class="code-quote">&quot;IN&quot;</SPAN> parameter values
+</SPAN>query.addParameter(<SPAN class="code-quote">&quot;parameter1&quot;</SPAN>, <SPAN class="code-quote">&quot;abc&quot;</SPAN>);
+query.addParameter(<SPAN class="code-quote">&quot;parameter2&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Integer</SPAN>(3000));
+
+<SPAN class="code-comment">// run query
+</SPAN>QueryResponse result = context.performGenericQuery(query);
+
+<SPAN class="code-comment">// check the results
+</SPAN><SPAN class="code-keyword">for</SPAN> (result.reset(); result.next();) {
+     <SPAN class="code-keyword">if</SPAN> (response.isList()) {
+         List list = result.currentList();
+         <SPAN class="code-comment">// ...
+</SPAN>     }
+    <SPAN class="code-keyword">else</SPAN> {
+         <SPAN class="code-object">int</SPAN>[] updateCounts = result.currentUpdateCount();
+         <SPAN class="code-comment">// ...
+</SPAN>     }
+}
+</PRE>
+</DIV></DIV>
+
+<H3><A name="ExecutingaStoredProcedure-UsingQueryResponsetoReadOUTParameters"></A>Using QueryResponse to Read OUT Parameters</H3>
+
+<P>Stored Procedure can return data back to the application as ResultSets or via OUT parameters. To simplify the processing of the query output, QueryResponse treats OUT parameters as if it was a separate ResultSet. If a stored procedure declares any OUT or INOUT parameters, QueryResponse will contain their returned values in the very first result list:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+DataContext context;
+
+<SPAN class="code-comment">// <SPAN class="code-quote">&quot;my_procedure&quot;</SPAN> is a name of a stored procedure,
+</SPAN><SPAN class="code-comment">// that must exist in the DataMap
+</SPAN>ProcedureQuery query = <SPAN class="code-keyword">new</SPAN> ProcedureQuery(<SPAN class="code-quote">&quot;my_procedure&quot;</SPAN>);
+
+<SPAN class="code-comment">// Set <SPAN class="code-quote">&quot;IN&quot;</SPAN> parameter values
+</SPAN>query.addParameter(<SPAN class="code-quote">&quot;paramter1&quot;</SPAN>, <SPAN class="code-quote">&quot;abc&quot;</SPAN>);
+query.addParameter(<SPAN class="code-quote">&quot;parameter2&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Integer</SPAN>(3000));
+
+<SPAN class="code-comment">// run query
+</SPAN>QueryResponse result = context.performGenericQuery(query);
+
+<SPAN class="code-comment">// read OUT parameters
+</SPAN>List outList = result.firstList();
+
+<SPAN class="code-keyword">if</SPAN>(outList.size() &gt;  0) {
+    Map outParameterValues = (Map) outList.get(0);
+}
+</PRE>
+</DIV></DIV>

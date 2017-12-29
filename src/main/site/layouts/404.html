@@ -1,0 +1,19 @@
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+<main class="container  py-5">
+    <section>
+        <h1 class="text-center">Oops, this page seems lost...</h1>
+        <p>
+            You followed a wrong link or this content is missing.
+        </p>
+        <p>
+            If you think this is an error,
+            you can try to fix it (see <a href="{{ relref . "cms-guide.md" }}">CMS guide</a>)
+            or report it in <a href="https://issues.apache.org/jira/browse/CAY">bug tracker</a>.
+        </p>
+    </section>
+</main>
+
+{{ partial "footer.html" . }}
+{{ partial "tail.html" . }}

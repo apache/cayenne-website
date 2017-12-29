@@ -1,0 +1,44 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Remote Object Persistence Installation
+url: /docs/1.2/remote-object-persistence-installation.html
+layout: docs_legacy
+---
+
+	
+
+<H3><A name="RemoteObjectPersistenceInstallation-InstallationandSystemRequirements"></A>Installation and System Requirements</H3>
+
+<P>Remote object persistence support is included in the standard Cayenne distribution. System requirements are the same as for the rest of Cayenne, and there is no special installation procedure. Check the <A href="installation.html" title="Installation">Installation</A> chapter of Cayenne User Guide for details. </P>
+
+<H3><A name="RemoteObjectPersistenceInstallation-ServerJarFiles"></A>Server Jar Files</H3>
+
+<P>Cayenne web service is no different from a regular Cayenne application, so it requires <B><TT>cayenne.jar</TT></B> or <B><TT>cayenne-nodeps.jar</TT></B>. One additional required third party library is <B><TT>hessian.jar</TT></B>, version 3.0.13 or newer. Hessian can be downloaded from <A href="http://www.caucho.com/hessian/" class="external-link" rel="nofollow">http://www.caucho.com/hessian/</A>.</P>
+
+<H3><A name="RemoteObjectPersistenceInstallation-ClientJarFiles"></A>Client Jar Files</H3>
+
+<P>On the client <B><TT>cayenne-client-nodeps.jar</TT></B> is needed. This is a stripped down version of Cayenne runtime. It doesn't bundle any dependencies, so the following third-party libraries need to be installed: </P>
+
+<UL>
+	<LI><A href="http://jakarta.apache.org/commons/logging/" class="external-link" rel="nofollow">Apache Commons Logging</A>, version 1.0.4. Unlike traditional Cayenne, client tier does not require Log4J (though it will happily use an existing Log4J configuration).</LI>
+	<LI><A href="http://jakarta.apache.org/commons/lang/" class="external-link" rel="nofollow">Apache Commons Lang</A>, version 2.1.</LI>
+	<LI><A href="http://jakarta.apache.org/commons/collections" class="external-link" rel="nofollow">Apache Commons Collections</A>, version 3.1.</LI>
+	<LI><A href="http://www.caucho.com/hessian/" class="external-link" rel="nofollow">Hessian Library</A>, version 3.0.13.</LI>
+</UL>
+

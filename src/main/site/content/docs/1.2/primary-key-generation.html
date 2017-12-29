@@ -1,0 +1,93 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Primary Key Generation
+url: /docs/1.2/primary-key-generation.html
+layout: docs_legacy
+---
+
+	
+
+<P>Depending on the type of persistent objects and the database design, primary key values can be handled in a few different ways. A decision to use one or another technique will affect how the mapping is done. Here is a summary of possible scenarios. Each one is described below in details.</P>
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">&nbsp;</TH>
+<TH class="confluenceTh">PK Has DbAttribute</TH>
+<TH class="confluenceTh">PK Has ObjAttribute</TH>
+<TH class="confluenceTh">PK is a DataObject property</TH>
+</TR>
+<TR>
+<TD class="confluenceTd">Meaningful Primary Key</TD>
+<TD class="confluenceTd">Yes</TD>
+<TD class="confluenceTd">Yes</TD>
+<TD class="confluenceTd">Yes</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">Primary Key Derived From Relationship</TD>
+<TD class="confluenceTd">Yes</TD>
+<TD class="confluenceTd">No</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">Database-Generated Primary Key</TD>
+<TD class="confluenceTd">Yes</TD>
+<TD class="confluenceTd">No</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">Cayenne-Generated Primary Key</TD>
+<TD class="confluenceTd">Yes</TD>
+<TD class="confluenceTd">No</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<H3><A name="PrimaryKeyGeneration-MeaningfulPrimaryKey"></A>Meaningful Primary Key</H3>
+
+<P>DataObjects can provide their own values for the primary key columns. Sometimes this makes sense, for example if a primary key column contains meaningful data like a Social Security Number. In such cases primary key handling is no different from handling any other persistent attributes. Each primary key column (DbAttribute) will have an ObjAttribute mapped to it. The Java class implementing DataObject will contain a property described by this ObjAttribute. The value of this property will be saved to the database.</P>
+
+<H3><A name="PrimaryKeyGeneration-PrimaryKeyDerivedFromRelationship"></A>Primary Key Derived From Relationship</H3>
+
+<P>A primary key column of a table may depend on a primary key column of another table. This is normally the case with &quot;join&quot; tables used to resolve many-to-many relationships. In such cases DataObject normally does not contain a property mapped to a PK column. Instead the value is automatically derived by Cayenne from a primary key of a related object using a relationship.</P>
+
+<H3><A name="PrimaryKeyGeneration-PrimaryKeyProvidedbyDatabaseonINSERT"></A>Primary Key Provided by Database on INSERT</H3>
+
+<P>Sometimes databases have their own proprietary mechanism to generate a primary key when a new row is inserted. This feature is called &quot;auto increment&quot; or &quot;identity column&quot;. Cayenne supports such primary keys out of the box. For this mechanism to be invoked, PK DbAttributes must be marked as &quot;generated&quot; in the Modeler. Currently MySQL and SQLServer adapters have this feature turned on by default.</P>
+
+<H3><A name="PrimaryKeyGeneration-CayenneGeneratedPrimaryKey"></A>Cayenne Generated Primary Key</H3>
+
+<P>In most cases, the database primary key is a purely relational concept that has no correspondence in the object model. Normally this is a unique sequential number that identifies a row in the database. This means that creating a property in a persistent object that corresponds to a primary key is an artificial step. To avoid doing that Cayenne assigns each object an ObjectId that internally handles the details of primary key handling.</P>
+
+<P>When a new DataObject is saved, and its properties and relationships do not contain primary key values, Cayenne will attempt to automatically generate a key value. Generation mechanism depends on the DbAdapter used and can be customized by users by subclassing one of the included adapters. Adapters shipped with Cayenne use the following default PK generation strategies:</P>
+
+<UL>
+	<LI>MySQL, PostgreSQL, HSQL Adapters: use select/update from a special AUTO_PK_TABLE lookup table.</LI>
+	<LI>Oracle Adapter: uses Oracle sequences.</LI>
+	<LI>DB2 Adapter: uses DB2 sequences.</LI>
+	<LI>SQLServer , Sybase Adapters: use a strored procedure tied to AUTO_PK_TABLE lookup table.</LI>
+	<LI>OpenBase Adapter: uses OpenBase specific NEWID mechanism.</LI>
+</UL>
+
+
+<P>To generate the necessary database objects for the primary key autogeneration, use CayenneModeler and follow the instructions given <A href="generate-primary-key-support.html" title="Generate Primary Key Support">here</A>.</P>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/1.2/images/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Cayenne only supports automatic PK generation for a single column per table.</TD></TR></TABLE></DIV>
+

@@ -1,0 +1,28 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: CayenneModeler and Eclipse
+url: /docs/2.0/cayennemodeler-and-eclipse.html
+layout: docs_legacy
+---
+
+	
+
+<P>If you use <A href="http://www.eclipse.org/" class="external-link" rel="nofollow">Eclipse IDE</A> for your Java development, it can be configured to launch CayenneModeler when clicking on &quot;cayenne.xml&quot; file in the project tree. Here is the instructions for Windows, other platforms should work in a similar fashion. </P>
+
+<P>In Eclipse Properties panel go to &quot;Workbench -&gt; File Associations&quot;. Add an association for &quot;cayenne.xml&quot; to open with &quot;external editor&quot;. Select &quot;modeler.bat&quot; file as an external editor. Caveat - CAYENNE_HOME variable must be either defined in the environment, or you may need to edit modeler.bat and set it right there, otherwise modeler will not start. </P>

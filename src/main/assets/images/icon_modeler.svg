@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #696969;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="_Modeler_w_o_bar" data-name="!!!Modeler w/o bar" class="cls-1" d="M1310,2103v-37a1.993,1.993,0,0,1,2-2h44a2,2,0,0,1,2,2v37h-48Zm3-31h15v28h-15v-28Zm16,0h26v28h-26v-28Zm-16,2h5v1h-5v-1Zm3,4h7v1h-7v-1Zm0,4h5v1h-5v-1Zm-3,7h15v3h-15v-3Zm6-3h5v1h-5v-1Zm0,8h6v1h-6v-1Zm0-4h7v1h-7v-1Zm10-6h26v1h-26v-1Zm18-10h5v1h-5v-1Zm-10,0h8v1h-8v-1Zm-5,0h3v1h-3v-1Zm0,13h4v1h-4v-1Zm6,0h3v1h-3v-1Zm11,0h3v1h-3v-1Zm-6,0h4v1h-4v-1Zm5,3h4v1h-4v-1Zm-5,0h3v1h-3v-1Zm-11,0h3v1h-3v-1Zm5,0h4v1h-4v-1Zm13,3h2v1h-2v-1Zm-7,0h2v1h-2v-1Zm-11,0h2v1h-2v-1Zm5,0h4v1h-4v-1Zm-24-26h2v2h-2v-2Zm3,0h2v2h-2v-2Zm3,0h2v2h-2v-2Zm0,0h2v2h-2v-2Zm0,0h2v2h-2v-2Z" transform="translate(-1310 -2059.5)"/>
+</svg>

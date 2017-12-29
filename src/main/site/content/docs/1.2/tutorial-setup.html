@@ -1,0 +1,64 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Tutorial Setup
+url: /docs/1.2/tutorial-setup.html
+layout: docs_legacy
+---
+
+	
+<H3><A name="TutorialSetup-InstallJava"></A>Install Java</H3>
+
+<P>Make sure you have Java installed (JDK 1.4 or 1.5).</P>
+
+<H3><A name="TutorialSetup-DownloadCayenne"></A>Download Cayenne</H3>
+
+<P>Get <A href="http://cayenne.apache.org/download.html" class="external-link" rel="nofollow">the latest Cayenne</A> distribution. If you are on Linux, select a cross-platform version (<TT>cayenne-XXX.tar.gz</TT>).  For Mac OS X select <TT>cayenne-XXX-macosx.dmg</TT> and for Windows - <TT>cayenne-XXX-win.zip</TT>. Unpack the distribution somewhere in the file system. </P>
+
+<H3><A name="TutorialSetup-DownloadDerbyDatabase"></A>Download Derby Database</H3>
+
+<P>Get Derby database <A href="http://db.apache.org/derby/derby_downloads.html" class="external-link" rel="nofollow">from here</A> and unpack it somewhere in the filesystem.</P>
+
+<H3><A name="TutorialSetup-DownloadEclipse"></A>Download Eclipse </H3>
+
+<P>Download Eclipse <A href="http://www.eclipse.org/" class="external-link" rel="nofollow">from here</A> and unpack it somewhere in the filesystem.</P>
+
+<H3><A name="TutorialSetup-CreateaNewEclipseProject"></A>Create a New Eclipse Project</H3>
+
+<P>Start Eclipse and go to <TT>&quot;File &gt; New &gt; Project&quot;</TT>. Select a &quot;Java Project&quot; for the project type and click &quot;Next&quot;:</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/1.2/images/eclipse-new-project.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>Enter &quot;cayenne-tutorial&quot; for the project name, select &quot;Create separate source and output folders&quot; radio button and click &quot;Next&quot;:</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/1.2/images/eclipse-project-settings.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>On the next screen (&quot;Java Settings&quot;) go to the &quot;Libraries&quot; tab and click &quot;Add External Jar&quot; button on the right to add two Jar files:</P>
+<UL>
+	<LI><TT>derby.jar</TT> located in the &quot;lib&quot; directory of the Derby installation)</LI>
+	<LI><TT>cayenne.jar</TT> located in the &quot;lib&quot; directory of Cayenne installation.</LI>
+</UL>
+
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/1.2/images/eclipse-java-settings.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>When done click &quot;Finish&quot; and the new project should appear in Eclipse.</P>
+
+<HR>
+<P><B>Next Step: <A href="tutorial-starting-mapping-project.html" title="Tutorial Starting Mapping Project">Tutorial Starting Mapping Project</A></B></P>
+<HR>

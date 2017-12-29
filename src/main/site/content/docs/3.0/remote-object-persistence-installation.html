@@ -1,0 +1,50 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Remote Object Persistence Installation
+url: /docs/3.0/remote-object-persistence-installation.html
+layout: docs_legacy
+---
+
+	<H3><A name="RemoteObjectPersistenceInstallation-InstallationandSystemRequirements"></A>Installation and System Requirements</H3>
+
+<P>Remote object persistence support is included in the standard Cayenne distribution. System requirements are the same as for the rest of Cayenne, and there is no special installation procedure. Check the <A href="installation.html" title="Installation">Installation</A> chapter of Cayenne User Guide for details. </P>
+
+<H3><A name="RemoteObjectPersistenceInstallation-ServerJarFiles"></A>Server Jar Files</H3>
+
+<P>Cayenne web service is no different from a regular Cayenne application, so it requires <B><TT>cayenne-server.jar</TT></B> and all standard dependencies. The only additional required third-party library is Hessian:</P>
+
+<UL>
+	<LI><A href="http://www.caucho.com/hessian/" class="external-link" rel="nofollow">Hessian Library</A>, version 3.1.6.</LI>
+</UL>
+
+
+<H3><A name="RemoteObjectPersistenceInstallation-ClientJarFiles"></A>Client Jar Files</H3>
+
+<P>On the client <B><TT>cayenne-client.jar</TT></B> is needed. This is a stripped-down version of Cayenne runtime. The following third party dependencies are needed (all included in &quot;lib/third-party&quot; directory of the distribution, except for hessian):</P>
+
+<UL>
+	<LI><A href="http://jakarta.apache.org/commons/logging/" class="external-link" rel="nofollow">Apache Commons Logging</A>, version 1.1.</LI>
+	<LI><A href="http://jakarta.apache.org/commons/collections" class="external-link" rel="nofollow">Apache Commons Collections</A>, version 3.1.</LI>
+	<LI><A href="http://www.caucho.com/hessian/" class="external-link" rel="nofollow">Hessian Library</A>, version 3.1.6.</LI>
+</UL>
+
+
+<P>Note that there can be issues with running different versions of Hessian on the client and server since the Hessian protocols sometimes change between even minor releases. We recommend you keep them matched or look at the Hessian source to decide whether you might have compatibility issues.</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Hessian Versions</B><BR>Cayenne 3.0 works correctly with Hessian 3.0.x and 3.1.x. Hessian 4.0.2 has a <A href="http://maillist.caucho.com/pipermail/hessian-interest/2009-December/000842.html" class="external-link" rel="nofollow">bug</A> that stops ROP. Hessian 3.2.x is binary incompatible with other versions and cannot be used.</TD></TR></TABLE></DIV> 

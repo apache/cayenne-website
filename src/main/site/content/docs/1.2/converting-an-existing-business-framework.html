@@ -1,0 +1,53 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Converting an Existing Business Framework
+url: /docs/1.2/converting-an-existing-business-framework.html
+layout: docs_legacy
+---
+
+	
+
+<H3><A name="ConvertinganExistingBusinessFramework-ConvertinganExistingBusinessFramework"></A>Converting an Existing Business Framework</H3>
+
+<P>If there is an existing data layer (e.g. DAO) that needs to be converted to Cayenne, currently most of the mapping tasks will have to be done manually using the Modeler.</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/1.2/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Note for EOF Users</B><BR>CayenneModeler provides import function for the EOModels. So most of the mapping conversions should be automatic.</TD></TR></TABLE></DIV>
+
+<P>In any case there is a good chance of reusing business methods already defined in a persistence framework. And definitely any existing database can be used as is. One possible approach to conversion is to follow these steps:</P>
+
+<UL>
+	<LI>Reverse engineer the database schema into a new Cayenne mapping project.</LI>
+	<LI>Update class names and packages match the names of the existing classes.</LI>
+	<LI>Run class generation using &quot;generation gap&quot; pattern (to create subclass/superclass pair for each entity). This would only create superclasses with set/get methods for persistent properties, without touching the existing classes.</LI>
+	<LI>Modify existing DAO classes to change the superclass to a corresponding generated one (e.g. &quot;Employee extends _Employee&quot;).</LI>
+	<LI>Remove any persistent properties with their setters and getters from the subclass.</LI>
+	<LI>Remove all the DAO-specific persistence code.</LI>
+	<LI>Rewrite any other &quot;business&quot; methods to use DataContext for data operations.</LI>
+</UL>
+
+
+<P>See the following topics explaining individual tasks involved:</P>
+
+<UL>
+	<LI><A href="create-new-project.html" title="Create New Project">Create New Project</A></LI>
+	<LI><A href="create-datanode.html" title="Create DataNode">Create DataNode</A></LI>
+	<LI><A href="reverse-engineer-database.html" title="Reverse Engineer Database">Create New DataMap by reverse engineering database</A></LI>
+	<LI><A href="generate-java-classes.html" title="Generate Java Classes">Generate Java Classes</A></LI>
+</UL>
+

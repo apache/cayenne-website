@@ -1,0 +1,16 @@
+{{ partial "docs_head.html" . }}
+{{ partial "header.html" . }}
+{{ partial "docs_header.html" . }}
+
+                <article>
+                    <header>
+                        <h1>{{ .Title }}</h1>
+                    </header>
+                    <section>
+                        {{ .Content }}
+                    </section>
+                </article>
+
+{{ partial "docs_footer.html" . }}
+{{ partial "footer.html" . }}
+{{ partial "tail.html" . }}

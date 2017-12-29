@@ -1,0 +1,306 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+// Cayenne Docs ( = cd)
+
+	.cd-head {
+		@include media-breakpoint-up(lg) {
+			position: relative;
+			padding-top: $topbar-navbar-cd-top-height;
+		}
+	}
+
+	// TOP SIDEBAR
+	.cd-top-sidebar {
+		background: $body-bg;
+
+		@include media-breakpoint-up(lg) {
+			position: fixed;
+			width: 100%;
+			top: $topbar-navbar-height;
+			z-index: $zindex-navbars - 1;
+		}
+
+		.dropdown-toggle {
+			color: #444;
+			font-weight: $font-weight-normal;
+			padding: $cd-top-sidebar-padding-y $cd-top-sidebar-padding-r $cd-top-sidebar-padding-y $cd-top-sidebar-padding-l;
+		}
+
+		.dropdown-menu {
+			left: $cd-top-sidebar-padding-l !important;
+			margin-top: -10px;
+		}
+	}
+
+	// SIDEBAR
+	.cd-sidebar {
+		
+		a {
+			color: #666;
+
+			@include hover-focus {
+				color: #444;
+			}
+		}
+
+	}
+
+	$cd-docs-nav-offset: $topbar-navbar-cd-top-height + 2; // `+ 2` is because .cd-sidebar has .py-2
+	#cd-docs-nav {
+		position: sticky;
+		overflow-y: auto;
+		left: 0;
+		top: $cd-docs-nav-offset; //11.5rem;
+		@include media-breakpoint-up(lg) {
+			max-height: calc(100vh - #{$cd-docs-nav-offset});
+		}
+		
+		// .nav ul a {
+		// 	margin-left: 2rem;
+		// }
+
+		// .cd-toc-item li {
+		// 	padding-left: 5rem;
+		// }
+
+		// 0 level links
+		.cd-toc-link {
+			display: inline-block;
+	        padding: .5rem $cd-top-sidebar-padding-r .5rem $cd-top-sidebar-padding-l;
+    		line-height: 1.5;
+
+			&.active {
+				padding-bottom: 0;
+
+				+ .toc-side {
+					padding-bottom: .5rem;
+				}
+			}
+
+		}
+	    
+	    // Active states
+	    .cd-toc-link,
+	    .nav-link {
+
+		    &.active {
+		    	color: #444;
+		    	font-weight: $font-weight-medium;
+		    }
+	    }
+	    
+
+
+		// #toc migrated(moved) from <artice>
+		#toctitle {
+			display: none;
+		}
+
+		#toc {
+			font-size: $small-font-size;
+
+			// added nav
+			.nav {
+				display: block;
+			}
+
+			// ul 1st level
+			.sectlevel1 {
+				padding: 0 2rem 0 3.75rem;
+				margin-bottom: 0;
+			}
+
+			// ul 2nd and others init
+			@include media-breakpoint-up(lg) {
+				.nav ul {
+					display: none;
+				}
+			}
+			
+			// ul 2nd and others active
+			.active + ul {
+				display: block;
+			}
+
+			li {
+				padding-left: 0;
+			}
+
+			li:not(:last-child) a {
+				margin-top: .5em;
+				margin-bottom: .5em;
+			}
+
+			a {
+				padding: 0;
+
+				// text truncate by ellipsis
+				// display: block;
+				// text-overflow: ellipsis;
+				// overflow: hidden;
+				// white-space: nowrap;
+			}
+
+		}
+	}
+
+
+	// DOCBOOK
+
+		// TOC
+		article #toc {
+			display: none;
+		}
+		#toc {
+		    // order: 2;
+			// position: sticky;
+			// max-height: calc(100vh - 11.5rem);
+			// overflow-y: auto;
+			// right: 0;
+			// font-weight: 400;
+			// padding: 1rem 0rem 1rem .5rem;
+			// top: 11.5rem;
+			
+			#toctitle {
+			    margin-bottom: .8rem;
+			}
+
+			ul {
+			    list-style: none;
+			    padding-left: 0;
+
+			}
+			
+			ul ul {
+			    padding-left: 20px;
+			}
+		    
+		    li:before {
+		    	content: none;
+		    }
+
+
+			a {
+			    display: inline-block;
+			    line-height: 1.5;
+			    // margin-bottom: .4rem;
+			}
+		}
+
+		// DOC
+		.cd-content {
+			@include media-breakpoint-up(lg) {
+				h1, h2, h3, h4, h5, h6,
+				.h1, .h2, .h3, .h4, .h5, .h6 {
+					&:before {
+						content: "";
+					    display: block;
+					    visibility: hidden;
+					    height: $topbar-navbar-cd-top-height + 1;
+					    margin-top: -#{$topbar-navbar-cd-top-height + 1};
+					}
+				}
+			}
+
+			.sect1 {
+			    margin-bottom: 5rem;
+			}
+
+			.sect2 {
+			    margin-bottom: 2.5rem;
+			}
+
+			.sect3 {
+			    margin-bottom: 1.8rem;
+			}
+
+			.listingblock .title {
+			    font-weight: 500;
+			    font-size: 80%;
+			    margin-bottom: .5rem;
+			}
+
+			.image img,
+			.imageblock img {
+				max-width: 100%;
+				height: auto;
+			}
+
+		    .imageblock {
+			    margin-bottom: 1rem;
+			}
+
+		    p .image {
+			    display: inline-block;
+			    margin: 0 .25em;
+			    position: relative;
+			    top: -.25em;
+			}
+
+			.table {
+				table-layout: fixed;
+
+				td {
+					overflow: scroll;
+					padding: $table-cell-padding-sm;
+				}
+
+				.halign-center {
+					text-align:center;
+				}
+
+				.valign-middle {
+					vertical-align: middle;
+				}
+
+				p.tableblock {
+					margin: 0;
+				}
+			}
+
+			.admonitionblock {
+				td {
+					padding: $table-cell-padding;
+				}
+				// Icon in admonition block
+				td.icon {
+					text-align: center;
+					border-right: $table-border-width solid $table-border-color;
+					i {
+						vertical-align: middle;
+					}
+				}
+			}
+
+			code {
+				@include media-breakpoint-down(md) {
+					word-break: break-all;
+					word-wrap: break-word;
+				}
+			}
+
+			code.hljs {
+				word-break: normal;
+				word-wrap: normal;
+			}
+
+			.icon {
+				vertical-align: middle;
+			}
+		}

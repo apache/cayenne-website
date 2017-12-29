@@ -1,0 +1,82 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: ObjectIdQuery
+url: /docs/2.0/objectidquery.html
+layout: docs_legacy
+---
+
+	
+
+<P><EM>(DataObjectUtils API below is available since 1.2M10. SingleObjectQuery, a precursor of ObjectIdQuery, was available since 1.2M9. In 1.2M12 SingleObjectQuery was renamed to ObjectIdQuery)</EM></P>
+
+<P><TT>ObjectIdQuery</TT> is a query that selects objects matching an ObjectId. Considering that ObjectId must be unique, the result of such query is a single object or no objects.</P>
+
+<P>Normally if you need to find an object that matches a certain primary key value, you would use <TT>DataObjectUtils.objectForPK(DataContext,String,int)</TT>. This method will look up an object in the cache, and only run a query if it is not yet cached. <TT>ObjectIdQuery</TT> gives the user more control of the object caching behavior. It supports three possible caching policies:</P>
+
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Policy</TH>
+<TH class="confluenceTh">Cache Behavior</TH>
+</TR>
+<TR>
+<TD class="confluenceTd"><TT>ObjectIdQuery.CACHE</TT> </TD>
+<TD class="confluenceTd">This policy is similar to DataObjectUtils behavior. If an object is already cached (either at the DataContext or DataDomain level), it is returned, otherwise the fetch is performed.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd"><EM>(default policy)</EM> <TT>ObjectIdQuery.CACHE_REFRESH</TT> </TD>
+<TD class="confluenceTd">This policy forces a database fetch. If an object is already cached (either at the DataContext or DataDomain level), cache is refreshed with a new version and a fresh object is included in the result.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd"><TT>ObjectIdQuery.CACHE_NO_REFRESH</TT> </TD>
+<TD class="confluenceTd">This policy suppresses database fetch. If an object is already cached (either at the DataContext or DataDomain level), query returns this object. Otherwise it returns an empty result.</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<P>An example of getting a guranteed fresh object:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">ObjectId id = <SPAN class="code-keyword">new</SPAN> ObjectId(<SPAN class="code-quote">&quot;Artist&quot;</SPAN>, Artist.ARTIST_ID_PK_COLUMN, 55);
+
+<SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> constructor implicitly uses <SPAN class="code-quote">&quot;CACHE_REFRESH&quot;</SPAN> policy, so a fresh object will be returned
+</SPAN>ObjectIdQuery query = <SPAN class="code-keyword">new</SPAN> ObjectIdQuery(id);
+
+DataContext context = ...
+Artist object = (Artist) DataObjectUtils.objectForQuery(context, query);
+</PRE>
+</DIV></DIV>
+
+<P>An example of checking whether an object is already cached:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">ObjectId id = <SPAN class="code-keyword">new</SPAN> ObjectId(<SPAN class="code-quote">&quot;Artist&quot;</SPAN>, Artist.ARTIST_ID_PK_COLUMN, 55);
+ObjectIdQuery query = <SPAN class="code-keyword">new</SPAN> ObjectIdQuery(id, <SPAN class="code-keyword">false</SPAN>, ObjectIdQuery.CACHE_NO_REFRESH);
+
+DataContext context = ...
+Artist object = (Artist) DataObjectUtils.objectForQuery(context, query);
+<SPAN class="code-keyword">if</SPAN>(object == <SPAN class="code-keyword">null</SPAN>) {
+  <SPAN class="code-comment">// not cached
+</SPAN>}
+<SPAN class="code-keyword">else</SPAN> {
+  <SPAN class="code-comment">// cached
+</SPAN>}
+</PRE>
+</DIV></DIV>

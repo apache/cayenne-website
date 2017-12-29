@@ -1,0 +1,37 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: Remote Object Persistence Introduction
+url: /docs/3.0/remote-object-persistence-introduction.html
+layout: docs_legacy
+---
+
+	<P>&quot;Remote Object Persistence&quot; is a low-overhead web services-based technology that provides lightweight object persistence and query functionality to 'remote' applications. In other words it provides familiar Cayenne API to applications that do not have direct access to the database. Instead such applications would access Cayenne Web Service (CWS). A single abstract data model (expressed as Cayenne XML DataMap) is used on the server and on the client, while execution logic can be partitioned between the tiers.</P>
+
+<P>The following picture compares a regular Cayenne web application and a rich client application that uses remote object persistence technology:</P>
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/remote-object-persistence.jpg" style="border: 0px solid black"></SPAN></P>
+
+<P>Persistence stack above consists of the following parts:</P>
+
+<UL>
+	<LI><B>ORM Tier:</B> a server-side Cayenne Java application that directly connects to the database via JDBC.</LI>
+	<LI><B>CWS (Cayenne Web Service):</B> A wrapper around an ORM tier that makes it accessible to remote CWS clients.</LI>
+	<LI><B>Remote Tier (aka Client Tier):</B> A Java application that has no direct DB connection and persists its objects by connecting to remote Cayenne Web Service (CWS). Note that CWS Client doesn't have to be a desktop application. It can be another server-side application. The word &quot;client&quot; means a client of Cayenne Web Service.</LI>
+</UL>
+

@@ -1,0 +1,114 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: cdeploy
+url: /docs/3.0/cdeploy.html
+layout: docs_legacy
+---
+
+	<DIV class="panelMacro"><TABLE class="warningMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/forbidden.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Deprecation Warning</B><BR>cdeploy is deprecated in 3.0 and will be removed in subsequent releases</TD></TR></TABLE></DIV>
+
+<P><TT>cdeploy</TT> is an Ant task that configures Cayenne connection information in existing jar files that contain Cayenne project information. It is useful for the automation of deployment of Cayenne-based frameworks in different environments.</P>
+
+<H3><A name="cdeploy-Parameters"></A>Parameters</H3>
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Attribute</TH>
+<TH class="confluenceTh">Description</TH>
+<TH class="confluenceTh">Required</TH>
+</TR>
+<TR>
+<TD class="confluenceTd">src</TD>
+<TD class="confluenceTd">Source jar file that contains Cayenne project files among other things.</TD>
+<TD class="confluenceTd">Yes</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">dest</TD>
+<TD class="confluenceTd">Destination jar file that should be generated as a result of this task execution. If omitted, src is used.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">altProjectFile</TD>
+<TD class="confluenceTd">An alternative location of cayenne.xml file. User can specify an arbitrary file. This file will be used as the main project file, replacing any existing cayenne.xml in the source jar. This gives the users an ultimate flexibility in configuring deployment libraries. For instance this feature can be used to deploy standalone DataMaps.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<H3><A name="cdeploy-NestedElements%3A"></A>Nested Elements:</H3>
+
+<H5><A name="cdeploy-node"></A>node</H5>
+<P>One or more nested &quot;node&quot; elements specify connection information for the named nodes. All nested nodes must exist in the project, or otherwise they will be ignored.<BR>
+Nested node Parameters:</P>
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Attribute</TH>
+<TH class="confluenceTh">Description</TH>
+<TH class="confluenceTh">Required</TH>
+</TR>
+<TR>
+<TD class="confluenceTd">name</TD>
+<TD class="confluenceTd">DataNode name</TD>
+<TD class="confluenceTd">Yes</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">domain</TD>
+<TD class="confluenceTd">Parent DataDomain of this node. If omitted, project must have only a single domain (very common case).</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">adapter</TD>
+<TD class="confluenceTd">DataNode adapter.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">dataSource</TD>
+<TD class="confluenceTd">DataSource name to use for this node.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">driverFile</TD>
+<TD class="confluenceTd">File that contains driver information.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<P>&quot;dataSource&quot; and &quot;driverFile&quot; are mutually exclusive, but none of them are required.</P>
+
+<H3><A name="cdeploy-Examples"></A>Examples</H3>
+
+<P>Here is an example of using <TT>cdeploy</TT> to regenerate a jar file called &quot;business.jar&quot; with connection info located in &quot;alt.driver.xml&quot;:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml"><SPAN class="code-tag">&lt;cdeploy src=<SPAN class="code-quote">&quot;business.jar&quot;</SPAN>&gt;</SPAN>
+    <SPAN class="code-tag">&lt;node name=<SPAN class="code-quote">&quot;main-node&quot;</SPAN> driverFile=<SPAN class="code-quote">&quot;alt.driver.xml&quot;</SPAN>/&gt;</SPAN>
+<SPAN class="code-tag">&lt;/cdeploy&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+
+<P>An example of using <TT>cdeploy</TT> to redeploy a 3rd party library that contains DataMaps, but may not contain cayenne.xml:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml"><SPAN class="code-tag">&lt;cdeploy src=<SPAN class="code-quote">&quot;business.jar&quot;</SPAN> altProjectFile=<SPAN class="code-quote">&quot;my-cayenne.xml&quot;</SPAN>/&gt;</SPAN>
+</PRE>
+</DIV></DIV>

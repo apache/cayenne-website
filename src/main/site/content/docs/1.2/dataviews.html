@@ -1,0 +1,35 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: DataViews
+url: /docs/1.2/dataviews.html
+layout: docs_legacy
+---
+
+	
+
+<DIV class="panelMacro"><TABLE class="warningMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/1.2/images/forbidden.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>In the future versions of Cayenne DataViews will be split in a standalone package. Unless we find volunteers, this package won't be supported very well.</TD></TR></TABLE></DIV>
+
+<P>Cayenne takes care of managing persistence layer for all types of applications - web, rich client, command line, etc. With DataViews Cayenne extends into the area of integrating such persistent layer with Swing GUI.</P>
+
+<P>DataViews define various presentation parameters of the DataObjects in an XML format. Just like DataMaps are edited using CayenneModeler, DataViews are edited with <A href="dvmodeler-gui-tool.html" title="DVModeler GUI Tool">DVModeler GUI Tool</A>. Runtime DataView classes are a part of the main Cayenne JAR file.</P>
+
+<P>For manual editing of the DataViews, DataView DTD is included in the distribution. It is pretty small and the names are self-explanatory once you become familiar with the Data View structure described in this chapter.</P>
+
+<DIV class="panelMacro"><TABLE class="infoMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/1.2/images/information.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>JDOM Note</B><BR>DataViews use JDOM, so in addition to the jar files required by a regular Cayenne application, DataViews-based application must have access to JDOM jars. JDOM can be downloaded from <A href="http://www.jdom.org/" class="external-link" rel="nofollow">http://www.jdom.org/</A>.</TD></TR></TABLE></DIV>
+

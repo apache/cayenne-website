@@ -1,6 +1,0 @@
-Title: DataSource
-
-	<P><A href="datanode.html" title="DataNode">DataNode</A> obtains connections via a <TT>javax.sql.DataSource</TT>. If an application is deployed in a J2EE container, DataSource is normally provided by container <A href="using-jndi.html" title="Using JNDI">via JNDI</A>. For standalone applications (or if you don't want to use JNDI) Cayenne provides its own DataSource that includes connection pooling features. Whenever you select <TT>org.apache.cayenne.conf.DriverDataSourceFactory</TT> in the Modeler, you are choosing to use Cayenne DataSource. </P>
-
-<P>Cayenne DataSource implementation is located in the <TT>org.apache.cayenne.conn</TT> package and is fully independent from the rest of the framework. Since Cayenne DataSource is chosen automatically, users rarely need to know more details. One notable exception are applications requiring users to interactively enter database login information. In this case you can write your own DataSource wrapper, and internally instantiate Cayenne DataSource (<TT>org.apache.cayenne.conn.PoolManager</TT>) after the user provides login and password.</P>
-

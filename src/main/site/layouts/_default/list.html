@@ -1,0 +1,25 @@
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+    <main class="container  py-5">
+        <section>
+            <div class="row">
+                <div class="col text-center">
+                    <h1>{{.Title}}</h1>
+                    
+                    <div class="lead">{{ .Content }}</div>
+                    
+                    <ul class="list-group list-unstyled  m-auto pt-2  mw-500px">
+                        {{ range .Data.Pages }}
+                        <li class="list-group-item list-group-item-action  border-0">
+                            <a class="d-flex justify-content-center   mw-100" href="{{ .Permalink }}">{{ .Title }}</a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{{ partial "footer.html" . }}
+{{ partial "tail.html" . }}

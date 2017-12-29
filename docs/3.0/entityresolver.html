@@ -1,5 +1,0 @@
-Title: EntityResolver
-
-	<P>In runtime the mapping metadata is accessed via a <A href="datachannel.html" title="DataChannel">DataChannel</A> in a form of <TT>org.apache.cayenne.map.EntityResolver</TT> (EntityResolver available via ObjectContext is usually obtained from the channel behind the scenes). EntityResolver provides a single namespace for multiple DataMaps. </P>
-
-<P>Another important function of the EntityResolver is providing access to the <TT>org.apache.cayenne.property.ClassDescriptor</TT> instances for each persistent entity. Those a compiled by Cayenne on the fly using EntityResolver's <TT>org.apache.cayenne.property.ClassDescriptorFactory</TT>.</P>

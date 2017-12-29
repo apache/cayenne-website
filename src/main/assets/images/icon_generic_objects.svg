@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #696969;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="_GenericObjects" data-name="!!!GenericObjects" class="cls-1" d="M1310,2605v-46a1.991,1.991,0,0,1,1.99-2h44a2,2,0,0,1,2.01,2v46h-48Zm31-26h-10a4,4,0,1,0-4,4,4.078,4.078,0,0,0,.99-0.14V2590H1341v-11Zm4-9v-1h-7v1h7Zm-10,5v-2h-1v2h-2.01v1H1334v2h1v-2h2v-1h-2Zm1-5v-1h-2v1h2Zm-4.01,0v-1H1326v1h5.99Zm-10,25h5v-1h-5v1Zm-3,2v1H1324v-1h-5.01Zm5.01-27v-1h-5.01v1H1324Zm4.99,24v1H1341v-1h-12.01Zm9.01,3v1h7v-1h-7Zm-4,4h7v-1h-7v1Zm0-3h2v-1h-2v1Zm-7.01,3h5v-1h-5v1Zm-0.99-3h5.99v-1H1326v1Zm-13.01,3H1325v-1h-12.01v1Zm0-3H1317v-1h-4.01v1Zm0-3H1320v-1h-7.01v1Zm0-25H1317v-1h-4.01v1Zm0-3H1320v-1h-7.01v1Zm0.99-7a1,1,0,1,0,1,1A0.994,0.994,0,0,0,1313.98,2560Zm3.02,0a1,1,0,1,0,1,1A1,1,0,0,0,1317,2560Zm3,0a1,1,0,1,0,1,1A1.005,1.005,0,0,0,1320,2560Zm6.99,6h-5v1h5v-1Zm14.01,0h-12.01v1H1341v-1Zm6,0h-4v1h4v-1Zm3,28h-6v1h6v-1Zm-10-5h-11.01v-9H1340v9Zm-7-7h-2.01v1H1333v-1Zm0,2h-2.01v1H1333v-1Zm0,2h-2.01v1H1333v-1Zm5-4h-4v1h4v-1Zm0,2h-4v1h4v-1Zm0,2h-4v1h4v-1Zm-10.01-7v2.81a2.725,2.725,0,0,1-.99.19,3,3,0,1,1,3-3h-2.01Z" transform="translate(-1310 -2557)"/>
+</svg>

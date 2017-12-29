@@ -1,0 +1,34 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: To Dep PK Checkbox
+url: /docs/3.0/to-dep-pk-checkbox.html
+layout: docs_legacy
+---
+
+	
+<H3><A name="ToDepPKCheckbox-%22ToDepPK%22Checkbox"></A>&quot;To Dep PK&quot; Checkbox</H3>
+
+<P>Some DB relationships consist only of the primary key columns of the participating tables. Examples of such relationships are:</P>
+<UL>
+	<LI>One-to-one relationship between master and detail tables.</LI>
+	<LI>One-to-many relationship between each main table and a join table in a many-to-many relationship spanning three tables.</LI>
+</UL>
+
+
+<P>Normally one side of the relationship is considered &quot;master&quot; and another one - &quot;dependent&quot;, meaning that &quot;dependent&quot; part can not exist without a corresponding &quot;master&quot; record, while &quot;master&quot; record can exist without any dependents. This fact is reflected in Cayenne mapping. DbEntity &quot;Relationships&quot; panel contains &quot;To Dep PK&quot; column. The checkboxes in this column are disabled, unless the relationship only consists of the PK attributes. If this is the case, you must select the relationship going in the direction from &quot;master&quot; to &quot;dependent&quot; and check the &quot;To Dep PK&quot; checkbox on this relationship. Otherwise Cayenne will not be able to handle such relationship properly.</P>

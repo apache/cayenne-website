@@ -1,0 +1,64 @@
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+<main class="container  py-5">
+    <section>
+        <h1 class="text-center">{{ .Title }}</h1>
+        {{- range where $.Site.Data.cayenne.releases "downloadable" true -}}
+        {{- if eq .customLink nil -}}
+            {{- $.Scratch.Set "link" (printf "%s/cayenne-%s" .latestRevision .latestRevision) -}}
+        {{- else -}}
+            {{- $.Scratch.Set "link" .customLink -}}
+        {{- end -}}
+        {{- $link := $.Scratch.Get "link" -}}
+        {{- $revision := .latestRevision -}}
+        {{- $urlFriendlyRevision := replace $revision "." "_" -}}
+        <h2>{{ .description }} - {{ $revision }} ({{ .type }})</h2>
+        <p>
+            Requires <strong>Java {{ .jdk }}</strong> or above.
+            You can find full release notes <a href="https://raw.githubusercontent.com/apache/cayenne/{{ .latestRevision }}/docs/doc/src/main/resources/RELEASE-NOTES.txt">here</a>.
+        </p>
+        <ul class="nav nav-tabs" id="tab_{{ $urlFriendlyRevision }}" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="bin_{{ $urlFriendlyRevision }}-tab" data-toggle="tab" href="#bin_{{ $urlFriendlyRevision }}" role="tab" aria-controls="bin_{{ $urlFriendlyRevision }}" aria-selected="true">Binary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="maven_{{ $urlFriendlyRevision }}-tab" data-toggle="tab" href="#maven_{{ $urlFriendlyRevision }}" role="tab" aria-controls="maven_{{ $urlFriendlyRevision }}" aria-selected="false">Maven</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="gradle_{{ $urlFriendlyRevision }}-tab" data-toggle="tab" href="#gradle_{{ $urlFriendlyRevision }}" role="tab" aria-controls="gradle_{{ $urlFriendlyRevision }}" aria-selected="false">Gradle</a>
+            </li>
+        </ul>
+        <div class="tab-content  px-1 pt-1 mb-5" id="tab_{{ $urlFriendlyRevision }}_content">
+            <div class="tab-pane fade show active" id="bin_{{ $urlFriendlyRevision }}" role="tabpanel" aria-labelledby="bin_{{ $urlFriendlyRevision }}-tab">
+                <ul class="list-unstyled">
+                    {{- range $.Site.Data.download.extensions -}}
+                    <li>
+                        <a href="http://www.apache.org/dyn/closer.lua/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $revision }}</a>
+                        {{ .description }}
+                        (<a href="http://www.apache.org/dist/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
+                        <a href="http://www.apache.org/dist/cayenne/{{ $link }}{{ .ext }}.md5">md5</a>)
+                    </li>
+                    {{- end -}}
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="maven_{{ $urlFriendlyRevision }}" role="tabpanel" aria-labelledby="maven_{{ $urlFriendlyRevision }}-tab">
+                <pre><code class="xml">&lt;dependency>
+    &lt;groupId>org.apache.cayenne&lt;/groupId>
+    &lt;artifactId>cayenne-server&lt;/artifactId>
+    &lt;version>{{ $revision }}&lt;/version>
+&lt;/dependency></code></pre>
+            </div>
+            <div class="tab-pane fade" id="gradle_{{ $urlFriendlyRevision }}" role="tabpanel" aria-labelledby="gradle_{{ $urlFriendlyRevision }}-tab">
+                <pre><code class="groovy">compile group: 'org.apache.cayenne', name: 'cayenne-server', version: '{{ $revision }}'</code></pre>
+            </div>
+        </div>
+        {{- end -}}
+
+        {{ .Content }}
+
+    </section>
+</main>
+
+{{ partial "footer.html" . }}
+{{ partial "tail.html" . }}

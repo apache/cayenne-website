@@ -1,0 +1,73 @@
+{{ $urlComponents := split .URL "/" }}
+{{ if (isset $urlComponents 3) }}
+{{ $.Scratch.Set "cayenneUrlVersion" (index $urlComponents 2) }}
+{{ else }}
+{{ $.Scratch.Set "cayenneUrlVersion" "4.1" }}
+{{ end }}
+{{ $docVersion := ($.Scratch.Get "cayenneUrlVersion") }}
+{{ $currentPageURL := .URL }}
+
+
+{{- range where $.Site.Data.cayenne.releases "docs" true -}}
+{{- $ver := .version -}}
+{{- $.Scratch.SetInMap "indexUrlByVersion" $ver (printf "/docs/%s/api/" $ver) -}}
+    {{- range (sort (where $.Site.Pages "Kind" "page") "Weight" "desc") -}}
+        {{- if eq .Params.cayenneVersion $ver -}}
+            {{- $.Scratch.SetInMap "indexUrlByVersion" $ver .URL -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+
+{{ $urlByVersion := $.Scratch.Get "indexUrlByVersion" }}
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                <!-- Sidebar -->
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version {{ $docVersion }}
+                            </a>
+                            <div class="dropdown-menu">
+                                {{ range where $.Site.Data.cayenne.releases "docs" true -}}
+                                {{- $ver := .version -}}
+                                <a class="dropdown-item" href="{{ index $urlByVersion $ver }}">Version {{ $ver }} ({{ .type }})</a>
+                                {{- end }}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9"> <!-- Search planned here, but ToC-toggler will be --> </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    {{ range (sort (where $.Site.Pages "Kind" "page") "Weight" ) -}}
+                    {{- if eq .Params.cayenneVersion $docVersion }}
+                    <div class="cd-toc-item">
+                        {{ if eq $currentPageURL .URL }}
+                        <span class="cd-toc-link active">{{ .Title }}</span>
+                            {{- $tocFile := printf "content/docs/%s/%s.toc.html" $docVersion .File.BaseFileName -}}
+                            {{- if (fileExists $tocFile) -}}
+                                {{ readFile $tocFile | safeHTML }}
+                            {{- end -}}
+                        {{ else }}
+                            <a class="cd-toc-link" href="{{ .URL }}">{{ .Title }}</a>
+                        {{ end }}
+                    </div>
+                    {{ end -}}
+                    {{- end }}
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/{{ $docVersion }}/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Main -->
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
