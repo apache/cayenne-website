@@ -53,13 +53,13 @@
                     {{- if eq .Params.cayenneVersion $docVersion }}
                     <div class="cd-toc-item">
                         {{ if eq $currentPageURL .URL }}
-                        <span class="cd-toc-link active">{{ .Title }}</span>
+                        <span class="cd-toc-link active">{{ if .Params.docsMenuTitle }}{{ .Params.docsMenuTitle }}{{ else }}{{ .Title }}{{ end }}</span>
                             {{- $tocFile := printf "content/docs/%s/%s.toc.html" $docVersion .File.BaseFileName -}}
                             {{- if (fileExists $tocFile) -}}
                                 {{ readFile $tocFile | safeHTML }}
                             {{- end -}}
                         {{ else }}
-                            <a class="cd-toc-link" href="{{ .URL }}">{{ .Title }}</a>
+                            <a class="cd-toc-link" href="{{ .URL }}">{{ if .Params.docsMenuTitle }}{{ .Params.docsMenuTitle }}{{ else }}{{ .Title }}{{ end }}</a>
                         {{ end }}
                     </div>
                     {{ end -}}

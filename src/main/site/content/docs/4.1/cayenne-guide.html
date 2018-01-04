@@ -1247,7 +1247,8 @@ compileJava.dependsOn cgen</code></pre>
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = binder -&gt;
-      ServerModule.contributeProperties(binder).put(Constants.SERVER_EXTERNAL_TX_PROPERTY, "true");
+      ServerModule.contributeProperties(binder)
+            .put(Constants.SERVER_EXTERNAL_TX_PROPERTY, "true");
 ServerRuntime runtime = ServerRuntime.builder()
       .addConfig("com/example/cayenne-project.xml")
       .addModule(extensions)
