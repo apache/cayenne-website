@@ -18,7 +18,7 @@
 
 title: "Cayenne Getting Started ROP"
 description: "Tutorial how to quick start new Cayenne ROP project"
-cayenneVersion: "4.1"
+cayenneVersion: "4.0"
 docsMenuTitle: "Getting Started ROP"
 weight: 40
 ---
@@ -69,9 +69,9 @@ weight: 40
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>Start CayenneModeler and open <code>cayenne.xml</code> from the "tutorial" project (located under <code>tutorial/src/main/resources</code>, unless it is already open.</p> </li> 
+      <li> <p>Start CayenneModeler and open cayenne.xml from the "tutorial" project (located under "tutorial/src/main/resources", unless it is already open.</p> </li> 
       <li> <p>Select the "datamap" DataMap and check "Allow Client Entities" checkbox.</p> </li> 
-      <li> <p>Enter <code>org.example.cayenne.persistent.client</code> for the "Client Java Package" and click "Update.." button next to the field to refresh the client package of all entities.</p> </li> 
+      <li> <p>Enter "org.example.cayenne.persistent.client" for the "Client Java Package" and click "Update.." button next to the field to refresh the client package of all entities.</p> </li> 
      </ul> 
     </div> 
     <div class="imageblock" style="text-align: center"> 
@@ -83,7 +83,7 @@ weight: 40
      <ul> 
       <li> <p>Select "Tools &gt; Generate Classes" menu.</p> </li> 
       <li> <p>For "Type" select "Client Persistent Objects".</p> </li> 
-      <li> <p>For the "Output Directory" select <code>tutorial-rop-client/src/main/java</code> folder (as client classes should go in the client project).</p> </li> 
+      <li> <p>For the "Output Directory" select "tutorial-rop-client/src/main/java" folder (as client classes should go in the client project).</p> </li> 
       <li> <p>Click on "Classes" tab and check the "Check All Classes" checkbox (unless it is already checked and reads "Uncheck all Classes").</p> </li> 
       <li> <p>Click "Generate".</p> </li> 
      </ul> 
@@ -105,7 +105,7 @@ weight: 40
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-client&lt;/artifactId&gt;
             &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
-            &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+            &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
         &lt;groupId&gt;com.caucho&lt;/groupId&gt;
@@ -144,7 +144,7 @@ weight: 40
    <div class="sect3"> 
     <h4 id="setting-up-dependencies"><a class="anchor" href="#setting-up-dependencies"></a>Setting up Dependencies</h4> 
     <div class="paragraph"> 
-     <p>Now lets get back to the "tutorial" project that contains a web application and set up dependencies. The only extra one that we don’t have yet is <code>resin-hessian.jar</code>, just like the client, so let’s add it (and the caucho repo declaration) to the <code>pom.xml</code>.</p> 
+     <p>Now lets get back to the "tutorial" project that contains a web application and set up dependencies. The only extra one that we don’t have yet is resin-hessian.jar, just like the client, so let’s add it (and the caucho repo declaration) to the pom.xml.</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -186,13 +186,7 @@ weight: 40
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> 
-         <div class="title">
-          Maven Optimization Hint
-         </div> 
-         <div class="paragraph"> 
-          <p>On a real project both server and client modules will likely share a common parent <code>pom.xml</code> where common repository delcaration can be placed, with child pom’s "inheriting" it from parent. This would reduce build code duplication.</p> 
-         </div> </td> 
+        <td class="content"> <strong>Maven Optimization Hint</strong> On a real project both server and client modules will likely share a common parent pom.xml where common repository delcaration can be placed, with child pom’s "inheriting" it from parent. This would reduce build code duplication. </td> 
        </tr> 
       </tbody>
      </table> 
@@ -207,7 +201,7 @@ weight: 40
    <div class="sect3"> 
     <h4 id="configuring-web-xml"><a class="anchor" href="#configuring-web-xml"></a>Configuring web.xml</h4> 
     <div class="paragraph"> 
-     <p>Cayenne web service is declared in the web.xml. It is implemented as a servlet <code>org.apache.cayenne.rop.ROPServlet</code>. Open <code>tutorial/src/main/webapp/WEB-INF/web.xml</code> in Eclipse and add a service declaration:</p> 
+     <p>Cayenne web service is declared in the web.xml. It is implemented as a servlet "org.apache.cayenne.rop.ROPServlet". Open tutorial/src/main/webapp/WEB-INF/web.xml in Eclipse and add a service declaration:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -234,13 +228,7 @@ weight: 40
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> 
-         <div class="title">
-          Extending Server Behavior via Callbacks
-         </div> 
-         <div class="paragraph"> 
-          <p>While no custom Java code is required on the server, just a service declaration, it is possible to customizing server-side behavior via callbacks and listeners (not shown in the tutorial).</p> 
-         </div> </td> 
+        <td class="content"> <strong>Extending Server Behavior via Callbacks</strong> While no custom Java code is required on the server, just a service declaration, it is possible to customizing server-side behavior via callbacks and listeners (not shown in the tutorial). </td> 
        </tr> 
       </tbody>
      </table> 
@@ -253,7 +241,7 @@ weight: 40
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre>[INFO] Scanning for projects...
+      <pre class="highlight"><code>[INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
 [INFO] Building tutorial 0.0.1-SNAPSHOT
@@ -269,7 +257,7 @@ INFO: loading user name and password.
 INFO: Created connection pool: jdbc:derby:memory:testdb;create=true
     Driver class: org.apache.derby.jdbc.EmbeddedDriver
     Min. connections in the pool: 1
-    Max. connections in the pool: 1</pre> 
+    Max. connections in the pool: 1</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -377,7 +365,7 @@ if (picasso != null) {
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre>INFO: Connecting to [http://localhost:8080/tutorial/cayenne-service] - dedicated session.
+      <pre class="highlight"><code>INFO: Connecting to [http://localhost:8080/tutorial/cayenne-service] - dedicated session.
 INFO: === Connected, session: org.apache.cayenne.remote.RemoteSession@26544ec1[sessionId=17uub1h34r9x1] - took 111 ms.
 INFO: --- Message 0: Bootstrap
 INFO: === Message 0: Bootstrap done - took 58 ms.
@@ -398,7 +386,7 @@ INFO: === Message 7: Query done - took 2 ms.
 INFO: --- Message 8: Query
 INFO: === Message 8: Query done - took 4 ms.
 INFO: --- Message 9: flush-cascade-sync
-INFO: === Message 9: flush-cascade-sync done - took 34 ms.</pre> 
+INFO: === Message 9: flush-cascade-sync done - took 34 ms.</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -406,7 +394,7 @@ INFO: === Message 9: flush-cascade-sync done - took 34 ms.</pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre>...
+      <pre class="highlight"><code>...
 INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'ARTIST']
 INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'GALLERY']
 INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'PAINTING']
@@ -442,7 +430,7 @@ INFO: === updated 2 rows.
 INFO: DELETE FROM ARTIST WHERE ID = ?
 INFO: [batch bind: 1-&gt;ID:200]
 INFO: === updated 1 row.
-INFO: +++ transaction committed.</pre> 
+INFO: +++ transaction committed.</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -490,7 +478,7 @@ INFO: +++ transaction committed.</pre>
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> These instructions are specific to Jetty 6. Other containers (and versions of Jetty) will have different mechanisms to achieve the same thing. </td> 
+        <td class="content"> These instructions are specific to Jetty 6. Other containers (and versions of Jetty) will have different mechansims to achieve the same thing. </td> 
        </tr> 
       </tbody>
      </table> 
@@ -519,11 +507,11 @@ INFO: +++ transaction committed.</pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Now create a new file called <code>realm.properties</code> at the root of the server project and put user login/password in there:</p> 
+     <p>Now create a new file called {["realm.properties"}} at the root of the server project and put user login/password in there:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre>cayenne-user: secret,cayenne-service-user</pre> 
+      <pre class="highlight"><code>cayenne-user: secret,cayenne-service-user</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -537,7 +525,7 @@ INFO: +++ transaction committed.</pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre>Mar 01, 2016 7:25:50 PM org.apache.cayenne.rop.http.HttpROPConnector logConnect
+      <pre class="highlight"><code>Mar 01, 2016 7:25:50 PM org.apache.cayenne.rop.http.HttpROPConnector logConnect
 INFO: Connecting to [cayenne-user@http://localhost:8080/tutorial-rop-server/cayenne-service] - dedicated session.
 Mar 01, 2016 7:25:50 PM org.apache.cayenne.rop.HttpClientConnection connect
 INFO: Server returned HTTP response code: 401 for URL: http://localhost:8080/tutorial-rop-server/cayenne-service
@@ -560,7 +548,7 @@ java.rmi.RemoteException: Server returned HTTP response code: 401 for URL: http:
 	at org.apache.cayenne.di.spi.DefaultScopeProvider.get(DefaultScopeProvider.java:50)
 	at org.apache.cayenne.di.spi.DefaultInjector.getInstance(DefaultInjector.java:134)
 	at org.apache.cayenne.configuration.CayenneRuntime.newContext(CayenneRuntime.java:134)
-	at org.apache.cayenne.tutorial.persistent.client.Main.main(Main.java:44)</pre> 
+	at org.apache.cayenne.tutorial.persistent.client.Main.main(Main.java:44)</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 

@@ -91,7 +91,7 @@ checkAndCreateDir "$JAVA_DOC_DIR"
 echo "Building docs for Cayenne $MAJOR_VERSION ($VERSION)"
 
 # clone git repo and checkout requested TAG
-git clone https://github.com/stariy95/cayenne.git "$CAYENNE_TMP_DIR" # apache / stariy95
+git clone https://github.com/apache/cayenne.git "$CAYENNE_TMP_DIR"
 cd  "$CAYENNE_TMP_DIR"
 git checkout "$GIT_TAG"
 

@@ -20,12 +20,12 @@ title: "Cayenne Getting Started Guide"
 description: "Tutorial how to quick start new Cayenne project"
 weight: 20
 docsMenuTitle: "Getting Started"
-cayenneVersion: "4.1"
+cayenneVersion: "4.0"
 menu:
     footer:
-        weight: 10
+        weight: 5
         parent: docs
-        name: "Getting Started (4.1)"
+        name: "Getting Started (4.0)"
 ---
 <div class="sect1"> 
  <h2 id="setting-up-the-environment"><a class="anchor" href="#setting-up-the-environment"></a>1. Setting up the environment</h2> 
@@ -109,8 +109,8 @@ menu:
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>JDBC Driver: <code>org.apache.derby.jdbc.EmbeddedDriver</code></p> </li> 
-      <li> <p>DB URL: <code>jdbc:derby:memory:testdb;create=true</code></p> </li> 
+      <li> <p>JDBC Driver: org.apache.derby.jdbc.EmbeddedDriver</p> </li> 
+      <li> <p>DB URL: jdbc:derby:memory:testdb;create=true</p> </li> 
      </ul> 
     </div> 
     <div class="admonitionblock note"> 
@@ -234,7 +234,7 @@ menu:
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>Select "ARTIST" DbEntity and click on "Create ObjEntity" button <span class="image"><img src="images/icon-new_objentity.png" alt="icon new objentity"></span> either on the entity toolbar or on the main toolbar. An ObjEntity called "Artist" is created with a Java class field set to <code>org.example.cayenne.persistent.Artist</code>. The modeler transformed the database names to the Java-friendly names (e.g., if you click on the "Attributes" tab, you’ll see that "DATE_OF_BIRTH" column was converted to "dateOfBirth" Java class attribute).</p> </li> 
+      <li> <p>Select "ARTIST" DbEntity and click on "Create ObjEntity" button <span class="image"><img src="images/icon-new_objentity.png" alt="icon new objentity"></span> either on the entity toolbar or on the main toolbar. An ObjEntity called "Artist" is created with a Java class field set to "org.example.cayenne.persistent.Artist". The modeler transformed the database names to the Java-friendly names (e.g., if you click on the "Attributes" tab, you’ll see that "DATE_OF_BIRTH" column was converted to "dateOfBirth" Java class attribute).</p> </li> 
       <li> <p>Select "GALLERY" DbEntity and click on "Create ObjEntity" button again - you’ll see a "Gallery" ObjEntity created.</p> </li> 
       <li> <p>Finally, do the same thing for "PAINTING".</p> </li> 
      </ul> 
@@ -279,20 +279,20 @@ menu:
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
     &lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;tutorial&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;cayenne.version&gt;4.1.M2-SNAPSHOT&lt;/version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;<i class="conum" data-value="1"></i><b>(1)</b>
 
     &lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-            &lt;version&gt;${cayenne.version}&lt;/version&gt;
+            &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
+            &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;!--  For java.time.* types you need to use this dependency--&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-java8&lt;/artifactId&gt;
-            &lt;version&gt;${cayenne.version}&lt;/version&gt;
+            &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
@@ -473,29 +473,29 @@ INFO: setting DataNode 'datanode' as default, used by all unlinked DataMaps&lt;/
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">public class Artist extends _Artist {
 
-    static final String DEFAULT_DATE_FORMAT = "yyyyMMdd";
+	static final String DEFAULT_DATE_FORMAT = "yyyyMMdd";
 
-    /**
-     * Sets date of birth using a string in format yyyyMMdd.
-     */
-    public void setDateOfBirthString(String yearMonthDay) {
-        if (yearMonthDay == null) {
-            setDateOfBirth(null);
-            return;
-        }
+	/**
+	 * Sets date of birth using a string in format yyyyMMdd.
+	 */
+	public void setDateOfBirthString(String yearMonthDay) {
+		if (yearMonthDay == null) {
+			setDateOfBirth(null);
+		} else {
 
-        LocalDate date;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter
-                    .ofPattern(DEFAULT_DATE_FORMAT);
-            date = LocalDate.parse(yearMonthDay, formatter);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException(
-                    "A date argument must be in format '"
-                            + DEFAULT_DATE_FORMAT + "': " + yearMonthDay);
-        }
-        setDateOfBirth(date);
-    }
+			LocalDate date;
+			try {
+				DateTimeFormatter formatter = DateTimeFormatter
+						.ofPattern(DEFAULT_DATE_FORMAT);
+				date = LocalDate.parse(yearMonthDay, formatter);
+			} catch (DateTimeParseException e) {
+				throw new IllegalArgumentException(
+						"A date argument must be in format '"
+								+ DEFAULT_DATE_FORMAT + "': " + yearMonthDay);
+			}
+			setDateOfBirth(date);
+		}
+	}
 }</code></pre> 
      </div> 
     </div> 
@@ -519,8 +519,10 @@ picasso.setDateOfBirthString("18811025");</code></pre>
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">Gallery metropolitan = context.newObject(Gallery.class);
 metropolitan.setName("Metropolitan Museum of Art");
+
 Painting girl = context.newObject(Painting.class);
 girl.setName("Girl Reading at a Table");
+
 Painting stein = context.newObject(Painting.class);
 stein.setName("Gertrude Stein");</code></pre> 
      </div> 
@@ -532,6 +534,7 @@ stein.setName("Gertrude Stein");</code></pre>
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">picasso.addToPaintings(girl);
 picasso.addToPaintings(stein);
+
 girl.setGallery(metropolitan);
 stein.setGallery(metropolitan);</code></pre> 
      </div> 

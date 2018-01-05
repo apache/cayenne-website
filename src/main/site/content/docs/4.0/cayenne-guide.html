@@ -18,16 +18,14 @@
 
 title: "Cayenne Guide"
 description: "Cayenne Guide"
-cayenneVersion: "4.1"
+cayenneVersion: "4.0"
 weight: 10
 menu:
     footer:
-        weight: 30
+        weight: 20
         parent: docs
-        name: "Cayenne Guide (4.1)"
+        name: "Cayenne Guide (4.0)"
 ---
-
-
 <div class="sect1"> 
  <h2 id="object-relational-mapping-with-cayenne"><a class="anchor" href="#object-relational-mapping-with-cayenne"></a>1. Object Relational Mapping with Cayenne</h2> 
  <div class="sectionbody"> 
@@ -45,9 +43,9 @@ menu:
       Table 1. Cayenne Version History
      </caption> 
      <colgroup> 
-      <col style="width: 28.5714%;"> 
-      <col style="width: 42.8571%;"> 
-      <col style="width: 28.5715%;"> 
+      <col style="width: 33.3333%;"> 
+      <col style="width: 33.3333%;"> 
+      <col style="width: 33.3334%;"> 
      </colgroup> 
      <thead> 
       <tr> 
@@ -123,7 +121,7 @@ menu:
         &lt;plugin&gt;
             &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+            &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;</code></pre> 
@@ -134,7 +132,7 @@ menu:
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code>$ mvn cayenne-modeler:run</code></pre> 
+      <pre>$ mvn cayenne-modeler:run</pre> 
      </div> 
     </div> 
     <table id="pluginParameteres" class="tableblock frame-all grid-all spread table table-bordered"> 
@@ -347,9 +345,9 @@ total 24
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>cayenne-di-4.1.M2-SNAPSHOT.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-server-4.1.M2-SNAPSHOT.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.1.M2-SNAPSHOT.jar</code> - a client-side runtime for <a href="#rop">ROP applications</a>.</p> </li> 
+      <li> <p><code>cayenne-di-4.0.B3-SNAPSHOT.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-server-4.0.B3-SNAPSHOT.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-client-4.0.B3-SNAPSHOT.jar</code> - a client-side runtime for <a href="#rop">ROP applications</a>.</p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -373,7 +371,7 @@ total 24
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
    &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-   &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+   &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
      </div> 
     </div> 
@@ -415,7 +413,7 @@ total 24
           </div> 
           <div class="listingblock"> 
            <div class="content"> 
-            <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre> 
+            <pre>${project.basedir}/src/main/resources/my.map.xml</pre> 
            </div> 
           </div>
          </div></td> 
@@ -529,7 +527,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 
     &lt;configuration&gt;
         &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
@@ -578,7 +576,7 @@ total 24
           </div> 
           <div class="listingblock"> 
            <div class="content"> 
-            <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre> 
+            <pre>${project.basedir}/src/main/resources/my.map.xml</pre> 
            </div> 
           </div>
          </div></td> 
@@ -692,7 +690,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
     &lt;executions&gt;
         &lt;execution&gt;
             &lt;configuration&gt;
@@ -848,7 +846,7 @@ total 24
        <tr> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">namingStrategy</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>org.apache.cayenne.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td> 
        </tr> 
        <tr> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">skipPrimaryKeyLoading</p></td> 
@@ -890,7 +888,7 @@ total 24
        <tr> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">useJava7Types</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether <em>DATE</em>, <em>TIME</em> and <em>TIMESTAMP</em> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether <code>DATE</code>, <code>TIME</code> and <code>TIMESTAMP</code> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td> 
        </tr> 
        <tr> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">filters configuration</p></td> 
@@ -926,7 +924,7 @@ total 24
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 
     &lt;executions&gt;
         &lt;execution&gt;
@@ -963,7 +961,7 @@ total 24
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.M2-SNAPSHOT'</code></pre> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.0.B3-SNAPSHOT'</code></pre> 
      </div> 
     </div> 
     <div class="ulist"> 
@@ -985,7 +983,7 @@ total 24
     }
     // add Cayenne Gradle Plugin
     dependencies {
-        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.M2-SNAPSHOT'
+        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.0.B3-SNAPSHOT'
     }
 }
 
@@ -999,6 +997,7 @@ cayenne.defaultDataMap 'datamap.map.xml'
 dependencies {
     // this is a shortcut for 'org.apache.cayenne:cayenne-server:VERSION_OF_PLUGIN'
     compile cayenne.dependency('server')
+    compile cayenne.dependency('java8')
 }</code></pre> 
       </div> 
      </div> 
@@ -1231,12 +1230,11 @@ compileJava.dependsOn cgen</code></pre>
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = binder -&gt;
-      ServerModule.contributeProperties(binder)
-            .put(Constants.SERVER_EXTERNAL_TX_PROPERTY, "true");
+                ServerModule.contributeProperties(binder).put(Constants.SERVER_EXTERNAL_TX_PROPERTY, "true");
 ServerRuntime runtime = ServerRuntime.builder()
-      .addConfig("com/example/cayenne-project.xml")
-      .addModule(extensions)
-      .build();</code></pre> 
+                .addConfig("com/example/cayenne-project.xml")
+                .addModule(extensions)
+                .build();</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -1274,7 +1272,7 @@ ServerRuntime runtime = ServerRuntime.builder()
       <li> <p>Runtime DataDomain name is set to the name of the last project in the list.</p> </li> 
       <li> <p>Runtime DataDomain properties are the same as the properties of the last project in the list. I.e. properties are not merged to avoid invalid combinations and unexpected runtime behavior.</p> </li> 
       <li> <p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project, the rest are discarded. Same precedence rules apply - DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p> </li> 
-      <li> <p>If there are two or more DataNodes with the same name, only one DataNode is used in the merged project, the rest are discarded. DataNode coming from project with the highest index in the project list is chosen per precedence rule above.</p> </li> 
+      <li> <p>If there are two or more DataNodes with the same name, only one DataNodes is used in the merged project, the rest are discarded. DataNode coming from project with the highest index in the project list is chosen per precedence rule above.</p> </li> 
       <li> <p>There is a notion of "default" DataNode. After the merge if any DataMaps are not explicitly linked to DataNodes, their queries will be executed via a default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime. If there’s only one DataNode in the merged project, it will be automatically chosen as default. A possible way to explicitly designate a specific node as default is to override <code>DataDomainProvider.createAndInitDataDomain()</code>.</p> </li> 
      </ul> 
     </div> 
@@ -1357,10 +1355,10 @@ ServerRuntime runtime = ServerRuntime.builder()
    <div class="sect3"> 
     <h4 id="persistent-object-and-its-lifecycle"><a class="anchor" href="#persistent-object-and-its-lifecycle"></a>Persistent Object and its Lifecycle</h4> 
     <div class="paragraph"> 
-     <p>Cayenne can persist Java objects that implement <code>org.apache.cayenne.Persistent</code> interface. Generally persistent classes are generated from the model as described above, so users do not have to worry about superclass and property implementation details.</p> 
+     <p>Cayenne can persist Java objects that implement <code>org.apache.cayenne.Persistent interface</code>. Generally persistent classes are generated from the model as described above, so users do not have to worry about superclass and property implementation details.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Persistent interface provides access to 3 persistence-related properties - <em>objectId</em>, <em>persistenceState</em> and <em>objectContext</em>. All 3 are initialized by Cayenne runtime framework. Application code should not attempt to change them. However it is allowed to read them, which provides valuable runtime information. E.g. ObjectId can be used for quick equality check of 2 objects, knowing persistence state would allow highlighting changed objects, etc.</p> 
+     <p>Persistent interface provides access to 3 persistence-related properties - objectId, persistenceState and objectContext. All 3 are initialized by Cayenne runtime framework. Application code should not attempt to change them. However it is allowed to read them, which provides valuable runtime information. E.g. ObjectId can be used for quick equality check of 2 objects, knowing persistence state would allow highlighting changed objects, etc.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Each persistent object belongs to a single ObjectContext, and can be in one of the following persistence states (as defined in <code>org.apache.cayenne.PersistenceState</code>) :</p> 
@@ -1464,7 +1462,7 @@ newArtist.setName("Picasso");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>It will only exist in memory until <code>commitChanges</code> is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an INSERT SQL statement to permanently store the object.</p> 
+     <p>It will only exist in memory until "commitChanges" is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an INSERT SQL statement to permanently store the object.</p> 
     </div> 
     <div class="paragraph"> 
      <p><code>deleteObjects</code> method takes one or more Persistent objects and marks them as "DELETED":</p> 
@@ -1684,7 +1682,7 @@ tx.addConnection("mydatanode", myConnection);</code></pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java"> [db:]segment[+][.segment[+]...]</code></pre> 
+      <pre> [db:]segment[+][.segment[+]...]</pre> 
      </div> 
     </div> 
     <div class="ulist"> 
@@ -1705,7 +1703,7 @@ tx.addConnection("mydatanode", myConnection);</code></pre>
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>Similarly a database path expression is a dot-separated path through DB table joins and columns. In Cayenne joins are mapped as DbRelationships with some symbolic names (the closest concept to DbRelationship name in the DB world is a named foreign key constraint. But DbRelationship names are usually chosen arbitrarily, without regard to constraints naming or even constraints presence). A database path therefore might look like this - <code>db:dbrelationshipX.dbrelationshipY.COLUMN_Z"</code>. More specific examples:</p> 
+     <p>Similarly a database path expression is a dot-separated path through DB table joins and columns. In Cayenne joins are mapped as DbRelationships with some symbolic names (the closest concept to DbRelationship name in the DB world is a named foreign key constraint. But DbRelationship names are usually chosen arbitrarily, without regard to constraints naming or even constraints presence). A database path therefore might look like this - <code>db:dbrelationshipX.dbrelationshipY.COLUMN_Z</code>. More specific examples:</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
@@ -1719,7 +1717,7 @@ tx.addConnection("mydatanode", myConnection);</code></pre>
     <div class="ulist"> 
      <ul> 
       <li> <p><code>artist.exhibits.closingDate</code> - full path</p> </li> 
-      <li> <p><code>e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p> </li> 
+      <li> <p><code>e.closingDate</code> - alias <code>e</code> is used for <code>artist.exhibits</code>.</p> </li> 
      </ul> 
     </div> 
     <div class="paragraph"> 
@@ -1772,7 +1770,7 @@ name LIKEIGNORECASE 'A%'</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Path prefixes. Object expressions are unquoted strings, optionally prefixed by <code>obj:</code> (usually they are not prefixed at all actually). Database expressions are always prefixed with <code>db:</code>. A special kind of prefix, not discussed yet is <code>enum:</code> that prefixes an enumeration constant:</p> 
+     <p>Path prefixes. Object expressions are unquoted strings, optionally prefixed by "obj:" (usually they are not prefixed at all actually). Database expressions are always prefixed with "db:". A special kind of prefix, not discussed yet is "enum:" that prefixes an enumeration constant:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1816,7 +1814,7 @@ Expression qualifier2 = template.paramsArray("Monet");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Positional binding is usually shorter. You can pass positional bindings to the <code>exp(..)</code> factory method (its second argument is a params vararg):</p> 
+     <p>Positional binding is usually shorter. You can pass positional bindings to the <code>"exp(..)"</code> factory method (its second argument is a params vararg):</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1856,14 +1854,14 @@ Expression qualifier1 = template.params(p1);
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Null handling. Handling of Java nulls as operands is no different from normal values. Instead of using special conditional operators, like SQL does (<code>IS NULL</code>, <code>IS NOT NULL</code>), "=" and "!=" expressions are used directly with null values. It is up to Cayenne to translate expressions with nulls to the valid SQL.</p> 
+     <p>Null handling. Handling of Java nulls as operands is no different from normal values. Instead of using special conditional operators, like SQL does (IS NULL, IS NOT NULL), "=" and "!=" expressions are used directly with null values. It is up to Cayenne to translate expressions with nulls to the valid SQL.</p> 
     </div> 
     <div class="admonitionblock note"> 
      <table> 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> A formal definition of the expression grammar is provided in <a href="#appendixC">Appendix C</a> </td> 
+        <td class="content"> A formal definition of the expression grammar is provided in Appendix C </td> 
        </tr> 
       </tbody>
      </table> 
@@ -1887,7 +1885,7 @@ Expression finalExp = e1.andExp(e2);</code></pre>
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> The last line in the example above shows how to create a new expression by "chaining" two other expressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact a new expression is created. I.e. Expression API treats existing expressions as immutable. </td> 
+        <td class="content"> The last line in the example above shows how to create a new expression by "chaining" two other epxressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact a new expression is created. I.e. Expression API treats existing expressions as immutable. </td> 
        </tr> 
       </tbody>
      </table> 
@@ -1922,7 +1920,7 @@ Expression e2 = Painting.ARTIST.dot(Artist.NAME).eq("Pablo");</code></pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="evaluete"><a class="anchor" href="#evaluete"></a>Evaluating Expressions in Memory</h4> 
+    <h4 id="evaluate"><a class="anchor" href="#evaluate"></a>Evaluating Expressions in Memory</h4> 
     <div class="paragraph"> 
      <p>When used in a query, an expression is converted to SQL WHERE clause (or ORDER BY clause) by Cayenne during query execution. Thus the actual evaluation against the data is done by the database engine. However the same expressions can also be used for accessing object properties, calculating values, in-memory filtering.</p> 
     </div> 
@@ -2053,8 +2051,8 @@ o.orderList(list);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0
-INFO: === returned 5 row. - took 5 ms.</code></pre> 
+       <pre>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0
+INFO: === returned 5 row. - took 5 ms.</pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -2072,9 +2070,9 @@ INFO: === returned 5 row. - took 5 ms.</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0 WHERE t0.NAME LIKE ?
+       <pre>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0 WHERE t0.NAME LIKE ?
 [bind: 1-&gt;NAME:'Pablo%']
-INFO: === returned 1 row. - took 6 ms.</code></pre> 
+INFO: === returned 1 row. - took 6 ms.</pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -2242,7 +2240,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1,?2,?3)</code></pre> 
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">select p from Painting p where p.paintingTitle in (?1,?2,?3)</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -2250,7 +2248,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in ?1</code></pre> 
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">select p from Painting p where p.paintingTitle in ?1</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -2258,7 +2256,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1)</code></pre> 
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">select p from Painting p where p.paintingTitle in (?1)</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -2293,7 +2291,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
     <div class="sect4"> 
      <h5 id="sqlselect-and-sqlexec"><a class="anchor" href="#sqlselect-and-sqlexec"></a>SQLSelect and SQLExec</h5> 
      <div class="paragraph"> 
-      <p><code>SQLSelect</code> and <code>SQLExec</code> are essentially a "fluent" versions of older <code>SQLTemplate</code> query. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns or collection of <code>DataRow</code>. <code>SQLExec</code> is designed to just execute any raw SQL code (e.g. updates, deletes, DDLs, etc.) This queries support all directives described in <a href="#sqltemplate">SQLTemplate</a> section.</p> 
+      <p><code>SQLSelect</code> and <code>SQLExec</code> are essentially a "fluent" versions of older <code>SQLTemplate</code> query. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns or collection of <code>DataRow. SQLExec</code> is designed to just execute any raw SQL code (e.g. updates, deletes, DDLs, etc.) This queries support all directives described in <a href="#sqltemplate">SQLTemplate</a> section.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Here is example of how to use SQLSelect:</p> 
@@ -2756,7 +2754,7 @@ select.setParameters(Collections.singletonMap("a", a));</code></pre>
       <div class="ulist"> 
        <ul> 
         <li> <p><code>column</code> - the name of the column to render in SQL SELECT clause.</p> </li> 
-        <li> <p><code>javaType</code> - a fully-qualified Java class name for a given result column. For simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So <code>"#result('A' 'String')"</code>, <code>"#result('B' 'java.lang.String')"</code> and <code>"#result('C' 'int')"</code> are all valid</p> </li> 
+        <li> <p><code>javaType</code> - a fully-qualified Java class name for a given result column. For simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So "<em>#result('A' 'String')</em>", "<em>#result('B' 'java.lang.String')</em>" and "<em>#result('C' 'int')</em>" are all valid</p> </li> 
         <li> <p><code>alias</code> - specifies both the SQL alias of the column and the value key in the DataRow. If omitted, "column" value is used.</p> </li> 
         <li> <p><code>dataRowKey</code> - needed if SQL 'alias' is not appropriate as a DataRow key on the Cayenne side. One common case when this happens is when a DataRow retrieved from a query is mapped using joint prefetch keys (see below). In this case DataRow must use database path expressions for joint column keys, and their format is incompatible with most databases alias format.</p> </li> 
        </ul> 
@@ -2781,15 +2779,11 @@ select.setParameters(Collections.singletonMap("a", a));</code></pre>
         <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT #result('ID' 'int'), #result('NAME' 'String'), #result('DATE_OF_BIRTH' 'java.util.Date') FROM ARTIST</code></pre> 
        </div> 
       </div> 
-      <div class="admonitionblock note"> 
-       <table> 
-        <tbody>
-         <tr> 
-          <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-          <td class="content"> For advanced features you may look at the <a href="#velocity">Apache Velocity extension</a> </td> 
-         </tr> 
-        </tbody>
-       </table> 
+     </div> 
+     <div class="sect5"> 
+      <h6 id="note"><a class="anchor" href="#note"></a>Note</h6> 
+      <div class="paragraph"> 
+       <p>For advanced features you may look at the <a href="#velocity">Apache Velocity extension</a></p> 
       </div> 
      </div> 
      <div class="sect5"> 
@@ -3267,7 +3261,7 @@ query.prefetch(Artist.PAINTINGS.dot(Painting.GALLERY).disjoint());</code></pre>
     <div class="sect4"> 
      <h5 id="prefetching-semantics"><a class="anchor" href="#prefetching-semantics"></a>Prefetching Semantics</h5> 
      <div class="paragraph"> 
-      <p>Prefetching semantics defines a strategy to prefetch relationships. Depending on it, Cayenne would generate different types of queries. The end result is the same - query root objects with related objects fully resolved. However semantics can affect performance, in some cases significantly. There are 3 types of prefetch semantics, all defined as constants in <code>org.apache.cayenne.query.PrefetchTreeNode</code>:</p> 
+      <p>Prefetching semantics defines a strategy to prefetch relationships. Depending on it, Cayenne would generate different types of queries. The end result is the same - query root objects with related objects fully resolved. However semantics can affect preformance, in some cases significantly. There are 3 types of prefetch semantics, all defined as constants in <code>org.apache.cayenne.query.PrefetchTreeNode</code>:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -3277,13 +3271,13 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>There’s no limitation on mixing different types of semantics in the same query. Each prefetch can have its own semantics. <code>SelectQuery</code> uses <code>DISJOINT_PREFETCH_SEMANTICS</code> by default. <code>ObjectSelect</code> requires explicit semantics as we’ve seen above. <code>SQLTemplate</code> and <code>ProcedureQuery</code> are both using <code>JOINT_PREFETCH_SEMANTICS</code> and it can not be changed due to the nature of those two queries.</p> 
+      <p>There’s no limitation on mixing different types of semantics in the same query. Each prefetch can have its own semantics. <code>SelectQuery</code> uses <code>DISJOINT_PREFETCH_SEMANTICS</code> by default. <code>ObjectSelect</code> requires explicit semantics as we’ve seen above. <code>SQLTemplate_ and _ProcedureQuery</code> are both using <code>JOINT_PREFETCH_SEMANTICS</code> and it can not be changed due to the nature of those two queries.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="disjoint-prefetching-semantics"><a class="anchor" href="#disjoint-prefetching-semantics"></a>Disjoint Prefetching Semantics</h5> 
      <div class="paragraph"> 
-      <p>This semantics results in Cayenne generatiing one SQL statement for the main objects, and a separate statement for each prefetch path (hence "disjoint" - related objects are not fetched with the main query). Each additional SQL statement uses a qualifier of the main query plus a set of joins traversing the prefetch path between the main and related entity.</p> 
+      <p>This semantics results in Cayenne generatiing one SQL statement for the main objects, and a separate statement for each prefetch path (hence "disjoint" - related objects are not fetched with the main query). Each additional SQL statement uses a qualifier of the main query plus a set of joins traversing the preftech path between the main and related entity.</p> 
      </div> 
      <div class="paragraph"> 
       <p>This strategy has an advantage of efficient JVM memory use, and faster overall result processing by Cayenne, but it requires (1+N) SQL statements to be executed, where N is the number of prefetched relationships.</p> 
@@ -3292,7 +3286,7 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
     <div class="sect4"> 
      <h5 id="disjoint-by-id-prefetching-semantics"><a class="anchor" href="#disjoint-by-id-prefetching-semantics"></a>Disjoint-by-ID Prefetching Semantics</h5> 
      <div class="paragraph"> 
-      <p>This is a variation of disjoint prefetch where related objects are matched against a set of IDs derived from the fetched main objects (or intermediate objects in a multi-step prefetch). Cayenne limits the size of the generated WHERE clause, as most DBs can’t parse arbitrary large SQL. So prefetch queries are broken into smaller queries. The size of is controlled by the DI property <code>Constants.SERVER_MAX_ID_QUALIFIER_SIZE_PROPERTY</code> (the default number of conditions in the generated WHERE clause is 10000). Cayenne will generate (1 + N * M) SQL statements for each query using disjoint-by-ID prefetches, where N is the number of relationships to prefetch, and M is the number of queries for a given prefetch that is dependent on the number of objects in the result (ideally M = 1).</p> 
+      <p>This is a variation of disjoint prefetch where related objects are matched against a set of IDs derived from the fetched main objects (or intermediate objects in a multi-step prefetch). Cayenne limits the size of the generated WHERE clause, as most DBs can’t parse arbitrary large SQL. So prefetch queries are broken into smaller queries. The size of is controlled by the DI property Constants.SERVER_MAX_ID_QUALIFIER_SIZE_PROPERTY (the default number of conditions in the generated WHERE clause is 10000). Cayenne will generate (1 + N * M) SQL statements for each query using disjoint-by-ID prefetches, where N is the number of relationships to prefetch, and M is the number of queries for a given prefetch that is dependent on the number of objects in the result (ideally M = 1).</p> 
      </div> 
      <div class="paragraph"> 
       <p>The advantage of this type of prefetch is that matching database rows by ID may be much faster than matching the qualifier of the original query. Moreover this is <strong>the only type of prefetch</strong> that can handle SelectQueries with <strong>fetch</strong> limit. Both joint and regular disjoint prefetches may produce invalid results or generate inefficient fetch-the-entire table SQL when fetch limit is in effect.</p> 
@@ -3328,7 +3322,7 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
    <div class="sect3"> 
     <h4 id="data-rows"><a class="anchor" href="#data-rows"></a>Data Rows</h4> 
     <div class="paragraph"> 
-     <p>Converting result set data to Persistent objects and registering these objects in the ObjectContext can be an expensive operation comparable to the time spent running the query (and frequently exceeding it). Internally Cayenne builds the result as a list of DataRows, that are later converted to objects. Skipping the last step and using data in the form of DataRows can significantly increase performance.</p> 
+     <p>Converting result set data to Persistent objects and registering these objects in the ObjectContext can be an expensive operation compareable to the time spent running the query (and frequently exceeding it). Internally Cayenne builds the result as a list of DataRows, that are later converted to objects. Skipping the last step and using data in the form of DataRows can significantly increase performance.</p> 
     </div> 
     <div class="paragraph"> 
      <p>DataRow is a simply a map of values keyed by their DB column name. It is a ubiqutous representation of DB data used internally by Cayenne. And it can be quite usable as is in the application in many cases. So performance sensitive selects should consider DataRows - it saves memory and CPU cycles. All selecting queries support DataRows option, e.g.:</p> 
@@ -3576,7 +3570,7 @@ public class Artist extends _Artist {
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code>$ java -Dcayenne.server.contexts_sync_strategy=false</code></pre> 
+      <pre>$ java -Dcayenne.server.contexts_sync_strategy=false</pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -3713,11 +3707,11 @@ for (int i = 0; i &lt; 5; i++) {
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code>0_Service1Impl
+       <pre>0_Service1Impl
 1_Service1Impl
 2_Service1Impl
 3_Service1Impl
-4_Service1Impl</code></pre> 
+4_Service1Impl</pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -3778,7 +3772,7 @@ binder.bind(Key.get(Service2.class, "i2")).to(Service2Impl.class);</code></pre>
    <div class="sect3"> 
     <h4 id="customization-strategies"><a class="anchor" href="#customization-strategies"></a>Customization Strategies</h4> 
     <div class="paragraph"> 
-     <p>The previous section discussed how Cayenne DI works in general terms. Since Cayenne users will mostly be dealing with an existing Injector provided by ServerRuntime, it is important to understand how to build custom extensions to a preconfigured container. As shown in "Starting and Stopping ServerRuntime" chapter, custom extensions are done by writing an application DI module (or multiple modules) that configures service overrides. This section shows all the configuration possibilities in detail, including changing properties of the existing services, contributing services to standard service lists and maps, and overriding service implementations. All the code examples later in this section are assumed to be placed in an application module "configure" method:</p> 
+     <p>The previous section discussed how Cayenne DI works in general terms. Since Cayenne users will mostly be dealing with an existing Injector provided by ServerRuntime, it is important to understand how to build custom extensions to a preconfigured container. As shown in "Starting and Stopping ServerRuntime" chapter, custom extensions are done by writing an aplication DI module (or multiple modules) that configures service overrides. This section shows all the configuration possibilities in detail, including changing properties of the existing services, contributing services to standard service lists and maps, and overriding service implementations. All the code examples later in this section are assumed to be placed in an application module "configure" method:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -3808,11 +3802,11 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code>$ java -Dcayenne.server.contexts_sync_strategy=false ...</code></pre> 
+       <pre>$ java -Dcayenne.server.contexts_sync_strategy=false ...</pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>A second one is to contribute a property to <code>o.a.c.configuration.DefaultRuntimeProperties.properties</code> map (see the next section on how to do that). This map contains the default property values and can accept application-specific values, overrding the defaults.</p> 
+      <p>A second one is to contribute a property to <code>org.apache.cayenne.configuration.DefaultRuntimeProperties.properties</code> map (see the next section on how to do that). This map contains the default property values and can accept application-specific values, overrding the defaults.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Note that if a property value is a name of a Java class, when this Java class is instantiated by Cayenne, the container performs injection of instance variables. So even the dynamically specified Java classes can use @Inject annotation to get a hold of other Cayenne services.</p> 
@@ -3824,7 +3818,7 @@ ServerRuntime runtime = ServerRuntime.builder()
     <div class="sect4"> 
      <h5 id="contributing-to-service-collections"><a class="anchor" href="#contributing-to-service-collections"></a>Contributing to Service Collections</h5> 
      <div class="paragraph"> 
-      <p>Cayenne can be extended by adding custom objects to named maps or lists bound in DI. We are calling these lists/maps "service collections". A service collection allows things like appending a custom strategy to a list of built-in strategies. E.g. an application that needs to install a custom DbAdapter for some database type may contribute an instance of custom DbAdapterDetector to a <code>o.a.c.configuration.server.DefaultDbAdapterFactory.detectors</code> list:</p> 
+      <p>Cayenne can be extended by adding custom objects to named maps or lists bound in DI. We are calling these lists/maps "service collections". A service collection allows things like appending a custom strategy to a list of built-in strategies. E.g. an application that needs to install a custom DbAdapter for some database type may contribute an instance of custom DbAdapterDetector to a <code>org.apache.cayenne.configuration.server.DefaultDbAdapterFactory.detectors</code> list:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -4022,6 +4016,26 @@ public class DoubleArrayType implements ExtendedType {
 }</code></pre> 
        </div> 
       </div> 
+      <div class="paragraph"> 
+       <p>For Java7</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="highlight"><code class="language-Java Java" data-lang="Java">// add DoubleArrayType to list of user types
+ServerRuntime runtime = ServerRuntime.builder()
+                .addConfig("cayenne-project.xml")
+                .addModule(new Module() {
+                    @Override
+                    public void configure(Binder binder) {
+                        ServerModule.contributeUserTypes(binder).add(new DoubleArrayType());
+                    }
+                })
+                .build();</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>For Java8</p> 
+      </div> 
       <div class="listingblock"> 
        <div class="content"> 
         <pre class="highlight"><code class="language-Java Java" data-lang="Java">// add DoubleArrayType to list of user types
@@ -4203,7 +4217,7 @@ ServerRuntime runtime = ServerRuntime.builder()
       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
 		&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
 		&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-		&lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+		&lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 
 		&lt;configuration&gt;
 			&lt;map&gt;${project.basedir}/src/main/resources/datamap.map.xml&lt;/map&gt;
@@ -4286,15 +4300,11 @@ ServerRuntime runtime = ServerRuntime.builder()
 &lt;/dbimport&gt;</code></pre> 
      </div> 
     </div> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> Current version of reverse engineering doesn’t support catalog filtering for Postgres database. </td> 
-       </tr> 
-      </tbody>
-     </table> 
+    <div class="sect4"> 
+     <h5 id="note-2"><a class="anchor" href="#note-2"></a>Note</h5> 
+     <div class="paragraph"> 
+      <p>Current version of reverse engineering doesn’t support catalog filtering for Postgres database.</p> 
+     </div> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -4776,7 +4786,7 @@ ServerRuntime runtime = ServerRuntime.builder()
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-cache-invalidation&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -4785,7 +4795,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <h5 id="gradle"><a class="anchor" href="#gradle"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.M2-SNAPSHOT'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.0.B3-SNAPSHOT'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -4806,54 +4816,50 @@ public class MyEntity extends _MyEntity {
     <div class="paragraph"> 
      <p>After any modification of <code>MyEntity</code> objects cache group <code>"some-group"</code> will be dropped from cache automatically.</p> 
     </div> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> You can read more about cache and cache groups in corresponding <a href="#caching">chapter</a> of this documentation. </td> 
-       </tr> 
-      </tbody>
-     </table> 
-    </div> 
-    <div class="paragraph"> 
-     <p>In case you need some complex logic of cache invalidation you can disable default behaviour and provide your own.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>To do so you need to implement <code>o.a.c.cache.invalidation.InvalidationHandler</code> interface and setup Cache Invalidation module to use it. Let’s use implementation class called <code>CustomInvalidationHandler</code> that will simply match all entities' types with <code>"custom-group"</code> cache group regardless of any annotations:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">public class CustomInvalidationHandler implements InvalidationHandler {
+    <div class="sect4"> 
+     <h5 id="note-3"><a class="anchor" href="#note-3"></a>Note</h5> 
+     <div class="paragraph"> 
+      <p>You can read more about cache and cache groups in corresponding <a href="#caching">chapter</a> of this documentation.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>In case you need some complex logic of cache invalidation you can disable default behaviour and provide your own.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>To do so you need to implement <code>org.apache.cayenne.cache.invalidation.InvalidationHandler</code> interface and setup Cache Invalidation module to use it. Let’s use implementation class called <code>CustomInvalidationHandler</code> that will simply match all entities' types with <code>"custom-group"</code> cache group regardless of any annotations:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-java java" data-lang="java">public class CustomInvalidationHandler implements InvalidationHandler {
     @Override
     public InvalidationFunction canHandle(Class&lt;? extends Persistent&gt; type) {
         return p -&gt; Collections.singleton(new CacheGroupDescriptor("custom-group"));
     }
 }</code></pre> 
+      </div> 
      </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Now we’ll set up it’s usage by <code>ServerRuntime</code>:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
+     <div class="paragraph"> 
+      <p>Now we’ll set up it’s usage by <code>ServerRuntime</code>:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
         .addModule(CacheInvalidationModule.extend()
                 // this will disable default handler based on @CacheGroups, and this is optional
                 .noCacheGroupsHandler()
                 .addHandler(CustomInvalidationHandler.class)
                 .module())</code></pre> 
+      </div> 
      </div> 
-    </div> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> You can combine as many invalidation handlers as you need. </td> 
-       </tr> 
-      </tbody>
-     </table> 
+     <div class="admonitionblock note"> 
+      <table> 
+       <tbody>
+        <tr> 
+         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+         <td class="content"> You can combine as many invalidation handlers as you need. </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </div> 
     </div> 
    </div> 
   </div> 
@@ -4874,7 +4880,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-commitlog&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -4883,7 +4889,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-2"><a class="anchor" href="#gradle-2"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.M2-SNAPSHOT'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.0.B3-SNAPSHOT'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -4952,7 +4958,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-crypto&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -4961,7 +4967,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-3"><a class="anchor" href="#gradle-3"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.M2-SNAPSHOT'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.0.B3-SNAPSHOT'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -4982,33 +4988,29 @@ public class MyEntity extends _MyEntity {
        <li> <p>Character types, that will store <code>base64</code> encoded value: <code>CHAR, NCHAR, CLOB, NCLOB, LONGVARCHAR, LONGNVARCHAR, VARCHAR, NVARCHAR</code>.</p> </li> 
       </ol> 
      </div> 
-     <div class="admonitionblock note"> 
-      <table> 
-       <tbody>
-        <tr> 
-         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-         <td class="content"> Not all data types may be supported by your database. </td> 
-        </tr> 
-       </tbody>
-      </table> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Default naming strategy that doesn’t require additional setup suggests using "CRYPTO_" prefix. You can change this default strategy by injecting you own implementation of <code>o.a.c.crypto.map.ColumnMapper</code> interface.</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
+     <div class="sect5"> 
+      <h6 id="note-4"><a class="anchor" href="#note-4"></a>Note</h6> 
+      <div class="paragraph"> 
+       <p>Not all data types may be supported by your database.</p> 
+      </div> 
+      <div class="paragraph"> 
+       <p>Default naming strategy that doesn’t require additional setup suggests using "CRYPTO_" prefix. You can change this default strategy by injecting you own implementation of <code>org.apache.cayenne.crypto.map.ColumnMapper</code> interface.</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
         .addModule(CryptoModule.extend()
                 .columnMapper(MyColumnMapper.class)
                 .module())</code></pre> 
+       </div> 
       </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Here is an example of how <code>ObjEntity</code> with two encrypted and two unencrypted properties can look like:</p> 
-     </div> 
-     <div class="imageblock" style="text-align: left"> 
-      <div class="content"> 
-       <img src="images/ext-crypto-obj-entity.png" alt="ext crypto obj entity"> 
+      <div class="paragraph"> 
+       <p>Here is an example of how <code>ObjEntity</code> with two encrypted and two unencrypted properties can look like:</p> 
+      </div> 
+      <div class="imageblock" style="text-align: left"> 
+       <div class="content"> 
+        <img src="images/ext-crypto-obj-entity.png" alt="ext crypto obj entity"> 
+       </div> 
       </div> 
      </div> 
     </div> 
@@ -5041,7 +5043,7 @@ public class MyEntity extends _MyEntity {
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>Another useful extension point is support for custom Java value types. To add support for your data type you need to implement <code>o.a.c.crypto.transformer.value.BytesConverter</code> interface that will convert required type to and from <code>byte[]</code>.</p> 
+      <p>Another useful extension point is support for custom Java value types. To add support for your data type you need to implement <code>org.apache.cayenne.crypto.transformer.value.BytesConverter</code> interface that will convert required type to and from <code>byte[]</code>.</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -5065,11 +5067,11 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="jcache-integration"><a class="anchor" href="#jcache-integration"></a>5.4. JCache integration</h3> 
+   <h3 id="apache-commons-dbcp-integration"><a class="anchor" href="#apache-commons-dbcp-integration"></a>5.4. Apache Commons DBCP integration</h3> 
    <div class="sect3"> 
     <h4 id="description-4"><a class="anchor" href="#description-4"></a>Description</h4> 
     <div class="paragraph"> 
-     <p>This module allows to integrate any JCache (JSR 107) compatible caching provider with Cayenne.</p> 
+     <p>This module enables usage of Apache Commons DBCP2 connection pool.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -5080,8 +5082,8 @@ public class MyEntity extends _MyEntity {
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;artifactId&gt;cayenne-dbcp2&lt;/artifactId&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5090,13 +5092,94 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-4"><a class="anchor" href="#gradle-4"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.M2-SNAPSHOT'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-dbcp2:4.0.B3-SNAPSHOT'</code></pre> 
       </div> 
      </div> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="usage-4"><a class="anchor" href="#usage-4"></a>Usage</h4> 
+    <div class="paragraph"> 
+     <p>To use DBCP2 pool you need to setup it in DataNode settings in Cayenne Modeler:</p> 
+    </div> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/ext-dbcp-setup.png" alt="ext dbcp setup"> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="java-8-extension"><a class="anchor" href="#java-8-extension"></a>5.5. Java 8 extension</h3> 
+   <div class="sect3"> 
+    <h4 id="description-5"><a class="anchor" href="#description-5"></a>Description</h4> 
+    <div class="paragraph"> 
+     <p>Java 8 module allows to use <code>java.time.LocalTime, java.time.LocalDate</code> and <code>java.time.LocalDateTime</code> types for entity attributes</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="including-in-a-project-5"><a class="anchor" href="#including-in-a-project-5"></a>Including in a project</h4> 
+    <div class="sect4"> 
+     <h5 id="maven-5"><a class="anchor" href="#maven-5"></a>Maven</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-java8&lt;/artifactId&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-java8:4.0.B3-SNAPSHOT'</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="usage-5"><a class="anchor" href="#usage-5"></a>Usage</h4> 
+    <div class="paragraph"> 
+     <p>This module doesn’t require any additional setup, you can just use new data types in your model.</p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="jcache-integration"><a class="anchor" href="#jcache-integration"></a>5.6. JCache integration</h3> 
+   <div class="sect3"> 
+    <h4 id="description-6"><a class="anchor" href="#description-6"></a>Description</h4> 
+    <div class="paragraph"> 
+     <p>This module allows to integrate any JCache (JSR 107) compatible caching provider with Cayenne.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="including-in-a-project-6"><a class="anchor" href="#including-in-a-project-6"></a>Including in a project</h4> 
+    <div class="sect4"> 
+     <h5 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.0.B3-SNAPSHOT'</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="usage-6"><a class="anchor" href="#usage-6"></a>Usage</h4> 
     <div class="paragraph"> 
      <p>To use JCache provider in your app you need to include this module and caching provider libs (e.g. Ehcache). You can provide own implementation of <code>org.apache.cayenne.jcache.JCacheConfigurationFactory</code> to customize cache configuration if required.</p> 
     </div> 
@@ -5119,97 +5202,11 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="joda-time-extension"><a class="anchor" href="#joda-time-extension"></a>5.5. Joda time extension</h3> 
-   <div class="sect3"> 
-    <h4 id="description-5"><a class="anchor" href="#description-5"></a>Description</h4> 
-    <div class="paragraph"> 
-     <p>Joda time module allows to use <code>org.joda.time.LocalTime</code>, <code>org.joda.time.LocalDate</code>, <code>org.joda.time.LocalDateTime</code> and <code>org.joda.time.DateTime</code> types for entity attributes.</p> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="including-in-a-project-5"><a class="anchor" href="#including-in-a-project-5"></a>Including in a project</h4> 
-    <div class="sect4"> 
-     <h5 id="maven-5"><a class="anchor" href="#maven-5"></a>Maven</h5> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-joda&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.1.M2-SNAPSHOT'</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="usage-5"><a class="anchor" href="#usage-5"></a>Usage</h4> 
-    <div class="paragraph"> 
-     <p>This module doesn’t require any additional setup, you can just use new data types in your model.</p> 
-    </div> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="project-compatibility-extension"><a class="anchor" href="#project-compatibility-extension"></a>5.6. Project compatibility extension</h3> 
-   <div class="sect3"> 
-    <h4 id="description-6"><a class="anchor" href="#description-6"></a>Description</h4> 
-    <div class="paragraph"> 
-     <p>Since version 4.1 Cayenne doesn’t allow to load project XML files from previous versions as this can lead to unexpected errors in runtime. This module allows to use project files from older versions performing their upgrade on the fly (without modifying files). This can be useful when using Cayenne models from third-party libraries in your app.</p> 
-    </div> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> You should prefer explicit project upgrade via Cayenne Modeler. </td> 
-       </tr> 
-      </tbody>
-     </table> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="including-in-a-project-6"><a class="anchor" href="#including-in-a-project-6"></a>Including in a project</h4> 
-    <div class="sect4"> 
-     <h5 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h5> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-project-compatibility&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.M2-SNAPSHOT'</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="usage-6"><a class="anchor" href="#usage-6"></a>Usage</h4> 
-    <div class="paragraph"> 
-     <p>This module doesn’t require any additional setup.</p> 
-    </div> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="velocity"><a class="anchor" href="#velocity"></a>5.7. Apache Velocity extension</h3> 
+   <h3 id="joda-time-extension"><a class="anchor" href="#joda-time-extension"></a>5.7. Joda time extension</h3> 
    <div class="sect3"> 
     <h4 id="description-7"><a class="anchor" href="#description-7"></a>Description</h4> 
     <div class="paragraph"> 
-     <p>This module enables usage of full featured Apache Velocity templates in <code>org.apache.cayenne.query.SQLTemplate</code> queries.</p> 
+     <p>Joda time module allows to use <code>org.joda.time.LocalTime</code>, <code>org.joda.time.LocalDate</code>, <code>org.joda.time.LocalDateTime</code> and <code>org.joda.time.DateTime</code> types for entity attributes.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -5220,8 +5217,8 @@ public class MyEntity extends _MyEntity {
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-velocity&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
+    &lt;artifactId&gt;cayenne-joda&lt;/artifactId&gt;
+    &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5230,7 +5227,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.M2-SNAPSHOT'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.0.B3-SNAPSHOT'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5238,35 +5235,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="usage-7"><a class="anchor" href="#usage-7"></a>Usage</h4> 
     <div class="paragraph"> 
-     <p>This module doesn’t require any additional setup.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>In addition of directives mentioned in <a href="#directives">this chapter</a>, this module enables <code>#chain</code> and <code>#chunk</code> directives.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p><code>#chain</code> and <code>#chunk</code> directives are used for conditional inclusion of SQL code. They are used together with <code>#chain</code> wrapping multiple <code>#chunks</code>. A chunk evaluates its parameter expression and if it is NULL suppresses rendering of the enclosed SQL block. A chain renders its prefix and its chunks joined by the operator. If all the chunks are suppressed, the chain itself is suppressed. This allows to work with otherwise hard to script SQL semantics. E.g. a WHERE clause can contain multiple conditions joined with AND or OR. Application code would like to exclude a condition if its right-hand parameter is not present (similar to Expression pruning discussed above). If all conditions are excluded, the entire WHERE clause should be excluded. chain/chunk allows to do that.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Semantics:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code>#chain(operator) ... #end
-#chain(operator prefix) ... #end
-#chunk() ... #end
-#chunk(param) ... #end</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Full example:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code>#chain('OR' 'WHERE')
-    #chunk($name) NAME LIKE #bind($name) #end
-    #chunk($id) ARTIST_ID &gt; #bind($id) #end
-#end"</code></pre> 
-     </div> 
+     <p>This module doesn’t require any additional setup, you can just use new data types in your model.</p> 
     </div> 
    </div> 
   </div> 
@@ -5482,7 +5451,7 @@ public class MyEntity extends _MyEntity {
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="appendixC"><a class="anchor" href="#appendixC"></a>8. Appendix C. Expressions BNF</h2> 
+ <h2 id="appendix-c-expressions-bnf"><a class="anchor" href="#appendix-c-expressions-bnf"></a>8. Appendix C. Expressions BNF</h2> 
  <div class="sectionbody"> 
   <div class="listingblock"> 
    <div class="content"> 
@@ -5627,7 +5596,7 @@ NON-TERMINALS
     <li> <p><a href="#dbimportParameters">&lt;dbimport&gt; parameters</a></p> </li> 
     <li> <p><a href="#persistenceStates">Persistence States</a></p> </li> 
     <li> <p><a href="#lifecycleEvent">Lifecycle Event Types</a></p> </li> 
-    <li> <p><a href="#configProperties">Configuration Properties Recognized by ServerRuntime and/or ClientRuntime</a></p> </li> 
+    <li> <p><a href="#congigProperties">Configuration Properties Recognized by ServerRuntime and/or ClientRuntime</a></p> </li> 
     <li> <p><a href="#serviceCollections">Service Collection Keys Present in ServerRuntime and/or ClientRuntime</a></p> </li> 
    </ul> 
   </div> 
