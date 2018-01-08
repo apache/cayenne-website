@@ -1,1 +1,0 @@
-Published version of http://cayenne.apache.org
