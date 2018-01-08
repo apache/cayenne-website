@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Scripting SQLTemplate &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 3.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.1/cayenne-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/cayenne-guide/">Version 4.0 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Stable)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/cayenne-guide.html">Cayenne Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/3.0/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    <P>SQLTemplate's internal SQL string is a dynamic script that is processed at runtime to generate PreparedStatement SQL code. Dynamic nature of SQLTemplate makes possible a few important things - it allows to bind parameters on the fly; it provides a way to pass extra information to Cayenne that is not included in the SQL text; it supports including/excluding chunks of SQL depending on runtime parameters.</P>
+
+<P>Scripting of SQL strings is done using <A href="http://velocity.apache.org/" class="external-link" rel="nofollow">Apache Velocity</A>. Velocity was chosen primarily for its concise template language (no XML tags within SQL!) that doesn't conflict with the SQL syntax. When creating dynamic SQL template, all standard Velocity directives are available, including <TT>#set</TT>, <TT>#foreach</TT>, <TT>#if</TT>. However due to the nature of the SQL and the need to integrate it with Cayenne runtime, only a few Cayenne custom directives are normally used. These directives (<TT>#bind</TT>..., <TT>#result</TT>, <TT>#chain</TT>, <TT>#chunk</TT>) are described below.</P>
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Directive Syntax Note</B><BR>Velocity directives start with pound sign (#) and have their parameters separated by space, not comma. E.g. <TT>#bind('SOMESTRING' 'VARCHAR')</TT>.</TD></TR></TABLE></DIV>
+
+<H3><A name="ScriptingSQLTemplate-NamedParameters"></A>Named Parameters</H3>
+<P><TT>SQLTemplate.setParameters(java.util.Map)</TT> allows setting a number of named parameters that are used to build parts of the query. During template processing by Velocity all keys in the parameters map are available as variables. For example if the map contains a key &quot;name&quot;, its value can be referenced as &quot;$name&quot; in the template. Value of the parameter will be inserted in the SQL unmodified:</P>
+
+<H5><A name="ScriptingSQLTemplate-NamedParametersExample"></A>Named Parameters Example</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build SQLTemplate
+</SPAN><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;delete from $tableName&quot;</SPAN>;
+SQLTemplate delete = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+...
+<SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> will create a query <SPAN class="code-quote">&quot;delete from ARTIST&quot;</SPAN>
+</SPAN>delete.setParameters(Collections.singletonMap(<SPAN class="code-quote">&quot;tableName&quot;</SPAN>, <SPAN class="code-quote">&quot;ARTIST&quot;</SPAN>));
+...
+<SPAN class="code-comment">// <SPAN class="code-keyword">this</SPAN> will create a query <SPAN class="code-quote">&quot;delete from PAINTING&quot;</SPAN>
+</SPAN>delete.setParameters(Collections.singletonMap(<SPAN class="code-quote">&quot;tableName&quot;</SPAN>, <SPAN class="code-quote">&quot;PAINTING&quot;</SPAN>));
+</PRE>
+</DIV></DIV>
+
+<H3><A name="ScriptingSQLTemplate-DescribingtheResults%23resultDirective"></A>Describing the Results - #result Directive</H3>
+
+<P><TT>#result</TT> directive is used in selecting SQLTemplates to quickly map an arbitrary ResultSet to a DataObject (or a data row with known keys), and also to control Java types of result values. #result directive has a variable number of arguments:</P>
+
+<UL>
+	<LI><TT>#result(columnName)</TT> - e.g. <TT>#result('ARTIST_NAME')</TT></LI>
+	<LI><TT>#result(columnName javaType)</TT> - e.g. <TT>#result('DATE_OF_BIRTH' 'java.util.Date')</TT></LI>
+	<LI><TT>#result(columnName javaType columnAlias)</TT> - e.g. <TT>#result('DATE_OF_BIRTH' 'java.util.Date' 'DOB')</TT> - in this case returned data row will use &quot;DOB&quot; instead of &quot;DATE_OF_BIRTH&quot; for the result value.</LI>
+</UL>
+
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD>Generally &quot;javaType&quot; argument is a fully-qualified Java class name for a given result column. However for simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So &quot;#result('A' 'String')&quot;, &quot;#result('B' 'java.lang.String')&quot; and &quot;#result('C' 'int')&quot; are all valid.</TD></TR></TABLE></DIV>
+
+<P>While &quot;select * from&quot; queries may work just fine, in many cases it is a good idea to explicitly describe results.</P>
+
+<H5><A name="ScriptingSQLTemplate-%23resultExamples"></A>#result Examples</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build selecting SQLTemplate
+</SPAN><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_ID' '<SPAN class="code-object">int</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_NAME' '<SPAN class="code-object">String</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('DATE_OF_BIRTH' 'java.util.Date')&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; FROM ARTIST&quot;</SPAN>;
+SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+...
+DataContext context...;
+List artists = context.performQuery(select);
+</PRE>
+</DIV></DIV>
+
+<P>Note that it is possible to mix columns described via #result() with regular columns. Columns without an explicit #result() directive will be mapped automatically using JDBC metadata.  E.g.:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build selecting SQLTemplate
+</SPAN><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_ID' '<SPAN class="code-object">long</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; ARTIST_NAME, DATE_OF_BIRTH FROM ARTIST&quot;</SPAN>;</PRE>
+</DIV></DIV>
+
+<H3><A name="ScriptingSQLTemplate-BindingParameters%23bindDirective"></A>Binding Parameters - #bind Directive</H3>
+<P>SQLTemplate uses <TT>#bind</TT> directive to indicate value binding. It has the same meaning as PreparedStatement question mark (&quot;?&quot;), however it also tells Cayenne about the nature of the bound value, so it should be used for all bindings. <TT>#bind()</TT> directive can have a variable number of arguments. The following are the valid invocation formats:</P>
+
+<UL>
+	<LI><TT>#bind(value)</TT> - e.g. <TT>#bind($xyz)</TT> or <TT>#bind('somestring')</TT></LI>
+	<LI><TT>#bind(value jdbcTypeName)</TT> - e.g. <TT>#bind($xyz 'VARCHAR')</TT>. Second argument is the name of JDBC type for this binding. Valid JDBC types are defined in java.sql.Types class. This form is the the most common and useful. It is generally preferred to the single argument form, as it explicitly tells what type of JDBC value this binding is.</LI>
+	<LI><TT>#bind(value jdbcTypeName scale)</TT> - e.g. <TT>#bind($xyz 'DECIMAL' 2)</TT></LI>
+</UL>
+
+
+<H5><A name="ScriptingSQLTemplate-%23binddirectiveexample"></A>#bind directive example</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build SQLTemplate
+</SPAN><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;update ARTIST set ARTIST_NAME = #bind($name) where ARTIST_ID = #bind($id)&quot;</SPAN>;
+SQLTemplate update = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+...
+<SPAN class="code-comment">// set parameters and run it...
+</SPAN>Map parameters = <SPAN class="code-keyword">new</SPAN> HashMap();
+parameters.put(<SPAN class="code-quote">&quot;name&quot;</SPAN>, <SPAN class="code-quote">&quot;Publo Picasso&quot;</SPAN>);
+parameters.put(<SPAN class="code-quote">&quot;id&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Integer</SPAN>(1001));
+update.setParameters(parameters);
+
+DataContext context...;
+context.performNonSelectingQuery(update);
+</PRE>
+</DIV></DIV>
+
+<P>SQLTemplate also supports binding Collections for building <TT>IN ( .. )</TT> queries. In any of the <TT>#bind</TT> invocation formats above, you may specify a Collection of values in place of <TT>value</TT>, and Cayenne will automatically expand it.</P>
+
+<H5><A name="ScriptingSQLTemplate-Collectionexample"></A>Collection example</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build SQLTemplate
+</SPAN><SPAN class="code-object">String</SPAN> sql = &quot;SELECT ARTIST_ID, ARTIST_NAME FROM ARTIST WHERE ARTIST_NAME IN (#bind($names))
+SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+...
+<SPAN class="code-comment">// set parameters and run it...
+</SPAN>Map parameters = <SPAN class="code-keyword">new</SPAN> HashMap();
+parameters.put(<SPAN class="code-quote">&quot;names&quot;</SPAN>, Arrays.asList(<SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">String</SPAN>[] { <SPAN class="code-quote">&quot;Monet&quot;</SPAN>, <SPAN class="code-quote">&quot;Publo Picasso&quot;</SPAN>}));
+select.setParameters(parameters);
+
+DataContext context...;
+List artists = context.performQuery(select);
+</PRE>
+</DIV></DIV>
+
+
+<H3><A name="ScriptingSQLTemplate-NullValuesinBindings%23bindEqualand%23bindNotEqualDirectives"></A>Null Values in Bindings - #bindEqual and #bindNotEqual Directives</H3>
+<P>Sometimes when a parameter is NULL, SQL code has to be changed. For example, instead of &quot;WHERE COLUMN = ?&quot;, PreparedStatement should be rewritten as &quot;WHERE COLUMN IS NULL&quot;, and instead of &quot;WHERE COLUMN &lt;&gt; ?&quot; - as &quot;WHERE COLUMN IS NOT NULL&quot;. <TT>#bindEqual</TT> and <TT>#bindNotEqual</TT> directives are used to dynamically generate correct SQL string in this case. Their semantics is the same as #bind directive above, except that they do not require &quot;=&quot;, &quot;!=&quot; or &quot;&lt;&gt;&quot; in front of them:</P>
+
+<UL>
+	<LI><TT>#bindEqual(value)</TT>, <TT>#bindNotEqual(value)</TT></LI>
+	<LI><TT>#bindEqual(value jdbcTypeName)</TT>, <TT>#bindNotEqual(value jdbcTypeName)</TT></LI>
+	<LI><TT>#bindEqual(value jdbcTypeName scale)</TT>, <TT>#bindNotEqual(value jdbcTypeName scale)</TT></LI>
+</UL>
+
+
+<H5><A name="ScriptingSQLTemplate-NullValueExamples"></A>Null Value Examples</H5>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build SQLTemplate
+</SPAN><SPAN class="code-comment">// note that <SPAN class="code-quote">&quot;=&quot;</SPAN> is ommitted <SPAN class="code-keyword">for</SPAN> the second binding, since it is a part of the directive
+</SPAN><SPAN class="code-object">String</SPAN> sql = &quot;update ARTIST set ARTIST_NAME = #bind($name) where ARTIST_ID #bindEqual($id);
+SQLTemplate update = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+...
+<SPAN class="code-comment">// set parameters and run it...
+</SPAN>Map parameters = <SPAN class="code-keyword">new</SPAN> HashMap();
+parameters.put(<SPAN class="code-quote">&quot;name&quot;</SPAN>, <SPAN class="code-quote">&quot;Publo Picasso&quot;</SPAN>);
+parameters.put(<SPAN class="code-quote">&quot;id&quot;</SPAN>, <SPAN class="code-keyword">new</SPAN> <SPAN class="code-object">Integer</SPAN>(1001));
+update.setParameters(parameters);
+
+DataContext context...;
+
+<SPAN class="code-comment">// after binding processing PrepapredStatement SQL will look like 
+</SPAN><SPAN class="code-comment">// <SPAN class="code-quote">&quot;update ARTIST set ARTIST_NAME = ? where ARTIST_ID = ?&quot;</SPAN>
+</SPAN>context.performNonSelectingQuery(update);
+</PRE>
+</DIV></DIV>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-comment">// build SQLTemplate
+</SPAN><SPAN class="code-comment">// note that <SPAN class="code-quote">&quot;!=&quot;</SPAN> is omitted <SPAN class="code-keyword">for</SPAN> the second binding, since it is a part of the directive
+</SPAN><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;update ARTIST set ARTIST_NAME = #bind($name) where ARTIST_ID #bindNotEqual($id)&quot;</SPAN>;
+SQLTemplate update = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+...
+<SPAN class="code-comment">// set parameters and run it...
+</SPAN>Map parameters = <SPAN class="code-keyword">new</SPAN> HashMap();
+parameters.put(<SPAN class="code-quote">&quot;name&quot;</SPAN>, <SPAN class="code-quote">&quot;Publo Picasso&quot;</SPAN>);
+parameters.put(<SPAN class="code-quote">&quot;id&quot;</SPAN>, <SPAN class="code-keyword">null</SPAN>);
+update.setParameters(parameters);
+
+DataContext context...;
+
+<SPAN class="code-comment">// after binding processing PrepapredStatement SQL will look like 
+</SPAN><SPAN class="code-comment">// <SPAN class="code-quote">&quot;update ARTIST set ARTIST_NAME = ? where ARTIST_ID IS NOT NULL&quot;</SPAN>
+</SPAN>context.performNonSelectingQuery(update);
+</PRE>
+</DIV></DIV>
+
+<H3><A name="ScriptingSQLTemplate-BindingPersistentObjectValues%23bindObjectEqualand%23bindObjectNotEqualdirectives"></A>Binding Persistent Object Values - #bindObjectEqual and #bindObjectNotEqual directives</H3>
+
+<P>It can be tricky to use a Persistent object (or an ObjectId) in a binding, especially for tables with compound primary keys. There are two directives to help with that - <TT>#bindObjectEqual</TT> and <TT>#bindObjectNotEqual</TT>. Long explicit form of these directives is the following:</P>
+
+<UL>
+	<LI><TT>#bindObjectEqual(object columns idColumns)</TT></LI>
+	<LI><TT>#bindObjectNotEqual(object columns idColumns)</TT></LI>
+</UL>
+
+
+<P>An <TT>&quot;object&quot;</TT> argument can be one of Persistent, ObjectId or Map. <TT>&quot;columns&quot;</TT> and <TT>&quot;idColumns&quot;</TT> can be of type Object[], Collection or Object. What these directives do is build the SQL to match <TT>&quot;columns&quot;</TT> (i.e. the columns from the SQL query) against <TT>&quot;idColumns&quot;</TT> (i.e. the names of the PK columns for a given entity) for a given object. E.g.:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT * FROM PAINTING t0&quot;</SPAN>
+                + <SPAN class="code-quote">&quot; WHERE #bindObjectEqual($a 't0.ARTIST_ID' 'ARTIST_ID' ) ORDER BY PAINTING_ID&quot;</SPAN>;
+SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+
+Artist a = ....
+select.setParameters(Collections.singletonMap(<SPAN class="code-quote">&quot;a&quot;</SPAN>, a));</PRE>
+</DIV></DIV>
+
+<P>In case of compound PK, arrays can be used for the last two parameters:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT * FROM TABLE_X t0&quot;</SPAN>
+                + <SPAN class="code-quote">&quot; WHERE #bindObjectEqual($a ['t0.FK1', 't0.FK2'] ['PK1', 'PK2'] )&quot;</SPAN>;
+SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(TableX.class, sql);</PRE>
+</DIV></DIV>
+
+<P>In the case when SQL columns have the same names as PK columns, and there's no naming conflict that would force to use fully qualified column names, a short form of these directives can be used, where column names are inferred from the ObjectId:</P>
+
+<UL>
+	<LI><TT>#bindObjectEqual(object)</TT></LI>
+	<LI><TT>#bindObjectNotEqual(object)</TT></LI>
+</UL>
+
+
+<P>E.g.:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT * FROM PAINTING WHERE #bindObjectEqual($a) ORDER BY PAINTING_ID&quot;</SPAN>;
+SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);</PRE>
+</DIV></DIV>
+
+<H3><A name="ScriptingSQLTemplate-BuildingDynamicSQL%23chainand%23chunkDirectives"></A>Building Dynamic SQL - #chain and #chunk Directives</H3>
+<P>Often it is desirable to exclude parts of the WHERE clause if some parameters are null or not set. This task is not trivial considering the semantics of a SQL statement. Consider this fairly simple example:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT DISTINCT&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_ID' '<SPAN class="code-object">int</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_NAME' '<SPAN class="code-object">String</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('DATE_OF_BIRTH' 'java.util.Date')&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; FROM ARTIST t0&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; WHERE ARTIST_NAME LIKE #bind($name)&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; OR ARTIST_ID &gt; #bind($id)&quot;</SPAN>;
+SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+</PRE>
+</DIV></DIV>
+
+<P>It would be nice to exclude ARTIST_NAME matching if &quot;name&quot; parameter is null, exclude ARTIST_ID matching if &quot;id&quot; is null, and exclude the whole WHERE clause if both are null. <TT>#chain</TT> and <TT>#chunk</TT> directives are used for this purpose. Each logical piece is wrapped in a conditional &quot;chunk&quot;, and a number of chunks are grouped in a chain. If chain contains no chunks it doesn't render anything enclosed in it.</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">
+<SPAN class="code-object">String</SPAN> sql = <SPAN class="code-quote">&quot;SELECT DISTINCT&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_ID' '<SPAN class="code-object">int</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('ARTIST_NAME' '<SPAN class="code-object">String</SPAN>'),&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; #result('DATE_OF_BIRTH' 'java.util.Date')&quot;</SPAN>
+   + <SPAN class="code-quote">&quot; FROM ARTIST t0&quot;</SPAN>
+   + &quot; #chain('OR' 'WHERE')                              <SPAN class="code-comment">// start chain prefixed by WHERE, 
+</SPAN>                                                         <SPAN class="code-comment">// and joined by OR
+</SPAN>   + <SPAN class="code-quote">&quot; #chunk($name) ARTIST_NAME LIKE #bind($name) #end&quot;</SPAN> <SPAN class="code-comment">// ARTIST_NAME <SPAN class="code-quote">&quot;chunk&quot;</SPAN>
+</SPAN>   + <SPAN class="code-quote">&quot; #chunk($id) ARTIST_ID &gt; #bind($id) #end&quot;</SPAN>          <SPAN class="code-comment">// ARTIST_ID <SPAN class="code-quote">&quot;chunk&quot;</SPAN>
+</SPAN>   + <SPAN class="code-quote">&quot; #end&quot;</SPAN>;                                            <SPAN class="code-comment">// end of chain
+</SPAN>SQLTemplate select = <SPAN class="code-keyword">new</SPAN> SQLTemplate(Artist.class, sql);
+</PRE>
+</DIV></DIV>
+
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Cayenne 4.0 Milestone 5 Released &middot; Apache Cayenne</title>
+    </head>
+    <body> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">Cayenne 4.0 Milestone 5 Released<br />
+                            <small class="font-size-1rem text-muted">Mar 07, 2017</small>
+                        </h1>
+                        
+
+<p>Apache Cayenne team is glad to announce the latest milestone of Cayenne - 4.0.M5.
+The new release features a number of important things:</p>
+
+<ul>
+<li>New fluent API for SQL functions (including long-awaited <strong>aggregate</strong> functions).</li>
+<li>Auto-loading of additional Cayenne modules.</li>
+<li>New JCache module that allows to easily include any compatible cache provider.</li>
+<li>Further improvements and stabilization of database reverse-engineering tools.</li>
+<li>Fixes bugs, updates docs, etc.</li>
+</ul>
+
+<p>Cayenne can be downloaded from <a href="/download.html">here</a>. Make sure to consult <a href="https://github.com/apache/cayenne/blob/4.0.M5/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> file before updating.</p>
+
+<p>Before we start discussing individual features, a few words on the future development effort.
+Cayenne 4.0 is quickly approaching &ldquo;beta&rdquo; status. There&rsquo;s a good chance that the following release will be
+feature-complete and we will enter &ldquo;beta&rdquo; and associated code freeze of the runtime framework.</p>
+
+<p>Now the new things in a bit more detail:</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="fluent-query-api">Fluent query API</h3>
+
+<p>These great additions to Fluent API are new in M5:</p>
+
+<p><em>ColumnSelect</em></p>
+
+<pre><code>List&lt;String&gt; names = ObjectSelect.query(Artist.class)
+                     .column(Artist.ARTIST_NAME).select(context);
+</code></pre>
+
+<p><em>Aggregate Functions</em></p>
+
+<pre><code>// easy way to select count
+long count = ObjectSelect.query(Artist.class).selectCount(context);
+</code></pre>
+
+<p><em>GROUP BY .. HAVING</em></p>
+
+<pre><code>Property&lt;Double&gt; minPrice = Artist.PAINTING_ARRAY.dot(Painting.ESTIMATED_PRICE).min();
+
+// Object[0] is a name (String)
+// Object[1] is a price (Double)
+// GROUP BY clause is generated automatically based on the query semantics
+List&lt;Object[]&gt; nameAndMinPrice = ObjectSelect.query(Artist.class)
+                    .columns(Artist.ARTIST_NAME, minPrice)
+                    .having(minPrice.gt(2000.0))
+                    .select(context);
+</code></pre>
+
+<p><em>SQL Functions</em></p>
+
+<pre><code>Property&lt;Integer&gt; nameLength = Artist.ARTIST_NAME.length();
+List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class, nameLength.gt(5))
+                        .select(context);
+</code></pre>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+    
+
+<h3 id="reverse-engineering-improvements">Reverse Engineering Improvements</h3>
+
+<p>We pushed DB reverse engineering functionality further. This time in addition to clearing bugs and perform smoother importing
+we changed cdbimport plugin configuration to make it clearer and ready for future improvements we have in mind.</p>
+
+<p>The plugin itself has changed it&rsquo;s name to <em>&ldquo;cayenne-maven-plugin&rdquo;</em>, so now you can use short commands like the following:</p>
+
+<pre><code>mvn cayenne:cdbimport
+</code></pre>
+
+<p><strong><em>Important note</em></strong>: please refer to <a href="https://github.com/apache/cayenne/blob/4.0.M5/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> for detailed changes in <em>cdbimport</em> configuration.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
+
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2139">CAY-2139</a> Upgrade HSQLDB dependency to the most recent version (2.3.4)</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2150">CAY-2150</a> Refactoring: ParameterBinding to contain ExtendedType property</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2163">CAY-2163</a> Property.path() , ExpressionFactory.pathExp()</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2164">CAY-2164</a> Relocate builder bootstrap methods from ServerRuntimeBuilder to ServerRuntime</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2165">CAY-2165</a> Explicit &ldquo;contribution&rdquo; API for easier expansion of DI collections and maps</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2166">CAY-2166</a> Auto-loading of Cayenne modules</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2168">CAY-2168</a> Split DbLoader to parts and clean it up</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2169">CAY-2169</a> Split DbMerger to parts and clean it up</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2170">CAY-2170</a> MergeToken sorting is highly unstable</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2172">CAY-2172</a> Cleanup Modeler import and migrate db actions</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2176">CAY-2176</a> Java 7 diamond class generation templates</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2177">CAY-2177</a> Sync auto generated state of PK between model and DB</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2187">CAY-2187</a> Support for the scalar and aggregate SQL functions in ObjectSelect API</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2197">CAY-2197</a> Update sqlite version and enable in-memory default config</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2212">CAY-2212</a> cdbimport cleanup and configuration schema refactoring</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2223">CAY-2223</a> JCacheQueryCache - a query cache provider to plug in JCache implementers</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2225">CAY-2225</a> Extensible CacheInvalidationFilter logic</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2228">CAY-2228</a> Deprecate multiple cache groups in caching and query API</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2231">CAY-2231</a> Support for collections in new functional expressions and old math expressions</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2232">CAY-2232</a> Proper conversion to String for new functional expressions</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2235">CAY-2235</a> Deprecate Query.getDataMap() method</li>
+</ul>
+
+<div class="pb-2"><!-- gap 2rem --></div>
+
+<h4 id="bug-fixes">Bug Fixes:</h4>
+
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2032">CAY-2032</a> SelectAction: DistinctResultIterator ignores flattened relationships</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2137">CAY-2137</a> When generating SQL from EJBQL, use &ldquo;AND&rdquo; to separate multiple join conditions</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2174">CAY-2174</a> Change FK attribute name cause ObjAttribute appear after Reverse Engineering</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2175">CAY-2175</a> AliasName used in EJBQLQuery is not working if it contains mixed case</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2183">CAY-2183</a> Newly created DbRelationship is unexpectedly renamed by the Modeler</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2199">CAY-2199</a> Modeler on Windows: The same project is displayed twice in &ldquo;Recent Projects&rdquo;</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2207">CAY-2207</a> Modeler: &ldquo;Java Type&rdquo; and &ldquo;DbAttribute Path&rdquo; are not saved with using TAB to move forward</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2221">CAY-2221</a> In-memory expression evaluation gives different result than select query</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2236">CAY-2236</a> Modeler Migrate DB Schema: unable to Reverse All Operations</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2238">CAY-2238</a> Modeler: Preserve manually set DbRelationship name when syncing with ObjEntity</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2242">CAY-2242</a> Vertical Inheritance: Cannot Insert Record For Implementing Class with Attribute And Relationship</li>
+</ul>
+
+                    </article>
+                </section>
+            
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+                <a class="btn btn-link" href='/2017/06/cayenne-40B1-released.html'>
+                    <span class="d-block d-md-none  text-muted">Prev: </span>
+                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
+                    Cayenne 4.0 Beta 1 Released
+                </a>
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+                <a class="btn btn-link" href='/2016/12/cayenne-40M4-released.html'>
+                    <span class="d-block d-md-none  text-muted">Next: </span>
+                    Cayenne 4.0 Milestone 4 Released
+                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                </a>
+                
+            </div>
+        </div>
+    </main>
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

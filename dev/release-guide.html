@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Release Guide &middot; Apache Cayenne</title>
+    </head>
+    <body> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">Release Guide</h1>
+                        
+
+<p>This page describes the steps that a Cayenne Release Manager needs to
+perform to prepare a release. The specifics of Cayenne release process is
+that we are publishing both downloadable assemblies and Maven artifacts, so
+we have to build and publish things twice. Both forms of Cayenne release
+are also available for evaluation during the vote.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+<li>A release manager must have his public key appended to the KEYS file
+checked in to source control and the key published on one of the public key servers.
+More info can be found at <a href="http://www.apache.org/dev/release-signing.html">http://www.apache.org/dev/release-signing.html</a></li>
+<li>Make sure &ldquo;apache-releases&rdquo; repository is configured in
+<em>~/.m2/settings.xml</em> and an appropriate password is setup. See <a href="http://www.apache.org/dev/publishing-maven-artifacts.html">this page</a>
+for details.</li>
+<li>As Cayenne has modules which require Java 1.8, you should use Java 1.8 to perform the release.</li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="preparing-sources">Preparing Sources</h2>
+
+<ul>
+<li>Edit UPGRADE-NOTES.txt if there is anything to add there.</li>
+
+<li><p>Check Sources Compliance with <a href="http://creadur.apache.org/rat/">RAT</a>. To run RAT,
+download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne
+source. Then read the report and fix any issues.</p>
+
+<pre><code>cd cayenne
+./rat.sh ~/Desktop/apache-rat-0.9/apache-rat-0.9.jar  &gt; report.txt
+</code></pre></li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+    
+
+<h2 id="tagging-the-repo-and-releasing-maven-artifacts">Tagging the Repo and Releasing Maven Artifacts</h2>
+
+<ul>
+<li><p>Create a Git tag and Create Maven Staging Repository:</p>
+
+<pre><code>cd cayenne
+mvn release:clean
+mvn release:prepare -DpreparationGoals=&quot;clean install&quot; -DautoVersionSubmodules=true
+mvn release:perform -P gpg [-Dgpg.keyname=B8AF90BF]
+</code></pre></li>
+
+<li><p>Close the staging repo. Login to <a href="https://repository.apache.org/">https://repository.apache.org/</a> with
+Apache ID/password, go to &ldquo;Staging Repositories&rdquo; page. Select a staging
+repository that was just created during &ldquo;<em>mvn release:perform</em>&rdquo;, click
+&ldquo;Close&rdquo;. Take a note of the freshly created staging repository URL. It will
+be used by the people voting on Cayenne. It may look like this:
+<a href="https://repository.apache.org/content/repositories/orgapachecayenne-052/">https://repository.apache.org/content/repositories/orgapachecayenne-052/</a></p></li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="releasing-downloadable-assemblies">Releasing Downloadable Assemblies</h2>
+
+<ul>
+<li><p>Switch to the release tag created above.</p></li>
+
+<li><p>Build source package (it will be the basis for the binary packages built
+in the next steps) :</p>
+
+<pre><code>mvn clean install -Passembly,src
+</code></pre></li>
+
+<li><p>Build binary assemblies. Take <em>&ldquo;assembly/target/cayenne-XXX-src.tar.gz&rdquo;</em>, unpack it somewhere, and
+perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT). <em>Release manager may skip
+running unit tests from here, as shown
+below, although release evaluators should use the src assembly for <a href="running-unit-tests.html">unit testing</a>
+and other kinds of testing.</em></p>
+
+<pre><code>mvn clean install -Passembly,generic -Dmaven.test.skip=true
+
+# You will need to do this on OS X, and use at least Java 1.8
+mvn clean install -Passembly,mac -Dmaven.test.skip=true
+
+# You will need to do this on Windows
+mvn clean install -Passembly,windows -Dmaven.test.skip=true
+</code></pre>
+
+<p>For further details on a general Cayenne build process check <a href="building-cayenne.html">this page</a>.</p></li>
+
+<li><p>Signing assemblies</p></li>
+</ul>
+
+<p>You can find additional information in official Apache <a href="http://www.apache.org/dev/release-distribution">Release Distribution policy</a>
+and on <a href="http://www.apache.org/dev/release-signing.html">this page</a>.
+Release manager key must be in the project KEYS file. Signing is a manual
+procedure not included in the Ant or Maven script. Here is how it might
+work (&ldquo;-u&rdquo; option can be omitted if you have only one GPG key):</p>
+
+<pre><code>    gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
+    gpg --print-md MD5 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.md5
+    gpg --print-md SHA512 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512
+</code></pre>
+
+<ul>
+<li>Assemblies, signature and checksum files are committed to the special SVN repo
+used for staging development releases: <a href="https://dist.apache.org/repos/dist/dev/cayenne/">https://dist.apache.org/repos/dist/dev/cayenne/</a>. Use a separate folder for each release. For more info on this repository check <a href="http://apache.org/dev/release.html#upload-ci">the infrastructure docs</a>.</li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="voting">Voting</h2>
+
+<ul>
+<li>The vote is started on the dev mailing list.</li>
+<li>All committers are encouraged to vote on releases. Committer votes will
+be considered by the PMC (particularly -1 votes will be discussed) when
+making the final decision, but are not binding.</li>
+<li>Each PMC member will do the following before voting on a release:
+a. download the artifacts
+b. satisfy themselves that the source matches the appropriate svn tag.
+This can be done by diffing the source against a recent svn checkout.
+c. satisfy themselves that the Apache licensing requirements are met (this
+will usually be achieved by ensuring that all notices are in place and
+verifying that the source matches SVN since all commits to SVN are possible
+only if the committer has a CLA on file).
+d. satisfy themselves that the binary distribution is sane and passes
+basic usability tests. For example, that the Cayenne modeler runs and the
+main jar passes some basic tests.
+e. satisfy themselves that the source passes agreed unit tests (either by
+running them manually or verifying that Hudson has run those tests against
+the equivalent source).</li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="publishing-the-release">Publishing the Release</h2>
+
+<ul>
+<li><p>Publish Maven artifacts. Go back to <a href="https://repository.apache.org/">https://repository.apache.org/</a>,
+select the staging repo and click &ldquo;Release&rdquo;.</p></li>
+
+<li><p>Publish downloadable assemblies by moving them to the release repo:</p>
+
+<pre><code>$ svn mv https://dist.apache.org/repos/dist/dev/cayenne/X.X \
+     https://dist.apache.org/repos/dist/release/cayenne/
+</code></pre></li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="after-the-release">After the release</h2>
+
+<ul>
+<li><p>Delete a previous version of Cayenne release of the same branch from the dist server.
+It should be already <a href="http://www.apache.org/dev/release.html#when-to-archive">archived by Apache</a>. Do this with an svn command like this:</p>
+
+<pre><code>$ svn rm https://dist.apache.org/repos/dist/release/cayenne/Y.Y
+</code></pre></li>
+
+<li><p><a href="https://issues.apache.org/jira/plugins/servlet/project-config/CAY/versions">Tell Jira</a>
+that the release has been released. Ensure there is another milestone or
+release target already created for further work, but this was probably
+already done when a branch was created in preparation for release.</p></li>
+
+<li><p>Update the <a href="http://svn.apache.org/repos/asf/cayenne/site/cms/trunk/content/doap/cayenne.rdf">DOAP file</a>
+which will update
+<a href="https://projects.apache.org/project.html?cayenne">https://projects.apache.org/project.html?cayenne</a> automatically.</p></li>
+
+<li><p>If the release is significant, consider press releases to relevant news
+sources</p></li>
+
+<li><p>Review the main website pages (front page and why-cayenne especially) to
+add any new features</p></li>
+
+<li><p>Add a news item to the Cayenne web site</p></li>
+
+<li><p>Send an email to the Cayenne user and developer lists</p></li>
+
+<li><p>Send a notification email to announceATapache.org</p></li>
+
+<li><p>Update <a href="http://en.wikipedia.org/wiki/Apache_Cayenne">http://en.wikipedia.org/wiki/Apache_Cayenne</a></p></li>
+</ul>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="reference">Reference:</h2>
+
+<ul>
+<li>Apache release publishing:
+<a href="http://www.apache.org/dev/release-publishing.html">http://www.apache.org/dev/release-publishing.html</a></li>
+<li>Apache Maven release publishing:
+<a href="http://www.apache.org/dev/publishing-maven-artifacts.html">http://www.apache.org/dev/publishing-maven-artifacts.html</a></li>
+<li>ARAT: <a href="http://code.google.com/p/arat/">http://code.google.com/p/arat/</a></li>
+<li>Signing Releases: <a href="http://www.apache.org/dev/release-signing.html">http://www.apache.org/dev/release-signing.html</a></li>
+</ul>
+
+                    </article>
+                </section>
+            
+        
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+                <a class="btn btn-link" href='/dev/building-cayenne.html'>
+                    <span class="d-block d-md-none  text-muted">Prev: </span>
+                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
+                    Building Cayenne
+                </a>
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+                <a class="btn btn-link" href='/dev/running-unit-tests.html'>
+                    <span class="d-block d-md-none  text-muted">Next: </span>
+                    Running Unit Tests
+                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                </a>
+                
+            </div>
+        </div>
+    </main>
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

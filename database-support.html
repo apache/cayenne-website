@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Database Support &middot; Apache Cayenne</title>
+    </head>
+    <body> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        <section>
+            <article>
+                <h1 class="text-center">Database Support</h1>
+                <p>This page provides useful information about JDBC driver settings for various database. All databases below have custom Cayenne DbAdapters and are automatically recognized by Cayenne AutoAdapter.</p>
+
+<table>
+<thead>
+<tr>
+<th>Database</th>
+<th>Driver Name</th>
+<th>Sample URL</th>
+<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://www.ibm.com/db2/">DB2</a></td>
+<td>com.ibm.db2.jcc.DB2Driver</td>
+<td>jdbc:db2://127.0.0.1:50000/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="http://db.apache.org/derby/">Derby</a></td>
+<td>org.apache.derby.jdbc.ClientDriver</td>
+<td>jdbc:derby://127.0.0.1/testdb</td>
+<td>client/server</td>
+</tr>
+
+<tr>
+<td></td>
+<td>org.apache.derby.jdbc.EmbeddedDriver</td>
+<td>jdbc:derby:path-to-db-dir;create=true</td>
+<td>embedded</td>
+</tr>
+
+<tr>
+<td><a href="http://www.frontbase.com/">FrontBase</a></td>
+<td>jdbc.FrontBase.FBJDriver</td>
+<td>jdbc:FrontBase://127.0.0.1/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="http://hsqldb.org/">HSQLDB</a></td>
+<td>org.hsqldb.jdbcDriver</td>
+<td>jdbc:hsqldb:hsql://127.0.0.1</td>
+<td>client/server</td>
+</tr>
+
+<tr>
+<td></td>
+<td>jdbc:hsqldb:</td>
+<td>file:/path-to-hsql-db-files</td>
+<td>embedded</td>
+</tr>
+
+<tr>
+<td><a href="www.h2database.com/">H2</a></td>
+<td>org.h2.Driver</td>
+<td>jdbc:h2:mem:myTestMem;MVCC=TRUE</td>
+<td>embedded in-memory</td>
+</tr>
+
+<tr>
+<td><a href="http://www.ingres.com/products/ingres-database.php">Ingres</a></td>
+<td>com.ingres.jdbc.IngresDriver</td>
+<td>jdbc:ingres://127.0.0.1:II7/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="http://www.mysql.com/">MySQL</a></td>
+<td>com.mysql.jdbc.Driver</td>
+<td>jdbc:mysql://127.0.0.1/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="www.openbase.com">OpenBase</a></td>
+<td>com.openbase.jdbc.ObDriver</td>
+<td>jdbc:openbase://127.0.0.1/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="http://www.oracle.com/">Oracle</a></td>
+<td>oracle.jdbc.driver.OracleDriver</td>
+<td>jdbc:oracle:thin:@//127.0.0.1:1521/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="http://www.postgresql.org/">PostgreSQL</a></td>
+<td>org.postgresql.Driver</td>
+<td>jdbc:postgresql://127.0.0.1:5432/dbname</td>
+<td></td>
+</tr>
+
+<tr>
+<td><a href="http://www.sqlite.org/">SQLite 3.*</a></td>
+<td>org.sqlite.JDBC</td>
+<td>jdbc:sqlite:path_to_dbfile</td>
+<td>driver from zentus.com</td>
+</tr>
+
+<tr>
+<td><a href="http://www.microsoft.com/sqlserver">SQLServer</a></td>
+<td><a href="http://msdn.microsoft.com/en-us/data/aa937724.aspx">com.microsoft.sqlserver.jdbc.SQLServerDriver</a></td>
+<td>jdbc:sqlserver://127.0.0.1;databaseName=dbname</td>
+<td>Microsoft Driver</td>
+</tr>
+
+<tr>
+<td></td>
+<td>com.microsoft.jdbc.sqlserver.SQLServerDriver</td>
+<td>jdbc:microsoft:sqlserver://127.0.0.1;databaseName=dbname;SelectMethod=cursor</td>
+<td>Microsoft Driver, SQL Server prior to 2005</td>
+</tr>
+
+<tr>
+<td></td>
+<td>net.sourceforge.jtds.jdbc.Driver</td>
+<td>jdbc:jtds:sqlserver://127.0.0.1:5000/dbname</td>
+<td><a href="http://jtds.sourceforge.net/">jTDS Driver</a></td>
+</tr>
+
+<tr>
+<td><a href="http://www.sybase.com/">Sybase</a></td>
+<td>com.sybase.jdbc3.jdbc.SybDriver</td>
+<td>jdbc:sybase:Tds:127.0.0.1:5000/dbname</td>
+<td>Sybase driver</td>
+</tr>
+
+<tr>
+<td></td>
+<td>net.sourceforge.jtds.jdbc.Driver</td>
+<td>jdbc:jtds:sybase://127.0.0.1:5000/dbname;useLOBs=false;TDS=4.2</td>
+<td><a href="http://jtds.sourceforge.net/">jTDS Driver</a></td>
+</tr>
+</tbody>
+</table>
+
+            </article>
+        </section>
+    </main> 
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

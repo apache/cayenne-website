@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>DataView Concepts &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 1.2
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.1/cayenne-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/cayenne-guide/">Version 4.0 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Stable)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/1.2/user-guide.html">User Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/1.2/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/1.2/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/1.2/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    <H3><A name="DataViewConcepts-DataViewHierarchy"></A>DataView Hierarchy</H3>
+
+<P>The class diagram on the figure below captures the structure of Data Views and how they rely on the classes in the Cayenne subpackages. Single DataView object is the root of the hierarchy. It serves as a container for ObjEntityViews from one or more DataView configuration files. Just like entities in the DataMaps, ObjEntityViews can freely refer to each other whether they are defined in the same configuration file or different ones. The recommended practice is to store closely related ObjEntityViews in the same XML &quot;module&quot; and define several &quot;modules&quot; based on the criterion of such closeness. When you load the list of XML files into the DataView, all the relationships are resolved automatically and the ObjEntityViews share the same namespace (so they must have different names even if they are located in different XML files).</P>
+
+<P>The diagram also shows that DataView is associated with several classes such as EntityResolver, DataTypeSpec, FormatFactory. The instances of these classes participate in the process of loading actual Data View files.</P>
+
+<P>The main unit of any Data View is ObjEntityView. It always refers to an ObjEntity defined in one of the used DataMaps and defines various presentation rules for this entity. There can be several ObjEntityViews for an ObjEntity, each of them utilized by an application when appropriate. EntityResolver finds the corresponding ObjEntities by the names as the Data View is being loaded. Every ObjEntityView must have a name unique in the DataView context.</P>
+
+<P>ObjEntityViews contain fields called ObjEntityViewFields. They must be named uniquely within an ObjEntityView. The fields can be of two sorts. The regular &quot;nocalc&quot; fields reference ObjAttributes in the ObjEntity referred by the parent ObjEntityView. There may be several fields for a given ObjAttribute in the ObjEntityView. A field describes the following view parameters:</P>
+
+<UL>
+	<LI>How the related ObjAttribute should be rendered and edited.</LI>
+	<LI>The data type and the formats to use in the presentation layer.</LI>
+	<LI>The caption that is usually used to name a table column or to label an input control in a form.</LI>
+	<LI>Editability and visibility of the attribute</LI>
+	<LI>An order in which the fields appear as columns in a JTable or in a form with the preferred index.</LI>
+</UL>
+
+
+<P>The other type of ObjEntityViewFields is &quot;lookup&quot; fields. They point to the fields defined in other ObjEntityViews so the actual values to display, edit, or select from come from those referenced fields. Such a lookup field corresponds to an ObjRelationship with the ObjEntity referred by this its ObjEntityView as a source and the ObjEntity referred by the lookup ObjEntityView as a target instead of an ObjAttribute. Next the field identifies which lookup ObjEntityView and which particular field it wants to use as a lookup. These dependencies are resolved when the data views are loaded into memory. Class LookupCache helps maintain and map to data objects lists of values used in lookup combo boxes and lists. Thus you can describe the rules of visual editing the relationships or make aggregated views base on the related entities.<BR>
+<SPAN class="image-wrap" style=""><img src="/docs/1.2/images/format-factory.gif" style="border: 0px solid black"></SPAN></P>
+
+
+<H3><A name="DataViewConcepts-FieldDataTypes"></A>Field Data Types</H3>
+<P>Cayenne defines the mapping between several Java Class types and JDBC types. It is convenient to use and sufficient in many cases but there are all sorts of situations when one would like to define more specific data types to make use of, especially for the presentation purposes. In many cases when Integer is used as a flag you would like to map it to Boolean. Or you may have a Money type or Date type that holds only year, month, and day values, and so forth.</P>
+
+<P>ObjEntityViewFields address that by providing an easily extensible system of data types often used in the business applications. This system takes care of converting values back and forth between Cayenne data types and application specific data types. It relies on two classes DataTypeEnum and DataTypeSpec, both of them can be extended to define new types of any sorts. While the entire thing may seem redundant at the first glance, actually, it is a powerful concept that can save a lot of time spent on the manual conversions.</P>
+
+<H3><A name="DataViewConcepts-FormatFactory"></A>FormatFactory</H3>
+<P>FormatFactory shown on the next figure provides the means to create instances of the edit and display formats used by ObjEntityViewFields. There are several formats defined in the java.text package. In addition the dataview library defines convenient MapFormat somewhat similar to java.text.ChoiceFormat. instead of formatting doubles by inclusion in range criterion as ChoiceFormat does it maps a set of objects of any type to string values. For example you can map Booleans to &quot;Sure&quot; and &quot;No way&quot; strings or you can map String keys to some descriptive String values, etc. It is easy for users to add custom formats of their own. They should subclass FormatFactory and create new Builders for their formats. That done, all they need is to configure the display and edit formats in ObjEntityViewFields with the class names of their Format classes and the patterns (and, maybe, some other properties).<BR>
+<SPAN class="image-wrap" style=""><img src="/docs/1.2/images/format-factory.gif" style="border: 0px solid black"></SPAN></P>
+
+
+<H3><A name="DataViewConcepts-CellRenderersandCellEditors"></A>CellRenderers and CellEditors</H3>
+<P>The following figure presents the utility class CellRenderers and several ready-to-use cell renderers for different types of ObjEntityViewFields. They are used in JTables, JLists, and JComboBoxes. The methods defined in the CellRenderers class will save your time when configuring a JTable to render values of the types available for use with ObjEntityViewFields<BR>
+<SPAN class="image-wrap" style=""><img src="/docs/1.2/images/cell-renderers.gif" style="border: 0px solid black"></SPAN></P>
+
+<P>The purpose of CellEditors is the same as that of CellRenderers. The editors are used when there is a need to edit data in JTables and such.<BR>
+<SPAN class="image-wrap" style=""><img src="/docs/1.2/images/cell-editors1.gif" style="border: 0px solid black"></SPAN></P>
+
+<P>The convenient notion of DataObjectList is defined in the library. It is a specialized container to store Cayenne DataObjects (usually of the same type). It fires events when modified and DOTableModel, DOListModel, DOComboBoxModel wrap it and being configured with an ObjEntityView / Field are handy to provide access to these data objects with JTables, JLists, and JComboBoxes. In fact, they make the visual components data aware.<BR>
+<SPAN class="image-wrap" style=""><img src="/docs/1.2/images/domodels.gif" style="border: 0px solid black"></SPAN></P>
+
+
+<H3><A name="DataViewConcepts-MiscellaneousFeatures"></A>Miscellaneous Features</H3>
+<P>One more useful feature is a centralized EventDispatcher within the DataView class. It is used by the fields to fire the events whenever their values are changed. Thus the ObjAttribute/ObjRelationship modifications can be easily propagated to all the listening components. </P>
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

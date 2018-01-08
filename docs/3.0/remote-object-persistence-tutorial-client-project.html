@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Remote Object Persistence Tutorial Client Project &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 3.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.1/cayenne-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/cayenne-guide/">Version 4.0 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Stable)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/cayenne-guide.html">Cayenne Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/3.0/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    <H2><A name="RemoteObjectPersistenceTutorialClientProject-CreateanROPClientProjectinEclipse"></A>Create an ROP Client Project in Eclipse</H2>
+
+<P>Creation of a new Eclipse project has been discussed in some details <A href="tutorial-starting-project.html" title="Tutorial Starting Project">here</A>, so we will omit the screenshots for the common parts.</P>
+
+<P>In Eclipse select <TT>&quot;File &gt; New &gt; Other...&quot;</TT> and then <TT>&quot;Maven &gt; Maven Project&quot;</TT>. Click <TT>&quot;Next&quot;</TT>. On the following screen check <TT>&quot;Create a simple project&quot;</TT> checkbox and click <TT>&quot;Next&quot;</TT> again. In the dialog shown on the screenshot below, enter <TT>&quot;org.example.cayenne&quot;</TT> for the <TT>&quot;Group Id&quot;</TT> and <TT>&quot;tutorial-rop-client&quot;</TT> for the <TT>&quot;Artifact Id&quot;</TT> (both without the quotes) and click <TT>&quot;Finish&quot;</TT>. </P>
+
+<P>Now you should have a new empty project in the Eclipse workspace. Check that the project Java compiler settings are correct. Rightclick on the <TT>&quot;tutorial-rop-client&quot;</TT> project, select &quot;Properties &gt; Java Compiler&quot; and ensure that <TT>&quot;Compiler compliance level&quot;</TT> is at least 1.5 (some versions of Maven plugin seem to be setting it to 1.4 by default).</P>
+
+<H2><A name="RemoteObjectPersistenceTutorialClientProject-CreateClientJavaClasses"></A>Create Client Java Classes</H2>
+
+<P>The client doesn't need the XML ORM mapping, as it is loaded from the server. However it needs the client-side Java classes. Let's generate them from the existing mapping:</P>
+
+<UL>
+	<LI>Start CayenneModeler and open <TT>cayenne.xml</TT> from the <TT>&quot;tutorial&quot;</TT> project (located under <TT>&quot;tutorial/src/main/resources&quot;</TT>, unless it is already open.</LI>
+	<LI>Select the &quot;UntitledDomainMap&quot; DataMap and check <TT>&quot;Allow Client Entities&quot;</TT> checkbox.</LI>
+	<LI>Enter <TT>&quot;org.example.cayenne.persistent.client&quot;</TT> for the <TT>&quot;Client Java Package&quot;</TT> and click <TT>&quot;Update..&quot;</TT> button next to the field to refresh the client package of all entities.</LI>
+</UL>
+
+
+<P><SPAN class="image-wrap" style=""><img src="/docs/3.0/images/datamap-enableclient.png" style="border: 0px solid black"></SPAN></P>
+
+<UL>
+	<LI>Select <TT>&quot;Tools &gt; Generate Classes&quot;</TT> menu.</LI>
+	<LI>For <TT>&quot;Type&quot;</TT> select <TT>&quot;Client Persistent Objects&quot;</TT>.</LI>
+	<LI>For the <TT>&quot;Output Directory&quot;</TT> select <TT>&quot;tutorial-rop-client/src/main/java&quot;</TT> folder (as client classes should go in the <EM>client</EM> project).</LI>
+	<LI>Click on <TT>&quot;Entities&quot;</TT> tab and check the <TT>&quot;Check All Entities&quot;</TT> checkbox (unless it is already checked and reads &quot;Uncheck all Entities&quot;).</LI>
+	<LI>Click <TT>&quot;Generate&quot;</TT>.</LI>
+</UL>
+
+
+<P>Now go back to Eclipse, right click on <TT>&quot;tutorial-rop-client&quot;</TT> project and select <TT>&quot;Refresh&quot;</TT> - you should see pairs of classes generated for each mapped entity, same as on the server. And again, we see a bunch of errors in those classes. Let's fix it now by adding two dependencies, <TT>&quot;cayenne-client&quot;</TT> and <TT>&quot;resin-hessian&quot;</TT>, in the bottom of the pom.xml file. We also need to add Caucho M2 repository to pull Hessian jar files. The resulting POM should look like this:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">&lt;project xmlns=<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//maven.apache.org/POM/4.0.0&quot;</SPAN> xmlns:xsi=<SPAN class="code-quote">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</SPAN>
+</SPAN>	xsi:schemaLocation=<SPAN class="code-quote">&quot;http:<SPAN class="code-comment">//maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</SPAN>&gt;
+</SPAN>	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+	&lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
+	&lt;artifactId&gt;tutorial-rop-client&lt;/artifactId&gt;
+	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+	&lt;dependencies&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+			&lt;artifactId&gt;cayenne-client&lt;/artifactId&gt;
+   &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
+			&lt;version&gt;3.0RC2&lt;/version&gt;
+		&lt;/dependency&gt;
+		&lt;dependency&gt;
+			&lt;groupId&gt;com.caucho&lt;/groupId&gt;
+			&lt;artifactId&gt;resin-hessian&lt;/artifactId&gt;
+			&lt;version&gt;3.1.6&lt;/version&gt;
+		&lt;/dependency&gt;
+	&lt;/dependencies&gt;
+
+	&lt;repositories&gt;
+		&lt;repository&gt;
+			&lt;id&gt;caucho&lt;/id&gt;
+			&lt;name&gt;Caucho Repository&lt;/name&gt;
+			&lt;url&gt;http:<SPAN class="code-comment">//caucho.com/m2&lt;/url&gt;
+</SPAN>			&lt;layout&gt;<SPAN class="code-keyword">default</SPAN>&lt;/layout&gt;
+			&lt;snapshots&gt;
+				&lt;enabled&gt;<SPAN class="code-keyword">false</SPAN>&lt;/enabled&gt;
+			&lt;/snapshots&gt;
+			&lt;releases&gt;
+				&lt;enabled&gt;<SPAN class="code-keyword">true</SPAN>&lt;/enabled&gt;
+			&lt;/releases&gt;
+		&lt;/repository&gt;
+	&lt;/repositories&gt;
+&lt;/project&gt;</PRE>
+</DIV></DIV>
+
+<P>Your computer must be connected to the internet. Once you save the <TT>pom.xml</TT>, Eclipse will download the needed jar files and add them to the project build path. After that all the errors should disappear.</P>
+
+<P>Now let's check the entity class pairs. They look almost identical to their server counterparts, although the superclass and the property access code are different. At this point these differences are somewhat academic, so let's go on with the tutorial.</P>
+
+<HR>
+<P><B>Next Step: <A href="remote-object-persistence-tutorial-webservice.html" title="Remote Object Persistence Tutorial WebService">Remote Object Persistence Tutorial WebService</A></B></P>
+<HR>
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

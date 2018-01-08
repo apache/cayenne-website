@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Cayenne 4.0 Milestone 3 Released &middot; Apache Cayenne</title>
+    </head>
+    <body> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">Cayenne 4.0 Milestone 3 Released<br />
+                            <small class="font-size-1rem text-muted">Feb 12, 2016</small>
+                        </h1>
+                        
+
+<p>This new milestone release has plenty of new features, bug fixes and other improvements. Below are just the main highlights. For more details check out the full release notes further down, as well as <a href="https://github.com/apache/cayenne/blob/4.0.M3/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a>.</p>
+
+<p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="java-7">Java 7</h3>
+
+<p>Since this milestone minimal Java version is 1.7. If you still need Java 1.6, you can use Cayenne 3.1 or 4.0.M2 until your application is able to upgrade.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="java-8-date-time-and-joda-time-support">Java 8 Date/Time and Joda-Time Support</h3>
+
+<p>Cayenne now has two additional modules that contain ExtendedTypes for Java 8 Date/Time and Joda-Time support. You will need to add appropriate dependency and then create a coresponding module and add it to the ServerRuntime. For example:</p>
+
+<pre><code>Module java8Module = new CayenneJava8Module();
+this.runtime = new ServerRuntime(&quot;cayenne-project.xml&quot;, java8Module);
+</code></pre>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="improvements-in-query-api">Improvements in Query API</h3>
+
+<p>All new fluent query classes (ObjectSelect, SQLSelect, SelectById) have the following new methods:</p>
+
+<ul>
+<li><code>List&lt;T&gt; select(ObjectContext context);</code></li>
+<li><code>T selectOne(ObjectContext context);</code></li>
+<li><code>T selectFirst(ObjectContext context);</code></li>
+<li><code>void iterate(ObjectContext context, ResultIteratorCallback&lt;T&gt; callback);</code></li>
+<li><code>ResultIterator&lt;T&gt; iterator(ObjectContext context);</code></li>
+<li><code>ResultBatchIterator&lt;T&gt; batchIterator(ObjectContext context, int size);</code></li>
+</ul>
+
+<p>The &ldquo;old&rdquo; style SelectQuery is still supported and also includes these methods.</p>
+
+<p>Also ResultIterator and ResultBatchIterator are both AutoCloseable now. So you will be able to use try-with-resources with them.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="non-blocking-datasource">Non-blocking DataSource</h3>
+
+<p>Default Cayenne DataSource provider is switched to a non-blocking implementation that has a much better concurrency compared to the old version.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="dbcp2">DBCP2</h3>
+
+<p>DBCPDataSourceFactory is now based on DBCP2 (which is required under Java 1.7 and newer). If you are using it, you will need to take a few steps to upgrade. For more details see <a href="https://github.com/apache/cayenne/blob/4.0.M3/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a>.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h3 id="capturing-a-stream-of-commit-changes">Capturing a stream of commit changes</h3>
+
+<p>Sometimes it is very useful to capture all or parts of &ldquo;commit log&rdquo; for commits made through Cayenne (for audit purposes, etc). It has always been a challenge to do it in a consistent and convenient manner. We&rsquo;ve made a few attempts to solve this before. M3 features new and the most comprehensive solution. There is a <a href="https://github.com/apache/cayenne/blob/4.0.M3/cayenne-lifecycle/src/main/java/org/apache/cayenne/lifecycle/postcommit/PostCommitModuleBuilder.java">PostCommitBuilder</a> class that helps to create a special DI module with all required extensions for this to work. It allows to register <a href="https://github.com/apache/cayenne/blob/4.0.M3/cayenne-lifecycle/src/main/java/org/apache/cayenne/lifecycle/postcommit/PostCommitListener.java">PostCommitListeners</a> that will receive an event on every commit, containing a full commit log object.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
+
+<ul>
+<li>CAY-1626 Add JodaTime DateTime support</li>
+<li>CAY-1902 Implement resolving Db paths for DataObjects</li>
+<li>CAY-1991 More control over generated String property names</li>
+<li>CAY-1992 Allow to exclude DataMap java class from Modeler class generation</li>
+<li>CAY-1995 Add support for iterators to Select</li>
+<li>CAY-2001 Saving a display state of Project</li>
+<li>CAY-2004 EJBQL: Support for ordering on aggregate expressions</li>
+<li>CAY-2007 Refactoring SelectTranslator for better extensibility</li>
+<li>CAY-2008 Connection pool refactoring and validation query support in Cayenne DataSource</li>
+<li>CAY-2009 Non-blocking connection pool</li>
+<li>CAY-2010 DataSourceBuilder to help users create pooling and non-pooling DataSources</li>
+<li>CAY-2011 Support for Java 8 date and time types</li>
+<li>CAY-2012 ObjectSelect, SelectById: eliminating methods that reset query state</li>
+<li>CAY-2013 In-memory evaluation of DB expressions - non-id attributes</li>
+<li>CAY-2023 Decouple the use of ResourceLocator</li>
+<li>CAY-2025 Support for DBCP2</li>
+<li>CAY-2026 Java 7</li>
+<li>CAY-2027 Support for Expression outer join syntax in EJBQL</li>
+<li>CAY-2028 Wrap DataChannelFilter calls in the main transaction</li>
+<li>CAY-2029 Allow out-of-order insertion into DI lists</li>
+<li>CAY-2030 Capturing a stream of commit changes</li>
+<li>CAY-2035 Autobind items added to collections (Cayenne DI)</li>
+<li>CAY-2042 Remove an arbitrary limitation on 1000 runtime DbRelationships</li>
+<li>CAY-2043 ServerRuntimeBuilder: use DataDomain name for the default DataNode</li>
+<li>CAY-2044 Collection setter for to-many relationships</li>
+<li>CAY-2045 Add autosuggestion fields to choose attributes and relationships</li>
+</ul>
+
+<div class="pb-2"><!-- gap 2rem --></div>
+
+<h3 id="bug-fixes">Bug Fixes:</h3>
+
+<ul>
+<li>CAY-1977 Cleanup Modeler reverse engineering functionality</li>
+<li>CAY-1987 Widen types before performing in-memory evaluation of qualifiers using j.l.Number subclasses</li>
+<li>CAY-1990 Incorrect display of the raw SQL query in Modeler</li>
+<li>CAY-1993 Reverse Engineering does not work with PostgreSQL database</li>
+<li>CAY-1994 Modeler Migration Tool Shows No Changes</li>
+<li>CAY-1997 Difference in NULL handling inside the path between PropertyUtils and DataObject.readNestedProperty</li>
+<li>CAY-1998 Speeding up PropertyUtils</li>
+<li>CAY-1999 Unneeded Property import for superclasses with no properties</li>
+<li>CAY-2003 cdbimport doesn&rsquo;t work properly with several includeTable tags</li>
+<li>CAY-2015 Joint prefetches combined with DisjointById prefetches return null incorrectly</li>
+<li>CAY-2020 typo: correction to upper alpha range in Rot13PasswordEncoder</li>
+<li>CAY-2041 &ldquo;cayenne.jdbc.max_connections&rdquo; and &ldquo;cayenne.jdbc.min_connections&rdquo; command line options are ignored</li>
+<li>CAY-2047 Relationship mapping with target inheritance</li>
+<li>CAY-2049 Changing the Relationship name in ObjRelationship Inspector has no effect</li>
+</ul>
+
+                    </article>
+                </section>
+            
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+                <a class="btn btn-link" href='/2016/05/cayenne-311-released.html'>
+                    <span class="d-block d-md-none  text-muted">Prev: </span>
+                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
+                    Cayenne 3.1.1 Released
+                </a>
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+                <a class="btn btn-link" href='/2015/03/cayenne-40m2-released.html'>
+                    <span class="d-block d-md-none  text-muted">Next: </span>
+                    Cayenne 4.0 Milestone 2 Released
+                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                </a>
+                
+            </div>
+        </div>
+    </main>
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

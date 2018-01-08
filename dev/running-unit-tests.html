@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>Running Unit Tests &middot; Apache Cayenne</title>
+    </head>
+    <body> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">Running Unit Tests</h1>
+                        
+
+<p>Cayenne provides a comprehensive suite of unit tests. To execute unit tests
+you must first get Cayenne from Git, install JDK 1.7 and obtain the latest
+Maven.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Maven <a href="/dev/building-cayenne.html">build prerequisites and recommended settings</a> apply here.</p>
+
+<h2 id="running-against-embedded-hsqldb">Running Against Embedded HSQLDB</h2>
+
+<p>No extra setup is required. Just run Maven:</p>
+
+<pre><code>$ cd cayenne
+$ mvn install
+</code></pre>
+
+<p>or</p>
+
+<pre><code>$ cd cayenne
+$ mvn clean verify
+</code></pre>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="running-against-in-memory-database">Running Against In-memory Database</h2>
+
+<p>Besides HSQLDB mentioned above Cayenne has preconfigured connection information for
+following databases that support in-memory mode:</p>
+
+<ul>
+<li>derby</li>
+<li>h2</li>
+<li>sqlite</li>
+</ul>
+
+<p>For this databases you can run tests without any additional configuration by only specifying
+<em>cayenneTestConnection</em> property that will activate required Maven profile:</p>
+
+<pre><code>$ mvn verify -DcayenneTestConnection=derby    
+</code></pre>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="running-against-database-in-docker-only-on-linux">Running Against Database in Docker (only on Linux)</h2>
+
+<p>Another handy option to run Cayenne tests is with preconfigured docker profiles.
+The only thing you need is to install Docker.</p>
+
+<p>You can run tests with following <em>cayenneTestConnection</em> properties:</p>
+
+<pre><code>$ mvn verify -DcayenneTestConnection=mysql-docker
+</code></pre>
+
+<p>or</p>
+
+<pre><code>$ mvn verify -DcayenneTestConnection=postgres-docker    
+</code></pre>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+
+<h2 id="running-against-a-specific-database">Running Against a Specific Database</h2>
+
+<p>Final option to run tests against any supported database is with manual configuration.</p>
+
+<div class="pb-1l2"><!-- gap .5rem --></div>
+
+<h5 id="step-1-install-jdbc-driver-jars-in-a-local-maven-repo">Step 1. Install JDBC Driver Jars in a Local Maven Repo</h5>
+
+<p>Most commercial drivers are not present in the public Maven repositories.
+So they have to be installed by the tester locally. The group and artifact
+ids are arbitrarily assigned in the main Cayenne POM, so users must follow
+the POM or the examples below.</p>
+
+<p><strong>FrontBase:</strong></p>
+
+<pre><code>$ mvn install:install-file -Dfile=frontbasejdbc.jar -DgroupId=com.frontbase \
+       -DartifactId=frontbase-driver -Dversion=4.1 -Dpackaging=jar -DgeneratePom=true
+</code></pre>
+
+<p><strong>OpenBase:</strong></p>
+
+<pre><code>$ mvn install:install-file -Dfile=OpenBaseJDBC.jar -DgroupId=com.openbase \
+       -DartifactId=openbase-driver -Dversion=9 -Dpackaging=jar -DgeneratePom=true
+</code></pre>
+
+<p><strong>Oracle:</strong></p>
+
+<pre><code>$ mvn install:install-file -Dfile=ojdbc5.jar -DgroupId=com.oracle \
+       -DartifactId=oracle-driver -Dversion=11 -Dpackaging=jar -DgeneratePom=true
+</code></pre>
+
+<p><strong>SQLServer:</strong></p>
+
+<pre><code>$ mvn install:install-file -Dfile=sqljdbc4.jar -DgroupId=com.microsoft \
+       -DartifactId=sqlserver-driver -Dversion=4.0 -Dpackaging=jar -DgeneratePom=true
+</code></pre>
+
+<p><strong>Sybase:</strong></p>
+
+<pre><code>$ mvn install:install-file -Dfile=jconn3.jar -DgroupId=com.sybase \
+       -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
+</code></pre>
+
+<div class="pb-3l2"><!-- gap 1.5rem --></div>
+
+<h5 id="step-2-run-tests-against-configured-data-source">Step 2. Run Tests Against Configured Data Source</h5>
+
+<p>Database type and connection information can be specified either on the
+command line or via a configuration file. First let&rsquo;s look at the command
+line options:</p>
+
+<pre><code>$ mvn verify -DcayenneTestConnection=&lt;profile_name&gt; \
+   -DcayenneAdapter=org.apache.cayenne.dba.mysql.MySQLAdapter \
+   -DcayenneJdbcUsername=myuser \
+   -DcayenneJdbcPassword=mypassword \
+   -DcayenneJdbcUrl=jdbc:mysql://localhost/cayenne \
+   -DcayenneJdbcDriver=com.mysql.jdbc.Driver
+</code></pre>
+
+<p><em>cayenneTestConnection</em> is a property activating a DB-specific Maven
+profile. <em><profile_name></em> can be one of:</p>
+
+<ul>
+<li>db2</li>
+<li>derby</li>
+<li>firebird</li>
+<li>frontbase</li>
+<li>h2</li>
+<li>ingres</li>
+<li>mysql</li>
+<li>openbase</li>
+<li>oracle</li>
+<li>postgres</li>
+<li>sqlite</li>
+<li>sqlserver</li>
+<li>sybase</li>
+</ul>
+
+<p>Another way to store this information permanently for each profile is to
+create a directory <em>$HOME/.cayenne/</em> and place a file called
+<em>connection.properties</em> in this directory. File contents should be
+similar to this example:</p>
+
+<pre><code>mysql.cayenne.adapter = org.apache.cayenne.dba.mysql.MySQLAdapter
+mysql.jdbc.username = someuser
+mysql.jdbc.password = somepasswd
+mysql.jdbc.url = jdbc:mysql://mysql.host:3306/test_db?useUnicode=true&amp;characterEncoding=UTF-8&amp;generateSimpleParameterMetadata=true
+mysql.jdbc.driver = com.mysql.jdbc.Driver
+
+oracle.cayenne.adapter = org.apache.cayenne.dba.oracle.OracleAdapter
+oracle.jdbc.username = someuser
+oracle.jdbc.password = somepasswd
+oracle.jdbc.url = jdbc:oracle:thin:@//oracle.host:1521/XE
+oracle.jdbc.driver = oracle.jdbc.driver.OracleDriver
+
+postgres.adapter = org.apache.cayenne.dba.postgres.PostgresAdapter
+postgres.jdbc.username = someuser
+postgres.jdbc.password = somepasswd
+postgres.jdbc.url = jdbc:postgresql://postgresql.host:5432/test_db
+postgres.jdbc.driver = org.postgresql.Driver
+
+db2.adapter = org.apache.cayenne.dba.db2.DB2Adapter
+db2.jdbc.username = someuser
+db2.jdbc.password = somepasswd
+db2.jdbc.url = jdbc:db2://db2.host:50000/test_db
+db2.jdbc.driver = com.ibm.db2.jcc.DB2Driver
+</code></pre>
+
+<p>Each property starts with the Maven profile name (&ldquo;mysql&rdquo; and &ldquo;oracle&rdquo; in
+the example above). Note that in this case you should still use
+<em>cayenneTestConnection</em>. E.g.:</p>
+
+<pre><code>$ mvn verify -DcayenneTestConnection=mysql
+</code></pre>
+
+                    </article>
+                </section>
+            
+        
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+                <a class="btn btn-link" href='/dev/release-guide.html'>
+                    <span class="d-block d-md-none  text-muted">Prev: </span>
+                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
+                    Release Guide
+                </a>
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+                <a class="btn btn-link" href='/dev/cms-guide.html'>
+                    <span class="d-block d-md-none  text-muted">Next: </span>
+                    Guide to Cayenne CMS
+                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                </a>
+                
+            </div>
+        </div>
+    </main>
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

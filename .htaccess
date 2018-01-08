@@ -1,0 +1,35 @@
+
+# Individual deleted/renamed pages
+Redirect permanent /commercial-support.html /about/support/index.html
+Redirect permanent /documentation.html /docs/index.html
+Redirect permanent /doc12/documentation.html /docs/1.2/index.html
+Redirect permanent /doc20/documentation.html /docs/2.0/index.html
+Redirect permanent /doc/documentation.html /docs/3.0/index.html
+
+# Remaping legacy doc folders
+Redirect permanent /doc12/ /docs/1.2/
+Redirect permanent /doc20/ /docs/2.0/
+Redirect permanent /doc/ /docs/3.0/
+
+# Remapping dev folders
+Redirect permanent /developer-guide.html /dev/index.html
+Redirect permanent /how_development_happens.html /dev/how_development_happens.html
+Redirect permanent /code-repository.html /dev/code-repository.html
+Redirect permanent /eclipse.html /dev/eclipse.html
+Redirect permanent /building-cayenne.html /dev/building-cayenne.html
+Redirect permanent /release-guide.html /dev/release-guide.html
+Redirect permanent /running-unit-tests.html /dev/running-unit-tests.html
+
+# Remaping old -> new cayenne site
+Redirect permanent /support.html /about/support/index.html
+Redirect permanent /download.html /download/index.html
+
+# 4.0 docs
+Redirect permanent /docs/4.0/tutorial /docs/4.0/getting-started/index.html
+RedirectMatch permanent /docs/4\.0/tutorial/(.*)\.html$ /docs/4.0/getting-started/index.html
+
+# 4.1 docs
+RedirectMatch permanent /docs/4\.1/tutorial/(.*)\.html$ /docs/4.1/getting-started/index.html
+
+# Custom 404 error page
+ErrorDocument 404 /404.html

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144-precomposed.png" sizes="144x144" />
+        <link rel="stylesheet" href="http://cayenne.apache.org/css/styles-452af12eaa.css"/>
+        <script src="http://cayenne.apache.org/js/bundle-bcaaf59313.js"></script>
+        <title>The Apache Software Foundation Announces Apache™ Cayenne™ v3.1 &middot; Apache Cayenne</title>
+    </head>
+    <body> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <img class="mh-26px  mr-1" src="/img/feather-641aa69d09.svg" />
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Apache Software Foundation</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="http://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="http://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="http://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="http://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        <li class="breadcrumb-item d-none d-lg-inline-block">Apache Cayenne</li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="http://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">The Apache Software Foundation Announces Apache™ Cayenne™ v3.1<br />
+                            <small class="font-size-1rem text-muted">Sep 29, 2014</small>
+                        </h1>
+                        
+
+<p>The Apache Software Foundation (ASF), the all-volunteer developers, stewards, and incubators of more than 200 Open Source projects and initiatives, announced today the availability of Apache™ Cayenne™ v3.1, the Open Source Java framework for object relational mapping (ORM), persistence, and caching.</p>
+
+<p>&ldquo;With the launch of version 3.1, Apache Cayenne has continued to evolve its mature 12 year-old library by introducing 125 new features,&rdquo; said Andrus Adamchik, Vice President of Apache Cayenne.
+Cayenne is an enterprise Java ORM with integrated support for caching, three-tier persistence, object lifecycles and workflow, inheritance, paging, on demand faulting, auditing and much more. As an object relational mapping library, Cayenne integrates applications to any SQL database available today, freeing solutions from being locked into one database engine. At the same time it improves performance through paging and caching, enforces data integrity and makes it dramatically faster for developers to build a reliable application.</p>
+
+<p>Cayenne has a track record of solid performance in high-volume environments. Apache Cayenne is an exceptional choice for persistence services, and is in use at ish onCourse, National Hockey League, Nike, Unilever and the Law Library of Congress (the world&rsquo;s largest publicly-available legal index) as well as dozens of high-demand applications and Websites accessed by millions of users each day.</p>
+
+<p>Apache Cayenne v3.1 is the result of 4 years of development. Notable new features and improvements include:</p>
+
+<ul>
+<li>easier configuration and embedding in any type of application;</li>
+<li>highly configurable runtime, enabled by one of the industry&rsquo;s smallest built-in Dependency Injection (DI) containers written specifically for Cayenne (and that co-exists with other DI/IoC, such as Apache Tapestry). It is also very easy to create more than one runtime, which opens interesting possibilities like multi-tenancy;</li>
+<li>nearly all components now pluggable, making it very easy to create more than one runtime and easily change or extend internals of the stack declaratively &ndash;from cache provider to SQL log format to DataSource lookup strategy and much more;</li>
+<li>improved ORM modularity to allow  projects to be included in libraries without assumptions about the target use. Different aspects of an application can now be modeled in separate mapping projects and combined in runtime as needed. As a result Cayenne projects can be included in libraries that make no assumptions about the target use;</li>
+<li>extended persistent events model from simple per-object events to more higher-level &ldquo;workflows&rdquo; that can be configured with app-specific annotations on persistent classes. Cayenne ships with &ldquo;cayenne-lifecycle&rdquo; module that provides a few common examples of such workflows activated on data changes: data modifications audit, precision cache invalidation, etc.; and performance optimizations for improved overall concurrency</li>
+</ul>
+
+<p>&ldquo;Developers who are seeking an alternate to EJB/Hibernate might find Cayenne&rsquo;s graphical modeler, reverse database engineering, easy to use query API and flexible context model a joy to work with,&rdquo; said Aristedes Maniatis, member of the Apache Cayenne Project Management Committee and CEO of ish.</p>
+
+<p>&ldquo;We use Apache Cayenne as the ORM for a large and complex budgeting project for around twenty government organizations,&rdquo; said Daniel Abrams, CEO of MassLight. &ldquo;Cayenne is used to access and persist exhibit data, business validation rules, and account information, and has simplified the development process. A single Cayenne method call evaluates all changes in the user&rsquo;s context and generates all statements required to commit their changes within a single transaction without the developer having to write code to track the changes &ndash; Cayenne does all the work. Since switching to Cayenne, there haven&rsquo;t been any faulting errors that tended to plague the previous version of the application because of the complex data model. This was one of the principal reasons for the switch to Cayenne and the data model has become significantly more complex now.&rdquo;</p>
+
+<p>&ldquo;We use Cayenne in our system to collect, quality control and distribute world coverage nautical charts to navies, pilots, inspectors and several thousand vessels,&rdquo; said Tore Halset, Development Manager at Electronic Chart Centre and PRIMAR. &ldquo;We have been happy users of Apache Cayenne since 2005 and are now on version 3.1.&rdquo;</p>
+
+<p>&ldquo;Apache Cayenne is a core service in Avoka Transact, an engagement platform for multi-channel sales and service transactions,&rdquo; said Malcolm Edgar, Vice President of Engineering at Avoka.</p>
+
+<p>&ldquo;We use Apache Cayenne to support the Oracle, MySQL, and SQL Server databases. Cayenne provides the right blend of ORM capabilities and low level JDBC access when required. It has been a rock-solid technology for us.&rdquo;
+In addition, Apache Cayenne&rsquo;s HTML documentation and tutorials have been completely revised and available in PDF for the first time.</p>
+
+<p>&ldquo;Our comprehensive documentation and vibrant, helpful user community are just what you need when you have questions about the internals of Cayenne or the best way to achieve your goals,&rdquo; added Adamchik.</p>
+
+<h3 id="availability-and-oversight">Availability and Oversight</h3>
+
+<p>Cayenne v3.1 is available immediately as a free download from <a href="http://cayenne.apache.org/download.html">http://cayenne.apache.org/download.html</a>. As with all Apache products, Apache Cayenne software is released under the Apache License v2.0, and is overseen by a self-selected team of active contributors to the project. A Project Management Committee (PMC) guides the Project&rsquo;s day-to-day operations, including community development and product releases. For documentation and ways to become involved with Apache Cayenne, visit <a href="http://cayenne.apache.org/">http://cayenne.apache.org/</a> and @ApacheCayenne on Twitter.</p>
+
+<h3 id="about-the-apache-software-foundation-asf">About The Apache Software Foundation (ASF)</h3>
+
+<p>Established in 1999, the all-volunteer Foundation oversees more than two hundred leading Open Source projects, including Apache HTTP Server &ndash;the world&rsquo;s most popular Web server software. Through the ASF&rsquo;s meritocratic process known as &ldquo;The Apache Way,&rdquo; more than 450 individual Members and 4,000 Committers successfully collaborate to develop freely available enterprise-grade software, benefiting millions of users worldwide: thousands of software solutions are distributed under the Apache License; and the community actively participates in ASF mailing lists, mentoring initiatives, and ApacheCon, the Foundation&rsquo;s official user conference, trainings, and expo. The ASF is a US 501&copy;(3) charitable organization, funded by individual donations and corporate sponsors including Budget Direct, Citrix, Cloudera, Comcast, Facebook, Google, Hortonworks, HP, Huawei, IBM, InMotion Hosting, Matt Mullenweg, Microsoft, Pivotal, Produban, WANdisco, and Yahoo. For more information, visit <a href="http://www.apache.org/">http://www.apache.org/</a> or follow @TheASF on Twitter.</p>
+
+                    </article>
+                </section>
+            
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+                <a class="btn btn-link" href='/2015/03/cayenne-40m2-released.html'>
+                    <span class="d-block d-md-none  text-muted">Prev: </span>
+                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
+                    Cayenne 4.0 Milestone 2 Released
+                </a>
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+            </div>
+        </div>
+    </main>
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2017-11-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Nov 20, 2017</time>
+                        <a href="/2017/11/cayenne-312-released.html">Cayenne 3.1.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2017</time>
+                        <a href="/2017/10/cayenne-41m1-released.html">Cayenne 4.1 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2017-10-06 17:38:42 &#43;0300 &#43;03" class="xsmall d-block">Oct 06, 2017</time>
+                        <a href="/2017/10/cayenne-40B2-released.html">Cayenne 4.0 Beta 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="http://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2018 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="http://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>
