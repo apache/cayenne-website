@@ -2781,33 +2781,57 @@ select.setParameters(Collections.singletonMap("a", a));</code></pre>
       </div> 
      </div> 
      <div class="sect5"> 
-      <h6 id="note"><a class="anchor" href="#note"></a>Note</h6> 
+      <h6 id="chain-and-chunk"><a class="anchor" href="#chain-and-chunk"></a>#chain and #chunk</h6> 
       <div class="paragraph"> 
-       <p>For advanced features you may look at the <a href="#velocity">Apache Velocity extension</a></p> 
-      </div> 
-     </div> 
-     <div class="sect5"> 
-      <h6 id="mapping-sqltemplate-results"><a class="anchor" href="#mapping-sqltemplate-results"></a>Mapping SQLTemplate Results</h6> 
-      <div class="paragraph"> 
-       <p>Here we’ll discuss how to convert the data selected via SQLTemplate to some useable format, compatible with other query results. It can either be very simple or very complex, depending on the structure of the SQL, JDBC driver nature and the desired result structure. This section presents various tips and tricks dealing with result mapping.</p> 
+       <p><code>#chain</code> and <code>#chunk</code> directives are used for conditional inclusion of SQL code. They are used together with <code>#chain</code> wrapping multiple <code>#chunks</code>. A chunk evaluates its parameter expression and if it is NULL suppresses rendering of the enclosed SQL block. A chain renders its prefix and its chunks joined by the operator. If all the chunks are suppressed, the chain itself is suppressed. This allows to work with otherwise hard to script SQL semantics. E.g. a WHERE clause can contain multiple conditions joined with AND or OR. Application code would like to exclude a condition if its right-hand parameter is not present (similar to Expression pruning discussed above). If all conditions are excluded, the entire WHERE clause should be excluded. <code>#chain + #chunk</code> allows to do that.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>By default SQLTemplate is expected to return a List of Persistent objects of its root type. This is the simple case:</p> 
+       <p>Semantics:</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate(Artist.class, "SELECT * FROM ARTIST");
-
-// List of Artists
-List&lt;Artist&gt; artists = context.performQuery(query);</code></pre> 
+        <pre>#chain(operator) ... #end
+    #chain(operator prefix) ... #end
+    #chunk() ... #end
+    #chunk(param) ... #end
+    ...</pre> 
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Just like SelectQuery, SQLTemplate can fetch DataRows. In fact DataRows option is very useful with SQLTemplate, as the result type most often than not does not represent a Cayenne entity, but instead may be some aggregated report or any other data whose object structure is opaque to Cayenne:</p> 
+       <p>Full example:</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">String sql = "SELECT t0.NAME, COUNT(1) FROM ARTIST t0 JOIN PAINTING t1 ON (t0.ID = t1.ARTIST_ID) "
+        <pre>#chain('OR' 'WHERE')
+    #chunk($name) NAME LIKE #bind($name) #end
+    #chunk($id) ARTIST_ID &gt; #bind($id) #end
+#end"</pre> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="mapping-sqltemplate-results"><a class="anchor" href="#mapping-sqltemplate-results"></a>Mapping SQLTemplate Results</h5> 
+     <div class="paragraph"> 
+      <p>Here we’ll discuss how to convert the data selected via SQLTemplate to some useable format, compatible with other query results. It can either be very simple or very complex, depending on the structure of the SQL, JDBC driver nature and the desired result structure. This section presents various tips and tricks dealing with result mapping.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>By default SQLTemplate is expected to return a List of Persistent objects of its root type. This is the simple case:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate(Artist.class, "SELECT * FROM ARTIST");
+
+// List of Artists
+List&lt;Artist&gt; artists = context.performQuery(query);</code></pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Just like SelectQuery, SQLTemplate can fetch DataRows. In fact DataRows option is very useful with SQLTemplate, as the result type most often than not does not represent a Cayenne entity, but instead may be some aggregated report or any other data whose object structure is opaque to Cayenne:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">String sql = "SELECT t0.NAME, COUNT(1) FROM ARTIST t0 JOIN PAINTING t1 ON (t0.ID = t1.ARTIST_ID) "
     + "GROUP BY t0.NAME ORDER BY COUNT(1)";
 SQLTemplate query = new SQLTemplate(Artist.class, sql);
 
@@ -2816,17 +2840,17 @@ query.setFetchingDataRows(true);
 
 // List of DataRow
 List&lt;DataRow&gt; rows = context.performQuery(query);</code></pre> 
-       </div> 
       </div> 
-      <div class="paragraph"> 
-       <p>In the example above, even though the query root is Artist. the result is a list of artist names with painting counts (as mentioned before in such case "root" is only used to find the DB to fetch against, but has no bearning on the result). The DataRows here are the most appropriate and desired result type.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>In a more advanced case you may decide to fetch a list of scalars or a list of Object[] with each array entry being either an entity or a scalar. You probably won’t be doing this too often and it requires quite a lot of work to setup, but if you want your SQLTemplate to return results similar to EJBQLQuery, it is doable using SQLResult as described below:</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate(Painting.class, "SELECT ESTIMATED_PRICE P FROM PAINTING");
+     </div> 
+     <div class="paragraph"> 
+      <p>In the example above, even though the query root is Artist. the result is a list of artist names with painting counts (as mentioned before in such case "root" is only used to find the DB to fetch against, but has no bearning on the result). The DataRows here are the most appropriate and desired result type.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>In a more advanced case you may decide to fetch a list of scalars or a list of Object[] with each array entry being either an entity or a scalar. You probably won’t be doing this too often and it requires quite a lot of work to setup, but if you want your SQLTemplate to return results similar to EJBQLQuery, it is doable using SQLResult as described below:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate(Painting.class, "SELECT ESTIMATED_PRICE P FROM PAINTING");
 
 // let Cayenne know that result is a scalar
 SQLResult resultDescriptor = new SQLResult();
@@ -2835,11 +2859,11 @@ query.setResult(resultDescriptor);
 
 // List of BigDecimals
 List&lt;BigDecimal&gt; prices = context.performQuery(query);</code></pre> 
-       </div> 
       </div> 
-      <div class="listingblock"> 
-       <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate(Artist.class, "SELECT t0.ID, t0.NAME, t0.DATE_OF_BIRTH, COUNT(t1.PAINTING_ID) C " +
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate(Artist.class, "SELECT t0.ID, t0.NAME, t0.DATE_OF_BIRTH, COUNT(t1.PAINTING_ID) C " +
       "FROM ARTIST t0 LEFT JOIN PAINTING t1 ON (t0.ID = t1.ARTIST_ID) " +
       "GROUP BY t0.ID, t0.NAME, t0.DATE_OF_BIRTH");
 
@@ -2856,14 +2880,14 @@ query.setResult(resultDescriptor);
 
 // List of Object[]
 List&lt;Object[]&gt; data = context.performQuery(query);</code></pre> 
-       </div> 
       </div> 
-      <div class="paragraph"> 
-       <p>Another trick related to mapping result sets is making Cayenne recognize prefetched entities in the result set. This emulates "joint" prefetching of SelectQuery, and is achieved by special column naming. Columns belonging to the "root" entity of the query should use unqualified names corresponding to the root DbEntity columns. For each related entity column names must be prefixed with relationship name and a dot (e.g. "toArtist.ID"). Column naming can be controlled with "#result" directive:</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">String sql = "SELECT distinct "
+     </div> 
+     <div class="paragraph"> 
+      <p>Another trick related to mapping result sets is making Cayenne recognize prefetched entities in the result set. This emulates "joint" prefetching of SelectQuery, and is achieved by special column naming. Columns belonging to the "root" entity of the query should use unqualified names corresponding to the root DbEntity columns. For each related entity column names must be prefixed with relationship name and a dot (e.g. "toArtist.ID"). Column naming can be controlled with "#result" directive:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">String sql = "SELECT distinct "
     + "#result('t1.ESTIMATED_PRICE' 'BigDecimal' '' 'paintings.ESTIMATED_PRICE'), "
     + "#result('t1.PAINTING_TITLE' 'String' '' 'paintings.PAINTING_TITLE'), "
     + "#result('t1.GALLERY_ID' 'int' '' 'paintings.GALLERY_ID'), "
@@ -2877,34 +2901,33 @@ List&lt;Object[]&gt; data = context.performQuery(query);</code></pre>
 SQLTemplate q = new SQLTemplate(Artist.class, sql);
 q.addPrefetch(Artist.PAINTINGS_PROPERTY)
 List&lt;Artist&gt; objects = context.performQuery(query);</code></pre> 
-       </div> 
       </div> 
-      <div class="paragraph"> 
-       <p>And the final tip deals with capitalization of the DataRow keys. Queries like <code>"SELECT * FROM…​"</code> and even <code>"SELECT COLUMN1, COLUMN2, …​ FROM …​"</code> can sometimes result in Cayenne exceptions on attempts to convert fetched DataRows to objects. Essentially any query that is not using a <code>#result</code> directive to describe the result set is prone to this problem, as different databases may produce different capitalization of the java.sql.ResultSet columns.</p> 
-      </div> 
-      <div class="paragraph"> 
-       <p>The most universal way to address this issue is to describe each column explicitly in the SQLTemplate via <code>#result</code>, e.g.: <code>"SELECT #result('column1'), #result('column2'), .."</code>. However this quickly becomes impractical for tables with lots of columns. For such cases Cayenne provides a shortcut based on the fact that an ORM mapping usually follows some naming convention for the column names. Simply put, for case-insensitive databases developers normally use either all lowercase or all uppercase column names. Here is the API that takes advantage of that user knowledge and forces Cayenne to follow a given naming convention for the DataRow keys (this is also available as a dropdown in the Modeler):</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate("SELECT * FROM ARTIST");
+     </div> 
+     <div class="paragraph"> 
+      <p>And the final tip deals with capitalization of the DataRow keys. Queries like <code>"SELECT * FROM…​"</code> and even <code>"SELECT COLUMN1, COLUMN2, …​ FROM …​"</code> can sometimes result in Cayenne exceptions on attempts to convert fetched DataRows to objects. Essentially any query that is not using a <code>#result</code> directive to describe the result set is prone to this problem, as different databases may produce different capitalization of the java.sql.ResultSet columns.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The most universal way to address this issue is to describe each column explicitly in the SQLTemplate via <code>#result</code>, e.g.: <code>"SELECT #result('column1'), #result('column2'), .."</code>. However this quickly becomes impractical for tables with lots of columns. For such cases Cayenne provides a shortcut based on the fact that an ORM mapping usually follows some naming convention for the column names. Simply put, for case-insensitive databases developers normally use either all lowercase or all uppercase column names. Here is the API that takes advantage of that user knowledge and forces Cayenne to follow a given naming convention for the DataRow keys (this is also available as a dropdown in the Modeler):</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate("SELECT * FROM ARTIST");
 query.setColumnNamesCapitalization(CapsStrategy.LOWER);
 List objects = context.performQuery(query);</code></pre> 
-       </div> 
       </div> 
-      <div class="paragraph"> 
-       <p>or</p> 
-      </div> 
-      <div class="listingblock"> 
-       <div class="content"> 
-        <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate("SELECT * FROM ARTIST");
+     </div> 
+     <div class="paragraph"> 
+      <p>or</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLTemplate query = new SQLTemplate("SELECT * FROM ARTIST");
 query.setColumnNamesCapitalization(CapsStrategy.UPPER);
 List objects = context.performQuery(query);</code></pre> 
-       </div> 
       </div> 
-      <div class="paragraph"> 
-       <p>None of this affects the generated SQL, but the resulting DataRows are using correct capitalization. Note that you probably shouldn’t bother with this unless you are getting CayenneRuntimeExceptions when fetching with SQLTemplate.</p> 
-      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>None of this affects the generated SQL, but the resulting DataRows are using correct capitalization. Note that you probably shouldn’t bother with this unless you are getting CayenneRuntimeExceptions when fetching with SQLTemplate.</p> 
      </div> 
     </div> 
    </div> 
@@ -4301,7 +4324,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="note-2"><a class="anchor" href="#note-2"></a>Note</h5> 
+     <h5 id="note"><a class="anchor" href="#note"></a>Note</h5> 
      <div class="paragraph"> 
       <p>Current version of reverse engineering doesn’t support catalog filtering for Postgres database.</p> 
      </div> 
@@ -4817,7 +4840,7 @@ public class MyEntity extends _MyEntity {
      <p>After any modification of <code>MyEntity</code> objects cache group <code>"some-group"</code> will be dropped from cache automatically.</p> 
     </div> 
     <div class="sect4"> 
-     <h5 id="note-3"><a class="anchor" href="#note-3"></a>Note</h5> 
+     <h5 id="note-2"><a class="anchor" href="#note-2"></a>Note</h5> 
      <div class="paragraph"> 
       <p>You can read more about cache and cache groups in corresponding <a href="#caching">chapter</a> of this documentation.</p> 
      </div> 
@@ -4989,7 +5012,7 @@ public class MyEntity extends _MyEntity {
       </ol> 
      </div> 
      <div class="sect5"> 
-      <h6 id="note-4"><a class="anchor" href="#note-4"></a>Note</h6> 
+      <h6 id="note-3"><a class="anchor" href="#note-3"></a>Note</h6> 
       <div class="paragraph"> 
        <p>Not all data types may be supported by your database.</p> 
       </div> 
