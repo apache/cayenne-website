@@ -132,7 +132,7 @@
                         <configuration>
                             <content>target/site/public</content>
                             <checkinComment>${msg}</checkinComment>
-                            <pubScmUrl>scm:git:git@github.com:stariy95/cayenne-website-demo.git</pubScmUrl>
+                            <pubScmUrl>scm:git:https://git-wip-us.apache.org/repos/asf/cayenne-website.git</pubScmUrl>
                             <scmBranch>asf-site</scmBranch>
                         </configuration>
                         <executions>
