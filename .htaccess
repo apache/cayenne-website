@@ -24,12 +24,36 @@ Redirect permanent /running-unit-tests.html /dev/running-unit-tests.html
 Redirect permanent /support.html /about/support/
 Redirect permanent /download.html /download/
 
+# 3.1 docs
+RedirectMatch permanent /docs/3\.1/tutorial/(.*)\.html$ /docs/3.1/getting-started/\#$1
+RedirectMatch permanent /docs/3\.1/tutorial-rop/(.*)\.html$ /docs/3.1/getting-started-rop/\#$1
+RedirectMatch permanent /docs/3\.1/cayenne-guide/(.*)\.html$ /docs/3.1/cayenne-guide/\#$1
+RedirectMatch permanent /docs/3\.1/upgrade-guide/(.*)\.html$ /docs/3.1/upgrade-guide/#$1
+#Redirect permanent /docs/3.1/tutorial /docs/3.1/getting-started-guide
+#Redirect permanent /docs/3.1/tutorial-rop /docs/3.1/getting-started-rop
+
 # 4.0 docs
-Redirect permanent /docs/4.0/tutorial /docs/4.0/getting-started
-RedirectMatch permanent /docs/4\.0/tutorial/(.*)\.html$ /docs/4.0/getting-started/$1
+RedirectMatch permanent /docs/4\.0/tutorial/(.*)\.html$ /docs/4.0/getting-started/#$1
+RedirectMatch permanent /docs/4\.0/tutorial-rop/(.*)\.html$ /docs/4.0/getting-started-rop/\#$1
+RedirectMatch permanent /docs/4\.0/cayenne-guide/(.*)\.html$ /docs/4.0/cayenne-guide/#$1
+RedirectMatch permanent /docs/4\.0/upgrade-guide/(.*)\.html$ /docs/4.0/upgrade-guide/#$1
+#Redirect permanent /docs/4.0/tutorial /docs/4.0/getting-started-guide
+#Redirect permanent /docs/4.0/tutorial-rop /docs/4.0/getting-started-rop
 
 # 4.1 docs
 RedirectMatch permanent /docs/4\.1/tutorial/(.*)\.html$ /docs/4.1/getting-started/$1
+RedirectMatch permanent /docs/4\.1/tutorial-rop/(.*)\.html$ /docs/4.1/getting-started-rop/\#$1
+RedirectMatch permanent /docs/4\.1/cayenne-guide/(.*)\.html$ /docs/4.1/cayenne-guide/#$1
+RedirectMatch permanent /docs/4\.1/upgrade-guide/(.*)\.html$ /docs/4.1/upgrade-guide/#$1
+#Redirect permanent /docs/4.1/tutorial /docs/4.1/getting-started-guide
+#Redirect permanent /docs/4.1/tutorial-rop /docs/4.1/getting-started-rop
+
+# Links without direct replacement in new site
+Redirect permanent /docs/legacy.html /docs/3.0/
+Redirect permanent /about.html /
+Redirect permanent /collaboration.html /
+Redirect permanent /thanks.html /
+RedirectMatch permanent /legacy(.*).html /
 
 # Custom 404 error page
 ErrorDocument 404 /404.html
