@@ -30,7 +30,7 @@ function runHugo(publish) {
     let cmd = hugo + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
 
     if (publish) {
-        cmd += ' --baseUrl="http://cayenne.apache.org/" ';
+        cmd += ' --baseUrl="' + argv.prod_host + '" ';
     } else {
         cmd += ' --baseUrl="http://' + argv.host + ':' + argv.port + '/" '
             + ' --buildDrafts=true --verbose=true';

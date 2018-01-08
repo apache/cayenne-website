@@ -37,6 +37,8 @@
         <!-- Host and port for dev mode, can be set via mvn (e.g. -Ddev.host="192.168.1.2" -Ddev.port=80) -->
         <dev.host>localhost</dev.host>
         <dev.port>3000</dev.port>
+        <!-- Production host -->
+        <prod.host>https://cayenne.apache.org</prod.host>
     </properties>
 
     <build>
@@ -73,7 +75,7 @@
                             <goal>gulp</goal>
                         </goals>
                         <configuration>
-                            <arguments>${gulp.task} --host ${dev.host} --port ${dev.port}</arguments>
+                            <arguments>${gulp.task} --host ${dev.host} --port ${dev.port} --prod_host ${prod.host}</arguments>
                         </configuration>
                     </execution>
                 </executions>
