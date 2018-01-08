@@ -21,15 +21,17 @@ Redirect permanent /release-guide.html /dev/release-guide.html
 Redirect permanent /running-unit-tests.html /dev/running-unit-tests.html
 
 # Remaping old -> new cayenne site
-Redirect permanent /support.html /about/support/index.html
-Redirect permanent /download.html /download/index.html
+Redirect permanent /support.html /about/support/
+Redirect permanent /download.html /download/
 
 # 4.0 docs
-Redirect permanent /docs/4.0/tutorial /docs/4.0/getting-started/index.html
-RedirectMatch permanent /docs/4\.0/tutorial/(.*)\.html$ /docs/4.0/getting-started/index.html
+Redirect permanent /docs/4.0/tutorial /docs/4.0/getting-started
+RedirectMatch permanent /docs/4\.0/tutorial/(.*)\.html$ /docs/4.0/getting-started/$1
 
 # 4.1 docs
-RedirectMatch permanent /docs/4\.1/tutorial/(.*)\.html$ /docs/4.1/getting-started/index.html
+RedirectMatch permanent /docs/4\.1/tutorial/(.*)\.html$ /docs/4.1/getting-started/$1
 
 # Custom 404 error page
 ErrorDocument 404 /404.html
+# Disable .git related content
+RedirectMatch 404 /\.git
