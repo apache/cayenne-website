@@ -38,7 +38,7 @@
         <dev.host>localhost</dev.host>
         <dev.port>3000</dev.port>
         <!-- Production host -->
-        <prod.host>https://cayenne.apache.org</prod.host>
+        <prod.host>https://cayenne.apache.org/</prod.host>
     </properties>
 
     <build>
