@@ -25,18 +25,19 @@ Redirect permanent /support.html /about/support/
 Redirect permanent /download.html /download/
 
 # Remaping docbook based docs to asciidocs based
-RedirectMatch permanent /docs/([0-9\.]+)/tutorial/(.*)\.html$ /docs/$1/getting-started-guide/\#$2
-RedirectMatch permanent /docs/([0-9\.]+)/tutorial-rop/(.*)\.html$ /docs/$1/getting-started-rop/\#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/(.*)\.html$ /docs/$1/getting-started-guide/\#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/(.*)\.html$ /docs/$1/getting-started-rop/\#$2
 # Redirect all except index.html to exclude cyclic redirection
-RedirectMatch permanent /docs/([0-9\.]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
-RedirectMatch permanent /docs/([0-9\.]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/$1/upgrade-guide/#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/$1/upgrade-guide/#$2
 
 # Links without direct replacement in new site
 Redirect permanent /docs/legacy.html /docs/3.0/
 Redirect permanent /about.html /
 Redirect permanent /collaboration.html /
 Redirect permanent /thanks.html /
-RedirectMatch permanent /legacy(.*).html /
+Redirect permanent /release-guide-2.0.html /dev/release-guide.html
+RedirectMatch permanent ^/legacy(.*).html$ /
 
 # Custom 404 error page
 ErrorDocument 404 /404.html
