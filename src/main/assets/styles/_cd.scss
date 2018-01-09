@@ -257,7 +257,7 @@
 				table-layout: fixed;
 
 				td {
-					overflow: scroll;
+					word-wrap: break-word;
 					padding: $table-cell-padding-sm;
 				}
 
