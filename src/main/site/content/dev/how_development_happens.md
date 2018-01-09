@@ -22,8 +22,7 @@ For further details consult the official [Apache handbook](http://www.apache.org
 In addition to the general Apache responsibilities, this is what is
 expected of everyone with privileges within the Cayenne project.
 
-<div class="pb-3"><!-- gap 3rem --></div> 
-
+{{% gap %}}
 
 ## Contribution
 Contribution to the project can take many forms. Updating documentation and
@@ -32,8 +31,7 @@ Everyone here is a volunteer, so quantity of effort is not the most
 important factor. Help when you can, but let the rest of the community know
 if you will be out of action for an extended period.
 
-<div class="pb-3"><!-- gap 3rem --></div> 
-
+{{% gap %}} 
 
 ## Mailing lists
 Cayenne takes special pride in the support we give to users of the
@@ -44,8 +42,7 @@ pleasant places to be for all users regardless of their English language
 skills or technical experience. When things might go off the rails, a
 gentle nudge back in the right direction is all that is needed.
 
-<div class="pb-3"><!-- gap 3rem --></div> 
-
+{{% gap %}} 
 
 ## Voting
 Each release should be voted on by the committers and PMC members. Even

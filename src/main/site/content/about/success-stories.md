@@ -14,8 +14,7 @@ sites that use Cayenne. If you want to add your Cayenne site to this page,
 please drop a note to cayenne-user list or directly to "andrus at
 objectstyle.org".</p>
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-AccessPointInc.(http://www.accesspointinc.com/)"></a>
 #### AccessPoint Inc. (<http://www.accesspointinc.com/>)
@@ -29,8 +28,7 @@ errors. In addition, Cayenne is used in our internal reporting application.
 These applications and thus Cayenne are central to the financial health of
 the company."
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-GlobalLegalInformationNetwork(GLIN)(http://www.glin.gov/)"></a>
 #### Global Legal Information Network (GLIN) (<http://www.glin.gov/>)
@@ -46,8 +44,7 @@ currently and will support 14 languages in the nearest future, thus
 becoming the most internationalized site in the federal government, after
 the IRS.
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-ishonCourse(http://www.ish.com.au/oncourse)"></a>
 #### ish onCourse (<http://www.ish.com.au/oncourse>)
@@ -61,8 +58,7 @@ real time data validation, replication to a web site and the use of caching
 and paging in Cayenne for the application to work well across slow WAN
 links."
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-NationalHockeyLeague(http://www.nhl.com/)"></a>
 #### National Hockey League (<http://www.nhl.com/>)
@@ -74,8 +70,7 @@ millions of hits a day, and are relying on Cayenne for all database access.
 The applications are often upgraded with the bleeding edge builds from
 Cayenne trunk to take advantage of the latest framework features.
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-ObjectVisualizer"></a>
 #### ObjectVisualizer
@@ -88,8 +83,7 @@ Interactive Data Table, Report Generation, Chart Creation, and Plugin
 Architecture. ObjectVisualizer has a Cayenne plugin to work with Cayenne
 mapping projects.
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-PixxuresInc.(http://www.pixxures.ca/)"></a>
 #### Pixxures Inc. (<http://www.pixxures.ca/>)
@@ -102,8 +96,7 @@ production system. Now Pixxures plans to revamp their main software to use
 Cayenne instead of the connection pooling system and the other data access
 methods.
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-Pogodak"></a>
 #### Pogodak
@@ -114,8 +107,7 @@ using Cayenne to store and retrieve indexed data for blog search engine:
 <http://www.pogodak.ba/index.jsp?tab=blog>. There are plans to switch to
 Cayenne similar sites for Slovenia, Serbia and Macedonia.
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-ProvestaWonen(http://www.provesta.nl/)"></a>
 #### Provesta Wonen (<http://www.provesta.nl/>)
@@ -126,8 +118,7 @@ the image base. The backend reads reports from an ERP-like system and based
 on that information can appoint the images to certain addresses and
 complexes (collection of addresses).
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-RossoAlice(http://www.rossoalice.it/)"></a>
 #### RossoAlice (<http://www.rossoalice.it/>)
@@ -137,8 +128,7 @@ download music, watch films, download games, watch television news and
 more. The Java database layer for the authentication / authorization
 component is developed with Cayenne.
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 <a name="Successstories-Unilever(http://www.rossoalice.it/)"></a>
 #### Unilever (<http://www.unilever-bilddatenbank.de/>), Ascensys (<http://www.ascensys.de/>)

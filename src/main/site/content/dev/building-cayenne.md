@@ -19,7 +19,7 @@ Here are the MAVEN_OPTS that should be used for the build. MAVEN_OPTS variable c
 or placed in *$HOME/.mavenrc*. Optimal values vary from platform to platform and between Cayenne versions, 
 but these should probably work for everyone:
 
-    MAVEN_OPTS="-Djava.net.preferIPv4Stack=true -Xms512m -Xmx512m -XX:MaxPermSize=128m"
+    MAVEN_OPTS="-Djava.net.preferIPv4Stack=true -Xms512m"
 
 
 <div class="pb-3"><!-- gap 3rem --></div>
@@ -36,10 +36,10 @@ common flavor) :
     mvn clean install
     
 In order to skip the unit tests (to speed up the build process or because
-some tests are failing), add *"-Dmaven.test.skip=true"* to any build
+some tests are failing), add *"-DskipTests"* to any build
 flavor:
 
-    mvn clean install -Dmaven.test.skip=true
+    mvn clean install -DskipTests
 
 For the build to produce a release-like assembly, activate "assembly"
 profile. Additionally activate a profile specific for the target platform

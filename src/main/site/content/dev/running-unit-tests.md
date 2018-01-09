@@ -12,6 +12,8 @@ Maven.
 
 Maven [build prerequisites and recommended settings](/dev/building-cayenne.html) apply here.    
     
+{{% gap 2 %}}    
+    
 ## Running Against Embedded HSQLDB
     
 No extra setup is required. Just run Maven:
@@ -24,7 +26,7 @@ or
     $ cd cayenne
     $ mvn clean verify
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
     
 ## Running Against In-memory Database
@@ -41,7 +43,7 @@ For this databases you can run tests without any additional configuration by onl
  
     $ mvn verify -DcayenneTestConnection=derby    
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
     
 ## Running Against Database in Docker (only on Linux)
@@ -56,14 +58,14 @@ or
     
     $ mvn verify -DcayenneTestConnection=postgres-docker    
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
     
 ## Running Against a Specific Database
 
 Final option to run tests against any supported database is with manual configuration. 
 
-<div class="pb-1l2"><!-- gap .5rem --></div>
+{{%gap 1l2 %}}
 
     
 ##### Step 1. Install JDBC Driver Jars in a Local Maven Repo
@@ -98,8 +100,7 @@ the POM or the examples below.
     $ mvn install:install-file -Dfile=jconn3.jar -DgroupId=com.sybase \
            -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
 
-<div class="pb-3l2"><!-- gap 1.5rem --></div>
-
+{{% gap 3l2 %}}
     
 ##### Step 2. Run Tests Against Configured Data Source
     

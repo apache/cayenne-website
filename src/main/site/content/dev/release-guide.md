@@ -10,9 +10,7 @@ that we are publishing both downloadable assemblies and Maven artifacts, so
 we have to build and publish things twice. Both forms of Cayenne release
 are also available for evaluation during the vote.
 
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+{{% gap %}}
 
 ## Prerequisites
 
@@ -24,7 +22,7 @@ More info can be found at [http://www.apache.org/dev/release-signing.html](http:
  for details.
 * As Cayenne has modules which require Java 1.8, you should use Java 1.8 to perform the release.
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 
 ## Preparing Sources
@@ -37,7 +35,7 @@ source. Then read the report and fix any issues.
         cd cayenne
         ./rat.sh ~/Desktop/apache-rat-0.9/apache-rat-0.9.jar  > report.txt
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
     
 
 ## Tagging the Repo and Releasing Maven Artifacts 
@@ -57,7 +55,7 @@ repository that was just created during "*mvn release:perform*", click
 be used by the people voting on Cayenne. It may look like this:
 [https://repository.apache.org/content/repositories/orgapachecayenne-052/](https://repository.apache.org/content/repositories/orgapachecayenne-052/) 
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 
 ## Releasing Downloadable Assemblies
@@ -100,7 +98,7 @@ work ("-u" option can be omitted if you have only one GPG key):
 * Assemblies, signature and checksum files are committed to the special SVN repo
   used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/dev/release.html#upload-ci).
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 
 ## Voting
@@ -124,7 +122,7 @@ main jar passes some basic tests.
 running them manually or verifying that Hudson has run those tests against
 the equivalent source). 
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 
 ## Publishing the Release
@@ -137,7 +135,7 @@ select the staging repo and click "Release".
         $ svn mv https://dist.apache.org/repos/dist/dev/cayenne/X.X \
              https://dist.apache.org/repos/dist/release/cayenne/
     
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 
 ## After the release
@@ -164,7 +162,7 @@ add any new features
 * Send a notification email to announceATapache.org
 * Update [http://en.wikipedia.org/wiki/Apache_Cayenne](http://en.wikipedia.org/wiki/Apache_Cayenne)
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
     
 ## Reference:

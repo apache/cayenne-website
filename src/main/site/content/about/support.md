@@ -14,7 +14,7 @@ aliases:
 * [Cayenne user mailing list](/mailing-lists.html) is a place to get help from the Cayenne community and discuss general Cayenne topics. Subscription is required to post messages and participate in discussion, and of course you can browse past archives anonymously.
 * [Stackoverflow](http://stackoverflow.com/questions/tagged/apache-cayenne) is another place to ask questions and search the existing knowledgebase of answers.
 
-<div class="pb-3"><!-- gap 5rem --></div>
+{{% gap %}}
 
 
 ## Commercial Support And Consulting

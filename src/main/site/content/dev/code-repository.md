@@ -19,8 +19,7 @@ It can be cloned by anyone, and that's where committers would ultimately push th
 
 Feel free to fork and/or star Cayenne there.
 
-<div class="pb-3"><!-- gap 3rem --></div> 
-
+{{% gap %}}
 
 ## Legacy Subversion Repository
 

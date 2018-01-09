@@ -21,8 +21,7 @@ To post a message use the following address: user@cayenne.apache.org
 * [Apache Message Archive - Old Style](http://mail-archives.apache.org/mod_mbox/cayenne-user/)
 * [ObjectStyle.org Archive](http://objectstyle.org/cayenne/lists/cayenne-user/) (legacy, does not store new messages, but has very old messages not available elsewhere)
 
-<div class="pb-3"><!-- gap 3rem --></div>
-
+{{% gap %}}
 
 ## Developer Mailing List
 
@@ -41,8 +40,7 @@ To post a message use the following address: dev@cayenne.apache.org
 * [Apache Message Archive - Old Style](http://mail-archives.apache.org/mod_mbox/cayenne-dev/)
 * [ObjectStyle.org Archive](http://objectstyle.org/cayenne/lists/cayenne-devel/) (legacy, does not store new messages, but has very old messages not available elsewhere)
 
-<div class="pb-2"><!-- gap 2rem --></div>
-
+{{% gap 2 %}}
 
 ## Commits Mailing List
 

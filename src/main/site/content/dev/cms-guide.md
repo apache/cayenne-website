@@ -9,7 +9,7 @@ https://git-wip-us.apache.org/repos/asf/cayenne-website.git
 
 Or from GitHub mirror (in read only mode): https://github.com/apache/cayenne-website.git
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 ## Dev mode
 
@@ -26,7 +26,7 @@ _You can change host and port by setting `dev.host` and `dev.port` properties:_
    
     mvn -Ddev.host="my.local" -Ddev.port="8080"
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 ## Publish
 
@@ -42,7 +42,7 @@ Don't forget to push you source's changes so others won't rewrite them.
 
 *NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`. But at first it is better to use manual publishing.
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 ## Content modifications
 
@@ -70,7 +70,7 @@ To update site content with information about new Cayenne version you need to pe
 * Update documentation, this can be done with `build-docs.sh` script. 
   You can run it like this: `./build-docs.sh 4.1.M2` 
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 
 ## Advanced 
 
