@@ -32,10 +32,11 @@ function updateResourceRefs() {
             global.hugoConfig.publicDir + '/**/*.html',
             global.hugoConfig.publicDir + '/**/*.xml',
             global.hugoConfig.publicDir + '/**/*.css',
+            global.hugoConfig.publicDir + '/**/*.json',
             // exclude all JavaDocs content as it's generated from outer sources
             '!' + global.hugoConfig.publicDir + '/docs/**/api/**/*.*'
         ])
-        .pipe(replace({manifest: manifest, replaceInExtensions: ['.html', '.xml', '.css']}))
+        .pipe(replace({manifest: manifest, replaceInExtensions: ['.html', '.xml', '.css', '.json']}))
         .pipe(size())
         .pipe(gulp.dest(global.hugoConfig.publicDir));
 }
