@@ -288,6 +288,58 @@
 				}
 			}
 
+
+			$conumSize: 1.25rem;
+
+			// Code line number comments, copied from Asciidoctor default styles
+			.conum[data-value] {
+				display: inline-block;
+				color: #fff !important;
+				background-color: rgba(0, 0, 0, .8);
+				border-radius: 100px;
+				text-align: center;
+				font-size: .75rem;
+				width: $conumSize;
+				height: $conumSize;
+				line-height: $conumSize;
+				font-style: normal;
+				font-weight: bold;
+				* {
+					color: #fff !important;
+				}
+			}
+			.conum[data-value] + b {
+				display: none;
+			}
+			.conum[data-value]:after {
+				content: attr(data-value)
+			}
+			pre .conum[data-value] {
+				position: relative;
+				top: -.125rem;
+			}
+			b.conum * {
+				color: inherit !important;
+			}
+			.conum:not([data-value]):empty {
+				display: none;
+			}
+
+			.colist>table {
+				tr>td:first-of-type {
+					padding: .35rem .5rem 1rem 1rem;
+					line-height: 1rem;
+					vertical-align: top;
+					img {
+						max-width:initial
+					}
+				}
+
+				tr>td:last-of-type {
+					padding: 0 0 1rem 0;
+				}
+			}
+
 			code {
 				@include media-breakpoint-down(md) {
 					word-break: break-all;
