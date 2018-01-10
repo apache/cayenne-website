@@ -28,10 +28,10 @@ menu:
         name: "Database First tutorial (4.1)"
 ---
 <div class="sect1"> 
- <h2 id="_getting_started_db_first_part1"><a class="anchor" href="#_getting_started_db_first_part1"></a>1. Setup</h2> 
+ <h2 id="setup"><a class="anchor" href="#setup"></a>1. Setup</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part1_prerequisites"><a class="anchor" href="#_getting_started_db_first_part1_prerequisites"></a>1.1. Prerequisites</h3> 
+   <h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>1.1. Prerequisites</h3> 
    <div class="paragraph"> 
     <p>You can start with this tutorial, or you can do "Getting Started with Cayenne" first and then continue with this tutorial.</p> 
    </div> 
@@ -39,19 +39,19 @@ menu:
     <p>This chapter lists the recommended software used in the tutorial.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_install_java"><a class="anchor" href="#_install_java"></a>Java</h4> 
+    <h4 id="java"><a class="anchor" href="#java"></a>Java</h4> 
     <div class="paragraph"> 
      <p>Cayenne 4.0 requires JDK 1.7 or newer.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_install_idea"><a class="anchor" href="#_install_idea"></a>IntelliJ IDEA IDE</h4> 
+    <h4 id="intellij-idea-ide"><a class="anchor" href="#intellij-idea-ide"></a>IntelliJ IDEA IDE</h4> 
     <div class="paragraph"> 
      <p>Download and install the free IntelliJ IDEA Community Edition IDE. This tutorial uses version 2017.1, but any recent IntelliJ IDEA version and edition will do.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_install_maven"><a class="anchor" href="#_install_maven"></a>Maven</h4> 
+    <h4 id="maven"><a class="anchor" href="#maven"></a>Maven</h4> 
     <div class="paragraph"> 
      <p>Two Maven plugins are used:</p> 
     </div> 
@@ -63,7 +63,7 @@ menu:
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_install_mysql"><a class="anchor" href="#_install_mysql"></a>MySQL</h4> 
+    <h4 id="mysql"><a class="anchor" href="#mysql"></a>MySQL</h4> 
     <div class="paragraph"> 
      <p>MySQL database server is used for demonstrating Cayenne’s ability to read the DB schema and to build/update the Cayenne model from it.</p> 
     </div> 
@@ -91,12 +91,12 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part1_maven_project"><a class="anchor" href="#_getting_started_db_first_part1_maven_project"></a>1.2. Maven Project</h3> 
+   <h3 id="maven-project"><a class="anchor" href="#maven-project"></a>1.2. Maven Project</h3> 
    <div class="paragraph"> 
     <p>The goal of this chapter is to create a new Java project in IntelliJ IDEA and to setup Maven Cayenne plugin</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_new_maven_project"><a class="anchor" href="#_new_maven_project"></a>Create a new Project in IntelliJ IDEA</h4> 
+    <h4 id="create-a-new-project-in-intellij-idea"><a class="anchor" href="#create-a-new-project-in-intellij-idea"></a>Create a new Project in IntelliJ IDEA</h4> 
     <div class="paragraph"> 
      <p>In IntelliJ IDEA select <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Project…​</b></span> and then select "Maven" and click "Next". In the dialog shown on the screenshot below, fill the "Group Id" and "Artifact Id" fields and click "Next".</p> 
     </div> 
@@ -108,7 +108,7 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_maven_plugin"><a class="anchor" href="#_maven_plugin"></a>Plugin setup</h4> 
+    <h4 id="plugin-setup"><a class="anchor" href="#plugin-setup"></a>Plugin setup</h4> 
     <div class="paragraph"> 
      <p>Next step is setting up Cayenne plugin in <code>pom.xml</code> file. For the convenience let’s define Cayenne version that we will use across project file:</p> 
     </div> 
@@ -140,17 +140,17 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="_getting_started_db_first_part2"><a class="anchor" href="#_getting_started_db_first_part2"></a>2. Importing database</h2> 
+ <h2 id="importing-database"><a class="anchor" href="#importing-database"></a>2. Importing database</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part2_rr_setup"><a class="anchor" href="#_getting_started_db_first_part2_rr_setup"></a>2.1. Reverse engineering database</h3> 
+   <h3 id="reverse-engineering-database"><a class="anchor" href="#reverse-engineering-database"></a>2.1. Reverse engineering database</h3> 
    <div class="paragraph"> 
     <p>Now we have everything ready and can proceed to importing Cayenne model from our Mysql database</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="configuring-plugin"><a class="anchor" href="#configuring-plugin"></a>Configuring plugin</h4> 
     <div class="paragraph"> 
-     <p>To let Cayenne plugin to its job we must tell it what to import and where it should get data. So let’s begin, here is sample settings for the data source:</p> 
+     <p>To let Cayenne plugin do its job we must tell it what to import and where it should get data. So let’s begin, here is sample settings for the data source:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -178,10 +178,7 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> 
-         <div class="paragraph"> 
-          <p>Don’t forget to set your actual MySQL login and password</p> 
-         </div> </td> 
+        <td class="content"> Don’t forget to set your actual MySQL login and password </td> 
        </tr> 
       </tbody>
      </table> 
@@ -198,7 +195,7 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>And a last small step we need set default package where our model classes will be and catalog where our tables are:</p> 
+     <p>And a last small step we need to do is to set default package where our model classes will be and catalog where our tables are:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -265,20 +262,14 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> 
-         <div class="paragraph"> 
-          <p>If you have some problems with configuration you can always delete <code>datamap.map.xml</code> file and try again.</p> 
-         </div> </td> 
+        <td class="content"> If you have some problems with configuration you can always delete <code>datamap.map.xml</code> file and try again. === Creating project </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part2_project_setup"><a class="anchor" href="#_getting_started_db_first_part2_project_setup"></a>2.2. Creating project</h3> 
-   <div class="paragraph"> 
-    <p>Now we also need to create project file, currently this should be done manually via Cayenne Modeler.</p> 
+    <div class="paragraph"> 
+     <p>Now we also need to create project file, currently this should be done manually via Cayenne Modeler.</p> 
+    </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="setup-modeler-maven-plugin"><a class="anchor" href="#setup-modeler-maven-plugin"></a>Setup Modeler Maven plugin</h4> 
@@ -328,10 +319,10 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="_getting_started_db_first_part3"><a class="anchor" href="#_getting_started_db_first_part3"></a>3. Advanced usage of cdbimport</h2> 
+ <h2 id="advanced-usage-of-cdbimport"><a class="anchor" href="#advanced-usage-of-cdbimport"></a>3. Advanced usage of cdbimport</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part3_updating_model"><a class="anchor" href="#_getting_started_db_first_part3_updating_model"></a>3.1. Updating model</h3> 
+   <h3 id="updating-model"><a class="anchor" href="#updating-model"></a>3.1. Updating model</h3> 
    <div class="paragraph"> 
     <p>We now have everything we need, let’s try some more features of plugin.</p> 
    </div> 
@@ -428,20 +419,14 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> 
-         <div class="paragraph"> 
-          <p><code>cdbimport</code> will skip only modifications in Object layer (e.g. ObjEntities, ObjAttributes and ObjRelationships), if you modify Db layer your changes will be overridden by next run of <code>cdbimport</code>.</p> 
-         </div> </td> 
+        <td class="content"> <code>cdbimport</code> will skip only modifications in Object layer (e.g. ObjEntities, ObjAttributes and ObjRelationships), if you modify Db layer your changes will be overridden by next run of <code>cdbimport</code>. === Advanced filtering </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part3_filtering"><a class="anchor" href="#_getting_started_db_first_part3_filtering"></a>3.2. Advanced filtering</h3> 
-   <div class="paragraph"> 
-    <p>Final part of our tutorial is about fine-tuning what you load from DB into your model.</p> 
+    <div class="paragraph"> 
+     <p>Final part of our tutorial is about fine-tuning what you load from DB into your model.</p> 
+    </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="update-schema"><a class="anchor" href="#update-schema"></a>Update schema</h4> 
@@ -460,7 +445,7 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
    <div class="sect3"> 
     <h4 id="configure-filtering"><a class="anchor" href="#configure-filtering"></a>Configure filtering</h4> 
     <div class="paragraph"> 
-     <p>Now we need to tell <code>cdbimport</code> what we don’t need in our model, for that we’ll just can add following into <code>&lt;configuration&gt;</code>:</p> 
+     <p>Now we need to tell <code>cdbimport</code> what we don’t need in our model, for that we’ll just add following into <code>&lt;configuration&gt;</code> section:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -490,12 +475,12 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="_getting_started_db_first_part4"><a class="anchor" href="#_getting_started_db_first_part4"></a>4. Java code</h2> 
+ <h2 id="java-code"><a class="anchor" href="#java-code"></a>4. Java code</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part4_java_classes"><a class="anchor" href="#_getting_started_db_first_part4_java_classes"></a>4.1. Generating Java classes</h3> 
+   <h3 id="generating-java-classes"><a class="anchor" href="#generating-java-classes"></a>4.1. Generating Java classes</h3> 
    <div class="paragraph"> 
-    <p>Now as we have our model ready let’s generate Java code that actually will be used in application. In order to do that we'' use same maven plugin, but different goal, namely <code>cgen</code>. It has many options to configure but default values will do for base case, so we can just call it:</p> 
+    <p>Now as we have our model ready let’s generate Java code that actually will be used in application. In order to do that we’ll use same maven plugin, but different goal, namely <code>cgen</code>. It has many options to configure but default values will do for our case, so we can just call it:</p> 
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
@@ -552,10 +537,7 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
      <tbody>
       <tr> 
        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-       <td class="content"> 
-        <div class="paragraph"> 
-         <p><code>cayenne-java8</code> module required to support Java 8 date/time types.</p> 
-        </div> </td> 
+       <td class="content"> <code>cayenne-java8</code> module required to support Java 8 date/time types. </td> 
       </tr> 
      </tbody>
     </table> 
@@ -579,20 +561,25 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>If all done right your code now shouldn’t have any errors.</p> 
+    <p>If all done right your code now shouldn’t have any errors. To be sure you can build it:</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre>$ mvn compile</pre> 
+    </div> 
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="_getting_started_db_first_part4_java_code"><a class="anchor" href="#_getting_started_db_first_part4_java_code"></a>4.2. Getting started with ObjectContext</h3> 
+   <h3 id="getting-started-with-objectcontext"><a class="anchor" href="#getting-started-with-objectcontext"></a>4.2. Getting started with ObjectContext</h3> 
    <div class="paragraph"> 
-    <p>In this section we’ll write a simple main class to run our application, and get a brief introduction to Cayenne ObjectContext.</p> 
+    <p>In this section we’ll write a simple main class to run our application, and get a brief introduction to Cayenne <code>ObjectContext</code>.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_creating_main_class"><a class="anchor" href="#_creating_main_class"></a>Creating the Main Class</h4> 
+    <h4 id="creating-the-main-class"><a class="anchor" href="#creating-the-main-class"></a>Creating the Main Class</h4> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>In IDEA create a new class called “`Main`” in the “`org.apache.cayenne.tutorial`” package.</p> </li> 
-      <li> <p>Create a standard "main" method to make it a runnable class:</p> 
+      <li> <p>In IDEA create a new class called <code>Main</code> in the <code>org.apache.cayenne.tutorial</code> package.</p> </li> 
+      <li> <p>Create a standard <code>main()</code> method to make it a runnable class:</p> 
        <div class="listingblock"> 
         <div class="content"> 
          <pre class="highlight"><code class="language-java java" data-lang="java">package org.apache.cayenne.tutorial;
@@ -630,7 +617,7 @@ public class Main {
         </div> 
        </div> 
        <div class="paragraph"> 
-        <p><code> ObjectContext</code> is an isolated "session" in Cayenne that provides all needed API to work with data. ObjectContext has methods to execute queries and manage persistent objects. We’ll discuss them in the following sections. When the first ObjectContext is created in the application, Cayenne loads XML mapping files and creates a shared access stack that is later reused by other ObjectContexts.</p> 
+        <p><code>ObjectContext</code> is an isolated "session" in Cayenne that provides all needed API to work with data. <code>ObjectContext</code> has methods to execute queries and manage persistent objects. We’ll discuss them in the following sections. When the first ObjectContext is created in the application, Cayenne loads XML mapping files and creates a shared access stack that is later reused by other ObjectContexts.</p> 
        </div> </li> 
       <li> <p>Let’s now add some code that will create persistent object:</p> 
        <div class="listingblock"> 
@@ -644,7 +631,7 @@ context.commitChanges();</code></pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_runnning_app"><a class="anchor" href="#_runnning_app"></a>Running Application</h4> 
+    <h4 id="running-application"><a class="anchor" href="#running-application"></a>Running Application</h4> 
     <div class="paragraph"> 
      <p>Let’s check what happens when you run the application. But before we do that we need to add another dependencies to the <code>pom.xml</code> - MySQL Jdbc driver and simple logger. The following piece of XML needs to be added to the <code>&lt;dependencies&gt;…​&lt;/dependencies&gt;</code> section, where we already have Cayenne jars:</p> 
     </div> 
@@ -661,6 +648,16 @@ context.commitChanges();</code></pre>
     &lt;version&gt;1.7.25&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
      </div> 
+    </div> 
+    <div class="admonitionblock note"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+        <td class="content"> Cayenne uses Slf4j logging API, here we will use simple backend that prints everything to console </td> 
+       </tr> 
+      </tbody>
+     </table> 
     </div> 
     <div class="paragraph"> 
      <p>Now we are ready to run. Right click the "Main" class in IDEA and select "Run 'Main.main()'".</p> 
@@ -690,16 +687,16 @@ context.commitChanges();</code></pre>
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="_getting_started_db_first_part5"><a class="anchor" href="#_getting_started_db_first_part5"></a>5. What’s next</h2> 
+ <h2 id="what-s-next"><a class="anchor" href="#what-s-next"></a>5. What’s next</h2> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
    <p>That’s all for this tutorial! Now you know how to setup and use <code>cayenne-maven-plugin</code>.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>Next step will be creating your first application with Cayenne. If you not passed yet, you can try out <a href="http://cayenne.apache.org/docs/4.0/tutorial/index.html">getting-started</a> tutorial.</p> 
+   <p>Next step will be creating your first application with Cayenne. If you not passed yet, you can try out <a href="/docs/4.1/getting-started-guide/">getting-started</a> tutorial.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>You can find detailed information about configuring this plugin in <a href="http://cayenne.apache.org/docs/4.0/cayenne-guide/including-cayenne-in-project.html#maven-projects">documentation</a> available on Cayenne site.</p> 
+   <p>You can find detailed information about configuring this plugin in <a href="/docs/4.1/cayenne-guide/#include">documentation</a> available on Cayenne site.</p> 
   </div> 
  </div> 
 </div>
