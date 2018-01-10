@@ -11,7 +11,7 @@
         <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="http://54.84.229.93/css/styles-5ade48e498.css"/>
+        <link rel="stylesheet" href="http://54.84.229.93/css/styles-c50fffa94d.css"/>
         <script src="http://54.84.229.93/js/bundle-bcaaf59313.js"></script>
         <title>Running Unit Tests &middot; Apache Cayenne</title>
     </head>
@@ -95,6 +95,9 @@ Maven.</p>
 
 <p>Maven <a href="/dev/building-cayenne.html">build prerequisites and recommended settings</a> apply here.</p>
 
+
+<div class="pb-2"></div>
+
 <h2 id="running-against-embedded-hsqldb">Running Against Embedded HSQLDB</h2>
 
 <p>No extra setup is required. Just run Maven:</p>
@@ -109,7 +112,8 @@ $ mvn install
 $ mvn clean verify
 </code></pre>
 
-<div class="pb-3"><!-- gap 3rem --></div>
+
+<div class="pb-3"></div>
 
 <h2 id="running-against-in-memory-database">Running Against In-memory Database</h2>
 
@@ -128,7 +132,8 @@ following databases that support in-memory mode:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=derby    
 </code></pre>
 
-<div class="pb-3"><!-- gap 3rem --></div>
+
+<div class="pb-3"></div>
 
 <h2 id="running-against-database-in-docker-only-on-linux">Running Against Database in Docker (only on Linux)</h2>
 
@@ -145,13 +150,15 @@ The only thing you need is to install Docker.</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=postgres-docker    
 </code></pre>
 
-<div class="pb-3"><!-- gap 3rem --></div>
+
+<div class="pb-3"></div>
 
 <h2 id="running-against-a-specific-database">Running Against a Specific Database</h2>
 
 <p>Final option to run tests against any supported database is with manual configuration.</p>
 
-<div class="pb-1l2"><!-- gap .5rem --></div>
+
+<div class="pb-1l2"></div>
 
 <h5 id="step-1-install-jdbc-driver-jars-in-a-local-maven-repo">Step 1. Install JDBC Driver Jars in a Local Maven Repo</h5>
 
@@ -190,7 +197,8 @@ the POM or the examples below.</p>
        -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
 </code></pre>
 
-<div class="pb-3l2"><!-- gap 1.5rem --></div>
+
+<div class="pb-3l2"></div>
 
 <h5 id="step-2-run-tests-against-configured-data-source">Step 2. Run Tests Against Configured Data Source</h5>
 

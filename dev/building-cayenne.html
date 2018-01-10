@@ -11,7 +11,7 @@
         <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="http://54.84.229.93/css/styles-5ade48e498.css"/>
+        <link rel="stylesheet" href="http://54.84.229.93/css/styles-c50fffa94d.css"/>
         <script src="http://54.84.229.93/js/bundle-bcaaf59313.js"></script>
         <title>Building Cayenne &middot; Apache Cayenne</title>
     </head>
@@ -102,7 +102,7 @@
 or placed in <em>$HOME/.mavenrc</em>. Optimal values vary from platform to platform and between Cayenne versions,
 but these should probably work for everyone:</p>
 
-<pre><code>MAVEN_OPTS=&quot;-Djava.net.preferIPv4Stack=true -Xms512m -Xmx512m -XX:MaxPermSize=128m&quot;
+<pre><code>MAVEN_OPTS=&quot;-Djava.net.preferIPv4Stack=true -Xms512m&quot;
 </code></pre>
 
 <div class="pb-3"><!-- gap 3rem --></div>
@@ -119,10 +119,10 @@ common flavor) :</p>
 </code></pre>
 
 <p>In order to skip the unit tests (to speed up the build process or because
-some tests are failing), add <em>&rdquo;-Dmaven.test.skip=true&rdquo;</em> to any build
+some tests are failing), add <em>&rdquo;-DskipTests&rdquo;</em> to any build
 flavor:</p>
 
-<pre><code>mvn clean install -Dmaven.test.skip=true
+<pre><code>mvn clean install -DskipTests
 </code></pre>
 
 <p>For the build to produce a release-like assembly, activate &ldquo;assembly&rdquo;
