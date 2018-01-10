@@ -256,9 +256,12 @@
 			.table {
 				table-layout: fixed;
 
+				td, th {
+					padding: $table-cell-padding-sm;
+				}
+
 				td {
 					word-wrap: break-word;
-					padding: $table-cell-padding-sm;
 				}
 
 				.halign-center {
