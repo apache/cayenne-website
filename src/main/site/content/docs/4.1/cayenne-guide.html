@@ -92,7 +92,7 @@ menu:
     <div class="ulist"> 
      <ul> 
       <li> <p>JDBC Driver: An appropriate DB-specific JDBC driver is needed to access the database. It can be included in the application or used in web container DataSource configuration.</p> </li> 
-      <li> <p>Third-party Libraries: Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See <a href="#include">"Including Cayenne in a Project"</a>. chapter for details.</p> </li> 
+      <li> <p>Third-party Libraries: Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See <a href="#including-cayenne-in-project">Including Cayenne in a Project</a> chapter for details.</p> </li> 
      </ul> 
     </div> 
    </div> 
@@ -267,7 +267,7 @@ total 24
    <div class="sect3"> 
     <h4 id="reverse-engineering-database"><a class="anchor" href="#reverse-engineering-database"></a>Reverse Engineering Database</h4> 
     <div class="paragraph"> 
-     <p>See chapter <a href="#reverse">Reverse Engineering in Cayenne Modeler</a></p> 
+     <p>See chapter <a href="#reverse-engineering-in-cayenne-modeler">Reverse Engineering in Cayenne Modeler</a></p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -339,7 +339,7 @@ total 24
  <h2 id="cayenne-framework"><a class="anchor" href="#cayenne-framework"></a>2. Cayenne Framework</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="include"><a class="anchor" href="#include"></a>2.1. Including Cayenne in a Project</h3> 
+   <h3 id="including-cayenne-in-project"><a class="anchor" href="#including-cayenne-in-project"></a>2.1. Including Cayenne in a Project</h3> 
    <div class="sect3"> 
     <h4 id="jar-files"><a class="anchor" href="#jar-files"></a>Jar Files</h4> 
     <div class="paragraph"> 
@@ -349,7 +349,7 @@ total 24
      <ul> 
       <li> <p><code>cayenne-di-4.1.M2-SNAPSHOT.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
       <li> <p><code>cayenne-server-4.1.M2-SNAPSHOT.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.1.M2-SNAPSHOT.jar</code> - a client-side runtime for <a href="#rop">ROP applications</a>.</p> </li> 
+      <li> <p><code>cayenne-client-4.1.M2-SNAPSHOT.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -716,7 +716,7 @@ total 24
     <div class="sect4"> 
      <h5 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>cdbimport</h5> 
      <div class="paragraph"> 
-      <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#dbFirstFlow">"DB-First Flow"</a></p> 
+      <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#db-first-flow">DB-First Flow</a></p> 
      </div> 
      <table id="cdbimportTable" class="tableblock frame-all grid-all spread table table-bordered"> 
       <caption class="title">
@@ -759,7 +759,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">dbimport</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#dbFirstFlow">"DB-First Flow"</a> chapter.</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter.</p></td> 
        </tr> 
       </tbody> 
      </table> 
@@ -846,7 +846,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td> 
        </tr> 
        <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">namingStrategy</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock"><a id="namingStrategy"></a>namingStrategy</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td> 
        </tr> 
@@ -898,7 +898,7 @@ total 24
         <td class="tableblock halign-left valign-top">
          <div>
           <div class="paragraph"> 
-           <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#dbFirstFlow">"DB-First Flow"</a> chapter. Here is some simple example:</p> 
+           <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p> 
           </div> 
           <div class="listingblock"> 
            <div class="content"> 
@@ -1226,7 +1226,7 @@ compileJava.dependsOn cgen</code></pre>
      <p>The parameter you pass to the builder is a location of the main project file. Location is a '/'-separated path (same path separator is used on UNIX and Windows) that is resolved relative to the application classpath. The project file can be placed in the root package or in a subpackage (e.g. in the code above it is in "com/example" subpackage).</p> 
     </div> 
     <div class="paragraph"> 
-     <p>ServerRuntime encapsulates a single Cayenne stack. Most applications will just have one ServerRuntime using it to create as many ObjectContexts as needed, access the Dependency Injection (DI) container and work with other Cayenne features. Internally ServerRuntime is just a thin wrapper around the DI container. Detailed features of the container are discussed in <a href="#customize">"Customizing Cayenne Runtime"</a> chapter. Here we’ll just show an example of how an application might turn on external transactions:</p> 
+     <p>ServerRuntime encapsulates a single Cayenne stack. Most applications will just have one ServerRuntime using it to create as many ObjectContexts as needed, access the Dependency Injection (DI) container and work with other Cayenne features. Internally ServerRuntime is just a thin wrapper around the DI container. Detailed features of the container are discussed in <a href="#customizing-cayenne-runtime">Customizing Cayenne Runtime</a> chapter. Here we’ll just show an example of how an application might turn on external transactions:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1333,7 +1333,7 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="persistent-objects-and-objectcontext"><a class="anchor" href="#persistent-objects-and-objectcontext"></a>2.3. Persistent Objects and ObjectContext</h3> 
+   <h3 id="persistent-objects-objectcontext"><a class="anchor" href="#persistent-objects-objectcontext"></a>2.3. Persistent Objects and ObjectContext</h3> 
    <div class="sect3"> 
     <h4 id="objectcontext"><a class="anchor" href="#objectcontext"></a>ObjectContext</h4> 
     <div class="paragraph"> 
@@ -3367,7 +3367,7 @@ for(DataRow row : rows) {
    <div class="sect3"> 
     <h4 id="specific-attributes-and-relationships-with-ejbql"><a class="anchor" href="#specific-attributes-and-relationships-with-ejbql"></a>Specific Attributes and Relationships with EJBQL</h4> 
     <div class="paragraph"> 
-     <p>It is possible to fetch specific attributes and relationships from a model using <a href="#ejbqlquery">EJBQLQuery</a>. The following example would return a java.util.List of String objects;</p> 
+     <p>It is possible to fetch specific attributes and relationships from a model using <a href="#ejbql">EJBQLQuery</a>. The following example would return a java.util.List of String objects;</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -3596,7 +3596,7 @@ public class Artist extends _Artist {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="customize"><a class="anchor" href="#customize"></a>2.9. Customizing Cayenne Runtime</h3> 
+   <h3 id="customizing-cayenne-runtime"><a class="anchor" href="#customizing-cayenne-runtime"></a>2.9. Customizing Cayenne Runtime</h3> 
    <div class="sect3"> 
     <h4 id="dependency-injection-container"><a class="anchor" href="#dependency-injection-container"></a>Dependency Injection Container</h4> 
     <div class="paragraph"> 
@@ -4074,7 +4074,7 @@ ServerRuntime runtime = ServerRuntime.builder()
  <h2 id="cayenne-framework-remote-object-persistence"><a class="anchor" href="#cayenne-framework-remote-object-persistence"></a>3. Cayenne Framework - Remote Object Persistence</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="rop"><a class="anchor" href="#rop"></a>3.1. Introduction to ROP</h3> 
+   <h3 id="introduction-to-rop"><a class="anchor" href="#introduction-to-rop"></a>3.1. Introduction to ROP</h3> 
    <div class="sect3"> 
     <h4 id="what-is-rop"><a class="anchor" href="#what-is-rop"></a>What is ROP</h4> 
     <div class="paragraph"> 
@@ -4172,9 +4172,9 @@ ServerRuntime runtime = ServerRuntime.builder()
  <h2 id="db-first-flow"><a class="anchor" href="#db-first-flow"></a>4. DB-First Flow</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="dbFirstFlow"><a class="anchor" href="#dbFirstFlow"></a>4.1. Introduction</h3> 
+   <h3 id="introduction"><a class="anchor" href="#introduction"></a>4.1. Introduction</h3> 
    <div class="sect3"> 
-    <h4 id="cImp"><a class="anchor" href="#cImp"></a>"DB-first" Flow</h4> 
+    <h4 id="db-first-flow-2"><a class="anchor" href="#db-first-flow-2"></a>"DB-first" Flow</h4> 
     <div class="paragraph"> 
      <p>An ORM system consists of three parts: database, OR mapping and persistent Java classes. These parts always need to be kept in sync with each other for the application to work. "DB-first" flow is a common and practical approach to synchronization that assumes the database to be the master source of the metadata, with other two parts synchronized from the DB as the schema evolves. Cayenne provides a number of tools to automate and control it. Here is how "DB-first" flow is typically implemented:</p> 
     </div> 
@@ -4690,9 +4690,9 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="reverse"><a class="anchor" href="#reverse"></a>4.4. Reverse Engineering in Cayenne Modeler</h3> 
+   <h3 id="reverse-engineering-in-cayenne-modeler"><a class="anchor" href="#reverse-engineering-in-cayenne-modeler"></a>4.4. Reverse Engineering in Cayenne Modeler</h3> 
    <div class="paragraph"> 
-    <p>Alternative aproach to using <a href="#cImp">cdbimport</a> is doing reverse engineering from <a href="#runModeler">Cayenne Modeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
+    <p>Alternative aproach to using <a href="#cdbimport">cdbimport</a> is doing reverse engineering from <a href="#cayennemodeler-application">CayenneModeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
    </div> 
    <div class="paragraph"> 
     <p>You can find reverse engineering tool in main modeler menu <strong>Tools &gt; Reengineer Database Schema</strong></p> 
@@ -4746,7 +4746,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <ul> 
       <li> <p><strong>Table Name Pattern</strong>: RegExp to filter tables. Default pattern .* includes all tables.</p> </li> 
       <li> <p><strong>Procedure Name Pattern</strong>: RegExp to filter procedures. Default pattern .* includes all stored procedures.</p> </li> 
-      <li> <p><strong>Naming Strategy</strong>: Currently there is only one naming strategy available. See ant/maven tools <a href="#reverse">documentation</a> for details about naming strategy.</p> </li> 
+      <li> <p><strong>Naming Strategy</strong>: Currently there is only one naming strategy available. See ant/maven tools <a href="#namingStrategy">documentation</a> for details about naming strategy.</p> </li> 
       <li> <p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p> </li> 
       <li> <p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p> </li> 
       <li> <p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p> </li> 
@@ -4760,7 +4760,7 @@ ServerRuntime runtime = ServerRuntime.builder()
  <h2 id="cayenne-additional-modules"><a class="anchor" href="#cayenne-additional-modules"></a>5. Cayenne Additional Modules</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="cacheInvalidation"><a class="anchor" href="#cacheInvalidation"></a>5.1. Cache invalidation extension</h3> 
+   <h3 id="cache-invalidation-extension"><a class="anchor" href="#cache-invalidation-extension"></a>5.1. Cache invalidation extension</h3> 
    <div class="sect3"> 
     <h4 id="description"><a class="anchor" href="#description"></a>Description</h4> 
     <div class="paragraph"> 
@@ -5114,7 +5114,7 @@ public class MyEntity extends _MyEntity {
      </table> 
     </div> 
     <div class="paragraph"> 
-     <p>You may else be interested in <a href="#cacheInvalidation">cache invalidation</a> extension.</p> 
+     <p>You may else be interested in <a href="#cache-invalidation-extension">Cache invalidation extension</a>.</p> 
     </div> 
    </div> 
   </div> 
