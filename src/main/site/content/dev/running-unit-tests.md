@@ -5,8 +5,7 @@ url: /dev/running-unit-tests.html
 ---
 
 Cayenne provides a comprehensive suite of unit tests. To execute unit tests
-you must first get Cayenne from Git, install JDK 1.7 and obtain the latest
-Maven.
+you must first get Cayenne from Git, install JDK 1.8 and obtain the latest Maven.
 
 ## Prerequisites
 
@@ -90,11 +89,6 @@ the POM or the examples below.
     $ mvn install:install-file -Dfile=ojdbc5.jar -DgroupId=com.oracle \
            -DartifactId=oracle-driver -Dversion=11 -Dpackaging=jar -DgeneratePom=true
 
-**SQLServer:**
-
-    $ mvn install:install-file -Dfile=sqljdbc4.jar -DgroupId=com.microsoft \
-           -DartifactId=sqlserver-driver -Dversion=4.0 -Dpackaging=jar -DgeneratePom=true
-
 **Sybase:**
 
     $ mvn install:install-file -Dfile=jconn3.jar -DgroupId=com.sybase \
@@ -143,17 +137,23 @@ similar to this example:
     mysql.jdbc.url = jdbc:mysql://mysql.host:3306/test_db?useUnicode=true&characterEncoding=UTF-8&generateSimpleParameterMetadata=true
     mysql.jdbc.driver = com.mysql.jdbc.Driver
     
-    oracle.cayenne.adapter = org.apache.cayenne.dba.oracle.OracleAdapter
-    oracle.jdbc.username = someuser
-    oracle.jdbc.password = somepasswd
-    oracle.jdbc.url = jdbc:oracle:thin:@//oracle.host:1521/XE
-    oracle.jdbc.driver = oracle.jdbc.driver.OracleDriver
-    
     postgres.adapter = org.apache.cayenne.dba.postgres.PostgresAdapter
     postgres.jdbc.username = someuser
     postgres.jdbc.password = somepasswd
     postgres.jdbc.url = jdbc:postgresql://postgresql.host:5432/test_db
     postgres.jdbc.driver = org.postgresql.Driver
+    
+    oracle.cayenne.adapter = org.apache.cayenne.dba.oracle.OracleAdapter
+    oracle.jdbc.username = someuser
+    oracle.jdbc.password = somepasswd
+    oracle.jdbc.url = jdbc:oracle:thin:@//oracle.host:1521/XE
+    oracle.jdbc.driver = oracle.jdbc.driver.OracleDriver
+
+    sqlserver.adapter = org.apache.cayenne.dba.sqlserver.SQLServerAdapter
+    sqlserver.jdbc.url = jdbc:sqlserver://sqlserver.host:1433;databaseName=test_db
+    sqlserver.jdbc.driver = com.microsoft.sqlserver.jdbc.SQLServerDriver
+    sqlserver.jdbc.username = someuser
+    sqlserver.jdbc.password = somepasswd
     
     db2.adapter = org.apache.cayenne.dba.db2.DB2Adapter
     db2.jdbc.username = someuser

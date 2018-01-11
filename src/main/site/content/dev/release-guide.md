@@ -150,26 +150,21 @@ select the staging repo and click "Release".
  that the release has been released. Ensure there is another milestone or
 release target already created for further work, but this was probably
 already done when a branch was created in preparation for release.
-* Update the [DOAP file](http://svn.apache.org/repos/asf/cayenne/site/cms/trunk/content/doap/cayenne.rdf)
- which will update
-https://projects.apache.org/project.html?cayenne automatically.
 * If the release is significant, consider press releases to relevant news
 sources
 * Review the main website pages (front page and why-cayenne especially) to
 add any new features
-* Add a news item to the Cayenne web site
+* Add new cayenne version and a news item to the Cayenne web site (see [CMS Guide]({{< ref "cms-guide.md#content-modifications" >}}))
 * Send an email to the Cayenne user and developer lists
-* Send a notification email to announceATapache.org
-* Update [http://en.wikipedia.org/wiki/Apache_Cayenne](http://en.wikipedia.org/wiki/Apache_Cayenne)
+* Send a notification email to announce(at)apache.org
+* Update http://en.wikipedia.org/wiki/Apache_Cayenne
 
 {{% gap %}}
 
     
 ## Reference:
     
-* Apache release publishing:
-[http://www.apache.org/dev/release-publishing.html](http://www.apache.org/dev/release-publishing.html)
-* Apache Maven release publishing:
-[http://www.apache.org/dev/publishing-maven-artifacts.html](http://www.apache.org/dev/publishing-maven-artifacts.html)
-* ARAT: [http://code.google.com/p/arat/](http://code.google.com/p/arat/)
-* Signing Releases: [http://www.apache.org/dev/release-signing.html](http://www.apache.org/dev/release-signing.html)
+* Apache release publishing: http://www.apache.org/dev/release-publishing.html
+* Apache Maven release publishing: http://www.apache.org/dev/publishing-maven-artifacts.html
+* Apache RAT: https://creadur.apache.org/rat/
+* Signing Releases: http://www.apache.org/dev/release-signing.html

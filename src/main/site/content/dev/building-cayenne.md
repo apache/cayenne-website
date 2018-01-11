@@ -9,9 +9,7 @@ url: /dev/building-cayenne.html
 * Make sure [Maven](http://maven.apache.org/) is installed.
 * [Get the source code](/dev/code-repository.html).
 
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+{{% gap %}}
 
 ## Recommended Maven Settings
 
@@ -21,9 +19,7 @@ but these should probably work for everyone:
 
     MAVEN_OPTS="-Djava.net.preferIPv4Stack=true -Xms512m"
 
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+{{% gap %}}
 
 ## Building with Maven
 
@@ -62,4 +58,5 @@ Mac OS X assembly:
     mvn clean install -Passembly,mac
 
 Multiple assemblies built at once:
+
     mvn clean install -Passembly,src,generic,mac
