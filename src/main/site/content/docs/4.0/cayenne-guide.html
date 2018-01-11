@@ -90,7 +90,7 @@ menu:
     <div class="ulist"> 
      <ul> 
       <li> <p>JDBC Driver: An appropriate DB-specific JDBC driver is needed to access the database. It can be included in the application or used in web container DataSource configuration.</p> </li> 
-      <li> <p>Third-party Libraries: Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See <a href="#include">"Including Cayenne in a Project"</a>. chapter for details.</p> </li> 
+      <li> <p>Third-party Libraries: Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See <a href="#including-cayenne-in-project">Including Cayenne in a Project</a> chapter for details.</p> </li> 
      </ul> 
     </div> 
    </div> 
@@ -265,7 +265,7 @@ total 24
    <div class="sect3"> 
     <h4 id="reverse-engineering-database"><a class="anchor" href="#reverse-engineering-database"></a>Reverse Engineering Database</h4> 
     <div class="paragraph"> 
-     <p>See chapter <a href="#reverse">Reverse Engineering in Cayenne Modeler</a></p> 
+     <p>See chapter <a href="#re-modeler">Reverse Engineering in Cayenne Modeler</a></p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -337,7 +337,7 @@ total 24
  <h2 id="cayenne-framework"><a class="anchor" href="#cayenne-framework"></a>2. Cayenne Framework</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="include"><a class="anchor" href="#include"></a>2.1. Including Cayenne in a Project</h3> 
+   <h3 id="including-cayenne-in-project"><a class="anchor" href="#including-cayenne-in-project"></a>2.1. Including Cayenne in a Project</h3> 
    <div class="sect3"> 
     <h4 id="jar-files"><a class="anchor" href="#jar-files"></a>Jar Files</h4> 
     <div class="paragraph"> 
@@ -347,7 +347,7 @@ total 24
      <ul> 
       <li> <p><code>cayenne-di-4.0.B3-SNAPSHOT.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
       <li> <p><code>cayenne-server-4.0.B3-SNAPSHOT.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.0.B3-SNAPSHOT.jar</code> - a client-side runtime for <a href="#rop">ROP applications</a>.</p> </li> 
+      <li> <p><code>cayenne-client-4.0.B3-SNAPSHOT.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -714,7 +714,7 @@ total 24
     <div class="sect4"> 
      <h5 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>cdbimport</h5> 
      <div class="paragraph"> 
-      <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#dbFirstFlow">"DB-First Flow"</a></p> 
+      <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#db-first-flow">DB-First Flow</a></p> 
      </div> 
      <table id="cdbimportTable" class="tableblock frame-all grid-all spread table table-bordered"> 
       <caption class="title">
@@ -757,7 +757,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">dbimport</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#dbFirstFlow">"DB-First Flow"</a> chapter.</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter.</p></td> 
        </tr> 
       </tbody> 
      </table> 
@@ -844,7 +844,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td> 
        </tr> 
        <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">namingStrategy</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock"><a id="namingStrategy"></a>namingStrategy</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>org.apache.cayenne.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td> 
        </tr> 
@@ -896,7 +896,7 @@ total 24
         <td class="tableblock halign-left valign-top">
          <div>
           <div class="paragraph"> 
-           <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#dbFirstFlow">"DB-First Flow"</a> chapter. Here is some simple example:</p> 
+           <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p> 
           </div> 
           <div class="listingblock"> 
            <div class="content"> 
@@ -1225,7 +1225,7 @@ compileJava.dependsOn cgen</code></pre>
      <p>The parameter you pass to the builder is a location of the main project file. Location is a '/'-separated path (same path separator is used on UNIX and Windows) that is resolved relative to the application classpath. The project file can be placed in the root package or in a subpackage (e.g. in the code above it is in "com/example" subpackage).</p> 
     </div> 
     <div class="paragraph"> 
-     <p>ServerRuntime encapsulates a single Cayenne stack. Most applications will just have one ServerRuntime using it to create as many ObjectContexts as needed, access the Dependency Injection (DI) container and work with other Cayenne features. Internally ServerRuntime is just a thin wrapper around the DI container. Detailed features of the container are discussed in <a href="#customize">"Customizing Cayenne Runtime"</a> chapter. Here we’ll just show an example of how an application might turn on external transactions:</p> 
+     <p>ServerRuntime encapsulates a single Cayenne stack. Most applications will just have one ServerRuntime using it to create as many ObjectContexts as needed, access the Dependency Injection (DI) container and work with other Cayenne features. Internally ServerRuntime is just a thin wrapper around the DI container. Detailed features of the container are discussed in <a href="#customizing-cayenne-runtime">Customizing Cayenne Runtime</a> chapter. Here we’ll just show an example of how an application might turn on external transactions:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1331,7 +1331,7 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="persistent-objects-and-objectcontext"><a class="anchor" href="#persistent-objects-and-objectcontext"></a>2.3. Persistent Objects and ObjectContext</h3> 
+   <h3 id="persistent-objects-objectcontext"><a class="anchor" href="#persistent-objects-objectcontext"></a>2.3. Persistent Objects and ObjectContext</h3> 
    <div class="sect3"> 
     <h4 id="objectcontext"><a class="anchor" href="#objectcontext"></a>ObjectContext</h4> 
     <div class="paragraph"> 
@@ -1861,7 +1861,7 @@ Expression qualifier1 = template.params(p1);
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> A formal definition of the expression grammar is provided in Appendix C </td> 
+        <td class="content"> A formal definition of the expression grammar is provided in <a href="#appendixC">Appendix C</a> </td> 
        </tr> 
       </tbody>
      </table> 
@@ -1885,7 +1885,7 @@ Expression finalExp = e1.andExp(e2);</code></pre>
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> The last line in the example above shows how to create a new expression by "chaining" two other epxressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact a new expression is created. I.e. Expression API treats existing expressions as immutable. </td> 
+        <td class="content"> The last line in the example above shows how to create a new expression by "chaining" two other expressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact a new expression is created. I.e. Expression API treats existing expressions as immutable. </td> 
        </tr> 
       </tbody>
      </table> 
@@ -2291,7 +2291,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
     <div class="sect4"> 
      <h5 id="sqlselect-and-sqlexec"><a class="anchor" href="#sqlselect-and-sqlexec"></a>SQLSelect and SQLExec</h5> 
      <div class="paragraph"> 
-      <p><code>SQLSelect</code> and <code>SQLExec</code> are essentially a "fluent" versions of older <code>SQLTemplate</code> query. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns or collection of <code>DataRow. SQLExec</code> is designed to just execute any raw SQL code (e.g. updates, deletes, DDLs, etc.) This queries support all directives described in <a href="#sqltemplate">SQLTemplate</a> section.</p> 
+      <p><code>SQLSelect</code> and <code>SQLExec</code> are essentially a "fluent" versions of older <code>SQLTemplate</code> query. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns or collection of <code>DataRow</code>. <code>SQLExec</code> is designed to just execute any raw SQL code (e.g. updates, deletes, DDLs, etc.) This queries support all directives described in <a href="#sqltemplate">SQLTemplate</a> section.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Here is example of how to use SQLSelect:</p> 
@@ -2754,7 +2754,7 @@ select.setParameters(Collections.singletonMap("a", a));</code></pre>
       <div class="ulist"> 
        <ul> 
         <li> <p><code>column</code> - the name of the column to render in SQL SELECT clause.</p> </li> 
-        <li> <p><code>javaType</code> - a fully-qualified Java class name for a given result column. For simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So "<em>#result('A' 'String')</em>", "<em>#result('B' 'java.lang.String')</em>" and "<em>#result('C' 'int')</em>" are all valid</p> </li> 
+        <li> <p><code>javaType</code> - a fully-qualified Java class name for a given result column. For simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So <code>"#result('A' 'String')"</code>, <code>"#result('B' 'java.lang.String')"</code> and <code>"#result('C' 'int')"</code> are all valid</p> </li> 
         <li> <p><code>alias</code> - specifies both the SQL alias of the column and the value key in the DataRow. If omitted, "column" value is used.</p> </li> 
         <li> <p><code>dataRowKey</code> - needed if SQL 'alias' is not appropriate as a DataRow key on the Cayenne side. One common case when this happens is when a DataRow retrieved from a query is mapped using joint prefetch keys (see below). In this case DataRow must use database path expressions for joint column keys, and their format is incompatible with most databases alias format.</p> </li> 
        </ul> 
@@ -3284,7 +3284,7 @@ query.prefetch(Artist.PAINTINGS.dot(Painting.GALLERY).disjoint());</code></pre>
     <div class="sect4"> 
      <h5 id="prefetching-semantics"><a class="anchor" href="#prefetching-semantics"></a>Prefetching Semantics</h5> 
      <div class="paragraph"> 
-      <p>Prefetching semantics defines a strategy to prefetch relationships. Depending on it, Cayenne would generate different types of queries. The end result is the same - query root objects with related objects fully resolved. However semantics can affect preformance, in some cases significantly. There are 3 types of prefetch semantics, all defined as constants in <code>org.apache.cayenne.query.PrefetchTreeNode</code>:</p> 
+      <p>Prefetching semantics defines a strategy to prefetch relationships. Depending on it, Cayenne would generate different types of queries. The end result is the same - query root objects with related objects fully resolved. However semantics can affect performance, in some cases significantly. There are 3 types of prefetch semantics, all defined as constants in <code>org.apache.cayenne.query.PrefetchTreeNode</code>:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -3294,13 +3294,13 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>There’s no limitation on mixing different types of semantics in the same query. Each prefetch can have its own semantics. <code>SelectQuery</code> uses <code>DISJOINT_PREFETCH_SEMANTICS</code> by default. <code>ObjectSelect</code> requires explicit semantics as we’ve seen above. <code>SQLTemplate_ and _ProcedureQuery</code> are both using <code>JOINT_PREFETCH_SEMANTICS</code> and it can not be changed due to the nature of those two queries.</p> 
+      <p>There’s no limitation on mixing different types of semantics in the same query. Each prefetch can have its own semantics. <code>SelectQuery</code> uses <code>DISJOINT_PREFETCH_SEMANTICS</code> by default. <code>ObjectSelect</code> requires explicit semantics as we’ve seen above. <code>SQLTemplate</code> and <code>ProcedureQuery</code> are both using <code>JOINT_PREFETCH_SEMANTICS</code> and it can not be changed due to the nature of those two queries.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="disjoint-prefetching-semantics"><a class="anchor" href="#disjoint-prefetching-semantics"></a>Disjoint Prefetching Semantics</h5> 
      <div class="paragraph"> 
-      <p>This semantics results in Cayenne generatiing one SQL statement for the main objects, and a separate statement for each prefetch path (hence "disjoint" - related objects are not fetched with the main query). Each additional SQL statement uses a qualifier of the main query plus a set of joins traversing the preftech path between the main and related entity.</p> 
+      <p>This semantics results in Cayenne generatiing one SQL statement for the main objects, and a separate statement for each prefetch path (hence "disjoint" - related objects are not fetched with the main query). Each additional SQL statement uses a qualifier of the main query plus a set of joins traversing the prefetch path between the main and related entity.</p> 
      </div> 
      <div class="paragraph"> 
       <p>This strategy has an advantage of efficient JVM memory use, and faster overall result processing by Cayenne, but it requires (1+N) SQL statements to be executed, where N is the number of prefetched relationships.</p> 
@@ -3309,7 +3309,7 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
     <div class="sect4"> 
      <h5 id="disjoint-by-id-prefetching-semantics"><a class="anchor" href="#disjoint-by-id-prefetching-semantics"></a>Disjoint-by-ID Prefetching Semantics</h5> 
      <div class="paragraph"> 
-      <p>This is a variation of disjoint prefetch where related objects are matched against a set of IDs derived from the fetched main objects (or intermediate objects in a multi-step prefetch). Cayenne limits the size of the generated WHERE clause, as most DBs can’t parse arbitrary large SQL. So prefetch queries are broken into smaller queries. The size of is controlled by the DI property Constants.SERVER_MAX_ID_QUALIFIER_SIZE_PROPERTY (the default number of conditions in the generated WHERE clause is 10000). Cayenne will generate (1 + N * M) SQL statements for each query using disjoint-by-ID prefetches, where N is the number of relationships to prefetch, and M is the number of queries for a given prefetch that is dependent on the number of objects in the result (ideally M = 1).</p> 
+      <p>This is a variation of disjoint prefetch where related objects are matched against a set of IDs derived from the fetched main objects (or intermediate objects in a multi-step prefetch). Cayenne limits the size of the generated WHERE clause, as most DBs can’t parse arbitrary large SQL. So prefetch queries are broken into smaller queries. The size of is controlled by the DI property <code>Constants.SERVER_MAX_ID_QUALIFIER_SIZE_PROPERTY</code> (the default number of conditions in the generated WHERE clause is 10000). Cayenne will generate (1 + N * M) SQL statements for each query using disjoint-by-ID prefetches, where N is the number of relationships to prefetch, and M is the number of queries for a given prefetch that is dependent on the number of objects in the result (ideally M = 1).</p> 
      </div> 
      <div class="paragraph"> 
       <p>The advantage of this type of prefetch is that matching database rows by ID may be much faster than matching the qualifier of the original query. Moreover this is <strong>the only type of prefetch</strong> that can handle SelectQueries with <strong>fetch</strong> limit. Both joint and regular disjoint prefetches may produce invalid results or generate inefficient fetch-the-entire table SQL when fetch limit is in effect.</p> 
@@ -3345,7 +3345,7 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
    <div class="sect3"> 
     <h4 id="data-rows"><a class="anchor" href="#data-rows"></a>Data Rows</h4> 
     <div class="paragraph"> 
-     <p>Converting result set data to Persistent objects and registering these objects in the ObjectContext can be an expensive operation compareable to the time spent running the query (and frequently exceeding it). Internally Cayenne builds the result as a list of DataRows, that are later converted to objects. Skipping the last step and using data in the form of DataRows can significantly increase performance.</p> 
+     <p>Converting result set data to Persistent objects and registering these objects in the ObjectContext can be an expensive operation comparable to the time spent running the query (and frequently exceeding it). Internally Cayenne builds the result as a list of DataRows, that are later converted to objects. Skipping the last step and using data in the form of DataRows can significantly increase performance.</p> 
     </div> 
     <div class="paragraph"> 
      <p>DataRow is a simply a map of values keyed by their DB column name. It is a ubiqutous representation of DB data used internally by Cayenne. And it can be quite usable as is in the application in many cases. So performance sensitive selects should consider DataRows - it saves memory and CPU cycles. All selecting queries support DataRows option, e.g.:</p> 
@@ -3384,7 +3384,7 @@ for(DataRow row : rows) {
    <div class="sect3"> 
     <h4 id="specific-attributes-and-relationships-with-ejbql"><a class="anchor" href="#specific-attributes-and-relationships-with-ejbql"></a>Specific Attributes and Relationships with EJBQL</h4> 
     <div class="paragraph"> 
-     <p>It is possible to fetch specific attributes and relationships from a model using <a href="#ejbqlquery">EJBQLQuery</a>. The following example would return a java.util.List of String objects;</p> 
+     <p>It is possible to fetch specific attributes and relationships from a model using <a href="#ejbql">EJBQLQuery</a>. The following example would return a java.util.List of String objects;</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -3613,7 +3613,7 @@ public class Artist extends _Artist {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="customize"><a class="anchor" href="#customize"></a>2.9. Customizing Cayenne Runtime</h3> 
+   <h3 id="customizing-cayenne-runtime"><a class="anchor" href="#customizing-cayenne-runtime"></a>2.9. Customizing Cayenne Runtime</h3> 
    <div class="sect3"> 
     <h4 id="dependency-injection-container"><a class="anchor" href="#dependency-injection-container"></a>Dependency Injection Container</h4> 
     <div class="paragraph"> 
@@ -4111,7 +4111,7 @@ ServerRuntime runtime = ServerRuntime.builder()
  <h2 id="cayenne-framework-remote-object-persistence"><a class="anchor" href="#cayenne-framework-remote-object-persistence"></a>3. Cayenne Framework - Remote Object Persistence</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="rop"><a class="anchor" href="#rop"></a>3.1. Introduction to ROP</h3> 
+   <h3 id="introduction-to-rop"><a class="anchor" href="#introduction-to-rop"></a>3.1. Introduction to ROP</h3> 
    <div class="sect3"> 
     <h4 id="what-is-rop"><a class="anchor" href="#what-is-rop"></a>What is ROP</h4> 
     <div class="paragraph"> 
@@ -4209,9 +4209,9 @@ ServerRuntime runtime = ServerRuntime.builder()
  <h2 id="db-first-flow"><a class="anchor" href="#db-first-flow"></a>4. DB-First Flow</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="dbFirstFlow"><a class="anchor" href="#dbFirstFlow"></a>4.1. Introduction</h3> 
+   <h3 id="re-introduction"><a class="anchor" href="#re-introduction"></a>4.1. Introduction</h3> 
    <div class="sect3"> 
-    <h4 id="cImp"><a class="anchor" href="#cImp"></a>"DB-first" Flow</h4> 
+    <h4 id="db-first-flow-2"><a class="anchor" href="#db-first-flow-2"></a>"DB-first" Flow</h4> 
     <div class="paragraph"> 
      <p>An ORM system consists of three parts: database, OR mapping and persistent Java classes. These parts always need to be kept in sync with each other for the application to work. "DB-first" flow is a common and practical approach to synchronization that assumes the database to be the master source of the metadata, with other two parts synchronized from the DB as the schema evolves. Cayenne provides a number of tools to automate and control it. Here is how "DB-first" flow is typically implemented:</p> 
     </div> 
@@ -4267,7 +4267,7 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="filtering"><a class="anchor" href="#filtering"></a>4.2. Filtering</h3> 
+   <h3 id="re-filtering"><a class="anchor" href="#re-filtering"></a>4.2. Filtering</h3> 
    <div class="paragraph"> 
     <p>The first thing you usually want to control during reverse engineering is what exactly should be loaded from database and what not. One of the most common cases is excluding system tables, as you usually don’t want to map them.</p> 
    </div> 
@@ -4664,7 +4664,7 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="other-settings"><a class="anchor" href="#other-settings"></a>4.3. Other Settings</h3> 
+   <h3 id="re-relationships-loading-control"><a class="anchor" href="#re-relationships-loading-control"></a>4.3. Other Settings</h3> 
    <div class="paragraph"> 
     <p>In databases relations are defined via foreign keys and there are a lot of different politics according to the level of relationships and ways how those relationships could be modeled in database. Anyway, cdbimport is able to recognize basic patterns of relationships, such as OneToMany, OneToOne and ManyToMany.</p> 
    </div> 
@@ -4723,9 +4723,9 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="reverse"><a class="anchor" href="#reverse"></a>4.4. Reverse Engineering in Cayenne Modeler</h3> 
+   <h3 id="re-modeler"><a class="anchor" href="#re-modeler"></a>4.4. Reverse Engineering in Cayenne Modeler</h3> 
    <div class="paragraph"> 
-    <p>Alternative aproach to using <a href="#cImp">cdbimport</a> is doing reverse engineering from <a href="#runModeler">Cayenne Modeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
+    <p>Alternative aproach to using <a href="#cdbimport">cdbimport</a> is doing reverse engineering from <a href="#cayennemodeler-application">CayenneModeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
    </div> 
    <div class="paragraph"> 
     <p>You can find reverse engineering tool in main modeler menu <strong>Tools &gt; Reengineer Database Schema</strong></p> 
@@ -4779,7 +4779,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <ul> 
       <li> <p><strong>Table Name Pattern</strong>: RegExp to filter tables. Default pattern .* includes all tables.</p> </li> 
       <li> <p><strong>Procedure Name Pattern</strong>: RegExp to filter procedures. Default pattern .* includes all stored procedures.</p> </li> 
-      <li> <p><strong>Naming Strategy</strong>: Currently there is only one naming strategy available. See ant/maven tools <a href="#reverse">documentation</a> for details about naming strategy.</p> </li> 
+      <li> <p><strong>Naming Strategy</strong>: Currently there is only one naming strategy available. See ant/maven tools <a href="#namingStrategy">documentation</a> for details about naming strategy.</p> </li> 
       <li> <p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p> </li> 
       <li> <p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p> </li> 
       <li> <p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p> </li> 
@@ -4793,7 +4793,7 @@ ServerRuntime runtime = ServerRuntime.builder()
  <h2 id="cayenne-additional-modules"><a class="anchor" href="#cayenne-additional-modules"></a>5. Cayenne Additional Modules</h2> 
  <div class="sectionbody"> 
   <div class="sect2"> 
-   <h3 id="cacheInvalidation"><a class="anchor" href="#cacheInvalidation"></a>5.1. Cache invalidation extension</h3> 
+   <h3 id="ext-cache-invalidation"><a class="anchor" href="#ext-cache-invalidation"></a>5.1. Cache invalidation extension</h3> 
    <div class="sect3"> 
     <h4 id="description"><a class="anchor" href="#description"></a>Description</h4> 
     <div class="paragraph"> 
@@ -4887,7 +4887,7 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="commit-log-extension"><a class="anchor" href="#commit-log-extension"></a>5.2. Commit log extension</h3> 
+   <h3 id="ext-commit-log"><a class="anchor" href="#ext-commit-log"></a>5.2. Commit log extension</h3> 
    <div class="sect3"> 
     <h4 id="description-2"><a class="anchor" href="#description-2"></a>Description</h4> 
     <div class="paragraph"> 
@@ -4965,7 +4965,7 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="crypto-extension"><a class="anchor" href="#crypto-extension"></a>5.3. Crypto extension</h3> 
+   <h3 id="ext-crypto"><a class="anchor" href="#ext-crypto"></a>5.3. Crypto extension</h3> 
    <div class="sect3"> 
     <h4 id="description-3"><a class="anchor" href="#description-3"></a>Description</h4> 
     <div class="paragraph"> 
@@ -5133,7 +5133,7 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="java-8-extension"><a class="anchor" href="#java-8-extension"></a>5.5. Java 8 extension</h3> 
+   <h3 id="ext-java8"><a class="anchor" href="#ext-java8"></a>5.5. Java 8 extension</h3> 
    <div class="sect3"> 
     <h4 id="description-5"><a class="anchor" href="#description-5"></a>Description</h4> 
     <div class="paragraph"> 
@@ -5171,7 +5171,7 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="jcache-integration"><a class="anchor" href="#jcache-integration"></a>5.6. JCache integration</h3> 
+   <h3 id="ext-jcache"><a class="anchor" href="#ext-jcache"></a>5.6. JCache integration</h3> 
    <div class="sect3"> 
     <h4 id="description-6"><a class="anchor" href="#description-6"></a>Description</h4> 
     <div class="paragraph"> 
@@ -5220,12 +5220,12 @@ public class MyEntity extends _MyEntity {
      </table> 
     </div> 
     <div class="paragraph"> 
-     <p>You may else be interested in <a href="#cacheInvalidation">cache invalidation</a> extension.</p> 
+     <p>You may else be interested in <a href="#ext-cache-invalidation">Cache invalidation extension</a>.</p> 
     </div> 
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="joda-time-extension"><a class="anchor" href="#joda-time-extension"></a>5.7. Joda time extension</h3> 
+   <h3 id="ext-joda"><a class="anchor" href="#ext-joda"></a>5.7. Joda time extension</h3> 
    <div class="sect3"> 
     <h4 id="description-7"><a class="anchor" href="#description-7"></a>Description</h4> 
     <div class="paragraph"> 
@@ -5474,7 +5474,7 @@ public class MyEntity extends _MyEntity {
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="appendix-c-expressions-bnf"><a class="anchor" href="#appendix-c-expressions-bnf"></a>8. Appendix C. Expressions BNF</h2> 
+ <h2 id="appendixC"><a class="anchor" href="#appendixC"></a>8. Appendix C. Expressions BNF</h2> 
  <div class="sectionbody"> 
   <div class="listingblock"> 
    <div class="content"> 
