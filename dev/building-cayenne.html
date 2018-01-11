@@ -94,7 +94,8 @@
 <li><a href="/dev/code-repository.html">Get the source code</a>.</li>
 </ul>
 
-<div class="pb-3"><!-- gap 3rem --></div>
+
+<div class="pb-3"></div>
 
 <h2 id="recommended-maven-settings">Recommended Maven Settings</h2>
 
@@ -105,7 +106,8 @@ but these should probably work for everyone:</p>
 <pre><code>MAVEN_OPTS=&quot;-Djava.net.preferIPv4Stack=true -Xms512m&quot;
 </code></pre>
 
-<div class="pb-3"><!-- gap 3rem --></div>
+
+<div class="pb-3"></div>
 
 <h2 id="building-with-maven">Building with Maven</h2>
 
@@ -149,8 +151,10 @@ of a given assembly (otherwise assembly profile won&rsquo;t produce anything).</
 <pre><code>mvn clean install -Passembly,mac
 </code></pre>
 
-<p>Multiple assemblies built at once:
-    mvn clean install -Passembly,src,generic,mac</p>
+<p>Multiple assemblies built at once:</p>
+
+<pre><code>mvn clean install -Passembly,src,generic,mac
+</code></pre>
 
                     </article>
                 </section>
