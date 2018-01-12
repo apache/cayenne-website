@@ -188,7 +188,7 @@
   <div class="sect2"> 
    <h3 id="install-java"><a class="anchor" href="#install-java"></a>1.1. Install Java</h3> 
    <div class="paragraph"> 
-    <p>Obviously, JDK has to be installed. Cayenne 4.0 requires JDK 1.7 or newer.</p> 
+    <p>Obviously, JDK has to be installed. Cayenne 4.1 requires JDK 1.8 or newer.</p> 
    </div> 
   </div> 
   <div class="sect2"> 
@@ -422,7 +422,7 @@
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>Now go back to IDEA - you should see pairs of classes generated for each mapped entity. You probably also see that there’s a bunch of red squiggles next to the newly generated Java classes in IDEA. This is because our project does not include Cayenne as a Maven dependency yet. Let’s fix it now by adding "cayenne-server" and "cayenne-java8" artifacts in the bottom of the <code>pom.xml</code> file. Also we should tell Maven compile plugin that our project needs Java 8. The resulting POM should look like this:</p> 
+     <p>Now go back to IDEA - you should see pairs of classes generated for each mapped entity. You probably also see that there’s a bunch of red squiggles next to the newly generated Java classes in IDEA. This is because our project does not include Cayenne as a Maven dependency yet. Let’s fix it now by adding "cayenne-server" artifact in the bottom of the <code>pom.xml</code> file. Also we should tell Maven compile plugin that our project needs Java 8. The resulting POM should look like this:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -432,18 +432,14 @@
     &lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;tutorial&lt;/artifactId&gt;
     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;cayenne.version&gt;4.1.M2-SNAPSHOT&lt;/version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;properties&gt;
+        &lt;cayenne.version&gt;4.1.M2-SNAPSHOT&lt;/cayenne.version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;/properties&gt;
 
     &lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-            &lt;version&gt;${cayenne.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;!--  For java.time.* types you need to use this dependency--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-            &lt;artifactId&gt;cayenne-java8&lt;/artifactId&gt;
             &lt;version&gt;${cayenne.version}&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
