@@ -282,20 +282,20 @@ menu:
     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
     &lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;tutorial&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;<i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;cayenne.version&gt;4.0.B3-SNAPSHOT&lt;/version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
 
     &lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-            &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
-            &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
+            &lt;version&gt;${cayenne.version}&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;!--  For java.time.* types you need to use this dependency--&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-java8&lt;/artifactId&gt;
-            &lt;version&gt;4.0.B3-SNAPSHOT&lt;/version&gt;
+            &lt;version&gt;${cayenne.version}&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
