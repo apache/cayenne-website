@@ -16,10 +16,10 @@ Database                                 | Driver Name                          
 [FrontBase](http://www.frontbase.com/)   | jdbc.<wbr>Front<wbr>Base.<wbr>FBJ<wbr>Driver 	                        | jdbc:<wbr>Front<wbr>Base:<wbr>//127.0.0.1<wbr>/dbname                  |
 [HSQLDB](http://hsqldb.org/)             | org.<wbr>hsqldb.<wbr>jdbc<wbr>Driver 	                            | jdbc:<wbr>hsqldb:<wbr>hsql:<wbr>//127.0.0.1                       | client<wbr>/<wbr>server 
   	  	                                 | jdbc:<wbr>hsqldb:                                            | file:<wbr>/path-to-<wbr>hsql-db-<wbr>files                        | em<wbr>bedd<wbr>ed 
-[H2](www.h2database.com/)                | org.<wbr>h2.<wbr>Driver 	                                    | jdbc:<wbr>h2:<wbr>mem:<wbr>myTestMem;<wbr>MVCC=<wbr>TRUE          | em<wbr>bedd<wbr>ed in-<wbr>me<wbr>mory
+[H2](http://www.h2database.com/)                | org.<wbr>h2.<wbr>Driver 	                                    | jdbc:<wbr>h2:<wbr>mem:<wbr>myTestMem;<wbr>MVCC=<wbr>TRUE          | em<wbr>bedd<wbr>ed in-<wbr>me<wbr>mory
 [Ingres](http://www.ingres.com/products/ingres-database.php)| com.<wbr>ingres.<wbr>jdbc.<wbr>Ingres<wbr>Driver | jdbc:<wbr>ingres:<wbr>//127.0.0.1<wbr>:II7<wbr>/dbname     |               
 [MySQL](http://www.mysql.com/)           | com.<wbr>mysql.<wbr>jdbc.<wbr>Driver                         | jdbc:<wbr>mysql:<wbr>//127.0.0.1<wbr>/dbname 	                    |              
-[OpenBase](www.openbase.com)             | com.<wbr>open<wbr>base.<wbr>jdbc.<wbr>Ob<wbr>Driver                    | jdbc:<wbr>open<wbr>base:<wbr>//127.0.0.1<wbr>/dbname 	                |              
+[OpenBase](http://www.openbase.com)             | com.<wbr>open<wbr>base.<wbr>jdbc.<wbr>Ob<wbr>Driver                    | jdbc:<wbr>open<wbr>base:<wbr>//127.0.0.1<wbr>/dbname 	                |              
 [Oracle](http://www.oracle.com/)         | oracle.<wbr>jdbc.<wbr>driver.<wbr>Oracle<wbr>Driver          | jdbc:<wbr>oracle<wbr>:thin:<wbr>@//127.0.0.1<wbr>:1521<wbr>/dbname|	           
 [PostgreSQL](http://www.postgresql.org/) | org.<wbr>postgre<wbr>sql.<wbr>Driver                              | jdbc:<wbr>postgre<wbr>sql:<wbr>//127.0.0.1<wbr>:5432<wbr>/dbname 	    |               
 [SQLite 3.*](http://www.sqlite.org/)     | org.<wbr>sqlite.<wbr>JDBC                                    | jdbc:<wbr>sqlite:<wbr>path_<wbr>to_<wbr>dbfile 	                | driver from zentus<wbr>.com
