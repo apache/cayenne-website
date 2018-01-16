@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="http://54.84.229.93/css/styles-c8a3174abc.css"/>
         <script src="http://54.84.229.93/js/bundle-bcaaf59313.js"></script>
-        <title>Guide to Cayenne CMS &middot; Apache Cayenne</title>
+        <title>Legacy Release Guide 2.0 &middot; Apache Cayenne</title>
     </head>
     <body>
 
@@ -83,156 +83,141 @@
 
 
     <main class="container  py-5">
-        
-                <section>
-                    <article>
-                        <h1 class="text-center">Guide to Cayenne CMS</h1>
-                        
+        <section>
+            <article>
+                <h1 class="text-center">Legacy Release Guide 2.0</h1>
+                
 
-<p>Cayenne Site source code (content + styling + scripts) can be obtained from Apache Git repo:<br />
-<a href="https://git-wip-us.apache.org/repos/asf/cayenne-website.git">https://git-wip-us.apache.org/repos/asf/cayenne-website.git</a></p>
+<p>Note that this page is of use for committers only. It describes the general
+procedure of building a Cayenne release.</p>
 
-<p>Or from GitHub mirror (in read only mode): <a href="https://github.com/apache/cayenne-website.git">https://github.com/apache/cayenne-website.git</a></p>
+<p><em>THIS ONLY REFERS TO 2.0.x RELEASE BRANCH</em></p>
 
+<p><a name="ReleaseGuide2.0-Prerequisites"></a></p>
 
-<div class="pb-3"></div>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<h2 id="dev-mode">Dev mode</h2>
+<p>Refer to the Prerequisites section of the <a href="/dev/release-guide.html">main release guide</a></p>
 
-<p>Just clone and run maven, nothing else required.</p>
+<p><a name="ReleaseGuide2.0-PreparingSources"></a></p>
 
-<pre><code>git clone https://git-wip-us.apache.org/repos/asf/cayenne-website.git
-cd cayenne-website
-mvn
-</code></pre>
-
-<p>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser. In dev mode site supports live-reloading.</p>
-
-<p><em>You can change host and port by setting <code>dev.host</code> and <code>dev.port</code> properties:</em></p>
-
-<pre><code>mvn -Ddev.host=&quot;my.local&quot; -Ddev.port=&quot;8080&quot;
-</code></pre>
-
-
-<div class="pb-3"></div>
-
-<h2 id="publish">Publish</h2>
-
-<p>To publish new version just run Maven with <code>publish</code> profile. This will build production version of the site (with <code>cayenne.apache.org</code> base URL) and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
-
-<pre><code>mvn -Ppublish -Dmsg=&quot;commit message describing site changes&quot;
-</code></pre>
-
-<p>That&rsquo;s all, so be carefull and review your changes before publishing (also don&rsquo;t forget to check them after).</p>
-
-<p>Don&rsquo;t forget to push you source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
-
-<p>:grey_exclamation: apache <code>gitpubsub</code> should be setup in order actual content sync to happen.</p>
-
-<p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>. But at first it is better to use manual publishing.</p>
-
-
-<div class="pb-3"></div>
-
-<h2 id="content-modifications">Content modifications</h2>
-
-<h3 id="publishing-news">Publishing news</h3>
-
-<p>To publish news simply add new file at <code>src/main/site/content/news/</code> folder.
-You can use following template:</p>
-
-<p><code>some-good-news.md</code></p>
-
-<pre><code>---
-title: Good news everyone!
-date: 2017-01-01T00:00:00+03:00
---- 
-
-Content goes here
-</code></pre>
-
-<h3 id="releasing-new-cayenne-version">Releasing new cayenne version</h3>
-
-<p>To update site content with information about new Cayenne version you need to perform these steps:</p>
+<h2 id="preparing-sources">Preparing Sources</h2>
 
 <ul>
-<li>Update data in <code>src/main/site/data/cayenne.yaml</code> file.
-This automatically update <a href="/download/">download</a> page and <code>/doap/caynne.rdf</code> file.</li>
-<li>Write news (see information above).</li>
-<li>Update documentation, this can be done with <code>build-docs.sh</code> script.
-You can run it like this: <code>./build-docs.sh 4.1.M2</code></li>
-<li>Publish your changes (see <a href="#Publish">publish</a> section)</li>
+<li><p>Export and commit the latest documentation per Documentation Guidelines
+.</p></li>
+
+<li><p>Create a report in Jira listing all issues that are FIXED but not CLOSED,
+paste its contents to RELEASE-NOTES.txt. Bulk-close all involved issues.
+<em>Note that issues that affect multiple releases are usually closed
+immediately when they are fixed, and the note is placed in
+RELEASE-NOTES.txt immediately when this happens.</em></p></li>
+
+<li><p>Edit UPGRADE-NOTES.txt if there is anything to add there.</p></li>
+
+<li><p>Check Sources Compliance with ARAT. <a href="http://code.google.com/p/arat/">ARAT</a>
+(A Release Audit Tool) is a Java tool written by Robert Burrell Donkin for
+checking the release files for ASF licensing compliance. To run ARAT, <a href="http://arat.googlecode.com/svn/tags/RAT_0_4/">check it out of SVN</a>
+<em>(we are using version 0.4)</em>, build with Ant, and run against unpacked
+distro (or the release tag), read the report and fix any issues.</p></li>
 </ul>
 
-
-<div class="pb-3"></div>
-
-<h2 id="advanced">Advanced</h2>
-
-<p>Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and Yarn tools and launch Gulp tasks.
-Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-bin</a> NPM module.</p>
-
-<h3 id="src-structure">Src structure</h3>
-
-<p>There is two main parts of site src:</p>
+<h2 id="building-release-artifacts">Building Release Artifacts</h2>
 
 <ul>
-<li><p><code>src/main/assets</code> assets processed by <a href="https://gulpjs.com">Gulp</a> tasks</p>
+<li><p>Tag <code>cayenne</code> directory under the repository trunk (assuming
+<code>release_version</code> is a version tag identifying the release, such as
+<code>&quot;1.2B3&quot;</code>):</p>
 
-<ul>
-<li><code>/gulp/</code> - list of Gulp tasks:
+<p>svn copy <a href="https://svn.apache.org/repos/asf/cayenne/main/trunk/cayenne">https://svn.apache.org/repos/asf/cayenne/main/trunk/cayenne</a> <br />
+ <a href="https://svn.apache.org/repos/asf/cayenne/main/tags/release_version/cayenne">https://svn.apache.org/repos/asf/cayenne/main/tags/release_version/cayenne</a> -m &ldquo;tagging B3 release&rdquo;</p></li>
 
-<ul>
-<li><code>hugo.js</code> - contains tasks that launch Hugo to process all content</li>
-<li><code>images.js</code> - compress and copy images</li>
-<li><code>reference.js</code> - replace references to generated resources inside content</li>
-<li><code>revision.js</code> - generate manifest file with resources versions</li>
-<li><code>scripts.js</code> - launch Webpack to process JavaScript resources</li>
-<li><code>serve.js</code> - launch dev-version of site with live-reloading</li>
-<li><code>styles.js</code> - generate CSS bundle (concat, minify, etc..)</li>
-</ul></li>
-<li><code>/images/</code> - images that will be compressed and published into site <code>/img</code> directory,
-you can put any stuff used by site here (see <code>/gulp/images.js</code>)</li>
-<li><code>/scripts/</code> - JavaScript sources, <code>main.js</code> is an entry point for the final bundle,
-will be processed by Webpack (see <code>/gulp/scripts.js</code>)</li>
-<li><code>/styles/</code> - Sass sources, <code>main.scss</code> is an entry point for the final bundle
-(see <code>/gulp/styles.js</code>)</li>
-<li><code>gulpfile.js</code> - main file for Gulp tasks, define some global path constants</li>
-<li><code>package.json</code> - all project dependencies are defined here</li>
-</ul></li>
+<li><p>Switch an existing working copy on a build machine to the release tag:
+If you don&rsquo;t have a local copy, do &ldquo;checkout&rdquo; instead of &ldquo;switch&rdquo;. <em>Do not
+forget to switch the local copy back to the appropriate branch in case you
+are using it to make the code changes.</em></p></li>
 
-<li><p><code>src/main/site</code> assets processed <a href="https://gohugo.io">Hugo</a> site generator</p>
+<li><p>Note that all Ant commands now must contain <em>&ldquo;project.version&rdquo;</em>
+property corresponding to the release version. The property is passed on
+the command line as <em>&rdquo;-Dproject.version=2.0.x&rdquo;</em>. See examples below.</p></li>
 
-<ul>
-<li><code>/content/</code> - main content part of the site, markdown and HTML files</li>
-<li><code>/data/</code> - data files in <em>yaml</em> format</li>
-<li><code>/layouts/</code> - site templates, using <a href="https://golang.org/pkg/text/template/">GO templates</a></li>
-<li><code>/static/</code> - files that will be copied as is to the final site content, note that <code>js</code>, <code>img</code> and <code>css</code> directories
-are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use coresponding directories in <code>assets</code>.<br /></li>
-<li><code>config.yaml</code> - Hugo configuration</li>
-</ul></li>
+<li><p>Run a test to make sure the checkout is ok:<br />
+Test with all supported databases listed <a href="/database-support.html">here</a>
+, or at least as many as possible.  See <a href="/legacy-ant-unit-tests.html">Legacy Ant Unit Tests</a>
+for more details on how to test each of the various database servers with
+legacy versions of Cayenne.</p></li>
+
+<li><p>Build a release for the target platform:</p></li>
+
+<li><p>Build Release Maven Bundles for ibiblio upload:</p></li>
+
+<li><p>Signing release
+For more info visit <a href="http://www.apache.org/dev/release-signing.html">this page</a>
+. Release manager key must be in the project KEYS file. Signing is a manual
+procedure not included in the Ant or Maven script. Here is how it might
+work (&ldquo;-u&rdquo; option can be omitted if you have only one GPG key):</p></li>
 </ul>
 
-                    </article>
-                </section>
-            
-        
-        <div class="pb-3"></div>
-        <div class="row">
-            <div class="col-12 col-md-6  text-center text-md-left">
-                
-                <a class="btn btn-link" href='/dev/running-unit-tests.html'>
-                    <span class="d-block d-md-none  text-muted">Prev: </span>
-                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    Running Unit Tests
-                </a>
-                
-            </div>
-            <div class="col-12 col-md-6  text-center text-md-right">
-                
-            </div>
-        </div>
-    </main>
+<p><a name="ReleaseGuide2.0-Voting"></a></p>
+
+<h2 id="voting">Voting</h2>
+
+<p>Refer to the Voting section of the <a href="/dev/release-guide.html">main release guide</a></p>
+
+<p><a name="ReleaseGuide2.0-PublishingtheRelease"></a></p>
+
+<h2 id="publishing-the-release">Publishing the Release</h2>
+
+<p>Copy KEYS file if updated to <code>&quot;/www/www.apache.org/dist/cayenne/&quot;</code>
+<em>(TODO: automate publishing the keys - maybe create a &ldquo;dist&rdquo; site project?)</em></p>
+
+<pre><code>chmod 664 /www/www.apache.org/dist/cayenne/*
+</code></pre>
+
+<p><a name="ReleaseGuide2.0-PublishingMavenArtifacts"></a></p>
+
+<h3 id="publishing-maven-artifacts">Publishing Maven Artifacts</h3>
+
+<p><em>(TODO: automate rsync with Ant)</em></p>
+
+<p>Assuming release version is 2.0.2, on a <em>local machine</em> do</p>
+
+<pre><code>ant clean mvn-install -Dproject.version=2.0.2
+
+rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne-nodeps/2.0.2 \
+people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/apache/cayenne/cayenne-nodeps/
+
+rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne/2.0.2 \
+people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/apache/cayenne/cayenne/
+
+rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne-client-nodeps/2.0.2 \
+people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/apache/cayenne/cayenne-client-nodeps/
+
+rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne-modeler/2.0.2 \
+people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/apache/cayenne/cayenne-modeler/
+</code></pre>
+
+<p><a name="ReleaseGuide2.0-Aftertherelease"></a></p>
+
+<h2 id="after-the-release">After the release</h2>
+
+<ul>
+<li>Update the <a href="http://svn.apache.org/repos/asf/cayenne/site/trunk/tlp-site/src/doap/cayenne.rdf">DOAP file</a>
+(held in the Cayenne svn) which will update
+<a href="https://projects.apache.org/project.html?cayenne">https://projects.apache.org/project.html?cayenne</a> automatically</li>
+<li>Update Freshmeat with new release number
+(<a href="http://freshmeat.net/projects/cayenne/">http://freshmeat.net/projects/cayenne/</a>)</li>
+<li>If the release is significant, consider press releases to relevant news
+sources</li>
+<li>Review the main website pages (front page and why-cayenne especially) to
+add any new features</li>
+<li>Add a news item to the Cayenne web site</li>
+<li>Send an email to the Cayenne user and developer lists</li>
+</ul>
+
+            </article>
+        </section>
+    </main> 
 
 
 <footer class="bg-dark">

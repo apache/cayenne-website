@@ -1203,6 +1203,27 @@
   </url>
   
   <url>
+    <loc>http://54.84.229.93/legacy/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://54.84.229.93/legacy-ant-build.html</loc>
+  </url>
+  
+  <url>
+    <loc>http://54.84.229.93/legacy-ant-unit-tests.html</loc>
+  </url>
+  
+  <url>
+    <loc>http://54.84.229.93/legacy-eclipse.html</loc>
+  </url>
+  
+  <url>
+    <loc>http://54.84.229.93/release-guide-2.0.html</loc>
+  </url>
+  
+  <url>
     <loc>http://54.84.229.93/docs/1.2/license.html</loc>
   </url>
   

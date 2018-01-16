@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="http://54.84.229.93/css/styles-c8a3174abc.css"/>
         <script src="http://54.84.229.93/js/bundle-bcaaf59313.js"></script>
-        <title>Guide to Cayenne CMS &middot; Apache Cayenne</title>
+        <title>Legacies &middot; Apache Cayenne</title>
     </head>
     <body>
 
@@ -80,158 +80,36 @@
 </header>
 
 
-
-
     <main class="container  py-5">
-        
-                <section>
-                    <article>
-                        <h1 class="text-center">Guide to Cayenne CMS</h1>
+        <section>
+            <div class="row">
+                <div class="col text-center">
+                    <h1>Legacies</h1>
+                    
+                    <div class="lead"></div>
+                    
+                    <ul class="list-group list-unstyled  m-auto pt-2  mw-500px">
                         
-
-<p>Cayenne Site source code (content + styling + scripts) can be obtained from Apache Git repo:<br />
-<a href="https://git-wip-us.apache.org/repos/asf/cayenne-website.git">https://git-wip-us.apache.org/repos/asf/cayenne-website.git</a></p>
-
-<p>Or from GitHub mirror (in read only mode): <a href="https://github.com/apache/cayenne-website.git">https://github.com/apache/cayenne-website.git</a></p>
-
-
-<div class="pb-3"></div>
-
-<h2 id="dev-mode">Dev mode</h2>
-
-<p>Just clone and run maven, nothing else required.</p>
-
-<pre><code>git clone https://git-wip-us.apache.org/repos/asf/cayenne-website.git
-cd cayenne-website
-mvn
-</code></pre>
-
-<p>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser. In dev mode site supports live-reloading.</p>
-
-<p><em>You can change host and port by setting <code>dev.host</code> and <code>dev.port</code> properties:</em></p>
-
-<pre><code>mvn -Ddev.host=&quot;my.local&quot; -Ddev.port=&quot;8080&quot;
-</code></pre>
-
-
-<div class="pb-3"></div>
-
-<h2 id="publish">Publish</h2>
-
-<p>To publish new version just run Maven with <code>publish</code> profile. This will build production version of the site (with <code>cayenne.apache.org</code> base URL) and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
-
-<pre><code>mvn -Ppublish -Dmsg=&quot;commit message describing site changes&quot;
-</code></pre>
-
-<p>That&rsquo;s all, so be carefull and review your changes before publishing (also don&rsquo;t forget to check them after).</p>
-
-<p>Don&rsquo;t forget to push you source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
-
-<p>:grey_exclamation: apache <code>gitpubsub</code> should be setup in order actual content sync to happen.</p>
-
-<p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>. But at first it is better to use manual publishing.</p>
-
-
-<div class="pb-3"></div>
-
-<h2 id="content-modifications">Content modifications</h2>
-
-<h3 id="publishing-news">Publishing news</h3>
-
-<p>To publish news simply add new file at <code>src/main/site/content/news/</code> folder.
-You can use following template:</p>
-
-<p><code>some-good-news.md</code></p>
-
-<pre><code>---
-title: Good news everyone!
-date: 2017-01-01T00:00:00+03:00
---- 
-
-Content goes here
-</code></pre>
-
-<h3 id="releasing-new-cayenne-version">Releasing new cayenne version</h3>
-
-<p>To update site content with information about new Cayenne version you need to perform these steps:</p>
-
-<ul>
-<li>Update data in <code>src/main/site/data/cayenne.yaml</code> file.
-This automatically update <a href="/download/">download</a> page and <code>/doap/caynne.rdf</code> file.</li>
-<li>Write news (see information above).</li>
-<li>Update documentation, this can be done with <code>build-docs.sh</code> script.
-You can run it like this: <code>./build-docs.sh 4.1.M2</code></li>
-<li>Publish your changes (see <a href="#Publish">publish</a> section)</li>
-</ul>
-
-
-<div class="pb-3"></div>
-
-<h2 id="advanced">Advanced</h2>
-
-<p>Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and Yarn tools and launch Gulp tasks.
-Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-bin</a> NPM module.</p>
-
-<h3 id="src-structure">Src structure</h3>
-
-<p>There is two main parts of site src:</p>
-
-<ul>
-<li><p><code>src/main/assets</code> assets processed by <a href="https://gulpjs.com">Gulp</a> tasks</p>
-
-<ul>
-<li><code>/gulp/</code> - list of Gulp tasks:
-
-<ul>
-<li><code>hugo.js</code> - contains tasks that launch Hugo to process all content</li>
-<li><code>images.js</code> - compress and copy images</li>
-<li><code>reference.js</code> - replace references to generated resources inside content</li>
-<li><code>revision.js</code> - generate manifest file with resources versions</li>
-<li><code>scripts.js</code> - launch Webpack to process JavaScript resources</li>
-<li><code>serve.js</code> - launch dev-version of site with live-reloading</li>
-<li><code>styles.js</code> - generate CSS bundle (concat, minify, etc..)</li>
-</ul></li>
-<li><code>/images/</code> - images that will be compressed and published into site <code>/img</code> directory,
-you can put any stuff used by site here (see <code>/gulp/images.js</code>)</li>
-<li><code>/scripts/</code> - JavaScript sources, <code>main.js</code> is an entry point for the final bundle,
-will be processed by Webpack (see <code>/gulp/scripts.js</code>)</li>
-<li><code>/styles/</code> - Sass sources, <code>main.scss</code> is an entry point for the final bundle
-(see <code>/gulp/styles.js</code>)</li>
-<li><code>gulpfile.js</code> - main file for Gulp tasks, define some global path constants</li>
-<li><code>package.json</code> - all project dependencies are defined here</li>
-</ul></li>
-
-<li><p><code>src/main/site</code> assets processed <a href="https://gohugo.io">Hugo</a> site generator</p>
-
-<ul>
-<li><code>/content/</code> - main content part of the site, markdown and HTML files</li>
-<li><code>/data/</code> - data files in <em>yaml</em> format</li>
-<li><code>/layouts/</code> - site templates, using <a href="https://golang.org/pkg/text/template/">GO templates</a></li>
-<li><code>/static/</code> - files that will be copied as is to the final site content, note that <code>js</code>, <code>img</code> and <code>css</code> directories
-are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use coresponding directories in <code>assets</code>.<br /></li>
-<li><code>config.yaml</code> - Hugo configuration</li>
-</ul></li>
-</ul>
-
-                    </article>
-                </section>
-            
-        
-        <div class="pb-3"></div>
-        <div class="row">
-            <div class="col-12 col-md-6  text-center text-md-left">
-                
-                <a class="btn btn-link" href='/dev/running-unit-tests.html'>
-                    <span class="d-block d-md-none  text-muted">Prev: </span>
-                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    Running Unit Tests
-                </a>
-                
+                        <li class="list-group-item list-group-item-action  border-0">
+                            <a class="d-flex justify-content-center   mw-100" href="http://54.84.229.93/legacy-ant-build.html">Legacy Ant Build</a>
+                        </li>
+                        
+                        <li class="list-group-item list-group-item-action  border-0">
+                            <a class="d-flex justify-content-center   mw-100" href="http://54.84.229.93/legacy-ant-unit-tests.html">Legacy Ant Unit Tests</a>
+                        </li>
+                        
+                        <li class="list-group-item list-group-item-action  border-0">
+                            <a class="d-flex justify-content-center   mw-100" href="http://54.84.229.93/legacy-eclipse.html">Legacy Eclipse</a>
+                        </li>
+                        
+                        <li class="list-group-item list-group-item-action  border-0">
+                            <a class="d-flex justify-content-center   mw-100" href="http://54.84.229.93/release-guide-2.0.html">Legacy Release Guide 2.0</a>
+                        </li>
+                        
+                    </ul>
+                </div>
             </div>
-            <div class="col-12 col-md-6  text-center text-md-right">
-                
-            </div>
-        </div>
+        </section>
     </main>
 
 

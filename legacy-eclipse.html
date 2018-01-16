@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="http://54.84.229.93/css/styles-c8a3174abc.css"/>
         <script src="http://54.84.229.93/js/bundle-bcaaf59313.js"></script>
-        <title>Guide to Cayenne CMS &middot; Apache Cayenne</title>
+        <title>Legacy Eclipse &middot; Apache Cayenne</title>
     </head>
     <body>
 
@@ -83,156 +83,92 @@
 
 
     <main class="container  py-5">
-        
-                <section>
-                    <article>
-                        <h1 class="text-center">Guide to Cayenne CMS</h1>
-                        
+        <section>
+            <article>
+                <h1 class="text-center">Legacy Eclipse</h1>
+                <p><a name="LegacyEclipse-UsingEclipsewithAntCayenne"></a></p>
 
-<p>Cayenne Site source code (content + styling + scripts) can be obtained from Apache Git repo:<br />
-<a href="https://git-wip-us.apache.org/repos/asf/cayenne-website.git">https://git-wip-us.apache.org/repos/asf/cayenne-website.git</a></p>
+<h2 id="using-eclipse-with-ant-cayenne">Using Eclipse with Ant Cayenne</h2>
 
-<p>Or from GitHub mirror (in read only mode): <a href="https://github.com/apache/cayenne-website.git">https://github.com/apache/cayenne-website.git</a></p>
+<p><em>(versions 1.2 and 2.0)</em></p>
 
+<p><a name="LegacyEclipse-ConfiguringEclipseWorkspaceforCayenne"></a></p>
 
-<div class="pb-3"></div>
-
-<h2 id="dev-mode">Dev mode</h2>
-
-<p>Just clone and run maven, nothing else required.</p>
-
-<pre><code>git clone https://git-wip-us.apache.org/repos/asf/cayenne-website.git
-cd cayenne-website
-mvn
-</code></pre>
-
-<p>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser. In dev mode site supports live-reloading.</p>
-
-<p><em>You can change host and port by setting <code>dev.host</code> and <code>dev.port</code> properties:</em></p>
-
-<pre><code>mvn -Ddev.host=&quot;my.local&quot; -Ddev.port=&quot;8080&quot;
-</code></pre>
-
-
-<div class="pb-3"></div>
-
-<h2 id="publish">Publish</h2>
-
-<p>To publish new version just run Maven with <code>publish</code> profile. This will build production version of the site (with <code>cayenne.apache.org</code> base URL) and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
-
-<pre><code>mvn -Ppublish -Dmsg=&quot;commit message describing site changes&quot;
-</code></pre>
-
-<p>That&rsquo;s all, so be carefull and review your changes before publishing (also don&rsquo;t forget to check them after).</p>
-
-<p>Don&rsquo;t forget to push you source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
-
-<p>:grey_exclamation: apache <code>gitpubsub</code> should be setup in order actual content sync to happen.</p>
-
-<p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>. But at first it is better to use manual publishing.</p>
-
-
-<div class="pb-3"></div>
-
-<h2 id="content-modifications">Content modifications</h2>
-
-<h3 id="publishing-news">Publishing news</h3>
-
-<p>To publish news simply add new file at <code>src/main/site/content/news/</code> folder.
-You can use following template:</p>
-
-<p><code>some-good-news.md</code></p>
-
-<pre><code>---
-title: Good news everyone!
-date: 2017-01-01T00:00:00+03:00
---- 
-
-Content goes here
-</code></pre>
-
-<h3 id="releasing-new-cayenne-version">Releasing new cayenne version</h3>
-
-<p>To update site content with information about new Cayenne version you need to perform these steps:</p>
+<h3 id="configuring-eclipse-workspace-for-cayenne">Configuring Eclipse Workspace for Cayenne</h3>
 
 <ul>
-<li>Update data in <code>src/main/site/data/cayenne.yaml</code> file.
-This automatically update <a href="/download/">download</a> page and <code>/doap/caynne.rdf</code> file.</li>
-<li>Write news (see information above).</li>
-<li>Update documentation, this can be done with <code>build-docs.sh</code> script.
-You can run it like this: <code>./build-docs.sh 4.1.M2</code></li>
-<li>Publish your changes (see <a href="#Publish">publish</a> section)</li>
+<li>Download and install <a href="http://wwww.eclipse.org">Eclipse</a>
+. Eclipse 3.1.1 or newer is recommended, as there are some per-project
+settings in repository that are not understood by older Eclipse.</li>
+<li>Install both JDK1.4 and 1.5. Some Cayenne projects below require JVM
+1.5.x, and others - JVM 1.4.x. It is possible to develop all or parts of
+Cayenne with just 1.5 or just 1.4, but make sure you understand what you
+are doing.</li>
+<li>Set JVM 1.4 as default workspace JVM.</li>
+<li>Define <em>&quot;JRE_LIB_15&quot;</em> Eclipse variable (Preferences -&gt; Java -&gt; Build
+Path -&gt; Classpath Variable) to point to the JRE 1.5 class library (e.g.
+<em>&quot;JRE15_HOME/jre/lib/rt.jar&quot;</em> on Windows and Linux or
+<em>&quot;/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Classes/classes.jar&quot;</em>
+on Mac OS X). Cayenne projects that are compatible with 1.5 rely on this
+variable.</li>
 </ul>
 
+<p><a name="LegacyEclipse-CheckingOutEclipseProjects"></a></p>
 
-<div class="pb-3"></div>
+<h3 id="checking-out-eclipse-projects">Checking Out Eclipse Projects</h3>
 
-<h2 id="advanced">Advanced</h2>
+<p>Under <a href="https://svn.apache.org/repos/asf/cayenne/main/branches/STABLE-2.0/cayenne/">cayenne folder</a>
+ in Subversion you'll find 4 Eclipse projects that need to be checked out
+to the same workspace. You may skip projects marked as optional if you are
+not planning to use/change them.</p>
 
-<p>Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and Yarn tools and launch Gulp tasks.
-Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-bin</a> NPM module.</p>
+<table class="table table-bordered">
+<thead>
+<tr>
+<th>Project Folder</th>
+<th>JVM</th>
+<th>Special Setup</th>
+<th>Notes</th>
+</tr>
+</thead>
 
-<h3 id="src-structure">Src structure</h3>
+<tbody>
+<tr>
+<td><em>/cayenne-java</em></td>
+<td>1.4.x</td>
+<td>n/a</td>
+<td>Eclipse project containing main Cayenne source and library folders. Source and binary compatibility must be set to JDK 1.4.</td>
+</tr>
 
-<p>There is two main parts of site src:</p>
+<tr>
+<td><em>/cayenne-java-1.5</em></td>
+<td>1.5.x</td>
+<td><em>JRE_LIB_15</em> variable</td>
+<td>Eclipse projectcontaining Cayenne JDK 1.5 specific code. Requires &quot;cayenne-java&quot; project to be present in workspace. Source and binary compatibility must be set to JDK 1.5.</td>
+</tr>
 
-<ul>
-<li><p><code>src/main/assets</code> assets processed by <a href="https://gulpjs.com">Gulp</a> tasks</p>
+<tr>
+<td><em>/cayenne-other</em></td>
+<td>1.5.x</td>
+<td><em>JRE_LIB_15</em> variable</td>
+<td>Optional Eclipse project that contains Cayenne documentation, contrib folders and such.</td>
+</tr>
 
-<ul>
-<li><code>/gulp/</code> - list of Gulp tasks:
+<tr>
+<td><em>/cayenne-ant</em></td>
+<td>n/a</td>
+<td>n/a</td>
+<td>Eclipse project with Ant build files to build the entire Cayenne workspace. Needed if you are planning to build Cayenne with Ant outside of Eclipse (i.e. to create JAR files or run a test suite).</td>
+</tr>
+</tbody>
+</table>
 
-<ul>
-<li><code>hugo.js</code> - contains tasks that launch Hugo to process all content</li>
-<li><code>images.js</code> - compress and copy images</li>
-<li><code>reference.js</code> - replace references to generated resources inside content</li>
-<li><code>revision.js</code> - generate manifest file with resources versions</li>
-<li><code>scripts.js</code> - launch Webpack to process JavaScript resources</li>
-<li><code>serve.js</code> - launch dev-version of site with live-reloading</li>
-<li><code>styles.js</code> - generate CSS bundle (concat, minify, etc..)</li>
-</ul></li>
-<li><code>/images/</code> - images that will be compressed and published into site <code>/img</code> directory,
-you can put any stuff used by site here (see <code>/gulp/images.js</code>)</li>
-<li><code>/scripts/</code> - JavaScript sources, <code>main.js</code> is an entry point for the final bundle,
-will be processed by Webpack (see <code>/gulp/scripts.js</code>)</li>
-<li><code>/styles/</code> - Sass sources, <code>main.scss</code> is an entry point for the final bundle
-(see <code>/gulp/styles.js</code>)</li>
-<li><code>gulpfile.js</code> - main file for Gulp tasks, define some global path constants</li>
-<li><code>package.json</code> - all project dependencies are defined here</li>
-</ul></li>
+<p>There are also various tutorials in &quot;cayenne&quot; folder that are not needed to
+build the framework or the tools.</p>
 
-<li><p><code>src/main/site</code> assets processed <a href="https://gohugo.io">Hugo</a> site generator</p>
-
-<ul>
-<li><code>/content/</code> - main content part of the site, markdown and HTML files</li>
-<li><code>/data/</code> - data files in <em>yaml</em> format</li>
-<li><code>/layouts/</code> - site templates, using <a href="https://golang.org/pkg/text/template/">GO templates</a></li>
-<li><code>/static/</code> - files that will be copied as is to the final site content, note that <code>js</code>, <code>img</code> and <code>css</code> directories
-are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use coresponding directories in <code>assets</code>.<br /></li>
-<li><code>config.yaml</code> - Hugo configuration</li>
-</ul></li>
-</ul>
-
-                    </article>
-                </section>
-            
-        
-        <div class="pb-3"></div>
-        <div class="row">
-            <div class="col-12 col-md-6  text-center text-md-left">
-                
-                <a class="btn btn-link" href='/dev/running-unit-tests.html'>
-                    <span class="d-block d-md-none  text-muted">Prev: </span>
-                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    Running Unit Tests
-                </a>
-                
-            </div>
-            <div class="col-12 col-md-6  text-center text-md-right">
-                
-            </div>
-        </div>
-    </main>
+            </article>
+        </section>
+    </main> 
 
 
 <footer class="bg-dark">
