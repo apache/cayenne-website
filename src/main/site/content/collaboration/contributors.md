@@ -7,6 +7,6 @@ menu:
         weight: 60
         identifier: contributors
         parent: collaboration
-url: contributors.html
+url: /contributors.html
 layout: contributors
 ---

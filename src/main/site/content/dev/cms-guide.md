@@ -66,9 +66,11 @@ You can use following template:
 To update site content with information about new Cayenne version you need to perform these steps:
 
 * Update data in `src/main/site/data/cayenne.yaml` file.
+This automatically update [download](/download/) page and `/doap/caynne.rdf` file.
 * Write news (see information above).
 * Update documentation, this can be done with `build-docs.sh` script. 
   You can run it like this: `./build-docs.sh 4.1.M2` 
+* Publish your changes (see [publish](#Publish) section)
 
 {{% gap %}}
 

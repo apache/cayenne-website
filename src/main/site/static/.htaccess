@@ -37,7 +37,7 @@ Redirect permanent /about.html /
 Redirect permanent /collaboration.html /
 Redirect permanent /thanks.html /
 Redirect permanent /release-guide-2.0.html /dev/release-guide.html
-RedirectMatch permanent ^/legacy(.*).html$ /
+Redirect permanent /legacy-ant-documentation-export.html /
 
 # Custom 404 error page
 ErrorDocument 404 /404.html

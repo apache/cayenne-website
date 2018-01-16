@@ -5,7 +5,7 @@ menu:
         weight: 50
         identifier: how-can-i-help
         parent: collaboration
-url: how-can-i-help.html
+url: /how-can-i-help.html
 ---
 Every volunteer project gets its strength from its participants. We invite
 everybody to participate in Cayenne. If you are willing to help,

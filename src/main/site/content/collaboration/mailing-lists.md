@@ -5,7 +5,7 @@ menu:
         weight: 20
         identifier: mail-list
         parent: collaboration
-url: mailing-lists.html
+url: /mailing-lists.html
 ---
 ## User Mailing List
 
