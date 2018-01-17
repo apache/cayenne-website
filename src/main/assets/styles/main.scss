@@ -78,6 +78,7 @@
 	.mw-50 { max-width: 50% !important; }
 	.mw-75 { max-width: 75% !important; }
 
+	.mw-15px { max-width: 15px !important; }
 	.mw-500px { max-width: 500px !important; }
 	// max height
 	.mh-26px {max-height: 26px;}
@@ -116,8 +117,11 @@
 		}
 
 		// size `sm`
-		.breadcrumb-sm * {
-			font-size: $small-font-size;
+		.breadcrumb-sm {
+			.breadcrumb-item,
+			.dropdown-item {
+				font-size: $small-font-size;
+			}
 		}
 
 	// _type.scss
@@ -437,10 +441,10 @@
 			}
 			
 			.symbol {
-				font-size: 18px;
+				font-size: 1.125rem;
 				margin-left: 1rem;
-				// vertical-align: middle;
-				// display: inline-block;
+				position: relative;
+				top: .0625rem;
 			}
 
 			.fa-lg.fa-long-arrow-right {
@@ -522,8 +526,4 @@
 			td, th {
 				padding: $table-cell-padding-sm;
 			}
-		}
-
-		.mw-20px {
-			max-width: 20px;
 		}
