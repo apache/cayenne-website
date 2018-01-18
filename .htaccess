@@ -1,3 +1,6 @@
+##################################################
+# Redirects carried from Apache CMS based site   #
+##################################################
 
 # Individual deleted/renamed pages
 Redirect permanent /commercial-support.html /about/support/index.html
@@ -20,16 +23,12 @@ Redirect permanent /building-cayenne.html /dev/building-cayenne.html
 Redirect permanent /release-guide.html /dev/release-guide.html
 Redirect permanent /running-unit-tests.html /dev/running-unit-tests.html
 
-# Remaping old -> new cayenne site
+##################################################
+# Remaping Apache CMS -> Hugo based site         #
+##################################################
+
 Redirect permanent /support.html /about/support/
 Redirect permanent /download.html /download/
-
-# Remaping docbook based docs to asciidocs based
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/(.*)\.html$ /docs/$1/getting-started-guide/\#$2
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/(.*)\.html$ /docs/$1/getting-started-rop/\#$2
-# Redirect all except index.html to exclude cyclic redirection
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
-RedirectMatch permanent ^/docs/([0-9\.]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/$1/upgrade-guide/#$2
 
 # Links without direct replacement in new site
 Redirect permanent /docs/legacy.html /docs/3.0/
@@ -37,16 +36,55 @@ Redirect permanent /about.html /
 Redirect permanent /collaboration.html /
 Redirect permanent /legacy-ant-documentation-export.html /
 
+##################################################
+# Remaping docbook based docs to asciidocs based #
+##################################################
+
+# Redirect main sections of Cayenne Guide
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part1.html$ /docs/$1/cayenne-guide/#object-relational-mapping-with-cayenne
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part2.html$ /docs/$1/cayenne-guide/#cayenne-framework
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part3.html$ /docs/$1/cayenne-guide/#cayenne-framework-remote-object-persistence
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part4.html$ /docs/$1/cayenne-guide/#db-first-flow
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part5.html$ /docs/$1/cayenne-guide/#cayenne-additional-modules
+# Tutorial
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part1.html$ /docs/$1/getting-started-guide/#setting-up-the-environment
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part2.html$ /docs/$1/getting-started-guide/#learning-mapping-basics
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part3.html$ /docs/$1/getting-started-guide/#learning-cayenne-api
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part4.html$ /docs/$1/getting-started-guide/#converting-to-web-application
+# Rop tutorial
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch01.html$ /docs/$1/getting-started-rop/#prerequisites-2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch02.html$ /docs/$1/getting-started-rop/#starting-client-project
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch03.html$ /docs/$1/getting-started-rop/#setting-up-hessian-web-service
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch04.html$ /docs/$1/getting-started-rop/#porting-existing-code-to-connect-to-a-web-service-instead-of-a-database
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch05.html$ /docs/$1/getting-started-rop/#adding-basic-authentication
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part1.html$ /docs/$1/getting-started-rop/#prerequisites
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part2.html$ /docs/$1/getting-started-rop/#remote-object-persistence-quick-start
+
+# Redirect all except index.html to exclude cyclic redirection
+RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/$1/upgrade-guide/#$2
+
+# Redirect everything else
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/(.*)\.html$ /docs/$1/getting-started-guide/\#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/(.*)\.html$ /docs/$1/getting-started-rop/\#$2
+
+
+##################################################
+# Additional parameters and optimizations        #
+##################################################
+
 # Custom 404 error page
 ErrorDocument 404 /404.html
-# Disable .git related content
+
+# Hide .git related content
 RedirectMatch 404 /\.git
 
-# One month for most static assets
+# Cache for one month static assets
 <filesMatch ".(css|jpg|jpeg|png|gif|svg|js|ico)$">
 Header set Cache-Control "max-age=2628000, public"
 </filesMatch>
 
+# Enable gzip compression
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/html
 AddOutputFilterByType DEFLATE text/css
