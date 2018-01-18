@@ -36,10 +36,10 @@ gulp.task('serve', ['build:all'], function() {
 
     watch(
         [
-            global.hugoConfig.srcDir + '/layouts/**/*',
             global.hugoConfig.srcDir + '/content/**/*',
             global.hugoConfig.srcDir + '/data/**/*',
-            global.hugoConfig.srcDir + '/archetypes/**/*'
+            global.hugoConfig.srcDir + '/layouts/**/*',
+            global.hugoConfig.srcDir + '/config.yaml'
         ], {},
         function handle() {
 		    gulp.start('build:all');

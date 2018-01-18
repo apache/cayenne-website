@@ -44,7 +44,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#db-first-flow">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_dbfirst_flow.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_dbfirst_flow.svg" alt="DB First Flow">
 							<span class="align-self-center  d-none d-lg-block">DB-first flow</span>
 						</div>
 					</a>
@@ -52,7 +52,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#transparent-transactions">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_transp_trans.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_transp_trans.svg" alt="Transactions">
 							<span class="align-self-center  d-none d-lg-block">Transparent transactions</span>
 						</div>
 					</a>
@@ -60,7 +60,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#objectcontext">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_object_context.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_object_context.svg" alt="Object Context">
 							<span class="align-self-center  d-none d-lg-block">ObjectContext</span>
 						</div>
 					</a>
@@ -68,7 +68,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#extension-api">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_extensions.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_extensions.svg" alt="Extension API">
 							<span class="align-self-center  d-none d-lg-block">Extension API</span>
 						</div>
 					</a>
@@ -76,7 +76,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#generic-objects">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_generic_objects.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_generic_objects.svg" alt="Generic Objects">
 							<span class="align-self-center  d-none d-lg-block">Generic objects</span>
 						</div>
 					</a>
@@ -84,7 +84,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#data-encryption">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_data_encrypt.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_data_encrypt.svg" alt="Data Encryption">
 							<span class="align-self-center  d-none d-lg-block">Data Encryption</span>
 						</div>
 					</a>
