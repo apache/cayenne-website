@@ -35,8 +35,6 @@ RedirectMatch permanent ^/docs/([0-9\.]+)/upgrade-guide/(?!index)(.*)\.html$ /do
 Redirect permanent /docs/legacy.html /docs/3.0/
 Redirect permanent /about.html /
 Redirect permanent /collaboration.html /
-Redirect permanent /thanks.html /
-Redirect permanent /release-guide-2.0.html /dev/release-guide.html
 Redirect permanent /legacy-ant-documentation-export.html /
 
 # Custom 404 error page
