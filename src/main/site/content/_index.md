@@ -7,9 +7,9 @@
         <div class="col-md-6  text-center">
             <img class="img-fluid  mb-2" src="img/cayenne_illustr.png" alt="Cayenne Illustration" />
             <h1 class="display-2  font-weight-normal">
-                ORM
-                <span class="font-weight-xlight">with</span>
-                <span class="font-weight-semibold">character</span>
+				<span class="font-weight-xlight">Your</span>
+				<span class="font-weight-semibold">ORM</span>
+				superpower
             </h1>
             <p class="small  font-italic">Apache Cayenne™ is an open source Java ORM (object-to-relational mapping) framework</p>
         </div>
