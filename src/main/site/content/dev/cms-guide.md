@@ -30,17 +30,17 @@ _You can change host and port by setting `dev.host` and `dev.port` properties:_
 
 ## Publish
 
-To publish new version just run Maven with `publish` profile. This will build production version of the site (with `cayenne.apache.org` base URL) and push commit into `asf-site` branch that will be synced with actual site content location:
+To publish new version just run Maven with `publish` profile. This will build production version of the site (with `cayenne.apache.org` base URL) 
+and push commit into `asf-site` branch that will be synced with actual site content location:
     
     mvn -Ppublish -Dmsg="commit message describing site changes"
     
 That's all, so be carefull and review your changes before publishing (also don't forget to check them after).
 
 Don't forget to push you source's changes so others won't rewrite them.
-    
-:grey_exclamation: apache `gitpubsub` should be setup in order actual content sync to happen. 
 
-*NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`. But at first it is better to use manual publishing.
+*NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`. 
+But for now it is better to use manual publishing.
 
 {{% gap %}}
 
@@ -76,7 +76,8 @@ This automatically update [download](/download/) page and `/doap/caynne.rdf` fil
 
 ## Advanced 
 
-Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and Yarn tools and launch Gulp tasks.
+Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and 
+Yarn tools and launch Gulp tasks.
 Hugo binaries managed by [hugo-bin](https://www.npmjs.com/package/hugo-bin) NPM module.
 
 
