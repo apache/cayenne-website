@@ -118,7 +118,8 @@ mvn
 
 <h2 id="publish">Publish</h2>
 
-<p>To publish new version just run Maven with <code>publish</code> profile. This will build production version of the site (with <code>cayenne.apache.org</code> base URL) and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
+<p>To publish new version just run Maven with <code>publish</code> profile. This will build production version of the site (with <code>cayenne.apache.org</code> base URL)
+and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
 
 <pre><code>mvn -Ppublish -Dmsg=&quot;commit message describing site changes&quot;
 </code></pre>
@@ -127,9 +128,8 @@ mvn
 
 <p>Don&rsquo;t forget to push you source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
 
-<p>:grey_exclamation: apache <code>gitpubsub</code> should be setup in order actual content sync to happen.</p>
-
-<p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>. But at first it is better to use manual publishing.</p>
+<p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>.
+But for now it is better to use manual publishing.</p>
 
 
 <div class="pb-3"></div>
@@ -169,7 +169,8 @@ You can run it like this: <code>./build-docs.sh 4.1.M2</code></li>
 
 <h2 id="advanced">Advanced</h2>
 
-<p>Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and Yarn tools and launch Gulp tasks.
+<p>Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and
+Yarn tools and launch Gulp tasks.
 Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-bin</a> NPM module.</p>
 
 <h3 id="src-structure">Src structure</h3>
