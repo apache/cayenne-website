@@ -9,7 +9,7 @@ Contains sources of [Cayenne website](http://cayenne.apache.org).
 Just clone and run maven, nothing else required.
 
     git clone https://git-wip-us.apache.org/repos/asf/cayenne-website.git
-    cd cayenne-website-demo
+    cd cayenne-website
     mvn
 
 Open http://localhost:3000 in your browser. In dev mode site supports live-reloading.
@@ -27,10 +27,8 @@ To publish new version just run Maven with `publish` profile. This will build pr
 That's all, so be carefull and review your changes before publishing (also don't forget to check them after).
 
 Don't forget to push you source's changes so others won't rewrite them.
-    
-:grey_exclamation: apache `gitpubsub` should be setup in order actual content sync to happen. 
 
-*NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`. But at first it is better to use manual publishing.
+*NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`.
 
 ## CMS guide
 
@@ -97,10 +95,3 @@ There is two main parts of site src:
     * `/static/` - files that will be copied as is to the final site content, note that `js`, `img` and `css` directories
     are processed via Gulp tasks, and shouldn't be used directly, instead use coresponding directories in `assets`.     
     * `config.yaml` - Hugo configuration
-
-
-## ToDo
-
-- [x] Add fontawesome as dependency
-- [x] Asciidoc ToC into docs aside
-- [ ] $small-font-size-rem - https://davidwalsh.name/rem-px-browser-function-sass
