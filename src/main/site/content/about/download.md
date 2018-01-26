@@ -27,10 +27,3 @@ aliases:
 		<a href="http://sourceforge.net/project/showfiles.php?group_id=48132">All pre-Apache (SourceForge) Cayenne Releases</a>
 	</li>
 </ul>
-
-## Maven
-
-All Cayenne artifacts are available from [Maven Central][1] for use with Maven, Ivy, Gradle or any other dependency management tool. 
-
-
-  [1]: http://search.maven.org/#search|ga|1|g%3A%22org.apache.cayenne%22
