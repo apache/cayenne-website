@@ -18,7 +18,8 @@ Redirect permanent /doc/ /docs/3.0/
 Redirect permanent /developer-guide.html /dev/index.html
 Redirect permanent /how_development_happens.html /dev/how_development_happens.html
 Redirect permanent /code-repository.html /dev/code-repository.html
-Redirect permanent /eclipse.html /dev/eclipse.html
+Redirect permanent /eclipse.html /dev/
+Redirect permanent /dev/eclipse.html /dev/
 Redirect permanent /building-cayenne.html /dev/building-cayenne.html
 Redirect permanent /release-guide.html /dev/release-guide.html
 Redirect permanent /running-unit-tests.html /dev/running-unit-tests.html

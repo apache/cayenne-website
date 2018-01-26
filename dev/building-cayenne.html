@@ -116,17 +116,9 @@ but these should probably work for everyone:</p>
 <p>Depending on what you want to do, there are various flavors of the builds
 discussed below. All builds should be executed from the root folder of the source checkout.</p>
 
-<p>Building the framework and installing it to the local repository (the most
-common flavor) :</p>
+<p>The most common flavor is building Cayenne and executing unit and integration tests :</p>
 
-<pre><code>mvn clean install
-</code></pre>
-
-<p>In order to skip the unit tests (to speed up the build process or because
-some tests are failing), add <em>&rdquo;-DskipTests&rdquo;</em> to any build
-flavor:</p>
-
-<pre><code>mvn clean install -DskipTests
+<pre><code>mvn clean verify
 </code></pre>
 
 <p>For the build to produce a release-like assembly, activate &ldquo;assembly&rdquo;
@@ -135,27 +127,27 @@ of a given assembly (otherwise assembly profile won&rsquo;t produce anything).</
 
 <p>Source assembly:</p>
 
-<pre><code>mvn clean install -Passembly,src
+<pre><code>mvn clean verify -Passembly,src
 </code></pre>
 
 <p>Cross-platform assembly:</p>
 
-<pre><code>mvn clean install -Passembly,generic
+<pre><code>mvn clean verify -Passembly,generic
 </code></pre>
 
 <p>Windows assembly:</p>
 
-<pre><code>mvn clean install -Passembly,windows
+<pre><code>mvn clean verify -Passembly,windows
 </code></pre>
 
 <p>Mac OS X assembly:</p>
 
-<pre><code>mvn clean install -Passembly,mac
+<pre><code>mvn clean verify -Passembly,mac
 </code></pre>
 
 <p>Multiple assemblies built at once:</p>
 
-<pre><code>mvn clean install -Passembly,src,generic,mac
+<pre><code>mvn clean verify -Passembly,src,generic,mac
 </code></pre>
 
                     </article>
@@ -166,10 +158,10 @@ of a given assembly (otherwise assembly profile won&rsquo;t produce anything).</
         <div class="row">
             <div class="col-12 col-md-6  text-center text-md-left">
                 
-                <a class="btn btn-link" href='/dev/eclipse.html'>
+                <a class="btn btn-link" href='/dev/code-repository.html'>
                     <span class="d-block d-md-none  text-muted">Prev: </span>
                     <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    Working with Cayenne code in Eclipse
+                    Code Repository
                 </a>
                 
             </div>
