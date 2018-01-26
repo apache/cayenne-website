@@ -11,7 +11,7 @@
                 <span class="font-weight-xlight">ORM</span>
                 superpower
             </h1>
-            <p class="small  font-italic">Apache Cayenne™ is an open source Java ORM (object-to-relational mapping) framework</p>
+            <p class="small  font-italic">Apache Cayenne™ is an open source Java object-to-relational mapping framework</p>
         </div>
         <div class="col-md  d-none">Video</div>
     </div>
