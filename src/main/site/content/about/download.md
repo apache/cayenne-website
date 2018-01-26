@@ -15,7 +15,7 @@ aliases:
     - /download.html
 ---
 
-<h5 class="mb-5">KEYS file to verify the file signatures can be <a href="http://www.apache.org/dist/cayenne/KEYS">found here</a></h5>
+<h5 class="mb-5">KEYS file to verify the file signatures can be <a href="http://www.apache.org/dist/cayenne/KEYS">found here</a>.</h5>
 
 ## Legacy Releases
 
