@@ -143,11 +143,7 @@
   <li><a href="#cayenne-framework-remote-object-persistence" class="nav-link">3. Cayenne Framework - Remote Object Persistence</a> 
    <ul class="sectlevel2 nav"> 
     <li><a href="#introduction-to-rop" class="nav-link">3.1. Introduction to ROP</a></li> 
-    <li><a href="#implementing-rop-client" class="nav-link">3.2. Implementing ROP Client</a></li> 
-    <li><a href="#implementing-rop-server" class="nav-link">3.3. Implementing ROP Server</a></li> 
-    <li><a href="#implementing-rop-client-2" class="nav-link">3.4. Implementing ROP Client</a></li> 
-    <li><a href="#rop-deployment" class="nav-link">3.5. ROP Deployment</a></li> 
-    <li><a href="#current-limitations" class="nav-link">3.6. Current Limitations</a></li> 
+    <li><a href="#rop-deployment" class="nav-link">3.2. ROP Deployment</a></li> 
    </ul> </li> 
   <li><a href="#db-first-flow" class="nav-link">4. DB-First Flow</a> 
    <ul class="sectlevel2 nav"> 
@@ -1581,19 +1577,19 @@ ServerRuntime runtime = ServerRuntime.builder()
    <div class="sect3"> 
     <h4 id="objectcontext-persistence-api"><a class="anchor" href="#objectcontext-persistence-api"></a>ObjectContext Persistence API</h4> 
     <div class="paragraph"> 
-     <p>One of the first things users usually want to do with an ObjectContext is to select some objects from a database. This is done by calling "performQuery" method:</p> 
+     <p>One of the first things users usually want to do with an <code>ObjectContext</code> is to select some objects from a database:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">SelectQuery query = new SelectQuery(Artist.class);
-List&lt;Artist&gt; artists = context.performQuery(query);</code></pre> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
+    .select(context);</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>We’ll discuss queries in some detail in the following chapters. The example above is self-explanatory - we create a SelectQuery that matches all Artist objects present in the database, and then call "performQuery", getting a list of Artist objects.</p> 
+     <p>We’ll discuss queries in some detail in the <a href="#queries">Queries</a> chapter. The example above is self-explanatory - we create a <code>ObjectSelect</code> that matches all <code>Artist</code> objects present in the database, and then use <code>select</code> to get the result.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries ObjectContext provides "performGenericQuery"method. While not nearly as commonly-used as "performQuery", it is nevertheless important in some situations. E.g.:</p> 
+     <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries ObjectContext provides <code>performGenericQuery()</code> method. While not commonly-used, it is nevertheless important in some situations. E.g.:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1613,7 +1609,7 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>The first time the object property is changed, the object’s state is automatically set to "MODIFIED" by Cayenne. Cayenne tracks all in-memory changes until a user calls "commitChanges":</p> 
+     <p>The first time the object property is changed, the object’s state is automatically set to <strong>MODIFIED</strong> by Cayenne. Cayenne tracks all in-memory changes until a user calls <code>commitChanges</code>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1621,7 +1617,7 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>At this point all in-memory changes are analyzed and a minimal set of SQL statements is issued in a single transaction to synchronize the database with the in-memory state. In our example "commitChanges" commits just one object, but generally it can be any number of objects.</p> 
+     <p>At this point all in-memory changes are analyzed and a minimal set of SQL statements is issued in a single transaction to synchronize the database with the in-memory state. In our example <code>commitChanges</code> commits just one object, but generally it can be any number of objects.</p> 
     </div> 
     <div class="paragraph"> 
      <p>If instead of commit, we wanted to reset all changed objects to the previously committed state, we’d call <code>rollbackChanges</code> instead:</p> 
@@ -1632,7 +1628,7 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>"newObject" method call creates a persistent object and sets its state to "NEW":</p> 
+     <p><code>newObject</code> method call creates a persistent object and sets its state to <strong>NEW</strong>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1641,10 +1637,10 @@ newArtist.setName("Picasso");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>It will only exist in memory until <code>commitChanges</code> is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an INSERT SQL statement to permanently store the object.</p> 
+     <p>It will only exist in memory until <code>commitChanges</code> is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an <code>INSERT</code> SQL statement to permanently store the object.</p> 
     </div> 
     <div class="paragraph"> 
-     <p><code>deleteObjects</code> method takes one or more Persistent objects and marks them as "DELETED":</p> 
+     <p><code>deleteObjects</code> method takes one or more Persistent objects and marks them as <strong>DELETED</strong>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1653,13 +1649,13 @@ context.deleteObjects(artist2, artist3, artist4);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Additionally "deleteObjects" processes all delete rules modeled for the affected objects. This may result in implicitly deleting or modifying extra related objects. Same as insert and update, delete operations are sent to the database only when "commitChanges" is called. Similarly "rollbackChanges" will undo the effect of "newObject" and "deleteObjects".</p> 
+     <p>Additionally <code>deleteObjects</code> processes all delete rules modeled for the affected objects. This may result in implicitly deleting or modifying extra related objects. Same as insert and update, delete operations are sent to the database only when <code>commitChanges</code> is called. Similarly <code>rollbackChanges</code> will undo the effect of <code>newObject</code> and <code>deleteObjects</code>.</p> 
     </div> 
     <div class="paragraph"> 
-     <p><code>localObject</code> returns a copy of a given persistent object that is "local" to a given ObjectContext:</p> 
+     <p><code>localObject</code> returns a copy of a given persistent object that is <em>local</em> to a given ObjectContext:</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Since an application often works with more than one context, "localObject" is a rather common operation. E.g. to improve performance a user might utilize a single shared context to select and cache data, and then occasionally transfer some selected objects to another context to modify and commit them:</p> 
+     <p>Since an application often works with more than one context, <code>localObject</code> is a rather common operation. E.g. to improve performance a user might utilize a single shared context to select and cache data, and then occasionally transfer some selected objects to another context to modify and commit them:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1668,7 +1664,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Often an appliction needs to inspect mapping metadata. This information is stored in the EntityResolver object, accessible via the ObjectContext:</p> 
+     <p>Often an application needs to inspect mapping metadata. This information is stored in the <code>EntityResolver</code> object, accessible via the <code>ObjectContext</code>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1682,7 +1678,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
    <div class="sect3"> 
     <h4 id="cayenne-helper-class"><a class="anchor" href="#cayenne-helper-class"></a>Cayenne Helper Class</h4> 
     <div class="paragraph"> 
-     <p>There is a useful helper class called "Cayenne" (fully-qualified name <code>"org.apache.cayenne.Cayenne"</code>) that builds on ObjectContext API to provide a number of very common operations. E.g. get a primary key (most entities do not model PK as an object property) :</p> 
+     <p>There is a useful helper class called <code>Cayenne</code> (fully-qualified name <code>org.apache.cayenne.Cayenne</code>) that builds on ObjectContext API to provide a number of very common operations. E.g. get a primary key (most entities do not model PK as an object property) :</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1729,7 +1725,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">ObjectContext parent = runtime.newContext();
-ObjectContext nested = runtime.newContext((DataChannel) parent);</code></pre> 
+ObjectContext nested = runtime.newContext(parent);</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -1765,7 +1761,7 @@ nested.rollbackChanges();</code></pre>
      <p>Generic objects are first class citizens in Cayenne, and all common persistent operations apply to them as well. There are some pecularities however, described below.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>When creating a new generic object, either cast your ObjectContext to DataContext (that provides "newObject(String)" API), or provide your object with an explicit ObjectId:</p> 
+     <p>When creating a new generic object, either cast your ObjectContext to DataContext (that provides <code>newObject(String)</code> API), or provide your object with an explicit ObjectId:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2205,20 +2201,20 @@ o.orderList(list);</code></pre>
     <p>There is a number of built-in queries in Cayenne, described later in this chapter. Most of the newer queries use fluent API and can be created and executed as easy-to-read one-liners. Users can define their own query types to abstract certain DB interactions that for whatever reason can not be adequately described by the built-in set.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>Queries can be roughly categorized as "object" and "native". Object queries (most notably ObjectSelect, SelectById, and EJBQLQuery) are built with abstractions originating in the object model (the "object" side in the "object-relational" divide). E.g. ObjectSelect is assembled from a Java class of the objects to fetch, a qualifier expression, orderings, etc. - all of this expressed in terms of the object model.</p> 
+    <p>Queries can be roughly categorized as "object" and "native". Object queries (most notably <code>ObjectSelect</code>, <code>SelectById</code>, and <code>EJBQLQuery</code>) are built with abstractions originating in the object model (the "object" side in the "object-relational" divide). E.g. ObjectSelect is assembled from a Java class of the objects to fetch, a qualifier expression, orderings, etc. - all of this expressed in terms of the object model.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>Native queries describe a desired DB operation as SQL code (SQLSelect, SQLTemplate query) or a reference to a stored procedure (ProcedureQuery), etc. The results of native queries are usually presented as Lists of Maps, with each map representing a row in the DB (a term "data row" is often used to describe such a map). They can potentially be converted to objects, however it may take a considerable effort to do so. Native queries are also less (if at all) portable across databases than object queries.</p> 
+    <p>Native queries describe a desired DB operation as SQL code (<code>SQLSelect</code>, <code>SQLTemplate</code> query) or a reference to a stored procedure (<code>ProcedureQuery</code>), etc. The results of native queries are usually presented as Lists of Maps, with each map representing a row in the DB (a term "data row" is often used to describe such a map). They can potentially be converted to objects, however it may take a considerable effort to do so. Native queries are also less (if at all) portable across databases than object queries.</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="select"><a class="anchor" href="#select"></a>ObjectSelect</h4> 
     <div class="sect4"> 
      <h5 id="selecting-objects"><a class="anchor" href="#selecting-objects"></a>Selecting objects</h5> 
      <div class="paragraph"> 
-      <p>ObjectSelect supersedes older SelectQuery. SelectQuery is still available and supported.</p> 
+      <p><code>ObjectSelect</code> supersedes older <code>SelectQuery</code>. <code>SelectQuery</code> is still available and supported.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>ObjectSelect is the most commonly used query in Cayenne applications. This may be the only query you will ever need. It returns a list of persistent objects (or data rows) of a certain type specified in the query:</p> 
+      <p><code>ObjectSelect</code> is the most commonly used query in Cayenne applications. This may be the only query you will ever need. It returns a list of persistent objects (or data rows) of a certain type specified in the query:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -2226,7 +2222,7 @@ o.orderList(list);</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>This returned all rows in the "ARTIST" table. If the logs were turned on, you might see the following SQL printed:</p> 
+      <p>This returned all rows in the <em>ARTIST</em> table. If the logs were turned on, you might see the following SQL printed:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -2235,7 +2231,7 @@ INFO: === returned 5 row. - took 5 ms.</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>This SQL was generated by Cayenne from the ObjectSelect above. ObjectSelect can have a qualifier to select only the data matching specific criteria. Qualifier is simply an Expression (Expressions where discussed in the previous chapter), appended to the query using "where" method. If you only want artists whose name begins with 'Pablo', you might use the following qualifier expression:</p> 
+      <p>This SQL was generated by Cayenne from the <code>ObjectSelect</code> above. <code>ObjectSelect</code> can have a qualifier to select only the data matching specific criteria. Qualifier is simply an Expression (Expressions where discussed in the previous chapter), appended to the query using "where" method. If you only want artists whose name begins with 'Pablo', you might use the following qualifier expression:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -2255,7 +2251,7 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>ObjectSelect allows to assemble qualifier from parts, using "and" and "or" method to chain then together:</p> 
+      <p><code>ObjectSelect</code> allows to assemble qualifier from parts, using "and" and "or" method to chain then together:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -2266,7 +2262,7 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>To order the results of ObjectSelect, one or more orderings can be applied:</p> 
+      <p>To order the results of <code>ObjectSelect</code>, one or more orderings can be applied:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -2277,7 +2273,7 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>There’s a number of other useful methods in ObjectSelect that define what to select and how to optimize database interaction (prefetching, caching, fetch offset and limit, pagination, etc.). Some of them are discussed in separate chapters on caching and performance optimization. Others are fairly self-explanatory. Please check the API docs for the full extent of the ObjectSelect features.</p> 
+      <p>There’s a number of other useful methods in <code>ObjectSelect</code> that define what to select and how to optimize database interaction (prefetching, caching, fetch offset and limit, pagination, etc.). Some of them are discussed in separate chapters on caching and performance optimization. Others are fairly self-explanatory. Please check the API docs for the full extent of the <code>ObjectSelect</code> features.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
@@ -2351,7 +2347,7 @@ ORDER BY COUNT(t1.PAINTING_ID) DESC, t0.ARTIST_NAME</code></pre>
    <div class="sect3"> 
     <h4 id="ejbql"><a class="anchor" href="#ejbql"></a>EJBQLQuery</h4> 
     <div class="paragraph"> 
-     <p>EJBQLQuery was created as a part of an experiment in adopting some of Java Persistence API (JPA) approaches in Cayenne. It is a parameterized object query that is created from query String. A String used to build EJBQLQuery must conform to JPQL (JPA query language):</p> 
+     <p>EJBQLQuery was created as a part of an experiment in adopting some of Java Persistence API (JPA) approaches in Cayenne. It is a parameterized object query that is created from query String. A String used to build <code>EJBQLQuery</code> must conform to JPQL (JPA query language):</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2362,14 +2358,14 @@ ORDER BY COUNT(t1.PAINTING_ID) DESC, t0.ARTIST_NAME</code></pre>
      <p>JPQL details can be found in any JPA manual. Here we’ll mention only how this fits into Cayenne and what are the differences between EJBQL and other Cayenne queries.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Although most frequently EJBQLQuery is used as an alternative to SelectQuery, there are also DELETE and UPDATE varieties available.</p> 
+     <p>Although most frequently <code>EJBQLQuery</code> is used as an alternative to <code>SelectQuery</code>, there are also DELETE and UPDATE varieties available.</p> 
     </div> 
     <div class="admonitionblock note"> 
      <table> 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> As of this version of Cayenne, DELETE and UPDATE do not change the state of objects in the ObjectContext. They are run directly against the database instead. </td> 
+        <td class="content"> As of this version of Cayenne, DELETE and UPDATE do not change the state of objects in the <code>ObjectContext</code>. They are run directly against the database instead. </td> 
        </tr> 
       </tbody>
      </table> 
@@ -2393,7 +2389,7 @@ context.performGenericQuery(update);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>In most cases SelectQuery is preferred to EJBQLQuery, as it is API-based, and provides you with better compile-time checks. However sometimes you may want a completely scriptable object query. This is when you might prefer EJBQL. A more practical reason for picking EJBQL over SelectQuery though is that the former offers some extra selecting capabilities, namely aggregate functions and subqueries:</p> 
+     <p>In most cases SelectQuery is preferred to <code>EJBQLQuery</code>, as it is API-based, and provides you with better compile-time checks. However sometimes you may want a completely scriptable object query. This is when you might prefer EJBQL. A more practical reason for picking <code>EJBQL</code> over <code>SelectQuery</code> though is that the former offers some extra selecting capabilities, namely aggregate functions and subqueries:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2406,7 +2402,7 @@ for(Object[] artistWithCount : result) {
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>This also demonstrates a previously unseen type of select result - a List of Object[] elements, where each entry in an Object[] is either a DataObject or a scalar, depending on the query SELECT clause. A result can also be a list of scalars:</p> 
+     <p>This also demonstrates a previously unseen type of select result - a List of <code>Object[]</code> elements, where each entry in an Object[] is either a <code>DataObject</code> or a scalar, depending on the query SELECT clause. A result can also be a list of scalars:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2423,7 +2419,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>The following example requires a single positional parameter to be supplied. The parameter can be any concrete implementation of the java.util.Collection interface such as java.util.List or java.util.Set.</p> 
+     <p>The following example requires a single positional parameter to be supplied. The parameter can be any concrete implementation of the <code>java.util.Collection</code> interface such as <code>java.util.List</code> or <code>java.util.Set</code>.</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2582,7 +2578,7 @@ Object out = result.getOutParam("out_param");</code></pre>
      <p>If a user needs some extra functionality not addressed by the existing set of Cayenne queries, he can write his own. The only requirement is to implement <code>org.apache.cayenne.query.Query</code> interface. The easiest way to go about it is to subclass some of the base queries in Cayenne.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>E.g. to do something directly in the JDBC layer, you might subclass AbstractQuery:</p> 
+     <p>E.g. to do something directly in the JDBC layer, you might subclass <code>AbstractQuery</code>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2603,7 +2599,7 @@ Object out = result.getOutParam("out_param");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>To delegate the actual query execution to a standard Cayenne query, you may subclass IndirectQuery:</p> 
+     <p>To delegate the actual query execution to a standard Cayenne query, you may subclass <code>IndirectQuery</code>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2623,7 +2619,7 @@ Object out = result.getOutParam("out_param");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>In fact many internal Cayenne queries are IndirectQueries, delegating to SelectQuery or SQLTemplate after some preprocessing.</p> 
+     <p>In fact many internal Cayenne queries are <code>IndirectQueries</code>, delegating to <code>SelectQuery</code> or <code>SQLTemplate</code> after some preprocessing.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -2651,16 +2647,16 @@ QueryResponse response = context.performGenericQuery(update);</code></pre>
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> Any data modifications done to DB as a result of SQLTemplate execution do not change the state of objects in the ObjectContext. So some objects in the context may become stale as a result. </td> 
+        <td class="content"> Any data modifications done to DB as a result of <code>SQLTemplate</code> execution do not change the state of objects in the ObjectContext. So some objects in the context may become stale as a result. </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
     <div class="paragraph"> 
-     <p>Another point to note is that the first argument to the SQLTemplate constructor - the Java class - has the same meaning as in SelectQuery only when the result can be converted to objects (e.g. when this is a selecting query and it is selecting all columns from one table). In this case it denotes the "root" entity of this query result. If the query does not denote a single entity result, this argument is only used for query routing, i.e. determining which database it should be run against. You are free to use any persistent class or even a DataMap instance in such situation. It will work as long as the passed "root" maps to the same database as the current query.</p> 
+     <p>Another point to note is that the first argument to the <code>SQLTemplate</code> constructor - the Java class - has the same meaning as in SelectQuery only when the result can be converted to objects (e.g. when this is a selecting query and it is selecting all columns from one table). In this case it denotes the "root" entity of this query result. If the query does not denote a single entity result, this argument is only used for query routing, i.e. determining which database it should be run against. You are free to use any persistent class or even a DataMap instance in such situation. It will work as long as the passed "root" maps to the same database as the current query.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>To achieve interoperability between mutliple RDBMS a user can specify multiple SQL statements for the same SQLTemplate, each corresponding to a native SQL dialect. A key used to look up the right dialect during execution is a fully qualified class name of the corresponding DbAdapter. If no DB-specific statement is present for a given DB, a default generic statement is used. E.g. in all the examples above a default statement will be used regardless of the runtime database. So in most cases you won’t need to explicitly "translate" your SQL to all possible dialects. Here is how this works in practice:</p> 
+     <p>To achieve interoperability between multiple RDBMS a user can specify multiple SQL statements for the same <code>SQLTemplate</code>, each corresponding to a native SQL dialect. A key used to look up the right dialect during execution is a fully qualified class name of the corresponding <code>DbAdapter</code>. If no DB-specific statement is present for a given DB, a default generic statement is used. E.g. in all the examples above a default statement will be used regardless of the runtime database. So in most cases you won’t need to explicitly "translate" your SQL to all possible dialects. Here is how this works in practice:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -2674,12 +2670,12 @@ query.setTemplate(PostgresAdapter.class.getName(), pgSQL);</code></pre>
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="scripting-sqltemplate-with-velocity"><a class="anchor" href="#scripting-sqltemplate-with-velocity"></a>Scripting SQLTemplate with Velocity</h5> 
+     <h5 id="scripting-sqltemplate-with-templates"><a class="anchor" href="#scripting-sqltemplate-with-templates"></a>Scripting SQLTemplate with templates</h5> 
      <div class="paragraph"> 
-      <p>The most interesting aspect of SQLTemplate (and the reason why it is called a "template") is that a SQL string is treated by Cayenne as an Apache Velocity template. Before sending it to DB as a PreparedStatement, the String is evaluated in the Velocity context, that does variable substitutions, and performs special callbacks in response to various directives, thus controlling query interaction with the JDBC layer.</p> 
+      <p>The most interesting aspect of SQLTemplate (and the reason why it is called a "template") is that a SQL string is treated by Cayenne as a template. Before sending it to DB as a PreparedStatement, the String is evaluated, that does variable substitutions, and performs special callbacks in response to various directives, thus controlling query interaction with the JDBC layer.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Check Velocity docs for the syntax details. Here we’ll just mention the two main scripting elements - "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). All built-in Velocity directives are supported. Additionally Cayenne defines a number of its own directives to bind parameters to PreparedStatements and to control the structure of the ResultSet. These directives are described in the following sections.</p> 
+      <p>Here we’ll describe the two main scripting elements - "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). Cayenne defines a number of directives to bind parameters to <code>PreparedStatement</code> and to control the structure of the <code>ResultSet</code>. These directives are described in the following sections.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
@@ -2696,10 +2692,10 @@ query.setParameters(Collections.singletonMap("tableName", "mydb.PAINTING"));
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>The example above demonstrates the point made earlier in this chapter - even if we don’t know upfront which table the query will run against, we can still use a fixed "root" in constructor (<code>Artist.class</code> in this case) , as we are not planning on converting the result to objects.</p> 
+      <p>The example above demonstrates the point made earlier in this chapter - even if we don’t know upfront which table the query will run against, we can still use a fixed "root" in constructor (<code>Artist.class</code> in this case), as we are not planning on converting the result to objects.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Variable substitution within the text uses <code>"object.toString()"</code> method to replace the variable value. Keep in mind that this may not be appropriate in all situations. E.g. passing a date object in a WHERE clause expression may be converted to a String not understood by the target RDBMS SQL parser. In such cases variable should be wrapped in <code>#bind</code> directive as described below.</p> 
+      <p>Variable substitution within the text uses <code>object.toString()</code> method to replace the variable value. Keep in mind that this may not be appropriate in all situations. E.g. passing a date object in a WHERE clause expression may be converted to a String not understood by the target RDBMS SQL parser. In such cases variable should be wrapped in <code>#bind</code> directive as described below.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
@@ -2710,7 +2706,7 @@ query.setParameters(Collections.singletonMap("tableName", "mydb.PAINTING"));
      <div class="sect5"> 
       <h6 id="bind"><a class="anchor" href="#bind"></a>#bind</h6> 
       <div class="paragraph"> 
-       <p>Creates a PreparedStatement positional parameter in place of the directive, binding the value to it before statement execution. <code>#bind</code> is allowed in places where a "?" would be allowed in a PreparedStatement. And in such places it almost always makes sense to pass objects to the template via this or other forms of #bind instead of inserting them inline.</p> 
+       <p>Creates a PreparedStatement positional parameter in place of the directive, binding the value to it before statement execution. <code>#bind</code> is allowed in places where a "?" would be allowed in a PreparedStatement. And in such places it almost always makes sense to pass objects to the template via this or other forms of <code>#bind</code> instead of inserting them inline.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Semantics:</p> 
@@ -2831,7 +2827,7 @@ query.setParameters(Collections.singletonMap("tableName", "mydb.PAINTING"));
      <div class="sect5"> 
       <h6 id="bindobjectequal"><a class="anchor" href="#bindobjectequal"></a>#bindObjectEqual</h6> 
       <div class="paragraph"> 
-       <p>It can be tricky to use a Persistent object or an ObjectId in a binding, especially for tables with compound primary keys. This directive helps to handle such binding. It maps columns in the query to the names of Persistent object ID columns, extracts ID values from the object, and generates SQL like "COL1 = ? AND COL2 = ? …​" , binding positional parameters to ID values. It can also correctly handle null object. Also notice how we are specifying a Velocity array for multi-column PK.</p> 
+       <p>It can be tricky to use a Persistent object or an ObjectId in a binding, especially for tables with compound primary keys. This directive helps to handle such binding. It maps columns in the query to the names of Persistent object ID columns, extracts ID values from the object, and generates SQL like "COL1 = ? AND COL2 = ? …​" , binding positional parameters to ID values. It can also correctly handle null object. Also notice how we are specifying an array for multi-column PK.</p> 
       </div> 
       <div class="paragraph"> 
        <p>Semantics:</p> 
@@ -3002,10 +2998,10 @@ List&lt;DataRow&gt; rows = context.performQuery(query);</code></pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>In the example above, even though the query root is Artist. the result is a list of artist names with painting counts (as mentioned before in such case "root" is only used to find the DB to fetch against, but has no bearning on the result). The DataRows here are the most appropriate and desired result type.</p> 
+       <p>In the example above, even though the query root is Artist. The result is a list of artist names with painting counts (as mentioned before in such case "root" is only used to find the DB to fetch against, but has no bearning on the result). The DataRows here are the most appropriate and desired result type.</p> 
       </div> 
       <div class="paragraph"> 
-       <p>In a more advanced case you may decide to fetch a list of scalars or a list of Object[] with each array entry being either an entity or a scalar. You probably won’t be doing this too often and it requires quite a lot of work to setup, but if you want your SQLTemplate to return results similar to EJBQLQuery, it is doable using SQLResult as described below:</p> 
+       <p>In a more advanced case you may decide to fetch a list of scalars or a list of <code>Object[]</code> with each array entry being either an entity or a scalar. You probably won’t be doing this too often and it requires quite a lot of work to setup, but if you want your <code>SQLTemplate</code> to return results similar to <code>EJBQLQuery</code>, it is doable using <code>SQLResult</code> as described below:</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -3042,7 +3038,7 @@ List&lt;Object[]&gt; data = context.performQuery(query);</code></pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>Another trick related to mapping result sets is making Cayenne recognize prefetched entities in the result set. This emulates "joint" prefetching of SelectQuery, and is achieved by special column naming. Columns belonging to the "root" entity of the query should use unqualified names corresponding to the root DbEntity columns. For each related entity column names must be prefixed with relationship name and a dot (e.g. "toArtist.ID"). Column naming can be controlled with "#result" directive:</p> 
+       <p>Another trick related to mapping result sets is making Cayenne recognize prefetched entities in the result set. This emulates "joint" prefetching of <code>SelectQuery</code>, and is achieved by special column naming. Columns belonging to the "root" entity of the query should use unqualified names corresponding to the root <code>DbEntity</code> columns. For each related entity column names must be prefixed with relationship name and a dot (e.g. "toArtist.ID"). Column naming can be controlled with <code>#result</code> directive:</p> 
       </div> 
       <div class="listingblock"> 
        <div class="content"> 
@@ -3063,7 +3059,7 @@ List&lt;Artist&gt; objects = context.performQuery(query);</code></pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>And the final tip deals with capitalization of the DataRow keys. Queries like <code>"SELECT * FROM…​"</code> and even <code>"SELECT COLUMN1, COLUMN2, …​ FROM …​"</code> can sometimes result in Cayenne exceptions on attempts to convert fetched DataRows to objects. Essentially any query that is not using a <code>#result</code> directive to describe the result set is prone to this problem, as different databases may produce different capitalization of the java.sql.ResultSet columns.</p> 
+       <p>And the final tip deals with capitalization of the DataRow keys. Queries like <code>"SELECT * FROM…​"</code> and even <code>"SELECT COLUMN1, COLUMN2, …​ FROM …​"</code> can sometimes result in Cayenne exceptions on attempts to convert fetched DataRows to objects. Essentially any query that is not using a <code>#result</code> directive to describe the result set is prone to this problem, as different databases may produce different capitalization of the <code>java.sql.ResultSet</code> columns.</p> 
       </div> 
       <div class="paragraph"> 
        <p>The most universal way to address this issue is to describe each column explicitly in the SQLTemplate via <code>#result</code>, e.g.: <code>"SELECT #result('column1'), #result('column2'), .."</code>. However this quickly becomes impractical for tables with lots of columns. For such cases Cayenne provides a shortcut based on the fact that an ORM mapping usually follows some naming convention for the column names. Simply put, for case-insensitive databases developers normally use either all lowercase or all uppercase column names. Here is the API that takes advantage of that user knowledge and forces Cayenne to follow a given naming convention for the DataRow keys (this is also available as a dropdown in the Modeler):</p> 
@@ -3086,7 +3082,17 @@ List objects = context.performQuery(query);</code></pre>
        </div> 
       </div> 
       <div class="paragraph"> 
-       <p>None of this affects the generated SQL, but the resulting DataRows are using correct capitalization. Note that you probably shouldn’t bother with this unless you are getting CayenneRuntimeExceptions when fetching with SQLTemplate.</p> 
+       <p>None of this affects the generated SQL, but the resulting DataRows are using correct capitalization.</p> 
+      </div> 
+      <div class="admonitionblock note"> 
+       <table> 
+        <tbody>
+         <tr> 
+          <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+          <td class="content"> You probably shouldn’t bother with this unless you are getting <code>CayenneRuntimeExceptions</code> when fetching with <code>SQLTemplate</code>. </td> 
+         </tr> 
+        </tbody>
+       </table> 
       </div> 
      </div> 
     </div> 
@@ -3255,10 +3261,15 @@ public class Listener2 {
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntime runtime = ...
-
-runtime.getDataDomain().addListener(new Listener1());
-runtime.getDataDomain().addListener(new Listener2());</code></pre> 
+      <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntime runtime = ServerRuntime.builder()
+       // ..
+       .addModule(binder -&gt;
+            ServerModule.contributeDomainListeners()
+                .add(new Listener1())
+                .add(new Listener2())
+       )
+       // ..
+       .build();</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -3384,14 +3395,15 @@ public class MyEntity2 extends _MyEntity2 {
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">CommittedObjectCounter counter = new CommittedObjectCounter();
-
-ServerRuntime runtime = ...
-DataDomain domain = runtime.getDataDomain();
-
-// register filter
-// this will also add it as a listener (since 3.2)
-domain.addFilter(counter);</code></pre> 
+      <pre class="highlight"><code class="language-Java Java" data-lang="Java">// this will also add filter as a listener
+ServerRuntime runtime = ServerRuntime.builder()
+        // ..
+        .addModule(b -&gt;
+                ServerModule.contributeDomainFilters(b)
+                        .add(CommittedObjectCounter.class)
+        )
+        // ..
+        .build();</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -3664,40 +3676,10 @@ List&lt;Artist&gt; artists =
       <p>This tells Cayenne that the query created here would like to use local cache of the context it is executed against. A vararg parameter to <code>localCache()</code> (or <code>sharedCache()</code>) method contains so called "cache groups". Those are arbitrary names that allow to categorize queries for the purpose of setting cache policies or explicit invalidation of the cache. More on that below.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. One such provider available in Cayenne is a provider for <a href="http://www.ehcache.org">EhCache</a>. It can be enabled on ServerRuntime startup in a custom Module:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntimeBuilder
-  .builder()
-  .addModule((binder) -&gt;
-     binder.bind(QueryCache.class).to(EhCacheQueryCache.class)
-  )
-  .build();</code></pre> 
-      </div> 
+      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="#ext-cayenne-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>By default EhCache reads a file called "ehcache.xml" located on classpath. You can put your cache configuration in that file. E.g.:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
-	monitoring="off" dynamicConfig="false"&gt;
-
-	&lt;defaultCache maxEntriesLocalHeap="1000" eternal="false"
-		overflowToDisk="false" timeToIdleSeconds="3600" timeToLiveSeconds="3600"&gt;
-	&lt;/defaultCache&gt;
-
-	&lt;cache name="artists" timeToLiveSeconds="20" maxEntriesLocalHeap="100" /&gt;
-&lt;/ehcache&gt;</code></pre> 
-      </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The example shows how to configure default cache settings ("defaultCache") as well as settings for a named cache group ("artists"). For many other things you can put in "ehcache.xml" refer to EhCache docs.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Often "passive" cache expiration policies similar to shown above are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p> 
+      <p>Often "passive" cache expiration policies used by caching providers are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -3706,28 +3688,7 @@ context.performGenericQuery(refresh);</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>The above can be used e.g. to build UI for manual cache invalidation. It is also possible to automate cache refresh when certain entities are committed. This requires including <code>cayenne-lifecycle.jar</code> deoendency. From that library you will need two things: <code>@CacheGroups</code> annotation to mark entities that generate cache invalidation events and <code>CacheInvalidationFilter</code> that catches the updates to the annotated objects and generates appropriate invalidation events:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">// configure filter on startup
-ServerRuntimeBuilder
-  .builder()
-  .addModule((binder) -&gt;
-     binder.bindList(Constants.SERVER_DOMAIN_FILTERS_LIST).add(CacheInvalidationFilter.class)
-  )
-  .build();</code></pre> 
-      </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Now you can associate entities with cache groups, so that commits to those entities would atomatically invalidate the groups:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">@CacheGroups("artists")
-public class Artist extends _Artist {
-}</code></pre> 
-      </div> 
+      <p>The above can be used e.g. to build UI for manual cache invalidation. It is also possible to automate cache refresh when certain entities are committed. This can be done with the help of <a href="#ext-cache-invalidation">Cache invalidation extension</a>.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Finally you may cluster cache group events. They are very small and can be efficiently sent over the wire to other JVMs running Cayenne. An example of Cayenne setup with event clustering is <a href="https://github.com/andrus/wowodc13/tree/master/services/src/main/java/demo/services/cayenne">available on GitHub</a>.</p> 
@@ -3765,7 +3726,8 @@ public class Artist extends _Artist {
 
     @Override
     public void configure(Binder binder) {
-        binder.bindMap(Constants.PROPERTIES_MAP).put(Constants.SERVER_CONTEXTS_SYNC_PROPERTY, "false");
+        ServerModule.contributeProperties(binder)
+            .put(Constants.SERVER_CONTEXTS_SYNC_PROPERTY, "false");
     }
 }</code></pre> 
      </div> 
@@ -4015,14 +3977,9 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">// since build-in list for this key is a singleton, repeated
-// calls to 'bindList' will return the same instance
-binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
-       .add(MyDbAdapterDetector.class);</code></pre> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerModule.contributeAdapterDetectors(binder)
+    .add(MyDbAdapterDetector.class);</code></pre> 
       </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Maps are customized using a similar <code>"bindMap"</code> method.</p> 
      </div> 
      <div class="paragraph"> 
       <p>The names of built-in collections are listed in "Appendix B".</p> 
@@ -4034,11 +3991,12 @@ binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
       <p>As mentioned above, custom modules are loaded by ServerRuntime after the built-in modules. So it is easy to redefine a built-in service in Cayenne by rebinding desired implementations or providers. To do that, first we need to know what those services to redefine are. While we describe some of them in the following sections, the best way to get a full list is to check the source code of the Cayenne version you are using and namely look in <code>org.apache.cayenne.configuration.server.ServerModule</code> - the main built-in module in Cayenne.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Now an example of overriding <code>QueryCache</code> service. The default implementation of this service is provided by <code>MapQueryCacheProvider</code>. But if we want to use <code>EhCacheQueryCache</code> (a Cayenne wrapper for the EhCache framework), we can define it like this:</p> 
+      <p>Now an example of overriding <code>JdbcEventLogger</code> service. The default implementation of this service is provided by <code>Slf4jJdbcEventLogger</code>. But if we want to use <code>FormattedSlf4jJdbcEventLogger</code> (a logger with basic SQL formatting), we can define it like this:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">binder.bind(QueryCache.class).to(EhCacheQueryCache.class);</code></pre> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">binder.bind(JdbcEventLogger.class)
+    .to(FormattedSlf4jJdbcEventLogger.class);</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -4111,12 +4069,14 @@ binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
       <div class="content"> 
        <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntime runtime = ServerRuntime.builder()
     .addConfig("cayenne-project.xml")
-    .addModule(binder -&gt; ServerModule.contributeValueObjectTypes(binder).add(MoneyValueObjectType.class))
+    .addModule(binder -&gt;
+        ServerModule.contributeValueObjectTypes(binder)
+            .add(MoneyValueObjectType.class))
     .build();</code></pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/tree/master/cayenne-joda">cayenne-joda module</a>.</p> 
+      <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/blob/master/cayenne-server/src/main/java/org/apache/cayenne/access/types/LocalDateValueType.java">cayenne-server</a>.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
@@ -4204,7 +4164,9 @@ public class DoubleArrayType implements ExtendedType {
         <pre class="highlight"><code class="language-Java Java" data-lang="Java">// add DoubleArrayType to list of user types
 ServerRuntime runtime = ServerRuntime.builder()
                 .addConfig("cayenne-project.xml")
-                .addModule(binder -&gt; ServerModule.contributeUserTypes(binder).add(new DoubleArrayType()))
+                .addModule(binder -&gt;
+                    ServerModule.contributeUserTypes(binder)
+                        .add(new DoubleArrayType()))
                 .build();</code></pre> 
        </div> 
       </div> 
@@ -4293,33 +4255,14 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="implementing-rop-client"><a class="anchor" href="#implementing-rop-client"></a>3.2. Implementing ROP Client</h3> 
+   <h3 id="rop-deployment"><a class="anchor" href="#rop-deployment"></a>3.2. ROP Deployment</h3> 
    <div class="sect3"> 
-    <h4 id="system-requirements-2"><a class="anchor" href="#system-requirements-2"></a>System Requirements</h4> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="jar-files-and-dependencies"><a class="anchor" href="#jar-files-and-dependencies"></a>Jar Files and Dependencies</h4> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="implementing-rop-server"><a class="anchor" href="#implementing-rop-server"></a>3.3. Implementing ROP Server</h3> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="implementing-rop-client-2"><a class="anchor" href="#implementing-rop-client-2"></a>3.4. Implementing ROP Client</h3> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="rop-deployment"><a class="anchor" href="#rop-deployment"></a>3.5. ROP Deployment</h3> 
-   <div class="sect3"> 
-    <h4 id="deploying-rop-server"><a class="anchor" href="#deploying-rop-server"></a>Deploying ROP Server</h4> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> Recent versions of Tomcat and Jetty containers (e.g. Tomcat 6 and 7, Jetty 8) contain code addressing a security concern related to "session fixation problem" by resetting the existing session ID of any request that requires BASIC authentcaition. If ROP service is protected with declarative security (see the ROP tutorial and the following chapters on security), this feature prevents the ROP client from attaching to its session, resulting in MissingSessionExceptions. To solve that you will need to either switch to an alternative security mechanism, or disable "session fixation problem" protections of the container. E.g. the later can be achieved in Tomcat 7 by adding the following context.xml file to the webapp’s META-INF/ directory: </td> 
-       </tr> 
-      </tbody>
-     </table> 
+    <h4 id="server-security-note"><a class="anchor" href="#server-security-note"></a>Server Security Note</h4> 
+    <div class="paragraph"> 
+     <p>Recent versions of Tomcat and Jetty containers (e.g. Tomcat 6 and 7, Jetty 8) contain code addressing a security concern related to "session fixation problem" by resetting the existing session ID of any request that requires BASIC authentication. If ROP service is protected with declarative security (see the ROP tutorial and the following chapters on security), this feature prevents the ROP client from attaching to its session, resulting in <code>MissingSessionExceptions</code>.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>To solve that you will need to either switch to an alternative security mechanism, or disable "session fixation problem" protections of the container. E.g. the later can be achieved in Tomcat 7 by adding the following <code>context.xml</code> file to the webapp’s <code>META-INF/</code> directory:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -4330,18 +4273,9 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>(The &lt;Valve&gt; tag can also be placed within the &lt;Context&gt; in any other locations used by Tomcat to load context configurations)</p> 
+     <p>(The <code>&lt;Valve&gt;</code> tag can also be placed within the <code>&lt;Context&gt;</code> in any other locations used by Tomcat to load context configurations)</p> 
     </div> 
    </div> 
-   <div class="sect3"> 
-    <h4 id="deploying-rop-client"><a class="anchor" href="#deploying-rop-client"></a>Deploying ROP Client</h4> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="security"><a class="anchor" href="#security"></a>Security</h4> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="current-limitations"><a class="anchor" href="#current-limitations"></a>3.6. Current Limitations</h3> 
   </div> 
  </div> 
 </div> 
@@ -5016,7 +4950,7 @@ public class MyEntity extends _MyEntity {
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
         .addModule(CacheInvalidationModule.extend()
-                // this will disable default handler based on @CacheGroups, and this is optional
+                // optionally you can disable @CacheGroups annotation processing
                 .noCacheGroupsHandler()
                 .addHandler(CustomInvalidationHandler.class)
                 .module())</code></pre> 
