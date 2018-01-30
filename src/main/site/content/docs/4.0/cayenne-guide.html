@@ -1402,19 +1402,19 @@ ServerRuntime runtime = ServerRuntime.builder()
    <div class="sect3"> 
     <h4 id="objectcontext-persistence-api"><a class="anchor" href="#objectcontext-persistence-api"></a>ObjectContext Persistence API</h4> 
     <div class="paragraph"> 
-     <p>One of the first things users usually want to do with an ObjectContext is to select some objects from a database. This is done by calling "performQuery" method:</p> 
+     <p>One of the first things users usually want to do with an <code>ObjectContext</code> is to select some objects from a database:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">SelectQuery query = new SelectQuery(Artist.class);
-List&lt;Artist&gt; artists = context.performQuery(query);</code></pre> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
+    .select(context);</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>We’ll discuss queries in some detail in the following chapters. The example above is self-explanatory - we create a SelectQuery that matches all Artist objects present in the database, and then call "performQuery", getting a list of Artist objects.</p> 
+     <p>We’ll discuss queries in some detail in the <a href="#queries">Queries</a> chapter. The example above is self-explanatory - we create a <code>ObjectSelect</code> that matches all <code>Artist</code> objects present in the database, and then use <code>select</code> to get the result.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries ObjectContext provides "performGenericQuery"method. While not nearly as commonly-used as "performQuery", it is nevertheless important in some situations. E.g.:</p> 
+     <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries ObjectContext provides <code>performGenericQuery()</code> method. While not commonly-used, it is nevertheless important in some situations. E.g.:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1434,7 +1434,7 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>The first time the object property is changed, the object’s state is automatically set to "MODIFIED" by Cayenne. Cayenne tracks all in-memory changes until a user calls "commitChanges":</p> 
+     <p>The first time the object property is changed, the object’s state is automatically set to <strong>MODIFIED</strong> by Cayenne. Cayenne tracks all in-memory changes until a user calls <code>commitChanges</code>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1442,7 +1442,7 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>At this point all in-memory changes are analyzed and a minimal set of SQL statements is issued in a single transaction to synchronize the database with the in-memory state. In our example "commitChanges" commits just one object, but generally it can be any number of objects.</p> 
+     <p>At this point all in-memory changes are analyzed and a minimal set of SQL statements is issued in a single transaction to synchronize the database with the in-memory state. In our example <code>commitChanges</code> commits just one object, but generally it can be any number of objects.</p> 
     </div> 
     <div class="paragraph"> 
      <p>If instead of commit, we wanted to reset all changed objects to the previously committed state, we’d call <code>rollbackChanges</code> instead:</p> 
@@ -1453,7 +1453,7 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>"newObject" method call creates a persistent object and sets its state to "NEW":</p> 
+     <p><code>newObject</code> method call creates a persistent object and sets its state to <strong>NEW</strong>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1462,10 +1462,10 @@ newArtist.setName("Picasso");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>It will only exist in memory until "commitChanges" is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an INSERT SQL statement to permanently store the object.</p> 
+     <p>It will only exist in memory until <code>commitChanges</code> is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an <code>INSERT</code> SQL statement to permanently store the object.</p> 
     </div> 
     <div class="paragraph"> 
-     <p><code>deleteObjects</code> method takes one or more Persistent objects and marks them as "DELETED":</p> 
+     <p><code>deleteObjects</code> method takes one or more Persistent objects and marks them as <strong>DELETED</strong>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1474,13 +1474,13 @@ context.deleteObjects(artist2, artist3, artist4);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Additionally "deleteObjects" processes all delete rules modeled for the affected objects. This may result in implicitly deleting or modifying extra related objects. Same as insert and update, delete operations are sent to the database only when "commitChanges" is called. Similarly "rollbackChanges" will undo the effect of "newObject" and "deleteObjects".</p> 
+     <p>Additionally <code>deleteObjects</code> processes all delete rules modeled for the affected objects. This may result in implicitly deleting or modifying extra related objects. Same as insert and update, delete operations are sent to the database only when <code>commitChanges</code> is called. Similarly <code>rollbackChanges</code> will undo the effect of <code>newObject</code> and <code>deleteObjects</code>.</p> 
     </div> 
     <div class="paragraph"> 
-     <p><code>localObject</code> returns a copy of a given persistent object that is "local" to a given ObjectContext:</p> 
+     <p><code>localObject</code> returns a copy of a given persistent object that is <em>local</em> to a given ObjectContext:</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Since an application often works with more than one context, "localObject" is a rather common operation. E.g. to improve performance a user might utilize a single shared context to select and cache data, and then occasionally transfer some selected objects to another context to modify and commit them:</p> 
+     <p>Since an application often works with more than one context, <code>localObject</code> is a rather common operation. E.g. to improve performance a user might utilize a single shared context to select and cache data, and then occasionally transfer some selected objects to another context to modify and commit them:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1489,7 +1489,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Often an appliction needs to inspect mapping metadata. This information is stored in the EntityResolver object, accessible via the ObjectContext:</p> 
+     <p>Often an application needs to inspect mapping metadata. This information is stored in the <code>EntityResolver</code> object, accessible via the <code>ObjectContext</code>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1503,7 +1503,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
    <div class="sect3"> 
     <h4 id="cayenne-helper-class"><a class="anchor" href="#cayenne-helper-class"></a>Cayenne Helper Class</h4> 
     <div class="paragraph"> 
-     <p>There is a useful helper class called "Cayenne" (fully-qualified name <code>"org.apache.cayenne.Cayenne"</code>) that builds on ObjectContext API to provide a number of very common operations. E.g. get a primary key (most entities do not model PK as an object property) :</p> 
+     <p>There is a useful helper class called <code>Cayenne</code> (fully-qualified name <code>org.apache.cayenne.Cayenne</code>) that builds on ObjectContext API to provide a number of very common operations. E.g. get a primary key (most entities do not model PK as an object property) :</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1550,7 +1550,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">ObjectContext parent = runtime.newContext();
-ObjectContext nested = runtime.newContext((DataChannel) parent);</code></pre> 
+ObjectContext nested = runtime.newContext(parent);</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -1586,7 +1586,7 @@ nested.rollbackChanges();</code></pre>
      <p>Generic objects are first class citizens in Cayenne, and all common persistent operations apply to them as well. There are some pecularities however, described below.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>When creating a new generic object, either cast your ObjectContext to DataContext (that provides "newObject(String)" API), or provide your object with an explicit ObjectId:</p> 
+     <p>When creating a new generic object, either cast your ObjectContext to DataContext (that provides <code>newObject(String)</code> API), or provide your object with an explicit ObjectId:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -3095,10 +3095,15 @@ public class Listener2 {
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntime runtime = ...
-
-runtime.getDataDomain().addListener(new Listener1());
-runtime.getDataDomain().addListener(new Listener2());</code></pre> 
+      <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntime runtime = ServerRuntime.builder()
+       // ..
+       .addModule(binder -&gt;
+            ServerModule.contributeDomainListeners()
+                .add(new Listener1())
+                .add(new Listener2())
+       )
+       // ..
+       .build();</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -3224,14 +3229,15 @@ public class MyEntity2 extends _MyEntity2 {
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">CommittedObjectCounter counter = new CommittedObjectCounter();
-
-ServerRuntime runtime = ...
-DataDomain domain = runtime.getDataDomain();
-
-// register filter
-// this will also add it as a listener (since 3.2)
-domain.addFilter(counter);</code></pre> 
+      <pre class="highlight"><code class="language-Java Java" data-lang="Java">// this will also add filter as a listener
+ServerRuntime runtime = ServerRuntime.builder()
+        // ..
+        .addModule(b -&gt;
+                ServerModule.contributeDomainFilters(b)
+                        .add(CommittedObjectCounter.class)
+        )
+        // ..
+        .build();</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -3504,40 +3510,10 @@ List&lt;Artist&gt; artists =
       <p>This tells Cayenne that the query created here would like to use local cache of the context it is executed against. A vararg parameter to <code>localCache()</code> (or <code>sharedCache()</code>) method contains so called "cache groups". Those are arbitrary names that allow to categorize queries for the purpose of setting cache policies or explicit invalidation of the cache. More on that below.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. One such provider available in Cayenne is a provider for <a href="http://www.ehcache.org">EhCache</a>. It can be enabled on ServerRuntime startup in a custom Module:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntimeBuilder
-  .builder()
-  .addModule((binder) -&gt;
-     binder.bind(QueryCache.class).to(EhCacheQueryCache.class)
-  )
-  .build();</code></pre> 
-      </div> 
+      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="#ext-cayenne-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>By default EhCache reads a file called "ehcache.xml" located on classpath. You can put your cache configuration in that file. E.g.:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
-	monitoring="off" dynamicConfig="false"&gt;
-
-	&lt;defaultCache maxEntriesLocalHeap="1000" eternal="false"
-		overflowToDisk="false" timeToIdleSeconds="3600" timeToLiveSeconds="3600"&gt;
-	&lt;/defaultCache&gt;
-
-	&lt;cache name="artists" timeToLiveSeconds="20" maxEntriesLocalHeap="100" /&gt;
-&lt;/ehcache&gt;</code></pre> 
-      </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>The example shows how to configure default cache settings ("defaultCache") as well as settings for a named cache group ("artists"). For many other things you can put in "ehcache.xml" refer to EhCache docs.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Often "passive" cache expiration policies similar to shown above are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p> 
+      <p>Often "passive" cache expiration policies used by caching providers are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -3546,28 +3522,7 @@ context.performGenericQuery(refresh);</code></pre>
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>The above can be used e.g. to build UI for manual cache invalidation. It is also possible to automate cache refresh when certain entities are committed. This requires including <code>cayenne-lifecycle.jar</code> deoendency. From that library you will need two things: <code>@CacheGroups</code> annotation to mark entities that generate cache invalidation events and <code>CacheInvalidationFilter</code> that catches the updates to the annotated objects and generates appropriate invalidation events:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">// configure filter on startup
-ServerRuntimeBuilder
-  .builder()
-  .addModule((binder) -&gt;
-     binder.bindList(Constants.SERVER_DOMAIN_FILTERS_LIST).add(CacheInvalidationFilter.class)
-  )
-  .build();</code></pre> 
-      </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Now you can associate entities with cache groups, so that commits to those entities would atomatically invalidate the groups:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">@CacheGroups("artists")
-public class Artist extends _Artist {
-}</code></pre> 
-      </div> 
+      <p>The above can be used e.g. to build UI for manual cache invalidation. It is also possible to automate cache refresh when certain entities are committed. This can be done with the help of <a href="#ext-cache-invalidation">Cache invalidation extension</a>.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Finally you may cluster cache group events. They are very small and can be efficiently sent over the wire to other JVMs running Cayenne. An example of Cayenne setup with event clustering is <a href="https://github.com/andrus/wowodc13/tree/master/services/src/main/java/demo/services/cayenne">available on GitHub</a>.</p> 
@@ -3605,7 +3560,8 @@ public class Artist extends _Artist {
 
     @Override
     public void configure(Binder binder) {
-        binder.bindMap(Constants.PROPERTIES_MAP).put(Constants.SERVER_CONTEXTS_SYNC_PROPERTY, "false");
+        ServerModule.contributeProperties(binder)
+            .put(Constants.SERVER_CONTEXTS_SYNC_PROPERTY, "false");
     }
 }</code></pre> 
      </div> 
@@ -3795,7 +3751,7 @@ binder.bind(Key.get(Service2.class, "i2")).to(Service2Impl.class);</code></pre>
    <div class="sect3"> 
     <h4 id="customization-strategies"><a class="anchor" href="#customization-strategies"></a>Customization Strategies</h4> 
     <div class="paragraph"> 
-     <p>The previous section discussed how Cayenne DI works in general terms. Since Cayenne users will mostly be dealing with an existing Injector provided by ServerRuntime, it is important to understand how to build custom extensions to a preconfigured container. As shown in "Starting and Stopping ServerRuntime" chapter, custom extensions are done by writing an aplication DI module (or multiple modules) that configures service overrides. This section shows all the configuration possibilities in detail, including changing properties of the existing services, contributing services to standard service lists and maps, and overriding service implementations. All the code examples later in this section are assumed to be placed in an application module "configure" method:</p> 
+     <p>The previous section discussed how Cayenne DI works in general terms. Since Cayenne users will mostly be dealing with an existing Injector provided by ServerRuntime, it is important to understand how to build custom extensions to a preconfigured container. As shown in "Starting and Stopping ServerRuntime" chapter, custom extensions are done by writing an application DI module (or multiple modules) that configures service overrides. This section shows all the configuration possibilities in detail, including changing properties of the existing services, contributing services to standard service lists and maps, and overriding service implementations. All the code examples later in this section are assumed to be placed in an application module "configure" method:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -3829,7 +3785,7 @@ ServerRuntime runtime = ServerRuntime.builder()
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>A second one is to contribute a property to <code>org.apache.cayenne.configuration.DefaultRuntimeProperties.properties</code> map (see the next section on how to do that). This map contains the default property values and can accept application-specific values, overrding the defaults.</p> 
+      <p>A second one is to contribute a property to <code>o.a.c.configuration.DefaultRuntimeProperties.properties</code> map (see the next section on how to do that). This map contains the default property values and can accept application-specific values, overrding the defaults.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Note that if a property value is a name of a Java class, when this Java class is instantiated by Cayenne, the container performs injection of instance variables. So even the dynamically specified Java classes can use @Inject annotation to get a hold of other Cayenne services.</p> 
@@ -3841,7 +3797,7 @@ ServerRuntime runtime = ServerRuntime.builder()
     <div class="sect4"> 
      <h5 id="contributing-to-service-collections"><a class="anchor" href="#contributing-to-service-collections"></a>Contributing to Service Collections</h5> 
      <div class="paragraph"> 
-      <p>Cayenne can be extended by adding custom objects to named maps or lists bound in DI. We are calling these lists/maps "service collections". A service collection allows things like appending a custom strategy to a list of built-in strategies. E.g. an application that needs to install a custom DbAdapter for some database type may contribute an instance of custom DbAdapterDetector to a <code>org.apache.cayenne.configuration.server.DefaultDbAdapterFactory.detectors</code> list:</p> 
+      <p>Cayenne can be extended by adding custom objects to named maps or lists bound in DI. We are calling these lists/maps "service collections". A service collection allows things like appending a custom strategy to a list of built-in strategies. E.g. an application that needs to install a custom DbAdapter for some database type may contribute an instance of custom DbAdapterDetector to a <code>o.a.c.configuration.server.DefaultDbAdapterFactory.detectors</code> list:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -3855,14 +3811,9 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">// since build-in list for this key is a singleton, repeated
-// calls to 'bindList' will return the same instance
-binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
-       .add(MyDbAdapterDetector.class);</code></pre> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerModule.contributeAdapterDetectors(binder)
+    .add(MyDbAdapterDetector.class);</code></pre> 
       </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Maps are customized using a similar <code>"bindMap"</code> method.</p> 
      </div> 
      <div class="paragraph"> 
       <p>The names of built-in collections are listed in "Appendix B".</p> 
@@ -3874,11 +3825,12 @@ binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
       <p>As mentioned above, custom modules are loaded by ServerRuntime after the built-in modules. So it is easy to redefine a built-in service in Cayenne by rebinding desired implementations or providers. To do that, first we need to know what those services to redefine are. While we describe some of them in the following sections, the best way to get a full list is to check the source code of the Cayenne version you are using and namely look in <code>org.apache.cayenne.configuration.server.ServerModule</code> - the main built-in module in Cayenne.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>Now an example of overriding <code>QueryCache</code> service. The default implementation of this service is provided by <code>MapQueryCacheProvider</code>. But if we want to use <code>EhCacheQueryCache</code> (a Cayenne wrapper for the EhCache framework), we can define it like this:</p> 
+      <p>Now an example of overriding <code>JdbcEventLogger</code> service. The default implementation of this service is provided by <code>Slf4jJdbcEventLogger</code>. But if we want to use <code>FormattedSlf4jJdbcEventLogger</code> (a logger with basic SQL formatting), we can define it like this:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Java Java" data-lang="Java">binder.bind(QueryCache.class).to(EhCacheQueryCache.class);</code></pre> 
+       <pre class="highlight"><code class="language-Java Java" data-lang="Java">binder.bind(JdbcEventLogger.class)
+    .to(FormattedSlf4jJdbcEventLogger.class);</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -3951,12 +3903,14 @@ binder.bindList(DefaultDbAdapterFactory.DETECTORS_LIST)
       <div class="content"> 
        <pre class="highlight"><code class="language-Java Java" data-lang="Java">ServerRuntime runtime = ServerRuntime.builder()
     .addConfig("cayenne-project.xml")
-    .addModule(binder -&gt; ServerModule.contributeValueObjectTypes(binder).add(MoneyValueObjectType.class))
+    .addModule(binder -&gt;
+        ServerModule.contributeValueObjectTypes(binder)
+            .add(MoneyValueObjectType.class))
     .build();</code></pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
-      <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/tree/master/cayenne-joda">cayenne-joda module</a>.</p> 
+      <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/blob/master/cayenne-server/src/main/java/org/apache/cayenne/access/types/LocalDateValueType.java">cayenne-server</a>.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
@@ -4064,7 +4018,9 @@ ServerRuntime runtime = ServerRuntime.builder()
         <pre class="highlight"><code class="language-Java Java" data-lang="Java">// add DoubleArrayType to list of user types
 ServerRuntime runtime = ServerRuntime.builder()
                 .addConfig("cayenne-project.xml")
-                .addModule(binder -&gt; ServerModule.contributeUserTypes(binder).add(new DoubleArrayType()))
+                .addModule(binder -&gt;
+                    ServerModule.contributeUserTypes(binder)
+                        .add(new DoubleArrayType()))
                 .build();</code></pre> 
        </div> 
       </div> 
@@ -4153,33 +4109,14 @@ ServerRuntime runtime = ServerRuntime.builder()
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="implementing-rop-client"><a class="anchor" href="#implementing-rop-client"></a>3.2. Implementing ROP Client</h3> 
+   <h3 id="rop-deployment"><a class="anchor" href="#rop-deployment"></a>3.2. ROP Deployment</h3> 
    <div class="sect3"> 
-    <h4 id="system-requirements-2"><a class="anchor" href="#system-requirements-2"></a>System Requirements</h4> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="jar-files-and-dependencies"><a class="anchor" href="#jar-files-and-dependencies"></a>Jar Files and Dependencies</h4> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="implementing-rop-server"><a class="anchor" href="#implementing-rop-server"></a>3.3. Implementing ROP Server</h3> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="implementing-rop-client-2"><a class="anchor" href="#implementing-rop-client-2"></a>3.4. Implementing ROP Client</h3> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="rop-deployment"><a class="anchor" href="#rop-deployment"></a>3.5. ROP Deployment</h3> 
-   <div class="sect3"> 
-    <h4 id="deploying-rop-server"><a class="anchor" href="#deploying-rop-server"></a>Deploying ROP Server</h4> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> Recent versions of Tomcat and Jetty containers (e.g. Tomcat 6 and 7, Jetty 8) contain code addressing a security concern related to "session fixation problem" by resetting the existing session ID of any request that requires BASIC authentcaition. If ROP service is protected with declarative security (see the ROP tutorial and the following chapters on security), this feature prevents the ROP client from attaching to its session, resulting in MissingSessionExceptions. To solve that you will need to either switch to an alternative security mechanism, or disable "session fixation problem" protections of the container. E.g. the later can be achieved in Tomcat 7 by adding the following context.xml file to the webapp’s META-INF/ directory: </td> 
-       </tr> 
-      </tbody>
-     </table> 
+    <h4 id="server-security-note"><a class="anchor" href="#server-security-note"></a>Server Security Note</h4> 
+    <div class="paragraph"> 
+     <p>Recent versions of Tomcat and Jetty containers (e.g. Tomcat 6 and 7, Jetty 8) contain code addressing a security concern related to "session fixation problem" by resetting the existing session ID of any request that requires BASIC authentication. If ROP service is protected with declarative security (see the ROP tutorial and the following chapters on security), this feature prevents the ROP client from attaching to its session, resulting in <code>MissingSessionExceptions</code>.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>To solve that you will need to either switch to an alternative security mechanism, or disable "session fixation problem" protections of the container. E.g. the later can be achieved in Tomcat 7 by adding the following <code>context.xml</code> file to the webapp’s <code>META-INF/</code> directory:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -4190,18 +4127,9 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>(The &lt;Valve&gt; tag can also be placed within the &lt;Context&gt; in any other locations used by Tomcat to load context configurations)</p> 
+     <p>(The <code>&lt;Valve&gt;</code> tag can also be placed within the <code>&lt;Context&gt;</code> in any other locations used by Tomcat to load context configurations)</p> 
     </div> 
    </div> 
-   <div class="sect3"> 
-    <h4 id="deploying-rop-client"><a class="anchor" href="#deploying-rop-client"></a>Deploying ROP Client</h4> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="security"><a class="anchor" href="#security"></a>Security</h4> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="current-limitations"><a class="anchor" href="#current-limitations"></a>3.6. Current Limitations</h3> 
   </div> 
  </div> 
 </div> 
@@ -4867,7 +4795,7 @@ public class MyEntity extends _MyEntity {
       <div class="content"> 
        <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
         .addModule(CacheInvalidationModule.extend()
-                // this will disable default handler based on @CacheGroups, and this is optional
+                // optionally you can disable @CacheGroups annotation processing
                 .noCacheGroupsHandler()
                 .addHandler(CustomInvalidationHandler.class)
                 .module())</code></pre> 
