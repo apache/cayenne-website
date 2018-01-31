@@ -98,10 +98,12 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
    <div class="sect3"> 
     <h4 id="create-a-new-project-in-intellij-idea"><a class="anchor" href="#create-a-new-project-in-intellij-idea"></a>Create a new Project in IntelliJ IDEA</h4> 
     <div class="paragraph"> 
-     <p>In IntelliJ IDEA select <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Project…​</b></span> and then select "Maven" and click "Next". In the dialog shown on the screenshot below, fill the "Group Id" and "Artifact Id" fields and click "Next".</p> 
+     <p>In IntelliJ IDEA select <code>File &gt; New &gt; Project…​</code> and then select "Maven" and click "Next". In the dialog shown on the screenshot below, fill the "Group Id" and "Artifact Id" fields and click "Next".</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-idea-project.png" alt="tutorial idea project"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-idea-project.png" alt="tutorial idea project"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>On next dialog screen you can customize directory for your project and click "Finish". Now you should have a new empty project.</p> 
@@ -251,8 +253,10 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     <div class="paragraph"> 
      <p>You can open created <code>datamap.map.xml</code> file and check it’s content in IDEA:</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-new-datamap.png" alt="tutorial new datamap"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-new-datamap.png" alt="tutorial new datamap"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>Great! We now have Cayenne DataMap file that describe model from our database.</p> 
@@ -262,14 +266,17 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> If you have some problems with configuration you can always delete <code>datamap.map.xml</code> file and try again. === Creating project </td> 
+        <td class="content"> If you have some problems with configuration you can always delete <code>datamap.map.xml</code> file and try again. </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
-    <div class="paragraph"> 
-     <p>Now we also need to create project file, currently this should be done manually via Cayenne Modeler.</p> 
-    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="creating-project"><a class="anchor" href="#creating-project"></a>2.2. Creating project</h3> 
+   <div class="paragraph"> 
+    <p>Now we also need to create project file, currently this should be done manually via Cayenne Modeler.</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="setup-modeler-maven-plugin"><a class="anchor" href="#setup-modeler-maven-plugin"></a>Setup Modeler Maven plugin</h4> 
@@ -299,8 +306,10 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     <div class="paragraph"> 
      <p>In Modeler start new project and select <code>File</code> &gt; <code>Import DataMap</code>. In File Select dialog select created <code>datamap.map.xml</code> file and click <code>Select DataMap</code>. Now all we need is to save project, click <code>Save</code> and select same folder where <code>datamap.map.xml</code> file is (it should be selected by default). That’s all, you should see now <code>cayenne-project.xml</code> file in IDEA:</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-cayenne-project.png" alt="tutorial cayenne project"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-cayenne-project.png" alt="tutorial cayenne project"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>To use newly created project in Modeler later let’s configure plugin to open it automatically:</p> 
@@ -382,8 +391,10 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
       <pre>$ mvn cayenne-modeler:run</pre> 
      </div> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-update-model.png" alt="tutorial update model"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-update-model.png" alt="tutorial update model"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>Great! New table and ObjEntity are in place, as well as a new field.</p> 
@@ -394,8 +405,10 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
     <div class="paragraph"> 
      <p>There is often a need to customize model to better fit it to your application requirements, such customization can be simple removal of toMany part of a relationship between two objects. Let’s do it, in a Modeler just select and remove relationship <code>paintings</code> in Artist object:</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-drop-relationship.png" alt="tutorial drop relationship"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-drop-relationship.png" alt="tutorial drop relationship"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>Now if you run</p> 
@@ -419,14 +432,17 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> <code>cdbimport</code> will skip only modifications in Object layer (e.g. ObjEntities, ObjAttributes and ObjRelationships), if you modify Db layer your changes will be overridden by next run of <code>cdbimport</code>. === Advanced filtering </td> 
+        <td class="content"> <code>cdbimport</code> will skip only modifications in Object layer (e.g. ObjEntities, ObjAttributes and ObjRelationships), if you modify Db layer your changes will be overridden by next run of <code>cdbimport</code>. </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
-    <div class="paragraph"> 
-     <p>Final part of our tutorial is about fine-tuning what you load from DB into your model.</p> 
-    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="advanced-filtering"><a class="anchor" href="#advanced-filtering"></a>3.2. Advanced filtering</h3> 
+   <div class="paragraph"> 
+    <p>Final part of our tutorial is about fine-tuning what you load from DB into your model.</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="update-schema"><a class="anchor" href="#update-schema"></a>Update schema</h4> 
@@ -508,8 +524,10 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
    <div class="paragraph"> 
     <p>In IDEA you should be able to see these newly generated classes:</p> 
    </div> 
-   <div class="paragraph"> 
-    <p><span class="image"><img src="images/tutorial-java-classes.png" alt="tutorial java classes"></span></p> 
+   <div class="imageblock" style="text-align: center"> 
+    <div class="content"> 
+     <img src="images/tutorial-java-classes.png" alt="tutorial java classes"> 
+    </div> 
    </div> 
    <div class="paragraph"> 
     <p>Note that Cayenne code is unrecognized, that’s because we need to include Cayenne as dependency, let’s do this in <code>pom.xml</code> file:</p> 
@@ -662,8 +680,10 @@ context.commitChanges();</code></pre>
     <div class="paragraph"> 
      <p>Now we are ready to run. Right click the "Main" class in IDEA and select "Run 'Main.main()'".</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/idea-file-run-menu.png" alt="idea file run menu"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/idea-file-run-menu.png" alt="idea file run menu"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>In the console you’ll see output similar to this, indicating that Cayenne stack has been started:</p> 
