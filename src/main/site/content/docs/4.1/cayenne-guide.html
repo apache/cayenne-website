@@ -4831,23 +4831,21 @@ public class MyEntity extends _MyEntity {
     <div class="paragraph"> 
      <p>In order to use <code>commitlog</code> module you need to perform three steps:</p> 
     </div> 
-    <div class="paragraph"> 
-     <p>1) Mark all entities which changes you are interested in with <code>@org.apache.cayenne.commitlog.CommitLog</code> annotation</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">@CommitLog(ignoredProperties = {"somePrivatePropertyToSkip"})
+    <div class="olist arabic"> 
+     <ol class="arabic"> 
+      <li> <p>Mark all entities which changes you are interested in with <code>@org.apache.cayenne.commitlog.CommitLog</code> annotation</p> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="highlight"><code class="language-Java Java" data-lang="Java">@CommitLog(ignoredProperties = {"somePrivatePropertyToSkip"})
 public class MyEntity extends _MyEntity {
     // ...
 }</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>2) Implement <code>CommitLogListener</code> interface.</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java"> CommitLogListener {
+        </div> 
+       </div> </li> 
+      <li> <p>Implement <code>CommitLogListener</code> interface.</p> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="highlight"><code class="language-java java" data-lang="java">public class MyCommitLogListener implements CommitLogListener {
     @Override
     public void onPostCommit(ObjectContext originatingContext, ChangeMap changes) {
         // ChangeMap will contain all information about changes happened in performed commit
@@ -4858,18 +4856,28 @@ public class MyEntity extends _MyEntity {
             .forEach(id -&gt; System.out.println("Inserted new entity with id: " + id));
     }
 }</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>3) Inject your listener into <code>ServerRuntime</code></p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
+        </div> 
+       </div> </li> 
+      <li> <p>Register your listener implementation.</p> 
+       <div class="listingblock"> 
+        <div class="content"> 
+         <pre class="highlight"><code class="language-java java" data-lang="java">ServerRuntime.builder()
         .addModule(CommitLogModule.extend()
                 .addListener(MyCommitLogListener.class)
                 .module())</code></pre> 
-     </div> 
+        </div> 
+       </div> 
+       <div class="admonitionblock note"> 
+        <table> 
+         <tbody>
+          <tr> 
+           <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+           <td class="content"> You can use several listeners, but they all will get same changes. </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </div> </li> 
+     </ol> 
     </div> 
    </div> 
   </div> 
