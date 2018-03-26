@@ -89,7 +89,7 @@ weight: 40
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>Now go back to Eclipse, right click on "tutorial-rop-client" project and select "Refresh" - you should see pairs of classes generated for each mapped entity, same as on the server. And again, we see a bunch of errors in those classes. Let’s fix it now by adding two dependencies, "cayenne-client" and "resin-hessian", in the bottom of the pom.xml file. We also need to add Caucho M2 repository to pull Hessian jar files. The resulting POM should look like this:</p> 
+     <p>Now go back to Eclipse, right click on "tutorial-rop-client" project and select "Refresh" - you should see pairs of classes generated for each mapped entity, same as on the server. And again, we see a bunch of errors in those classes. Let’s fix it now by adding two dependencies, "cayenne-client" and "hessian", in the bottom of the pom.xml file. We also need to add Caucho M2 repository to pull Hessian jar files. The resulting POM should look like this:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -103,7 +103,7 @@ weight: 40
     &lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-            &lt;artifactId&gt;cayenne-client&lt;/artifactId&gt;
+            &lt;artifactId&gt;cayenne-client-jetty&lt;/artifactId&gt;
             &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
             &lt;version&gt;4.1.M2-SNAPSHOT&lt;/version&gt;
         &lt;/dependency&gt;
@@ -305,11 +305,16 @@ public class Main {
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">Map&lt;String, String&gt; properties = new HashMap&lt;&gt;();
-properties.put(Constants.ROP_SERVICE_URL_PROPERTY, "http://localhost:8080/tutorial/cayenne-service");
-properties.put(Constants.ROP_SERVICE_USERNAME_PROPERTY, "cayenne-user");
-properties.put(Constants.ROP_SERVICE_PASSWORD_PROPERTY, "secret");
+properties.put(ClientConstants.ROP_SERVICE_URL_PROPERTY, "http://localhost:8080/cayenne-service");
+properties.put(ClientConstants.ROP_SERVICE_USERNAME_PROPERTY, "cayenne-user");
+properties.put(ClientConstants.ROP_SERVICE_PASSWORD_PROPERTY, "secret");
+properties.put(ClientConstants.ROP_SERVICE_REALM_PROPERTY, "Cayenne Realm");
 
-ClientRuntime runtime = new ClientRuntime(properties);
+
+ClientRuntime runtime = ClientRuntime.builder()
+                        .properties(properties)
+                        .addModule(new ClientJettyHttpModule())
+                        .build();
 ObjectContext context = runtime.newContext();</code></pre> 
      </div> 
     </div> 
@@ -501,13 +506,13 @@ INFO: +++ transaction committed.</pre>
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
-    &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
         &lt;artifactId&gt;maven-jetty-plugin&lt;/artifactId&gt;
-        &lt;version&gt;6.1.22&lt;/version&gt;
+        &lt;version&gt;9.4.8.v20171121&lt;/version&gt;
         &lt;!-- adding configuration below: --&gt;
         &lt;configuration&gt;
             &lt;userRealms&gt;
-                &lt;userRealm implementation="org.mortbay.jetty.security.HashUserRealm"&gt;
+                &lt;userRealm implementation="org.eclipse.jetty.security.HashLoginService"&gt;
                     &lt;!-- this name must match the realm-name in web.xml --&gt;
                     &lt;name&gt;Cayenne Realm&lt;/name&gt;
                     &lt;config&gt;realm.properties&lt;/config&gt;
@@ -569,11 +574,15 @@ java.rmi.RemoteException: Server returned HTTP response code: 401 for URL: http:
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">Map&lt;String,String&gt; properties = new HashMap&lt;&gt;();
-properties.put(Constants.ROP_SERVICE_URL_PROPERTY, "http://localhost:8080/tutorial/cayenne-service");
-properties.put(Constants.ROP_SERVICE_USERNAME_PROPERTY, "cayenne-user");
-properties.put(Constants.ROP_SERVICE_PASSWORD_PROPERTY, "secret");
+properties.put(ClientConstants.ROP_SERVICE_URL_PROPERTY, "http://localhost:8080/cayenne-service");
+properties.put(ClientConstants.ROP_SERVICE_USERNAME_PROPERTY, "cayenne-user");
+properties.put(ClientConstants.ROP_SERVICE_PASSWORD_PROPERTY, "secret");
+properties.put(ClientConstants.ROP_SERVICE_REALM_PROPERTY, "Cayenne Realm");
 
-ClientRuntime runtime = new ClientRuntime(properties);</code></pre> 
+ClientRuntime runtime = ClientRuntime.builder()
+                        .properties(properties)
+                        .addModule(new ClientJettyHttpModule())
+                        .build();</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 

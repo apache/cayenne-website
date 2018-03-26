@@ -96,7 +96,7 @@ cd  "$CAYENNE_TMP_DIR"
 
 # build it
 echo "Running Maven build... it can take a while..."
-mvn install -q -DskipTests > /dev/null 2>&1
+mvn install -Passembly -q -DskipTests > /dev/null 2>&1
 echo "Maven build complete"
 
 # copy JavaDoc
