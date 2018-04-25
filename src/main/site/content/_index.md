@@ -1,5 +1,5 @@
 ---
-# content for index page of the site
+# content for index page of the site 
 ---
 <!-- Intro -->
 <section id="intro" class="pb-5">
