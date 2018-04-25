@@ -47,9 +47,9 @@
             </Version>
         </release><release>
             <Version>
-                <name>Beta</name>
-                <created>2017-10-6</created>
-                <revision>4.0.B2</revision>
+                <name>Stable</name>
+                <created>2018-04-25</created>
+                <revision>4.0.RC1</revision>
             </Version>
         </release><release>
             <Version>
