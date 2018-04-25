@@ -32,13 +32,14 @@ releases:
     jdk: 1.8                                  # min supported Java version
 
   - version: "4.0"
-    latestRevision: "4.0.B2"
-    type: "Beta"
-    description: "Latest beta release"
-    date: "2017-10-6"
+    latestRevision: "4.0.RC1"
+    type: "Stable"
+    description: "Release Candidate"
+    date: "2018-04-25"
     docs: true
     downloadable: true
     jdk: 1.7
+    newRepoLayout: true
 
   - version: "3.1"
     latestRevision: "3.1.2"
