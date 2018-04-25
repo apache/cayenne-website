@@ -87,7 +87,7 @@ There is two main parts of site src:
     * `gulpfile.js` - main file for Gulp tasks, define some global path constants
     * `package.json` - all project dependencies are defined here
 
-* `src/main/site` assets processed [Hugo](https://gohugo.io) site generator
+* `src/main/site` assets processed by [Hugo](https://gohugo.io) site generator
 
     * `/content/` - main content part of the site, markdown and HTML files
     * `/data/` - data files in *yaml* format
