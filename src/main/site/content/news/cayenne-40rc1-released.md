@@ -7,7 +7,9 @@ Apache Cayenne team is glad to announce a release candidate of _Cayenne 4.0_.
 
 It brings new icons to Cayenne Modeler plus some minor bug fixes.
 
-![Cayenne Modeler 4.0.RC1](/img/cayenne-modeler-40rc1.png)
+<p style="text-align: center;">
+    <img src="/img/cayenne-modeler-40rc1.png" alt="Cayenne Modeler 4.0.RC1"/>
+</p>
 
 Cayenne can be downloaded from [here](/download.html).
 
