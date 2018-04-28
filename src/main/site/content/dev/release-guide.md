@@ -27,7 +27,8 @@ More info can be found at [http://www.apache.org/dev/release-signing.html](http:
 
 ## Preparing Sources
 
-* Edit UPGRADE-NOTES.txt if there is anything to add there.
+* Edit `UPGRADE-NOTES.txt` if there is anything to add there.
+* Update `RELEASE-NOTES.txt` with actual release name and current date as a release date.
 * Check Sources Compliance with [RAT](http://creadur.apache.org/rat/). To run RAT,
 download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne 
 source. Then read the report and fix any issues.
