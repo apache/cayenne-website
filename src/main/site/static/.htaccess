@@ -108,7 +108,7 @@ AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
 AddOutputFilterByType DEFLATE font/ttf
 AddOutputFilterByType DEFLATE font/otf
 AddOutputFilterByType DEFLATE font/opentype
-# For Olders Browsers Which Can't Handle Compression
+# For Older Browsers Which Can't Handle Compression
 BrowserMatch ^Mozilla/4 gzip-only-text/html
 BrowserMatch ^Mozilla/4\.0[678] no-gzip
 BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
@@ -116,6 +116,7 @@ BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteRule ^(schema)($|/) - [L]
 RewriteCond %{HTTPS} off
 RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
