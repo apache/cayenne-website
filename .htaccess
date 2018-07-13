@@ -116,7 +116,7 @@ BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteRule ^(schema)($|/) - [L]
 RewriteCond %{HTTPS} off
-RewriteRule ^schema/.*$ - [PT]
 RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
