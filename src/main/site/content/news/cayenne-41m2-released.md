@@ -12,7 +12,7 @@ This is a development release that introduces a number of nice new features alon
 1. New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable, 
 more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.
 <p style="text-align: center;">
-    <img class="img-fluid" src="/img/modeler-cdbimport.png" alt="Cayenne Modeler 4.1 new DbImport UI"/>
+    <img class="img-fluid" src="/img/modeler-cdbimport.png" alt="New reverse engineering UI"/>
 </p>
 
 2. User controlled transaction propagation logic and isolation level.
