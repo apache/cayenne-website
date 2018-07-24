@@ -16,11 +16,8 @@ org.apache.cayenne.ashwood
 org.apache.cayenne.ashwood.graph
 org.apache.cayenne.cache
 org.apache.cayenne.configuration
-org.apache.cayenne.configuration.osgi
 org.apache.cayenne.configuration.rop.client
-org.apache.cayenne.configuration.rop.server
 org.apache.cayenne.configuration.server
-org.apache.cayenne.configuration.web
 org.apache.cayenne.configuration.xml
 org.apache.cayenne.conn
 org.apache.cayenne.datasource
