@@ -34,9 +34,9 @@ more over configuration is now saved so you can evolve it with your model and pe
 
 Cayenne can be downloaded from [here](/download.html).
 
-<div class="pb-3"><!-- gap 3rem --></div>
+{{% gap %}}
 <h2 class="text-center">A full list of changes in this release:</h2>
-<div class="pb-2"><!-- gap 2rem --></div>
+{{% gap 2 %}}
 
 #### Changes/New Features:
 
@@ -66,7 +66,7 @@ Cayenne can be downloaded from [here](/download.html).
 - {{% jira 2440 %}} cdbimport: allow cross-schema relationships
 - {{% jira 2443 %}} Make SqlTemplate and SqlExec possible to return generated keys
 
-<div class="pb-2"><!-- gap 2rem --></div>
+{{% gap 2 %}}
 
 #### Bug Fixes:
 

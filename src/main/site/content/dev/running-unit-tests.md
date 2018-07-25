@@ -45,17 +45,20 @@ For this databases you can run tests without any additional configuration by onl
 {{% gap %}}
 
     
-## Running Against Database in Docker (only on Linux)
+## Running Against Database in Docker
 
 Another handy option to run Cayenne tests is with preconfigured docker profiles.
 The only thing you need is to install Docker.
 
-You can run tests with following *cayenneTestConnection* properties:
+You can run tests using following *cayenneTestConnection* properties:
+
+* mysql-docker
+* postgres-docker
+* sqlserver-docker
  
-    $ mvn verify -DcayenneTestConnection=mysql-docker
-or
-    
-    $ mvn verify -DcayenneTestConnection=postgres-docker    
+Like with in-memory databases no additional setup is required:
+ 
+    $ mvn verify -DcayenneTestConnection=mysql-docker   
 
 {{% gap %}}
 
