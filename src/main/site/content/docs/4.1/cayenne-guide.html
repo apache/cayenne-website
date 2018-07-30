@@ -40,7 +40,7 @@ menu:
       <li> <p>Java: Cayenne runtime framework and CayenneModeler GUI tool are written in 100% Java, and run on any Java-compatible platform. Minimal required JDK version depends on the version of Cayenne you are using, as shown in the following table:</p> </li> 
      </ul> 
     </div> 
-    <table id="versionHistory" class="tableblock frame-all grid-all spread table table-bordered"> 
+    <table id="versionHistory" class="tableblock frame-all grid-all stretch table table-bordered"> 
      <caption class="title">
       Table 1. Cayenne Version History
      </caption> 
@@ -137,7 +137,7 @@ menu:
       <pre class="highlight"><code>$ mvn cayenne-modeler:run</code></pre> 
      </div> 
     </div> 
-    <table id="pluginParameteres" class="tableblock frame-all grid-all spread table table-bordered"> 
+    <table id="pluginParameteres" class="tableblock frame-all grid-all stretch table table-bordered"> 
      <caption class="title">
       Table 2. Modeler plugin parameters
      </caption> 
@@ -158,7 +158,7 @@ menu:
        <td class="tableblock halign-left valign-middle"><p class="tableblock">modelFile</p></td> 
        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
        <td class="tableblock halign-left valign-top">
-        <div>
+        <div class="content">
          <div class="paragraph"> 
           <p>Name of the model file to open. Here is some simple example:</p> 
          </div> 
@@ -347,9 +347,9 @@ total 24
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>cayenne-di-4.1.M2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-server-4.1.M2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.1.M2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
+      <li> <p><code>cayenne-di-4.1.M2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li>
+      <li> <p><code>cayenne-server-4.1.M2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li>
+      <li> <p><code>cayenne-client-4.1.M2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li>
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -388,7 +388,7 @@ total 24
      <div class="paragraph"> 
       <p>By creating custom templates, you can use cgen to generate other output (such as web pages, reports, specialized code templates) based on DataMap information.</p> 
      </div> 
-     <table id="tablecgen" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="tablecgen" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 3. cgen required parameters
       </caption> 
@@ -409,7 +409,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
         <td class="tableblock halign-left valign-top">
-         <div>
+         <div class="content">
           <div class="paragraph"> 
            <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p> 
           </div> 
@@ -422,7 +422,7 @@ total 24
        </tr> 
       </tbody> 
      </table> 
-     <table id="cgenOptional" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="cgenOptional" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 4. cgen optional parameters
       </caption> 
@@ -551,7 +551,7 @@ total 24
      <div class="paragraph"> 
       <p><code>cdbgen</code> is a <code>cayenne-maven-plugin</code> goal that drops and/or generates tables in a database on Cayenne DataMap. By default, it is bound to the pre-integration-test phase.</p> 
      </div> 
-     <table id="cdbgenTable" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="cdbgenTable" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 5. cdbgen required parameters
       </caption> 
@@ -572,7 +572,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
         <td class="tableblock halign-left valign-top">
-         <div>
+         <div class="content">
           <div class="paragraph"> 
            <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p> 
           </div> 
@@ -590,7 +590,7 @@ total 24
        </tr> 
       </tbody> 
      </table> 
-     <table id="dataSourceParameteres" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="dataSourceParameteres" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 6. &lt;dataSource&gt; parameters
       </caption> 
@@ -635,7 +635,7 @@ total 24
        </tr> 
       </tbody> 
      </table> 
-     <table id="cdbgenOptionl" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="cdbgenOptionl" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 7. cdbgen optional parameters
       </caption> 
@@ -718,7 +718,7 @@ total 24
      <div class="paragraph"> 
       <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#db-first-flow">DB-First Flow</a></p> 
      </div> 
-     <table id="cdbimportTable" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="cdbimportTable" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 8. cdbimport parameters
       </caption> 
@@ -744,6 +744,12 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">DataMap XML file which is the destination of the schema import. Can be an existing file. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/my.map.xml</code>. If "overwrite" is true (the default), an existing DataMap will be used as a template for the new imported DataMap, i.e. all its entities will be cleared and recreated, but its common settings, such as default Java package, will be preserved (unless changed explicitly in the plugin configuration).</p></td> 
        </tr> 
        <tr> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">cayenneProject</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">Project XML file which will be used. Can be an existing file, in this case data map will be added to project if it’s not already there. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/cayenne-project.xml</code>.</p></td> 
+       </tr> 
+       <tr> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
@@ -763,7 +769,7 @@ total 24
        </tr> 
       </tbody> 
      </table> 
-     <table id="cdbimportDataSource" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="cdbimportDataSource" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 9. &lt;dataSource&gt; parameters
       </caption> 
@@ -808,7 +814,7 @@ total 24
        </tr> 
       </tbody> 
      </table> 
-     <table id="dbimportParameters" class="tableblock frame-all grid-all spread table table-bordered"> 
+     <table id="dbimportParameters" class="tableblock frame-all grid-all stretch table table-bordered"> 
       <caption class="title">
        Table 10. &lt;dbimport&gt; parameters
       </caption> 
@@ -864,7 +870,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">stripFromTableNames</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
         <td class="tableblock halign-left valign-top">
-         <div>
+         <div class="content">
           <div class="paragraph"> 
            <p>Regex that matches the part of the table name that needs to be stripped off when generating ObjEntity name. Here are some examples:</p> 
           </div> 
@@ -896,7 +902,7 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">filters configuration</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
         <td class="tableblock halign-left valign-top">
-         <div>
+         <div class="content">
           <div class="paragraph"> 
            <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p> 
           </div> 
@@ -963,7 +969,7 @@ total 24
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.M2'</code></pre> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.M2'</code></pre>
      </div> 
     </div> 
     <div class="ulist"> 
@@ -1051,6 +1057,8 @@ dependencies {
        <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cdbimport {
     // map can be skipped if it is defined in cayenne.defaultDataMap
     map 'datamap.map.xml'
+    // optional project file, will be created if missing
+    cayenneProject 'cayenne-project.xml'
 
     dataSource {
         driver 'com.mysql.cj.jdbc.Driver'
@@ -1365,7 +1373,7 @@ ServerRuntime runtime = ServerRuntime.builder()
     <div class="paragraph"> 
      <p>Each persistent object belongs to a single ObjectContext, and can be in one of the following persistence states (as defined in <code>org.apache.cayenne.PersistenceState</code>) :</p> 
     </div> 
-    <table id="persistenceStates" class="tableblock frame-all grid-all spread table table-bordered"> 
+    <table id="persistenceStates" class="tableblock frame-all grid-all stretch table table-bordered"> 
      <caption class="title">
       Table 11. Persistence States
      </caption> 
@@ -2300,12 +2308,19 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-java java" data-lang="java">SQLSelect&lt;Painting&gt; q1 = SQLSelect
+       <pre class="highlight"><code class="language-java java" data-lang="java">// Selecting objects
+List&lt;Painting&gt; paintings = SQLSelect
     .query(Painting.class, "SELECT * FROM PAINTING WHERE PAINTING_TITLE LIKE #bind($title)")
     .params("title", "painting%")
     .upperColumnNames()
     .localCache()
     .limit(100)
+    .select(context);
+
+// Selecting scalar values
+List&lt;String&gt; paintingNames = SQLSelect
+    .scalarQuery(String.class, "SELECT PAINTING_TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; #bind($price)")
+    .params("price", 100000)
     .select(context);</code></pre> 
       </div> 
      </div> 
@@ -2941,7 +2956,7 @@ List objects = context.performQuery(query);</code></pre>
     <div class="paragraph"> 
      <p>Cayenne defines the following 8 types of lifecycle events for which callbacks can be regsitered:</p> 
     </div> 
-    <table id="lifecycleEvent" class="tableblock frame-all grid-all spread table table-bordered"> 
+    <table id="lifecycleEvent" class="tableblock frame-all grid-all stretch table table-bordered"> 
      <caption class="title">
       Table 12. Lifecycle Event Types
      </caption> 
@@ -2987,7 +3002,7 @@ List objects = context.performQuery(query);</code></pre>
       <tr> 
        <td class="tableblock halign-left valign-middle"><p class="tableblock">PostLoad</p></td> 
        <td class="tableblock halign-left valign-top">
-        <div>
+        <div class="content">
          <div class="ulist"> 
           <ul> 
            <li> <p>After an object is fetched inside ObjectContext.performQuery().</p> </li> 
@@ -3092,7 +3107,7 @@ public class Listener2 {
        // ..
        .addModule(binder -&gt;
             ServerModule.contributeDomainListeners()
-                .add(new Listener1())
+                .add(Listener1.class)
                 .add(new Listener2())
        )
        // ..
@@ -3171,29 +3186,19 @@ public class MyEntity2 extends _MyEntity2 {
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="combining-listeners-with-datachannelfilters"><a class="anchor" href="#combining-listeners-with-datachannelfilters"></a>Combining Listeners with DataChannelFilters</h4> 
+    <h4 id="combining-listeners-with-datachannel-filters"><a class="anchor" href="#combining-listeners-with-datachannel-filters"></a>Combining Listeners with DataChannel filters</h4> 
     <div class="paragraph"> 
-     <p>A final touch in the listeners design is preserving the state of the listener within a single select or commit, so that events generated by multiple objects can be collected and processed all together. To do that you will need to implement a <code>DataChannelFilter</code>, and add some callback methods to it. They will store their state in a ThreadLocal variable of the filter. Here is an example filter that does something pretty meaningless - counts how many total objects were committed. However it demonstrates the important pattern of aggregating multiple events and presenting a combined result:</p> 
+     <p>A final touch in the listeners design is preserving the state of the listener within a single select or commit, so that events generated by multiple objects can be collected and processed all together. To do that you will need to implement a <code>DataChannelSyncFilter</code> (and/or <code>DataChannelQueryFilter</code>), and add some callback methods to it. They will store their state in a <code>ThreadLocal</code> variable of the filter. Here is an example filter that does something pretty meaningless - counts how many total objects were committed. However it demonstrates the important pattern of aggregating multiple events and presenting a combined result:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class CommittedObjectCounter implements DataChannelFilter {
+      <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class CommittedObjectCounter implements DataChannelSyncFilter {
 
-    private ThreadLocal&lt;int[]&gt; counter;
-
-    @Override
-    public void init(DataChannel channel) {
-        counter = new ThreadLocal&lt;int[]&gt;();
-    }
-
-    @Override
-    public QueryResponse onQuery(ObjectContext originatingContext, Query query, DataChannelFilterChain filterChain) {
-        return filterChain.onQuery(originatingContext, query);
-    }
+    private ThreadLocal&lt;int[]&gt; counter = new ThreadLocal&lt;int[]&gt;();
 
     @Override
     public GraphDiff onSync(ObjectContext originatingContext, GraphDiff changes, int syncType,
-            DataChannelFilterChain filterChain) {
+            DataChannelSyncFilterChain filterChain) {
 
         // init the counter for the current commit
         counter.set(new int[1]);
@@ -3226,7 +3231,7 @@ public class MyEntity2 extends _MyEntity2 {
 ServerRuntime runtime = ServerRuntime.builder()
         // ..
         .addModule(b -&gt;
-                ServerModule.contributeDomainFilters(b)
+                ServerModule.contributeDomainSyncFilters(b)
                         .add(CommittedObjectCounter.class)
         )
         // ..
@@ -3503,7 +3508,7 @@ List&lt;Artist&gt; artists =
       <p>This tells Cayenne that the query created here would like to use local cache of the context it is executed against. A vararg parameter to <code>localCache()</code> (or <code>sharedCache()</code>) method contains so called "cache groups". Those are arbitrary names that allow to categorize queries for the purpose of setting cache policies or explicit invalidation of the cache. More on that below.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="#ext-cayenne-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p> 
+      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="#ext-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Often "passive" cache expiration policies used by caching providers are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p> 
@@ -4021,9 +4026,9 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="datachannelfilter"><a class="anchor" href="#datachannelfilter"></a>DataChannelFilter</h5> 
+     <h5 id="datachannelsyncfilter-and-datachannelqueryfilter"><a class="anchor" href="#datachannelsyncfilter-and-datachannelqueryfilter"></a>DataChannelSyncFilter and DataChannelQueryFilter</h5> 
      <div class="paragraph"> 
-      <p>An interface of a filter that allows to intercept DataChannel operations. Filters allow to implement chains of custom processors around a DataChannel, that can be used for security, monitoring, business logic, providing context to lifecycle event listeners, etc.</p> 
+      <p>Interfaces of filters that allow to intercept DataChannel operations. Filters allow to implement chains of custom processors around a DataChannel, that can be used for security, monitoring, business logic, providing context to lifecycle event listeners, etc.</p> 
      </div> 
     </div> 
     <div class="sect4"> 
@@ -4179,7 +4184,7 @@ ServerRuntime runtime = ServerRuntime.builder()
     <p>The following use-cases will provide you a better understanding of how filtering works and how you could use it.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="process-everything-from-schema-catalog"><a class="anchor" href="#process-everything-from-schema-catalog"></a>Process everything from schema/catalog</h4> 
+    <h4 id="process-everything-from-schemacatalog"><a class="anchor" href="#process-everything-from-schemacatalog"></a>Process everything from schema/catalog</h4> 
     <div class="paragraph"> 
      <p>The simplest example of reverse engineering is processing tables from one schema of catalog and there are several options to do this. Basic syntax is described below:</p> 
     </div> 
@@ -4723,7 +4728,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <h5 id="gradle"><a class="anchor" href="#gradle"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -4821,7 +4826,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-2"><a class="anchor" href="#gradle-2"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -4907,7 +4912,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-3"><a class="anchor" href="#gradle-3"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -5036,7 +5041,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-4"><a class="anchor" href="#gradle-4"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -5090,7 +5095,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -5138,7 +5143,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -5176,7 +5181,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.M2'</code></pre>
       </div> 
      </div> 
     </div> 
@@ -5263,11 +5268,30 @@ public class MyEntity extends _MyEntity {
        <li> <p>Default value: none, project DataNode configuration is used</p> </li> 
       </ul> 
      </div> </li> 
+    <li> <p><code>cayenne.jdbc.max_wait</code> defines a maximum time in milliseconds that a connection request could wait in the connection queue. After this period expires, an exception will be thrown in the calling method. A value of zero will make the thread wait until a connection is available with no time out.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: 20 seconds</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.jdbc.validation_query</code> defines a SQL string that returns some result. It will be used to validate connections in the pool.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: none</p> </li> 
+      </ul> 
+     </div> </li> 
     <li> <p><code>cayenne.querycache.size</code> An integer defining the maximum number of entries in the query cache. Note that not all QueryCache providers may respect this property. MapQueryCache uses it, but the rest would use alternative configuration methods.</p> 
      <div class="ulist"> 
       <ul> 
        <li> <p>Possible values: any positive int value</p> </li> 
        <li> <p>Default value: 2000</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.DataRowStore.snapshot.size</code> defines snapshot cache max size</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Possible values: any positive int</p> </li> 
+       <li> <p>Default value: 10000</p> </li> 
       </ul> 
      </div> </li> 
     <li> <p><code>cayenne.server.contexts_sync_strategy</code> defines whether peer ObjectContexts should receive snapshot events after commits from other contexts. If true (<em>default</em>), the contexts would automatically synchronize their state with peers.</p> 
@@ -5296,6 +5320,18 @@ public class MyEntity extends _MyEntity {
       <ul> 
        <li> <p>Possible values: true, false</p> </li> 
        <li> <p>Default value: false</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.server.query_execution_time_logging_threshold</code> defines the minimum number of milliseconds a query must run before it is logged. A value less than or equal to zero disables logging.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: 0</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.server.domain.name</code> defines an optional name of the runtime DataDomain. If not specified, the name is inferred from the configuration name.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: none</p> </li> 
       </ul> 
      </div> </li> 
     <li> <p><code>cayenne.rop.service_url</code> defines the URL of the ROP server</p> 
@@ -5366,7 +5402,7 @@ public class MyEntity extends _MyEntity {
   <div class="paragraph"> 
    <p>Note that the collection keys below are defined as constants in <code>org.apache.cayenne.configuration.Constants</code> interface.</p> 
   </div> 
-  <table id="serviceCollections" class="tableblock frame-all grid-all spread table table-bordered"> 
+  <table id="serviceCollections" class="tableblock frame-all grid-all stretch table table-bordered"> 
    <caption class="title">
     Table 13. Service Collection Keys Present in ServerRuntime and/or ClientRuntime
    </caption> 
@@ -5394,9 +5430,9 @@ public class MyEntity extends _MyEntity {
      <td class="tableblock halign-left valign-middle"><p class="tableblock">Contains objects that can discover the type of current database and install the correct DbAdapter in runtime.</p></td> 
     </tr> 
     <tr> 
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.server.domain_filters</code></p></td> 
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;DataChannelFilter&gt;</code></p></td> 
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores DataDomain filters.</p></td> 
+     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.server.domain_listeners</code></p></td> 
+     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;Object&gt;</code></p></td> 
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores DataDomain listeners.</p></td> 
     </tr> 
     <tr> 
      <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.server.project_locations</code></p></td> 
