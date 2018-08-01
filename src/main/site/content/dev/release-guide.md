@@ -109,18 +109,18 @@ work ("-u" option can be omitted if you have only one GPG key):
 be considered by the PMC (particularly -1 votes will be discussed) when
 making the final decision, but are not binding.
 * Each PMC member will do the following before voting on a release:
- a. download the artifacts
- b. satisfy themselves that the source matches the appropriate svn tag.
-This can be done by diffing the source against a recent svn checkout.
- c. satisfy themselves that the Apache licensing requirements are met (this
+    * download the artifacts
+    * satisfy themselves that the source matches the appropriate GIT tag.
+This can be done by diffing the source against a recent git checkout.
+    * satisfy themselves that the Apache licensing requirements are met (this
 will usually be achieved by ensuring that all notices are in place and
-verifying that the source matches SVN since all commits to SVN are possible
+verifying that the source matches GIT since all commits to GIT are possible
 only if the committer has a CLA on file).
- d. satisfy themselves that the binary distribution is sane and passes
+    * satisfy themselves that the binary distribution is sane and passes
 basic usability tests. For example, that the Cayenne modeler runs and the
 main jar passes some basic tests.
- e. satisfy themselves that the source passes agreed unit tests (either by
-running them manually or verifying that Hudson has run those tests against
+    * satisfy themselves that the source passes agreed unit tests (either by
+running them manually or verifying that CI service has run those tests against
 the equivalent source). 
 
 {{% gap %}}
