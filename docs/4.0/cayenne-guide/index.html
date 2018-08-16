@@ -95,7 +95,7 @@
                                 Cayenne Version 4.0
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Stable)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -232,7 +232,7 @@
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">4.0</p></td> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.7 or newer</p></td> 
-       <td class="tableblock halign-left valign-top"><p class="tableblock">Beta</p></td> 
+       <td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td> 
       </tr> 
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">3.1</p></td> 
@@ -290,7 +290,7 @@
         &lt;plugin&gt;
             &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;4.0.RC1&lt;/version&gt;
+            &lt;version&gt;4.0&lt;/version&gt;
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;</code></pre> 
@@ -514,9 +514,9 @@ total 24
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>cayenne-di-4.0.RC1.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-server-4.0.RC1.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.0.RC1.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
+      <li> <p><code>cayenne-di-4.0.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-server-4.0.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-client-4.0.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -540,7 +540,7 @@ total 24
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
    &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-   &lt;version&gt;4.0.RC1&lt;/version&gt;
+   &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
      </div> 
     </div> 
@@ -696,7 +696,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 
     &lt;configuration&gt;
         &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
@@ -859,7 +859,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
     &lt;executions&gt;
         &lt;execution&gt;
             &lt;configuration&gt;
@@ -1093,7 +1093,7 @@ total 24
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 
     &lt;executions&gt;
         &lt;execution&gt;
@@ -1130,7 +1130,7 @@ total 24
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.0.RC1'</code></pre> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.0'</code></pre> 
      </div> 
     </div> 
     <div class="ulist"> 
@@ -1152,7 +1152,7 @@ total 24
     }
     // add Cayenne Gradle Plugin
     dependencies {
-        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.0.RC1'
+        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.0'
     }
 }
 
@@ -2467,12 +2467,19 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-java java" data-lang="java">SQLSelect&lt;Painting&gt; q1 = SQLSelect
+       <pre class="highlight"><code class="language-java java" data-lang="java">// Selecting objects
+List&lt;Painting&gt; paintings = SQLSelect
     .query(Painting.class, "SELECT * FROM PAINTING WHERE PAINTING_TITLE LIKE #bind($title)")
     .params("title", "painting%")
     .upperColumnNames()
     .localCache()
     .limit(100)
+    .select(context);
+
+// Selecting scalar values
+List&lt;String&gt; paintingNames = SQLSelect
+    .scalarQuery(String.class, "SELECT PAINTING_TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; #bind($price)")
+    .params("price", 100000)
     .select(context);</code></pre> 
       </div> 
      </div> 
@@ -3679,7 +3686,7 @@ List&lt;Artist&gt; artists =
       <p>This tells Cayenne that the query created here would like to use local cache of the context it is executed against. A vararg parameter to <code>localCache()</code> (or <code>sharedCache()</code>) method contains so called "cache groups". Those are arbitrary names that allow to categorize queries for the purpose of setting cache policies or explicit invalidation of the cache. More on that below.</p> 
      </div> 
      <div class="paragraph"> 
-      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="#ext-cayenne-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p> 
+      <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="#ext-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Often "passive" cache expiration policies used by caching providers are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p> 
@@ -4337,7 +4344,7 @@ ServerRuntime runtime = ServerRuntime.builder()
       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
 		&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
 		&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-		&lt;version&gt;4.0.RC1&lt;/version&gt;
+		&lt;version&gt;4.0&lt;/version&gt;
 
 		&lt;configuration&gt;
 			&lt;map&gt;${project.basedir}/src/main/resources/datamap.map.xml&lt;/map&gt;
@@ -4906,7 +4913,7 @@ ServerRuntime runtime = ServerRuntime.builder()
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-cache-invalidation&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -4915,7 +4922,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <h5 id="gradle"><a class="anchor" href="#gradle"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5000,7 +5007,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-commitlog&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5009,7 +5016,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-2"><a class="anchor" href="#gradle-2"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5086,7 +5093,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-crypto&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5095,7 +5102,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-3"><a class="anchor" href="#gradle-3"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5211,7 +5218,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-dbcp2&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5220,7 +5227,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-4"><a class="anchor" href="#gradle-4"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-dbcp2:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-dbcp2:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5254,7 +5261,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-java8&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5263,7 +5270,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-java8:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-java8:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5292,7 +5299,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5301,7 +5308,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5346,7 +5353,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-joda&lt;/artifactId&gt;
-    &lt;version&gt;4.0.RC1&lt;/version&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5355,7 +5362,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.0.RC1'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.0'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5414,11 +5421,30 @@ public class MyEntity extends _MyEntity {
        <li> <p>Default value: none, project DataNode configuration is used</p> </li> 
       </ul> 
      </div> </li> 
+    <li> <p><code>cayenne.jdbc.max_wait</code> defines a maximum time in milliseconds that a connection request could wait in the connection queue. After this period expires, an exception will be thrown in the calling method. A value of zero will make the thread wait until a connection is available with no time out.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: 20 seconds</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.jdbc.validation_query</code> defines a SQL string that returns some result. It will be used to validate connections in the pool.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: none</p> </li> 
+      </ul> 
+     </div> </li> 
     <li> <p><code>cayenne.querycache.size</code> An integer defining the maximum number of entries in the query cache. Note that not all QueryCache providers may respect this property. MapQueryCache uses it, but the rest would use alternative configuration methods.</p> 
      <div class="ulist"> 
       <ul> 
        <li> <p>Possible values: any positive int value</p> </li> 
        <li> <p>Default value: 2000</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.DataRowStore.snapshot.size</code> defines snapshot cache max size</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Possible values: any positive int</p> </li> 
+       <li> <p>Default value: 10000</p> </li> 
       </ul> 
      </div> </li> 
     <li> <p><code>cayenne.server.contexts_sync_strategy</code> defines whether peer ObjectContexts should receive snapshot events after commits from other contexts. If true (<em>default</em>), the contexts would automatically synchronize their state with peers.</p> 
@@ -5447,6 +5473,18 @@ public class MyEntity extends _MyEntity {
       <ul> 
        <li> <p>Possible values: true, false</p> </li> 
        <li> <p>Default value: false</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.server.query_execution_time_logging_threshold</code> defines the minimum number of milliseconds a query must run before it is logged. A value less than or equal to zero disables logging.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: 0</p> </li> 
+      </ul> 
+     </div> </li> 
+    <li> <p><code>cayenne.server.domain.name</code> defines an optional name of the runtime DataDomain. If not specified, the name is inferred from the configuration name.</p> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>Default value: none</p> </li> 
       </ul> 
      </div> </li> 
     <li> <p><code>cayenne.rop.service_url</code> defines the URL of the ROP server</p> 
@@ -5548,6 +5586,11 @@ public class MyEntity extends _MyEntity {
      <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.server.domain_filters</code></p></td> 
      <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;DataChannelFilter&gt;</code></p></td> 
      <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores DataDomain filters.</p></td> 
+    </tr> 
+    <tr> 
+     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.server.domain_listeners</code></p></td> 
+     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;Object&gt;</code></p></td> 
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores DataDomain listeners.</p></td> 
     </tr> 
     <tr> 
      <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.server.project_locations</code></p></td> 
@@ -5832,6 +5875,11 @@ NON-TERMINALS
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2018-07-23 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
                         <a href="/2018/07/cayenne-41m2-released.html">Cayenne 4.1 Milestone 2 Released</a>
                     </li>
@@ -5839,11 +5887,6 @@ NON-TERMINALS
                     <li>
                         <time datetime="2018-07-23 11:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
                         <a href="/2018/07/cayenne-313-released.html">Cayenne 3.1.3 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2018-04-25 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 25, 2018</time>
-                        <a href="/2018/04/cayenne-40rc1-released/">Cayenne 4.0 release candidate is out</a>
                     </li>
                     
                 </ul>

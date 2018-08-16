@@ -211,19 +211,22 @@ used for staging development releases: <a href="https://dist.apache.org/repos/di
 be considered by the PMC (particularly -1 votes will be discussed) when
 making the final decision, but are not binding.</li>
 <li>Each PMC member will do the following before voting on a release:
-a. download the artifacts
-b. satisfy themselves that the source matches the appropriate svn tag.
-This can be done by diffing the source against a recent svn checkout.
-c. satisfy themselves that the Apache licensing requirements are met (this
+
+<ul>
+<li>download the artifacts</li>
+<li>satisfy themselves that the source matches the appropriate Git tag.
+This can be done by diffing the source against a recent git checkout.</li>
+<li>satisfy themselves that the Apache licensing requirements are met (this
 will usually be achieved by ensuring that all notices are in place and
-verifying that the source matches SVN since all commits to SVN are possible
-only if the committer has a CLA on file).
-d. satisfy themselves that the binary distribution is sane and passes
-basic usability tests. For example, that the Cayenne modeler runs and the
-main jar passes some basic tests.
-e. satisfy themselves that the source passes agreed unit tests (either by
-running them manually or verifying that Hudson has run those tests against
+verifying that the source matches Git since all commits to Git are possible
+only if the committer has a CLA on file).</li>
+<li>satisfy themselves that the binary distribution is sane and passes
+basic usability tests. For example, that the Cayenne Modeler runs and the
+main jar passes some basic tests.</li>
+<li>satisfy themselves that the source passes agreed unit tests (either by
+running them manually or verifying that CI service has run those tests against
 the equivalent source).</li>
+</ul></li>
 </ul>
 
 
@@ -408,6 +411,11 @@ add any new features</p></li>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2018-07-23 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
                         <a href="/2018/07/cayenne-41m2-released.html">Cayenne 4.1 Milestone 2 Released</a>
                     </li>
@@ -415,11 +423,6 @@ add any new features</p></li>
                     <li>
                         <time datetime="2018-07-23 11:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
                         <a href="/2018/07/cayenne-313-released.html">Cayenne 3.1.3 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2018-04-25 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 25, 2018</time>
-                        <a href="/2018/04/cayenne-40rc1-released/">Cayenne 4.0 release candidate is out</a>
                     </li>
                     
                 </ul>

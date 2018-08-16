@@ -95,7 +95,7 @@
                                 Cayenne Version 4.0
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Stable)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -229,7 +229,7 @@ Module module = binder -&gt;
    <div class="sect3"> 
     <h4 id="fluent-query-api"><a class="anchor" href="#fluent-query-api"></a>Fluent Query API</h4> 
     <div class="paragraph"> 
-     <p>Fluent Query API is one of the most exciting new features in Cayenne 4.0. This syntax is "chainable" so you can write query assembly and execution code on one line. The most useful fluent queries are ObjectSelect, SQLSelect and SelectById:</p> 
+     <p>Fluent Query API is one of the most exciting new features in Cayenne 4.0. This syntax is "chainable" so you can write query assembly and execution code on one line. The most useful fluent queries are <code>ObjectSelect</code>, <code>SQLSelect</code> and <code>SelectById</code>:</p> 
     </div> 
     <div class="sect4"> 
      <h5 id="objectselect"><a class="anchor" href="#objectselect"></a>ObjectSelect</h5> 
@@ -262,7 +262,7 @@ Module module = binder -&gt;
     <div class="sect4"> 
      <h5 id="sqlselect"><a class="anchor" href="#sqlselect"></a>SQLSelect</h5> 
      <div class="paragraph"> 
-      <p>A "chainable" analog of SQLTemplate used specifically to run selecting raw SQL:</p> 
+      <p>A "chainable" analog of <code>SQLTemplate</code> used specifically to run selecting raw SQL:</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -275,7 +275,7 @@ Module module = binder -&gt;
     <div class="sect4"> 
      <h5 id="selectbyid"><a class="anchor" href="#selectbyid"></a>SelectById</h5> 
      <div class="paragraph"> 
-      <p>There’s really no good analog of SelectById in Cayenne prior to 4.0. Previously available ObjectIdQuery didn’t support half of the features of SelectById (e.g. caching consistent with other queries, prefetches, etc.) :</p> 
+      <p>There’s really no good analog of <code>SelectById</code> in Cayenne prior to 4.0. Previously available <code>ObjectIdQuery</code> didn’t support half of the features of <code>SelectById</code> (e.g. caching consistent with other queries, prefetches, etc.) :</p> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
@@ -315,13 +315,13 @@ context.iterate(q, (Artist a) -&gt; {
    <div class="sect3"> 
     <h4 id="property-api"><a class="anchor" href="#property-api"></a>Property API</h4> 
     <div class="paragraph"> 
-     <p>Persistent superclasses (_MyEntity) now contain a set of static Property&lt;T&gt; variables generated from the model. These metadata objects make possible to create type-safe Expressions and other query parts.</p> 
+     <p>Persistent superclasses (_MyEntity) now contain a set of static <code>Property&lt;T&gt;</code> variables generated from the model. These metadata objects make possible to create type-safe Expressions and other query parts.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="positional-parameter-bindings"><a class="anchor" href="#positional-parameter-bindings"></a>Positional Parameter Bindings</h4> 
     <div class="paragraph"> 
-     <p>Expressions and SQLTemplate traditionally supported binding of parameters by name as a map. Cayenne 4.0 introduces a very easy form of positional bindings. It works with the same named template format, only parameters are bound by position, left-to-right. Here we showing a more complex example with the same parameter name being used more than once in the query:</p> 
+     <p>Expressions and <code>SQLTemplate</code> traditionally supported binding of parameters by name as a map. Cayenne 4.0 introduces a very easy form of positional bindings. It works with the same named template format, only parameters are bound by position, left-to-right. Here we showing a more complex example with the same parameter name being used more than once in the query:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -332,7 +332,7 @@ Expression e = ExpressionFactory.exp(
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>This API is supported in Expressions, SQLTemplate as well as new SQLSelect and can be used interchnageably with named parameters with a single template flavor.</p> 
+     <p>This API is supported in Expressions, SQLTemplate as well as new SQLSelect and can be used interchangeably with named parameters with a single template flavor.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -405,19 +405,19 @@ Expression e = ExpressionFactory.exp(
    <div class="sect3"> 
     <h4 id="cdbimport"><a class="anchor" href="#cdbimport"></a>cdbimport</h4> 
     <div class="paragraph"> 
-     <p>"cdbimport" has evolved from an experiment to a full-featured production tool that significantly reduces (and sometimes eliminates) the need for manual maintenance of the DataMaps in CayenneModeler. Two improvements made this possible. First, smart merge algorithm will ensure that custom changes to the model are not overridden on subsequent runs of "cdbimport". Second, the mechanism for specifing DB reverse-engineering parameters, such as name filtering, is made much more powerful with many new options. E.g. we started supporting filters by catalogs and schemas, table name filters can be added per catalog/schema or at the top level, etc.</p> 
+     <p><code>cdbimport</code> has evolved from an experiment to a full-featured production tool that significantly reduces (and sometimes eliminates) the need for manual maintenance of the DataMaps in CayenneModeler. Two improvements made this possible. First, smart merge algorithm will ensure that custom changes to the model are not overridden on subsequent runs of "cdbimport". Second, the mechanism for specifing DB reverse-engineering parameters, such as name filtering, is made much more powerful with many new options. E.g. we started supporting filters by catalogs and schemas, table name filters can be added per catalog/schema or at the top level, etc.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="cgen"><a class="anchor" href="#cgen"></a>cgen</h4> 
     <div class="paragraph"> 
-     <p>As was mentioned above, cgen now includes Property&lt;T&gt; static variables for expression building. It is also made smarter about its defaults for "destDir" and "superPkg".</p> 
+     <p>As was mentioned above, <code>cgen</code> now includes <code>Property&lt;T&gt;</code> static variables for expression building. It is also made smarter about its defaults for "destDir" and "superPkg".</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="gradle-plugin"><a class="anchor" href="#gradle-plugin"></a>Gradle Plugin</h4> 
     <div class="paragraph"> 
-     <p>Cayenne now provides it’s own Gradle Plugin that allows you easily integrate cdbimport and cgen tools into your build process. Here is example of it’s usage:</p> 
+     <p>Cayenne now provides it’s own Gradle Plugin that allows you easily integrate <code>cdbimport</code> and <code>cgen</code> tools into your build process. Here is example of it’s usage:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -426,7 +426,7 @@ Expression e = ExpressionFactory.exp(
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.0.B2'
+        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.0'
     }
 }
 
@@ -546,6 +546,11 @@ dependencies {
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2018-07-23 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
                         <a href="/2018/07/cayenne-41m2-released.html">Cayenne 4.1 Milestone 2 Released</a>
                     </li>
@@ -553,11 +558,6 @@ dependencies {
                     <li>
                         <time datetime="2018-07-23 11:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
                         <a href="/2018/07/cayenne-313-released.html">Cayenne 3.1.3 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2018-04-25 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 25, 2018</time>
-                        <a href="/2018/04/cayenne-40rc1-released/">Cayenne 4.0 release candidate is out</a>
                     </li>
                     
                 </ul>
