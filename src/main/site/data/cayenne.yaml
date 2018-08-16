@@ -26,10 +26,10 @@
 releases:
 
   - version: "4.0"
-    latestRevision: "4.0.RC1"
+    latestRevision: "4.0"
     type: "Stable"
-    description: "Release Candidate"
-    date: "2018-04-25"
+    description: "Latest stable release"
+    date: "2018-08-15"
     docs: true
     downloadable: true
     jdk: 1.7
@@ -47,8 +47,8 @@ releases:
 
   - version: "3.1"
     latestRevision: "3.1.3"
-    description: "Latest stable release"
-    type: "Stable"
+    description: "Previous stable release"
+    type: "Aging"
     date: "2018-07-23"
     docs: true
     downloadable: true
@@ -56,7 +56,7 @@ releases:
 
   - version: "3.0"
     latestRevision: "3.0.2"
-    description: "Previous stable release"
+    description: "Legacy release"
     type: "Legacy"
     date: "2011-06-21"
     docs: true

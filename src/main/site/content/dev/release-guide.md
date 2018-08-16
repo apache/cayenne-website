@@ -110,14 +110,14 @@ be considered by the PMC (particularly -1 votes will be discussed) when
 making the final decision, but are not binding.
 * Each PMC member will do the following before voting on a release:
     * download the artifacts
-    * satisfy themselves that the source matches the appropriate GIT tag.
+    * satisfy themselves that the source matches the appropriate Git tag.
 This can be done by diffing the source against a recent git checkout.
     * satisfy themselves that the Apache licensing requirements are met (this
 will usually be achieved by ensuring that all notices are in place and
-verifying that the source matches GIT since all commits to GIT are possible
+verifying that the source matches Git since all commits to Git are possible
 only if the committer has a CLA on file).
     * satisfy themselves that the binary distribution is sane and passes
-basic usability tests. For example, that the Cayenne modeler runs and the
+basic usability tests. For example, that the Cayenne Modeler runs and the
 main jar passes some basic tests.
     * satisfy themselves that the source passes agreed unit tests (either by
 running them manually or verifying that CI service has run those tests against
