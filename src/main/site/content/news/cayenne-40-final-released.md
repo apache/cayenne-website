@@ -13,7 +13,7 @@ It is a really important milestone for the entire Cayenne community. Here are so
 * Commits made: _2421_
 * Authors: _29_
 
-Many people have already been using various milestones, betas and RCs of 4.0, so the GA release is a simple and straightforward upgrade for them. For those who were waiting for the officially "final" version before upgrading, this day is now. Among those ~ 400 tasks there are a lot of cool features making everyday life of a Java developer easier:
+Many people have already been using various milestones, betas and RCs of 4.0, so the GA release is a simple and straightforward upgrade for them. For those who were waiting for the official "final" version before upgrading, this day is now. Among those ~ 400 tasks there are a lot of cool features making everyday life of a Java developer easier:
 
 * fluent query API, simple parameter bindings, aggregating and scalar queries;
 * better runtime assembly and extension mechanism;
@@ -23,7 +23,7 @@ Many people have already been using various milestones, betas and RCs of 4.0, so
 * database cryptography extensions;
 * Gradle ORM workflow plugins and much more
 
-In the comping weeks expect blog posts that explain what this all means. Follow us on Twitter [@ApacheCayenne](https://twitter.com/ApacheCayenne) to not miss the announcements, and feel free to start a conversation on the [user@ mailing list]({{< ref "collaboration/mailing-lists.md" >}}). 
+In the coming weeks expect blog posts that explain what this all means. Follow us on Twitter [@ApacheCayenne](https://twitter.com/ApacheCayenne) to not miss the announcements, and feel free to start a conversation on the [user@ mailing list]({{< ref "collaboration/mailing-lists.md" >}}). 
 
 Thanks to everyone who made 4.0 possible! 
 
