@@ -15,15 +15,39 @@ aliases:
     - /download.html
 ---
 
-<h5 class="mb-5">KEYS file to verify the file signatures can be <a href="http://www.apache.org/dist/cayenne/KEYS">found here</a>.</h5>
+## Verification
+
+We provide OpenPGP signatures (`.asc`) files and checksums (`.sha512`) for every release artifact.
+
+The PGP signatures can be verified using PGP or GPG. 
+First download the [KEYS](https://www.apache.org/dist/cayenne/KEYS) file as well as the `.asc` signature file for the relevant release packages. 
+Make sure you get these files from the [main distribution directory](https://www.apache.org/dist/cayenne/), rather than from a mirror.
+
+Then verify the signatures using
+
+```
+$ pgp -ka KEYS
+$ pgp cayenne-X.Y.Z-src.tar.gz.asc
+```
+
+or
+
+```
+$ gpg --import KEYS
+$ gpg --verify cayenne-X.Y.Z-src.tar.gz.asc
+```
+
+Alternatively, you can verify the SHA512 checksum on the files. 
+For checking the SHA512 checksums, use the programs called `sha512sum`, or, alternatively, `openssl`. 
+Windows users can use `CertUtil` or use the equivalent *nix tools as part of their Cygwin or Linux subsystems.
 
 ## Legacy Releases
 
 <ul class="list-unstyled  mb-5">
 	<li>
-		<a href="http://archive.apache.org/dist/cayenne/">All Apache Cayenne releases</a>
+		<a href="https://archive.apache.org/dist/cayenne/">All Apache Cayenne releases</a>
 	</li>
 	<li>
-		<a href="http://sourceforge.net/project/showfiles.php?group_id=48132">All pre-Apache (SourceForge) Cayenne Releases</a>
+		<a href="https://sourceforge.net/project/showfiles.php?group_id=48132">All pre-Apache (SourceForge) Cayenne Releases</a>
 	</li>
 </ul>
