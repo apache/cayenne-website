@@ -191,13 +191,13 @@ procedure not included in the Ant or Maven script. Here is how it might
 work (&ldquo;-u&rdquo; option can be omitted if you have only one GPG key):</p>
 
 <pre><code>    gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
-    gpg --print-md MD5 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.md5
     gpg --print-md SHA512 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512
 </code></pre>
 
 <ul>
 <li>Assemblies, signature and checksum files are committed to the special SVN repo
-used for staging development releases: <a href="https://dist.apache.org/repos/dist/dev/cayenne/">https://dist.apache.org/repos/dist/dev/cayenne/</a>. Use a separate folder for each release. For more info on this repository check <a href="http://apache.org/dev/release.html#upload-ci">the infrastructure docs</a>.</li>
+used for staging development releases: <a href="https://dist.apache.org/repos/dist/dev/cayenne/">https://dist.apache.org/repos/dist/dev/cayenne/</a>.
+Use a separate folder for each release. For more info on this repository check <a href="http://apache.org/dev/release.html#upload-ci">the infrastructure docs</a>.</li>
 </ul>
 
 
@@ -214,6 +214,7 @@ making the final decision, but are not binding.</li>
 
 <ul>
 <li>download the artifacts</li>
+<li>verify GPG signature and sha512 checksum</li>
 <li>satisfy themselves that the source matches the appropriate Git tag.
 This can be done by diffing the source against a recent git checkout.</li>
 <li>satisfy themselves that the Apache licensing requirements are met (this
