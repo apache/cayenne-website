@@ -93,11 +93,11 @@ procedure not included in the Ant or Maven script. Here is how it might
 work ("-u" option can be omitted if you have only one GPG key):
 
         gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
-        gpg --print-md MD5 cayenne-X.X.tar.gz > cayenne-X.X.tar.gz.md5
         gpg --print-md SHA512 cayenne-X.X.tar.gz > cayenne-X.X.tar.gz.sha512
 
 * Assemblies, signature and checksum files are committed to the special SVN repo
-  used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/dev/release.html#upload-ci).
+  used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). 
+  Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/dev/release.html#upload-ci).
 
 {{% gap %}}
 
@@ -110,6 +110,7 @@ be considered by the PMC (particularly -1 votes will be discussed) when
 making the final decision, but are not binding.
 * Each PMC member will do the following before voting on a release:
     * download the artifacts
+    * verify GPG signature and sha512 checksum 
     * satisfy themselves that the source matches the appropriate Git tag.
 This can be done by diffing the source against a recent git checkout.
     * satisfy themselves that the Apache licensing requirements are met (this
