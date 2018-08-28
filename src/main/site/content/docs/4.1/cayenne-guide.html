@@ -347,9 +347,9 @@ total 24
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>cayenne-di-4.1.M2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li>
-      <li> <p><code>cayenne-server-4.1.M2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li>
-      <li> <p><code>cayenne-client-4.1.M2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li>
+      <li> <p><code>cayenne-di-4.1.M2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-server-4.1.M2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-client-4.1.M2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -518,6 +518,11 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">createPropertyNames</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate String Property names. Default is "false"</p></td> 
+       </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">force</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will force run from maven/gradle.</p></td> 
        </tr> 
       </tbody> 
      </table> 
@@ -969,7 +974,7 @@ total 24
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.M2'</code></pre>
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.M2'</code></pre> 
      </div> 
     </div> 
     <div class="ulist"> 
@@ -1673,6 +1678,18 @@ generic.writeProperty("name", "New Name");</code></pre>
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">Transaction tx = BaseTransaction.getThreadTransaction();
 tx.addConnection("mydatanode", myConnection);</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>You can control transaction isolation level and propagation logic using TransactionDescriptor.</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">TransactionDescriptor descriptor = new TransactionDescriptor(
+                Connection.TRANSACTION_SERIALIZABLE,
+                TransactionPropagation.REQUIRES_NEW
+        );
+transactionManager.performInTransaction(transactionalOperation, descriptor);</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -4144,26 +4161,27 @@ ServerRuntime runtime = ServerRuntime.builder()
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
-		&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
-		&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-		&lt;version&gt;4.1.M2&lt;/version&gt;
+	&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+	&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;4.1.M2&lt;/version&gt;
 
-		&lt;configuration&gt;
-			&lt;map&gt;${project.basedir}/src/main/resources/datamap.map.xml&lt;/map&gt;
-			&lt;dataSource&gt;
-				&lt;url&gt;&lt;!-- jdbc url --&gt;&lt;/url&gt;
-				&lt;driver&gt;&lt;!-- jdbc driver class --&gt;&lt;/driver&gt;
-				&lt;username&gt;username&lt;/username&gt;
-				&lt;password&gt;password&lt;/password&gt;
-			&lt;/dataSource&gt;
-			&lt;dbimport&gt;
-				&lt;defaultPackage&gt;com.example.package&lt;/defaultPackage&gt;
-			    &lt;includeTable&gt;.*&lt;/includeTable&gt;
-			&lt;/dbimport&gt;
-		&lt;/configuration&gt;
-		&lt;dependencies&gt;
-			&lt;!-- jdbc driver dependency --&gt;
-		&lt;/dependencies&gt;
+	&lt;configuration&gt;
+        &lt;cayenneProject&gt;${project.basedir}/src/main/resources/cayenne/cayenne-project.xml&lt;/cayenneProject&gt;
+        &lt;map&gt;${project.basedir}/src/main/resources/datamap.map.xml&lt;/map&gt;
+        &lt;dataSource&gt;
+            &lt;url&gt;&lt;!-- jdbc url --&gt;&lt;/url&gt;
+            &lt;driver&gt;&lt;!-- jdbc driver class --&gt;&lt;/driver&gt;
+            &lt;username&gt;username&lt;/username&gt;
+            &lt;password&gt;password&lt;/password&gt;
+        &lt;/dataSource&gt;
+        &lt;dbimport&gt;
+            &lt;defaultPackage&gt;com.example.package&lt;/defaultPackage&gt;
+            &lt;includeTable&gt;.*&lt;/includeTable&gt;
+        &lt;/dbimport&gt;
+    &lt;/configuration&gt;
+    &lt;dependencies&gt;
+        &lt;!-- jdbc driver dependency --&gt;
+    &lt;/dependencies&gt;
 &lt;/plugin&gt;</code></pre> 
      </div> 
     </div> 
@@ -4317,7 +4335,7 @@ ServerRuntime runtime = ServerRuntime.builder()
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="including-and-excluding-tables-columns-and-procedures"><a class="anchor" href="#including-and-excluding-tables-columns-and-procedures"></a>Including and Excluding tables, columns and procedures</h4> 
+    <h4 id="including-and-excluding-tables-columns-procedures-and-relationships"><a class="anchor" href="#including-and-excluding-tables-columns-procedures-and-relationships"></a>Including and Excluding tables, columns, procedures and relationships</h4> 
     <div class="paragraph"> 
      <p>Cayenne reverse engineering let you fine tune table, columns and stored procedures names that you need to import to your model file. In every filter you can use regexp syntax. Here is some examples of configuration for common tasks.</p> 
     </div> 
@@ -4400,7 +4418,18 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>All filtering tags <code>&lt;includeTable&gt;</code>, <code>&lt;excludeTable&gt;</code>, <code>&lt;includeColumn&gt;</code>, <code>&lt;excludeColumn&gt;</code>, <code>&lt;includeProcedure&gt;</code> and <code>&lt;excludeProcedure&gt;</code> have 2 ways to pass filtering RegExp.</p> 
+     <p>9) Exclude relationships:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;excludeRelationship&gt;excludeRelationship01&lt;/excludeRelationship&gt;
+&lt;excludeRelationship&gt;
+    &lt;pattern&gt;excludeRelationship03&lt;/pattern&gt;
+&lt;/excludeRelationship&gt;</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>All filtering tags <code>&lt;includeTable&gt;</code>, <code>&lt;excludeTable&gt;</code>, <code>&lt;includeColumn&gt;</code>, <code>&lt;excludeColumn&gt;</code>, <code>&lt;includeProcedure&gt;</code>, <code>&lt;excludeProcedure&gt;</code> and <code>&lt;excludeRelationship&gt;</code> have 2 ways to pass filtering RegExp.</p> 
     </div> 
     <div class="paragraph"> 
      <p>1) text inside tag</p> 
@@ -4510,6 +4539,12 @@ ServerRuntime runtime = ServerRuntime.builder()
             &lt;pattern&gt;excludeProcedure-02&lt;/pattern&gt;
         &lt;/excludeProcedure&gt;
 
+        &lt;excludeRelationship&gt;excludeRelationship-01&lt;/excludeRelationship&gt;
+
+        &lt;excludeRelationship&gt;
+            &lt;pattern&gt;excludeRelationship-02&lt;/pattern&gt;
+        &lt;/excludeRelationship&gt;
+
     &lt;/catalog&gt;
 &lt;/dbimport&gt;</code></pre> 
      </div> 
@@ -4557,6 +4592,9 @@ ServerRuntime runtime = ServerRuntime.builder()
 
     &lt;excludeProcedure&gt;excludeProcedure-01&lt;/excludeProcedure&gt;
     &lt;excludeProcedure pattern="excludeProcedure-02"/&gt;
+
+    &lt;excludeRelationship&gt;excludeRelationship-01&lt;/excludeRelationship&gt;
+    &lt;excludeRelationship pattern="excludeRelationship-02"/&gt;
 
 &lt;/catalog&gt;</code></pre> 
      </div> 
@@ -4638,27 +4676,10 @@ ServerRuntime runtime = ServerRuntime.builder()
     <p>Alternative aproach to using <a href="#cdbimport">cdbimport</a> is doing reverse engineering from <a href="#cayennemodeler-application">CayenneModeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>You can find reverse engineering tool in main modeler menu <strong>Tools &gt; Reengineer Database Schema</strong></p> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="datasource-selection"><a class="anchor" href="#datasource-selection"></a>DataSource selection</h4> 
-    <div class="paragraph"> 
-     <p>First you should select DataSource. If you don’t have any DataSource yet you can create one from this menu.</p> 
-    </div> 
-    <div class="imageblock" style="text-align: center"> 
-     <div class="content"> 
-      <img src="images/re-modeler-datasource-select.png" alt="re modeler datasource select"> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Datasource selection dialog.</p> 
-    </div> 
+    <p>You can find reverse engineering tool in dataMap view on <strong>DbImport Tab</strong>.</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="reverse-engineering-options"><a class="anchor" href="#reverse-engineering-options"></a>Reverse engineering options</h4> 
-    <div class="paragraph"> 
-     <p>Once DataSource is selected you can proceed to reverse engineering options.</p> 
-    </div> 
     <div class="imageblock" style="text-align: center"> 
      <div class="content"> 
       <img src="images/re-modeler-reverseengineering-dialog.png" alt="re modeler reverseengineering dialog"> 
@@ -4672,28 +4693,40 @@ ServerRuntime runtime = ServerRuntime.builder()
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><strong>Select Catalog</strong>: catalog to process</p> </li> 
-     </ul> 
-    </div> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> You can only select one catalog. If you need to import multiple catalogs you need to run process several times. </td> 
-       </tr> 
-      </tbody>
-     </table> 
-    </div> 
-    <div class="ulist"> 
-     <ul> 
-      <li> <p><strong>Table Name Pattern</strong>: RegExp to filter tables. Default pattern .* includes all tables.</p> </li> 
-      <li> <p><strong>Procedure Name Pattern</strong>: RegExp to filter procedures. Default pattern .* includes all stored procedures.</p> </li> 
-      <li> <p><strong>Naming Strategy</strong>: Currently there is only one naming strategy available. See ant/maven tools <a href="#namingStrategy">documentation</a> for details about naming strategy.</p> </li> 
+      <li> <p><strong>Add Catalog</strong></p> </li> 
+      <li> <p><strong>Add Schema</strong></p> </li> 
+      <li> <p><strong>Add Include Table</strong></p> </li> 
+      <li> <p><strong>Add Exclude Table</strong></p> </li> 
+      <li> <p><strong>Add Include Column</strong></p> </li> 
+      <li> <p><strong>Add Exclude Column</strong></p> </li> 
+      <li> <p><strong>Add Include Procedure</strong></p> </li> 
+      <li> <p><strong>Add Exclude Procedure</strong></p> </li> 
       <li> <p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p> </li> 
+      <li> <p><strong>Strip from table names</strong>: Regex that matches the part of the table name that needs to be stripped off generating ObjEntity name.</p> </li> 
+      <li> <p><strong>Skip relationships loading</strong>: Whether to load relationships.</p> </li> 
+      <li> <p><strong>Skip primary key loading</strong>: Whether to load primary keys.</p> </li> 
+      <li> <p><strong>Force datamap catalog</strong>: will set DbEntity catalog to one in the DataMap.</p> </li> 
+      <li> <p><strong>Force datamap schema</strong>: will set DbEntity schema to one in the DataMap.</p> </li> 
       <li> <p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p> </li> 
       <li> <p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p> </li> 
      </ul> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="datasource-selection"><a class="anchor" href="#datasource-selection"></a>DataSource selection</h4> 
+    <div class="paragraph"> 
+     <p>Then you click <code>Run Import</code> or <code>Configure Connection</code> to set DataSource. If you don’t have any DataSource yet you can create one from this menu.</p> 
+    </div> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/re-modeler-datasource-select.png" alt="re modeler datasource select"> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Datasource selection dialog.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Then click <code>continue</code> to start dbImport.</p> 
     </div> 
    </div> 
   </div> 
@@ -4728,7 +4761,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <h5 id="gradle"><a class="anchor" href="#gradle"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.M2'</code></pre>
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.M2'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -4826,7 +4859,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-2"><a class="anchor" href="#gradle-2"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.M2'</code></pre>
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.M2'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -4912,7 +4945,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-3"><a class="anchor" href="#gradle-3"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.M2'</code></pre>
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.M2'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5041,7 +5074,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-4"><a class="anchor" href="#gradle-4"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.M2'</code></pre>
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.M2'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5070,47 +5103,9 @@ public class MyEntity extends _MyEntity {
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="ext-joda"><a class="anchor" href="#ext-joda"></a>5.5. Joda time extension</h3> 
+   <h3 id="ext-project-compatibility"><a class="anchor" href="#ext-project-compatibility"></a>5.5. Project compatibility extension</h3> 
    <div class="sect3"> 
     <h4 id="description-5"><a class="anchor" href="#description-5"></a>Description</h4> 
-    <div class="paragraph"> 
-     <p>Joda time module allows to use <code>org.joda.time.LocalTime</code>, <code>org.joda.time.LocalDate</code>, <code>org.joda.time.LocalDateTime</code> and <code>org.joda.time.DateTime</code> types for entity attributes.</p> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="including-in-a-project-5"><a class="anchor" href="#including-in-a-project-5"></a>Including in a project</h4> 
-    <div class="sect4"> 
-     <h5 id="maven-5"><a class="anchor" href="#maven-5"></a>Maven</h5> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-joda&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
-&lt;/dependency&gt;</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-joda:4.1.M2'</code></pre>
-      </div> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="usage-5"><a class="anchor" href="#usage-5"></a>Usage</h4> 
-    <div class="paragraph"> 
-     <p>This module doesn’t require any additional setup, you can just use new data types in your model.</p> 
-    </div> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="ext-project-compatibility"><a class="anchor" href="#ext-project-compatibility"></a>5.6. Project compatibility extension</h3> 
-   <div class="sect3"> 
-    <h4 id="description-6"><a class="anchor" href="#description-6"></a>Description</h4> 
     <div class="paragraph"> 
      <p>Since version 4.1 Cayenne doesn’t allow to load project XML files from previous versions as this can lead to unexpected errors in runtime. This module allows to use project files from older versions performing their upgrade on the fly (without modifying files). This can be useful when using Cayenne models from third-party libraries in your app.</p> 
     </div> 
@@ -5126,9 +5121,9 @@ public class MyEntity extends _MyEntity {
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="including-in-a-project-6"><a class="anchor" href="#including-in-a-project-6"></a>Including in a project</h4> 
+    <h4 id="including-in-a-project-5"><a class="anchor" href="#including-in-a-project-5"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h5> 
+     <h5 id="maven-5"><a class="anchor" href="#maven-5"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5140,33 +5135,33 @@ public class MyEntity extends _MyEntity {
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
+     <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.M2'</code></pre>
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.M2'</code></pre> 
       </div> 
      </div> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="usage-6"><a class="anchor" href="#usage-6"></a>Usage</h4> 
+    <h4 id="usage-5"><a class="anchor" href="#usage-5"></a>Usage</h4> 
     <div class="paragraph"> 
      <p>This module doesn’t require any additional setup.</p> 
     </div> 
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="ext-velocity"><a class="anchor" href="#ext-velocity"></a>5.7. Apache Velocity extension</h3> 
+   <h3 id="ext-velocity"><a class="anchor" href="#ext-velocity"></a>5.6. Apache Velocity extension</h3> 
    <div class="sect3"> 
-    <h4 id="description-7"><a class="anchor" href="#description-7"></a>Description</h4> 
+    <h4 id="description-6"><a class="anchor" href="#description-6"></a>Description</h4> 
     <div class="paragraph"> 
      <p>This module enables usage of full featured Apache Velocity templates in <code>org.apache.cayenne.query.SQLTemplate</code> queries.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="including-in-a-project-7"><a class="anchor" href="#including-in-a-project-7"></a>Including in a project</h4> 
+    <h4 id="including-in-a-project-6"><a class="anchor" href="#including-in-a-project-6"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-7"><a class="anchor" href="#maven-7"></a>Maven</h5> 
+     <h5 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5178,16 +5173,16 @@ public class MyEntity extends _MyEntity {
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
+     <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.M2'</code></pre>
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.M2'</code></pre> 
       </div> 
      </div> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="usage-7"><a class="anchor" href="#usage-7"></a>Usage</h4> 
+    <h4 id="usage-6"><a class="anchor" href="#usage-6"></a>Usage</h4> 
     <div class="paragraph"> 
      <p>This module doesn’t require any additional setup.</p> 
     </div> 
@@ -5217,6 +5212,102 @@ public class MyEntity extends _MyEntity {
     #chunk($name) NAME LIKE #bind($name) #end
     #chunk($id) ARTIST_ID &gt; #bind($id) #end
 #end"</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="cayenne-web-extension"><a class="anchor" href="#cayenne-web-extension"></a>5.7. Cayenne Web extension</h3> 
+   <div class="sect3"> 
+    <h4 id="description-7"><a class="anchor" href="#description-7"></a>Description</h4> 
+    <div class="paragraph"> 
+     <p>This module provides basic utilities to bootstrap Cayenne service inside web application.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="including-in-a-project-7"><a class="anchor" href="#including-in-a-project-7"></a>Including in a project</h4> 
+    <div class="sect4"> 
+     <h5 id="maven-7"><a class="anchor" href="#maven-7"></a>Maven</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-web&lt;/artifactId&gt;
+    &lt;version&gt;4.1.M2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-web:4.1.M2'</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="cayenne-osgi-extension"><a class="anchor" href="#cayenne-osgi-extension"></a>5.8. Cayenne OSGI extension</h3> 
+   <div class="sect3"> 
+    <h4 id="description-8"><a class="anchor" href="#description-8"></a>Description</h4> 
+    <div class="paragraph"> 
+     <p>This module helps to bootstrap Cayenne in OSGi environment.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="including-in-a-project-8"><a class="anchor" href="#including-in-a-project-8"></a>Including in a project</h4> 
+    <div class="sect4"> 
+     <h5 id="maven-8"><a class="anchor" href="#maven-8"></a>Maven</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-osgi&lt;/artifactId&gt;
+    &lt;version&gt;4.1.M2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="gradle-8"><a class="anchor" href="#gradle-8"></a>Gradle</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-osgi:4.1.M2'</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="cayenne-rop-server-extension"><a class="anchor" href="#cayenne-rop-server-extension"></a>5.9. Cayenne Rop Server extension</h3> 
+   <div class="sect3"> 
+    <h4 id="description-9"><a class="anchor" href="#description-9"></a>Description</h4> 
+    <div class="paragraph"> 
+     <p>This module creates services for the server side of an <a href="#introduction-to-rop">ROP</a> application.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="including-in-a-project-9"><a class="anchor" href="#including-in-a-project-9"></a>Including in a project</h4> 
+    <div class="sect4"> 
+     <h5 id="maven-9"><a class="anchor" href="#maven-9"></a>Maven</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-rop-server&lt;/artifactId&gt;
+    &lt;version&gt;4.1.M2&lt;/version&gt;
+&lt;/dependency&gt;</code></pre> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="gradle-9"><a class="anchor" href="#gradle-9"></a>Gradle</h5> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-rop-server:4.1.M2'</code></pre> 
+      </div> 
      </div> 
     </div> 
    </div> 
