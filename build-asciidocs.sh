@@ -96,7 +96,7 @@ cd  "$CAYENNE_TMP_DIR/docs/asciidoc/"
 
 # build it
 echo "Running Maven build... it can take a while..."
-mvn install -q -DskipTests > /dev/null 2>&1
+mvn install -q -DskipTests -Dcayenne.version=${VERSION} > /dev/null 2>&1
 echo "Maven build complete"
 
 # copy everything from ./docs/asciidoc/**/target/site/** directories
