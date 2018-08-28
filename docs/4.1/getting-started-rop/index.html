@@ -290,7 +290,7 @@
    <div class="sect3"> 
     <h4 id="setting-up-dependencies"><a class="anchor" href="#setting-up-dependencies"></a>Setting up Dependencies</h4> 
     <div class="paragraph"> 
-     <p>Now lets get back to the "tutorial" project that contains a web application and set up dependencies. The only extra one that we don’t have yet is <code>resin-hessian.jar</code>, just like the client, so let’s add it (and the caucho repo declaration) to the <code>pom.xml</code>.</p> 
+     <p>Now lets get back to the "tutorial" project that contains a web application and set up dependencies. Let’s add <code>resin-hessian.jar</code> (and the caucho repo declaration) and <code>cayenne-rop-server</code> to the <code>pom.xml</code></p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -299,6 +299,12 @@
     ...
     &lt;dependencies&gt;
         ...
+        &lt;dependency&gt;
+        	&lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+        	&lt;artifactId&gt;cayenne-rop-server&lt;/artifactId&gt;
+        	&lt;!-- Here specify the version of Cayenne you are actually using --&gt;
+            &lt;version&gt;{version}&lt;/version&gt;
+        &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;com.caucho&lt;/groupId&gt;
             &lt;artifactId&gt;hessian&lt;/artifactId&gt;
