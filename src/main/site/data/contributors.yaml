@@ -172,4 +172,9 @@ contributors:
     role: 
     email: "eric at centralparksoftware dot com"
     website: "[http://www.centralparksoftware.com/](http://www.centralparksoftware.com/)"
-    active: false     
+    active: false
+
+other:
+  - name: "jianingwang"
+    org: "Tencent's XuanWu Lab"
+    comment: "Finding and reporting XXE Vulnerability in Cayenne Modeler"

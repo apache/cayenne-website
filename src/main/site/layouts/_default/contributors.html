@@ -54,6 +54,29 @@
             </table>
         </div>
 
+        <h3 class="text-center">Other Contributors</h3>
+        <p class="text-center"></p>
+        <div class="table-responsive  mt-2 mb-5">
+            <table class="table table-bordered ">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Org</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{- range $.Site.Data.contributors.other -}}
+                <tr>
+                    <td>{{ .name }}</td>
+                    <td>{{ .org }}</td>
+                    <td>{{ if .comment }}{{ .comment | markdownify }}{{ end }}</td>
+                </tr>
+                {{- end -}}
+                </tbody>
+            </table>
+        </div>
+
     </section>
 </main>
 
