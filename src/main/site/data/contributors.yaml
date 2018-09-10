@@ -177,4 +177,4 @@ contributors:
 other:
   - name: "jianingwang"
     org: "Tencent's XuanWu Lab"
-    comment: "Finding and reporting XXE Vulnerability in Cayenne Modeler"
+    comment: "Found and reported XXE Vulnerability in Cayenne Modeler"
