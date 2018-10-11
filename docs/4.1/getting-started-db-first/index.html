@@ -223,11 +223,11 @@
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE SCHEMA IF NOT EXISTS cayenne_demo; USE cayenne_demo;
-CREATE TABLE ARTIST (DATE_OF_BIRTH DATE NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-CREATE TABLE GALLERY (ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-CREATE TABLE PAINTING (ARTIST_ID INT NULL, GALLERY_ID INT NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-ALTER TABLE PAINTING ADD FOREIGN KEY (ARTIST_ID) REFERENCES ARTIST (ID) ON DELETE CASCADE;
-ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DELETE CASCADE;</code></pre> 
+CREATE TABLE artist (DATE_OF_BIRTH DATE NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+CREATE TABLE gallery (ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+CREATE TABLE painting (ARTIST_ID INT NULL, GALLERY_ID INT NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+ALTER TABLE painting ADD FOREIGN KEY (ARTIST_ID) REFERENCES artist (ID) ON DELETE CASCADE;
+ALTER TABLE painting ADD FOREIGN KEY (GALLERY_ID) REFERENCES gallery (ID) ON DELETE CASCADE;</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -380,25 +380,25 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
       <pre>...
 [INFO] +++ Connecting: SUCCESS.
 [INFO] Detected and installed adapter: org.apache.cayenne.dba.mysql.MySQLAdapter
-[INFO]   Table: cayenne_demo.ARTIST
-[INFO]   Table: cayenne_demo.GALLERY
-[INFO]   Table: cayenne_demo.PAINTING
-[INFO]     Db Relationship : toOne  (PAINTING.GALLERY_ID, GALLERY.ID)
-[INFO]     Db Relationship : toMany (GALLERY.ID, PAINTING.GALLERY_ID)
-[INFO]     Db Relationship : toOne  (PAINTING.ARTIST_ID, ARTIST.ID)
-[INFO]     Db Relationship : toMany (ARTIST.ID, PAINTING.ARTIST_ID)
+[INFO]   Table: cayenne_demo.artist
+[INFO]   Table: cayenne_demo.gallery
+[INFO]   Table: cayenne_demo.painting
+[INFO]     Db Relationship : toOne  (painting.GALLERY_ID, gallery.ID)
+[INFO]     Db Relationship : toMany (gallery.ID, painting.GALLERY_ID)
+[INFO]     Db Relationship : toOne  (painting.ARTIST_ID, artist.ID)
+[INFO]     Db Relationship : toMany (artist.ID, painting.ARTIST_ID)
 [INFO]
 [INFO] Map file does not exist. Loaded db model will be saved into '~/work/cayenne/db-first-tutorial/src/main/resources/datamap.map.xml'
 [INFO]
 [INFO] Detected changes:
-[INFO]     Create Table         ARTIST
-[INFO]     Create Table         PAINTING
-[INFO]     Create Table         GALLERY
+[INFO]     Create Table         artist
+[INFO]     Create Table         painting
+[INFO]     Create Table         gallery
 [INFO]
-[WARNING] Can't find ObjEntity for PAINTING
-[WARNING] Db Relationship (Db Relationship : toMany (ARTIST.ID, PAINTING.ARTIST_ID)) will have GUESSED Obj Relationship reflection.
-[WARNING] Can't find ObjEntity for GALLERY
-[WARNING] Db Relationship (Db Relationship : toOne  (PAINTING.GALLERY_ID, GALLERY.ID)) will have GUESSED Obj Relationship reflection.
+[WARNING] Can't find ObjEntity for painting
+[WARNING] Db Relationship (Db Relationship : toMany (artist.ID, painting.ARTIST_ID)) will have GUESSED Obj Relationship reflection.
+[WARNING] Can't find ObjEntity for gallery
+[WARNING] Db Relationship (Db Relationship : toOne  (painting.GALLERY_ID, gallery.ID)) will have GUESSED Obj Relationship reflection.
 [INFO] Migration Complete Successfully.</pre> 
      </div> 
     </div> 
@@ -471,9 +471,9 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.PAINTING_INFO (INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (PAINTING_ID)) ENGINE=InnoDB;
-ALTER TABLE cayenne_demo.GALLERY ADD COLUMN FOUNDED_DATE DATE;
-ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES cayenne_demo.PAINTING (ID);</code></pre> 
+      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.painting_info (INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (PAINTING_ID)) ENGINE=InnoDB;
+ALTER TABLE cayenne_demo.gallery ADD COLUMN FOUNDED_DATE DATE;
+ALTER TABLE cayenne_demo.painting_info ADD FOREIGN KEY (PAINTING_ID) REFERENCES cayenne_demo.painting (ID);</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -493,21 +493,21 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
     <div class="listingblock"> 
      <div class="content"> 
       <pre>...
-[INFO]   Table: cayenne_demo.ARTIST
-[INFO]   Table: cayenne_demo.GALLERY
-[INFO]   Table: cayenne_demo.PAINTING
-[INFO]   Table: cayenne_demo.PAINTING_INFO
-[INFO]     Db Relationship : toOne  (PAINTING_INFO.PAINTING_ID, PAINTING.ID)
-[INFO]     Db Relationship : toOne  (PAINTING.ID, PAINTING_INFO.PAINTING_ID)
-[INFO]     Db Relationship : toOne  (PAINTING.GALLERY_ID, GALLERY.ID)
-[INFO]     Db Relationship : toMany (GALLERY.ID, PAINTING.GALLERY_ID)
-[INFO]     Db Relationship : toOne  (PAINTING.ARTIST_ID, ARTIST.ID)
-[INFO]     Db Relationship : toMany (ARTIST.ID, PAINTING.ARTIST_ID)
+[INFO]   Table: cayenne_demo.artist
+[INFO]   Table: cayenne_demo.gallery
+[INFO]   Table: cayenne_demo.painting
+[INFO]   Table: cayenne_demo.painting_info
+[INFO]     Db Relationship : toOne  (painting_info.PAINTING_ID, painting.ID)
+[INFO]     Db Relationship : toOne  (painting.ID, painting_info.PAINTING_ID)
+[INFO]     Db Relationship : toOne  (painting.GALLERY_ID, gallery.ID)
+[INFO]     Db Relationship : toMany (gallery.ID, painting.GALLERY_ID)
+[INFO]     Db Relationship : toOne  (painting.ARTIST_ID, artist.ID)
+[INFO]     Db Relationship : toMany (artist.ID, painting.ARTIST_ID)
 [INFO]
 [INFO] Detected changes:
-[INFO]     Create Table         PAINTING_INFO
-[INFO]     Add Column           GALLERY.FOUNDED_DATE
-[INFO]     Add Relationship     paintingInfo PAINTING-&gt;PAINTING_INFO.PAINTING_ID
+[INFO]     Create Table         painting_info
+[INFO]     Add Column           gallery.FOUNDED_DATE
+[INFO]     Add Relationship     paintingInfo painting-&gt;painting_info.PAINTING_ID
 [INFO]
 [INFO] Migration Complete Successfully.</pre> 
      </div> 
@@ -580,10 +580,10 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.LEGACY_PAINTING_INFO (ID INT NOT NULL AUTO_INCREMENT, INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-ALTER TABLE cayenne_demo.ARTIST ADD COLUMN __service_column INT;
-ALTER TABLE cayenne_demo.GALLERY ADD COLUMN __service_column INT;
-ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre> 
+      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.legacy_painting_info (ID INT NOT NULL AUTO_INCREMENT, INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+ALTER TABLE cayenne_demo.artist ADD COLUMN __service_column INT;
+ALTER TABLE cayenne_demo.gallery ADD COLUMN __service_column INT;
+ALTER TABLE cayenne_demo.painting ADD COLUMN __service_column INT;</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -594,7 +594,7 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;excludeTable&gt;LEGACY_PAINTING_INFO&lt;/excludeTable&gt;
+      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;excludeTable&gt;legacy_painting_info&lt;/excludeTable&gt;
 &lt;excludeColumn&gt;__service_column&lt;/excludeColumn&gt;</code></pre> 
      </div> 
     </div> 
@@ -809,7 +809,7 @@ context.commitChanges();</code></pre>
 ...
 [main] INFO org.apache.cayenne.datasource.DriverDataSource - +++ Connecting: SUCCESS.
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - --- transaction started.
-[main] INFO org.apache.cayenne.log.JdbcEventLogger - INSERT INTO cayenne_demo.ARTIST (DATE_OF_BIRTH, NAME) VALUES (?, ?)
+[main] INFO org.apache.cayenne.log.JdbcEventLogger - INSERT INTO cayenne_demo.artist (DATE_OF_BIRTH, NAME) VALUES (?, ?)
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - [bind: 1-&gt;DATE_OF_BIRTH:NULL, 2-&gt;NAME:'Picasso']
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - Generated PK: ARTIST.ID = 2
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - === updated 1 row.
