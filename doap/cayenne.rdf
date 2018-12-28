@@ -42,8 +42,8 @@
         <release>
             <Version>
                 <name>Stable</name>
-                <created>2018-08-15</created>
-                <revision>4.0</revision>
+                <created>2018-12-28</created>
+                <revision>4.0.1</revision>
             </Version>
         </release><release>
             <Version>

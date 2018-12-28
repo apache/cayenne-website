@@ -131,6 +131,11 @@
   </url>
   
   <url>
+    <loc>https://cayenne.apache.org/2018/12/cayenne-401-released/</loc>
+    <lastmod>2018-12-28T12:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://cayenne.apache.org/2018/08/cayenne-40-final-released/</loc>
     <lastmod>2018-08-16T12:00:00+03:00</lastmod>
   </url>
@@ -202,7 +207,7 @@
   
   <url>
     <loc>https://cayenne.apache.org/</loc>
-    <lastmod>2018-08-16T12:00:00+03:00</lastmod>
+    <lastmod>2018-12-28T12:00:00+03:00</lastmod>
   </url>
   
   <url>
@@ -1453,7 +1458,7 @@
   
   <url>
     <loc>https://cayenne.apache.org/news/</loc>
-    <lastmod>2018-08-16T12:00:00+03:00</lastmod>
+    <lastmod>2018-12-28T12:00:00+03:00</lastmod>
     <priority>0</priority>
   </url>
   
