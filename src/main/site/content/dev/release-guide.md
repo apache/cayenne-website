@@ -97,7 +97,7 @@ work ("-u" option can be omitted if you have only one GPG key):
 
 * Assemblies, signature and checksum files are committed to the special SVN repo
   used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). 
-  Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/dev/release.html#upload-ci).
+  Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/legal/release-policy.html#stage).
 
 {{% gap %}}
 
