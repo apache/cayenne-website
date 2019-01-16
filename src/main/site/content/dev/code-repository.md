@@ -11,7 +11,7 @@ url: /dev/code-repository.html
 
 ## GitHub Repository
 
-A read-only mirror of Cayenne sources is published on GitHub:    
+A read-write mirror of Cayenne sources is published on GitHub:    
 [https://github.com/apache/cayenne](https://github.com/apache/cayenne) 
 
 Feel free to clone, fork, star Cayenne there. And of course submit pull requests.
@@ -22,10 +22,9 @@ Feel free to clone, fork, star Cayenne there. And of course submit pull requests
 ## Master Git Repository
 
 "Master" writable repository is located here:    
-[https://git-wip-us.apache.org/repos/asf/cayenne.git](https://git-wip-us.apache.org/repos/asf/cayenne.git)
+[https://gitbox.apache.org/repos/asf/cayenne.git](https://gitbox.apache.org/repos/asf/cayenne.git)
 
-It is publicly readable, but only committers have write access. That's where committers would ultimately push 
-the code. It is synchronized to GitHub usually within seconds.
+It is publicly readable, but only committers have write access.
 
 {{% gap %}}
 
