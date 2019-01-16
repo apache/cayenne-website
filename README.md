@@ -8,7 +8,7 @@ Contains sources of [Cayenne website](http://cayenne.apache.org).
 
 Just clone and run maven, nothing else required.
 
-    git clone https://git-wip-us.apache.org/repos/asf/cayenne-website.git
+    git clone https://gitbox.apache.org/repos/asf/cayenne-website.git
     cd cayenne-website
     mvn
 
