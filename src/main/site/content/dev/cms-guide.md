@@ -5,7 +5,7 @@ url: /dev/cms-guide.html
 ---
 
 Cayenne Site source code (content + styling + scripts) can be obtained from Apache Git repo:  
-https://git-wip-us.apache.org/repos/asf/cayenne-website.git
+https://gitbox.apache.org/repos/asf/cayenne.git
 
 Or from GitHub mirror (in read only mode): https://github.com/apache/cayenne-website.git
 
@@ -15,7 +15,7 @@ Or from GitHub mirror (in read only mode): https://github.com/apache/cayenne-web
 
 Just clone and run maven, nothing else required.
 
-    git clone https://git-wip-us.apache.org/repos/asf/cayenne-website.git
+    git clone https://gitbox.apache.org/repos/asf/cayenne.git
     cd cayenne-website
     mvn
 
