@@ -19,9 +19,8 @@
 
 #
 # This file used in cayenne.rdf file generation,
-# to form Documentation and Downloads sections (filtered by docs and downloadable flags).
-#
-# NOTE: versions are rendered on Download page in the same order as in this file.
+# to form Documentation, and in Downloads sections (filtered by docs and downloadable flags respectively).
+# Versions are rendered on Download page in the same order as in this file.
 #
 releases:
 
@@ -36,10 +35,10 @@ releases:
     newRepoLayout: true
 
   - version: "4.1"                            # major version
-    latestRevision: "4.1.M2"                  # exact latest version
-    type: "Alpha"                             # arbitrary type (Alpha for milestones, Beta, Stable and Legacy)
+    latestRevision: "4.1.B1"                  # exact latest version
+    type: "Beta"                              # arbitrary type (Alpha for milestones, Beta, Stable and Legacy)
     description: "Latest development release" # some general comment
-    date: "2018-07-23"                        # release date
+    date: "2019-03-18"                        # release date
     docs: true                                # this version is visible in Docs section
     downloadable: true                        # this version is visible in Download section, also see "customLink" attribute
     jdk: 1.8                                  # min supported Java version

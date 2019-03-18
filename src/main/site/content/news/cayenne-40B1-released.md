@@ -5,7 +5,7 @@ url: /2017/06/cayenne-40B1-released.html
 --- 
 
 Apache Cayenne team is glad to announce a beta release of Cayenne 4.0. What this means for our users is
-that now the API is frozen and it is safe to try it out even if you are not usually confortable living 
+that now the API is frozen and it is safe to try it out even if you are not usually comfortable living 
 on the bleeding edge of unstable releases. We'd like to hear from you about your upgrade experiences. 
 And of course we'll strive to fix any remaining bugs before 4.0 goes final. To give you more confidence, 
 we'd like to mention that most of the Cayenne developers have been using 4.0 in production for years. 
