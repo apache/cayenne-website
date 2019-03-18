@@ -1,5 +1,5 @@
 ---
-title: Cayenne 4.1 Beta 2 Released
+title: Cayenne 4.1 Beta 1 Released
 date: 2019-03-18T12:00:00+03:00
 url: /2019/03/cayenne-41b1-released.html
 --- 
