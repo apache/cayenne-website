@@ -95,7 +95,7 @@
                                 Cayenne Version 4.1
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Alpha)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -235,12 +235,12 @@
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">4.1</p></td> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.8 or newer</p></td> 
-       <td class="tableblock halign-left valign-top"><p class="tableblock">Development</p></td> 
+       <td class="tableblock halign-left valign-top"><p class="tableblock">Beta</p></td> 
       </tr> 
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">4.0</p></td> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.7 or newer</p></td> 
-       <td class="tableblock halign-left valign-top"><p class="tableblock">Beta</p></td> 
+       <td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td> 
       </tr> 
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">3.1</p></td> 
@@ -298,7 +298,7 @@
         &lt;plugin&gt;
             &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;4.1.M2&lt;/version&gt;
+            &lt;version&gt;4.1.B1&lt;/version&gt;
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;</code></pre> 
@@ -437,9 +437,6 @@ total 24
   <div class="sect2"> 
    <h3 id="cayennemodeler-application"><a class="anchor" href="#cayennemodeler-application"></a>1.3. CayenneModeler Application</h3> 
    <div class="sect3"> 
-    <h4 id="working-with-mapping-projects"><a class="anchor" href="#working-with-mapping-projects"></a>Working with Mapping Projects</h4> 
-   </div> 
-   <div class="sect3"> 
     <h4 id="reverse-engineering-database"><a class="anchor" href="#reverse-engineering-database"></a>Reverse Engineering Database</h4> 
     <div class="paragraph"> 
      <p>See chapter <a href="#re-modeler">Reverse Engineering in Cayenne Modeler</a></p> 
@@ -453,9 +450,6 @@ total 24
     <div class="paragraph"> 
      <p>You can select what database parts should be generated and what tables you want</p> 
     </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="migrations"><a class="anchor" href="#migrations"></a>Migrations</h4> 
    </div> 
    <div class="sect3"> 
     <h4 id="generating-java-classes"><a class="anchor" href="#generating-java-classes"></a>Generating Java Classes</h4> 
@@ -479,15 +473,19 @@ total 24
     <div class="ulist"> 
      <ul> 
       <li> <p><strong>Client Persistent Objects</strong></p> </li> 
+     </ul> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This type is for generating code for client part of a ROP setup.</p> 
+    </div> 
+    <div class="ulist"> 
+     <ul> 
       <li> <p><strong>Advanced</strong></p> </li> 
      </ul> 
     </div> 
     <div class="paragraph"> 
      <p>In advanced mode you can control almost all aspects of code generation including custom templates for java code. See default Cayenne templates on GitHub as an example.</p> 
     </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="modeling-inheritance"><a class="anchor" href="#modeling-inheritance"></a>Modeling Inheritance</h4> 
    </div> 
    <div class="sect3"> 
     <h4 id="modeling-generic-persistent-classes"><a class="anchor" href="#modeling-generic-persistent-classes"></a>Modeling Generic Persistent Classes</h4> 
@@ -502,10 +500,25 @@ total 24
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="mapping-objattributes-to-custom-classes"><a class="anchor" href="#mapping-objattributes-to-custom-classes"></a>Mapping ObjAttributes to Custom Classes</h4> 
-   </div> 
-   <div class="sect3"> 
     <h4 id="modeling-primary-key-generation-strategy"><a class="anchor" href="#modeling-primary-key-generation-strategy"></a>Modeling Primary Key Generation Strategy</h4> 
+    <div class="paragraph"> 
+     <p>Cayenne supports three PK generation strategies:</p> 
+    </div> 
+    <div class="olist arabic"> 
+     <ol class="arabic"> 
+      <li> <p><strong>Cayenne Generated</strong>. This is default strategy. Cayenne will use special table <code>AUTO_PK_SUPPORT</code> for managing primary keys.</p> </li> 
+      <li> <p><strong>Database Generated</strong>. Cayenne will delegate PK generation to database (e.g. auto increment fields on MySQL or <code>serial</code> type on PostgreSQL)</p> </li> 
+      <li> <p><strong>Custom Sequence</strong>. In this case Cayenne will use provided sequence to generate primary keys.</p> </li> 
+     </ol> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Strategy should be set per each <code>DbEntity</code> independently.</p> 
+    </div> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/db-entity-pk.png" alt="db entity pk"> 
+     </div> 
+    </div> 
    </div> 
   </div> 
  </div> 
@@ -522,9 +535,9 @@ total 24
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>cayenne-di-4.1.M2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-server-4.1.M2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.1.M2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
+      <li> <p><code>cayenne-di-4.1.B1.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-server-4.1.B1.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-client-4.1.B1.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -548,7 +561,7 @@ total 24
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
    &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-   &lt;version&gt;4.1.M2&lt;/version&gt;
+   &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
      </div> 
     </div> 
@@ -699,6 +712,11 @@ total 24
         <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
         <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will force run from maven/gradle.</p></td> 
        </tr> 
+       <tr> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">createPKProperties</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+        <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate PK attributes as Properties. Default is "false".</p></td> 
+       </tr> 
       </tbody> 
      </table> 
      <div class="paragraph"> 
@@ -709,7 +727,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 
     &lt;configuration&gt;
         &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
@@ -872,7 +890,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
     &lt;executions&gt;
         &lt;execution&gt;
             &lt;configuration&gt;
@@ -1112,7 +1130,7 @@ total 24
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 
     &lt;executions&gt;
         &lt;execution&gt;
@@ -1149,7 +1167,7 @@ total 24
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.M2'</code></pre> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.B1'</code></pre> 
      </div> 
     </div> 
     <div class="ulist"> 
@@ -1171,7 +1189,7 @@ total 24
     }
     // add Cayenne Gradle Plugin
     dependencies {
-        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.M2'
+        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.B1'
     }
 }
 
@@ -2493,7 +2511,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
     <div class="sect4"> 
      <h5 id="sqlselect-and-sqlexec"><a class="anchor" href="#sqlselect-and-sqlexec"></a>SQLSelect and SQLExec</h5> 
      <div class="paragraph"> 
-      <p><code>SQLSelect</code> and <code>SQLExec</code> are essentially a "fluent" versions of older <code>SQLTemplate</code> query. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns or collection of <code>DataRow</code>. <code>SQLExec</code> is designed to just execute any raw SQL code (e.g. updates, deletes, DDLs, etc.) This queries support all directives described in <a href="#sqltemplate">SQLTemplate</a> section.</p> 
+      <p><code>SQLSelect</code> and <code>SQLExec</code> are essentially a "fluent" versions of older <code>SQLTemplate</code> query. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns, collection of <code>DataRow</code> or Object[]. <code>SQLExec</code> is designed to just execute any raw SQL code (e.g. updates, deletes, DDLs, etc.) This queries support all directives described in <a href="#sqltemplate">SQLTemplate</a> section. Also you can predefine result type of columns.</p> 
      </div> 
      <div class="paragraph"> 
       <p>Here is example of how to use SQLSelect:</p> 
@@ -2513,6 +2531,16 @@ List&lt;Painting&gt; paintings = SQLSelect
 List&lt;String&gt; paintingNames = SQLSelect
     .scalarQuery(String.class, "SELECT PAINTING_TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; #bind($price)")
     .params("price", 100000)
+    .select(context);
+
+// Selecting DataRow with predefined types
+List&lt;DataRow&gt; result = SQLSelect
+    .dataRowQuery("SELECT * FROM ARTIST_CT", Integer.class, String.class, LocalDateTime.class)
+    .select(context);
+
+// Selecting Object[] with predefined types
+List&lt;Object[]&gt; result = SQLSelect
+    .scalarQuery("SELECT * FROM ARTIST_CT", Integer.class, String.class, LocalDateTime.class)
     .select(context);</code></pre> 
       </div> 
      </div> 
@@ -3069,6 +3097,24 @@ query.setResult(resultDescriptor);
 
 // List of Object[]
 List&lt;Object[]&gt; data = context.performQuery(query);</code></pre> 
+       </div> 
+      </div> 
+      <div class="paragraph"> 
+       <p>You can fetch list of scalars, list of Object[] or list of DataRow with predefined result column types or using default types.</p> 
+      </div> 
+      <div class="listingblock"> 
+       <div class="content"> 
+        <pre class="highlight"><code class="language-Java Java" data-lang="Java">// Selecting Object[] with predefined types
+SQLTemplate q3 = new SQLTemplate(Artist.class, "SELECT ARTIST_ID, ARTIST_NAME FROM ARTIST");
+ 		q3.setResultColumnsTypes(Double.class, String.class);
+ 		q3.setUseScalar(true);
+List&lt;Object[]&gt; result = context.performQuery(q3);
+
+// Selecting DataRow with predefined types
+SQLTemplate q3 = new SQLTemplate(Artist.class, "SELECT ARTIST_ID, ARTIST_NAME FROM ARTIST");
+        q3.setResultColumnsTypes(Double.class, String.class);
+        q3.setFetchingDataRows(true);
+List&lt;DataRow&gt; result = context.performQuery(q3);</code></pre> 
        </div> 
       </div> 
       <div class="paragraph"> 
@@ -4338,7 +4384,7 @@ ServerRuntime runtime = ServerRuntime.builder()
       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
 	&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
 	&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-	&lt;version&gt;4.1.M2&lt;/version&gt;
+	&lt;version&gt;4.1.B1&lt;/version&gt;
 
 	&lt;configuration&gt;
         &lt;cayenneProject&gt;${project.basedir}/src/main/resources/cayenne/cayenne-project.xml&lt;/cayenneProject&gt;
@@ -4927,7 +4973,7 @@ ServerRuntime runtime = ServerRuntime.builder()
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-cache-invalidation&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -4936,7 +4982,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <h5 id="gradle"><a class="anchor" href="#gradle"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5025,7 +5071,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-commitlog&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5034,7 +5080,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-2"><a class="anchor" href="#gradle-2"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5111,7 +5157,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-crypto&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5120,7 +5166,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-3"><a class="anchor" href="#gradle-3"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5240,7 +5286,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5249,7 +5295,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-4"><a class="anchor" href="#gradle-4"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5357,7 +5403,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-project-compatibility&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5366,7 +5412,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5395,7 +5441,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-velocity&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5404,7 +5450,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5461,7 +5507,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-web&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5470,7 +5516,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-web:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-web:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5493,7 +5539,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-osgi&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5502,7 +5548,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-8"><a class="anchor" href="#gradle-8"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-osgi:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-osgi:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5525,7 +5571,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-rop-server&lt;/artifactId&gt;
-    &lt;version&gt;4.1.M2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5534,7 +5580,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-9"><a class="anchor" href="#gradle-9"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-rop-server:4.1.M2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-rop-server:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -6036,6 +6082,11 @@ NON-TERMINALS
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2019-03-18 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 18, 2019</time>
+                        <a href="/2019/03/cayenne-41b1-released.html">Cayenne 4.1 Beta 2 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2018-12-28 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 28, 2018</time>
                         <a href="/2018/12/cayenne-401-released/">Cayenne 4.0.1 Released</a>
                     </li>
@@ -6043,11 +6094,6 @@ NON-TERMINALS
                     <li>
                         <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
                         <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2018-07-23 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 23, 2018</time>
-                        <a href="/2018/07/cayenne-41m2-released.html">Cayenne 4.1 Milestone 2 Released</a>
                     </li>
                     
                 </ul>
