@@ -4,8 +4,17 @@ date: 2019-03-18T12:00:00+03:00
 url: /2019/03/cayenne-41b1-released.html
 --- 
 
-Apache Cayenne team is glad to announce first beta release of Cayenne 4.1. 
+Apache Cayenne team is glad to announce the first beta release of Cayenne 4.1. 
 The API is frozen now and it is safe to try it out. From now on the 4.1 branch will concentrate on bug fixes.
+The highlights of this release are:
+
+* Cross-context synchronization to turned off by default. This should improve commit performance and cluster consistency. It can be turned back on via `cayenne.server.contexts_sync_strategy` property (aka `Constants.SERVER_CONTEXTS_SYNC_PROPERTY`)
+
+* Improved "DB Import" tab for DataMaps
+
+* "Class Generation" dialog is now implemented as a DataMap tab. Class generation user selections are preserved in the project and can be reused from Maven/Gradle/Ant cgen.
+
+* General Modeler cleanup and bugfixes; framework bugfixes.
 
 Cayenne can be downloaded from [here](/download.html).
 
