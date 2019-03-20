@@ -96,7 +96,7 @@ The API is frozen now and it is safe to try it out. From now on the 4.1 branch w
 The highlights of this release are:</p>
 
 <ul>
-<li><p>Cross-context synchronization to turned off by default. This should improve commit performance and cluster consistency. It can be turned back on via <code>cayenne.server.contexts_sync_strategy</code> property (aka <code>Constants.SERVER_CONTEXTS_SYNC_PROPERTY</code>)</p></li>
+<li><p>Cross-context synchronization is turned off by default. This should improve commit performance and data consistency in app clustering scenarios. It can be turned back on via <code>cayenne.server.contexts_sync_strategy</code> property (aka <code>Constants.SERVER_CONTEXTS_SYNC_PROPERTY</code>).</p></li>
 
 <li><p>Improved &ldquo;DB Import&rdquo; tab for DataMaps</p></li>
 
