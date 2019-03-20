@@ -8,7 +8,7 @@ Apache Cayenne team is glad to announce the first beta release of Cayenne 4.1.
 The API is frozen now and it is safe to try it out. From now on the 4.1 branch will concentrate on bug fixes.
 The highlights of this release are:
 
-* Cross-context synchronization to turned off by default. This should improve commit performance and cluster consistency. It can be turned back on via `cayenne.server.contexts_sync_strategy` property (aka `Constants.SERVER_CONTEXTS_SYNC_PROPERTY`)
+* Cross-context synchronization is turned off by default. This should improve commit performance and data consistency in app clustering scenarios. It can be turned back on via `cayenne.server.contexts_sync_strategy` property (aka `Constants.SERVER_CONTEXTS_SYNC_PROPERTY`).
 
 * Improved "DB Import" tab for DataMaps
 
