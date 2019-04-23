@@ -79,6 +79,7 @@
 	.mw-75 { max-width: 75% !important; }
 
 	.mw-15px { max-width: 15px !important; }
+	.mw-460px { max-width: 460px !important; }
 	.mw-500px { max-width: 500px !important; }
 	// max height
 	.mh-26px {max-height: 26px;}
@@ -352,6 +353,10 @@
 		}
 
 		// NAVBAR
+		// .navbar {
+		// 	box-shadow: 0 4px 20px 0px rgba(220, 86, 86, 0.5);
+		// }
+
 		.navbar-brand {
 			margin-right: 3rem;
 		}
@@ -417,20 +422,46 @@
 		}
 
     // TABS
-	.nav-tabs {
-		.nav-link {
-			color: #777;
-			border-width: 0 0 1px;
+		.nav-tabs {
+			.nav-link {
+				color: #777;
+				border-width: 0 0 1px;
+			}
+
+			.nav-link.active,
+			.nav-item.show .nav-link {
+				color: #444;
+				border-width: 0 0 2px;
+				border-color: #dc5656;
+			}
 		}
 
-		.nav-link.active,
-		.nav-item.show .nav-link {
-			color: #444;
-			border-width: 0 0 2px;
-			border-color: #dc5656;
+	// #INTRO
+	#intro {
+
+		img {
+			@include media-breakpoint-up(xl) {
+				max-width: 330px;
+			}
+
+			@media screen and (min-width: map-get($grid-breakpoints, sm)) and (max-width: map-get($grid-breakpoints, xl)) {
+				max-width: 460px;
+				margin-left: -500rem;
+				margin-right: -500rem;
+			}
+			
+			max-width: 100%; 
+		}
+
+		.embed-responsive {
+			// box-shadow: 0 0 13px 0px rgba(0, 0, 0, 0.1), 0 0 0 0.5em rgba(220,86,86,.1);
+			// box-shadow: 0 0 13px 0px rgba(0, 0, 0, 0.1);
+			//box-shadow: 0 0 0px 4px rgba(0, 0, 0, 0.11); // 0 0 5px 4px rgba(0,0,0,.11)
+			// box-shadow: 0 0 0 0.5em rgba(0, 0, 0, 0.1); 
+			box-shadow: 0 0 20px 10px rgba(0,0,0,.11);
+			border-radius: 2px; // .5em;
 		}
 	}
-
 
 	// FOOTER
 		footer {

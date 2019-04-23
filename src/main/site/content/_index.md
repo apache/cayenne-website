@@ -3,17 +3,21 @@
 ---
 <!-- Intro -->
 <section id="intro" class="pb-5">
-    <div class="row align-items-center justify-content-center  mb-3">
-        <div class="col-md-6  text-center">
-            <img class="img-fluid  mb-2" src="img/cayenne_illustr.png" alt="Cayenne Illustration" />
-            <h1 class="display-2  font-weight-normal">
+    <div class="row align-items-center justify-content-center  mb-4">
+        <div class="col-10 col-sm-8 col-md-6 text-center text-xl-left">
+            <img class="mb-2 mb-xl-0" src="img/cayenne_illustr.png" alt="Cayenne Illustration" /> <!-- !!! -->
+            <h1 class="display-2  font-weight-normal  mb-xl-1l2">
                 <span class="font-weight-xlight">Your</span>
                 <span class="font-weight-semibold">ORM</span>
                 superpower
             </h1>
-            <p class="small  font-italic">Apache Cayenne™ is an open source Java object-to-relational mapping framework</p>
+            <p class="d-inline-block mw-460px  small  font-italic  mb-xl-0">Apache Cayenne™ is an open source Java object-to-relational mapping framework</p>
         </div>
-        <div class="col-md  d-none">Video</div>
+        <div class="col-11 col-sm-10 col-lg-8 col-xl  mt-2">
+			<div class="embed-responsive mw-500px mx-auto embed-responsive-16by9">
+				<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0H5HIA03xFc?html5=1&controls=1&showinfo=0&fs=1&rel=0" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div><!-- col-md  d-none -->
     </div>
 
     <!-- CTA Btn -->        
