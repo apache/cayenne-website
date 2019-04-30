@@ -32,6 +32,6 @@
     "merge-stream": "^1.0.1",
     "require-dir": "^0.3.2",
     "rev-del": "^1.0.5",
-    "hugo-bin": "^0.18.0"
+    "hugo-bin": "^0.30.0"
   }
 }
