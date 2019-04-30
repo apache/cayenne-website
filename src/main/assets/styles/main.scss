@@ -80,7 +80,6 @@
 
 	.mw-15px { max-width: 15px !important; }
 	.mw-460px { max-width: 460px !important; }
-	.mw-500px { max-width: 500px !important; }
 	// max height
 	.mh-26px {max-height: 26px;}
 
@@ -460,6 +459,11 @@
 			// box-shadow: 0 0 0 0.5em rgba(0, 0, 0, 0.1); 
 			box-shadow: 0 0 20px 10px rgba(0,0,0,.11);
 			border-radius: 2px; // .5em;
+			max-width: 560px;
+			
+			@include media-breakpoint-down(xs) {
+				max-width: 460px;
+			}
 		}
 	}
 
