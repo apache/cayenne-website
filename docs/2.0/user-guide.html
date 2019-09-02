@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-56b760f573.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
+        <title>User Guide &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.0/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 2.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">User Guide</span>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/2.0/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/2.0/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/2.0/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    <H2><A name="UserGuide-UserGuide"></A>User Guide</H2>
+
+<OL>
+	<LI><A href="introduction.html" title="Introduction">Introduction</A></LI>
+	<LI><A href="installation.html" title="Installation">Installation</A></LI>
+	<LI><A href="quick-start.html" title="Quick Start">Quick Start</A></LI>
+	<LI><A href="design.html" title="Design">Design</A></LI>
+	<LI><A href="datacontext.html" title="DataContext">DataContext</A></LI>
+	<LI><A href="queries.html" title="Queries">Queries</A></LI>
+	<LI><A href="dataobjects.html" title="DataObjects">DataObjects</A></LI>
+	<LI><A href="stored-procedures.html" title="Stored Procedures">Stored Procedures</A></LI>
+	<LI><A href="expressions.html" title="Expressions">Expressions</A></LI>
+	<LI><A href="performance-tuning.html" title="Performance Tuning">Performance Tuning</A></LI>
+	<LI><A href="deployment.html" title="Deployment">Deployment</A></LI>
+	<LI><A href="ant-tasks.html" title="Ant Tasks">Ant Tasks</A></LI>
+	<LI><A href="customizing.html" title="Customizing">Customizing</A></LI>
+	<LI><A href="dataviews.html" title="DataViews">DataViews</A></LI>
+</OL>
+
+
+
+<H3><A name="UserGuide-Completealphabeticalguideindex"></A>Complete alphabetical guide index</H3>
+<UL><LI><A href="ant-tasks.html" title="Ant Tasks">Ant Tasks</A><UL><LI><A href="cdataport.html" title="cdataport">cdataport</A></LI><LI><A href="cdbgen.html" title="cdbgen">cdbgen</A></LI><LI><A href="cdeploy.html" title="cdeploy">cdeploy</A></LI><LI><A href="cgen.html" title="cgen">cgen</A></LI></UL></LI><LI><A href="customizing.html" title="Customizing">Customizing</A><UL><LI><A href="extended-types.html" title="Extended Types">Extended Types</A></LI></UL></LI><LI><A href="datacontext.html" title="DataContext">DataContext</A><UL><LI><A href="datacontextdelegate.html" title="DataContextDelegate">DataContextDelegate</A></LI><LI><A href="datacontextfactory.html" title="DataContextFactory">DataContextFactory</A></LI><LI><A href="dataobject-state-management.html" title="DataObject State Management">DataObject State Management</A></LI><LI><A href="moving-objects-between-contexts.html" title="Moving Objects Between Contexts">Moving Objects Between Contexts</A></LI><LI><A href="nested-datacontexts.html" title="Nested DataContexts">Nested DataContexts</A></LI><LI><A href="obtaining-datacontext.html" title="Obtaining DataContext">Obtaining DataContext</A></LI><LI><A href="running-queries.html" title="Running Queries">Running Queries</A></LI></UL></LI><LI><A href="dataobjects.html" title="DataObjects">DataObjects</A><UL><LI><A href="accessing-pk-and-fk-values.html" title="Accessing PK and FK values">Accessing PK and FK values</A></LI><LI><A href="dataobjects-example.html" title="DataObjects Example">DataObjects Example</A></LI><LI><A href="dataobjectutils.html" title="DataObjectUtils">DataObjectUtils</A></LI><LI><A href="dataobject-validation.html" title="DataObject Validation">DataObject Validation</A></LI><LI><A href="deleting-objects.html" title="Deleting Objects">Deleting Objects</A></LI><LI><A href="flattened-relationships.html" title="Flattened Relationships">Flattened Relationships</A></LI><LI><A href="generic-persistent-class.html" title="Generic Persistent Class">Generic Persistent Class</A></LI><LI><A href="handling-inheritance.html" title="Handling Inheritance">Handling Inheritance</A></LI><LI><A href="relationships.html" title="Relationships">Relationships</A></LI></UL></LI><LI><A href="dataviews.html" title="DataViews">DataViews</A><UL><LI><A href="dataview-concepts.html" title="DataView Concepts">DataView Concepts</A></LI><LI><A href="dataviews-in-action.html" title="DataViews in Action">DataViews in Action</A></LI><LI><A href="dvmodeler-gui-tool.html" title="DVModeler GUI Tool">DVModeler GUI Tool</A></LI><LI><A href="swing-applications.html" title="Swing Applications">Swing Applications</A></LI></UL></LI><LI><A href="deployment.html" title="Deployment">Deployment</A><UL><LI><A href="configuring-logging.html" title="Configuring Logging">Configuring Logging</A></LI><LI><A href="customizing-configuration.html" title="Customizing Configuration">Customizing Configuration</A></LI><LI><A href="dbcpdatasourcefactory.html" title="DBCPDataSourceFactory">DBCPDataSourceFactory</A></LI><LI><A href="deployment-with-ant.html" title="Deployment with Ant">Deployment with Ant</A></LI><LI><A href="standalone-applications.html" title="Standalone Applications">Standalone Applications</A></LI><LI><A href="using-jndi.html" title="Using JNDI">Using JNDI</A></LI><LI><A href="web-applications.html" title="Web Applications">Web Applications</A></LI></UL></LI><LI><A href="design.html" title="Design">Design</A><UL><LI><A href="cayenne-contract.html" title="Cayenne Contract">Cayenne Contract</A></LI><LI><A href="object-caching.html" title="Object Caching">Object Caching</A></LI><LI><A href="persistent-object-lifecycle.html" title="Persistent Object Lifecycle">Persistent Object Lifecycle</A></LI><LI><A href="primary-key-generation.html" title="Primary Key Generation">Primary Key Generation</A><UL><LI><A href="generated-columns.html" title="Generated Columns">Generated Columns</A></LI></UL></LI><LI><A href="runtime-components.html" title="Runtime Components">Runtime Components</A><UL><LI><A href="datachannel.html" title="DataChannel">DataChannel</A></LI><LI><A href="datanode.html" title="DataNode">DataNode</A></LI><LI><A href="datasource.html" title="DataSource">DataSource</A></LI><LI><A href="dbadapter.html" title="DbAdapter">DbAdapter</A></LI><LI><A href="entityresolver.html" title="EntityResolver">EntityResolver</A></LI><LI><A href="event-package.html" title="Event Package">Event Package</A></LI><LI><A href="objectcontext.html" title="ObjectContext">ObjectContext</A></LI></UL></LI><LI><A href="understanding-transactions.html" title="Understanding Transactions">Understanding Transactions</A></LI></UL></LI><LI><A href="expressions.html" title="Expressions">Expressions</A><UL><LI><A href="bnf-for-expressionparser.html" title="BNF for ExpressionParser">BNF for ExpressionParser</A></LI><LI><A href="building-expressions.html" title="Building Expressions">Building Expressions</A></LI><LI><A href="expression-factory-utilities.html" title="Expression Factory Utilities">Expression Factory Utilities</A></LI><LI><A href="in-memory-evaluation.html" title="In-Memory Evaluation">In-Memory Evaluation</A></LI><LI><A href="null-handling.html" title="NULL Handling">NULL Handling</A></LI><LI><A href="path-expressions.html" title="Path Expressions">Path Expressions</A></LI></UL></LI><LI><A href="installation.html" title="Installation">Installation</A><UL><LI><A href="jar-files-and-dependencies.html" title="JAR Files and Dependencies">JAR Files and Dependencies</A></LI><LI><A href="upgrade.html" title="Upgrade">Upgrade</A></LI></UL></LI><LI><A href="introduction.html" title="Introduction">Introduction</A><UL><LI><A href="acknowledgments.html" title="Acknowledgments">Acknowledgments</A></LI><LI><A href="guide-to-11-features.html" title="Guide to 1.1 Features">Guide to 1.1 Features</A></LI><LI><A href="guide-to-12-features.html" title="Guide to 1.2 Features">Guide to 1.2 Features</A></LI><LI><A href="license.html" title="License">License</A></LI></UL></LI><LI><A href="performance-tuning.html" title="Performance Tuning">Performance Tuning</A><UL><LI><A href="caching-lookup-tables.html" title="Caching Lookup Tables">Caching Lookup Tables</A></LI><LI><A href="data-rows.html" title="Data Rows">Data Rows</A></LI><LI><A href="iterating-through-data-rows.html" title="Iterating Through Data Rows">Iterating Through Data Rows</A></LI><LI><A href="paginated-queries.html" title="Paginated Queries">Paginated Queries</A></LI><LI><A href="prefetching.html" title="Prefetching">Prefetching</A></LI><LI><A href="turning-off-context-synchronization.html" title="Turning off Context Synchronization">Turning off Context Synchronization</A></LI></UL></LI><LI><A href="queries.html" title="Queries">Queries</A><UL><LI><A href="caching-query-results.html" title="Caching Query Results">Caching Query Results</A></LI><LI><A href="customizing-queries.html" title="Customizing Queries">Customizing Queries</A></LI><LI><A href="namedquery.html" title="NamedQuery">NamedQuery</A></LI><LI><A href="objectidquery.html" title="ObjectIdQuery">ObjectIdQuery</A></LI><LI><A href="parameterized-queries.html" title="Parameterized Queries">Parameterized Queries</A></LI><LI><A href="qualifier-expressions.html" title="Qualifier Expressions">Qualifier Expressions</A></LI><LI><A href="queries-stored-in-datamap.html" title="Queries Stored in DataMap">Queries Stored in DataMap</A></LI><LI><A href="querychain.html" title="QueryChain">QueryChain</A></LI><LI><A href="relationshipquery.html" title="RelationshipQuery">RelationshipQuery</A></LI><LI><A href="scripting-sqltemplate.html" title="Scripting SQLTemplate">Scripting SQLTemplate</A></LI><LI><A href="selectquery.html" title="SelectQuery">SelectQuery</A></LI><LI><A href="selectquery-customization.html" title="SelectQuery Customization">SelectQuery Customization</A></LI><LI><A href="sqltemplate-query.html" title="SQLTemplate Query">SQLTemplate Query</A></LI><LI><A href="using-orderings.html" title="Using Orderings">Using Orderings</A></LI></UL></LI><LI><A href="quick-start.html" title="Quick Start">Quick Start</A><UL><LI><A href="tutorial-datacontext.html" title="Tutorial DataContext">Tutorial DataContext</A></LI><LI><A href="tutorial-dataobjects.html" title="Tutorial DataObjects">Tutorial DataObjects</A></LI><LI><A href="tutorial-delete.html" title="Tutorial Delete">Tutorial Delete</A></LI><LI><A href="tutorial-generate-database-and-java-classes.html" title="Tutorial Generate Database and Java Classes">Tutorial Generate Database and Java Classes</A></LI><LI><A href="tutorial-mapping-query.html" title="Tutorial Mapping Query">Tutorial Mapping Query</A></LI><LI><A href="tutorial-object-relational-mapping.html" title="Tutorial Object Relational Mapping">Tutorial Object Relational Mapping</A></LI><LI><A href="tutorial-selectquery.html" title="Tutorial SelectQuery">Tutorial SelectQuery</A></LI><LI><A href="tutorial-setup.html" title="Tutorial Setup">Tutorial Setup</A></LI><LI><A href="tutorial-starting-mapping-project.html" title="Tutorial Starting Mapping Project">Tutorial Starting Mapping Project</A></LI><LI><A href="tutorial-webapp.html" title="Tutorial Webapp">Tutorial Webapp</A></LI></UL></LI><LI><A href="stored-procedures.html" title="Stored Procedures">Stored Procedures</A><UL><LI><A href="executing-a-stored-procedure.html" title="Executing a Stored Procedure">Executing a Stored Procedure</A></LI><LI><A href="selecting-objects.html" title="Selecting Objects">Selecting Objects</A></LI><LI><A href="stored-procedures-and-transactions.html" title="Stored Procedures and Transactions">Stored Procedures and Transactions</A></LI></UL></LI></UL>
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2019-03-18 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 18, 2019</time>
+                        <a href="/2019/03/cayenne-41b1-released.html">Cayenne 4.1 Beta 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-12-28 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 28, 2018</time>
+                        <a href="/2018/12/cayenne-401-released/">Cayenne 4.0.1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2019 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

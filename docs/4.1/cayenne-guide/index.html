@@ -13,7 +13,7 @@
         <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-56b760f573.css"/>
         <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
         <title>Cayenne Guide &middot; Apache Cayenne</title>
     </head>
@@ -95,7 +95,7 @@
                                 Cayenne Version 4.1
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/api/">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/api/">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/api/">Version 1.2 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -298,7 +298,7 @@
         &lt;plugin&gt;
             &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;4.1.B2&lt;/version&gt;
+            &lt;version&gt;4.1.B1&lt;/version&gt;
         &lt;/plugin&gt;
     &lt;/plugins&gt;
 &lt;/build&gt;</code></pre> 
@@ -535,9 +535,9 @@ total 24
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>cayenne-di-4.1.B2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-server-4.1.B2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.1.B2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
+      <li> <p><code>cayenne-di-4.1.B1.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-server-4.1.B1.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
+      <li> <p><code>cayenne-client-4.1.B1.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
       <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
      </ul> 
     </div> 
@@ -561,7 +561,7 @@ total 24
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
    &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
-   &lt;version&gt;4.1.B2&lt;/version&gt;
+   &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
      </div> 
     </div> 
@@ -727,7 +727,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 
     &lt;configuration&gt;
         &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
@@ -890,7 +890,7 @@ total 24
        <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
     &lt;executions&gt;
         &lt;execution&gt;
             &lt;configuration&gt;
@@ -1130,7 +1130,7 @@ total 24
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 
     &lt;executions&gt;
         &lt;execution&gt;
@@ -1167,7 +1167,7 @@ total 24
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.B2'</code></pre> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.B1'</code></pre> 
      </div> 
     </div> 
     <div class="ulist"> 
@@ -1189,7 +1189,7 @@ total 24
     }
     // add Cayenne Gradle Plugin
     dependencies {
-        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.B2'
+        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.B1'
     }
 }
 
@@ -4384,7 +4384,7 @@ ServerRuntime runtime = ServerRuntime.builder()
       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
 	&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
 	&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-	&lt;version&gt;4.1.B2&lt;/version&gt;
+	&lt;version&gt;4.1.B1&lt;/version&gt;
 
 	&lt;configuration&gt;
         &lt;cayenneProject&gt;${project.basedir}/src/main/resources/cayenne/cayenne-project.xml&lt;/cayenneProject&gt;
@@ -4973,7 +4973,7 @@ ServerRuntime runtime = ServerRuntime.builder()
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-cache-invalidation&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -4982,7 +4982,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <h5 id="gradle"><a class="anchor" href="#gradle"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-cache-invalidation:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5071,7 +5071,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-commitlog&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5080,7 +5080,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-2"><a class="anchor" href="#gradle-2"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-commitlog:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5157,7 +5157,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-crypto&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5166,7 +5166,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-3"><a class="anchor" href="#gradle-3"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5286,7 +5286,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5295,7 +5295,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-4"><a class="anchor" href="#gradle-4"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5403,7 +5403,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-project-compatibility&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5412,7 +5412,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-5"><a class="anchor" href="#gradle-5"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-project-compatibility:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5441,7 +5441,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-velocity&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5450,7 +5450,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5507,7 +5507,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-web&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5516,7 +5516,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-7"><a class="anchor" href="#gradle-7"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-web:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-web:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5539,7 +5539,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-osgi&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5548,7 +5548,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-8"><a class="anchor" href="#gradle-8"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-osgi:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-osgi:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -5571,7 +5571,7 @@ public class MyEntity extends _MyEntity {
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-rop-server&lt;/artifactId&gt;
-    &lt;version&gt;4.1.B2&lt;/version&gt;
+    &lt;version&gt;4.1.B1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre> 
       </div> 
      </div> 
@@ -5580,7 +5580,7 @@ public class MyEntity extends _MyEntity {
      <h5 id="gradle-9"><a class="anchor" href="#gradle-9"></a>Gradle</h5> 
      <div class="listingblock"> 
       <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-rop-server:4.1.B2'</code></pre> 
+       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-rop-server:4.1.B1'</code></pre> 
       </div> 
      </div> 
     </div> 
@@ -6082,11 +6082,6 @@ NON-TERMINALS
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
-                        <time datetime="2019-05-13 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">May 13, 2019</time>
-                        <a href="/2019/05/cayenne-41b2-released/">Cayenne 4.1 Beta 2 Released</a>
-                    </li>
-                    
-                    <li>
                         <time datetime="2019-03-18 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 18, 2019</time>
                         <a href="/2019/03/cayenne-41b1-released.html">Cayenne 4.1 Beta 1 Released</a>
                     </li>
@@ -6094,6 +6089,11 @@ NON-TERMINALS
                     <li>
                         <time datetime="2018-12-28 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 28, 2018</time>
                         <a href="/2018/12/cayenne-401-released/">Cayenne 4.0.1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
                     </li>
                     
                 </ul>
@@ -6112,16 +6112,13 @@ NON-TERMINALS
 </footer>
     
 <script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-7036673-1', 'auto');
-	
-	ga('send', 'pageview');
-}
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
 </script>
 
     </body>

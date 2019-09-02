@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-56b760f573.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
+        <title>Guide to 3.0 Features &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.0/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 3.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/cayenne-guide.html">Cayenne Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/3.0/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    <P>This page highlights the new features and changes introduced in 3.0 release. It is a high level overview and as such is by no means complete. Consult RELEASE-NOTES.txt file included in each release for the full list of changes, and UPGRADE.txt for the upgrade instructions.</P>
+
+<UL>
+	<LI><A href="#Guideto3.0Features-DistributionContentsStructure">Distribution Contents Structure</A></LI>
+	<LI><A href="#Guideto3.0Features-ObjectRelationalMapping">Object Relational Mapping</A></LI>
+	<LI><A href="#Guideto3.0Features-CayennePersistenceAPI">Cayenne Persistence API</A></LI>
+	<LI><A href="#Guideto3.0Features-RemoteObjectPersistence">Remote Object Persistence</A></LI>
+	<LI><A href="#Guideto3.0Features-CayenneModeler">CayenneModeler</A></LI>
+	<LI><A href="#Guideto3.0Features-DeploymentandRuntime">Deployment and Runtime</A></LI>
+	<LI><A href="#Guideto3.0Features-Tools">Tools</A></LI>
+</UL>
+
+
+
+<H2><A name="Guideto3.0Features-DistributionContentsStructure"></A>Distribution Contents Structure</H2>
+
+<UL>
+	<LI>There are a few changes in the contents of the distribution &quot;lib&quot; folder. For details see <A href="jar-files-and-dependencies.html" title="JAR Files and Dependencies">this page</A>. Main Cayenne JAR is now called <TT>&quot;cayenne-server-x.x.x.jar&quot;</TT>. We no longer ship the &quot;fat&quot; jar with dependencies. Instead dependencies are included in the separate jars in <TT>&quot;lib/third-party&quot;</TT> distribution folder.</LI>
+	<LI>CayenneModeler is located in the &quot;bin&quot; folder. Never mind the <TT>&quot;lib/cayenne-modeler-x.x.x.jar&quot;</TT> - this is just an underlying Modeler <B>library</B>, used in &quot;local JNDI&quot; configuration for instance, not the runnable application.</LI>
+</UL>
+
+
+<H2><A name="Guideto3.0Features-ObjectRelationalMapping"></A>Object Relational Mapping</H2>
+
+<H3><A name="Guideto3.0Features-KilledDerivedDbEntityConcept"></A>Killed DerivedDbEntity Concept </H3>
+
+<P>Stopped supporting <TT>DerivedDbEntity</TT> - its functionality (aggregate queries) is achieved via EJBQL and other means.</P>
+
+<H3><A name="Guideto3.0Features-DataMapDTDReplacedwithSchema"></A>DataMap DTD Replaced with Schema</H3>
+
+<P>A schema is now available <A href="http://cayenne.apache.org/schema/3.0/modelMap.html" class="external-link" rel="nofollow">here</A> for the DataMap XML format.</P>
+
+<H3><A name="Guideto3.0Features-Embeddables"></A>Embeddables</H3>
+
+<P>Added a new mapping artifact - <A href="modeling-embeddables.html" title="Modeling Embeddables">Embeddable</A>, that allows to map composite objects to a single table. </P>
+
+<H3><A name="Guideto3.0Features-FlattenedAttributes"></A>Flattened Attributes</H3>
+
+<P>Just like with &quot;flattened&quot; relationships, now there is a way to map an ObjAttribute that spans one or more DbRelationships and is mapped to a column of a joined table. An important use of flattened attributes is vertical inheritance mapping, as described below.</P>
+
+<H3><A name="Guideto3.0Features-VerticalInheritance"></A>Vertical Inheritance</H3>
+
+<P>Adding flattened attributes to subclasses in a single-table mapping gives us another powerful way to map inheritance - &quot;vertical inheritance mapping&quot;, described in more details <A href="modeling-vertical-inheritance.html" title="Modeling Vertical Inheritance">here</A>.</P>
+
+<H3><A name="Guideto3.0Features-PersistingPrimitivesandaNumberofOtherSimpleProperties"></A>Persisting Primitives and a Number of Other Simple Properties</H3>
+
+<P>DataObjects are now allowed to have primitive properties, such as int, boolean, etc. Also Cayenne can now persist the following extra simple property types: java.util.Calendar, java.math.BigInteger, java.io.Serializable, char[], java.lang.Character, java.lang.Character[], java.lang.Byte[].</P>
+
+<H3><A name="Guideto3.0Features-SupportforToManyRelationshipMapsandCollections."></A>Support for To-Many Relationship Maps and Collections.</H3>
+
+<P>In addition to mapping a to-many relationship as a List, Cayenne now supports to-many Maps (keyed by target object pk, or an arbitrary unique property), Sets and generic Collections. Note that relationship maps is the only conceptually new type of relationships. Collection and Set are not that different from the earlier List behavior (that was a Collection, and just like Set ensured uniqueness of its objects).</P>
+
+<H3><A name="Guideto3.0Features-Supportfor%22extended%22EnumsMapping"></A>Support for &quot;extended&quot; Enums Mapping</H3>
+
+<P>In addition to vanilla Java enums, Cayenne allows enums to provide a custom database value for each enumerated instance by implementing <TT>org.apache.cayenne.ExtendedEnumeration</TT>. This way a persistent value doesn't have to be tied to the enum Java name or position.</P>
+
+<H3><A name="Guideto3.0Features-DbAttributeScaleandPrecision"></A>DbAttribute Scale and Precision</H3>
+
+<P>Changed DbAttribute &quot;precision&quot; property to &quot;scale&quot; (as it meant scale all along) and added a separate &quot;precision&quot; attribute to track precision.</P>
+
+
+<H2><A name="Guideto3.0Features-CayennePersistenceAPI"></A>Cayenne Persistence API</H2>
+
+<H3><A name="Guideto3.0Features-Java5Required"></A>Java 5 Required</H3>
+
+<P>Cayenne now requires Java 5 or newer to run. This allowed us to start providing generics-based API, enums and other Java 5 features.</P>
+
+<H3><A name="Guideto3.0Features-ObjectContext"></A>ObjectContext</H3>
+
+<P>While you can still use DataContext directly, we encourage you to avoid direct dependency on DataContext throughout your code, and instead use <TT>org.apache.cayenne.ObjectContext</TT> interface. E.g.:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">ObjectContext context = DataContext.createDataContext();</PRE>
+</DIV></DIV>
+
+<P>This protects your code from the evolution of the underlying implementation, allows you to customize context behavior by using interface wrappers. There are plans to update all Cayenne API to return ObjectContext everywhere DataContext might be returned.</P>
+
+<H3><A name="Guideto3.0Features-EJBQLQueries"></A>EJB QL Queries</H3>
+
+<P>Never mind the &quot;EJB&quot; in the name. EJBQL queries are a powerful object query mechanism similar to the one supported by the JPA specification. <A href="ejbqlquery.html" title="EJBQLQuery">EJBQLQuery</A> is a first-class citizen, just like SelectQuery.</P>
+
+<H3><A name="Guideto3.0Features-SQLTemplateQueryImprovements"></A>SQLTemplate Query Improvements</H3>
+
+<UL>
+	<LI><A href="advanced-sqltemplate.html" title="Advanced SQLTemplate">Significantly simplified</A> the process for fetching DataObjects (vs. DataRows) via a SQLTemplate query with <TT>'setColumnNamesCapitalization'</TT> method.</LI>
+	<LI>Added support for <A href="sqltemplate-result-mapping.html" title="SQLTemplate Result Mapping">fetching scalar and mixed scalar/object results</A> using <TT>SQLResult</TT>.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-SelectQueryImprovements"></A>SelectQuery Improvements</H3>
+
+<UL>
+	<LI>Added support for &quot;path splits&quot;. Splits allow to control how the joins are generated for the overlapping path expressions. By default a group of overlapping qualifier paths will produce a single join. To &quot;split&quot; that into separate joins, Cayenne allows to use &quot;aliases&quot; in path expressions, and then bind them to the actual pathes using <TT>&quot;SelectQuery.addPathSplitAliases(String path, String... aliases)</TT>.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-EntityLifecycleCallbacks"></A>Entity Lifecycle Callbacks</H3>
+
+<P>Cayenne lifecycle callbacks are similar (but not identical) to callbacks defined in the JPA specification. This is a feature that allows to perform custom operations at certain points in the object lifecycle. For more details see <A href="lifecycle-callbacks.html" title="Lifecycle Callbacks">this page</A>.</P>
+
+<H3><A name="Guideto3.0Features-GeneralQueryImprovements"></A>General Query Improvements</H3>
+
+<UL>
+	<LI>Added support for fetch offset (complimentary to the existing &quot;fetch limit&quot;).</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-DataContextChanges"></A>DataContext Changes</H3>
+
+<P>Implemented <TT>DataContext.rollbackChangesLocally()</TT>. This was missing in 2.0, limiting the operation of the nested DataContexts.</P>
+
+<H3><A name="Guideto3.0Features-CacheManagement"></A>Cache Management</H3>
+
+<UL>
+	<LI><A href="caching-and-fresh-data.html" title="Caching and Fresh Data">pluggable query cache</A></LI>
+	<LI>a notion of Query cache groups</LI>
+	<LI>automated cache key management for standard queries</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-ExpressionImprovements"></A>Expression Improvements</H3>
+
+<UL>
+	<LI>Added missing DB expressions to ExpressionFactory.</LI>
+	<LI><A href="path-expressions.html" title="Path Expressions">Added support</A> for OUTER JOINS</LI>
+	<LI><A href="expression-factory-utilities.html" title="Expression Factory Utilities">Added support</A> for split expressions (see <TT>&quot;ExpressionFactory.matchAllExp(String path, Object... values)&quot;</TT> and <TT>&quot;ExpressionFactory.matchAllExp(String path, Collection values)&quot;</TT>). This is also related to the qualifier splits for SelectQuery described above.</LI>
+	<LI>Added support for matching against TRUE and FALSE.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-DatabaseIntegrationChanges%2FImprovements"></A>Database Integration Changes/Improvements</H3>
+
+<UL>
+	<LI>Added support for &quot;long&quot; primary keys (vs. &quot;int&quot; PK used previously)</LI>
+	<LI>Added adapter for <A href="http://www.sqlite.org/" class="external-link" rel="nofollow">SQLite</A> database.</LI>
+	<LI>Added adapter for <A href="http://www.h2database.com/" class="external-link" rel="nofollow">H2</A> database.</LI>
+	<LI>Added stored procedure support on MySQL.</LI>
+	<LI>Changed default table type on MySQL to InnoDB, added MySQL FK constraints support in the Modeler.</LI>
+	<LI>Turned on update query batching on SQL Server and Derby.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-ClassGenerationImprovements"></A>Class Generation Improvements</H3>
+
+<UL>
+	<LI>Generating classes for DataMaps that contain type-safe methods for all mapped SelectQueries.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-PrefetchingImprovements"></A>Prefetching Improvements</H3>
+
+<UL>
+	<LI>Joint prefetches are switched to OUTER joins, removing the major limitation to their use.</LI>
+	<LI>Disjoint to-many prefetches no longer have a limitation preventing their use if a query qualifier spanned prefetched relationships.</LI>
+</UL>
+
+
+<H2><A name="Guideto3.0Features-RemoteObjectPersistence"></A>Remote Object Persistence</H2>
+
+<H3><A name="Guideto3.0Features-ValidationcallbackssupportforROPObjectContext"></A>Validation callbacks support for ROP ObjectContext</H3>
+<P>Now object validation works the same way on the ROP client as it did on the server.</P>
+
+<H3><A name="Guideto3.0Features-NestedcontextssupportforROPObjectContext"></A>Nested contexts support for ROP ObjectContext</H3>
+<P>Nested contexts can now be created for ROP contexts. Creation method is added to ObjectContext interface.</P>
+
+
+<H2><A name="Guideto3.0Features-CayenneModeler"></A>CayenneModeler</H2>
+
+<DIV class="panelMacro"><TABLE class="warningMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/forbidden.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Upgrade Warning</B><BR>Saving projects with CayenneModeler v.3.0 will render them uneditable with earlier versions of the Modeler</TD></TR></TABLE></DIV>
+
+<P>The Modeler underwent significant changes with the goal to improve usability and look-and-feel.</P>
+
+<UL>
+	<LI>Added copy/paste support</LI>
+	<LI>Reworked ObjRelationship mapping dialog</LI>
+	<LI>Added combo auto-completion</LI>
+	<LI>Added a usable and good looking welcome screen</LI>
+	<LI>Added contextual menus</LI>
+	<LI>Added support for flattened attributes</LI>
+	<LI>Added copy/paste support</LI>
+	<LI>Added detection of project file changes on disk</LI>
+	<LI>Added multi-item selection</LI>
+	<LI>Added ability to specify password encryption mechanism</LI>
+	<LI>Added ability to drag and drop cayenne.xml from the filesystem to the Modeler window to open the project.</LI>
+	<LI>Added support for to-many relationship collections mapping.</LI>
+	<LI>Added &quot;search&quot; functionality</LI>
+	<LI>Added lifecycle callback and listener mapping functionality.</LI>
+	<LI>Added support for merging DataMap changes back to the database.</LI>
+	<LI>Removed support for DerivedDbEntity</LI>
+	<LI>Added confirmation dialog for delete actions</LI>
+	<LI>Reopen Last Project on Startup</LI>
+	<LI>Added progress/log view</LI>
+	<LI>Added SQL syntax highlighting.</LI>
+	<LI>Added EJBQL Query mapping capabilities, with syntax highlighting.</LI>
+	<LI>Added support for quoting of SQL Identifiers</LI>
+	<LI>The Modeler can be <A href="maven2-modeler.html" title="maven2-modeler">started from Maven</A></LI>
+	<LI>Added &quot;Infer Relationships&quot; operation to automatically create DbRelationships based on PK/FK naming conventions.</LI>
+	<LI>Added support for mapping Embeddable objects.</LI>
+	<LI>Added undo/redo support</LI>
+</UL>
+
+
+<H2><A name="Guideto3.0Features-DeploymentandRuntime"></A>Deployment and Runtime</H2>
+
+<H3><A name="Guideto3.0Features-ImprovedPerformance"></A>Improved Performance</H3>
+
+<UL>
+	<LI>Paginated query algorithm is changed, resulting in very significant performance improvements on large data sets (this also improves ROP paginated query performance). This includes faster query times and much smaller memory footprint of an unresolved list.</LI>
+	<LI>Reduced the scope of lock on a shared cache during commit, that should result in improved concurrency.</LI>
+	<LI>Queries using disjoint to-many and joint to-one prefetching now work significantly faster.</LI>
+	<LI>ROP new context creation speed is improved, as EntityResolver is cached on the client after first retrieval.</LI>
+	<LI>ROP uses a &quot;diff compression&quot; algorithm on commit, reducing the amount of data passed around.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-ImprovedMemoryManagement"></A>Improved Memory Management</H3>
+
+<UL>
+	<LI><A href="objectcontext-memory-management.html" title="ObjectContext Memory Management">Leak free ObjectContext</A></LI>
+	<LI>Query lists are cached in an LRU map, so there's no indefinite memory growth when using query caching.</LI>
+</UL>
+
+
+<H3><A name="Guideto3.0Features-LoggingSwitchedtocommonsloggingfromLog4J"></A>Logging Switched to commons-logging from Log4J</H3>
+
+<P>Cayenne no longer has a Log4J dependency. Instead it uses Jakarta commons-logging, as described <A href="configuring-logging.html" title="Configuring Logging">here</A>. Note that 2.0 Log4J configurations should continue to work, although now it is a user responsibility to bootstrap Log4J - Cayenne will no longer do it for you. E.g. you can do this on startup:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">org.apache.log4j.PropertyConfigurator.configure(<SPAN class="code-quote">&quot;cayenne-log.properties&quot;</SPAN>);</PRE>
+</DIV></DIV>
+
+<H3><A name="Guideto3.0Features-OptionalQuotingofSQLIdentifiers"></A>Optional Quoting of SQL Identifiers</H3>
+
+<P>Cayenne now supports optional quoting of SQL identifiers in the generated SQL. This has been a very popular request in the past. Identifier quoting can be turned on per DataMap in the Modeler (look for &quot;Quote SQL Identifiers&quot; checkbox). This will allow to map column names that contain spaces, non-ascii characters, reserved words, etc., i.e. the schemas that could not be mapped with Cayenne before.</P>
+
+<H3><A name="Guideto3.0Features-AbilitytoDetectMissing%2FPartialSchemaandAutoGenerateSchemainRuntime"></A>Ability to Detect Missing/Partial Schema and Auto Generate Schema in Runtime</H3>
+
+<P>DataNode has a new attribute in the Modeler - &quot;Schema Update Strategy&quot;. This allows to specify runtime behavior in regards to schema consistency checking. The default behavior is &quot;do nothing&quot; (<TT>org.apache.cayenne.access.dbsync.SkipSchemaUpdateStrategy</TT>). Alternatively Cayenne can create the schema if none is found or throw an exception if schema inconsistencies are detected.</P>
+
+<H2><A name="Guideto3.0Features-Tools"></A>Tools</H2>
+
+<UL>
+	<LI>Switched <TT>&quot;cgen&quot;</TT> to &quot;version 1.2&quot; of the template as a default version</LI>
+	<LI>Support for classpath in <TT>&quot;cdbgen&quot;</TT>.</LI>
+	<LI>The Modeler can be <A href="maven2-modeler.html" title="maven2-modeler">started from Maven</A>, that can potentially help in aligning the Modeler version with the project runtime Cayenne version.</LI>
+</UL>
+
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2019-03-18 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 18, 2019</time>
+                        <a href="/2019/03/cayenne-41b1-released.html">Cayenne 4.1 Beta 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-12-28 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 28, 2018</time>
+                        <a href="/2018/12/cayenne-401-released/">Cayenne 4.0.1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2019 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>

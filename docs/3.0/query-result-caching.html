@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-56b760f573.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
+        <title>Query Result Caching &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.0/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 3.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Beta)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/cayenne-guide.html">Cayenne Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/3.0/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    <H2><A name="QueryResultCaching-QueryResultCaching"></A>Query Result Caching</H2>
+
+<P>In addition to caching individual objects, Cayenne can cache query results. Just like with object cache, the actual caching happens behind the scenes, so users only need to declare the desired cache policy, either in the code or via the Modeler:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">SelectQuery query = <SPAN class="code-keyword">new</SPAN> SelectQuery(Artist.class, /* some qualifier */);
+query.setCacheStrategy(QueryCacheStrategy.LOCAL_CACHE);
+query.setCacheGroups(<SPAN class="code-quote">&quot;artists&quot;</SPAN>, <SPAN class="code-quote">&quot;recent_exhibits&quot;</SPAN>);
+List&lt;Artist&gt; artists = context.performQuery(query);
+</PRE>
+</DIV></DIV>
+
+<P>This query runs against the DB for the first time. Later if this query (or another query with the same parameters) is run again, the result is quickly returned from cache, and no DB access is performed.</P>
+
+<P>Next we'll discuss what cache strategies and cache groups mean.</P>
+
+<H3><A name="QueryResultCaching-CacheStrategies"></A>Cache Strategies</H3>
+
+<P>Following Cayenne stack structure, query cache can be attached either to an ObjectContext or to a DataDomain. In the former case it is not shared between the contexts, and therefore is called &quot;local&quot;, in the later case, the cache is shared between all contexts from a given stack, and the cache is called &quot;shared&quot;. Access to the local cache is much faster, but the tradeoff is that it takes more memory if many contexts use local caching and also it hits database more often in a situation with multiple contexts. </P>
+
+<P>Formally cache strategies are defined in the QueryCacheStrategy enum as NO_CACHE, LOCAL_CACHE, LOCAL_CACHE_REFRESH, SHARED_CACHE, SHARED_CACHE_REFRESH. Strategies ending with &quot;_REFRESH&quot; would actually run the query against database, but then cache the result. These are not used very often, as it is a good idea to separate cache refresh logic from the query code (as discussed below). Therefore the most common caching strategies are LOCAL_CACHE and SHARED_CACHE.</P>
+
+<H3><A name="QueryResultCaching-CacheGroups"></A>Cache Groups</H3>
+
+<P>As shown in the example above, each query can be tagged with one or more &quot;cache groups&quot;. Cache groups are symbolic names that a user assigns to certain queries to group them for the purpose of defining a common cache policy. These cache groups are just strings which can then be used as a way to indicate what data you'd like to refresh and when you'd like it refreshed.</P>
+
+<H3><A name="QueryResultCaching-QueryCacheManagement"></A>QueryCache Management</H3>
+
+<P>The query cache provider is installed via <TT>org.apache.cayenne.cache.QueryCacheFactory</TT>. The factory can be configured in the Modeler for the DataDomain, or set in code. Cayenne supplies a few factories out of the box that should be sufficient in most cases.</P>
+
+<H4><A name="QueryResultCaching-SimpleCacheProviderLRUMap"></A>Simple Cache Provider - LRUMap</H4>
+
+<P>The default factory is <TT>org.apache.cayenne.cache.MapQueryCacheFactory</TT> that is simply an LRU map. Cache entries never expire by themselves, but rarely used entries will be eventually swapped out when the cache is operating at the 100% capacity. This is the simplest form of query cache that requires users to implement their own &quot;active&quot; invalidation strategies accessing the methods of <TT>org.apache.cayenne.cache.QueryCache</TT> interface directly.</P>
+
+<H4><A name="QueryResultCaching-AdvancedCacheProviderOSCache"></A>Advanced Cache Provider - OSCache</H4>
+
+<P>A much more advanced cache provider can be installed via <TT>org.apache.cayenne.cache.OSQueryCacheFactory</TT>. The actual cache is using <A href="http://www.opensymphony.com/oscache/" class="external-link" rel="nofollow">OSCache</A> by OpenSymphony, so <A href="jar-files-and-dependencies.html" title="JAR Files and Dependencies">OSCache jars</A> need to be added to the application classpath. Cache configuration should be created outside Cayenne tools (e.g. in a text editor or in Eclipse) in a file called <BR>
+<TT>&quot;oscache.properties&quot;</TT>. This file should be placed in the application classpath. The file format follows a regular java properties file. Here is an example that shows some of its capabilities, and demonstrates how to configure cache policies per cache group. More standard properties are discussed in the <A href="http://www.opensymphony.com/oscache/wiki/Configuration.html" class="external-link" rel="nofollow">OSCache documentation</A>.</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE># OSCache standard configuration:
+                       
+#cache.memory=true
+#cache.blocking=false
+cache.capacity=5000
+cache.algorithm=com.opensymphony.oscache.base.algorithm.LRUCache
+                        
+# Cayenne specific properties:
+                       
+# Default refresh period in seconds 
+# (used for all cache groups not explicitly overriding it here)
+cayenne.default.refresh = 60
+
+# Default expiry specified as cron expressions per
+#    http://www.opensymphony.com/oscache/wiki/Cron%20Expressions.html
+# expire entries every hour on the 10's minute
+cayenne.default.cron = 10 * * * *
+                        
+# Same parameters can be defined per cache group, overriding the defaults
+# cache group name is specified inside the property key. E.g. &quot;artists&quot; below 
+# is a cache group name
+cayenne.group.artists.refresh = 120
+cayenne.group.artists.cron = 10 1 * * *
+</PRE>
+</DIV></DIV>
+
+<P>As shown in this example, you can specify either a fixed expiration time since the entry was created or a cron-like cache expiration expression. Both can be specified either for the entire cache and/or one or more cache groups. As you see, cache groups become really useful when OSCache is used, and you don't have to do explicit cache management in the code. It is all 100% declarative. OSCache itself is very efficient when expiring groups that may potentially contain thousands of entries. Instead of scanning the entire cache for all entries that need to be expired, it simply tags the entire group as expired, so performance of this solution is really great.</P>
+
+<H3><A name="QueryResultCaching-InstantCacheInvalidation"></A>Instant Cache Invalidation</H3>
+
+<P>The above OSCache configuration is very flexible, however even this setup it does not address one important scenario - invalidation of a cache group on demand. This is often needed when a certain object is updated in the application, potentially rendering invalid a whole bunch of previously cached query results. How do we invalidate those cached object lists? </P>
+
+<P>The first step is to find a place where an explicit cache update should be triggered. Usually this is done via <A href="lifecycle-callbacks.html" title="Lifecycle Callbacks">post commit callbacks</A>. A callback or a listener method would gain access to the QueryCache instance and call &quot;removeGroup&quot; for all groups that need to be invalidated. Here is where careful selection of query cache groups pays off. E.g. we may have tagged all queries fetching deceased artists with &quot;classics&quot; and all modern artists as &quot;modern&quot;. The Artist entity can map a callback method similar to this:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java">void onCommit() {
+   QueryCache cache = ((BaseContext) getObjectContext()).getQueryCache();
+   <SPAN class="code-keyword">if</SPAN>(isModern()) {
+      cache.removeGroup(<SPAN class="code-quote">&quot;modern&quot;</SPAN>);
+   }
+   <SPAN class="code-keyword">else</SPAN> {
+      cache.removeGroup(<SPAN class="code-quote">&quot;classic&quot;</SPAN>);
+   }
+}
+}</PRE>
+</DIV></DIV>
+
+<P>This will ensure that subsequent &quot;performQuery&quot; calls will not use stale data, and the cache gets lazily refreshed.</P>
+
+<P>The above approach is applicable to both LRU Map and OSCache. As expected, OSCache gives us extra capabilities in this area as well. As we've mentioned already, sending object change notifications between (possibly remote) Cayenne stacks is inefficient most of the time. Not so with OSCache. It can send remote invalidation notifications that are simply cache group names, so they create very little network traffic. Also on the receiving end invalidation is processed lazily, so no extra CPU cycles are immediately needed for the application to process an event. OSCache comes with support for JavaGroups and JMS notifications. To enable it add one of the following entries to <TT>&quot;oscache.properties&quot;</TT> per <A href="http://www.opensymphony.com/oscache/wiki/Clustering.html" class="external-link" rel="nofollow">OSCache clustering guide</A> :</P>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>cache.event.listeners=com.opensymphony.oscache.plugins.clustersupport.JMSBroadcastingListener
+# other JMS paramaters go here...</PRE>
+</DIV></DIV>
+
+<DIV class="preformatted panel" style="border-width: 1px;"><DIV class="preformattedContent panelContent">
+<PRE>cache.event.listeners=com.opensymphony.oscache.plugins.clustersupport.JavaGroupsBroadcastingListener
+# other JavaGroups paramaters go here...</PRE>
+</DIV></DIV>
+
+<H3><A name="QueryResultCaching-QueryCacheConclusions"></A>Query Cache Conclusions</H3>
+
+<P>The consequence of consistently using caching strategies and coming up with reasonable set of ache groups is that many applications no longer has to cache fetched lists explicitly. Re-running a query with a one of the caching strategies (especially with &quot;LOCAL_CACHE&quot;) becomes an extremely fast operation. Also the code becomes cleaner, as the state is stored in Cayenne, not in the application code. One possible exception from this rule is when the application needs to access the same list between requests, regardless of whether it is stale or not. </P>
+
+
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2019-03-18 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 18, 2019</time>
+                        <a href="/2019/03/cayenne-41b1-released.html">Cayenne 4.1 Beta 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-12-28 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 28, 2018</time>
+                        <a href="/2018/12/cayenne-401-released/">Cayenne 4.0.1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2018-08-16 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Aug 16, 2018</time>
+                        <a href="/2018/08/cayenne-40-final-released/">Cayenne 4.0 Final Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2019 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7036673-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </body>
+</html>
