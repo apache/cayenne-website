@@ -35,10 +35,10 @@ releases:
     newRepoLayout: true
 
   - version: "4.1"                            # major version
-    latestRevision: "4.1.B2"                  # exact latest version
-    type: "Beta"                              # arbitrary type (Alpha for milestones, Beta, Stable and Legacy)
+    latestRevision: "4.1.RC1"                 # exact latest version
+    type: "Release Candidate"                 # arbitrary type (Alpha for milestones, Beta, Stable and Legacy)
     description: "Latest development release" # some general comment
-    date: "2019-05-13"                        # release date
+    date: "2019-10-08"                        # release date
     docs: true                                # this version is visible in Docs section
     downloadable: true                        # this version is visible in Download section, also see "customLink" attribute
     jdk: 1.8                                  # min supported Java version
