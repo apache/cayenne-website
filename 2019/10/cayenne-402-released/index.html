@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
         <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
-        <title>Code Repository &middot; Apache Cayenne</title>
+        <title>Cayenne 4.0.2 Released &middot; Apache Cayenne</title>
     </head>
     <body>
 
@@ -86,57 +86,58 @@
         
                 <section>
                     <article>
-                        <h1 class="text-center">Code Repository</h1>
+                        <h1 class="text-center">Cayenne 4.0.2 Released<br />
+                            <small class="font-size-1rem text-muted">Oct 14, 2019</small>
+                        </h1>
                         
 
-<h2 id="github-repository">GitHub Repository</h2>
+<p>This is a maintenance release with some minor changes in Modeler and a few bug fixes.
+It can be downloaded from <a href="/download.html">here</a>.</p>
 
-<p>A read-write mirror of Cayenne sources is published on GitHub:<br />
-<a href="https://github.com/apache/cayenne">https://github.com/apache/cayenne</a></p>
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
 
-<p>Feel free to clone, fork, star Cayenne there. And of course submit pull requests.</p>
+<h4 id="changes-new-features">Changes/New Features:</h4>
 
-
-<div class="pb-3"></div>
-
-<h2 id="master-git-repository">Master Git Repository</h2>
-
-<p>&ldquo;Master&rdquo; writable repository is located here:<br />
-<a href="https://gitbox.apache.org/repos/asf/cayenne.git">https://gitbox.apache.org/repos/asf/cayenne.git</a></p>
-
-<p>It is publicly readable, but only committers have write access.</p>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2519">CAY-2519</a> Use NoopEventManager if SERVER_CONTEXTS_SYNC_PROPERTY is false</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2570">CAY-2570</a> Use MySQL adapter for latest versions of MariaDB</li>
+</ul>
 
 
 <div class="pb-3"></div>
 
-<h2 id="legacy-subversion-repository">Legacy Subversion Repository</h2>
+<h4 id="bug-fixes">Bug Fixes:</h4>
 
-<p>Up to version 3.2M2 we used Subversion. For archival purposes SVN repository is still available
-in a read-only mode:<br />
-<a href="https://svn.apache.org/repos/asf/cayenne/main/">https://svn.apache.org/repos/asf/cayenne/main/</a></p>
-
-<p>Note that it contains branches and tags for releases prior to 3.0, that are not present in Git. So if you are looking for those older releases, you will have to use SVN.</p>
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2417">CAY-2417</a> Modeler: wrong title in attribute context menu</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2550">CAY-2550</a> Modeler: ObjAttribute inspector modifies wrong columns in attribute table</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2553">CAY-2553</a> Wrong disjoint prefetch query qualifier</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2559">CAY-2559</a> Modeler: Warning dialog shows wrong information after changing target entity in dbRelationship</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2573">CAY-2573</a> DI field injection is triggered when creating sql Driver</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2582">CAY-2582</a> Double insert of manyToMany relationship mapped to Set</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2584">CAY-2584</a> Crypto: can&rsquo;t use ColumnSelect with encrypted columns</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2586">CAY-2586</a> Char can&rsquo;t be materialized to EnumType in some cases</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2616">CAY-2616</a> Modeler: Wrong handling of path with spaces</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2624">CAY-2624</a> SelectQuery &ldquo;having&rdquo; qualifier is not considered when calculating cache key</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2627">CAY-2627</a> Modeler: ObjRelationship creation dialog ignores delete rule</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2628">CAY-2628</a> dbimport: unable to add several relationships to existing entity</li>
+</ul>
 
                     </article>
                 </section>
             
-        
         <div class="pb-3"></div>
         <div class="row">
             <div class="col-12 col-md-6  text-center text-md-left">
                 
-                <a class="btn btn-link" href='/dev/how_development_happens.html'>
-                    <span class="d-block d-md-none  text-muted">Prev: </span>
-                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    How development happens
-                </a>
-                
             </div>
             <div class="col-12 col-md-6  text-center text-md-right">
                 
-                <a class="btn btn-link" href='/dev/building-cayenne.html'>
+                <a class="btn btn-link" href='/2019/10/cayenne-41rc1-released/'>
                     <span class="d-block d-md-none  text-muted">Next: </span>
-                    Building Cayenne
+                    Cayenne 4.1 Release Candidate 1 Released
                     <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
                 </a>
                 
