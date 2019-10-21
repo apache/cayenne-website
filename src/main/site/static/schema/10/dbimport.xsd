@@ -8,7 +8,7 @@
   ~  "License"); you may not use this file except in compliance
   ~  with the License.  You may obtain a copy of the License at
   ~
-  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~    https://www.apache.org/licenses/LICENSE-2.0
   ~
   ~  Unless required by applicable law or agreed to in writing,
   ~  software distributed under the License is distributed on an
@@ -31,6 +31,7 @@
                         <xs:element name="catalog" minOccurs="0" maxOccurs="unbounded" type="dbi:catalog"/>
                         <xs:element name="schema" minOccurs="0" maxOccurs="unbounded" type="dbi:schema"/>
                         <xs:element name="tableTypes" minOccurs="0" type="dbi:tableTypes"/>
+
                         <xs:element name="defaultPackage" minOccurs="0" type="xs:string"/>
                         <xs:element name="forceDataMapCatalog" minOccurs="0" type="xs:boolean"/>
                         <xs:element name="forceDataMapSchema" minOccurs="0" type="xs:boolean"/>
@@ -63,9 +64,9 @@
 
     <xs:complexType name="includeTable" mixed="true">
         <xs:sequence>
-            <xs:element name="name" minOccurs="0" type="dbi:db-type"/>
-            <xs:element name="includeColumn" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="excludeColumn" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="name" minOccurs="0" type="xs:string"/>
+            <xs:element name="includeColumn" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="excludeColumn" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax"/>
         </xs:sequence>
@@ -74,11 +75,11 @@
     <xs:complexType name="container" abstract="true">
         <xs:sequence>
             <xs:element name="includeTable" type="dbi:includeTable" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="excludeTable" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="includeColumn" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="excludeColumn" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="includeProcedure" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="excludeProcedure" type="dbi:db-type" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="excludeTable" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="includeColumn" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="excludeColumn" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="includeProcedure" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="excludeProcedure" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 
             <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax"/>
         </xs:sequence>
