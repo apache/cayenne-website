@@ -20,13 +20,13 @@ Open http://localhost:3000 in your browser. In dev mode site supports live-reloa
 
 ### Publish
 
-To publish new version just run Maven with `publish` profile. This will build production version of the site (with cayenne.apache.org base URL) and push commit into `asf-site` branch that will be synced with actual site content location:
+To publish a new version just run Maven with `publish` profile. This will build a production version of the site (with cayenne.apache.org base URL) and push commit into `asf-site` branch that will be synced with actual site content location:
     
     mvn -Ppublish -Dmsg="commit message describing site changes"
     
-That's all, so be carefull and review your changes before publishing (also don't forget to check them after).
+That's all, so be careful and review your changes before publishing (also don't forget to check them after).
 
-Don't forget to push you source's changes so others won't rewrite them.
+Don't forget to push your source's changes so others won't rewrite them.
 
 *NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`.
 
@@ -37,7 +37,7 @@ Don't forget to push you source's changes so others won't rewrite them.
 #### Publishing news
 
 To publish news simply add new file at `src/main/site/content/news/` folder.
-You can use following template: 
+You can use the following template: 
 
 `some-good-news.md`
 
@@ -55,17 +55,38 @@ To update site content with information about new Cayenne version you need to pe
 
 * Update data in `src/main/site/data/cayenne.yaml` file.
 * Write news (see information above).
-* Update documentation, this can be done with `build-docs.sh` script. 
-  You can run it like this: `./build-docs.sh 4.1.M2` 
+* Update documentation, see next section.
+  
+####  Update Cayenne Documentation
+
+There are two helpers shell scripts to update Cayenne documentation:
+
+* build-docs.sh that updates both JavaDoc and Asciidoc
+* build-asciidocs.sh that update Asciidoc only
+
+Usage:
+
+* Update all docs after the release
+```
+    ./build-docs.sh 4.1.RC2
+```
+    
+* Add fixes to the docs
+```
+    ./build-asciidocs.sh STABLE-4.0 4.0.2
+```
+    
+These scripts don't commit changes so you should commit them manually and publish the site as usual. 
+
 
 ### Advanced 
 
-Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and Yarn tools and launch Gulp tasks.
+Node.js, Yarn, Gulp and Hugo tools are used to build this site, Maven used just to bootstrap Node.js and Yarn tools and launch Gulp tasks.
 Hugo binaries managed by [hugo-bin](https://www.npmjs.com/package/hugo-bin) NPM module.
 
 #### Src structure
 
-There is two main parts of site src:
+There are two main parts of the site src:
 * `src/main/assets` assets processed by [Gulp](https://gulpjs.com) tasks
 
     * `/gulp/` - list of Gulp tasks
