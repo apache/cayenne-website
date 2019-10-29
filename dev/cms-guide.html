@@ -118,15 +118,15 @@ mvn
 
 <h2 id="publish">Publish</h2>
 
-<p>To publish new version just run Maven with <code>publish</code> profile. This will build production version of the site (with <code>cayenne.apache.org</code> base URL)
+<p>To publish a new version just run Maven with <code>publish</code> profile. This will build a production version of the site (with <code>cayenne.apache.org</code> base URL)
 and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
 
 <pre><code>mvn -Ppublish -Dmsg=&quot;commit message describing site changes&quot;
 </code></pre>
 
-<p>That&rsquo;s all, so be carefull and review your changes before publishing (also don&rsquo;t forget to check them after).</p>
+<p>That&rsquo;s all, so be careful and review your changes before publishing (also don&rsquo;t forget to check them after).</p>
 
-<p>Don&rsquo;t forget to push you source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
+<p>Don&rsquo;t forget to push your source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
 
 <p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>.
 But for now it is better to use manual publishing.</p>
@@ -139,7 +139,7 @@ But for now it is better to use manual publishing.</p>
 <h3 id="publishing-news">Publishing news</h3>
 
 <p>To publish news simply add new file at <code>src/main/site/content/news/</code> folder.
-You can use following template:</p>
+You can use the following template:</p>
 
 <p><code>some-good-news.md</code></p>
 
@@ -159,23 +159,48 @@ Content goes here
 <li>Update data in <code>src/main/site/data/cayenne.yaml</code> file.
 This automatically update <a href="/download/">download</a> page and <code>/doap/caynne.rdf</code> file.</li>
 <li>Write news (see information above).</li>
-<li>Update documentation, this can be done with <code>build-docs.sh</code> script.
-You can run it like this: <code>./build-docs.sh 4.1.M2</code></li>
-<li>Publish your changes (see <a href="#Publish">publish</a> section)</li>
+<li>Update documentation (see next section).</li>
+<li>Publish your changes (see <a href="#Publish">publish</a> section)
+<br /></li>
 </ul>
+
+<h3 id="update-cayenne-documentation">Update Cayenne Documentation</h3>
+
+<p>There are two helpers shell scripts to update Cayenne documentation:</p>
+
+<ul>
+<li>build-docs.sh that updates both JavaDoc and Asciidoc</li>
+<li>build-asciidocs.sh that update Asciidoc only</li>
+</ul>
+
+<p>Usage:</p>
+
+<ul>
+<li><p>Update all docs after the release</p>
+
+<pre><code>./build-docs.sh 4.1.RC2
+</code></pre></li>
+
+<li><p>Add fixes to the docs</p>
+
+<pre><code>./build-asciidocs.sh STABLE-4.0 4.0.2
+</code></pre></li>
+</ul>
+
+<p>These scripts don&rsquo;t commit changes so you should commit them manually and publish the site as usual.</p>
 
 
 <div class="pb-3"></div>
 
 <h2 id="advanced">Advanced</h2>
 
-<p>Node.js, Yarn, Gulp and Hugo used to build this site, Maven used just to boostrap Node.js and
+<p>Node.js, Yarn, Gulp and Hugo are used to build this site, Maven used just to bootstrap Node.js and
 Yarn tools and launch Gulp tasks.
 Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-bin</a> NPM module.</p>
 
 <h3 id="src-structure">Src structure</h3>
 
-<p>There is two main parts of site src:</p>
+<p>There are two main parts of site src:</p>
 
 <ul>
 <li><p><code>src/main/assets</code> assets processed by <a href="https://gulpjs.com">Gulp</a> tasks</p>
@@ -202,7 +227,7 @@ will be processed by Webpack (see <code>/gulp/scripts.js</code>)</li>
 <li><code>package.json</code> - all project dependencies are defined here</li>
 </ul></li>
 
-<li><p><code>src/main/site</code> assets processed <a href="https://gohugo.io">Hugo</a> site generator</p>
+<li><p><code>src/main/site</code> assets processed by <a href="https://gohugo.io">Hugo</a> site generator</p>
 
 <ul>
 <li><code>/content/</code> - main content part of the site, markdown and HTML files</li>
@@ -330,6 +355,11 @@ are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use 
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
+                        <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
                         <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
                     </li>
@@ -337,11 +367,6 @@ are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use 
                     <li>
                         <time datetime="2019-10-08 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 08, 2019</time>
                         <a href="/2019/10/cayenne-41rc1-released/">Cayenne 4.1 Release Candidate 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2019-05-13 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">May 13, 2019</time>
-                        <a href="/2019/05/cayenne-41b2-released/">Cayenne 4.1 Beta 2 Released</a>
                     </li>
                     
                 </ul>
