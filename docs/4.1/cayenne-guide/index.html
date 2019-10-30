@@ -1840,10 +1840,10 @@ generic.writeProperty("name", "New Name");</code></pre>
      <p>Considering how much attention is given to managing transactions in most other ORMs, transactions have been conspicuously absent from the ObjectContext discussion till now. The reason is that transactions are seamless in Cayenne in all but a few special cases. ObjectContext is an in-memory container of objects that is disconnected from the database, except when it needs to run an operation. So it does not care about any surrounding transaction scope. Sure enough all database operations are transactional, so when an application does a commit, all SQL execution is wrapped in a database transaction. But this is done behind the scenes and is rarely a concern to the application code.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Two cases where transactions need to be taken into consideration are container-managed and application-managed transactions.</p> 
+     <p>Two cases where transactions need to be taken into consideration are container- and application-managed transactions.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>If you are using an EJB container (or some other JTA environment), you’ll likely need to switch Cayenne runtime into "external transactions mode". This is done by setting DI configuration property defined in <code>Constants.SERVER_EXTERNAL_TX_PROPERTY</code> (see Appendix A). If this property is set to "true", Cayenne assumes that JDBC Connections obtained by runtime whenever that might happen are all coming from a transactional DataSource managed by the container. In this case Cayenne does not attempt to commit or rollback the connections, leaving it up to the container to do that when appropriate.</p> 
+     <p>If you are using Spring, EJB or another environment that manages transactions, you’ll likely need to switch Cayenne runtime into "external transactions mode". This is done by setting DI configuration property defined in <code>Constants.SERVER_EXTERNAL_TX_PROPERTY</code> (see Appendix A). If this property is set to "true", Cayenne assumes that JDBC Connections obtained by runtime whenever that might happen are all coming from a transactional DataSource managed by the container. In this case Cayenne does not attempt to commit or rollback the connections, leaving it up to the container to do that when appropriate.</p> 
     </div> 
     <div class="paragraph"> 
      <p>In the second scenario, an application might need to define its own transaction scope that spans more than one Cayenne operation. E.g. two sequential commits that need to be rolled back together in case of failure. This can be done via <code>ServerRuntime.performInTransaction</code> method:</p> 
@@ -1865,12 +1865,11 @@ generic.writeProperty("name", "New Name");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>When inside the transaction, current thread Transaction object can be accessed via a static method. E.g. here is an example that initializes transaction JDBC connection with a custom connection object :</p> 
+     <p>When inside a transaction, current thread Transaction object can be accessed via a static method:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">Transaction tx = BaseTransaction.getThreadTransaction();
-tx.addConnection("mydatanode", myConnection);</code></pre> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">Transaction tx = BaseTransaction.getThreadTransaction();</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
