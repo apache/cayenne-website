@@ -10,7 +10,7 @@ menu:
         parent: about 
 weight: 20
 layout: download
-url: /download/index.html
+url: /download/
 aliases:
     - /download.html
 ---

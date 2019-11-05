@@ -30,7 +30,8 @@ googleAnalytics: 'UA-7036673-1'
 
 mediaTypes:
   application/rdf:
-    suffix: rdf
+    suffixes:
+      - rdf
 
 outputFormats:
   rdf:
