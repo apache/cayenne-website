@@ -96,8 +96,8 @@ you must first get Cayenne from Git, install JDK 1.8 and obtain the latest Maven
 
 <p>Maven <a href="/dev/building-cayenne.html">build prerequisites and recommended settings</a> apply here.</p>
 
-
-<div class="pb-2"></div>
+<div class="pb-2"></div>    
+    
 
 <h2 id="running-against-embedded-hsqldb">Running Against Embedded HSQLDB</h2>
 
@@ -112,7 +112,6 @@ $ mvn install
 <pre><code>$ cd cayenne
 $ mvn clean verify
 </code></pre>
-
 
 <div class="pb-3"></div>
 
@@ -132,7 +131,6 @@ following databases that support in-memory mode:</p>
 
 <pre><code>$ mvn verify -DcayenneTestConnection=derby    
 </code></pre>
-
 
 <div class="pb-3"></div>
 
@@ -154,13 +152,11 @@ The only thing you need is to install Docker.</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql-docker   
 </code></pre>
 
-
 <div class="pb-3"></div>
 
 <h2 id="running-against-a-specific-database">Running Against a Specific Database</h2>
 
 <p>Final option to run tests against any supported database is with manual configuration.</p>
-
 
 <div class="pb-1l2"></div>
 
@@ -195,8 +191,8 @@ the POM or the examples below.</p>
        -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
 </code></pre>
 
-
 <div class="pb-3l2"></div>
+    
 
 <h5 id="step-2-run-tests-against-configured-data-source">Step 2. Run Tests Against Configured Data Source</h5>
 
@@ -425,7 +421,7 @@ the example above). Note that in this case you should still use
     </div>
 </footer>
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

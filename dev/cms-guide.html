@@ -94,7 +94,6 @@
 
 <p>Or from GitHub mirror (in read only mode): <a href="https://github.com/apache/cayenne-website.git">https://github.com/apache/cayenne-website.git</a></p>
 
-
 <div class="pb-3"></div>
 
 <h2 id="dev-mode">Dev mode</h2>
@@ -113,7 +112,6 @@ mvn
 <pre><code>mvn -Ddev.host=&quot;my.local&quot; -Ddev.port=&quot;8080&quot;
 </code></pre>
 
-
 <div class="pb-3"></div>
 
 <h2 id="publish">Publish</h2>
@@ -130,7 +128,6 @@ and push commit into <code>asf-site</code> branch that will be synced with actua
 
 <p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>.
 But for now it is better to use manual publishing.</p>
-
 
 <div class="pb-3"></div>
 
@@ -188,7 +185,6 @@ This automatically update <a href="/download/">download</a> page and <code>/doap
 </ul>
 
 <p>These scripts don&rsquo;t commit changes so you should commit them manually and publish the site as usual.</p>
-
 
 <div class="pb-3"></div>
 
@@ -384,7 +380,7 @@ are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use 
     </div>
 </footer>
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

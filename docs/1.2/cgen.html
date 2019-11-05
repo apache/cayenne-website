@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
+        <title>cgen &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.0/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 1.2
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Release Candidate)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/1.2/user-guide.html">User Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/1.2/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/1.2/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/1.2/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    
+	
+
+<P><TT>cgen</TT> is an Ant task that generates and maintains DataObjects source files based on Cayenne DataMap. If &quot;makepairs&quot; is set to &quot;true&quot; (default), this task will generate a pair of classes (superclass/subclass) for each ObjEntity in the DataMap. Superclasses should not be changed manually, since they are always overwritten. Subclasses are never overwritten and may be later customized by the user. If &quot;makepairs&quot; is set to &quot;false&quot;, a single class will be generated for each ObjEntity.</P>
+
+<P>By creating custom templates, Cgen can also be used to generate other output (such as web pages, reports, specialized code templates) based on DataMap information.</P>
+
+<H3><A name="cgen-Parameters"></A>Parameters</H3>
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Attribute</TH>
+<TH class="confluenceTh">Description</TH>
+<TH class="confluenceTh">Required</TH>
+</TR>
+<TR>
+<TD class="confluenceTd">map</TD>
+<TD class="confluenceTd">DataMap XML file to use as a base for class generation.</TD>
+<TD class="confluenceTd">Yes</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">additionalMaps</TD>
+<TD class="confluenceTd">Path to additional DataMap XML files to use for class generation.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">destDir</TD>
+<TD class="confluenceTd">Destination directory for Java classes (ignoring their package names).</TD>
+<TD class="confluenceTd">Yes</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">overwrite</TD>
+<TD class="confluenceTd">If set to &quot;true&quot;, will overwrite older versions of generated classes. Ignored unless makepairs is set to &quot;false&quot;.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">makepairs</TD>
+<TD class="confluenceTd">If set to &quot;true&quot;, will generate subclass/superclass pairs, with all generated code included in superclass (default is &quot;true&quot;).</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">template</TD>
+<TD class="confluenceTd">Location of Velocity template file for Java class generation. If omitted, default template is used.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">supertemplate</TD>
+<TD class="confluenceTd">Location of Velocity template file for Java superclass generation. Ignored unless &quot;makepairs&quot; set to &quot;true&quot;. If omitted, default template is used.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">superpkg</TD>
+<TD class="confluenceTd">Java package name of generated superclasses. Ignored unless &quot;makepairs&quot; set to &quot;true&quot;. If omitted, each superclass will be assigned the same package as subclass. Note that having superclass in a different package would only make sense when &quot;usepkgpath&quot; is set to &quot;true&quot;. Otherwise classes from different packages will end up in the same directory.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">usepkgpath</TD>
+<TD class="confluenceTd">If set to &quot;true&quot; (default), a directory tree will be generated in &quot;destDir&quot; corresponding to the class package structure, if set to &quot;false&quot;, classes will be generated in &quot;destDir&quot; ignoring their package.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">encoding</TD>
+<TD class="confluenceTd">Specify generated file encoding if different from the default on current platform. Target encoding must be supported by the JVM running Ant build. Standard encodings supported by Java on all platforms are US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See Sun Java Docs for java.nio.charset.Charset for more information.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">version</TD>
+<TD class="confluenceTd">Specifies template location and generator behavior. &quot;1.1&quot; is the old behavior, with templates located in &quot;dotemplates&quot; and &quot;classgen&quot; as the only velocity context attribute. &quot;1.2&quot; is the new behavior, with templates located in &quot;dotemplates/v1.2&quot; and &quot;objEntity&quot;, &quot;entityUtils&quot;, &quot;stringUtils&quot;, and &quot;importUtils&quot; in the velocity context. (Default is &quot;1.1&quot;)</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">excludeEntities</TD>
+<TD class="confluenceTd">Entities (expressed as a perl5 regex) to exclude from template generation. (Default is to include all entities in the DataMap)</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">includeEntities</TD>
+<TD class="confluenceTd">Entities (expressed as a perl5 regex) to include in template generation. (Default is to include all entities in the DataMap)</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">outputPattern</TD>
+<TD class="confluenceTd">Name of file for generated output. (Default is &quot;*.java&quot;)</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">mode</TD>
+<TD class="confluenceTd">Specifies generator iteration target. &quot;entity&quot; performs one iteration for each selected entity. &quot;datamap&quot; performs one iteration per datamap (This is always one iteration since cgen currently supports specifying one-and-only-one datamap). (Default is &quot;entity&quot;)</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">client</TD>
+<TD class="confluenceTd">Whether we are generating classes for the client tier in a <A href="remote-object-persistence-guide.html" title="Remote Object Persistence Guide">Remote Object Persistence</A> application. Default is &quot;false&quot;</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<H3><A name="cgen-Parametersspecifiedasnestedelements"></A>Parameters specified as nested elements</H3>
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Attribute</TH>
+<TH class="confluenceTh">Description</TH>
+<TH class="confluenceTh">Required</TH>
+</TR>
+<TR>
+<TD class="confluenceTd">config</TD>
+<TD class="confluenceTd">CGen with version=&quot;1.2&quot; also supports <A href="http://vpp.sourceforge.net/" class="external-link" rel="nofollow">VPP</A> config nested elements for configuring the velocity template engine and adding objects to the velocity template. You can also reference a vppconfig element declared outside of the CGen task, but you'll need to insure that both <TT>vppconfig</TT> and <TT>cgen</TT> have been loaded with the same classloader by using the same ant taskdef loaderRef value for both tasks. See the <A href="http://vpp.sourceforge.net/manual/vppconfig.html" class="external-link" rel="nofollow">VPP VPPConfig Manual</A> page for complete information.</TD>
+<TD class="confluenceTd">No</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<H3><A name="cgen-Examples"></A>Examples</H3>
+
+<P>Here is an example of using CGen to generate DataObject subclass/superclass pairs from DataMap located in &quot;src/datamap.xml&quot;. All generated subclasses and superclasses will be saved in the same directory &quot;src/java/dobj&quot; regardless of their package names:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml"><SPAN class="code-tag">&lt;taskdef name=<SPAN class="code-quote">&quot;cgen&quot;</SPAN> classname=<SPAN class="code-quote">&quot;org.objectstyle.cayenne.tools.CayenneGenerator&quot;</SPAN>&gt;</SPAN>
+    <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;classpath&quot;</SPAN>/&gt;</SPAN>
+<SPAN class="code-tag">&lt;/taskdef&gt;</SPAN>
+<SPAN class="code-tag">&lt;cgen map=<SPAN class="code-quote">&quot;src/datamap.xml&quot;</SPAN> destDir=<SPAN class="code-quote">&quot;src/java/dobj&quot;</SPAN> usepkgpath=<SPAN class="code-quote">&quot;false&quot;</SPAN>/&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+<P>Here is an example of using CGen to generate html pages for all entities starting with &quot;Artist&quot; in the DataMap:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml"><SPAN class="code-tag">&lt;taskdef name=<SPAN class="code-quote">&quot;cgen&quot;</SPAN> classname=<SPAN class="code-quote">&quot;org.objectstyle.cayenne.tools.CayenneGenerator&quot;</SPAN>&gt;</SPAN>
+    <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;classpath&quot;</SPAN>/&gt;</SPAN>
+<SPAN class="code-tag">&lt;/taskdef&gt;</SPAN>
+&lt;cgen map=<SPAN class="code-quote">&quot;src/datamap.xml&quot;</SPAN> destDir=<SPAN class="code-quote">&quot;src/doc/web&quot;</SPAN> makepairs=<SPAN class="code-quote">&quot;false&quot;</SPAN> usepkgpath=<SPAN class="code-quote">&quot;false&quot;</SPAN>
+    template=<SPAN class="code-quote">&quot;EntityReport.vm&quot;</SPAN> includeEntities=<SPAN class="code-quote">&quot;Artist*&quot;</SPAN> outputPattern=<SPAN class="code-quote">&quot;*Report.html&quot;</SPAN>/&gt;
+</PRE>
+</DIV></DIV>
+
+<P>Here is an example of using CGen with a nested config element:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml">&lt;typedef
+    resource=<SPAN class="code-quote">&quot;org/objectstyle/cayenne/tools/antlib.xml&quot;</SPAN>&gt;
+    <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;aclasspath&quot;</SPAN>/&gt;</SPAN>
+<SPAN class="code-tag">&lt;/typedef&gt;</SPAN>
+
+&lt;cgen map=<SPAN class="code-quote">&quot;src/datamap.xml&quot;</SPAN>
+    destDir=<SPAN class="code-quote">&quot;src/doc/web&quot;</SPAN>
+    makepairs=<SPAN class="code-quote">&quot;false&quot;</SPAN>
+    usepkgpath=<SPAN class="code-quote">&quot;false&quot;</SPAN>
+    template=<SPAN class="code-quote">&quot;EntityReport.vm&quot;</SPAN>
+    includeEntities=<SPAN class="code-quote">&quot;Artist*&quot;</SPAN>
+    outputPattern=<SPAN class="code-quote">&quot;*Report.html&quot;</SPAN>&gt;
+    <SPAN class="code-tag">&lt;config&gt;</SPAN>
+        <SPAN class="code-tag">&lt;context&gt;</SPAN>
+            <SPAN class="code-tag">&lt;property key=<SPAN class="code-quote">&quot;myPropertyName&quot;</SPAN> value=<SPAN class="code-quote">&quot;myPropertyValue&quot;</SPAN> /&gt;</SPAN>
+            <SPAN class="code-tag">&lt;tool key=<SPAN class="code-quote">&quot;myToolName&quot;</SPAN> className=<SPAN class="code-quote">&quot;org.myDomain.MyTool&quot;</SPAN> /&gt;</SPAN>
+        <SPAN class="code-tag">&lt;/context&gt;</SPAN>
+    <SPAN class="code-tag">&lt;/config&gt;</SPAN>
+<SPAN class="code-tag">&lt;/cgen&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+
+<P>Here is an example of using CGen with vppconfig:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-xml">&lt;typedef
+    resource=<SPAN class="code-quote">&quot;org/objectstyle/cayenne/tools/antlib.xml&quot;</SPAN>&gt;
+    loaderref=<SPAN class="code-quote">&quot;aclasspathloader&quot;</SPAN>
+    <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;aclasspath&quot;</SPAN>/&gt;</SPAN>
+<SPAN class="code-tag">&lt;/typedef&gt;</SPAN>
+
+&lt;typedef name=<SPAN class="code-quote">&quot;vppconfig&quot;</SPAN>
+    classname=<SPAN class="code-quote">&quot;foundrylogic.vpp.VPPConfig&quot;</SPAN>
+    loaderref=<SPAN class="code-quote">&quot;aclasspathloader&quot;</SPAN>&gt;
+    <SPAN class="code-tag">&lt;classpath refid=<SPAN class="code-quote">&quot;aclasspath&quot;</SPAN>/&gt;</SPAN>
+<SPAN class="code-tag">&lt;/typedef&gt;</SPAN>
+
+<SPAN class="code-tag">&lt;vppconfig id=<SPAN class="code-quote">&quot;myconfig&quot;</SPAN>&gt;</SPAN>
+    <SPAN class="code-tag">&lt;context&gt;</SPAN>
+        <SPAN class="code-tag">&lt;property key=<SPAN class="code-quote">&quot;myPropertyName&quot;</SPAN> value=<SPAN class="code-quote">&quot;myPropertyValue&quot;</SPAN> /&gt;</SPAN>
+        <SPAN class="code-tag">&lt;tool key=<SPAN class="code-quote">&quot;myToolName&quot;</SPAN> className=<SPAN class="code-quote">&quot;org.myDomain.MyTool&quot;</SPAN> /&gt;</SPAN>
+    <SPAN class="code-tag">&lt;/context&gt;</SPAN>
+<SPAN class="code-tag">&lt;/vppconfig&gt;</SPAN>
+
+&lt;cgen map=<SPAN class="code-quote">&quot;src/datamap.xml&quot;</SPAN>
+    destDir=<SPAN class="code-quote">&quot;src/doc/web&quot;</SPAN>
+    makepairs=<SPAN class="code-quote">&quot;false&quot;</SPAN>
+    usepkgpath=<SPAN class="code-quote">&quot;false&quot;</SPAN>
+    template=<SPAN class="code-quote">&quot;EntityReport.vm&quot;</SPAN>
+    includeEntities=<SPAN class="code-quote">&quot;Artist*&quot;</SPAN>
+    outputPattern=<SPAN class="code-quote">&quot;*Report.html&quot;</SPAN>&gt;
+    <SPAN class="code-tag">&lt;config refid=<SPAN class="code-quote">&quot;myconfig&quot;</SPAN> /&gt;</SPAN>
+<SPAN class="code-tag">&lt;/cgen&gt;</SPAN>
+</PRE>
+</DIV></DIV>
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
+                        <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
+                        <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-08 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 08, 2019</time>
+                        <a href="/2019/10/cayenne-41rc1-released/">Cayenne 4.1 Release Candidate 1 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2019 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-7036673-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    </body>
+</html>

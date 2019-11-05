@@ -101,10 +101,10 @@
 
 <p>Cayenne now provides a set of new fluent query classes: ObjectSelect, SQLSelect, SelectById. More will be coming in the future releases. Here is a simple example of a query selecting a single object by a given criteria:</p>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Artist a <span style="color:#f92672">=</span> ObjectSelect
-    <span style="color:#f92672">.</span><span style="color:#a6e22e">query</span><span style="color:#f92672">(</span>Artist<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
-    <span style="color:#f92672">.</span><span style="color:#a6e22e">where</span><span style="color:#f92672">(</span>Artist<span style="color:#f92672">.</span><span style="color:#a6e22e">NAME</span><span style="color:#f92672">.</span><span style="color:#a6e22e">eq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Picasso&#34;</span><span style="color:#f92672">))</span>
-    <span style="color:#f92672">.</span><span style="color:#a6e22e">selectOne</span><span style="color:#f92672">(</span>context<span style="color:#f92672">);</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#960050;background-color:#1e0010">Artist a </span><span style="color:#f92672">=</span> ObjectSelect
+    .<span style="color:#a6e22e">query</span>(Artist.<span style="color:#a6e22e">class</span>)
+    .<span style="color:#a6e22e">where</span>(Artist.<span style="color:#a6e22e">NAME</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#e6db74">&#34;Picasso&#34;</span>))
+    .<span style="color:#a6e22e">selectOne</span>(context);</code></pre></div>
 
 <p>A related addition is positional bindings in Expression, SQLTemplate and the new query classes. Using the new API you&rsquo;ll avoid boilerplate in the most-commonly written Cayenne code, all this with full support for generics and type safety. The &ldquo;old&rdquo; style of bean-like queries (SelectQuery) is still supported.</p>
 
@@ -449,7 +449,7 @@ Module module = new Module() {
     </div>
 </footer>
     
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

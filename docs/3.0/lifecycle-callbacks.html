@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-92aa692db7.js"></script>
+        <title>Lifecycle Callbacks &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.0/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 3.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Release Candidate)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/cayenne-guide.html">Cayenne Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/modeler-guide.html">Modeler Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/3.0/remote-object-persistence-guide.html">Remote Object Persistence Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/3.0/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+            
+            <article>
+                <section>
+                    
+	<H2><A name="LifecycleCallbacks-LifecycleCallbacks"></A>Lifecycle Callbacks</H2>
+
+<P>Users can register callback methods that will be invoked during the lifecycle of persistent objects. Callback mechanism is similar to the one defined in the <A href="../CAYJPA/jpa-guide.html" title="JPA Guide">JPA Specification</A>, however there are some noteable differences introduced to better follow the Cayenne object lifecycle. There are eight lifecycle callbacks described below (PostAdd, PrePersist, PostPersist, PreUpdate, PostUpdate, PreRemove, PostRemove, PostLoad). Each one cab be invoked as a <B>callback on a persistent object</B> itself or as a <B>callback on an arbitrary listener object</B>.</P>
+
+<DIV class="panelMacro"><TABLE class="noteMacro"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><img src="/docs/3.0/images/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD><B>Callbacks feature supercedes the following 1.2/2.0 features:</B><BR><UL>
+	<LI>Interception of object state transitions inside <TT>&quot;Persistent.setPersistenceState()&quot;</TT>.</LI>
+	<LI>Event mechanism defined in <TT>&quot;org.apache.cayenne.access.event&quot;</TT> package that was removed in 3.0.</LI>
+	<LI><TT>&quot;DataObject.validateForX&quot;</TT> - it is a good idea to use it strictly for validation; updating the state before commit should be done via callbacks.</LI>
+	<LI><TT>&quot;DataObject.fetchFinished()&quot;</TT> - scheduled for removal in 3.0</LI>
+</UL>
+</TD></TR></TABLE></DIV>
+
+<H2><A name="LifecycleCallbacks-CallbackMethodSemantics"></A>Callback Method Semantics</H2>
+
+<UL>
+	<LI>No formal interface is required to mark a method to be used for callback (although <TT>org.apache.cayenne.LifecycleListener</TT> can optionally be implemented for type-safety and to simplify registration).</LI>
+	<LI>A callback method signature looks like <TT>&quot;void someMethod()&quot;</TT> <EM>for persistent classes</EM>.</LI>
+	<LI>It looks like <TT>&quot;void method(Type entityObject)&quot;</TT> <EM>for listener classes</EM>.</LI>
+	<LI>A callback method can have an arbitrary name.</LI>
+	<LI>A callback method can use public, private, protected or default access.</LI>
+	<LI>It must NOT be static.</LI>
+	<LI>Callback methods are polymorphic - registering a callback on a superclass (even if the superclass does not map to an entity) will ensure the callback will be invoked on all entity subclasses, using the overriding subclass method if applicable.</LI>
+</UL>
+
+
+<P>Callback on persistent object example:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">public</SPAN> class Artist { 
+   ...
+
+   <SPAN class="code-comment">// a valid callback method
+</SPAN>   <SPAN class="code-keyword">protected</SPAN> void setDefaultProperties() {
+      ...
+   }
+}</PRE>
+</DIV></DIV>
+
+
+<P>Callback on a listener class example:</P>
+
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">public</SPAN> class MyListener { 
+   ...
+
+   <SPAN class="code-comment">// a valid callback method
+</SPAN>   <SPAN class="code-keyword">public</SPAN> void initArtist(Artist a) {
+      ...
+   }
+}</PRE>
+</DIV></DIV>
+
+<P>Note that empty callback methods are generated as a part of persistent class generation (either with <A href="maven2-cgen.html" title="maven2-cgen">Maven</A>, <A href="cgen.html" title="cgen">Ant</A> or CayenneModeler).</P>
+
+<H2><A name="LifecycleCallbacks-TypesofCallbacks"></A>Types of Callbacks</H2>
+
+<P>Valid callback types are defined as Java enumerated constants in the <TT>org.apache.cayenne.map.LifecycleEvent</TT> enumeration.</P>
+
+<DIV class="table-wrap">
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh">Callback</TH>
+<TH class="confluenceTh">Invoked...</TH>
+</TR>
+<TR>
+<TD class="confluenceTd">PostAdd</TD>
+<TD class="confluenceTd">Within <TT>&quot;ObjectContext.newObject()&quot;</TT> after ObjectId and ObjectContext are set.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PrePersist</TD>
+<TD class="confluenceTd">Prior to commit (and prior to &quot;validateFor*&quot;) within <TT>&quot;ObjectContext.commitChanges()&quot;</TT> and <TT>&quot;ObjectContext.commitChangesToParent()&quot;</TT></TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PreRemove</TD>
+<TD class="confluenceTd">Before an object is deleted inside <TT>&quot;ObjectContext.deleteObject()&quot;</TT>; also includes all objects that will be deleted as a result of CASCADE delete rule.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PreUpdate</TD>
+<TD class="confluenceTd">Prior to commit (and prior to &quot;validateFor*&quot;) within <TT>&quot;ObjectContext.commitChanges()&quot;</TT> and <TT>&quot;ObjectContext.commitChangesToParent()&quot;</TT></TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PostPersist</TD>
+<TD class="confluenceTd">Within <TT>&quot;ObjectContext.commitChanges()&quot;</TT>, after commit of a new object is done.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PostRemove</TD>
+<TD class="confluenceTd">Within <TT>&quot;ObjectContext.commitChanges()&quot;</TT>, after commit of a deleted object is done.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PostUpdate</TD>
+<TD class="confluenceTd">Within <TT>&quot;ObjectContext.commitChanges()&quot;</TT>, after commit of a modified object is done.</TD>
+</TR>
+<TR>
+<TD class="confluenceTd">PostLoad</TD>
+<TD class="confluenceTd"><UL>
+	<LI>Within <TT>&quot;ObjectContext.performQuery()&quot;</TT> after the object is fetched.</LI>
+	<LI>Within <TT>&quot;ObjectContext.rollbackChanges()&quot;</TT> after the object is reverted.</LI>
+	<LI>Anytime a faulted object is resolved (i.e. if a relationship is fetched.</LI>
+</UL>
+</TD>
+</TR>
+</TBODY></TABLE>
+</DIV>
+
+
+<H2><A name="LifecycleCallbacks-RegisteringCallbacks"></A>Registering Callbacks</H2>
+
+<P>Normally listeners and persistent object callbacks are mapped in the Modeler, but this can also be done in the code. Callbacks are registered with <TT>LifecycleCallbackRegistry</TT>, which is shared by all contexts within a DataDomain.</P>
+
+<P>Obtaining the shared registry instance:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> org.apache.cayenne.reflect.LifecycleCallbackRegistry;
+...
+DataDomain domain = ...
+LifecycleCallbackRegistry registry = domain.getEntityResolver().getCallbackRegistry();</PRE>
+</DIV></DIV>
+
+
+<P>Registry obtained this way already contains callbacks mapped in the DataMap. To add extra callbacks in runtimes, use various <TT>addListener(...)</TT>  methods. </P>
+
+<P>Adding a listener object that implements <TT>LifecycleListener</TT> interface:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">import</SPAN> org.apache.cayenne.LifecycleListener
+
+<SPAN class="code-keyword">public</SPAN> class MyListener <SPAN class="code-keyword">implements</SPAN> LifecycleListener {
+	<SPAN class="code-keyword">public</SPAN> void prePersist(<SPAN class="code-object">Object</SPAN> entity) {
+		Persistent p = (Persistent) entity;
+	    <SPAN class="code-object">System</SPAN>.out.println(<SPAN class="code-quote">&quot;New object created <SPAN class="code-keyword">for</SPAN> entity &quot;</SPAN> + p.getObjectId().getEntityName());	
+	}
+	
+	... 
+}
+
+<SPAN class="code-comment">// listen <SPAN class="code-keyword">for</SPAN> events on a single entity - Artist
+</SPAN>registry.addListener(Artist.class, <SPAN class="code-keyword">new</SPAN> MyListener());
+
+<SPAN class="code-comment">// listen <SPAN class="code-keyword">for</SPAN> events on ALL entities:
+</SPAN>registry.addDefaultListener(<SPAN class="code-keyword">new</SPAN> MyListener());</PRE>
+</DIV></DIV>
+
+<P>Adding a listener of an arbitrary class</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-keyword">public</SPAN> class MyOtherListener {
+	
+	<SPAN class="code-comment">// note that callback method doesn't have to be 
+</SPAN>	<SPAN class="code-comment">// <SPAN class="code-keyword">public</SPAN> or called any predefined name
+</SPAN>    void onEntityLoad(<SPAN class="code-object">Object</SPAN> entity) {
+		Persistent p = (Persistent) entity;
+	    <SPAN class="code-object">System</SPAN>.out.println(<SPAN class="code-quote">&quot;<SPAN class="code-object">Object</SPAN> fetched: &quot;</SPAN> + p.getObjectId().getEntityName());	
+	}
+	
+	<SPAN class="code-comment">// also we can pass the object already <SPAN class="code-keyword">cast</SPAN> to the entity class 
+</SPAN>	<SPAN class="code-comment">// <SPAN class="code-keyword">if</SPAN> the method is only going to handle <SPAN class="code-keyword">this</SPAN> type of entities
+</SPAN>	void onArtistChange(Artist artist) {
+	    <SPAN class="code-object">System</SPAN>.out.println(<SPAN class="code-quote">&quot;Artist changed &quot;</SPAN> + artist.getArtistName());	
+	}
+	
+	... 
+}
+
+<SPAN class="code-object">Object</SPAN> listener = <SPAN class="code-keyword">new</SPAN> MyOtherListener();
+
+<SPAN class="code-comment">// listen <SPAN class="code-keyword">for</SPAN> different events on a single entity - Artist. The same
+</SPAN><SPAN class="code-comment">// method can be registered <SPAN class="code-keyword">for</SPAN> multiple events
+</SPAN>registry.addListener(LifecycleListener.PRE_PERSIST, Artist.class, listener, <SPAN class="code-quote">&quot;onArtistChange&quot;</SPAN>);
+registry.addListener(LifecycleListener.PRE_REMOVE, Artist.class, listener, <SPAN class="code-quote">&quot;onArtistChange&quot;</SPAN>);
+registry.addListener(LifecycleListener.PRE_UPDATE, Artist.class, listener, <SPAN class="code-quote">&quot;onArtistChange&quot;</SPAN>);
+
+<SPAN class="code-comment">// register another method to listen <SPAN class="code-keyword">for</SPAN> ALL entities
+</SPAN>registry.addListener(LifecycleListener.POST_LOAD, listener, <SPAN class="code-quote">&quot;onEntityLoad&quot;</SPAN>);</PRE>
+</DIV></DIV>
+
+<P>Finally a persistent object can implement callbacks as well, being notified of its own events:</P>
+<DIV class="code panel" style="border-width: 1px;"><DIV class="codeContent panelContent">
+<PRE class="code-java"><SPAN class="code-comment">// <SPAN class="code-quote">&quot;<SPAN class="code-keyword">extends</SPAN> _Artist&quot;</SPAN> implies <SPAN class="code-quote">&quot;<SPAN class="code-keyword">implements</SPAN> Persistent&quot;</SPAN> via a superclass
+</SPAN><SPAN class="code-keyword">public</SPAN> class Artist <SPAN class="code-keyword">extends</SPAN> _Artist {
+	
+	<SPAN class="code-comment">// note that callback on entity is a no-arg method.
+</SPAN>	void onLoad() {
+		Persistent p = (Persistent) entity;
+	    <SPAN class="code-object">System</SPAN>.out.println(<SPAN class="code-quote">&quot;<SPAN class="code-object">Object</SPAN> fetched: &quot;</SPAN> + <SPAN class="code-keyword">this</SPAN>);	
+	}
+}
+
+<SPAN class="code-comment">// register Artist class callback
+</SPAN>registry.addListener(LifecycleListener.POST_LOAD, Artist.class, <SPAN class="code-quote">&quot;onLoad&quot;</SPAN>);</PRE>
+</DIV></DIV>
+
+
+                </section>
+            </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
+                        <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
+                        <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-08 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 08, 2019</time>
+                        <a href="/2019/10/cayenne-41rc1-released/">Cayenne 4.1 Release Candidate 1 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2019 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-7036673-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    </body>
+</html>
