@@ -126,7 +126,7 @@
    <ul class="sectlevel2 nav"> 
     <li><a href="#setup" class="nav-link">1.1. Setup</a></li> 
     <li><a href="#cayenne-mapping-structure" class="nav-link">1.2. Cayenne Mapping Structure</a></li> 
-    <li><a href="#cayennemodeler-application" class="nav-link">1.3. CayenneModeler Application</a></li> 
+    <li><a href="#cayenne-modeler" class="nav-link">1.3. CayenneModeler Application</a></li> 
    </ul> </li> 
   <li><a href="#cayenne-framework" class="nav-link">2. Cayenne Framework</a> 
    <ul class="sectlevel2 nav"> 
@@ -164,10 +164,15 @@
     <li><a href="#cayenne-osgi-extension" class="nav-link">5.8. Cayenne OSGI extension</a></li> 
     <li><a href="#cayenne-rop-server-extension" class="nav-link">5.9. Cayenne Rop Server extension</a></li> 
    </ul> </li> 
-  <li><a href="#appendix-a-configuration-properties" class="nav-link">6. Appendix A. Configuration Properties</a></li> 
-  <li><a href="#appendix-b-service-collections" class="nav-link">7. Appendix B. Service Collections</a></li> 
-  <li><a href="#appendixC" class="nav-link">8. Appendix C. Expressions BNF</a></li> 
-  <li><a href="#list-of-tables" class="nav-link">9. List of tables</a></li> 
+  <li><a href="#build_tools" class="nav-link">6. Build Tools</a> 
+   <ul class="sectlevel2 nav"> 
+    <li><a href="#maven_plugin" class="nav-link">6.1. Maven Plugin</a></li> 
+    <li><a href="#gradle_plugin" class="nav-link">6.2. Gradle Plugin</a></li> 
+    <li><a href="#ant_tasks" class="nav-link">6.3. Ant Tasks</a></li> 
+   </ul> </li> 
+  <li><a href="#appendix-a-configuration-properties" class="nav-link">7. Appendix A. Configuration Properties</a></li> 
+  <li><a href="#appendix-b-service-collections" class="nav-link">8. Appendix B. Service Collections</a></li> 
+  <li><a href="#appendixC" class="nav-link">9. Appendix C. Expressions BNF</a></li> 
  </ul> 
 </div>
                     </div>
@@ -437,7 +442,7 @@ total 24
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="cayennemodeler-application"><a class="anchor" href="#cayennemodeler-application"></a>1.3. CayenneModeler Application</h3> 
+   <h3 id="cayenne-modeler"><a class="anchor" href="#cayenne-modeler"></a>1.3. CayenneModeler Application</h3> 
    <div class="sect3"> 
     <h4 id="reverse-engineering-database"><a class="anchor" href="#reverse-engineering-database"></a>Reverse Engineering Database</h4> 
     <div class="paragraph"> 
@@ -531,32 +536,9 @@ total 24
   <div class="sect2"> 
    <h3 id="including-cayenne-in-project"><a class="anchor" href="#including-cayenne-in-project"></a>2.1. Including Cayenne in a Project</h3> 
    <div class="sect3"> 
-    <h4 id="jar-files"><a class="anchor" href="#jar-files"></a>Jar Files</h4> 
+    <h4 id="maven"><a class="anchor" href="#maven"></a>Maven</h4> 
     <div class="paragraph"> 
-     <p>This is an overview of Cayenne jars that is agnostic of the build tool used. The following are the important libraries:</p> 
-    </div> 
-    <div class="ulist"> 
-     <ul> 
-      <li> <p><code>cayenne-di-4.1.RC2.jar</code> - Cayenne dependency injection (DI) container library. All applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-server-4.1.RC2.jar</code> - contains main Cayenne runtime (adapters, DB access classes, etc.). Most applications will require this file.</p> </li> 
-      <li> <p><code>cayenne-client-4.1.RC2.jar</code> - a client-side runtime for <a href="#introduction-to-rop">ROP applications</a></p> </li> 
-      <li> <p>Other cayenne-* jars - various Cayenne tools extensions.</p> </li> 
-     </ul> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="dependencies"><a class="anchor" href="#dependencies"></a>Dependencies</h4> 
-    <div class="paragraph"> 
-     <p>With modern build tools like Maven and Gradle, you should not worry about tracking dependencies. If you have one of those, you can skip this section and go straight to the Maven section below. However if your environment requires manual dependency resolution (like Ant), the distribution provides all of Cayenne jars plus a minimal set of third-party dependencies to get you started in a default configuration. Check lib and <code>lib/third-party</code> folders for those.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Dependencies for non-standard configurations will need to be figured out by the users on their own. Check <code>pom.xml</code> files of the corresponding Cayenne modules in one of the searchable Maven archives out there to get an idea of those dependencies (e.g. <a href="http://search.maven.org" class="bare">http://search.maven.org</a>).</p> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="maven-projects"><a class="anchor" href="#maven-projects"></a>Maven Projects</h4> 
-    <div class="paragraph"> 
-     <p>If you are using Maven, you won’t have to deal with figuring out the dependencies. You can simply include cayenne-server artifact in your POM:</p> 
+     <p>To add Cayenne to your Maven project, include <code>cayenne-server</code> in your POM:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -567,852 +549,22 @@ total 24
 &lt;/dependency&gt;</code></pre> 
      </div> 
     </div> 
-    <div class="paragraph"> 
-     <p>Additionally Cayenne provides a Maven plugin with a set of goals to perform various project tasks, such as synching generated Java classes with the mapping, described in the following subsection. The full plugin name is <code>org.apache.cayenne.plugins:cayenne-maven-plugin</code>.</p> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cgen"><a class="anchor" href="#cgen"></a>cgen</h5> 
-     <div class="paragraph"> 
-      <p><code>cgen</code> is a <code>cayenne-maven-plugin</code> goal that generates and maintains source (.java) files of persistent objects based on a DataMap. By default, it is bound to the generate-sources phase. If "makePairs" is set to "true" (which is the recommended default), this task will generate a pair of classes (superclass/subclass) for each ObjEntity in the DataMap. Superclasses should not be changed manually, since they are always overwritten. Subclasses are never overwritten and may be later customized by the user. If "makePairs" is set to "false", a single class will be generated for each ObjEntity.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>By creating custom templates, you can use cgen to generate other output (such as web pages, reports, specialized code templates) based on DataMap information.</p> 
-     </div> 
-     <table id="tablecgen" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 3. cgen required parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 16.6666%;"> 
-       <col style="width: 16.6666%;"> 
-       <col style="width: 66.6668%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
-        <td class="tableblock halign-left valign-top">
-         <div class="content">
-          <div class="paragraph"> 
-           <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p> 
-          </div> 
-          <div class="listingblock"> 
-           <div class="content"> 
-            <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre> 
-           </div> 
-          </div>
-         </div></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <table id="cgenOptional" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 4. cgen optional parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 25%;"> 
-       <col style="width: 12.5%;"> 
-       <col style="width: 62.5%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">additionalMaps</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A directory that contains additional DataMap XML files that may be needed to resolve cross-DataMap relationships for the the main DataMap, for which class generation occurs.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">client</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether we are generating classes for the client tier in a Remote Object Persistence application. "False" by default.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">destDir</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Root destination directory for Java classes (ignoring their package names). The default is "src/main/java".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableTemplate</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable class generation. If omitted, default template is used.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableSuperTemplate</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable superclass generation. Ignored unless "makepairs" set to "true". If omitted, default template is used.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">encoding</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Generated files encoding if different from the default on current platform. Target encoding must be supported by the JVM running the build. Standard encodings supported by Java on all platforms are US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See javadocs for java.nio.charset.Charset for more information.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">excludeEntities</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to exclude from template generation. By default none of the DataMap entities are excluded.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">includeEntities</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to include from template generation. By default all DataMap entities are included.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">makePairs</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">If "true" (a recommended default), will generate subclass/superclass pairs, with all generated code placed in superclass.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">mode</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Specifies class generator iteration target. There are three possible values: "entity" (default), "datamap", "all". "entity" performs one generator iteration for each included ObjEntity, applying either standard to custom entity templates. "datamap" performs a single iteration, applying DataMap templates. "All" is a combination of entity and datamap.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">overwrite</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Only has effect when "makePairs" is set to "false". If "overwrite" is "true", will overwrite older versions of generated classes.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">superPkg</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Java package name of all generated superclasses. If omitted, each superclass will be placed in the subpackage of its subclass called "auto". Doesn’t have any effect if either "makepairs" or "usePkgPath" are false (both are true by default).</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">superTemplate</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity superclass generation. Only has effect if "makepairs" set to "true". If omitted, default template is used.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">template</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity class generation. If omitted, default template is used.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">usePkgPath</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true" (default), a directory tree will be generated in "destDir" corresponding to the class package structure, if set to "false", classes will be generated in "destDir" ignoring their package.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">createPropertyNames</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate String Property names. Default is "false"</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">force</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will force run from maven/gradle.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">createPKProperties</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate PK attributes as Properties. Default is "false".</p></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <div class="paragraph"> 
-      <p>Example - a typical class generation scenario, where pairs of classes are generated with default Maven source destination and superclass package:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.RC2&lt;/version&gt;
-
-    &lt;configuration&gt;
-        &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
-    &lt;/configuration&gt;
-
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;cgen&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cdbgen"><a class="anchor" href="#cdbgen"></a>cdbgen</h5> 
-     <div class="paragraph"> 
-      <p><code>cdbgen</code> is a <code>cayenne-maven-plugin</code> goal that drops and/or generates tables in a database on Cayenne DataMap. By default, it is bound to the pre-integration-test phase.</p> 
-     </div> 
-     <table id="cdbgenTable" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 5. cdbgen required parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 16.6666%;"> 
-       <col style="width: 16.6666%;"> 
-       <col style="width: 66.6668%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
-        <td class="tableblock halign-left valign-top">
-         <div class="content">
-          <div class="paragraph"> 
-           <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p> 
-          </div> 
-          <div class="listingblock"> 
-           <div class="content"> 
-            <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre> 
-           </div> 
-          </div>
-         </div></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters</p></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <table id="dataSourceParameteres" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 6. &lt;dataSource&gt; parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 20%;"> 
-       <col style="width: 10%;"> 
-       <col style="width: 20%;"> 
-       <col style="width: 50%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Required</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <table id="cdbgenOptionl" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 7. cdbgen optional parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 16.6666%;"> 
-       <col style="width: 16.6666%;"> 
-       <col style="width: 66.6668%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Java class name implementing org.apache.cayenne.dba.DbAdapter. While this attribute is optional (a generic JdbcAdapter is used if not set), it is highly recommended to specify correct target adapter.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">createFK</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create foreign key constraints. Default is "true".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">createPK</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create Cayenne-specific auto PK objects. Default is "true".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">createTables</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create new tables. Default is "true".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">dropPK</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop Cayenne primary key support objects. Default is "false".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">dropTables</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop the tables before attempting to create new ones. Default is "false".</p></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <div class="paragraph"> 
-      <p>Example - creating a DB schema on a local HSQLDB database:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.RC2&lt;/version&gt;
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;configuration&gt;
-                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
-                &lt;adapter&gt;org.apache.cayenne.dba.hsqldb.HSQLDBAdapter&lt;/adapter&gt;
-                &lt;dataSource&gt;
-                    &lt;url&gt;jdbc:hsqldb:hsql://localhost/testdb&lt;/url&gt;
-                    &lt;driver&gt;org.hsqldb.jdbcDriver&lt;/driver&gt;
-                    &lt;username&gt;sa&lt;/username&gt;
-                &lt;/dataSource&gt;
-            &lt;/configuration&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;cdbgen&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>cdbimport</h5> 
-     <div class="paragraph"> 
-      <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#db-first-flow">DB-First Flow</a></p> 
-     </div> 
-     <table id="cdbimportTable" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 8. cdbimport parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 20%;"> 
-       <col style="width: 10%;"> 
-       <col style="width: 20%;"> 
-       <col style="width: 50%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Required</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">DataMap XML file which is the destination of the schema import. Can be an existing file. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/my.map.xml</code>. If "overwrite" is true (the default), an existing DataMap will be used as a template for the new imported DataMap, i.e. all its entities will be cleared and recreated, but its common settings, such as default Java package, will be preserved (unless changed explicitly in the plugin configuration).</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">cayenneProject</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Project XML file which will be used. Can be an existing file, in this case data map will be added to project if it’s not already there. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/cayenne-project.xml</code>.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java class name implementing org.apache.cayenne.dba.DbAdapter. This attribute is optional. If not specified, AutoAdapter is used, which will attempt to guess the DB type.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">dbimport</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter.</p></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <table id="cdbimportDataSource" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 9. &lt;dataSource&gt; parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 20%;"> 
-       <col style="width: 10%;"> 
-       <col style="width: 20%;"> 
-       <col style="width: 50%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Required</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <table id="dbimportParameters" class="tableblock frame-all grid-all stretch table table-bordered"> 
-      <caption class="title">
-       Table 10. &lt;dbimport&gt; parameters
-      </caption> 
-      <colgroup> 
-       <col style="width: 37.5%;"> 
-       <col style="width: 12.5%;"> 
-       <col style="width: 50%;"> 
-      </colgroup> 
-      <thead> 
-       <tr> 
-        <th class="tableblock halign-left valign-top">Name</th> 
-        <th class="tableblock halign-left valign-top">Type</th> 
-        <th class="tableblock halign-left valign-top">Description</th> 
-       </tr> 
-      </thead> 
-      <tbody> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">defaultPackage</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java package that will be set as the imported DataMap default and a package of all the persistent Java classes. This is a required attribute if the "map" itself does not already contain a default package, as otherwise all the persistent classes will be mapped with no package, and will not compile.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapCatalog</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapCatalog</code> to <code>true</code> will set DbEntity catalog to one in the DataMap. Default value is <code>false</code>.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapSchema</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapSchema</code> to <code>true</code> will set DbEntity schema to one in the DataMap. Default value is <code>false</code>.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">meaningfulPkTables</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock"><a id="namingStrategy"></a>namingStrategy</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">skipPrimaryKeyLoading</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load primary keys. Default "false".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">skipRelationshipsLoading</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load relationships. Default "false".</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">stripFromTableNames</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
-        <td class="tableblock halign-left valign-top">
-         <div class="content">
-          <div class="paragraph"> 
-           <p>Regex that matches the part of the table name that needs to be stripped off when generating ObjEntity name. Here are some examples:</p> 
-          </div> 
-          <div class="listingblock"> 
-           <div class="content"> 
-            <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;!-- Strip prefix --&gt;
-&lt;stripFromTableNames&gt;^myt_&lt;/stripFromTableNames&gt;
-
-&lt;!-- Strip suffix --&gt;
-&lt;stripFromTableNames&gt;_s$&lt;/stripFromTableNames&gt;
-
-&lt;!-- Strip multiple occurrences in the middle --&gt;
-&lt;stripFromTableNames&gt;_abc&lt;/stripFromTableNames&gt;</code></pre> 
-           </div> 
-          </div>
-         </div></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">usePrimitives</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether numeric and boolean data types should be mapped as Java primitives or Java classes. Default is "true", i.e. primitives will be used.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">useJava7Types</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether <em>DATE</em>, <em>TIME</em> and <em>TIMESTAMP</em> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td> 
-       </tr> 
-       <tr> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">filters configuration</p></td> 
-        <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
-        <td class="tableblock halign-left valign-top">
-         <div class="content">
-          <div class="paragraph"> 
-           <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p> 
-          </div> 
-          <div class="listingblock"> 
-           <div class="content"> 
-            <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
-	&lt;catalog name="test_catalog"&gt;
-		&lt;schema name="test_schema"&gt;
-			&lt;includeTable&gt;.*&lt;/includeTable&gt;
-			&lt;excludeTable&gt;test_table&lt;/excludeTable&gt;
-		&lt;/schema&gt;
-	&lt;/catalog&gt;
-
-	&lt;includeProcedure pattern=".*"/&gt;
-&lt;/dbimport&gt;</code></pre> 
-           </div> 
-          </div>
-         </div></td> 
-       </tr> 
-      </tbody> 
-     </table> 
-     <div class="paragraph"> 
-      <p>Example - loading a DB schema from a local HSQLDB database (essentially a reverse operation compared to the cdbgen example above) :</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;4.1.RC2&lt;/version&gt;
-
-    &lt;executions&gt;
-        &lt;execution&gt;
-            &lt;configuration&gt;
-                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
-                &lt;dataSource&gt;
-                    &lt;url&gt;jdbc:mysql://127.0.0.1/mydb&lt;/url&gt;
-                    &lt;driver&gt;com.mysql.jdbc.Driver&lt;/driver&gt;
-                    &lt;username&gt;sa&lt;/username&gt;
-                &lt;/dataSource&gt;
-                &lt;dbimport&gt;
-                    &lt;defaultPackage&gt;com.example.cayenne&lt;/defaultPackage&gt;
-                &lt;/dbimport&gt;
-            &lt;/configuration&gt;
-            &lt;goals&gt;
-                &lt;goal&gt;cdbimport&lt;/goal&gt;
-            &lt;/goals&gt;
-        &lt;/execution&gt;
-    &lt;/executions&gt;
-&lt;/plugin&gt;</code></pre> 
-      </div> 
-     </div> 
-    </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="gradle-projects"><a class="anchor" href="#gradle-projects"></a>Gradle Projects</h4> 
     <div class="paragraph"> 
-     <p>To include Cayenne into your Gradle project you have two options:</p> 
-    </div> 
-    <div class="ulist"> 
-     <ul> 
-      <li> <p>Simply add Cayenne as a dependency:</p> </li> 
-     </ul> 
+     <p>To add Cayenne to your Maven project, include <code>cayenne-server</code> module:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-server:4.1.RC2'</code></pre> 
      </div> 
     </div> 
-    <div class="ulist"> 
-     <ul> 
-      <li> <p>Or you can use Cayenne Gradle plugin</p> </li> 
-     </ul> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="gradle-plugin"><a class="anchor" href="#gradle-plugin"></a>Gradle Plugin</h5> 
-     <div class="paragraph"> 
-      <p>Cayenne Gradle plugin provides several tasks, such as synching generated Java classes with the mapping or synching mapping with the database. Plugin also provides <code>cayenne</code> extension that have some useful utility methods. Here is example of how to include Cayenne plugin into your project:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">buildscript {
-    // add Maven Central repository
-    repositories {
-        mavenCentral()
-    }
-    // add Cayenne Gradle Plugin
-    dependencies {
-        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.RC2'
-    }
-}
-
-// apply plugin
-apply plugin: 'org.apache.cayenne'
-
-// set default DataMap
-cayenne.defaultDataMap 'datamap.map.xml'
-
-// add Cayenne dependencies to your project
-dependencies {
-    // this is a shortcut for 'org.apache.cayenne:cayenne-server:VERSION_OF_PLUGIN'
-    compile cayenne.dependency('server')
-}</code></pre> 
-      </div> 
-     </div> 
-     <div class="sect5"> 
-      <h6 id="warning"><a class="anchor" href="#warning"></a>Warning</h6> 
-      <div class="paragraph"> 
-       <p>Cayenne Gradle plugin is experimental and it’s API can change later.</p> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cgen-2"><a class="anchor" href="#cgen-2"></a>cgen</h5> 
-     <div class="paragraph"> 
-      <p>Cgen task generates Java classes based on your DataMap, it has same configuration parameters as in Maven Plugin version, described in <a href="#tablecgen">Table, “cgen required parameters”.</a>. If you provided default DataMap via <code>cayenne.defaultDataMap</code>, you can skip <code>cgen</code> configuration as default settings will suffice in common case.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Here is how you can change settings of the default <code>cgen</code> task:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cgen {
-    client = false
-    mode = 'all'
-    overwrite = true
-    createPropertiesNames = true
-}</code></pre> 
-      </div> 
-     </div> 
-     <div class="paragraph"> 
-      <p>And here is example of how to define additional cgen task (e.g. for client classes if you are using ROP):</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">task clientCgen(type: cayenne.cgen) {
-    client = true
-}</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cdbimport"><a class="anchor" href="#cdbimport"></a>cdbimport</h5> 
-     <div class="paragraph"> 
-      <p>This task is for creating and synchronizing your Cayenne model from database schema. Full list of parameters are same as in Maven Plugin version, described in <a href="#cdbimportTable">Table, “cdbimport parameters”</a>, with exception that Gradle version will use Groovy instead of XML.</p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Here is example of configuration for cdbimport task:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cdbimport {
-    // map can be skipped if it is defined in cayenne.defaultDataMap
-    map 'datamap.map.xml'
-    // optional project file, will be created if missing
-    cayenneProject 'cayenne-project.xml'
-
-    dataSource {
-        driver 'com.mysql.cj.jdbc.Driver'
-        url 'jdbc:mysql://127.0.0.1:3306/test?useSSL=false'
-        username 'root'
-        password ''
-    }
-
-    dbImport
-        // additional settings
-        usePrimitives false
-        defaultPackage 'org.apache.cayenne.test'
-
-        // DB filter configuration
-        catalog 'catalog-1'
-        schema 'schema-1'
-
-        catalog {
-            name 'catalog-2'
-
-            includeTable 'table0', {
-                excludeColumns '_column_'
-            }
-
-            includeTables 'table1', 'table2', 'table3'
-
-            includeTable 'table4', {
-                includeColumns 'id', 'type', 'data'
-            }
-
-            excludeTable '^GENERATED_.*'
-        }
-
-        catalog {
-            name 'catalog-3'
-            schema {
-                name 'schema-2'
-                includeTable 'test_table'
-                includeTable 'test_table2', {
-                    excludeColumn '__excluded'
-                }
-            }
-        }
-
-        includeProcedure 'procedure_test_1'
-
-        includeColumns 'id', 'version'
-
-        tableTypes 'TABLE', 'VIEW'
-    }
-}</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cdbgen-2"><a class="anchor" href="#cdbgen-2"></a>cdbgen</h5> 
-     <div class="paragraph"> 
-      <p>Cdbgen task drops and/or generates tables in a database on Cayenne DataMap. Full list of parameters are same as in Maven Plugin version, described in <a href="#cdbgenTable">Table , “cdbgen required parameters”</a></p> 
-     </div> 
-     <div class="paragraph"> 
-      <p>Here is example of how to configure default <code>cdbgen</code> task:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cdbgen {
-
-    adapter 'org.apache.cayenne.dba.derby.DerbyAdapter'
-
-    dataSource {
-        driver 'org.apache.derby.jdbc.EmbeddedDriver'
-        url 'jdbc:derby:build/testdb;create=true'
-        username 'sa'
-        password ''
-    }
-
-    dropTables true
-    dropPk true
-
-    createTables true
-    createPk true
-    createFk true
-}</code></pre> 
-      </div> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="link-tasks-to-gradle-build-lifecycle"><a class="anchor" href="#link-tasks-to-gradle-build-lifecycle"></a>Link tasks to Gradle build lifecycle</h5> 
-     <div class="paragraph"> 
-      <p>With gradle you can easily connect Cayenne tasks to default build lifecycle. Here is short example of how to connect defaut <code>cgen</code> and <code>cdbimport</code> tasks with <code>compileJava</code> task:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cgen.dependsOn cdbimport
-compileJava.dependsOn cgen</code></pre> 
-      </div> 
-     </div> 
-     <div class="admonitionblock note"> 
-      <table> 
-       <tbody>
-        <tr> 
-         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-         <td class="content"> Running <code>cdbimport</code> automatically with build not always a good choice, e.g. in case of complex model that you need to alter in the Cayenne Modeler after import. </td> 
-        </tr> 
-       </tbody>
-      </table> 
-     </div> 
-    </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="ant-projects"><a class="anchor" href="#ant-projects"></a>Ant Projects</h4> 
+    <h4 id="ant-etc"><a class="anchor" href="#ant-etc"></a>Ant, etc.</h4> 
     <div class="paragraph"> 
-     <p>Ant tasks are the same as Maven plugin goals described above, namely "cgen", "cdbgen", "cdbimport". Configuration parameters are also similar (except Maven can guess many defaults that Ant can’t). To include Ant tasks in the project, use the following Antlib:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;typedef resource="org/apache/cayenne/tools/antlib.xml"&gt;
-   &lt;classpath&gt;
-   		&lt;fileset dir="lib" &gt;
-			&lt;include name="cayenne-ant-*.jar" /&gt;
-			&lt;include name="cayenne-cgen-*.jar" /&gt;
-			&lt;include name="cayenne-dbsync-*.jar" /&gt;
-			&lt;include name="cayenne-di-*.jar" /&gt;
-			&lt;include name="cayenne-project-*.jar" /&gt;
-			&lt;include name="cayenne-server-*.jar" /&gt;
-			&lt;include name="commons-collections-*.jar" /&gt;
-			&lt;include name="commons-lang-*.jar" /&gt;
-			&lt;include name="slf4j-api-*.jar" /&gt;
-			&lt;include name="velocity-*.jar" /&gt;
-			&lt;include name="vpp-2.2.1.jar" /&gt;
-		&lt;/fileset&gt;
-   &lt;/classpath&gt;
-&lt;/typedef&gt;</code></pre> 
-     </div> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cgen-3"><a class="anchor" href="#cgen-3"></a>cgen</h5> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cdbgen-3"><a class="anchor" href="#cdbgen-3"></a>cdbgen</h5> 
-    </div> 
-    <div class="sect4"> 
-     <h5 id="cdbimport-2"><a class="anchor" href="#cdbimport-2"></a>cdbimport</h5> 
-     <div class="paragraph"> 
-      <p>This is an Ant counterpart of "cdbimport" goal of cayenne-maven-plugin described above. It has exactly the same properties. Here is a usage example:</p> 
-     </div> 
-     <div class="listingblock"> 
-      <div class="content"> 
-       <pre class="highlight"><code class="language-XML XML" data-lang="XML"> &lt;cdbimport map="${context.dir}/WEB-INF/my.map.xml"
-    driver="com.mysql.jdbc.Driver"
-    url="jdbc:mysql://127.0.0.1/mydb"
-    username="sa"
-    defaultPackage="com.example.cayenne"/&gt;</code></pre> 
-      </div> 
-     </div> 
+     <p>If your environment requires manual dependency management (like Ant), check <code>lib</code> and <code>lib/third-party</code> folders of Cayenne distribution. It contains all Cayenne jars as well as the minimal set of third-party libraries to get you started.</p> 
     </div> 
    </div> 
   </div> 
@@ -1575,7 +727,7 @@ ServerRuntime runtime = ServerRuntime.builder()
     </div> 
     <table id="persistenceStates" class="tableblock frame-all grid-all stretch table table-bordered"> 
      <caption class="title">
-      Table 11. Persistence States
+      Table 3. Persistence States
      </caption> 
      <colgroup> 
       <col style="width: 20%;"> 
@@ -1890,11 +1042,8 @@ transactionManager.performInTransaction(transactionalOperation, descriptor);</co
   </div> 
   <div class="sect2"> 
    <h3 id="expressions"><a class="anchor" href="#expressions"></a>2.4. Expressions</h3> 
-   <div class="sect3"> 
-    <h4 id="expressions-overview"><a class="anchor" href="#expressions-overview"></a>Expressions Overview</h4> 
-    <div class="paragraph"> 
-     <p>Cayenne provides a simple yet powerful object-based expression language. The most common use of expressions are to build qualifiers and orderings of queries that are later converted to SQL by Cayenne and to evaluate in-memory against specific objects (to access certain values in the object graph or to perform in-memory object filtering and sorting). Cayenne provides API to build expressions in the code and a parser to create expressions from strings.</p> 
-    </div> 
+   <div class="paragraph"> 
+    <p>Cayenne provides a simple yet powerful object-based expression language. The most common use of expressions are to build qualifiers and orderings of queries that are later converted to SQL by Cayenne and to evaluate in-memory against specific objects (to access certain values in the object graph or to perform in-memory object filtering and sorting). Cayenne provides API to build expressions in the code and a parser to create expressions from strings.</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="path-expressions"><a class="anchor" href="#path-expressions"></a>Path Expressions</h4> 
@@ -2141,7 +1290,7 @@ Expression e2 = Painting.ARTIST.dot(Artist.NAME).eq("Pablo");</code></pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="evaluete"><a class="anchor" href="#evaluete"></a>Evaluating Expressions in Memory</h4> 
+    <h4 id="evaluate"><a class="anchor" href="#evaluate"></a>Evaluating Expressions in Memory</h4> 
     <div class="paragraph"> 
      <p>When used in a query, an expression is converted to SQL WHERE clause (or ORDER BY clause) by Cayenne during query execution. Thus the actual evaluation against the data is done by the database engine. However the same expressions can also be used for accessing object properties, calculating values, in-memory filtering.</p> 
     </div> 
@@ -2399,124 +1548,6 @@ ORDER BY COUNT(t1.PAINTING_ID) DESC, t0.ARTIST_NAME</code></pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="ejbql"><a class="anchor" href="#ejbql"></a>EJBQLQuery</h4> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> As soon as all of the <code>EJBQLQuery</code> capabilities become available in <code>ObjectSelect</code>, we are planning to deprecate <code>EJBQLQuery</code>. </td> 
-       </tr> 
-      </tbody>
-     </table> 
-    </div> 
-    <div class="paragraph"> 
-     <p>EJBQLQuery was created as a part of an experiment in adopting some of Java Persistence API (JPA) approaches in Cayenne. It is a parameterized object query that is created from query String. A String used to build EJBQLQuery follows JPQL (JPA Query Language) syntax:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a FROM Artist a");</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>JPQL details can be found in any JPA manual. Here we’ll focus on how this fits into Cayenne and what are the differences between EJBQL and other Cayenne queries.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Although most frequently EJBQLQuery is used as an alternative to ObjectSelect, there are also DELETE and UPDATE varieties available.</p> 
-    </div> 
-    <div class="admonitionblock note"> 
-     <table> 
-      <tbody>
-       <tr> 
-        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> DELETE and UPDATE do not change the state of objects in the ObjectContext. They are run directly against the database instead. </td> 
-       </tr> 
-      </tbody>
-     </table> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery select =
-    new EJBQLQuery("select a FROM Artist a WHERE a.name = 'Salvador Dali'");
-List&lt;Artist&gt; artists = context.performQuery(select);</code></pre> 
-     </div> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery delete = new EJBQLQuery("delete from Painting");
-context.performGenericQuery(delete);</code></pre> 
-     </div> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery update =
-    new EJBQLQuery("UPDATE Painting AS p SET p.name = 'P2' WHERE p.name = 'P1'");
-context.performGenericQuery(update);</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>In most cases <code>ObjectSelect</code> is preferred to <code>EJBQLQuery</code>, as it is API-based, and provides you with better compile-time checks. However sometimes you may want a completely scriptable object query. This is when you might prefer EJBQL. A more practical reason for picking EJBQL over <code>ObjectSelect</code> though is that the former offers a few extra capabilities, such as subqueries.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>Just like <code>ObjectSelect</code> <code>EJBQLQuery</code> can return a List of Object[] elements, where each entry in an array is either a DataObject or a scalar, depending on the query SELECT clause.</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a, COUNT(p) FROM Artist a JOIN a.paintings p GROUP BY a");
-List&lt;Object[]&gt; result = context.performQuery(query);
-for(Object[] artistWithCount : result) {
-    Artist a = (Artist) artistWithCount[0];
-    int hasPaintings = (Integer) artistWithCount[1];
-}</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>A result can also be a list of scalars:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a.name FROM Artist a");
-List&lt;String&gt; names = context.performQuery(query);</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>EJBQLQuery supports an "IN" clause with three different usage-patterns. The following example would require three individual positional parameters (named parameters could also have been used) to be supplied.</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1,?2,?3)</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>The following example requires a single positional parameter to be supplied. The parameter can be any concrete implementation of the <code>java.util.Collection</code> interface such as <code>java.util.List</code> or <code>java.util.Set</code>.</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in ?1</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>The following example is functionally identical to the one prior.</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1)</code></pre> 
-     </div> 
-    </div> 
-    <div class="paragraph"> 
-     <p>It is possible to convert an <a href="#expressions">Expression</a> object used with a <a href="#select">ObjectSelect</a> to EJBQL. Use the Expression#appendAsEJBQL methods for this purpose.</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>While Cayenne Expressions discussed previously can be thought of as identical to JPQL WHERE clause, and indeed they are very close, there are a few notable differences:</p> 
-    </div> 
-    <div class="ulist"> 
-     <ul> 
-      <li> <p>Null handling: SelectQuery would translate the expressions matching NULL values to the corresponding "X IS NULL" or "X IS NOT NULL" SQL syntax. EJBQLQuery on the other hand requires explicit "IS NULL" (or "IS NOT NULL") syntax to be used, otherwise the generated SQL will look like "X = NULL" (or "X &lt;&gt; NULL"), which will evaluate differently.</p> </li> 
-      <li> <p>Expression Parameters: SelectQuery uses "$" to denote named parameters (e.g. "$myParam"), while EJBQL uses ":" (e.g. ":myParam"). Also EJBQL supports positional parameters denoted by the question mark: "?3".</p> </li> 
-     </ul> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
     <h4 id="selectbyid"><a class="anchor" href="#selectbyid"></a>SelectById</h4> 
     <div class="paragraph"> 
      <p>This query allows to search objects by their ID. It’s introduced in Cayenne 4.0 and uses new "fluent" API same as <code>ObjectSelect</code> query.</p> 
@@ -2536,7 +1567,7 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
    <div class="sect3"> 
     <h4 id="sqlselect-and-sqlexec"><a class="anchor" href="#sqlselect-and-sqlexec"></a>SQLSelect and SQLExec</h4> 
     <div class="paragraph"> 
-     <p>SQL is very powerful and allows to manipulate data in ways that can not always be described as a graph of related entities. Cayenne acknowledges this fact and provides a facility to execute SQL, sometimes allowing to map results back to persistent objects. <code>SQLSelect</code> and <code>SQLExec</code> are a pair of queries that allow to run native SQL. <code>SQLSelect</code> can be used (as name suggests) to select custom data in form of entities, separate columns, collection of <code>DataRow</code> or Object[]. <code>SQLExec</code> is designed to execute any raw SQL code (e.g. updates, deletes, DDLs, etc.).</p> 
+     <p>SQL is very powerful and allows to manipulate data in ways that can not always be described as a graph of related entities. Cayenne acknowledges this fact and provides a facility to execute SQL, sometimes allowing to map results back to persistent objects. <code>SQLSelect</code> and <code>SQLExec</code> are a pair of queries that allow to run native SQL. <code>SQLSelect</code> can be used (as the name suggests) to select custom data in form of entities, separate columns, collection of <code>DataRow</code> or <code>Object[]</code>. <code>SQLExec</code> is designed to execute any SQL (e.g. updates, deletes, DDLs, etc.).</p> 
     </div> 
     <div class="paragraph"> 
      <p>Both queries support advanced SQL templating, with variable substitution and special directives as described <a href="#sqlscripting">in the next chapter</a>. Here we’ll just provide a few simple examples:</p> 
@@ -2558,12 +1589,12 @@ List&lt;String&gt; paintingNames = SQLSelect
 
 // Selecting DataRow with predefined types
 List&lt;DataRow&gt; result = SQLSelect
-    .dataRowQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDateTime.class)
+    .dataRowQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
     .select(context);
 
 // Selecting Object[] with predefined types
 List&lt;Object[]&gt; result = SQLSelect
-    .scalarQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDateTime.class)
+    .scalarQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
     .select(context);</code></pre> 
      </div> 
     </div> 
@@ -2581,7 +1612,7 @@ List&lt;Object[]&gt; result = SQLSelect
    <div class="sect3"> 
     <h4 id="sqlscripting"><a class="anchor" href="#sqlscripting"></a>Scripting SQL Queries</h4> 
     <div class="paragraph"> 
-     <p>A powerful feature of <code>SQLSelect</code> and <code>SQLExec</code> is that a SQL string is treated by Cayenne as a dynamic template. Before sending it to DB as a PreparedStatement, the String is evaluated, resolving the dynamic parts. The two main scripting elements are "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). In the discussion below we’ll use both selecting and updating examples, as scripting works the same way for both <code>SQLSelect</code> and <code>SQLExec</code>.</p> 
+     <p>A powerful feature of <code>SQLSelect</code> and <code>SQLExec</code> is that SQL string is treated by Cayenne as a dynamic template. Before creating a PreparedStatement, the String is evaluated, resolving its dynamic parts. The two main scripting elements are "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). In the discussion below we’ll use both selecting and updating examples, as scripting works the same way for both <code>SQLSelect</code> and <code>SQLExec</code>.</p> 
     </div> 
     <div class="sect4"> 
      <h5 id="variable-substitution"><a class="anchor" href="#variable-substitution"></a>Variable Substitution</h5> 
@@ -2602,7 +1633,7 @@ SQLExec query = SQLExec.query("delete from $tableName")
     <div class="sect4"> 
      <h5 id="directives"><a class="anchor" href="#directives"></a>Directives</h5> 
      <div class="paragraph"> 
-      <p>"Directives" look like <code>#directive(p1 p2 p3)</code> (notice the absence of comma between the arguments). The folliwng directives are supported in SQL templates:</p> 
+      <p>"Directives" look like <code>#directive(p1 p2 p3)</code> (notice the absence of comma between the arguments). The following directives are supported in SQL templates:</p> 
      </div> 
      <div class="sect5"> 
       <h6 id="bind"><a class="anchor" href="#bind"></a>#bind</h6> 
@@ -2956,6 +1987,124 @@ Object out = result.getOutParam("out_param");</code></pre>
     </div> 
    </div> 
    <div class="sect3"> 
+    <h4 id="ejbql"><a class="anchor" href="#ejbql"></a>EJBQLQuery</h4> 
+    <div class="admonitionblock note"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+        <td class="content"> As soon as all of the <code>EJBQLQuery</code> capabilities become available in <code>ObjectSelect</code>, we are planning to deprecate <code>EJBQLQuery</code>. </td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+    <div class="paragraph"> 
+     <p>EJBQLQuery was created as a part of an experiment in adopting some of Java Persistence API (JPA) approaches in Cayenne. It is a parameterized object query that is created from query String. A String used to build EJBQLQuery follows JPQL (JPA Query Language) syntax:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a FROM Artist a");</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>JPQL details can be found in any JPA manual. Here we’ll focus on how this fits into Cayenne and what are the differences between EJBQL and other Cayenne queries.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Although most frequently EJBQLQuery is used as an alternative to ObjectSelect, there are also DELETE and UPDATE varieties available.</p> 
+    </div> 
+    <div class="admonitionblock note"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+        <td class="content"> DELETE and UPDATE do not change the state of objects in the ObjectContext. They are run directly against the database instead. </td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery select =
+    new EJBQLQuery("select a FROM Artist a WHERE a.name = 'Salvador Dali'");
+List&lt;Artist&gt; artists = context.performQuery(select);</code></pre> 
+     </div> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery delete = new EJBQLQuery("delete from Painting");
+context.performGenericQuery(delete);</code></pre> 
+     </div> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery update =
+    new EJBQLQuery("UPDATE Painting AS p SET p.name = 'P2' WHERE p.name = 'P1'");
+context.performGenericQuery(update);</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>In most cases <code>ObjectSelect</code> is preferred to <code>EJBQLQuery</code>, as it is API-based, and provides you with better compile-time checks. However sometimes you may want a completely scriptable object query. This is when you might prefer EJBQL. A more practical reason for picking EJBQL over <code>ObjectSelect</code> though is that the former offers a few extra capabilities, such as subqueries.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Just like <code>ObjectSelect</code> <code>EJBQLQuery</code> can return a List of Object[] elements, where each entry in an array is either a DataObject or a scalar, depending on the query SELECT clause.</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a, COUNT(p) FROM Artist a JOIN a.paintings p GROUP BY a");
+List&lt;Object[]&gt; result = context.performQuery(query);
+for(Object[] artistWithCount : result) {
+    Artist a = (Artist) artistWithCount[0];
+    int hasPaintings = (Integer) artistWithCount[1];
+}</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>A result can also be a list of scalars:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a.name FROM Artist a");
+List&lt;String&gt; names = context.performQuery(query);</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>EJBQLQuery supports an "IN" clause with three different usage-patterns. The following example would require three individual positional parameters (named parameters could also have been used) to be supplied.</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1,?2,?3)</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>The following example requires a single positional parameter to be supplied. The parameter can be any concrete implementation of the <code>java.util.Collection</code> interface such as <code>java.util.List</code> or <code>java.util.Set</code>.</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in ?1</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>The following example is functionally identical to the one prior.</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1)</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>It is possible to convert an <a href="#expressions">Expression</a> object used with a <a href="#select">ObjectSelect</a> to EJBQL. Use the Expression#appendAsEJBQL methods for this purpose.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>While Cayenne Expressions discussed previously can be thought of as identical to JPQL WHERE clause, and indeed they are very close, there are a few notable differences:</p> 
+    </div> 
+    <div class="ulist"> 
+     <ul> 
+      <li> <p>Null handling: SelectQuery would translate the expressions matching NULL values to the corresponding "X IS NULL" or "X IS NOT NULL" SQL syntax. EJBQLQuery on the other hand requires explicit "IS NULL" (or "IS NOT NULL") syntax to be used, otherwise the generated SQL will look like "X = NULL" (or "X &lt;&gt; NULL"), which will evaluate differently.</p> </li> 
+      <li> <p>Expression Parameters: SelectQuery uses "$" to denote named parameters (e.g. "$myParam"), while EJBQL uses ":" (e.g. ":myParam"). Also EJBQL supports positional parameters denoted by the question mark: "?3".</p> </li> 
+     </ul> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
     <h4 id="custom-queries"><a class="anchor" href="#custom-queries"></a>Custom Queries</h4> 
     <div class="paragraph"> 
      <p>If a user needs some extra functionality not addressed by the existing set of Cayenne queries, he can write his own. The only requirement is to implement <code>org.apache.cayenne.query.Query</code> interface. The easiest way to go about it is to subclass some of the base queries in Cayenne.</p> 
@@ -3024,7 +2173,7 @@ Object out = result.getOutParam("out_param");</code></pre>
     </div> 
     <table id="lifecycleEvent" class="tableblock frame-all grid-all stretch table table-bordered"> 
      <caption class="title">
-      Table 12. Lifecycle Event Types
+      Table 4. Lifecycle Event Types
      </caption> 
      <colgroup> 
       <col style="width: 20%;"> 
@@ -3656,14 +2805,14 @@ context.performGenericQuery(refresh);</code></pre>
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-Java Java" data-lang="Java">public interface Service1 {
-    public String getString();
+    String getString();
 }</code></pre> 
       </div> 
      </div> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-Java Java" data-lang="Java">public interface Service2 {
-    public int getInt();
+    int getInt();
 }</code></pre> 
       </div> 
      </div> 
@@ -4722,7 +3871,7 @@ ServerRuntime runtime = ServerRuntime.builder()
   <div class="sect2"> 
    <h3 id="re-modeler"><a class="anchor" href="#re-modeler"></a>4.4. Reverse Engineering in Cayenne Modeler</h3> 
    <div class="paragraph"> 
-    <p>Alternative aproach to using <a href="#cdbimport">cdbimport</a> is doing reverse engineering from <a href="#cayennemodeler-application">CayenneModeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
+    <p>Alternative aproach to using <a href="#cdbimport">cdbimport</a> is doing reverse engineering from <a href="#cayenne-modeler">CayenneModeler</a>. Currently modeler GUI doesn’t support all features of ant/maven tasks but it suffice for general DB import. Especially it’s a good place to quickly start working on your data model.</p> 
    </div> 
    <div class="paragraph"> 
     <p>You can find reverse engineering tool in dataMap view on <strong>DbImport Tab</strong>.</p> 
@@ -4795,7 +3944,7 @@ ServerRuntime runtime = ServerRuntime.builder()
    <div class="sect3"> 
     <h4 id="including-in-a-project"><a class="anchor" href="#including-in-a-project"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven"><a class="anchor" href="#maven"></a>Maven</h5> 
+     <h5 id="maven-2"><a class="anchor" href="#maven-2"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -4893,7 +4042,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-2"><a class="anchor" href="#including-in-a-project-2"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-2"><a class="anchor" href="#maven-2"></a>Maven</h5> 
+     <h5 id="maven-3"><a class="anchor" href="#maven-3"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -4979,7 +4128,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-3"><a class="anchor" href="#including-in-a-project-3"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-3"><a class="anchor" href="#maven-3"></a>Maven</h5> 
+     <h5 id="maven-4"><a class="anchor" href="#maven-4"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5108,7 +4257,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-4"><a class="anchor" href="#including-in-a-project-4"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-4"><a class="anchor" href="#maven-4"></a>Maven</h5> 
+     <h5 id="maven-5"><a class="anchor" href="#maven-5"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5225,7 +4374,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-5"><a class="anchor" href="#including-in-a-project-5"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-5"><a class="anchor" href="#maven-5"></a>Maven</h5> 
+     <h5 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5263,7 +4412,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-6"><a class="anchor" href="#including-in-a-project-6"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h5> 
+     <h5 id="maven-7"><a class="anchor" href="#maven-7"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5329,7 +4478,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-7"><a class="anchor" href="#including-in-a-project-7"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-7"><a class="anchor" href="#maven-7"></a>Maven</h5> 
+     <h5 id="maven-8"><a class="anchor" href="#maven-8"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5361,7 +4510,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-8"><a class="anchor" href="#including-in-a-project-8"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-8"><a class="anchor" href="#maven-8"></a>Maven</h5> 
+     <h5 id="maven-9"><a class="anchor" href="#maven-9"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5393,7 +4542,7 @@ public class MyEntity extends _MyEntity {
    <div class="sect3"> 
     <h4 id="including-in-a-project-9"><a class="anchor" href="#including-in-a-project-9"></a>Including in a project</h4> 
     <div class="sect4"> 
-     <h5 id="maven-9"><a class="anchor" href="#maven-9"></a>Maven</h5> 
+     <h5 id="maven-10"><a class="anchor" href="#maven-10"></a>Maven</h5> 
      <div class="listingblock"> 
       <div class="content"> 
        <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -5417,7 +4566,832 @@ public class MyEntity extends _MyEntity {
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="appendix-a-configuration-properties"><a class="anchor" href="#appendix-a-configuration-properties"></a>6. Appendix A. Configuration Properties</h2> 
+ <h2 id="build_tools"><a class="anchor" href="#build_tools"></a>6. Build Tools</h2> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>While we encourage the use of <a href="#cayenne-modeler">CayenneModeler</a> for tasks such as DB reverse-engineering and code generation, Cayenne also provides an option to execute them from your preferred build tool. It may be occasionally useful to keep them as a part of the build. This chapter shows how to use them in <a href="#maven_plugin">Maven</a>, <a href="#gradle_plugin">Gradle</a> or <a href="#ant_tasks">Ant</a>.</p> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="maven_plugin"><a class="anchor" href="#maven_plugin"></a>6.1. Maven Plugin</h3> 
+   <div class="paragraph"> 
+    <p>The full plugin Maven name is <code>org.apache.cayenne.plugins:cayenne-maven-plugin</code>. It can be executed as <code>mvn cayenne:&lt;goal&gt;</code>.</p> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cgen"><a class="anchor" href="#cgen"></a>cgen</h4> 
+    <div class="paragraph"> 
+     <p><code>cgen</code> is a goal that generates and maintains source (.java) files of persistent objects based on a DataMap. By default, it is bound to the generate-sources phase. If "makePairs" is set to "true" (which is the recommended default), this task will generate a pair of classes (superclass/subclass) for each ObjEntity in the DataMap. Superclasses should not be changed manually, since they are always overwritten. Subclasses are never overwritten and may be later customized by the user. If "makePairs" is set to "false", a single class will be generated for each ObjEntity.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>By creating custom templates, you can use cgen to generate other output (such as web pages, reports, specialized code templates) based on DataMap information.</p> 
+    </div> 
+    <table id="tablecgen" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 5. cgen required parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 16.6666%;"> 
+      <col style="width: 16.6666%;"> 
+      <col style="width: 66.6668%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+       <td class="tableblock halign-left valign-top">
+        <div class="content">
+         <div class="paragraph"> 
+          <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p> 
+         </div> 
+         <div class="listingblock"> 
+          <div class="content"> 
+           <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre> 
+          </div> 
+         </div>
+        </div></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <table id="cgenOptional" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 6. cgen optional parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 25%;"> 
+      <col style="width: 12.5%;"> 
+      <col style="width: 62.5%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">additionalMaps</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A directory that contains additional DataMap XML files that may be needed to resolve cross-DataMap relationships for the the main DataMap, for which class generation occurs.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">client</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether we are generating classes for the client tier in a Remote Object Persistence application. "False" by default.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">destDir</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Root destination directory for Java classes (ignoring their package names). The default is "src/main/java".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableTemplate</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable class generation. If omitted, default template is used.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableSuperTemplate</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable superclass generation. Ignored unless "makepairs" set to "true". If omitted, default template is used.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">encoding</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Generated files encoding if different from the default on current platform. Target encoding must be supported by the JVM running the build. Standard encodings supported by Java on all platforms are US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See javadocs for java.nio.charset.Charset for more information.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">excludeEntities</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to exclude from template generation. By default none of the DataMap entities are excluded.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">includeEntities</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to include from template generation. By default all DataMap entities are included.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">makePairs</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">If "true" (a recommended default), will generate subclass/superclass pairs, with all generated code placed in superclass.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">mode</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Specifies class generator iteration target. There are three possible values: "entity" (default), "datamap", "all". "entity" performs one generator iteration for each included ObjEntity, applying either standard to custom entity templates. "datamap" performs a single iteration, applying DataMap templates. "All" is a combination of entity and datamap.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">overwrite</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Only has effect when "makePairs" is set to "false". If "overwrite" is "true", will overwrite older versions of generated classes.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">superPkg</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Java package name of all generated superclasses. If omitted, each superclass will be placed in the subpackage of its subclass called "auto". Doesn’t have any effect if either "makepairs" or "usePkgPath" are false (both are true by default).</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">superTemplate</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity superclass generation. Only has effect if "makepairs" set to "true". If omitted, default template is used.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">template</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity class generation. If omitted, default template is used.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">usePkgPath</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true" (default), a directory tree will be generated in "destDir" corresponding to the class package structure, if set to "false", classes will be generated in "destDir" ignoring their package.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">createPropertyNames</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate String Property names. Default is "false"</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">force</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will force run from maven/gradle.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">createPKProperties</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate PK attributes as Properties. Default is "false".</p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <div class="paragraph"> 
+     <p>Example - a typical class generation scenario, where pairs of classes are generated with default Maven source destination and superclass package:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;4.1.RC2&lt;/version&gt;
+
+    &lt;configuration&gt;
+        &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+    &lt;/configuration&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cgen&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>cdbimport</h4> 
+    <div class="paragraph"> 
+     <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="#db-first-flow">DB-First Flow</a></p> 
+    </div> 
+    <table id="cdbimportTable" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 7. cdbimport parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 20%;"> 
+      <col style="width: 10%;"> 
+      <col style="width: 20%;"> 
+      <col style="width: 50%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Required</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">DataMap XML file which is the destination of the schema import. Can be an existing file. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/my.map.xml</code>. If "overwrite" is true (the default), an existing DataMap will be used as a template for the new imported DataMap, i.e. all its entities will be cleared and recreated, but its common settings, such as default Java package, will be preserved (unless changed explicitly in the plugin configuration).</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">cayenneProject</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Project XML file which will be used. Can be an existing file, in this case data map will be added to project if it’s not already there. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/cayenne-project.xml</code>.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java class name implementing org.apache.cayenne.dba.DbAdapter. This attribute is optional. If not specified, AutoAdapter is used, which will attempt to guess the DB type.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">dbimport</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter.</p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <table id="cdbimportDataSource" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 8. &lt;dataSource&gt; parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 20%;"> 
+      <col style="width: 10%;"> 
+      <col style="width: 20%;"> 
+      <col style="width: 50%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Required</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <table id="dbimportParameters" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 9. &lt;dbimport&gt; parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 37.5%;"> 
+      <col style="width: 12.5%;"> 
+      <col style="width: 50%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">defaultPackage</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java package that will be set as the imported DataMap default and a package of all the persistent Java classes. This is a required attribute if the "map" itself does not already contain a default package, as otherwise all the persistent classes will be mapped with no package, and will not compile.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapCatalog</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapCatalog</code> to <code>true</code> will set DbEntity catalog to one in the DataMap. Default value is <code>false</code>.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapSchema</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapSchema</code> to <code>true</code> will set DbEntity schema to one in the DataMap. Default value is <code>false</code>.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">meaningfulPkTables</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock"><a id="namingStrategy"></a>namingStrategy</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">skipPrimaryKeyLoading</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load primary keys. Default "false".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">skipRelationshipsLoading</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load relationships. Default "false".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">stripFromTableNames</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-top">
+        <div class="content">
+         <div class="paragraph"> 
+          <p>Regex that matches the part of the table name that needs to be stripped off when generating ObjEntity name. Here are some examples:</p> 
+         </div> 
+         <div class="listingblock"> 
+          <div class="content"> 
+           <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;!-- Strip prefix --&gt;
+&lt;stripFromTableNames&gt;^myt_&lt;/stripFromTableNames&gt;
+
+&lt;!-- Strip suffix --&gt;
+&lt;stripFromTableNames&gt;_s$&lt;/stripFromTableNames&gt;
+
+&lt;!-- Strip multiple occurrences in the middle --&gt;
+&lt;stripFromTableNames&gt;_abc&lt;/stripFromTableNames&gt;</code></pre> 
+          </div> 
+         </div>
+        </div></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">usePrimitives</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether numeric and boolean data types should be mapped as Java primitives or Java classes. Default is "true", i.e. primitives will be used.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">useJava7Types</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether <em>DATE</em>, <em>TIME</em> and <em>TIMESTAMP</em> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">filters configuration</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
+       <td class="tableblock halign-left valign-top">
+        <div class="content">
+         <div class="paragraph"> 
+          <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="#db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p> 
+         </div> 
+         <div class="listingblock"> 
+          <div class="content"> 
+           <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+	&lt;catalog name="test_catalog"&gt;
+		&lt;schema name="test_schema"&gt;
+			&lt;includeTable&gt;.*&lt;/includeTable&gt;
+			&lt;excludeTable&gt;test_table&lt;/excludeTable&gt;
+		&lt;/schema&gt;
+	&lt;/catalog&gt;
+
+	&lt;includeProcedure pattern=".*"/&gt;
+&lt;/dbimport&gt;</code></pre> 
+          </div> 
+         </div>
+        </div></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <div class="paragraph"> 
+     <p>Example - loading a DB schema from a local HSQLDB database (essentially a reverse operation compared to the cdbgen example above) :</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;4.1.RC2&lt;/version&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;configuration&gt;
+                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+                &lt;dataSource&gt;
+                    &lt;url&gt;jdbc:mysql://127.0.0.1/mydb&lt;/url&gt;
+                    &lt;driver&gt;com.mysql.jdbc.Driver&lt;/driver&gt;
+                    &lt;username&gt;sa&lt;/username&gt;
+                &lt;/dataSource&gt;
+                &lt;dbimport&gt;
+                    &lt;defaultPackage&gt;com.example.cayenne&lt;/defaultPackage&gt;
+                &lt;/dbimport&gt;
+            &lt;/configuration&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cdbimport&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cdbgen"><a class="anchor" href="#cdbgen"></a>cdbgen</h4> 
+    <div class="paragraph"> 
+     <p><code>cdbgen</code> is a <code>cayenne-maven-plugin</code> goal that drops and/or generates tables in a database on Cayenne DataMap. By default, it is bound to the pre-integration-test phase.</p> 
+    </div> 
+    <table id="cdbgenTable" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 10. cdbgen required parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 16.6666%;"> 
+      <col style="width: 16.6666%;"> 
+      <col style="width: 66.6668%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td> 
+       <td class="tableblock halign-left valign-top">
+        <div class="content">
+         <div class="paragraph"> 
+          <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p> 
+         </div> 
+         <div class="listingblock"> 
+          <div class="content"> 
+           <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre> 
+          </div> 
+         </div>
+        </div></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters</p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <table id="dataSourceParameteres" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 11. &lt;dataSource&gt; parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 20%;"> 
+      <col style="width: 10%;"> 
+      <col style="width: 20%;"> 
+      <col style="width: 50%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Required</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <table id="cdbgenOptionl" class="tableblock frame-all grid-all stretch table table-bordered"> 
+     <caption class="title">
+      Table 12. cdbgen optional parameters
+     </caption> 
+     <colgroup> 
+      <col style="width: 16.6666%;"> 
+      <col style="width: 16.6666%;"> 
+      <col style="width: 66.6668%;"> 
+     </colgroup> 
+     <thead> 
+      <tr> 
+       <th class="tableblock halign-left valign-top">Name</th> 
+       <th class="tableblock halign-left valign-top">Type</th> 
+       <th class="tableblock halign-left valign-top">Description</th> 
+      </tr> 
+     </thead> 
+     <tbody> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Java class name implementing org.apache.cayenne.dba.DbAdapter. While this attribute is optional (a generic JdbcAdapter is used if not set), it is highly recommended to specify correct target adapter.</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">createFK</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create foreign key constraints. Default is "true".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">createPK</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create Cayenne-specific auto PK objects. Default is "true".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">createTables</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create new tables. Default is "true".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">dropPK</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop Cayenne primary key support objects. Default is "false".</p></td> 
+      </tr> 
+      <tr> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">dropTables</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td> 
+       <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop the tables before attempting to create new ones. Default is "false".</p></td> 
+      </tr> 
+     </tbody> 
+    </table> 
+    <div class="paragraph"> 
+     <p>Example - creating a DB schema on a local HSQLDB database:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;4.1.RC2&lt;/version&gt;
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;configuration&gt;
+                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+                &lt;adapter&gt;org.apache.cayenne.dba.hsqldb.HSQLDBAdapter&lt;/adapter&gt;
+                &lt;dataSource&gt;
+                    &lt;url&gt;jdbc:hsqldb:hsql://localhost/testdb&lt;/url&gt;
+                    &lt;driver&gt;org.hsqldb.jdbcDriver&lt;/driver&gt;
+                    &lt;username&gt;sa&lt;/username&gt;
+                &lt;/dataSource&gt;
+            &lt;/configuration&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cdbgen&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="gradle_plugin"><a class="anchor" href="#gradle_plugin"></a>6.2. Gradle Plugin</h3> 
+   <div class="paragraph"> 
+    <p>Cayenne Gradle plugin provides tasks similar to <a href="#maven_plugin">Maven plugin</a>. It also provides <code>cayenne</code> extension that has some useful utility methods. Here is example of how to include Cayenne plugin into your project:</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">buildscript {
+    // add Maven Central repository
+    repositories {
+        mavenCentral()
+    }
+    // add Cayenne Gradle Plugin
+    dependencies {
+        classpath group: 'org.apache.cayenne.plugins', name: 'cayenne-gradle-plugin', version: '4.1.RC2'
+    }
+}
+
+// apply plugin
+apply plugin: 'org.apache.cayenne'
+
+// set default DataMap
+cayenne.defaultDataMap 'datamap.map.xml'
+
+// add Cayenne dependencies to your project
+dependencies {
+    // this is a shortcut for 'org.apache.cayenne:cayenne-server:VERSION_OF_PLUGIN'
+    compile cayenne.dependency('server')
+}</code></pre> 
+    </div> 
+   </div> 
+   <div class="admonitionblock note"> 
+    <table> 
+     <tbody>
+      <tr> 
+       <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+       <td class="content"> Cayenne Gradle plugin is experimental and it’s API may still change. </td> 
+      </tr> 
+     </tbody>
+    </table> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cgen-2"><a class="anchor" href="#cgen-2"></a>cgen</h4> 
+    <div class="paragraph"> 
+     <p>Cgen task generates Java classes based on your DataMap, it has same configuration parameters as in Maven Plugin version, described in <a href="#tablecgen">Table, “cgen required parameters”.</a>. If you provided default DataMap via <code>cayenne.defaultDataMap</code>, you can skip <code>cgen</code> configuration as default settings will suffice in common case.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Here is how you can change settings of the default <code>cgen</code> task:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cgen {
+    client = false
+    mode = 'all'
+    overwrite = true
+    createPropertiesNames = true
+}</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>And here is example of how to define additional cgen task (e.g. for client classes if you are using ROP):</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">task clientCgen(type: cayenne.cgen) {
+    client = true
+}</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cdbimport"><a class="anchor" href="#cdbimport"></a>cdbimport</h4> 
+    <div class="paragraph"> 
+     <p>This task is for creating and synchronizing your Cayenne model from database schema. Full list of parameters are same as in <a href="#cdbimportTable">Maven Plugin</a>, with the exception that Gradle version will use Groovy instead of XML. Here is example of configuration for cdbimport task:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cdbimport {
+    // map can be skipped if it is defined in cayenne.defaultDataMap
+    map 'datamap.map.xml'
+    // optional project file, will be created if missing
+    cayenneProject 'cayenne-project.xml'
+
+    dataSource {
+        driver 'com.mysql.cj.jdbc.Driver'
+        url 'jdbc:mysql://127.0.0.1:3306/test?useSSL=false'
+        username 'root'
+        password ''
+    }
+
+    dbImport
+        // additional settings
+        usePrimitives false
+        defaultPackage 'org.apache.cayenne.test'
+
+        // DB filter configuration
+        catalog 'catalog-1'
+        schema 'schema-1'
+
+        catalog {
+            name 'catalog-2'
+
+            includeTable 'table0', {
+                excludeColumns '_column_'
+            }
+
+            includeTables 'table1', 'table2', 'table3'
+
+            includeTable 'table4', {
+                includeColumns 'id', 'type', 'data'
+            }
+
+            excludeTable '^GENERATED_.*'
+        }
+
+        catalog {
+            name 'catalog-3'
+            schema {
+                name 'schema-2'
+                includeTable 'test_table'
+                includeTable 'test_table2', {
+                    excludeColumn '__excluded'
+                }
+            }
+        }
+
+        includeProcedure 'procedure_test_1'
+
+        includeColumns 'id', 'version'
+
+        tableTypes 'TABLE', 'VIEW'
+    }
+}</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cdbgen-2"><a class="anchor" href="#cdbgen-2"></a>cdbgen</h4> 
+    <div class="paragraph"> 
+     <p>Cdbgen task drops and/or generates tables in a database on Cayenne DataMap. Full list of parameters is same as in the <a href="#cdbgenTable">Maven plugin</a>. Here is example of how to configure default <code>cdbgen</code> task:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cdbgen {
+
+    adapter 'org.apache.cayenne.dba.derby.DerbyAdapter'
+
+    dataSource {
+        driver 'org.apache.derby.jdbc.EmbeddedDriver'
+        url 'jdbc:derby:build/testdb;create=true'
+        username 'sa'
+        password ''
+    }
+
+    dropTables true
+    dropPk true
+
+    createTables true
+    createPk true
+    createFk true
+}</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="link-tasks-to-gradle-build-lifecycle"><a class="anchor" href="#link-tasks-to-gradle-build-lifecycle"></a>Link tasks to Gradle build lifecycle</h4> 
+    <div class="paragraph"> 
+     <p>You can connect Cayenne tasks to the default build lifecycle. Here is short example of how to connect defaut <code>cgen</code> and <code>cdbimport</code> tasks with <code>compileJava</code> task:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">cgen.dependsOn cdbimport
+compileJava.dependsOn cgen</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="ant_tasks"><a class="anchor" href="#ant_tasks"></a>6.3. Ant Tasks</h3> 
+   <div class="paragraph"> 
+    <p>Ant tasks are the same as <a href="#maven_plugin">Maven plugin goals</a> described previously, namely "cgen", "cdbgen", "cdbimport". Configuration parameters are also similar (except Maven can guess many defaults that Ant can’t). To include Ant tasks in the project, use the following Antlib:</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;typedef resource="org/apache/cayenne/tools/antlib.xml"&gt;
+   &lt;classpath&gt;
+   		&lt;fileset dir="lib" &gt;
+			&lt;include name="cayenne-ant-*.jar" /&gt;
+			&lt;include name="cayenne-cgen-*.jar" /&gt;
+			&lt;include name="cayenne-dbsync-*.jar" /&gt;
+			&lt;include name="cayenne-di-*.jar" /&gt;
+			&lt;include name="cayenne-project-*.jar" /&gt;
+			&lt;include name="cayenne-server-*.jar" /&gt;
+			&lt;include name="commons-collections-*.jar" /&gt;
+			&lt;include name="commons-lang-*.jar" /&gt;
+			&lt;include name="slf4j-api-*.jar" /&gt;
+			&lt;include name="velocity-*.jar" /&gt;
+			&lt;include name="vpp-2.2.1.jar" /&gt;
+		&lt;/fileset&gt;
+   &lt;/classpath&gt;
+&lt;/typedef&gt;</code></pre> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cgen-3"><a class="anchor" href="#cgen-3"></a>cgen</h4> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cdbgen-3"><a class="anchor" href="#cdbgen-3"></a>cdbgen</h4> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="cdbimport-2"><a class="anchor" href="#cdbimport-2"></a>cdbimport</h4> 
+    <div class="paragraph"> 
+     <p>This is an Ant counterpart of "cdbimport" goal of cayenne-maven-plugin described above. It has exactly the same properties. Here is a usage example:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML"> &lt;cdbimport map="${context.dir}/WEB-INF/my.map.xml"
+    driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://127.0.0.1/mydb"
+    username="sa"
+    defaultPackage="com.example.cayenne"/&gt;</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="appendix-a-configuration-properties"><a class="anchor" href="#appendix-a-configuration-properties"></a>7. Appendix A. Configuration Properties</h2> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
    <p>Note that the property names below are defined as constants in <code>org.apache.cayenne.configuration.Constants</code> interface.</p> 
@@ -5590,7 +5564,7 @@ public class MyEntity extends _MyEntity {
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="appendix-b-service-collections"><a class="anchor" href="#appendix-b-service-collections"></a>7. Appendix B. Service Collections</h2> 
+ <h2 id="appendix-b-service-collections"><a class="anchor" href="#appendix-b-service-collections"></a>8. Appendix B. Service Collections</h2> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
    <p>Note that the collection keys below are defined as constants in <code>org.apache.cayenne.configuration.Constants</code> interface.</p> 
@@ -5657,7 +5631,7 @@ public class MyEntity extends _MyEntity {
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="appendixC"><a class="anchor" href="#appendixC"></a>8. Appendix C. Expressions BNF</h2> 
+ <h2 id="appendixC"><a class="anchor" href="#appendixC"></a>9. Appendix C. Expressions BNF</h2> 
  <div class="sectionbody"> 
   <div class="listingblock"> 
    <div class="content"> 
@@ -5782,29 +5756,6 @@ NON-TERMINALS
                             | "db:" &lt;PROPERTY_PATH&gt;
                             | "enum:" &lt;PROPERTY_PATH&gt;  )</code></pre> 
    </div> 
-  </div> 
- </div> 
-</div> 
-<div class="sect1"> 
- <h2 id="list-of-tables"><a class="anchor" href="#list-of-tables"></a>9. List of tables</h2> 
- <div class="sectionbody"> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p><a href="#versionHistory">Cayenne Version History</a></p> </li> 
-    <li> <p><a href="#pluginParameteres">modeler plugin parameters</a></p> </li> 
-    <li> <p><a href="#tablecgen">cgen required parameters</a></p> </li> 
-    <li> <p><a href="#cgenOptional">cgen optional parameters</a></p> </li> 
-    <li> <p><a href="#cdbgenTable">cdbgen required parameters</a></p> </li> 
-    <li> <p><a href="#dataSourceParameteres">&lt;dataSource&gt; parameters</a></p> </li> 
-    <li> <p><a href="#cdbgenOptionl">cdbgen optional parameters</a></p> </li> 
-    <li> <p><a href="#cdbimportTable">cdbimport parameters</a></p> </li> 
-    <li> <p><a href="#cdbimportDataSource">&lt;dataSource&gt; parameters</a></p> </li> 
-    <li> <p><a href="#dbimportParameters">&lt;dbimport&gt; parameters</a></p> </li> 
-    <li> <p><a href="#persistenceStates">Persistence States</a></p> </li> 
-    <li> <p><a href="#lifecycleEvent">Lifecycle Event Types</a></p> </li> 
-    <li> <p><a href="#configProperties">Configuration Properties Recognized by ServerRuntime and/or ClientRuntime</a></p> </li> 
-    <li> <p><a href="#serviceCollections">Service Collection Keys Present in ServerRuntime and/or ClientRuntime</a></p> </li> 
-   </ul> 
   </div> 
  </div> 
 </div>
