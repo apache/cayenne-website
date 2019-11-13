@@ -75,6 +75,11 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+anchor-js@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/anchor-js/-/anchor-js-4.2.1.tgz#983d40b4950c07bca838242e4f46606dfbba49ae"
+  integrity sha512-v2NFSBkEoal1GatM8YoL9bV1mS9729Xs1vIvASNKCQH16BgRiyFi6pqGdbtEXzUCwm6i5DRG0kYlhAEkMdCw5g==
+
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"

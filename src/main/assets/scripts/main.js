@@ -22,13 +22,15 @@ require('bootstrap/js/dist/collapse');
 require('bootstrap/js/dist/dropdown');
 require('bootstrap/js/dist/scrollspy');
 
-function initHljs() {
-    var hljs    = require('highlight.js/lib/highlight.js');
-    var xml     = require('highlight.js/lib/languages/xml.js');
-    var java    = require('highlight.js/lib/languages/java.js');
-    var sql     = require('highlight.js/lib/languages/sql.js');
-    var groovy  = require('highlight.js/lib/languages/groovy.js');
+var anchorJS = require('anchor-js');
 
+var hljs     = require('highlight.js/lib/highlight.js');
+var xml      = require('highlight.js/lib/languages/xml.js');
+var java     = require('highlight.js/lib/languages/java.js');
+var sql      = require('highlight.js/lib/languages/sql.js');
+var groovy   = require('highlight.js/lib/languages/groovy.js');
+
+function initHljs() {
     hljs.registerLanguage('xml',    xml);
     hljs.registerLanguage('java',   java);
     hljs.registerLanguage('sql',    sql);
@@ -43,8 +45,19 @@ function initGitHubBadge() {
     });
 }
 
+function initAnchors() {
+    var anchors = new anchorJS();
+    anchors
+        .add(".cd-content h2")
+        .add(".cd-content h3")
+        .add(".cd-content h4")
+        .add(".cd-content h5")
+        .add(".cd-content h6");
+}
+
 $(document).ready(function () {
     initHljs();
+    initAnchors();
     initGitHubBadge();
 });
 
