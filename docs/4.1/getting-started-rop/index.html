@@ -197,7 +197,7 @@
   <div class="sect2"> 
    <h3 id="starting-client-project"><a class="anchor" href="#starting-client-project"></a>2.1. Starting Client Project</h3> 
    <div class="sect3"> 
-    <h4 id="create-an-rop-client-project-in-eclipse"><a class="anchor" href="#create-an-rop-client-project-in-eclipse"></a>Create an ROP Client Project in Eclipse</h4> 
+    <h4 id="create-an-rop-client-project-in-eclipse"><a class="anchor" href="#create-an-rop-client-project-in-eclipse"></a>2.1.1. Create an ROP Client Project in Eclipse</h4> 
     <div class="paragraph"> 
      <p>Creation of a new Eclipse project has been discussed in some details in "Getting Started with Cayenne" guide, so we will omit the screenshots for the common parts.</p> 
     </div> 
@@ -209,7 +209,7 @@
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="create-client-java-classes"><a class="anchor" href="#create-client-java-classes"></a>Create Client Java Classes</h4> 
+    <h4 id="create-client-java-classes"><a class="anchor" href="#create-client-java-classes"></a>2.1.2. Create Client Java Classes</h4> 
     <div class="paragraph"> 
      <p>The client doesn’t need the XML ORM mapping, as it is loaded from the server. However it needs the client-side Java classes. Let’s generate them from the existing mapping:</p> 
     </div> 
@@ -288,7 +288,7 @@
   <div class="sect2"> 
    <h3 id="setting-up-hessian-web-service"><a class="anchor" href="#setting-up-hessian-web-service"></a>2.2. Setting up Hessian Web Service</h3> 
    <div class="sect3"> 
-    <h4 id="setting-up-dependencies"><a class="anchor" href="#setting-up-dependencies"></a>Setting up Dependencies</h4> 
+    <h4 id="setting-up-dependencies"><a class="anchor" href="#setting-up-dependencies"></a>2.2.1. Setting up Dependencies</h4> 
     <div class="paragraph"> 
      <p>Now lets get back to the "tutorial" project that contains a web application and set up dependencies. Let’s add <code>resin-hessian.jar</code> (and the caucho repo declaration) and <code>cayenne-rop-server</code> to the <code>pom.xml</code></p> 
     </div> 
@@ -351,13 +351,13 @@
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="client-classes-on-the-server"><a class="anchor" href="#client-classes-on-the-server"></a>Client Classes on the Server</h4> 
+    <h4 id="client-classes-on-the-server"><a class="anchor" href="#client-classes-on-the-server"></a>2.2.2. Client Classes on the Server</h4> 
     <div class="paragraph"> 
      <p>Since ROP web service requires both server and client persistent classes, we need to generate a second copy of the client classes inside the server project. This is a minor inconvenience that will hopefully go away in the future versions of Cayenne. Don’t forget to refresh the project in Eclipse after class generation is done.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="configuring-web-xml"><a class="anchor" href="#configuring-web-xml"></a>Configuring web.xml</h4> 
+    <h4 id="configuring-web-xml"><a class="anchor" href="#configuring-web-xml"></a>2.2.3. Configuring web.xml</h4> 
     <div class="paragraph"> 
      <p>Cayenne web service is declared in the web.xml. It is implemented as a servlet <code>org.apache.cayenne.rop.ROPServlet</code>. Open <code>tutorial/src/main/webapp/WEB-INF/web.xml</code> in Eclipse and add a service declaration:</p> 
     </div> 
@@ -399,7 +399,7 @@
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="running-rop-server"><a class="anchor" href="#running-rop-server"></a>Running ROP Server</h4> 
+    <h4 id="running-rop-server"><a class="anchor" href="#running-rop-server"></a>2.2.4. Running ROP Server</h4> 
     <div class="paragraph"> 
      <p>Use previosly created Eclipse Jetty run configuration available via "Run &gt; Run Configurations…​" (or create a new one if none exists yet). You should see output in the Eclipse console similar to the following:</p> 
     </div> 
@@ -432,7 +432,7 @@ INFO: Created connection pool: jdbc:derby:memory:testdb;create=true
   <div class="sect2"> 
    <h3 id="porting-existing-code-to-connect-to-a-web-service-instead-of-a-database"><a class="anchor" href="#porting-existing-code-to-connect-to-a-web-service-instead-of-a-database"></a>2.3. Porting Existing Code to Connect to a Web Service Instead of a Database</h3> 
    <div class="sect3"> 
-    <h4 id="starting-command-line-client"><a class="anchor" href="#starting-command-line-client"></a>Starting Command Line Client</h4> 
+    <h4 id="starting-command-line-client"><a class="anchor" href="#starting-command-line-client"></a>2.3.1. Starting Command Line Client</h4> 
     <div class="paragraph"> 
      <p>One of the benefits of ROP is that the client code is no different from the server code - it uses the same ObjectContext interface for access, same query and commit API. So the code below will be similar to the code presented in the first Cayenne Getting Started Guide, although with a few ROP-specific parts required to bootstrap the ObjectContext.</p> 
     </div> 
@@ -613,7 +613,7 @@ INFO: +++ transaction committed.</pre>
     <p>You probably don’t want everybody in the world to connect to your service and access (and update!) arbitrary data in the database. The first step in securing Cayenne service is implementing client authentication. The easiest way to do it is to delegate the authentication task to the web container that is running the service. HessianConnection used in the previous chapter supports BASIC authentication on the client side, so we’ll demonstrate how to set it up here.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="securing-rop-server-application"><a class="anchor" href="#securing-rop-server-application"></a>Securing ROP Server Application</h4> 
+    <h4 id="securing-rop-server-application"><a class="anchor" href="#securing-rop-server-application"></a>2.4.1. Securing ROP Server Application</h4> 
     <div class="paragraph"> 
      <p>Open web.xml file in the server project and setup security constraints with BASIC authentication for the ROP service:</p> 
     </div> 
@@ -641,7 +641,7 @@ INFO: +++ transaction committed.</pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="configuring-jetty-for-basic-authentication"><a class="anchor" href="#configuring-jetty-for-basic-authentication"></a>Configuring Jetty for BASIC Authentication</h4> 
+    <h4 id="configuring-jetty-for-basic-authentication"><a class="anchor" href="#configuring-jetty-for-basic-authentication"></a>2.4.2. Configuring Jetty for BASIC Authentication</h4> 
     <div class="admonitionblock note"> 
      <table> 
       <tbody>
@@ -688,7 +688,7 @@ INFO: +++ transaction committed.</pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="running-client-with-basic-authentication"><a class="anchor" href="#running-client-with-basic-authentication"></a>Running Client with Basic Authentication</h4> 
+    <h4 id="running-client-with-basic-authentication"><a class="anchor" href="#running-client-with-basic-authentication"></a>2.4.3. Running Client with Basic Authentication</h4> 
     <div class="paragraph"> 
      <p>If you run the client without any changes, you’ll get the following error:</p> 
     </div> 
