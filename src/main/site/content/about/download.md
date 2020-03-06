@@ -20,8 +20,8 @@ aliases:
 We provide OpenPGP signatures (`.asc`) files and checksums (`.sha512`) for every release artifact.
 
 The PGP signatures can be verified using PGP or GPG. 
-First download the [KEYS](https://www.apache.org/dist/cayenne/KEYS) file as well as the `.asc` signature file for the relevant release packages. 
-Make sure you get these files from the [main distribution directory](https://www.apache.org/dist/cayenne/), rather than from a mirror.
+First download the [KEYS](https://downloads.apache.org/cayenne/KEYS) file as well as the `.asc` signature file for the relevant release packages. 
+Make sure you get these files from the [main distribution directory](https://downloads.apache.org/cayenne/), rather than from a mirror.
 
 Then verify the signatures using
 

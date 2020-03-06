@@ -40,10 +40,10 @@
                 <ul class="list-unstyled">
                     {{- range $.Site.Data.download.extensions -}}
                     <li>
-                        <a href="https://www.apache.org/dyn/closer.lua/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $revision }}</a>
+                        <a href="https://www.apache.org/dyn/closer.cgi/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $revision }}</a>
                         {{ .description }}
-                        (<a href="https://www.apache.org/dist/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
-                        <a href="https://www.apache.org/dist/cayenne/{{ $link }}{{ .ext }}.sha512">sha512</a>)
+                        (<a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.sha512">sha512</a>)
                     </li>
                     {{- end -}}
                 </ul>
