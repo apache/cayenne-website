@@ -56,8 +56,9 @@ function initAnchors() {
 }
 
 $(document).ready(function () {
-    initHljs();
     initAnchors();
     initGitHubBadge();
 });
+
+initHljs();
 
