@@ -13,7 +13,7 @@
         <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-70a0d2965c.css"/>
         <script src="https://cayenne.apache.org/js/bundle-4f4f41728e.js"></script>
         <title>Release Guide &middot; Apache Cayenne</title>
     </head>
@@ -122,7 +122,12 @@ download the distro and unpack it somewhere. You can run it directly, or use a c
 source. Then read the report and fix any issues.</p>
 
 <pre><code>cd cayenne
-./rat.sh ~/Desktop/apache-rat-0.9/apache-rat-0.9.jar  &gt; report.txt
+./rat.sh ~/Desktop/apache-rat-0.14-SNAPSHOT.jar  &gt; report.txt
+</code></pre>
+
+<p>As an alternative you could use Apache RAT maven plugin already configured in the Cayenne:</p>
+
+<pre><code>mvn apache-rat:check
 </code></pre></li>
 </ul>
 
