@@ -34,7 +34,11 @@ download the distro and unpack it somewhere. You can run it directly, or use a c
 source. Then read the report and fix any issues.
 
         cd cayenne
-        ./rat.sh ~/Desktop/apache-rat-0.9/apache-rat-0.9.jar  > report.txt
+        ./rat.sh ~/Desktop/apache-rat-0.14-SNAPSHOT.jar  > report.txt
+        
+    As an alternative you could use Apache RAT maven plugin already configured in the Cayenne:
+        
+        mvn apache-rat:check
 
 {{% gap %}}
     
