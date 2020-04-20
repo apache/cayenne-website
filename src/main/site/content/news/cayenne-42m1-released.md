@@ -1,34 +1,37 @@
 ---
 title: Cayenne 4.2 Milestone 1 Released
-date: 2020-03-30T12:00:00+03:00
-draft: true
+date: 2020-04-20T12:00:00+03:00
 --- 
 
 Apache Cayenne team is glad to announce the first milestone release of Cayenne 4.2. 
 
-This is a development release that introduces numerous fixes and new features. While the biggest features are internal, securing future Cayenne development, there are some nice ones in the user API.
+This is a development release that introduces numerous fixes and new features. 
+While the biggest features are internal, securing future Cayenne development, 
+there are some nice ones in the user API.
 
-Property API is greatly revised. It is type aware now and allows safer usage of SQL functions. 
-Additionally, it allows using subqueries:
+* Property API is greatly revised. 
+It is type aware now and allows safer usage of SQL functions.
 
-```java
-ColumnSelect<Long> subQuery = ObjectSelect
-        .columnQuery(Artist.class, Artist.ARTIST_ID_PK_PROPERTY)
-        .where(Artist.DATE_OF_BIRTH.year().gt(1950));
+* Cayenne 4.2 brings support for subqueries.
 
-List<Artist> artists = ObjectSelect.query(Artist.class)
-        .where(Artist.ARTIST_ID_PK_PROPERTY.in(subQuery))
+    ```java
+    ColumnSelect<Long> subQuery = ObjectSelect
+            .columnQuery(Artist.class, Artist.ARTIST_ID_PK_PROPERTY)
+            .where(Artist.DATE_OF_BIRTH.year().gt(1950));
+    
+    List<Artist> artists = ObjectSelect.query(Artist.class)
+            .where(Artist.ARTIST_ID_PK_PROPERTY.in(subQuery))
+            .select(context);
+    ```
+
+* SQL alias supported at the top-level API:
+   
+    ```java
+    ObjectSelect.query(Artist.class)
+        .where(Artist.PAINTING_ARRAY.alias("p1").dot(Painting.PAINTING_TITLE).eq("painting2"))
+        .and(Artist.PAINTING_ARRAY.alias("p2").dot(Painting.PAINTING_TITLE).eq("painting4"))
         .select(context);
-```
-
-And it brings alias support to the top level:
-
-```java
-ObjectSelect.query(Artist.class)
-    .where(Artist.PAINTING_ARRAY.alias("p1").dot(Painting.PAINTING_TITLE).eq("painting2"))
-    .and(Artist.PAINTING_ARRAY.alias("p2").dot(Painting.PAINTING_TITLE).eq("painting4"))
-    .select(context);
-```
+    ```
 
 Cayenne can be downloaded from [here](/download.html).
 
@@ -140,3 +143,6 @@ Cayenne can be downloaded from [here](/download.html).
 - {{% jira 2646 %}} Wrong target path selection logic in cgen config
 - {{% jira 2647 %}} Modeler: project upgrade from 4.0.B2 to 4.1.RC2 failure
 - {{% jira 2648 %}} Whitespace symbols in JDBC Driver and DB URL lines lead to incorrect driver loading
+- {{% jira 2653 %}} No methods for queries with qualifier parameters generated
+- {{% jira 2654 %}} Exception in dbimport when relationships should be imported, but no explicit configuration exists
+- {{% jira 2655 %}} AutoAdapter missing supportsGeneratedKeysForBatchInserts() method

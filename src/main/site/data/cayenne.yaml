@@ -34,6 +34,16 @@ releases:
     jdk: 1.8                                  # min supported Java version
     newRepoLayout: true
 
+  - version: "4.2"
+    latestRevision: "4.2.M1"
+    type: "Alpha"
+    description: "Latest development release"
+    date: "2020-04-20"
+    docs: true
+    downloadable: true
+    jdk: 1.8
+    newRepoLayout: true
+
   - version: "4.0"
     latestRevision: "4.0.2"
     type: "Stable"
