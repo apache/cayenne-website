@@ -47,6 +47,12 @@
             </Version>
         </release><release>
             <Version>
+                <name>Alpha</name>
+                <created>2020-04-20</created>
+                <revision>4.2.M1</revision>
+            </Version>
+        </release><release>
+            <Version>
                 <name>Stable</name>
                 <created>2019-10-14</created>
                 <revision>4.0.2</revision>

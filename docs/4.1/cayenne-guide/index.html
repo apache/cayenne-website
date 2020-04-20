@@ -13,7 +13,7 @@
         <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-70a0d2965c.css"/>
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
         <script src="https://cayenne.apache.org/js/bundle-4f4f41728e.js"></script>
         <title>Cayenne Guide &middot; Apache Cayenne</title>
     </head>
@@ -95,7 +95,7 @@
                                 Cayenne Version 4.1
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Release Candidate)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Release Candidate)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -2626,10 +2626,46 @@ for(DataRow row : rows) {
     <h4 id="iterated-queries"><a class="anchor" href="#iterated-queries"></a>2.8.4. Iterated Queries</h4> 
     <div class="paragraph"> 
      <p>While contemporary hardware may easily allow applications to fetch hundreds of thousands or even millions of objects into memory, it doesn’t mean this is always a good idea to do so. You can optimize processing of very large result sets with two techniques discussed in this and the following chapter - iterated and paginated queries.</p> 
-    </div> 
+    </div>
     <div class="paragraph"> 
      <p>Iterated query is not actually a special query. Any selecting query can be executed in iterated mode by an ObjectContext. ObjectContext creates an object called <code>ResultIterator</code> that is backed by an open ResultSet. Iterator provides constant memory performance for arbitrarily large ResultSets. This is true at least on the Cayenne end, as JDBC driver may still decide to bring the entire ResultSet into the JVM memory.</p> 
-    </div> 
+    </div>
+    <div class="admonitionblock note"> 
+        <table> 
+            <tbody>
+                <tr>
+                    <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+                    <td class="content">
+                        <div>
+                            The MySQL JDBC driver is known to pull the entire ResultSet into memory.
+                            In order to get the driver to stream the results, append the JDBC parameter
+                            <code class="language-java java" data-lang="java">useCursorFetch=true</code>
+                            to the JDBC URL.
+                        </div>
+                        <br/>
+                        <div>
+                            A fetch size must also be set when doing the query using
+                            <code class="language-java java" data-lang="java">ObjectSelect.statementFetchSize(..)</code>,
+                            for example:
+                        </div>
+                        <div class="listingblock">
+                            <div class="content">
+                                <pre class="highlight" style="margin-bottom: 0px">
+                                    <code class="language-Java Java" data-lang="Java" style="font-size: 120%">ObjectSelect.query(queryClass)
+    .statementFetchSize(50000)
+    .iterate(objectContext, cayenneObject -> ...</code>
+                                </pre>
+                            </div> 
+                        </div> 
+                        <div>
+                            Adjust the value of the fetch size to fit requirements.  A larger value is more
+                            performant, but consumes more memory as well.
+                        </div>
+                    </td>
+                </tr> 
+            </tbody>
+        </table> 
+    </div>
     <div class="paragraph"> 
      <p>Data is read from ResultIterator one row/object at a time until it is exhausted. There are two styles of accessing ResultIterator - direct access which requires explicit closing to avoid JDBC resources leak, or a callback that lets Cayenne handle resource management. In both cases iteration can be performed using "for" loop, as ResultIterator is "Iterable".</p> 
     </div> 
@@ -5750,6 +5786,10 @@ NON-TERMINALS
                     </li>
                     
                     <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
                         <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
                     </li>
                     
@@ -5758,7 +5798,15 @@ NON-TERMINALS
                     </li>
                     
                     <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
                         <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
                     </li>
                     
                 </ul>
@@ -5804,6 +5852,11 @@ NON-TERMINALS
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2020-04-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 20, 2020</time>
+                        <a href="/2020/04/cayenne-42m1-released/">Cayenne 4.2 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
                         <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
                     </li>
@@ -5811,11 +5864,6 @@ NON-TERMINALS
                     <li>
                         <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
                         <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2019-10-08 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 08, 2019</time>
-                        <a href="/2019/10/cayenne-41rc1-released/">Cayenne 4.1 Release Candidate 1 Released</a>
                     </li>
                     
                 </ul>

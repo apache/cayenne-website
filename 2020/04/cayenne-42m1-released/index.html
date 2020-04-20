@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-4f4f41728e.js"></script>
+        <title>Cayenne 4.2 Milestone 1 Released &middot; Apache Cayenne</title>
+    </head>
+    <body>
+
+
+
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.1/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">Cayenne 4.2 Milestone 1 Released<br />
+                            <small class="font-size-1rem text-muted">Apr 20, 2020</small>
+                        </h1>
+                        
+
+<p>Apache Cayenne team is glad to announce the first milestone release of Cayenne 4.2.</p>
+
+<p>This is a development release that introduces numerous fixes and new features.
+While the biggest features are internal, securing future Cayenne development,
+there are some nice ones in the user API.</p>
+
+<ul>
+<li><p>Property API is greatly revised.
+It is type aware now and allows safer usage of SQL functions.</p></li>
+
+<li><p>Cayenne 4.2 brings support for subqueries.</p>
+
+<pre><code class="language-java">ColumnSelect&lt;Long&gt; subQuery = ObjectSelect
+        .columnQuery(Artist.class, Artist.ARTIST_ID_PK_PROPERTY)
+        .where(Artist.DATE_OF_BIRTH.year().gt(1950));
+    
+List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
+        .where(Artist.ARTIST_ID_PK_PROPERTY.in(subQuery))
+        .select(context);
+</code></pre></li>
+
+<li><p>SQL alias supported at the top-level API:</p>
+
+<pre><code class="language-java">ObjectSelect.query(Artist.class)
+    .where(Artist.PAINTING_ARRAY.alias(&quot;p1&quot;).dot(Painting.PAINTING_TITLE).eq(&quot;painting2&quot;))
+    .and(Artist.PAINTING_ARRAY.alias(&quot;p2&quot;).dot(Painting.PAINTING_TITLE).eq(&quot;painting4&quot;))
+    .select(context);
+</code></pre></li>
+</ul>
+
+<p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
+
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
+
+<h4 id="changes-new-features">Changes/New Features:</h4>
+
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2465">CAY-2465</a> New SelectTranslator implementation</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2466">CAY-2466</a> New internal API to build SQL</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2467">CAY-2467</a> New type-aware Property API</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2468">CAY-2468</a> Support subqueries in Expression API</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2507">CAY-2507</a> Property API to use path aliases</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2508">CAY-2508</a> Create api to add aliases in expressions</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2510">CAY-2510</a> Create builder to load custom modules into plugins and modeler</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2511">CAY-2511</a> Contribute custom properties for attributes</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2512">CAY-2512</a> Support for custom functions in Expression API and Property API</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2514">CAY-2514</a> Set SERVER_CONTEXTS_SYNC_PROPERTY default value to false</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2517">CAY-2517</a> EventManager: optimization of adding listeners</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2518">CAY-2518</a> Add method to append having qualifier expression to ObjectSelect</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2520">CAY-2520</a> Split ObjectId into several specialized variants</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2522">CAY-2522</a> Make ObjectSelect a direct query</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2523">CAY-2523</a> Deprecate SelectQuery</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2525">CAY-2525</a> Deprecate OpenBase adapter</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2527">CAY-2527</a> API to map Object[] result to POJO</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2539">CAY-2539</a> Import procedures with the help of MergerToken</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2540">CAY-2540</a> Modeler: redesign dbRelationship editor dialog</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2542">CAY-2542</a> Modeler: redesign ObjRelationship editor dialog</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2543">CAY-2543</a> Move ResultSetMapping generation from metadata to translator</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2549">CAY-2549</a> Modeler: Redesign ObjAttribute editor dialog</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2551">CAY-2551</a> Create extended type for abstract Number class</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2555">CAY-2555</a> Use explicit ArcId in GraphChangeHandler methods</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2557">CAY-2557</a> Add java.time.Duration and java.time.Period to supported types</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2562">CAY-2562</a> Make ROPServerModule autoloaded</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2563">CAY-2563</a> Deprecate old scalarQuery methods in SQLSelect</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2568">CAY-2568</a> Class Generation: Superclass Package setting persistence</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2569">CAY-2569</a> Custom &lsquo;Naming Strategy&rsquo; in Cayenne Modeler</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2570">CAY-2570</a> Use MySQL adapter for latest versions of MariaDB</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2571">CAY-2571</a> DataDomainFlushAction redesign</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2579">CAY-2579</a> Review and possibly relax usage of readonly flag of ObjRelationship</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2585">CAY-2585</a> Rename scalarQuery and params methods in SQLSelect</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2590">CAY-2590</a> Add method to set query timeout to queries</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2592">CAY-2592</a> Modeler: make all datamaps selected in global cgen tab</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2593">CAY-2593</a> Add tableTypes field to dbImport config in dataMap</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2602">CAY-2602</a> Remove RTRIM of char columns in Sybase</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2604">CAY-2604</a> Specialization of property API for PK</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2610">CAY-2610</a> Align methods in ObjectSelect and SQLSelect</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2611">CAY-2611</a> Exclude system catalogs and schemas when run dbImport without config</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2612">CAY-2612</a> Modeler: add lazy-loading to dbImport tab</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2645">CAY-2645</a> Modeler: DbImport tree highlight improvement</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2650">CAY-2650</a> Support using generated primary keys along with batch inserts</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2651">CAY-2651</a> Support multiple IDs in the SelectById query</li>
+</ul>
+
+<div class="pb-2"><!-- gap 2rem --></div>
+
+<h4 id="bug-fixes">Bug Fixes:</h4>
+
+<ul>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2019">CAY-2019</a> Optimistic locking always fails on CRYPTO columns</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2332">CAY-2332</a> Property API: unable to use eq() and in() methods for toMany relationships</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2417">CAY-2417</a> Modeler: wrong title in attribute context menu</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2506">CAY-2506</a> Java class generated for Embeddable object is not serializable</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2509">CAY-2509</a> Result of resolving lazily faulted relationships can be out-of-date</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2530">CAY-2530</a> Modeler: DB Import and Class Generation from Project is performed for removed datamaps</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2531">CAY-2531</a> Modeler: Importing same schema after Import Revert clears all entities in datamap</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2533">CAY-2533</a> Modeler: Exception on validating ObjRelationship without db path</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2535">CAY-2535</a> Modeler: Impossible to import stored procedure apart from db tables</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2537">CAY-2537</a> Modeler: Schema Generation Complete popup window is hidden</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2538">CAY-2538</a> Modeler: dbImport configuration unclear behavior</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2541">CAY-2541</a> Performing query with expression with ObjectId throws NPE in some cases</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2544">CAY-2544</a> Possible name clash of ivar and property name in generated class</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2547">CAY-2547</a> CayenneDataObject serialization issue</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2553">CAY-2553</a> Wrong disjoint prefetch query qualifier</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2559">CAY-2559</a> Modeler: Warning dialog shows wrong information after changing target entity in dbRelationship</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2561">CAY-2561</a> Modeler: cgen type combobox doesn&rsquo;t set templates</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2572">CAY-2572</a> Queries are not sorted by name in data map XML</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2573">CAY-2573</a> DI field injection is triggered when creating sql Driver</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2575">CAY-2575</a> Select translator: Wrong translation of IN Expression</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2576">CAY-2576</a> Ant cgen task is broken</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2577">CAY-2577</a> Between property with extended type failure</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2578">CAY-2578</a> Wrong bindings in select of related entity by compound FK</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2580">CAY-2580</a> Cgen: Can&rsquo;t use custom templates for client mode</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2582">CAY-2582</a> Double insert of manyToMany relationship mapped to Set</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2584">CAY-2584</a> Crypto: can&rsquo;t use ColumnSelect with encrypted columns</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2588">CAY-2588</a> IdRowReader: ArrayIndexOutOfBoundsException</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2591">CAY-2591</a> Modeler: project becomes dirty after click on dbImport or cgen tab</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2594">CAY-2594</a> DbImport: AutoAdapter resolving inside an import operation hangs up the op on Hana DB</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2595">CAY-2595</a> ObjAttributes are not sorted in alphabetical ordering on save</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2596">CAY-2596</a> DbImport xml config changes after dbImport plugin task execution</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2600">CAY-2600</a> Modeler DbImport: Can&rsquo;t retrieve schema for databases with no catalog support</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2601">CAY-2601</a> Modeler DbImport: result dialog issues</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2603">CAY-2603</a> NPE reloading project in the model</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2605">CAY-2605</a> Modeler: Unable to save - java.nio.file.InvalidPathException</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2606">CAY-2606</a> Can&rsquo;t resolve obj path with embeddable component</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2608">CAY-2608</a> CayenneModeler: NPE when reverse engineering with an auto-adapter DataSource</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2609">CAY-2609</a> Modeler: can&rsquo;t close dbImport result dialog window</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2616">CAY-2616</a> Modeler: Wrong handling of path with spaces</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2618">CAY-2618</a> Unstable property ordering in generated classes</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2619">CAY-2619</a> &ldquo;to-dep PK&rdquo; related dbimport delta confuses the Modeler</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2624">CAY-2624</a> SelectQuery &ldquo;having&rdquo; qualifier is not considered when calculating cache key</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2627">CAY-2627</a> Modeler: ObjRelationship creation dialog ignores delete rule</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2628">CAY-2628</a> dbimport: unable to add several relationships to existing entity</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2631">CAY-2631</a> Can no longer use &ldquo;byte[]&rdquo; as root of scalar SQLSelect</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2632">CAY-2632</a> Modeler: issue saving cgen path for maven project</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2633">CAY-2633</a> Modeler: attribute sorting logic in cgen can corrupt model</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2634">CAY-2634</a> Minor inconsistencies in Modeler &ldquo;DB Import&rdquo;</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2635">CAY-2635</a> Lambda expressions break ROP serialization</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2646">CAY-2646</a> Wrong target path selection logic in cgen config</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2647">CAY-2647</a> Modeler: project upgrade from 4.0.B2 to 4.1.RC2 failure</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2648">CAY-2648</a> Whitespace symbols in JDBC Driver and DB URL lines lead to incorrect driver loading</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2653">CAY-2653</a> No methods for queries with qualifier parameters generated</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2654">CAY-2654</a> Exception in dbimport when relationships should be imported, but no explicit configuration exists</li>
+<li><a href="https://issues.apache.org/jira/browse/CAY-2655">CAY-2655</a> AutoAdapter missing supportsGeneratedKeysForBatchInserts() method</li>
+</ul>
+
+                    </article>
+                </section>
+            
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+                <a class="btn btn-link" href='/2019/10/cayenne-41rc2-released/'>
+                    <span class="d-block d-md-none  text-muted">Next: </span>
+                    Cayenne 4.1 Release Candidate 2 Released
+                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                </a>
+                
+            </div>
+        </div>
+    </main>
+
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2020-04-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 20, 2020</time>
+                        <a href="/2020/04/cayenne-42m1-released/">Cayenne 4.2 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
+                        <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
+                        <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2020 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-7036673-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    </body>
+</html>

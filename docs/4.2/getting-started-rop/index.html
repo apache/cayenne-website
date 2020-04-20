@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-4f4f41728e.js"></script>
+        <title>Cayenne Getting Started ROP &middot; Apache Cayenne</title>
+    </head>
+    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.1/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 4.2
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Release Candidate)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/4.2/getting-started-guide/">Getting Started</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/4.2/cayenne-guide/">Cayenne Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/4.2/getting-started-db-first/">Database First Tutorial</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">Getting Started ROP</span><div id="toc" class="toc toc-side"> 
+ <div id="toctitle">
+  Table of Contents
+ </div> 
+ <ul class="sectlevel1 nav"> 
+  <li><a href="#prerequisites" class="nav-link">1. Prerequisites</a> 
+   <ul class="sectlevel2 nav"> 
+    <li><a href="#prerequisites-2" class="nav-link">1.1. Prerequisites</a></li> 
+   </ul> </li> 
+  <li><a href="#remote-object-persistence-quick-start" class="nav-link">2. Remote Object Persistence Quick Start</a> 
+   <ul class="sectlevel2 nav"> 
+    <li><a href="#starting-client-project" class="nav-link">2.1. Starting Client Project</a></li> 
+    <li><a href="#setting-up-hessian-web-service" class="nav-link">2.2. Setting up Hessian Web Service</a></li> 
+    <li><a href="#porting-existing-code-to-connect-to-a-web-service-instead-of-a-database" class="nav-link">2.3. Porting Existing Code to Connect to a Web Service Instead of a Database</a></li> 
+    <li><a href="#adding-basic-authentication" class="nav-link">2.4. Adding BASIC Authentication</a></li> 
+   </ul> </li> 
+ </ul> 
+</div>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/4.2/upgrade-guide/">Upgrade Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        <a class="cd-toc-link" href="/docs/4.2/api/">JavaDoc</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+                <article>
+                    <header>
+                        <h1>Cayenne Getting Started ROP</h1>
+                    </header>
+                    <section>
+                        <div class="sect1"> 
+ <h2 id="prerequisites"><a class="anchor" href="#prerequisites"></a>1. Prerequisites</h2> 
+ <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="prerequisites-2"><a class="anchor" href="#prerequisites-2"></a>1.1. Prerequisites</h3> 
+   <div class="paragraph"> 
+    <p>This tutorial starts where "Getting Started with Cayenne" left off. If you have gone through the previous tutorial, and have the "tutorial" project open in Eclipse, you can go directly to the next step. If not, here are the compressed instructions to prepare you for work with ROP:</p> 
+   </div> 
+   <div class="ulist"> 
+    <ul> 
+     <li> <p>Step 1 - Eclipse Setup</p> </li> 
+     <li> <p>Step 2 - Create a project</p> </li> 
+     <li> <p>Step 3 - Create Cayenne OR Mapping</p> </li> 
+     <li> <p>Step 4 - Create Java Classes</p> </li> 
+     <li> <p>Step 5 - Convert the project to webapp.</p> </li> 
+    </ul> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Note that at "Step 5" you can skip the JSP creation part. Just setup <code>web.xml</code> and <code>maven-jetty-plugin</code> in the POM.</p> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="remote-object-persistence-quick-start"><a class="anchor" href="#remote-object-persistence-quick-start"></a>2. Remote Object Persistence Quick Start</h2> 
+ <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="starting-client-project"><a class="anchor" href="#starting-client-project"></a>2.1. Starting Client Project</h3> 
+   <div class="sect3"> 
+    <h4 id="create-an-rop-client-project-in-eclipse"><a class="anchor" href="#create-an-rop-client-project-in-eclipse"></a>2.1.1. Create an ROP Client Project in Eclipse</h4> 
+    <div class="paragraph"> 
+     <p>Creation of a new Eclipse project has been discussed in some details in "Getting Started with Cayenne" guide, so we will omit the screenshots for the common parts.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>In Eclipse select "File &gt; New &gt; Other…​" and then "Maven &gt; Maven Project". Click "Next". On the following screen check "Create a simple project" checkbox and click "Next" again. In the dialog shown on the screenshot below, enter "org.example.cayenne" for the "Group Id" and "tutorial-rop-client" for the "Artifact Id" (both without the quotes) and click "Finish".</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now you should have a new empty project in the Eclipse workspace. Check that the project Java compiler settings are correct. Rightclick on the "tutorial-rop-client" project, select "Properties &gt; Java Compiler" and ensure that "Compiler compliance level" is at least 1.5 (some versions of Maven plugin seem to be setting it to 1.4 by default).</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="create-client-java-classes"><a class="anchor" href="#create-client-java-classes"></a>2.1.2. Create Client Java Classes</h4> 
+    <div class="paragraph"> 
+     <p>The client doesn’t need the XML ORM mapping, as it is loaded from the server. However it needs the client-side Java classes. Let’s generate them from the existing mapping:</p> 
+    </div> 
+    <div class="ulist"> 
+     <ul> 
+      <li> <p>Start CayenneModeler and open <code>cayenne.xml</code> from the "tutorial" project (located under <code>tutorial/src/main/resources</code>, unless it is already open.</p> </li> 
+      <li> <p>Select the "datamap" DataMap and check "Allow Client Entities" checkbox.</p> </li> 
+      <li> <p>Enter <code>org.example.cayenne.persistent.client</code> for the "Client Java Package" and click "Update.." button next to the field to refresh the client package of all entities.</p> </li> 
+     </ul> 
+    </div> 
+    <div class="imageblock text-center"> 
+     <div class="content"> 
+      <img src="images/datamap-enableclient.png" alt="datamap enableclient"> 
+     </div> 
+    </div> 
+    <div class="ulist"> 
+     <ul> 
+      <li> <p>Select "Tools &gt; Generate Classes" menu.</p> </li> 
+      <li> <p>For "Type" select "Client Persistent Objects".</p> </li> 
+      <li> <p>For the "Output Directory" select <code>tutorial-rop-client/src/main/java</code> folder (as client classes should go in the client project).</p> </li> 
+      <li> <p>Click on "Classes" tab and check the "Check All Classes" checkbox (unless it is already checked and reads "Uncheck all Classes").</p> </li> 
+      <li> <p>Click "Generate".</p> </li> 
+     </ul> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now go back to Eclipse, right click on "tutorial-rop-client" project and select "Refresh" - you should see pairs of classes generated for each mapped entity, same as on the server. And again, we see a bunch of errors in those classes. Let’s fix it now by adding two dependencies, "cayenne-client" and "hessian", in the bottom of the pom.xml file. We also need to add Caucho M2 repository to pull Hessian jar files. The resulting POM should look like this:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;tutorial-rop-client&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+            &lt;artifactId&gt;cayenne-client-jetty&lt;/artifactId&gt;
+            &lt;!-- Here specify the version of Cayenne you are actually using --&gt;
+            &lt;version&gt;4.2.M1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+        &lt;groupId&gt;com.caucho&lt;/groupId&gt;
+            &lt;artifactId&gt;hessian&lt;/artifactId&gt;
+            &lt;version&gt;4.0.38&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;caucho&lt;/id&gt;
+            &lt;name&gt;Caucho Repository&lt;/name&gt;
+            &lt;url&gt;http://caucho.com/m2&lt;/url&gt;
+            &lt;layout&gt;default&lt;/layout&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+            &lt;releases&gt;
+                &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;/releases&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Your computer must be connected to the internet. Once you save the pom.xml, Eclipse will download the needed jar files and add them to the project build path. After that all the errors should disappear.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now let’s check the entity class pairs. They look almost identical to their server counterparts, although the superclass and the property access code are different. At this point these differences are somewhat academic, so let’s go on with the tutorial.</p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="setting-up-hessian-web-service"><a class="anchor" href="#setting-up-hessian-web-service"></a>2.2. Setting up Hessian Web Service</h3> 
+   <div class="sect3"> 
+    <h4 id="setting-up-dependencies"><a class="anchor" href="#setting-up-dependencies"></a>2.2.1. Setting up Dependencies</h4> 
+    <div class="paragraph"> 
+     <p>Now lets get back to the "tutorial" project that contains a web application and set up dependencies. Let’s add <code>resin-hessian.jar</code> (and the caucho repo declaration) and <code>cayenne-rop-server</code> to the <code>pom.xml</code></p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+    ...
+    &lt;dependencies&gt;
+        ...
+        &lt;dependency&gt;
+        	&lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+        	&lt;artifactId&gt;cayenne-rop-server&lt;/artifactId&gt;
+        	&lt;!-- Here specify the version of Cayenne you are actually using --&gt;
+            &lt;version&gt;{version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.caucho&lt;/groupId&gt;
+            &lt;artifactId&gt;hessian&lt;/artifactId&gt;
+            &lt;version&gt;4.0.38&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+    ...
+    &lt;/build&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;caucho&lt;/id&gt;
+            &lt;name&gt;Caucho Repository&lt;/name&gt;
+            &lt;url&gt;http://caucho.com/m2&lt;/url&gt;
+            &lt;layout&gt;default&lt;/layout&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+            &lt;releases&gt;
+                &lt;enabled&gt;true&lt;/enabled&gt;
+            &lt;/releases&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+    &lt;/project&gt;</code></pre> 
+     </div> 
+    </div> 
+    <div class="admonitionblock note"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+        <td class="content"> 
+         <div class="title">
+          Maven Optimization Hint
+         </div> 
+         <div class="paragraph"> 
+          <p>On a real project both server and client modules will likely share a common parent <code>pom.xml</code> where common repository delcaration can be placed, with child pom’s "inheriting" it from parent. This would reduce build code duplication.</p> 
+         </div> </td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="client-classes-on-the-server"><a class="anchor" href="#client-classes-on-the-server"></a>2.2.2. Client Classes on the Server</h4> 
+    <div class="paragraph"> 
+     <p>Since ROP web service requires both server and client persistent classes, we need to generate a second copy of the client classes inside the server project. This is a minor inconvenience that will hopefully go away in the future versions of Cayenne. Don’t forget to refresh the project in Eclipse after class generation is done.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="configuring-web-xml"><a class="anchor" href="#configuring-web-xml"></a>2.2.3. Configuring web.xml</h4> 
+    <div class="paragraph"> 
+     <p>Cayenne web service is declared in the web.xml. It is implemented as a servlet <code>org.apache.cayenne.rop.ROPServlet</code>. Open <code>tutorial/src/main/webapp/WEB-INF/web.xml</code> in Eclipse and add a service declaration:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+ &lt;!DOCTYPE web-app
+   PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+   "http://java.sun.com/dtd/web-app_2_3.dtd"&gt;
+&lt;web-app&gt;
+    &lt;display-name&gt;Cayenne Tutorial&lt;/display-name&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;cayenne-project&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.apache.cayenne.rop.ROPServlet&lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;0&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;cayenne-project&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/cayenne-service&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;/web-app&gt;</code></pre> 
+     </div> 
+    </div> 
+    <div class="admonitionblock note"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+        <td class="content"> 
+         <div class="title">
+          Extending Server Behavior via Callbacks
+         </div> 
+         <div class="paragraph"> 
+          <p>While no custom Java code is required on the server, just a service declaration, it is possible to customizing server-side behavior via callbacks and listeners (not shown in the tutorial).</p> 
+         </div> </td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="running-rop-server"><a class="anchor" href="#running-rop-server"></a>2.2.4. Running ROP Server</h4> 
+    <div class="paragraph"> 
+     <p>Use previosly created Eclipse Jetty run configuration available via "Run &gt; Run Configurations…​" (or create a new one if none exists yet). You should see output in the Eclipse console similar to the following:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre>[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building tutorial 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+...
+[INFO] Starting jetty 6.1.22 ...
+INFO::jetty-6.1.22
+INFO::No Transaction manager found - if your webapp requires one, please configure one.
+INFO::Started SelectChannelConnector@0.0.0.0:8080
+[INFO] Started Jetty Server
+INFO: Loading XML configuration resource from file:cayenne-project.xml
+INFO: loading user name and password.
+INFO: Created connection pool: jdbc:derby:memory:testdb;create=true
+    Driver class: org.apache.derby.jdbc.EmbeddedDriver
+    Min. connections in the pool: 1
+    Max. connections in the pool: 1</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Cayenne ROP service URL is <a href="http://localhost:8080/tutorial/cayenne-service" class="bare">http://localhost:8080/tutorial/cayenne-service</a>. If you click on it, you will see "Hessian Requires POST" message, that means that the service is alive, but you need a client other than the web browser to access it.</p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="porting-existing-code-to-connect-to-a-web-service-instead-of-a-database"><a class="anchor" href="#porting-existing-code-to-connect-to-a-web-service-instead-of-a-database"></a>2.3. Porting Existing Code to Connect to a Web Service Instead of a Database</h3> 
+   <div class="sect3"> 
+    <h4 id="starting-command-line-client"><a class="anchor" href="#starting-command-line-client"></a>2.3.1. Starting Command Line Client</h4> 
+    <div class="paragraph"> 
+     <p>One of the benefits of ROP is that the client code is no different from the server code - it uses the same ObjectContext interface for access, same query and commit API. So the code below will be similar to the code presented in the first Cayenne Getting Started Guide, although with a few ROP-specific parts required to bootstrap the ObjectContext.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Let’s start by creating an empty Main class with the standard main() method in the client project:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">package org.example.cayenne.persistent.client;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+    }
+}</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now the part that is actually different from regular Cayenne - establishing the server connection and obtaining the ObjectContext:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">Map&lt;String, String&gt; properties = new HashMap&lt;&gt;();
+properties.put(ClientConstants.ROP_SERVICE_URL_PROPERTY, "http://localhost:8080/cayenne-service");
+properties.put(ClientConstants.ROP_SERVICE_USERNAME_PROPERTY, "cayenne-user");
+properties.put(ClientConstants.ROP_SERVICE_PASSWORD_PROPERTY, "secret");
+properties.put(ClientConstants.ROP_SERVICE_REALM_PROPERTY, "Cayenne Realm");
+
+
+ClientRuntime runtime = ClientRuntime.builder()
+                        .properties(properties)
+                        .addModule(new ClientJettyHttpModule())
+                        .build();
+ObjectContext context = runtime.newContext();</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Note that the "runtime" can be used to create as many peer ObjectContexts as needed over the same connection, while ObjectContext is a kind of isolated "persistence session", similar to the server-side context. A few more notes. Since we are using HTTP(S) to communicate with ROP server, there’s no need to explicitly close the connection (or channel, or context).</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>So now let’s do the same persistent operaions that we did in the first tutorial "Main" class. Let’s start by creating and saving some objects:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">// creating new Artist
+Artist picasso = context.newObject(Artist.class);
+picasso.setName("Pablo Picasso");
+
+// Creating other objects
+Gallery metropolitan = context.newObject(Gallery.class);
+metropolitan.setName("Metropolitan Museum of Art");
+
+Painting girl = context.newObject(Painting.class);
+girl.setName("Girl Reading at a Table");
+
+Painting stein = context.newObject(Painting.class);
+stein.setName("Gertrude Stein");
+
+// connecting objects together via relationships
+picasso.addToPaintings(girl);
+picasso.addToPaintings(stein);
+
+girl.setGallery(metropolitan);
+stein.setGallery(metropolitan);
+
+// saving all the changes above
+context.commitChanges();</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now let’s select them back:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">// ObjectSelect examples
+List&lt;Painting&gt; paintings1 = ObjectSelect.query(Painting.class).select(context);
+
+List&lt;Painting&gt; paintings2 = ObjectSelect.query(Painting.class)
+        .where(Painting.NAME.likeIgnoreCase("gi%")).select(context);</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now, delete:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">// Delete object example
+Artist picasso = ObjectSelect.query(Artist.class).where(Artist.NAME.eq("Pablo Picasso")).selectOne(context);
+
+if (picasso != null) {
+    context.deleteObject(picasso);
+    context.commitChanges();
+}</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This code is exactly the same as in the first tutorial. So now let’s try running the client and see what happens. In Eclipse open main class and select "Run &gt; Run As &gt; Java Application" from the menu (assuming the ROP server started in the previous step is still running). You will some output in both server and client process consoles. Client:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre>INFO: Connecting to [http://localhost:8080/tutorial/cayenne-service] - dedicated session.
+INFO: === Connected, session: org.apache.cayenne.remote.RemoteSession@26544ec1[sessionId=17uub1h34r9x1] - took 111 ms.
+INFO: --- Message 0: Bootstrap
+INFO: === Message 0: Bootstrap done - took 58 ms.
+INFO: --- Message 1: flush-cascade-sync
+INFO: === Message 1: flush-cascade-sync done - took 1119 ms.
+INFO: --- Message 2: Query
+INFO: === Message 2: Query done - took 48 ms.
+INFO: --- Message 3: Query
+INFO: === Message 3: Query done - took 63 ms.
+INFO: --- Message 4: Query
+INFO: === Message 4: Query done - took 19 ms.
+INFO: --- Message 5: Query
+INFO: === Message 5: Query done - took 7 ms.
+INFO: --- Message 6: Query
+INFO: === Message 6: Query done - took 5 ms.
+INFO: --- Message 7: Query
+INFO: === Message 7: Query done - took 2 ms.
+INFO: --- Message 8: Query
+INFO: === Message 8: Query done - took 4 ms.
+INFO: --- Message 9: flush-cascade-sync
+INFO: === Message 9: flush-cascade-sync done - took 34 ms.</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>As you see client prints no SQL statmenets, just a bunch of query and flush messages sent to the server. The server side is more verbose, showing the actual client queries executed against the database:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre>...
+INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'ARTIST']
+INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'GALLERY']
+INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'PAINTING']
+INFO: INSERT INTO ARTIST (DATE_OF_BIRTH, ID, NAME) VALUES (?, ?, ?)
+INFO: [batch bind: 1-&gt;DATE_OF_BIRTH:NULL, 2-&gt;ID:200, 3-&gt;NAME:'Pablo Picasso']
+INFO: === updated 1 row.
+INFO: INSERT INTO GALLERY (ID, NAME) VALUES (?, ?)
+INFO: [batch bind: 1-&gt;ID:200, 2-&gt;NAME:'Metropolitan Museum of Art']
+INFO: === updated 1 row.
+INFO: INSERT INTO PAINTING (ARTIST_ID, GALLERY_ID, ID, NAME) VALUES (?, ?, ?, ?)
+INFO: [batch bind: 1-&gt;ARTIST_ID:200, 2-&gt;GALLERY_ID:200, 3-&gt;ID:200, 4-&gt;NAME:'Girl Reading at a Table']
+INFO: [batch bind: 1-&gt;ARTIST_ID:200, 2-&gt;GALLERY_ID:200, 3-&gt;ID:201, 4-&gt;NAME:'Gertrude Stein']
+INFO: === updated 2 rows.
+INFO: +++ transaction committed.
+INFO: --- transaction started.
+INFO: SELECT t0.GALLERY_ID, t0.NAME, t0.ARTIST_ID, t0.ID FROM PAINTING t0
+INFO: === returned 2 rows. - took 14 ms.
+INFO: +++ transaction committed.
+INFO: --- transaction started.
+INFO: SELECT t0.GALLERY_ID, t0.NAME, t0.ARTIST_ID, t0.ID FROM PAINTING t0
+      WHERE UPPER(t0.NAME) LIKE UPPER(?) [bind: 1-&gt;NAME:'gi%']
+INFO: === returned 1 row. - took 10 ms.
+INFO: +++ transaction committed.
+INFO: --- transaction started.
+INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0 WHERE t0.NAME = ? [bind: 1-&gt;NAME:'Pablo Picasso']
+INFO: === returned 1 row. - took 8 ms.
+INFO: +++ transaction committed.
+INFO: --- transaction started.
+INFO: DELETE FROM PAINTING WHERE ID = ?
+INFO: [batch bind: 1-&gt;ID:200]
+INFO: [batch bind: 1-&gt;ID:201]
+INFO: === updated 2 rows.
+INFO: DELETE FROM ARTIST WHERE ID = ?
+INFO: [batch bind: 1-&gt;ID:200]
+INFO: === updated 1 row.
+INFO: +++ transaction committed.</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>You are done with the basic ROP client!</p> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="adding-basic-authentication"><a class="anchor" href="#adding-basic-authentication"></a>2.4. Adding BASIC Authentication</h3> 
+   <div class="paragraph"> 
+    <p>You probably don’t want everybody in the world to connect to your service and access (and update!) arbitrary data in the database. The first step in securing Cayenne service is implementing client authentication. The easiest way to do it is to delegate the authentication task to the web container that is running the service. HessianConnection used in the previous chapter supports BASIC authentication on the client side, so we’ll demonstrate how to set it up here.</p> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="securing-rop-server-application"><a class="anchor" href="#securing-rop-server-application"></a>2.4.1. Securing ROP Server Application</h4> 
+    <div class="paragraph"> 
+     <p>Open web.xml file in the server project and setup security constraints with BASIC authentication for the ROP service:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;CayenneService&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;/cayenne-service&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;cayenne-service-user&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;
+
+&lt;login-config&gt;
+    &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+    &lt;realm-name&gt;Cayenne Realm&lt;/realm-name&gt;
+&lt;/login-config&gt;
+
+&lt;security-role&gt;
+    &lt;role-name&gt;cayenne-service-user&lt;/role-name&gt;
+&lt;/security-role&gt;</code></pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="configuring-jetty-for-basic-authentication"><a class="anchor" href="#configuring-jetty-for-basic-authentication"></a>2.4.2. Configuring Jetty for BASIC Authentication</h4> 
+    <div class="admonitionblock note"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
+        <td class="content"> These instructions are specific to Jetty 6. Other containers (and versions of Jetty) will have different mechanisms to achieve the same thing. </td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Open pom.xml in the server project and configure a "userRealm" for the Jetty plugin:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
+    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-jetty-plugin&lt;/artifactId&gt;
+        &lt;version&gt;9.4.8.v20171121&lt;/version&gt;
+        &lt;!-- adding configuration below: --&gt;
+        &lt;configuration&gt;
+            &lt;userRealms&gt;
+                &lt;userRealm implementation="org.eclipse.jetty.security.HashLoginService"&gt;
+                    &lt;!-- this name must match the realm-name in web.xml --&gt;
+                    &lt;name&gt;Cayenne Realm&lt;/name&gt;
+                    &lt;config&gt;realm.properties&lt;/config&gt;
+                &lt;/userRealm&gt;
+            &lt;/userRealms&gt;
+        &lt;/configuration&gt;
+    &lt;/plugin&gt;
+&lt;/plugins&gt;</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now create a new file called <code>realm.properties</code> at the root of the server project and put user login/password in there:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre>cayenne-user: secret,cayenne-service-user</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Now let’s stop the server and start it again. Everything should start as before, but if you go to <a href="http://localhost:8080/tutorial/cayenne-service" class="bare">http://localhost:8080/tutorial/cayenne-service</a>, your browser should pop up authentication dialog. Enter "cayenne-user/secret" for user name / password, and you should see "Hessian Requires POST" message. So the server is now secured.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="running-client-with-basic-authentication"><a class="anchor" href="#running-client-with-basic-authentication"></a>2.4.3. Running Client with Basic Authentication</h4> 
+    <div class="paragraph"> 
+     <p>If you run the client without any changes, you’ll get the following error:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre>Mar 01, 2016 7:25:50 PM org.apache.cayenne.rop.http.HttpROPConnector logConnect
+INFO: Connecting to [cayenne-user@http://localhost:8080/tutorial-rop-server/cayenne-service] - dedicated session.
+Mar 01, 2016 7:25:50 PM org.apache.cayenne.rop.HttpClientConnection connect
+INFO: Server returned HTTP response code: 401 for URL: http://localhost:8080/tutorial-rop-server/cayenne-service
+java.rmi.RemoteException: Server returned HTTP response code: 401 for URL: http://localhost:8080/tutorial-rop-server/cayenne-service
+	at org.apache.cayenne.rop.ProxyRemoteService.establishSession(ProxyRemoteService.java:45)
+	at org.apache.cayenne.rop.HttpClientConnection.connect(HttpClientConnection.java:85)
+	at org.apache.cayenne.rop.HttpClientConnection.getServerEventBridge(HttpClientConnection.java:68)
+	at org.apache.cayenne.remote.ClientChannel.setupRemoteChannelListener(ClientChannel.java:279)
+	at org.apache.cayenne.remote.ClientChannel.&lt;init&gt;(ClientChannel.java:71)
+	at org.apache.cayenne.configuration.rop.client.ClientChannelProvider.get(ClientChannelProvider.java:48)
+	at org.apache.cayenne.configuration.rop.client.ClientChannelProvider.get(ClientChannelProvider.java:31)
+	at org.apache.cayenne.di.spi.CustomProvidersProvider.get(CustomProvidersProvider.java:39)
+	at org.apache.cayenne.di.spi.FieldInjectingProvider.get(FieldInjectingProvider.java:43)
+	at org.apache.cayenne.di.spi.DefaultScopeProvider.get(DefaultScopeProvider.java:50)
+	at org.apache.cayenne.di.spi.DefaultInjector.getInstance(DefaultInjector.java:139)
+	at org.apache.cayenne.di.spi.FieldInjectingProvider.value(FieldInjectingProvider.java:105)
+	at org.apache.cayenne.di.spi.FieldInjectingProvider.injectMember(FieldInjectingProvider.java:68)
+	at org.apache.cayenne.di.spi.FieldInjectingProvider.injectMembers(FieldInjectingProvider.java:59)
+	at org.apache.cayenne.di.spi.FieldInjectingProvider.get(FieldInjectingProvider.java:44)
+	at org.apache.cayenne.di.spi.DefaultScopeProvider.get(DefaultScopeProvider.java:50)
+	at org.apache.cayenne.di.spi.DefaultInjector.getInstance(DefaultInjector.java:134)
+	at org.apache.cayenne.configuration.CayenneRuntime.newContext(CayenneRuntime.java:134)
+	at org.apache.cayenne.tutorial.persistent.client.Main.main(Main.java:44)</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Which is exactly what you’d expect, as the client is not authenticating itself. So change the line in Main.java where we obtained an ROP connection to this:</p> 
+    </div> 
+    <div class="listingblock"> 
+     <div class="content"> 
+      <pre class="highlight"><code class="language-java java" data-lang="java">Map&lt;String,String&gt; properties = new HashMap&lt;&gt;();
+properties.put(ClientConstants.ROP_SERVICE_URL_PROPERTY, "http://localhost:8080/cayenne-service");
+properties.put(ClientConstants.ROP_SERVICE_USERNAME_PROPERTY, "cayenne-user");
+properties.put(ClientConstants.ROP_SERVICE_PASSWORD_PROPERTY, "secret");
+properties.put(ClientConstants.ROP_SERVICE_REALM_PROPERTY, "Cayenne Realm");
+
+ClientRuntime runtime = ClientRuntime.builder()
+                        .properties(properties)
+                        .addModule(new ClientJettyHttpModule())
+                        .build();</code></pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Try running again, and everything should work as before. Obviously in production environment, in addition to authentication you’ll need to use HTTPS to access the server to prevent third-party eavesdropping on your password and data.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Congratulations, you are done with the ROP tutorial!</p> 
+    </div> 
+   </div> 
+  </div> 
+ </div> 
+</div>
+                    </section>
+                </article>
+
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2020-04-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 20, 2020</time>
+                        <a href="/2020/04/cayenne-42m1-released/">Cayenne 4.2 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
+                        <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
+                        <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2020 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-7036673-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    </body>
+</html>

@@ -13,7 +13,7 @@
         <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-70a0d2965c.css"/>
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-e429186d1b.css"/>
         <script src="https://cayenne.apache.org/js/bundle-4f4f41728e.js"></script>
         <title>Download &middot; Apache Cayenne</title>
     </head>
@@ -132,6 +132,57 @@
             </div>
             <div class="tab-pane fade" id="gradle_4_1_RC2" role="tabpanel" aria-labelledby="gradle_4_1_RC2-tab">
                 <pre><code class="groovy">compile group: 'org.apache.cayenne', name: 'cayenne-server', version: '4.1.RC2'</code></pre>
+            </div>
+        </div><h2>Latest development release - 4.2.M1 (Alpha)</h2>
+        <p>
+            Requires <strong>Java 1.8</strong> or above.
+            You can find full release notes
+            <a href="https://github.com/apache/cayenne/blob/4.2.M1/RELEASE-NOTES.txt">here</a>.
+        </p>
+        <ul class="nav nav-tabs" id="tab_4_2_M1" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="bin_4_2_M1-tab" data-toggle="tab" href="#bin_4_2_M1" role="tab" aria-controls="bin_4_2_M1" aria-selected="true">Binary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="maven_4_2_M1-tab" data-toggle="tab" href="#maven_4_2_M1" role="tab" aria-controls="maven_4_2_M1" aria-selected="false">Maven</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="gradle_4_2_M1-tab" data-toggle="tab" href="#gradle_4_2_M1" role="tab" aria-controls="gradle_4_2_M1" aria-selected="false">Gradle</a>
+            </li>
+        </ul>
+        <div class="tab-content  px-1 pt-1 mb-5" id="tab_4_2_M1_content">
+            <div class="tab-pane fade show active" id="bin_4_2_M1" role="tabpanel" aria-labelledby="bin_4_2_M1-tab">
+                <ul class="list-unstyled"><li>
+                        <a href="https://www.apache.org/dyn/closer.cgi/cayenne/4.2.M1/cayenne-4.2.M1.tar.gz">Cayenne 4.2.M1</a>
+                        binary distribution with cross-platform Java CayenneModeler
+                        (<a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1.tar.gz.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1.tar.gz.sha512">sha512</a>)
+                    </li><li>
+                        <a href="https://www.apache.org/dyn/closer.cgi/cayenne/4.2.M1/cayenne-4.2.M1-macosx.dmg">Cayenne 4.2.M1</a>
+                        binary distribution with Mac OS X CayenneModeler
+                        (<a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1-macosx.dmg.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1-macosx.dmg.sha512">sha512</a>)
+                    </li><li>
+                        <a href="https://www.apache.org/dyn/closer.cgi/cayenne/4.2.M1/cayenne-4.2.M1-win.zip">Cayenne 4.2.M1</a>
+                        binary distribution with Windows CayenneModeler
+                        (<a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1-win.zip.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1-win.zip.sha512">sha512</a>)
+                    </li><li>
+                        <a href="https://www.apache.org/dyn/closer.cgi/cayenne/4.2.M1/cayenne-4.2.M1-src.tar.gz">Cayenne 4.2.M1</a>
+                        source code distribution
+                        (<a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1-src.tar.gz.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/4.2.M1/cayenne-4.2.M1-src.tar.gz.sha512">sha512</a>)
+                    </li></ul>
+            </div>
+            <div class="tab-pane fade" id="maven_4_2_M1" role="tabpanel" aria-labelledby="maven_4_2_M1-tab">
+                <pre><code class="xml">&lt;dependency>
+    &lt;groupId>org.apache.cayenne&lt;/groupId>
+    &lt;artifactId>cayenne-server&lt;/artifactId>
+    &lt;version>4.2.M1&lt;/version>
+&lt;/dependency></code></pre>
+            </div>
+            <div class="tab-pane fade" id="gradle_4_2_M1" role="tabpanel" aria-labelledby="gradle_4_2_M1-tab">
+                <pre><code class="groovy">compile group: 'org.apache.cayenne', name: 'cayenne-server', version: '4.2.M1'</code></pre>
             </div>
         </div><h2>Latest stable release - 4.0.2 (Stable)</h2>
         <p>
@@ -317,6 +368,10 @@ Windows users can use <code>CertUtil</code> or use the equivalent *nix tools as 
                     </li>
                     
                     <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
                         <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
                     </li>
                     
@@ -325,7 +380,15 @@ Windows users can use <code>CertUtil</code> or use the equivalent *nix tools as 
                     </li>
                     
                     <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
                         <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
                     </li>
                     
                 </ul>
@@ -371,6 +434,11 @@ Windows users can use <code>CertUtil</code> or use the equivalent *nix tools as 
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2020-04-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 20, 2020</time>
+                        <a href="/2020/04/cayenne-42m1-released/">Cayenne 4.2 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
                         <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
                     </li>
@@ -378,11 +446,6 @@ Windows users can use <code>CertUtil</code> or use the equivalent *nix tools as 
                     <li>
                         <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
                         <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2019-10-08 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 08, 2019</time>
-                        <a href="/2019/10/cayenne-41rc1-released/">Cayenne 4.1 Release Candidate 1 Released</a>
                     </li>
                     
                 </ul>
