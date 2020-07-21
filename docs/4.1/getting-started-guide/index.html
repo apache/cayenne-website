@@ -95,7 +95,7 @@
                                 Cayenne Version 4.1
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Release Candidate)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Alpha)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Stable)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Aging)</a><a class="dropdown-item" href="/docs/3.0/cayenne-guide.html">Version 3.0 (Legacy)</a><a class="dropdown-item" href="/docs/2.0/user-guide.html">Version 2.0 (Legacy)</a><a class="dropdown-item" href="/docs/1.2/user-guide.html">Version 1.2 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -415,12 +415,17 @@
     <h4 id="creating-java-classes-2"><a class="anchor" href="#creating-java-classes-2"></a>2.3.1. Creating Java Classes</h4> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>Select "Tools &gt; Generate Classes" menu.</p> </li> 
+      <li> <p>Select your datamap in a project tree and open "Class Generation" tab.</p> </li> 
       <li> <p>For "Type" select "Standard Persistent Objects", if it is not already selected.</p> </li> 
       <li> <p>For the "Output Directory" select “src/main/java” folder under your IDEA project folder (this is a "peer" location to the <code>cayenne-*.xml</code> location we selected before).</p> </li> 
-      <li> <p>Click on "Classes" tab and check the "Check All Classes" checkbox (unless it is already checked and reads "Uncheck all Classes").</p> </li> 
-      <li> <p>Click "Generate"</p> </li> 
+      <li> <p>Select all object entities (unless they are already checked).</p> </li> 
+      <li> <p>Finally, click "Generate"</p> </li> 
      </ul> 
+    </div> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/class-generation.png" alt="class generation"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>Now go back to IDEA - you should see pairs of classes generated for each mapped entity. You probably also see that there’s a bunch of red squiggles next to the newly generated Java classes in IDEA. This is because our project does not include Cayenne as a Maven dependency yet. Let’s fix it now by adding "cayenne-server" artifact in the bottom of the <code>pom.xml</code> file. Also we should tell Maven compile plugin that our project needs Java 8. The resulting POM should look like this:</p> 
@@ -435,7 +440,7 @@
     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
 
     &lt;properties&gt;
-        &lt;cayenne.version&gt;4.1.RC2&lt;/cayenne.version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        &lt;cayenne.version&gt;4.1&lt;/cayenne.version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
         &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt; <i class="conum" data-value="2"></i><b>(2)</b>
         &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
     &lt;/properties&gt;
@@ -478,7 +483,7 @@
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Now let’s check the entity class pairs. Each one is made of a superclass (e.g. <code>_Artist</code>) and a subclass (e.g. <code>Artist</code>). You <strong>should not</strong> modify the superclasses whose names start with "_" (underscore), as they will be replaced on subsequent generator runs. Instead all custom logic should be placed in the subclasses in <code>org.example.cayenne.persistent</code> package - those will never be overwritten by the class generator.</p> 
+     <p>Now let’s check the entity class pairs. Each one is made of a superclass (e.g. <code>auto/_Artist</code>) and a subclass (e.g. <code>Artist</code>). You <strong>should not</strong> modify the superclasses whose names start with "_" (underscore), as they will be replaced on subsequent generator runs. Instead all custom logic should be placed in the subclasses in <code>org.example.cayenne.persistent</code> package - those will never be overwritten by the class generator.</p> 
     </div> 
     <div class="admonitionblock tip"> 
      <table> 
