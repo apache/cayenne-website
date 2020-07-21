@@ -5,14 +5,14 @@ date: 2020-07-21T12:00:00+03:00
 
 Apache Cayenne team is really glad to announce a final (general availability) release of _Cayenne 4.1_. 
 
-Here is a recap of all great changes made since 4.0:
+Here is a recap of changes made since 4.0:
 
 - New field-based data objects (see {{% jira 2330 %}}), 
   that are **much faster** to read and write, while **significantly** reducing the app memory footprint.
   
 - Dependency-free Cayenne core. No more velocity or commons-collections compile dependencies. Only "slf4j-api" is required in the base config.
 
-- New extensible project XML structure. 
+- New extensible project XML structure. This allows to store cgen and reverse engineering configs along with the project.
 
 - New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable, 
 more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.
@@ -35,7 +35,7 @@ more over configuration is now saved so you can evolve it with your model and pe
     
 ```
 
-- And a numerous minor fixes and improvements. 
+- And numerous minor fixes and improvements. 
 
 Cayenne can be downloaded from [here](/download.html).
 
