@@ -242,7 +242,7 @@
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">4.1</p></td> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.8 or newer</p></td> 
-       <td class="tableblock halign-left valign-top"><p class="tableblock">Beta</p></td> 
+       <td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td> 
       </tr> 
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">4.0</p></td> 
@@ -252,7 +252,7 @@
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">3.1</p></td> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.5 or newer</p></td> 
-       <td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td> 
+       <td class="tableblock halign-left valign-top"><p class="tableblock">Aging</p></td> 
       </tr> 
       <tr> 
        <td class="tableblock halign-left valign-top"><p class="tableblock">3.0</p></td> 
@@ -2670,6 +2670,25 @@ for(DataRow row : rows) {
        context.commitChanges();
     }
 }</code></pre> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="mysql-jdbc-driver-and-iterated-queries"><a class="anchor" href="#mysql-jdbc-driver-and-iterated-queries"></a>2.8.4.1. MySQL JDBC driver and iterated queries</h5> 
+     <div class="paragraph"> 
+      <p>The MySQL JDBC driver is known to pull the entire ResultSet into memory. In order to get the driver to stream the results, append the JDBC parameter <code>useCursorFetch=true</code> to the JDBC URL.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>A fetch size must also be set when doing the query using <code>ObjectSelect.statementFetchSize(..)</code>, for example:</p> 
+     </div> 
+     <div class="listingblock"> 
+      <div class="content"> 
+       <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect.query(queryClass)
+    .statementFetchSize(50000)
+    .iterate(objectContext, cayenneObject -&gt; ...</code></pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Adjust the value of the fetch size to fit requirements. A larger value is more performant, but consumes more memory as well.</p> 
      </div> 
     </div> 
    </div> 
@@ -5816,6 +5835,11 @@ NON-TERMINALS
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2020-07-21 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jul 21, 2020</time>
+                        <a href="/2020/07/cayenne-41-final-released/">Cayenne 4.1 Final Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2020-04-20 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Apr 20, 2020</time>
                         <a href="/2020/04/cayenne-42m1-released/">Cayenne 4.2 Milestone 1 Released</a>
                     </li>
@@ -5823,11 +5847,6 @@ NON-TERMINALS
                     <li>
                         <time datetime="2019-10-29 14:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 29, 2019</time>
                         <a href="/2019/10/cayenne-41rc2-released/">Cayenne 4.1 Release Candidate 2 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2019-10-14 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Oct 14, 2019</time>
-                        <a href="/2019/10/cayenne-402-released/">Cayenne 4.0.2 Released</a>
                     </li>
                     
                 </ul>
