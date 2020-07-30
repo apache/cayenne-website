@@ -2465,16 +2465,25 @@ ServerRuntime runtime = ServerRuntime.builder()
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">ObjectSelect&lt;Artist&gt; query = ObjectSelect
+      <pre class="highlight"><code class="language-Java Java" data-lang="Java">List&lt;Artist&gt; artists = ObjectSelect
     .query(Artist.class)
-    // Instructs Cayenne to prefetch one of Artist's relationships.
-    // Equivalent to ".prefetch("paintings", PrefetchTreeNode.DISJOINT_PREFETCH_SEMANTICS)")
-    .prefetch(Artist.PAINTINGS.disjoint());
-
-// query is expecuted as usual, but the resulting Artists will have
-// their paintings "inflated"
-List&lt;Artist&gt; artists = query.select(context);</code></pre> 
+    .prefetch(Artist.PAINTINGS.disjoint()) <i class="conum" data-value="1"></i><b>(1)</b>
+    .select(context); <i class="conum" data-value="2"></i><b>(2)</b></code></pre> 
      </div> 
+    </div> 
+    <div class="colist arabic"> 
+     <table> 
+      <tbody>
+       <tr> 
+        <td><i class="conum" data-value="1"></i><b>1</b></td> 
+        <td>Instructs Cayenne to prefetch one of Artist’s relationships.</td> 
+       </tr> 
+       <tr> 
+        <td><i class="conum" data-value="2"></i><b>2</b></td> 
+        <td>Query is executed as usual, but the resulting Artists will have their paintings "inflated"</td> 
+       </tr> 
+      </tbody>
+     </table> 
     </div> 
     <div class="paragraph"> 
      <p>All types of relationships can be prefetched - to-one, to-many, flattened. A prefetch can span multiple relationships:</p> 
