@@ -92,13 +92,19 @@ echo "Building docs for Cayenne $MAJOR_VERSION ($VERSION)"
 # clone git repo and checkout requested TAG
 git clone https://github.com/apache/cayenne.git "$CAYENNE_TMP_DIR" --branch "$GIT_TAG" --depth 1
 # we will need Maven to build only asciidoc modules
-cd  "$CAYENNE_TMP_DIR/docs/asciidoc/"
+cd  "$CAYENNE_TMP_DIR"
 
 # build it
 echo "Running Maven build... it can take a while..."
-mvn install -Passembly -DskipTests -Dcayenne.version=${VERSION} > /dev/null 2>&1
+mvn package -Passembly -q -DskipTests -Dcayenne.version=${VERSION} -pl !modeler,!modeler/cayenne-modeler,\
+!modeler/cayenne-modeler-generic,!modeler/cayenne-modeler-generic-ext,\
+!modeler/cayenne-modeler-mac,!modeler/cayenne-modeler-mac-ext,\
+!modeler/cayenne-modeler-win,!modeler/cayenne-modeler-win-ext,\
+!modeler/cayenne-wocompat,!assembly,!cayenne-gradle-plugin,!docs/doc\
+ > /dev/null 2>&1
 echo "Maven build complete"
 
+cd "docs/asciidoc/"
 # copy everything from ./docs/asciidoc/**/target/site/** directories
 for d in */ ; do
     # skip asciidoc extension module

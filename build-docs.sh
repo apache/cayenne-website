@@ -96,12 +96,12 @@ cd  "$CAYENNE_TMP_DIR" || exit 3
 
 # build it
 echo "Running Maven build... it can take a while..."
-mvn package -Passembly -q -DskipTests -pl \!modeler,\!modeler/cayenne-modeler,\
-  \!modeler/cayenne-modeler-generic,\!modeler/cayenne-modeler-generic-ext,\
-  \!modeler/cayenne-modeler-mac,\!modeler/cayenne-modeler-mac-ext,\
-  \!modeler/cayenne-modeler-win,\!modeler/cayenne-modeler-win-ext,\
-  \!modeler/cayenne-wecompat,\!assembly \
-  > /dev/null 2>&1
+mvn package -Passembly -q -DskipTests -Dcayenne.version=${VERSION} -pl !modeler,!modeler/cayenne-modeler,\
+!modeler/cayenne-modeler-generic,!modeler/cayenne-modeler-generic-ext,\
+!modeler/cayenne-modeler-mac,!modeler/cayenne-modeler-mac-ext,\
+!modeler/cayenne-modeler-win,!modeler/cayenne-modeler-win-ext,\
+!modeler/cayenne-wocompat,!assembly\
+ > /dev/null 2>&1
 echo "Maven build complete"
 
 # copy JavaDoc
