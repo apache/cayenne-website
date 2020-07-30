@@ -50,14 +50,14 @@ function checkAndCreateDir() {
 function clearDir() {
     if [ -d "$1" ]; then
         echo "Clearing dir: $1"
-        rm -rf "$1/"
+        rm -rf "${1:?}/"
     fi
 }
 
 # no input, so just exit
 if [ -z "$1" ]; then
     echo "Usage: build-docs.sh git-tag [cayenne-version]"
-    exit -1
+    exit 1
 fi
 
 GIT_TAG="$1"
@@ -72,8 +72,8 @@ else
 fi
 
 # change dir to one with this script
-cd "$( dirname "${BASH_SOURCE[0]}" )"
-BASE_DIR=`pwd` # base project dir
+cd "$( dirname "${BASH_SOURCE[0]}" )" || exit 2
+BASE_DIR=$(pwd) # base project dir
 echo "Working dir: $BASE_DIR"
 
 # init and check paths
@@ -92,11 +92,16 @@ echo "Building docs for Cayenne $MAJOR_VERSION ($VERSION)"
 
 # clone git repo and checkout requested TAG
 git clone https://github.com/apache/cayenne.git "$CAYENNE_TMP_DIR" --branch "$GIT_TAG" --depth 1
-cd  "$CAYENNE_TMP_DIR"
+cd  "$CAYENNE_TMP_DIR" || exit 3
 
 # build it
 echo "Running Maven build... it can take a while..."
-mvn install -Passembly -q -DskipTests > /dev/null 2>&1
+mvn package -Passembly -q -DskipTests -pl \!modeler,\!modeler/cayenne-modeler,\
+  \!modeler/cayenne-modeler-generic,\!modeler/cayenne-modeler-generic-ext,\
+  \!modeler/cayenne-modeler-mac,\!modeler/cayenne-modeler-mac-ext,\
+  \!modeler/cayenne-modeler-win,\!modeler/cayenne-modeler-win-ext,\
+  \!modeler/cayenne-wecompat,\!assembly \
+  > /dev/null 2>&1
 echo "Maven build complete"
 
 # copy JavaDoc
@@ -104,7 +109,7 @@ echo "Syncing JavaDoc to \"docs/$MAJOR_VERSION/api/\""
 rsync -a --delete "./docs/doc/target/site/apidocs/doc/api/" "$JAVA_DOC_DIR/api/"
 
 # copy everything from ./docs/asciidoc/**/target/site/** directories
-cd "$CAYENNE_TMP_DIR/docs/asciidoc/"
+cd "$CAYENNE_TMP_DIR/docs/asciidoc/" || exit 4
 for d in */ ; do
     if [ "$d" == "cayenne-asciidoc-extension/" ]; then
         continue
