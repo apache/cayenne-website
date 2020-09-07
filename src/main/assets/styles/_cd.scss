@@ -83,7 +83,8 @@
 		.cd-toc-link {
 			display: inline-block;
 	        padding: .5rem $cd-top-sidebar-padding-r .5rem $cd-top-sidebar-padding-l;
-    		line-height: 1.5;
+			line-height: 1.5;
+			font-size: $small-font-size; 
 
 			&.active {
 				padding-bottom: 0;
@@ -205,6 +206,8 @@
 
 		// DOC
 		.cd-content {
+			font-size: $small-font-size;
+
 			@include media-breakpoint-up(lg) {
 				h1, h2, h3, h4, h5, h6,
 				.h1, .h2, .h3, .h4, .h5, .h6 {
@@ -278,6 +281,8 @@
 			}
 
 			.admonitionblock {
+				margin-bottom: $paragraph-margin-bottom;
+
 				td {
 					padding: $table-cell-padding;
 				}
