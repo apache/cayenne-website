@@ -230,10 +230,14 @@
 			    margin-bottom: 1.8rem;
 			}
 
-			.listingblock .title {
-			    font-weight: 500;
-			    font-size: 80%;
-			    margin-bottom: .5rem;
+			.listingblock {
+				position: relative;
+				
+				.title {
+					font-weight: 500;
+					font-size: 80%;
+					margin-bottom: .5rem;
+				}
 			}
 
 			.image img,
