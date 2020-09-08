@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "dependencies": {
-    "jquery": "3.2.1",
-    "bootstrap": "4.0.0-beta.2",
-    "popper.js": "1.12.9",
-    "highlight.js": "9.12.0",
-    "font-awesome": "4.7.0"
+    "jquery": "3.4.1",
+    "bootstrap": "4.3.1",
+    "popper.js": "1.16.0",
+    "highlight.js": "9.18.1",
+    "font-awesome": "4.7.0",
+    "anchor-js": "4.2.1"
   },
   "devDependencies" : {
     "gulp": "^3.9.1",
@@ -32,6 +33,6 @@
     "merge-stream": "^1.0.1",
     "require-dir": "^0.3.2",
     "rev-del": "^1.0.5",
-    "hugo-bin": "^0.18.0"
+    "hugo-bin": "^0.47.1"
   }
 }

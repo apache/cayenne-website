@@ -46,7 +46,7 @@
 // Bootstrap v4 bet2
 //@import "../node_modules/bootstrap/scss/bootstrap";
 // this is for future, when we understand we can exclude
- @import 'bootstrap-optimized';
+@import 'bootstrap-optimized';
 // Highlight.js
 @import '../node_modules/highlight.js/styles/github.css';
 // INNER PAGE
@@ -78,7 +78,8 @@
 	.mw-50 { max-width: 50% !important; }
 	.mw-75 { max-width: 75% !important; }
 
-	.mw-500px { max-width: 500px !important; }
+	.mw-15px { max-width: 15px !important; }
+	.mw-460px { max-width: 460px !important; }
 	// max height
 	.mh-26px {max-height: 26px;}
 
@@ -116,8 +117,11 @@
 		}
 
 		// size `sm`
-		.breadcrumb-sm * {
-			font-size: $small-font-size;
+		.breadcrumb-sm {
+			.breadcrumb-item,
+			.dropdown-item {
+				font-size: $small-font-size;
+			}
 		}
 
 	// _type.scss
@@ -348,6 +352,10 @@
 		}
 
 		// NAVBAR
+		// .navbar {
+		// 	box-shadow: 0 4px 20px 0px rgba(220, 86, 86, 0.5);
+		// }
+
 		.navbar-brand {
 			margin-right: 3rem;
 		}
@@ -413,20 +421,51 @@
 		}
 
     // TABS
-	.nav-tabs {
-		.nav-link {
-			color: #777;
-			border-width: 0 0 1px;
+		.nav-tabs {
+			.nav-link {
+				color: #777;
+				border-width: 0 0 1px;
+			}
+
+			.nav-link.active,
+			.nav-item.show .nav-link {
+				color: #444;
+				border-width: 0 0 2px;
+				border-color: #dc5656;
+			}
 		}
 
-		.nav-link.active,
-		.nav-item.show .nav-link {
-			color: #444;
-			border-width: 0 0 2px;
-			border-color: #dc5656;
+	// #INTRO
+	#intro {
+
+		img {
+			@include media-breakpoint-up(xl) {
+				max-width: 330px;
+			}
+
+			@media screen and (min-width: map-get($grid-breakpoints, sm)) and (max-width: map-get($grid-breakpoints, xl)) {
+				max-width: 460px;
+				margin-left: -500rem;
+				margin-right: -500rem;
+			}
+			
+			max-width: 100%; 
+		}
+
+		.embed-responsive {
+			// box-shadow: 0 0 13px 0px rgba(0, 0, 0, 0.1), 0 0 0 0.5em rgba(220,86,86,.1);
+			// box-shadow: 0 0 13px 0px rgba(0, 0, 0, 0.1);
+			//box-shadow: 0 0 0px 4px rgba(0, 0, 0, 0.11); // 0 0 5px 4px rgba(0,0,0,.11)
+			// box-shadow: 0 0 0 0.5em rgba(0, 0, 0, 0.1); 
+			box-shadow: 0 0 20px 10px rgba(0,0,0,.11);
+			border-radius: 2px; // .5em;
+			max-width: 560px;
+			
+			@include media-breakpoint-down(xs) {
+				max-width: 460px;
+			}
 		}
 	}
-
 
 	// FOOTER
 		footer {
@@ -437,10 +476,10 @@
 			}
 			
 			.symbol {
-				font-size: 18px;
+				font-size: 1.125rem;
 				margin-left: 1rem;
-				// vertical-align: middle;
-				// display: inline-block;
+				position: relative;
+				top: .0625rem;
 			}
 
 			.fa-lg.fa-long-arrow-right {
@@ -522,8 +561,4 @@
 			td, th {
 				padding: $table-cell-padding-sm;
 			}
-		}
-
-		.mw-20px {
-			max-width: 20px;
 		}

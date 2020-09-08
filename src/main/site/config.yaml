@@ -30,7 +30,8 @@ googleAnalytics: 'UA-7036673-1'
 
 mediaTypes:
   application/rdf:
-    suffix: rdf
+    suffixes:
+      - rdf
 
 outputFormats:
   rdf:
@@ -40,8 +41,12 @@ outputFormats:
 permalinks:
   news: '/:year/:month/:filename/'
 
-# Add link to Jira to the footer menu
 menu:
+  main:
+    - name: Documentation
+      weight: 20
+      url: "/docs/4.1/getting-started-guide/"
+
   footer:
     - name: Bug/Feature Tracker
       weight: 10

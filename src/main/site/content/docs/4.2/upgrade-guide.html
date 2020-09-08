@@ -1,0 +1,74 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Guide to 4.2 Features"
+description: "This guide highlights the new features and changes introduced in Apache Cayenne 4.2"
+cayenneVersion: "4.2"
+docsMenuTitle: "Upgrade Guide"
+weight: 50
+---
+
+
+<div class="sect1"> 
+ <h2 id="java-version"><a class="anchor" href="#java-version"></a>1. Java Version</h2> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>Minimum required JDK version is 1.8 or newer. Cayenne 4.2 is fully tested with Java 1.8 and 11.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="new-features"><a class="anchor" href="#new-features"></a>2. New Features</h2> 
+ <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="subqueries"><a class="anchor" href="#subqueries"></a>2.1. Subqueries</h3> 
+   <div class="paragraph"> 
+    <p>Expressions are now support subqueries.</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Long&gt; subQuery = ObjectSelect
+        .columnQuery(Artist.class, Artist.ARTIST_ID_PK_PROPERTY)
+        .where(...);
+List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
+        .where(Artist.ARTIST_ID_PK_PROPERTY.in(subQuery))
+        .select(context);</code></pre> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="new-property-api"><a class="anchor" href="#new-property-api"></a>2.2. New Property API</h3> 
+   <div class="paragraph"> 
+    <p>Property API are greatly revised. This API allows to use type aware expression factories aka Properties. These properties are normally generated as static constants in model classes, but they can also be created manually by <code>PropertyFactory</code> if needed.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Typical usage in select queries:</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-java java" data-lang="java">Painting painting = //...
+Artist artist = ObjectSelect.query(Artist.class)
+        .where(Artist.PAINTING_ARRAY.contains(painting))
+        .and(Artist.DATE_OF_BIRTH.year().gt(1950))
+        .and(Artist.ARTIST_NAME.lower().like("pablo%"))
+        .selectOne(context);</code></pre> 
+    </div> 
+   </div> 
+  </div> 
+ </div> 
+</div>

@@ -20,8 +20,8 @@ Subscription is required to post messages and participate in discussion, and of 
 
 ## Commercial Support And Consulting
 
-* [ObjectStyle](http://www.objectstyle.com/cayenne-consulting). Cayenne commercial support, consulting services, 
-and training provided by the company employing its original authors and a number of committers.
+* [ObjectStyle](http://www.objectstyle.com/cayenne-consulting) provides Cayenne commercial support, consulting, 
+and training. The company employs Cayenne original authors and a number of committers and PMC members.
 
-_If your company also provides commercial services supporting Apache Cayenne, please drop a note to Cayenne PMC (private at cayenne dot apache dot org), 
-we'll review your request add a note to this page._
+_If your company also provides commercial services supporting Apache Cayenne, please drop a note to Cayenne PMC 
+(private at cayenne dot apache dot org), we'll review your request add a note to this page._

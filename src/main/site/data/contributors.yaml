@@ -131,7 +131,7 @@ contributors:
     active: true
 
   - name: "Alex Kolonitsky"
-    role: "Committer "
+    role: "Committer"
     email: "kolonitsky at apache dot org "
     website: 
     active: true
@@ -148,6 +148,12 @@ contributors:
     website:
     active: true 
     
+  - name: "Arseni Bulatski"
+    role: "Committer"
+    email: "abulatski at apache dot org "
+    website: 
+    active: true
+
 ### Inactive commiters
     
   - name: "Holger Hoffstaette"
@@ -172,4 +178,9 @@ contributors:
     role: 
     email: "eric at centralparksoftware dot com"
     website: "[http://www.centralparksoftware.com/](http://www.centralparksoftware.com/)"
-    active: false     
+    active: false
+
+other:
+  - name: "jianingwang"
+    org: "Tencent's XuanWu Lab"
+    comment: "Found and reported XXE Vulnerability in Cayenne Modeler"

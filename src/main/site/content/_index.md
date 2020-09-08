@@ -1,24 +1,25 @@
 ---
-# content for index page of the site
+# content for index page of the site 
 ---
 <!-- Intro -->
 <section id="intro" class="pb-5">
-    <div class="row align-items-center justify-content-center  mb-3">
-        <div class="col-md-6  text-center">
-            <img class="img-fluid  mb-2" src="img/cayenne_illustr.png" alt="Cayenne Illustration" />
-            <h1 class="display-2  font-weight-normal">
-                ORM
-                <span class="font-weight-xlight">with</span>
-                <span class="font-weight-semibold">character</span>
+    <div class="row align-items-center justify-content-center  mb-4">
+        <div class="col-12 col-sm-10 col-md-9 col-lg-7  text-center"> <!--  text-xl-left -->
+            <h1 class="display-2  font-weight-normal  mt-2 mx-auto mb-1 "> <!-- mb-xl-1l2 -->
+                <span class="font-weight-xlight">Your</span>
+                <span class="font-weight-semibold">ORM</span>
+                superpower
             </h1>
-            <p class="small  font-italic">Apache Cayenne™ is an open source Java ORM (object-to-relational mapping) framework</p>
+            <p class="d-inline-block mw-460px  small  font-italic  mb-0">Apache Cayenne™ is an open source Java object-to-relational mapping framework</p>
+			<div class="embed-responsive mw-560px mt-3 mx-auto  embed-responsive-16by9">
+				<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0H5HIA03xFc?html5=1&controls=1&showinfo=0&fs=1&rel=0" frameborder="0" allowfullscreen></iframe>
+			</div>
         </div>
-        <div class="col-md  d-none">Video</div>
     </div>
 
     <!-- CTA Btn -->        
     <div class="text-center">
-        <a href="/download/" class="btn btn-xlg btn-primary  text-uppercase  round-corners1">Download latest</a>
+        <a href="/download/" class="btn btn-xlg btn-primary  text-uppercase">Download latest</a>
     </div>
 
 </section>
@@ -44,7 +45,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#db-first-flow">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_dbfirst_flow.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_dbfirst_flow.svg" alt="DB First Flow">
 							<span class="align-self-center  d-none d-lg-block">DB-first flow</span>
 						</div>
 					</a>
@@ -52,7 +53,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#transparent-transactions">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_transp_trans.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_transp_trans.svg" alt="Transactions">
 							<span class="align-self-center  d-none d-lg-block">Transparent transactions</span>
 						</div>
 					</a>
@@ -60,7 +61,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#objectcontext">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_object_context.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_object_context.svg" alt="Object Context">
 							<span class="align-self-center  d-none d-lg-block">ObjectContext</span>
 						</div>
 					</a>
@@ -68,7 +69,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#extension-api">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_extensions.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_extensions.svg" alt="Extension API">
 							<span class="align-self-center  d-none d-lg-block">Extension API</span>
 						</div>
 					</a>
@@ -76,7 +77,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#generic-objects">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_generic_objects.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_generic_objects.svg" alt="Generic Objects">
 							<span class="align-self-center  d-none d-lg-block">Generic objects</span>
 						</div>
 					</a>
@@ -84,7 +85,7 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#data-encryption">
 						<div class="media">
-							<img class="align-self-center  mr-lg-3l2" src="img/icon_data_encrypt.svg" alt="Modeler">
+							<img class="align-self-center  mr-lg-3l2" src="img/icon_data_encrypt.svg" alt="Data Encryption">
 							<span class="align-self-center  d-none d-lg-block">Data Encryption</span>
 						</div>
 					</a>

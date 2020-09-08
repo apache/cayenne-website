@@ -26,16 +26,9 @@ but these should probably work for everyone:
 Depending on what you want to do, there are various flavors of the builds
 discussed below. All builds should be executed from the root folder of the source checkout.
 
-Building the framework and installing it to the local repository (the most
-common flavor) :
+The most common flavor is building Cayenne and executing unit and integration tests :
 
-    mvn clean install
-    
-In order to skip the unit tests (to speed up the build process or because
-some tests are failing), add *"-DskipTests"* to any build
-flavor:
-
-    mvn clean install -DskipTests
+    mvn clean verify
 
 For the build to produce a release-like assembly, activate "assembly"
 profile. Additionally activate a profile specific for the target platform
@@ -43,20 +36,20 @@ of a given assembly (otherwise assembly profile won't produce anything).
 
 Source assembly: 
 
-    mvn clean install -Passembly,src
+    mvn clean verify -Passembly,src
 
 Cross-platform assembly:
 
-    mvn clean install -Passembly,generic
+    mvn clean verify -Passembly,generic
 
 Windows assembly:
 
-    mvn clean install -Passembly,windows
+    mvn clean verify -Passembly,windows
 
 Mac OS X assembly:
 
-    mvn clean install -Passembly,mac
+    mvn clean verify -Passembly,mac
 
 Multiple assemblies built at once:
 
-    mvn clean install -Passembly,src,generic,mac
+    mvn clean verify -Passembly,src,generic,mac

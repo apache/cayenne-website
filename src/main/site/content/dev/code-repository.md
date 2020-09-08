@@ -9,15 +9,22 @@ menu:
 url: /dev/code-repository.html
 ---
 
-## Git Repository
+## GitHub Repository
 
-Cayenne uses Git for source code version control. "Master" writable repository is located here:    
-[https://git-wip-us.apache.org/repos/asf/cayenne.git](https://git-wip-us.apache.org/repos/asf/cayenne.git)
-
-It can be cloned by anyone, and that's where committers would ultimately push the code. We also have a GitHub read-only copy:  
+A read-write mirror of Cayenne sources is published on GitHub:    
 [https://github.com/apache/cayenne](https://github.com/apache/cayenne) 
 
-Feel free to fork and/or star Cayenne there.
+Feel free to clone, fork, star Cayenne there. And of course submit pull requests.
+
+{{% gap %}}
+
+
+## Master Git Repository
+
+"Master" writable repository is located here:    
+[https://gitbox.apache.org/repos/asf/cayenne.git](https://gitbox.apache.org/repos/asf/cayenne.git)
+
+It is publicly readable, but only committers have write access.
 
 {{% gap %}}
 

@@ -31,6 +31,7 @@ org.apache.cayenne.dba.frontbase
 org.apache.cayenne.dba.h2
 org.apache.cayenne.dba.hsqldb
 org.apache.cayenne.dba.ingres
+org.apache.cayenne.dba.mariadb
 org.apache.cayenne.dba.mysql
 org.apache.cayenne.dba.openbase
 org.apache.cayenne.dba.oracle

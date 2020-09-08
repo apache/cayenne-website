@@ -28,12 +28,101 @@ weight: 50
  <h2 id="java-version"><a class="anchor" href="#java-version"></a>1. Java Version</h2> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>Minimum required JDK version is 1.8 or newer. Cayenne 4.1 is fully tested with Java 1.8 and 9.</p> 
+   <p>Minimum required JDK version is 1.8 or newer. Cayenne 4.1 is fully tested with Java 1.8 and 11.</p> 
   </div> 
  </div> 
 </div> 
 <div class="sect1"> 
  <h2 id="new-features"><a class="anchor" href="#new-features"></a>2. New Features</h2> 
  <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="cayenne-core-is-dependency-free"><a class="anchor" href="#cayenne-core-is-dependency-free"></a>2.1. Cayenne Core is Dependency-Free</h3> 
+   <div class="paragraph"> 
+    <p>Cayenne now depends only on <code>slf4j-api</code> library. We removed <code>velocity</code>, <code>commons-lang</code> and <code>commons-collections</code> dependencies from the Cayenne core. Velocity templates replaced with a simplified (and also much faster) parser for the parts of the Velocity syntax essential for Cayenne.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>This should be transparent in almost all case. See <code>UPGRADE.txt</code> for details.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="field-based-data-objects"><a class="anchor" href="#field-based-data-objects"></a>2.2. Field-Based Data Objects</h3> 
+   <div class="paragraph"> 
+    <p>Cayenne <strong>4.1</strong> generates field-based DataObjects by default. And it is HUGE for the app performance. The new objects are much faster to read and write and significantly reduce the overall app memory footprint and the corresponding GC pauses.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The new objects are mostly backwards-compatible with our “classic” map-based objects from the application standpoint. The main source of incompatibility is support for “dynamic” properties (i.e. persistent properties not known at compile time).</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Field-based DataObjects are generated via new class templates. So to take advantage of this feature you should simply regenerate you model classes.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="extensible-project-xml-structure"><a class="anchor" href="#extensible-project-xml-structure"></a>2.3. Extensible Project XML Structure</h3> 
+   <div class="paragraph"> 
+    <p>Cayenne mapping project structure was modularized, allowing embedding of extensions with their own XML schemas. This enables support for comments for entities, attributes and relationships. Also Cayenne 4.1 have extensions for cdbimport and cgen, making OR modeling workflow experience so much smoother.</p> 
+   </div> 
+   <div class="imageblock" style="text-align: center"> 
+    <div class="content"> 
+     <img src="images/modeler-dbimport.png" alt="modeler dbimport"> 
+    </div> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="api-changes"><a class="anchor" href="#api-changes"></a>3. API Changes</h2> 
+ <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="transaction-propagation-logic-and-isolation-level"><a class="anchor" href="#transaction-propagation-logic-and-isolation-level"></a>3.1. Transaction propagation logic and isolation level</h3> 
+   <div class="paragraph"> 
+    <p>New API allows to fully control transaction behavior where it’s needed.</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-java java" data-lang="java">TransactionManager manager = runtime.getInjector().getInstance(TransactionManager.class);
+    TransactionDescriptor descriptor = new TransactionDescriptor(
+            Connection.TRANSACTION_SERIALIZABLE, // set transaction isolation to SERIALIZABLE
+            TransactionPropagation.REQUIRES_NEW  // require new transaction for every operation
+    );
+    manager.performInTransaction(() -&gt; {
+        // perform some DB operations...
+        return null;
+    }, descriptor);</code></pre> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="injectable-pkgenerator"><a class="anchor" href="#injectable-pkgenerator"></a>3.2. Injectable PkGenerator</h3> 
+   <div class="paragraph"> 
+    <p>All <code>PkGenerators</code> are now managed by DI so you can simply inject your own implementation.</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-java java" data-lang="java">ServerModule.contributePkGenerators(binder)
+                .put(MySQLAdapter.class.getName(), CustomSQLPkGenerator.class);</code></pre> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="datachannelfilter-replaced-with-datachannelqueryfilter-and-datachannelsyncfilter"><a class="anchor" href="#datachannelfilter-replaced-with-datachannelqueryfilter-and-datachannelsyncfilter"></a>3.3. DataChannelFilter replaced with DataChannelQueryFilter and DataChannelSyncFilter</h3> 
+   <div class="paragraph"> 
+    <p><code>DataChannelFilter</code> is deprecated. Instead two separate filters are introduced.</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="highlight"><code class="language-java java" data-lang="java">ServerModule.contributeDomainQueryFilters(binder).add((context, query, chain) -&gt; {
+    // do something with query
+    // ...
+    return chain.onQuery(context, query);
+});
+
+ServerModule.contributeDomainSyncFilters(binder).add((context, changes, syncType, chain) -&gt; {
+    // do something with changes
+    // ...
+    return chain.onSync(context, changes, syncType);
+});</code></pre> 
+    </div> 
+   </div> 
+  </div> 
  </div> 
 </div>

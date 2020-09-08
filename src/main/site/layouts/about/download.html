@@ -16,7 +16,13 @@
         <h2>{{ .description }} - {{ $revision }} ({{ .type }})</h2>
         <p>
             Requires <strong>Java {{ .jdk }}</strong> or above.
-            You can find full release notes <a href="https://raw.githubusercontent.com/apache/cayenne/{{ .latestRevision }}/docs/doc/src/main/resources/RELEASE-NOTES.txt">here</a>.
+            You can find full release notes
+            {{ if .newRepoLayout -}}
+            <a href="https://github.com/apache/cayenne/blob/{{ .latestRevision }}/RELEASE-NOTES.txt">here</a>
+            {{- else -}}
+            <a href="https://github.com/apache/cayenne/blob/{{ .latestRevision }}/docs/doc/src/main/resources/RELEASE-NOTES.txt">here</a>
+            {{- end -}}
+            .
         </p>
         <ul class="nav nav-tabs" id="tab_{{ $urlFriendlyRevision }}" role="tablist">
             <li class="nav-item">
@@ -34,10 +40,10 @@
                 <ul class="list-unstyled">
                     {{- range $.Site.Data.download.extensions -}}
                     <li>
-                        <a href="http://www.apache.org/dyn/closer.lua/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $revision }}</a>
+                        <a href="https://www.apache.org/dyn/closer.cgi/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $revision }}</a>
                         {{ .description }}
-                        (<a href="http://www.apache.org/dist/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
-                        <a href="http://www.apache.org/dist/cayenne/{{ $link }}{{ .ext }}.md5">md5</a>)
+                        (<a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.sha512">sha512</a>)
                     </li>
                     {{- end -}}
                 </ul>

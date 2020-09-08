@@ -4,20 +4,17 @@ weight: 10
 url: /dev/how_development_happens.html
 ---
 
-There are several levels of access to the Cayenne project and source.
+There are several levels of access to the Cayenne project and source:
 
-1. Documentation only access. Access to the Confluence system for creating
-documentation means that these users are able to edit and create content
-which then available on this web site and bundled with the download.
-1. Committers have direct access to Git and are able to make changes to the
-entire source repository.
-1. Project Management Committee (PMC) members have further responsibility
+1. Anyone on the internet can clone or fork the code from Git (and of course send 
+back pull requests).
+1. _Committers_ have write access to Git.
+1. _Project Management Committee (PMC) members_ have further responsibility
 for the project as a whole and for ensuring that releases meet all the
 appropriate standards.
-1. PMC Chair. This person has a leadership role in the project and has a
-special responsibility to the Apache board.  
-For further details consult the official [Apache handbook](http://www.apache.org/foundation/how-it-works.html#roles)
-.
+1. _PMC Chair_. This person has a has a special responsibility to the Apache board,
+but otherwise is an equal member of the PMC. 
+For further details consult the official [Apache handbook](http://www.apache.org/foundation/how-it-works.html#roles).
 
 In addition to the general Apache responsibilities, this is what is
 expected of everyone with privileges within the Cayenne project.

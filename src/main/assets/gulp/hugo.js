@@ -33,7 +33,7 @@ function runHugo(publish) {
         cmd += ' --baseUrl="' + argv.prod_host + '" ';
     } else {
         cmd += ' --baseUrl="http://' + argv.host + ':' + argv.port + '/" '
-            + ' --buildDrafts=true --verbose=true';
+            + ' --buildDrafts=true --verbose=true --buildFuture';
     }
 
     console.log("Running " + cmd);

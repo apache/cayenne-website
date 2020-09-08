@@ -39,19 +39,19 @@ menu:
     <p>This chapter lists the recommended software used in the tutorial.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="java"><a class="anchor" href="#java"></a>Java</h4> 
+    <h4 id="java"><a class="anchor" href="#java"></a>1.1.1. Java</h4> 
     <div class="paragraph"> 
-     <p>Cayenne 4.0 requires JDK 1.7 or newer.</p> 
+     <p>Cayenne 4.1 requires JDK 1.8 or newer.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="intellij-idea-ide"><a class="anchor" href="#intellij-idea-ide"></a>IntelliJ IDEA IDE</h4> 
+    <h4 id="intellij-idea-ide"><a class="anchor" href="#intellij-idea-ide"></a>1.1.2. IntelliJ IDEA IDE</h4> 
     <div class="paragraph"> 
      <p>Download and install the free IntelliJ IDEA Community Edition IDE. This tutorial uses version 2017.1, but any recent IntelliJ IDEA version and edition will do.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="maven"><a class="anchor" href="#maven"></a>Maven</h4> 
+    <h4 id="maven"><a class="anchor" href="#maven"></a>1.1.3. Maven</h4> 
     <div class="paragraph"> 
      <p>Two Maven plugins are used:</p> 
     </div> 
@@ -63,7 +63,7 @@ menu:
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="mysql"><a class="anchor" href="#mysql"></a>MySQL</h4> 
+    <h4 id="mysql"><a class="anchor" href="#mysql"></a>1.1.4. MySQL</h4> 
     <div class="paragraph"> 
      <p>MySQL database server is used for demonstrating Cayenne’s ability to read the DB schema and to build/update the Cayenne model from it.</p> 
     </div> 
@@ -73,11 +73,11 @@ menu:
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE SCHEMA IF NOT EXISTS cayenne_demo; USE cayenne_demo;
-CREATE TABLE ARTIST (DATE_OF_BIRTH DATE NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-CREATE TABLE GALLERY (ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-CREATE TABLE PAINTING (ARTIST_ID INT NULL, GALLERY_ID INT NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-ALTER TABLE PAINTING ADD FOREIGN KEY (ARTIST_ID) REFERENCES ARTIST (ID) ON DELETE CASCADE;
-ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DELETE CASCADE;</code></pre> 
+CREATE TABLE artist (DATE_OF_BIRTH DATE NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+CREATE TABLE gallery (ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+CREATE TABLE painting (ARTIST_ID INT NULL, GALLERY_ID INT NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+ALTER TABLE painting ADD FOREIGN KEY (ARTIST_ID) REFERENCES artist (ID) ON DELETE CASCADE;
+ALTER TABLE painting ADD FOREIGN KEY (GALLERY_ID) REFERENCES gallery (ID) ON DELETE CASCADE;</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -96,26 +96,28 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     <p>The goal of this chapter is to create a new Java project in IntelliJ IDEA and to setup Maven Cayenne plugin</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="create-a-new-project-in-intellij-idea"><a class="anchor" href="#create-a-new-project-in-intellij-idea"></a>Create a new Project in IntelliJ IDEA</h4> 
+    <h4 id="create-a-new-project-in-intellij-idea"><a class="anchor" href="#create-a-new-project-in-intellij-idea"></a>1.2.1. Create a new Project in IntelliJ IDEA</h4> 
     <div class="paragraph"> 
-     <p>In IntelliJ IDEA select <span class="menuseq"><b class="menu">File</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="submenu">New</b>&nbsp;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Project…​</b></span> and then select "Maven" and click "Next". In the dialog shown on the screenshot below, fill the "Group Id" and "Artifact Id" fields and click "Next".</p> 
+     <p>In IntelliJ IDEA select <code>File &gt; New &gt; Project…​</code> and then select "Maven" and click "Next". In the dialog shown on the screenshot below, fill the "Group Id" and "Artifact Id" fields and click "Next".</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-idea-project.png" alt="tutorial idea project"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-idea-project.png" alt="tutorial idea project"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>On next dialog screen you can customize directory for your project and click "Finish". Now you should have a new empty project.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="plugin-setup"><a class="anchor" href="#plugin-setup"></a>Plugin setup</h4> 
+    <h4 id="plugin-setup"><a class="anchor" href="#plugin-setup"></a>1.2.2. Plugin setup</h4> 
     <div class="paragraph"> 
      <p>Next step is setting up Cayenne plugin in <code>pom.xml</code> file. For the convenience let’s define Cayenne version that we will use across project file:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;properties&gt;
-    &lt;cayenne.version&gt;4.1.M2-SNAPSHOT&lt;/cayenne.version&gt;
+    &lt;cayenne.version&gt;4.1&lt;/cayenne.version&gt;
 &lt;/properties&gt;</code></pre> 
      </div> 
     </div> 
@@ -148,7 +150,7 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     <p>Now we have everything ready and can proceed to importing Cayenne model from our Mysql database</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="configuring-plugin"><a class="anchor" href="#configuring-plugin"></a>Configuring plugin</h4> 
+    <h4 id="configuring-plugin"><a class="anchor" href="#configuring-plugin"></a>2.1.1. Configuring plugin</h4> 
     <div class="paragraph"> 
      <p>To let Cayenne plugin do its job we must tell it what to import and where it should get data. So let’s begin, here is sample settings for the data source:</p> 
     </div> 
@@ -191,7 +193,9 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;configuration&gt;
     ...
     &lt;/dataSource&gt;
-    &lt;map&gt;${project.basedir}/src/main/resources/datamap.map.xml&lt;/map&gt;</code></pre> 
+    &lt;cayenneProject&gt;${project.basedir}/src/main/resources/cayenne/cayenne-project.xml&lt;/cayenneProject&gt;
+    &lt;map&gt;${project.basedir}/src/main/resources/datamap.map.xml&lt;/map&gt;
+    ...</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -209,7 +213,7 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="running-plugin"><a class="anchor" href="#running-plugin"></a>Running plugin</h4> 
+    <h4 id="running-plugin"><a class="anchor" href="#running-plugin"></a>2.1.2. Running plugin</h4> 
     <div class="paragraph"> 
      <p>Finally we can run db import, it is as easy as just running this command in terminal:</p> 
     </div> 
@@ -226,55 +230,57 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
       <pre>...
 [INFO] +++ Connecting: SUCCESS.
 [INFO] Detected and installed adapter: org.apache.cayenne.dba.mysql.MySQLAdapter
-[INFO]   Table: cayenne_demo.ARTIST
-[INFO]   Table: cayenne_demo.GALLERY
-[INFO]   Table: cayenne_demo.PAINTING
-[INFO]     Db Relationship : toOne  (PAINTING.GALLERY_ID, GALLERY.ID)
-[INFO]     Db Relationship : toMany (GALLERY.ID, PAINTING.GALLERY_ID)
-[INFO]     Db Relationship : toOne  (PAINTING.ARTIST_ID, ARTIST.ID)
-[INFO]     Db Relationship : toMany (ARTIST.ID, PAINTING.ARTIST_ID)
+[INFO]   Table: cayenne_demo.artist
+[INFO]   Table: cayenne_demo.gallery
+[INFO]   Table: cayenne_demo.painting
+[INFO]     Db Relationship : toOne  (painting.GALLERY_ID, gallery.ID)
+[INFO]     Db Relationship : toMany (gallery.ID, painting.GALLERY_ID)
+[INFO]     Db Relationship : toOne  (painting.ARTIST_ID, artist.ID)
+[INFO]     Db Relationship : toMany (artist.ID, painting.ARTIST_ID)
 [INFO]
 [INFO] Map file does not exist. Loaded db model will be saved into '~/work/cayenne/db-first-tutorial/src/main/resources/datamap.map.xml'
 [INFO]
 [INFO] Detected changes:
-[INFO]     Create Table         ARTIST
-[INFO]     Create Table         PAINTING
-[INFO]     Create Table         GALLERY
+[INFO]     Create Table         artist
+[INFO]     Create Table         painting
+[INFO]     Create Table         gallery
 [INFO]
-[WARNING] Can't find ObjEntity for PAINTING
-[WARNING] Db Relationship (Db Relationship : toMany (ARTIST.ID, PAINTING.ARTIST_ID)) will have GUESSED Obj Relationship reflection.
-[WARNING] Can't find ObjEntity for GALLERY
-[WARNING] Db Relationship (Db Relationship : toOne  (PAINTING.GALLERY_ID, GALLERY.ID)) will have GUESSED Obj Relationship reflection.
+[WARNING] Can't find ObjEntity for painting
+[WARNING] Db Relationship (Db Relationship : toMany (artist.ID, painting.ARTIST_ID)) will have GUESSED Obj Relationship reflection.
+[WARNING] Can't find ObjEntity for gallery
+[WARNING] Db Relationship (Db Relationship : toOne  (painting.GALLERY_ID, gallery.ID)) will have GUESSED Obj Relationship reflection.
 [INFO] Migration Complete Successfully.</pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
      <p>You can open created <code>datamap.map.xml</code> file and check it’s content in IDEA:</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-new-datamap.png" alt="tutorial new datamap"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-new-datamap.png" alt="tutorial new datamap"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Great! We now have Cayenne DataMap file that describe model from our database.</p> 
+     <p>Great! We now have Cayenne DataMap file that describe model from our database and cayenne-project.xml file.</p> 
     </div> 
     <div class="admonitionblock note"> 
      <table> 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> If you have some problems with configuration you can always delete <code>datamap.map.xml</code> file and try again. === Creating project </td> 
+        <td class="content"> If you have some problems with configuration you can always delete <code>datamap.map.xml</code> file and try again. </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
-    <div class="paragraph"> 
-     <p>Now we also need to create project file, currently this should be done manually via Cayenne Modeler.</p> 
-    </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="setup-modeler-maven-plugin"><a class="anchor" href="#setup-modeler-maven-plugin"></a>Setup Modeler Maven plugin</h4> 
+    <h4 id="setup-modeler-maven-plugin"><a class="anchor" href="#setup-modeler-maven-plugin"></a>2.1.3. Setup Modeler Maven plugin</h4> 
     <div class="paragraph"> 
-     <p>To launch Modeler we’ll use <code>cayenne-modeler-maven-plugin</code>. To use it just include it in <code>pom.xml</code> like we did with <code>cayenne-maven-plugin</code>:</p> 
+     <p>Cayenne Modeler can be helpful in case you want to make some customizations to your model, though it’s usage optional.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>To launch Modeler we’ll use <code>cayenne-modeler-maven-plugin</code>. Just include it in <code>pom.xml</code> like we did with <code>cayenne-maven-plugin</code> and tell where your project is:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -282,36 +288,18 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
     &lt;version&gt;${cayenne.version}&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;modelFile&gt;${project.basedir}/src/main/resources/cayenne-project.xml&lt;/modelFile&gt;
+    &lt;/configuration&gt;
 &lt;/plugin&gt;</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>To launch it simple use console:</p> 
+     <p>To launch it simply run:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
       <pre>$ mvn cayenne-modeler:run</pre> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="create-project"><a class="anchor" href="#create-project"></a>Create project</h4> 
-    <div class="paragraph"> 
-     <p>In Modeler start new project and select <code>File</code> &gt; <code>Import DataMap</code>. In File Select dialog select created <code>datamap.map.xml</code> file and click <code>Select DataMap</code>. Now all we need is to save project, click <code>Save</code> and select same folder where <code>datamap.map.xml</code> file is (it should be selected by default). That’s all, you should see now <code>cayenne-project.xml</code> file in IDEA:</p> 
-    </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-cayenne-project.png" alt="tutorial cayenne project"></span></p> 
-    </div> 
-    <div class="paragraph"> 
-     <p>To use newly created project in Modeler later let’s configure plugin to open it automatically:</p> 
-    </div> 
-    <div class="listingblock"> 
-     <div class="content"> 
-      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
-    ...
-    &lt;configuration&gt;
-        &lt;modelFile&gt;${project.basedir}/src/main/resources/cayenne-project.xml&lt;/modelFile&gt;
-    &lt;/configuration&gt;</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -327,20 +315,20 @@ ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID) ON DEL
     <p>We now have everything we need, let’s try some more features of plugin.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="update-ddl"><a class="anchor" href="#update-ddl"></a>Update DDL</h4> 
+    <h4 id="update-ddl"><a class="anchor" href="#update-ddl"></a>3.1.1. Update DDL</h4> 
     <div class="paragraph"> 
      <p>To show next feature let’s imagine that over some time our database schema has evolved and we need to synchronize it with our model, no problem we can simply run <code>cdbimport</code> again and all changes will be loaded to model. We use following SQL script to alter our demo database:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.PAINTING_INFO (INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (PAINTING_ID)) ENGINE=InnoDB;
-ALTER TABLE cayenne_demo.GALLERY ADD COLUMN FOUNDED_DATE DATE;
-ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES cayenne_demo.PAINTING (ID);</code></pre> 
+      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.painting_info (INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (PAINTING_ID)) ENGINE=InnoDB;
+ALTER TABLE cayenne_demo.gallery ADD COLUMN FOUNDED_DATE DATE;
+ALTER TABLE cayenne_demo.painting_info ADD FOREIGN KEY (PAINTING_ID) REFERENCES cayenne_demo.painting (ID);</code></pre> 
      </div> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="run-cdbimport"><a class="anchor" href="#run-cdbimport"></a>Run cdbimport</h4> 
+    <h4 id="run-cdbimport"><a class="anchor" href="#run-cdbimport"></a>3.1.2. Run cdbimport</h4> 
     <div class="paragraph"> 
      <p>Now we can simply run again</p> 
     </div> 
@@ -355,21 +343,21 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
     <div class="listingblock"> 
      <div class="content"> 
       <pre>...
-[INFO]   Table: cayenne_demo.ARTIST
-[INFO]   Table: cayenne_demo.GALLERY
-[INFO]   Table: cayenne_demo.PAINTING
-[INFO]   Table: cayenne_demo.PAINTING_INFO
-[INFO]     Db Relationship : toOne  (PAINTING_INFO.PAINTING_ID, PAINTING.ID)
-[INFO]     Db Relationship : toOne  (PAINTING.ID, PAINTING_INFO.PAINTING_ID)
-[INFO]     Db Relationship : toOne  (PAINTING.GALLERY_ID, GALLERY.ID)
-[INFO]     Db Relationship : toMany (GALLERY.ID, PAINTING.GALLERY_ID)
-[INFO]     Db Relationship : toOne  (PAINTING.ARTIST_ID, ARTIST.ID)
-[INFO]     Db Relationship : toMany (ARTIST.ID, PAINTING.ARTIST_ID)
+[INFO]   Table: cayenne_demo.artist
+[INFO]   Table: cayenne_demo.gallery
+[INFO]   Table: cayenne_demo.painting
+[INFO]   Table: cayenne_demo.painting_info
+[INFO]     Db Relationship : toOne  (painting_info.PAINTING_ID, painting.ID)
+[INFO]     Db Relationship : toOne  (painting.ID, painting_info.PAINTING_ID)
+[INFO]     Db Relationship : toOne  (painting.GALLERY_ID, gallery.ID)
+[INFO]     Db Relationship : toMany (gallery.ID, painting.GALLERY_ID)
+[INFO]     Db Relationship : toOne  (painting.ARTIST_ID, artist.ID)
+[INFO]     Db Relationship : toMany (artist.ID, painting.ARTIST_ID)
 [INFO]
 [INFO] Detected changes:
-[INFO]     Create Table         PAINTING_INFO
-[INFO]     Add Column           GALLERY.FOUNDED_DATE
-[INFO]     Add Relationship     paintingInfo PAINTING-&gt;PAINTING_INFO.PAINTING_ID
+[INFO]     Create Table         painting_info
+[INFO]     Add Column           gallery.FOUNDED_DATE
+[INFO]     Add Relationship     paintingInfo painting-&gt;painting_info.PAINTING_ID
 [INFO]
 [INFO] Migration Complete Successfully.</pre> 
      </div> 
@@ -382,20 +370,24 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
       <pre>$ mvn cayenne-modeler:run</pre> 
      </div> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-update-model.png" alt="tutorial update model"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-update-model.png" alt="tutorial update model"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>Great! New table and ObjEntity are in place, as well as a new field.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="customizing-model"><a class="anchor" href="#customizing-model"></a>Customizing Model</h4> 
+    <h4 id="customizing-model"><a class="anchor" href="#customizing-model"></a>3.1.3. Customizing Model</h4> 
     <div class="paragraph"> 
      <p>There is often a need to customize model to better fit it to your application requirements, such customization can be simple removal of toMany part of a relationship between two objects. Let’s do it, in a Modeler just select and remove relationship <code>paintings</code> in Artist object:</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/tutorial-drop-relationship.png" alt="tutorial drop relationship"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/tutorial-drop-relationship.png" alt="tutorial drop relationship"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>Now if you run</p> 
@@ -419,37 +411,40 @@ ALTER TABLE cayenne_demo.PAINTING_INFO ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> <code>cdbimport</code> will skip only modifications in Object layer (e.g. ObjEntities, ObjAttributes and ObjRelationships), if you modify Db layer your changes will be overridden by next run of <code>cdbimport</code>. === Advanced filtering </td> 
+        <td class="content"> <code>cdbimport</code> will skip only modifications in Object layer (e.g. ObjEntities, ObjAttributes and ObjRelationships), if you modify Db layer your changes will be overridden by next run of <code>cdbimport</code>. </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
-    <div class="paragraph"> 
-     <p>Final part of our tutorial is about fine-tuning what you load from DB into your model.</p> 
-    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="advanced-filtering"><a class="anchor" href="#advanced-filtering"></a>3.2. Advanced filtering</h3> 
+   <div class="paragraph"> 
+    <p>Final part of our tutorial is about fine-tuning what you load from DB into your model.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="update-schema"><a class="anchor" href="#update-schema"></a>Update schema</h4> 
+    <h4 id="update-schema"><a class="anchor" href="#update-schema"></a>3.2.1. Update schema</h4> 
     <div class="paragraph"> 
      <p>Let’s add some information to our database, that we don’t need in our model:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.LEGACY_PAINTING_INFO (ID INT NOT NULL AUTO_INCREMENT, INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
-ALTER TABLE cayenne_demo.ARTIST ADD COLUMN __service_column INT;
-ALTER TABLE cayenne_demo.GALLERY ADD COLUMN __service_column INT;
-ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre> 
+      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE TABLE cayenne_demo.legacy_painting_info (ID INT NOT NULL AUTO_INCREMENT, INFO VARCHAR(255) NULL, PAINTING_ID INT NOT NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
+ALTER TABLE cayenne_demo.artist ADD COLUMN __service_column INT;
+ALTER TABLE cayenne_demo.gallery ADD COLUMN __service_column INT;
+ALTER TABLE cayenne_demo.painting ADD COLUMN __service_column INT;</code></pre> 
      </div> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="configure-filtering"><a class="anchor" href="#configure-filtering"></a>Configure filtering</h4> 
+    <h4 id="configure-filtering"><a class="anchor" href="#configure-filtering"></a>3.2.2. Configure filtering</h4> 
     <div class="paragraph"> 
      <p>Now we need to tell <code>cdbimport</code> what we don’t need in our model, for that we’ll just add following into <code>&lt;configuration&gt;</code> section:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;excludeTable&gt;LEGACY_PAINTING_INFO&lt;/excludeTable&gt;
+      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;excludeTable&gt;legacy_painting_info&lt;/excludeTable&gt;
 &lt;excludeColumn&gt;__service_column&lt;/excludeColumn&gt;</code></pre> 
      </div> 
     </div> 
@@ -508,8 +503,10 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
    <div class="paragraph"> 
     <p>In IDEA you should be able to see these newly generated classes:</p> 
    </div> 
-   <div class="paragraph"> 
-    <p><span class="image"><img src="images/tutorial-java-classes.png" alt="tutorial java classes"></span></p> 
+   <div class="imageblock" style="text-align: center"> 
+    <div class="content"> 
+     <img src="images/tutorial-java-classes.png" alt="tutorial java classes"> 
+    </div> 
    </div> 
    <div class="paragraph"> 
     <p>Note that Cayenne code is unrecognized, that’s because we need to include Cayenne as dependency, let’s do this in <code>pom.xml</code> file:</p> 
@@ -524,23 +521,8 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
             &lt;artifactId&gt;cayenne-server&lt;/artifactId&gt;
             &lt;version&gt;${cayenne.version}&lt;/version&gt;
         &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-            &lt;artifactId&gt;cayenne-java8&lt;/artifactId&gt;
-            &lt;version&gt;${cayenne.version}&lt;/version&gt;
-        &lt;/dependency&gt;
     &lt;/dependencies&gt;</code></pre> 
     </div> 
-   </div> 
-   <div class="admonitionblock note"> 
-    <table> 
-     <tbody>
-      <tr> 
-       <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-       <td class="content"> <code>cayenne-java8</code> module required to support Java 8 date/time types. </td> 
-      </tr> 
-     </tbody>
-    </table> 
    </div> 
    <div class="paragraph"> 
     <p>Additionally we need to tell <code>Maven compiler plugin</code> that our code uses Java 8:</p> 
@@ -575,7 +557,7 @@ ALTER TABLE cayenne_demo.PAINTING ADD COLUMN __service_column INT;</code></pre>
     <p>In this section we’ll write a simple main class to run our application, and get a brief introduction to Cayenne <code>ObjectContext</code>.</p> 
    </div> 
    <div class="sect3"> 
-    <h4 id="creating-the-main-class"><a class="anchor" href="#creating-the-main-class"></a>Creating the Main Class</h4> 
+    <h4 id="creating-the-main-class"><a class="anchor" href="#creating-the-main-class"></a>4.2.1. Creating the Main Class</h4> 
     <div class="ulist"> 
      <ul> 
       <li> <p>In IDEA create a new class called <code>Main</code> in the <code>org.apache.cayenne.tutorial</code> package.</p> </li> 
@@ -631,7 +613,7 @@ context.commitChanges();</code></pre>
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="running-application"><a class="anchor" href="#running-application"></a>Running Application</h4> 
+    <h4 id="running-application"><a class="anchor" href="#running-application"></a>4.2.2. Running Application</h4> 
     <div class="paragraph"> 
      <p>Let’s check what happens when you run the application. But before we do that we need to add another dependencies to the <code>pom.xml</code> - MySQL Jdbc driver and simple logger. The following piece of XML needs to be added to the <code>&lt;dependencies&gt;…​&lt;/dependencies&gt;</code> section, where we already have Cayenne jars:</p> 
     </div> 
@@ -662,8 +644,10 @@ context.commitChanges();</code></pre>
     <div class="paragraph"> 
      <p>Now we are ready to run. Right click the "Main" class in IDEA and select "Run 'Main.main()'".</p> 
     </div> 
-    <div class="paragraph"> 
-     <p><span class="image"><img src="images/idea-file-run-menu.png" alt="idea file run menu"></span></p> 
+    <div class="imageblock" style="text-align: center"> 
+     <div class="content"> 
+      <img src="images/idea-file-run-menu.png" alt="idea file run menu"> 
+     </div> 
     </div> 
     <div class="paragraph"> 
      <p>In the console you’ll see output similar to this, indicating that Cayenne stack has been started:</p> 
@@ -675,7 +659,7 @@ context.commitChanges();</code></pre>
 ...
 [main] INFO org.apache.cayenne.datasource.DriverDataSource - +++ Connecting: SUCCESS.
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - --- transaction started.
-[main] INFO org.apache.cayenne.log.JdbcEventLogger - INSERT INTO cayenne_demo.ARTIST (DATE_OF_BIRTH, NAME) VALUES (?, ?)
+[main] INFO org.apache.cayenne.log.JdbcEventLogger - INSERT INTO cayenne_demo.artist (DATE_OF_BIRTH, NAME) VALUES (?, ?)
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - [bind: 1-&gt;DATE_OF_BIRTH:NULL, 2-&gt;NAME:'Picasso']
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - Generated PK: ARTIST.ID = 2
 [main] INFO org.apache.cayenne.log.JdbcEventLogger - === updated 1 row.
@@ -687,7 +671,7 @@ context.commitChanges();</code></pre>
  </div> 
 </div> 
 <div class="sect1"> 
- <h2 id="what-s-next"><a class="anchor" href="#what-s-next"></a>5. What’s next</h2> 
+ <h2 id="whats-next"><a class="anchor" href="#whats-next"></a>5. What’s next</h2> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
    <p>That’s all for this tutorial! Now you know how to setup and use <code>cayenne-maven-plugin</code>.</p> 

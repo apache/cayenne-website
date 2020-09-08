@@ -27,13 +27,18 @@ More info can be found at [http://www.apache.org/dev/release-signing.html](http:
 
 ## Preparing Sources
 
-* Edit UPGRADE-NOTES.txt if there is anything to add there.
+* Edit `UPGRADE-NOTES.txt` if there is anything to add there.
+* Update `RELEASE-NOTES.txt` with actual release name and current date as a release date.
 * Check Sources Compliance with [RAT](http://creadur.apache.org/rat/). To run RAT,
 download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne 
 source. Then read the report and fix any issues.
 
         cd cayenne
-        ./rat.sh ~/Desktop/apache-rat-0.9/apache-rat-0.9.jar  > report.txt
+        ./rat.sh ~/Desktop/apache-rat-0.14-SNAPSHOT.jar  > report.txt
+        
+    As an alternative you could use Apache RAT maven plugin already configured in the Cayenne:
+        
+        mvn apache-rat:check
 
 {{% gap %}}
     
@@ -92,11 +97,11 @@ procedure not included in the Ant or Maven script. Here is how it might
 work ("-u" option can be omitted if you have only one GPG key):
 
         gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
-        gpg --print-md MD5 cayenne-X.X.tar.gz > cayenne-X.X.tar.gz.md5
         gpg --print-md SHA512 cayenne-X.X.tar.gz > cayenne-X.X.tar.gz.sha512
 
 * Assemblies, signature and checksum files are committed to the special SVN repo
-  used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/dev/release.html#upload-ci).
+  used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). 
+  Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/legal/release-policy.html#stage).
 
 {{% gap %}}
 
@@ -108,18 +113,19 @@ work ("-u" option can be omitted if you have only one GPG key):
 be considered by the PMC (particularly -1 votes will be discussed) when
 making the final decision, but are not binding.
 * Each PMC member will do the following before voting on a release:
- a. download the artifacts
- b. satisfy themselves that the source matches the appropriate svn tag.
-This can be done by diffing the source against a recent svn checkout.
- c. satisfy themselves that the Apache licensing requirements are met (this
+    * download the artifacts
+    * verify GPG signature and sha512 checksum 
+    * satisfy themselves that the source matches the appropriate Git tag.
+This can be done by diffing the source against a recent git checkout.
+    * satisfy themselves that the Apache licensing requirements are met (this
 will usually be achieved by ensuring that all notices are in place and
-verifying that the source matches SVN since all commits to SVN are possible
+verifying that the source matches Git since all commits to Git are possible
 only if the committer has a CLA on file).
- d. satisfy themselves that the binary distribution is sane and passes
-basic usability tests. For example, that the Cayenne modeler runs and the
+    * satisfy themselves that the binary distribution is sane and passes
+basic usability tests. For example, that the Cayenne Modeler runs and the
 main jar passes some basic tests.
- e. satisfy themselves that the source passes agreed unit tests (either by
-running them manually or verifying that Hudson has run those tests against
+    * satisfy themselves that the source passes agreed unit tests (either by
+running them manually or verifying that CI service has run those tests against
 the equivalent source). 
 
 {{% gap %}}
