@@ -152,16 +152,21 @@
   
   <url>
     <loc>https://cayenne.apache.org/</loc>
-    <lastmod>2020-07-21T12:00:00+03:00</lastmod>
+    <lastmod>2020-10-12T12:00:00+03:00</lastmod>
   </url>
   
   <url>
-    <loc>https://cayenne.apache.org/2020/07/cayenne-41-final-released/</loc>
-    <lastmod>2020-07-21T12:00:00+03:00</lastmod>
+    <loc>https://cayenne.apache.org/2020/10/cayenne-42m2-released/</loc>
+    <lastmod>2020-10-12T12:00:00+03:00</lastmod>
   </url>
   
   <url>
     <loc>https://cayenne.apache.org/news/</loc>
+    <lastmod>2020-10-12T12:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://cayenne.apache.org/2020/07/cayenne-41-final-released/</loc>
     <lastmod>2020-07-21T12:00:00+03:00</lastmod>
   </url>
   
