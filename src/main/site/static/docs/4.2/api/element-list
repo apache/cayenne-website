@@ -10,6 +10,7 @@ org.apache.cayenne.access.sqlbuilder
 org.apache.cayenne.access.sqlbuilder.sqltree
 org.apache.cayenne.access.translator
 org.apache.cayenne.access.translator.batch
+org.apache.cayenne.access.translator.batch.legacy
 org.apache.cayenne.access.translator.ejbql
 org.apache.cayenne.access.translator.procedure
 org.apache.cayenne.access.translator.select
@@ -77,3 +78,4 @@ org.apache.cayenne.util
 org.apache.cayenne.util.commons
 org.apache.cayenne.util.concurrentlinkedhashmap
 org.apache.cayenne.validation
+org.apache.cayenne.value
