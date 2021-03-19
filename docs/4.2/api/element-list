@@ -79,3 +79,4 @@ org.apache.cayenne.util.commons
 org.apache.cayenne.util.concurrentlinkedhashmap
 org.apache.cayenne.validation
 org.apache.cayenne.value
+org.apache.cayenne.value.json
