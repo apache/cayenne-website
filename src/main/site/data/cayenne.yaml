@@ -38,7 +38,7 @@ releases:
     latestRevision: "4.2.M3"
     type: "Alpha"
     description: "Latest development release"
-    date: "2020-03-19"
+    date: "2021-03-19"
     docs: true
     downloadable: true
     jdk: 1.8
