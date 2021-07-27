@@ -82,7 +82,10 @@ be used by the people voting on Cayenne. It may look like this:
       perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT). 
       
     * Per Apache release guidelines there shouldn't be any binaries in a release, so you need manually copy
-    Gradle wrapper. Just cp ./cayenne-gradle-plugin/gradle/ to the corresponding folder in unpacked sources.
+    Gradle wrapper. Just copy *cayenne-gradle-plugin/gradle* folder to the corresponding folder in unpacked sources.
+        ```bash
+        cp -r ./cayenne-gradle-plugin/gradle ./assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
+        ```
       
     * Build binary artifacts
         ```bash
