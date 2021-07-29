@@ -14,7 +14,7 @@
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-c1116f84b2.css"/>
-        <script src="https://cayenne.apache.org/js/bundle-4f4f41728e.js"></script>
+        <script src="https://cayenne.apache.org/js/bundle-16fc0c2ea0.js"></script>
         <title>Release Guide &middot; Apache Cayenne</title>
     </head>
     <body>
@@ -106,7 +106,7 @@ More info can be found at <a href="http://www.apache.org/dev/release-signing.htm
 <li>Make sure &ldquo;apache-releases&rdquo; repository is configured in
 <em>~/.m2/settings.xml</em> and an appropriate password is setup. See <a href="http://www.apache.org/dev/publishing-maven-artifacts.html">this page</a>
 for details.</li>
-<li>As Cayenne has modules which require Java 1.8, you should use Java 1.8 to perform the release.</li>
+<li>As Cayenne has modules which require Java 1.8, you should use at least Java 1.8 to perform the release.</li>
 </ul>
 
 <div class="pb-3"></div>
@@ -121,13 +121,13 @@ for details.</li>
 download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne
 source. Then read the report and fix any issues.</p>
 
-<pre><code>cd cayenne
+<pre><code class="language-bash">cd cayenne
 ./rat.sh ~/Desktop/apache-rat-0.14-SNAPSHOT.jar  &gt; report.txt
 </code></pre>
 
 <p>As an alternative you could use Apache RAT maven plugin already configured in the Cayenne:</p>
 
-<pre><code>mvn apache-rat:check
+<pre><code class="language-bash">mvn apache-rat:check
 </code></pre></li>
 </ul>
 
@@ -139,7 +139,7 @@ source. Then read the report and fix any issues.</p>
 <ul>
 <li><p>Create a Git tag and Create Maven Staging Repository:</p>
 
-<pre><code>cd cayenne
+<pre><code class="language-bash">cd cayenne
 mvn release:clean
 mvn release:prepare -DpreparationGoals=&quot;clean install&quot; -DautoVersionSubmodules=true
 mvn release:perform -P gpg [-Dgpg.keyname=B8AF90BF]
@@ -160,40 +160,48 @@ be used by the people voting on Cayenne. It may look like this:
 <ul>
 <li><p>Switch to the release tag created above.</p></li>
 
-<li><p>Build source package (it will be the basis for the binary packages built
-in the next steps) :</p>
+<li><p>Build source package (it will be the basis for the binary packages built in the next steps) :</p>
 
-<pre><code>mvn clean install -Passembly,src
+<pre><code class="language-bash">mvn clean install -Passembly,src
 </code></pre></li>
 
-<li><p>Build binary assemblies. Take <em>&ldquo;assembly/target/cayenne-XXX-src.tar.gz&rdquo;</em>, unpack it somewhere, and
-perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT). <em>Release manager may skip
-running unit tests from here, as shown
+<li><p>Build binary assemblies. <em>Release manager may skip running unit tests from here, as shown
 below, although release evaluators should use the src assembly for <a href="running-unit-tests.html">unit testing</a>
-and other kinds of testing.</em></p>
+and other kinds of testing.</em> For further details on a general Cayenne build process check <a href="building-cayenne.html">this page</a>.</p>
 
-<pre><code>mvn clean install -Passembly,generic -Dmaven.test.skip=true
+<ul>
+<li><p>Take <em>&ldquo;assembly/target/cayenne-XXX-src.tar.gz&rdquo;</em>, unpack it somewhere, and
+perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT).</p></li>
 
-# You will need to do this on OS X, and use at least Java 1.8
-mvn clean install -Passembly,mac -Dmaven.test.skip=true
+<li><p>Per Apache release guidelines there shouldn&rsquo;t be any binaries in a release, so you need manually copy
+Gradle wrapper. Just copy <em>cayenne-gradle-plugin/gradle</em> folder to the corresponding folder in unpacked sources.</p>
+
+<pre><code class="language-bash">cp -r ./cayenne-gradle-plugin/gradle ./assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
+</code></pre></li>
+
+<li><p>Build binary artifacts</p>
+
+<pre><code class="language-bash">mvn clean package -Passembly,generic -DskipTests
+
+# You will need to do this on OS X
+mvn clean package -Passembly,mac -DskipTests
 
 # You will need to do this on Windows
-mvn clean install -Passembly,windows -Dmaven.test.skip=true
-</code></pre>
-
-<p>For further details on a general Cayenne build process check <a href="building-cayenne.html">this page</a>.</p></li>
+mvn clean package -Passembly,windows -DskipTests
+</code></pre></li>
+</ul></li>
 
 <li><p>Signing assemblies</p></li>
 </ul>
 
 <p>You can find additional information in official Apache <a href="http://www.apache.org/dev/release-distribution">Release Distribution policy</a>
-and on <a href="http://www.apache.org/dev/release-signing.html">this page</a>.
-Release manager key must be in the project KEYS file. Signing is a manual
-procedure not included in the Ant or Maven script. Here is how it might
-work (&ldquo;-u&rdquo; option can be omitted if you have only one GPG key):</p>
+  and on <a href="http://www.apache.org/dev/release-signing.html">this page</a>.
+  Release manager key must be in the project KEYS file. Signing is a manual
+  procedure not included in the Ant or Maven script. Here is how it might
+  work (&ldquo;-u&rdquo; option can be omitted if you have only one GPG key):</p>
 
-<pre><code>    gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
-    gpg --print-md SHA512 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512
+<pre><code class="language-bash">  gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
+  gpg --print-md SHA512 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512
 </code></pre>
 
 <ul>
@@ -241,7 +249,7 @@ select the staging repo and click &ldquo;Release&rdquo;.</p></li>
 
 <li><p>Publish downloadable assemblies by moving them to the release repo:</p>
 
-<pre><code>$ svn mv https://dist.apache.org/repos/dist/dev/cayenne/X.X \
+<pre><code class="language-bash">svn mv https://dist.apache.org/repos/dist/dev/cayenne/X.X \
      https://dist.apache.org/repos/dist/release/cayenne/
 </code></pre></li>
 </ul>
@@ -251,10 +259,10 @@ select the staging repo and click &ldquo;Release&rdquo;.</p></li>
 <h2 id="after-the-release">After the release</h2>
 
 <ul>
-<li><p>Delete a previous version of Cayenne release of the same branch from the dist server.
+<li><p>Delete a <strong>previous version</strong> of Cayenne release of the same branch from the dist server.
 It should be already <a href="http://www.apache.org/dev/release.html#when-to-archive">archived by Apache</a>. Do this with an svn command like this:</p>
 
-<pre><code>$ svn rm https://dist.apache.org/repos/dist/release/cayenne/Y.Y
+<pre><code class="language-bash">svn rm https://dist.apache.org/repos/dist/release/cayenne/Y.Y
 </code></pre></li>
 
 <li><p><a href="https://issues.apache.org/jira/plugins/servlet/project-config/CAY/versions">Tell Jira</a>
