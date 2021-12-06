@@ -35,10 +35,10 @@ releases:
     newRepoLayout: true
 
   - version: "4.2"
-    latestRevision: "4.2.M3"
-    type: "Alpha"
+    latestRevision: "4.2.B1"
+    type: "Beta"
     description: "Latest development release"
-    date: "2021-03-19"
+    date: "2021-12-06"
     docs: true
     downloadable: true
     jdk: 1.8
