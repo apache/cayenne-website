@@ -68,6 +68,9 @@ be used by the people voting on Cayenne. It may look like this:
 ## Releasing Downloadable Assemblies
 
 * Switch to the release tag created above.
+  ```bash
+  git clone https://github.com/apache/cayenne.git --branch "XXX" --depth 1
+  ```
 
 * Build source package (it will be the basis for the binary packages built in the next steps) :
   ```bash
