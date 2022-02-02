@@ -136,6 +136,8 @@ following databases that support in-memory mode:</p>
 
 <h2 id="running-against-database-in-docker">Running Against Database in Docker</h2>
 
+<p><strong>(Before Cayenne 4.2)</strong></p>
+
 <p>Another handy option to run Cayenne tests is with preconfigured docker profiles.
 The only thing you need is to install Docker.</p>
 
@@ -150,6 +152,31 @@ The only thing you need is to install Docker.</p>
 <p>Like with in-memory databases no additional setup is required:</p>
 
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql-docker   
+</code></pre>
+
+<div class="pb-3"></div>
+
+<h2 id="running-against-database-with-testcontainer">Running Against Database with TestContainer</h2>
+
+<p><strong>(Since Cayenne 4.2)</strong></p>
+
+<p>Another handy option to run Cayenne tests is with <a href="https://www.testcontainers.org/">TestContainer</a> which use Docker.
+The only thing you need is to install Docker and run it.</p>
+
+<p>You can run tests using following <em>cayenneTestConnection</em> properties:</p>
+
+<ul>
+<li>mysql-tc</li>
+<li>postgres-tc</li>
+<li>sqlserver-tc</li>
+<li>mariadb-tc</li>
+<li>oracle-tc</li>
+<li>db2-tc</li>
+</ul>
+
+<p>Like with in-memory databases no additional setup is required:</p>
+
+<pre><code>$ mvn verify -DcayenneTestConnection=mysql-tc   
 </code></pre>
 
 <div class="pb-3"></div>
