@@ -1,7 +1,7 @@
 ---
 title: Database Support
 url: /database-support.html
-markup: mmark
+markup: md
 ---
 
 This page provides useful information about JDBC driver settings for various database. 

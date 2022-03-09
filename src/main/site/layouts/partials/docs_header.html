@@ -1,11 +1,11 @@
-{{ $urlComponents := split .URL "/" }}
+{{ $urlComponents := split .RelPermalink "/" }}
 {{ if (isset $urlComponents 3) }}
 {{ $.Scratch.Set "cayenneUrlVersion" (index $urlComponents 2) }}
 {{ else }}
 {{ $.Scratch.Set "cayenneUrlVersion" "4.1" }}
 {{ end }}
 {{ $docVersion := ($.Scratch.Get "cayenneUrlVersion") }}
-{{ $currentPageURL := .URL }}
+{{ $currentPageURL := .RelPermalink }}
 
 
 {{- range where $.Site.Data.cayenne.releases "docs" true -}}
@@ -13,7 +13,7 @@
 {{- $.Scratch.SetInMap "indexUrlByVersion" $ver (printf "/docs/%s/api/" $ver) -}}
     {{- range (sort (where $.Site.Pages "Kind" "page") "Weight" "desc") -}}
         {{- if eq .Params.cayenneVersion $ver -}}
-            {{- $.Scratch.SetInMap "indexUrlByVersion" $ver .URL -}}
+            {{- $.Scratch.SetInMap "indexUrlByVersion" $ver .RelPermalink -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
@@ -52,14 +52,14 @@
                     {{ range (sort (where $.Site.Pages "Kind" "page") "Weight" ) -}}
                     {{- if eq .Params.cayenneVersion $docVersion }}
                     <div class="cd-toc-item">
-                        {{ if eq $currentPageURL .URL }}
+                        {{ if eq $currentPageURL .RelPermalink }}
                         <span class="cd-toc-link active">{{ if .Params.docsMenuTitle }}{{ .Params.docsMenuTitle }}{{ else }}{{ .Title }}{{ end }}</span>
                             {{- $tocFile := printf "content/docs/%s/%s.toc.html" $docVersion .File.BaseFileName -}}
                             {{- if (fileExists $tocFile) -}}
                                 {{ readFile $tocFile | safeHTML }}
                             {{- end -}}
                         {{ else }}
-                            <a class="cd-toc-link" href="{{ .URL }}">{{ if .Params.docsMenuTitle }}{{ .Params.docsMenuTitle }}{{ else }}{{ .Title }}{{ end }}</a>
+                            <a class="cd-toc-link" href="{{ .RelPermalink }}">{{ if .Params.docsMenuTitle }}{{ .Params.docsMenuTitle }}{{ else }}{{ .Title }}{{ end }}</a>
                         {{ end }}
                     </div>
                     {{ end -}}

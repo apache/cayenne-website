@@ -1,7 +1,7 @@
 ---
 title: Legacy Ant Unit Tests
 url: /legacy-ant-unit-tests.html
-markup: mmark
+markup: md
 ---
 Cayenne provides a comprehensive suite of unit tests. To execute unit tests
 you must first [get Cayenne from SVN](/dev/code-repository.html)
