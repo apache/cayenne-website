@@ -1,7 +1,7 @@
 ---
 title: Legacy Eclipse
 url: /legacy-eclipse.html
-markup: mmark
+markup: md
 ---
 <a name="LegacyEclipse-UsingEclipsewithAntCayenne"></a>
 ## Using Eclipse with Ant Cayenne 

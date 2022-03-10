@@ -7,6 +7,7 @@ menu:
         parent: about
         weight: 40  
 weight: 40
+url: /about/support/
 aliases:
     - /support.html
 ---
