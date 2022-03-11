@@ -18,5 +18,6 @@
  */
 
 const gulp = require('gulp');
+require('./serve.js');
 
-gulp.task('default', ['serve']);
+gulp.task('default', gulp.series('serve'));

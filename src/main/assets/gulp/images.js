@@ -20,10 +20,11 @@
 const gulp     = require('gulp');
 const imagemin = require('gulp-imagemin');
 const changed  = require('gulp-changed');
+require("./util.js");
 
-gulp.task('images', ['clean-static'], function () {
+gulp.task('images', gulp.series('clean-static', function () {
   return gulp.src('images/**/*.*')
     .pipe(changed(global.hugoConfig.stagingDir + '/img'))
     .pipe(imagemin())
     .pipe(gulp.dest(global.hugoConfig.stagingDir + '/img'));
-});
+}));

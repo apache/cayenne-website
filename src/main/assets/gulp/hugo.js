@@ -16,18 +16,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 const gulp = require('gulp');
 const childProcess = require('child_process');
-const hugo = require('hugo-bin');
+require("./revision.js");
 
-function runHugo(publish) {
+async function runHugo(publish) {
+
+    const hugo = await import('hugo-bin');
+
     const src = global.hugoConfig.srcDir;
     const dst = global.hugoConfig.publicDir;
     const conf = global.hugoConfig.srcDir + 'config.yaml';
     const argv = require('yargs').argv;
 
-    let cmd = hugo + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
+    let cmd = hugo.default + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
 
     if (publish) {
         cmd += ' --baseUrl="' + argv.prod_host + '" ';
@@ -41,10 +43,12 @@ function runHugo(publish) {
     console.log('hugo out: \n' + result);
 }
 
-gulp.task('hugo:all', ['revision'], function() {
+gulp.task('hugo:all', gulp.series('revision', function(done) {
     runHugo(false);
-});
+    done();
+}));
 
-gulp.task('hugo:publish', ['revision'], function() {
+gulp.task('hugo:publish', gulp.series('revision', function(done) {
     runHugo(true);
-});
+    done();
+}));

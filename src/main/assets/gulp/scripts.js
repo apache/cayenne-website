@@ -24,7 +24,7 @@ const webpack = require('webpack'); // use newer version of webpack
 const gulpWebpack  = require('webpack-stream');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-gulp.task('scripts', ['clean-static'], function() {
+gulp.task('scripts', gulp.series('clean-static', function() {
     return gulp.src('scripts/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter("default"))
@@ -48,4 +48,4 @@ gulp.task('scripts', ['clean-static'], function() {
                 devtool: "source-map"
         }, webpack))
         .pipe(gulp.dest(global.hugoConfig.stagingDir + '/js'));
-});
+}));

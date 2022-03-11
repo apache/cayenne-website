@@ -22,25 +22,18 @@ const rev   = require('gulp-rev');
 const del   = require('rev-del');
 const path  = require('path');
 const clean = require('gulp-clean');
-
-// styles, scripts, images, fonts depends on this
-gulp.task('clean-static', function() {
-    return gulp.src(
-        [
-            global.hugoConfig.srcDir + '/static/css/**/*.css',
-            global.hugoConfig.srcDir + '/static/js/**/*.js',
-            global.hugoConfig.srcDir + '/static/js/**/*.js.map'
-        ],{base: global.hugoConfig.srcDir, read: false})
-        .pipe(clean({force: true}));
-});
+require("./styles.js");
+require("./scripts.js");
+require("./images.js");
+require("./fonts.js");
 
 // separately copy source maps
-gulp.task('copy-js-map', ['scripts'], function () {
+gulp.task('copy-js-map', gulp.series('scripts', function () {
     return gulp.src(global.hugoConfig.stagingDir + '/js/**/*.js.map')
         .pipe(gulp.dest(global.hugoConfig.srcDir + '/static/js'));
-});
+}));
 
-gulp.task('revision', ['styles', 'scripts', 'images', 'fonts', 'copy-js-map'], function() {
+gulp.task('revision', gulp.series('styles', 'scripts', 'images', 'fonts', 'copy-js-map', function() {
     return gulp.src(
         [
             global.hugoConfig.stagingDir + '/css/**/*.css',
@@ -54,4 +47,4 @@ gulp.task('revision', ['styles', 'scripts', 'images', 'fonts', 'copy-js-map'], f
         .pipe(rev.manifest('../../../../target/site/staging/rev-manifest.json'))
         .pipe(del({dest: global.hugoConfig.srcDir + '/static', force: true}))
         .pipe(gulp.dest(global.hugoConfig.srcDir + '/static'));
-});
+}));

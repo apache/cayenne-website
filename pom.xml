@@ -30,9 +30,9 @@
     <packaging>pom</packaging>
 
     <properties>
-        <node.version>v8.9.1</node.version>
-        <yarn.version>v1.19.1</yarn.version>
-        <frontend.plugin.version>1.8.0</frontend.plugin.version>
+        <node.version>v16.14.0</node.version>
+        <yarn.version>v1.22.17</yarn.version>
+        <frontend.plugin.version>1.12.0</frontend.plugin.version>
         <gulp.task>serve</gulp.task>
         <!-- Host and port for dev mode, can be set via mvn (e.g. -Ddev.host="192.168.1.2" -Ddev.port=80) -->
         <dev.host>localhost</dev.host>

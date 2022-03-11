@@ -18,8 +18,9 @@
  */
 
 const gulp = require('gulp');
+require("./util.js");
 
-gulp.task('fonts', ['clean-static'], function() {
+gulp.task('fonts', gulp.series('clean-static', function() {
     return gulp.src(['styles/fonts/*', 'node_modules/font-awesome/fonts/*'])
         .pipe(gulp.dest('../site/static/css/fonts'));
-});
+}));

@@ -17,7 +17,15 @@
  * under the License.
  */
 
-const gulp = require("gulp");
-require("./build.js");
+const gulp  = require('gulp');
+const clean = require('gulp-clean');// styles, scripts, images, fonts depends on this
 
-gulp.task('publish', gulp.series('build:publish'));
+gulp.task('clean-static', function() {
+    return gulp.src(
+        [
+            global.hugoConfig.srcDir + '/static/css/**/*.css',
+            global.hugoConfig.srcDir + '/static/js/**/*.js',
+            global.hugoConfig.srcDir + '/static/js/**/*.js.map'
+        ],{base: global.hugoConfig.srcDir, read: false})
+        .pipe(clean({force: true}));
+});

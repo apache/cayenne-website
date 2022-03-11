@@ -19,9 +19,16 @@
 
 const gulp   = require("gulp");
 const reload = require("browser-sync").reload;
+require("./reference.js");
 
-gulp.task('build:content', ['reference:content'], reload);
+gulp.task('build:content', gulp.series('reference:content', function (done) {
+        reload();
+        done();
+    }));
 
-gulp.task('build:all', ['reference:all'], reload);
+gulp.task('build:all', gulp.series('reference:all', function (done) {
+        reload();
+        done();
+    }));
 
-gulp.task('build:publish', ['reference:publish']);
+gulp.task('build:publish', gulp.series('reference:publish'));
