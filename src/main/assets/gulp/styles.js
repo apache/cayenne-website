@@ -32,7 +32,6 @@ gulp.task('styles', gulp.series('clean-static', function() {
 
     const cssStream = gulp.src('styles/**/*.css')
         .pipe(concat('css-files.css'));
-    console.log(global.hugoConfig.stagingDir);
 
     return merge(scssStream, cssStream)
         .pipe(autoprefixer('last 2 version'))

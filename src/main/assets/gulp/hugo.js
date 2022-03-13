@@ -21,34 +21,35 @@ const childProcess = require('child_process');
 require("./revision.js");
 
 async function runHugo(publish) {
+    return new Promise(async (resolve, reject) => {
+            const hugo = await import('hugo-bin');
 
-    const hugo = await import('hugo-bin');
+            const src = global.hugoConfig.srcDir;
+            const dst = global.hugoConfig.publicDir;
+            const conf = global.hugoConfig.srcDir + 'config.yaml';
+            const argv = require('yargs').argv;
 
-    const src = global.hugoConfig.srcDir;
-    const dst = global.hugoConfig.publicDir;
-    const conf = global.hugoConfig.srcDir + 'config.yaml';
-    const argv = require('yargs').argv;
+            let cmd = hugo.default + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
 
-    let cmd = hugo.default + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
+            if (publish) {
+                cmd += ' --baseUrl="' + argv.prod_host + '" ';
+            } else {
+                cmd += ' --baseUrl="http://' + argv.host + ':' + argv.port + '/" '
+                    + ' --buildDrafts=true --verbose=true --buildFuture';
+            }
 
-    if (publish) {
-        cmd += ' --baseUrl="' + argv.prod_host + '" ';
-    } else {
-        cmd += ' --baseUrl="http://' + argv.host + ':' + argv.port + '/" '
-            + ' --buildDrafts=true --verbose=true --buildFuture';
-    }
+            console.log("Running " + cmd);
+            const result = childProcess.execSync(cmd, {encoding: 'utf-8'});
+            console.log('hugo out: \n' + result);
 
-    console.log("Running " + cmd);
-    const result = childProcess.execSync(cmd, {encoding: 'utf-8'});
-    console.log('hugo out: \n' + result);
+            resolve();
+        })
 }
 
 gulp.task('hugo:all', gulp.series('revision', function(done) {
-    runHugo(false);
-    done();
+  runHugo(false).then(function () { done(); })
 }));
 
 gulp.task('hugo:publish', gulp.series('revision', function(done) {
-    runHugo(true);
-    done();
+    runHugo(true).then(function () { done(); })
 }));

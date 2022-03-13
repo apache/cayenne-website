@@ -40,7 +40,7 @@
 @include customFontFace('montserrat', 'fonts/montserrat-bolditalic', 700, italic);
 
 // FA ICONS
-@import "../node_modules/font-awesome/scss/font-awesome";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 @include customFontFace('fontawesome', 'fonts/fontawesome-webfont', 400);
 
 // Bootstrap v4 bet2
@@ -52,6 +52,10 @@
 // INNER PAGE
 @import "cd";
 
+//For applying fontawesome icons
+.fa {
+    font-family: "FontAwesome" !important;
+}
 
 //
 // [Extend] Text utilities

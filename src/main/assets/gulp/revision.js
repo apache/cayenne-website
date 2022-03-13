@@ -28,12 +28,12 @@ require("./images.js");
 require("./fonts.js");
 
 // separately copy source maps
-gulp.task('copy-js-map', gulp.series('scripts', function () {
+gulp.task('copy-js-map', gulp.series( function () {
     return gulp.src(global.hugoConfig.stagingDir + '/js/**/*.js.map')
         .pipe(gulp.dest(global.hugoConfig.srcDir + '/static/js'));
 }));
 
-gulp.task('revision', gulp.series('styles', 'scripts', 'images', 'fonts', 'copy-js-map', function() {
+gulp.task('revision', gulp.series(gulp.parallel('styles', 'scripts', 'images', 'fonts'),'copy-js-map',function() {
     return gulp.src(
         [
             global.hugoConfig.stagingDir + '/css/**/*.css',
