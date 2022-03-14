@@ -46,10 +46,10 @@ async function runHugo(publish) {
         })
 }
 
-gulp.task('hugo:all', gulp.series('revision', function(done) {
+gulp.task('hugo:all', gulp.series('revision:all', function(done) {
   runHugo(false).then(function () { done(); })
 }));
 
-gulp.task('hugo:publish', gulp.series('revision', function(done) {
+gulp.task('hugo:publish', gulp.series('revision:publish', function(done) {
     runHugo(true).then(function () { done(); })
 }));

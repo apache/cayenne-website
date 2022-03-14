@@ -22,13 +22,14 @@ const jshint  = require('gulp-jshint');
 const uglify  = require('gulp-uglify');
 const webpack = require('webpack'); // use newer version of webpack
 const gulpWebpack  = require('webpack-stream');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
-gulp.task('scripts', gulp.series('clean-static', function() {
+function scriptConfig(modeType) {
     return gulp.src('scripts/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter("default"))
         .pipe(gulpWebpack({
+                mode: modeType,
                 output: {
                     filename: 'bundle.js'
                 },
@@ -41,11 +42,20 @@ gulp.task('scripts', gulp.series('clean-static', function() {
                         Popper: ['popper.js', 'default'],
                         Util: "exports-loader?Util!bootstrap/js/dist/util"
                     }),
-                    new UglifyJsPlugin({
-                        sourceMap: true
-                    })
+                    new TerserPlugin()
                 ],
                 devtool: "source-map"
         }, webpack))
         .pipe(gulp.dest(global.hugoConfig.stagingDir + '/js'));
+}
+
+gulp.task('scripts:all', gulp.series('clean-static', function(done) {
+   scriptConfig('development');
+   done();
 }));
+
+gulp.task('scripts:publish', gulp.series('clean-static', function(done) {
+   scriptConfig('production');
+   done();
+}));
+

@@ -54,6 +54,6 @@ gulp.task('reference:publish', gulp.series('hugo:publish', function() {
 }));
 
 // live rebuild
-gulp.task('reference:content', gulp.series('revision', function() {
+gulp.task('reference:content', gulp.series('revision:all', function() {
     return updateResourceRefs();
 }));

@@ -27,13 +27,7 @@ require("./scripts.js");
 require("./images.js");
 require("./fonts.js");
 
-// separately copy source maps
-gulp.task('copy-js-map', gulp.series( function () {
-    return gulp.src(global.hugoConfig.stagingDir + '/js/**/*.js.map')
-        .pipe(gulp.dest(global.hugoConfig.srcDir + '/static/js'));
-}));
-
-gulp.task('revision', gulp.series(gulp.parallel('styles', 'scripts', 'images', 'fonts'),'copy-js-map',function() {
+function revisionTask() {
     return gulp.src(
         [
             global.hugoConfig.stagingDir + '/css/**/*.css',
@@ -47,4 +41,18 @@ gulp.task('revision', gulp.series(gulp.parallel('styles', 'scripts', 'images', '
         .pipe(rev.manifest('../../../../target/site/staging/rev-manifest.json'))
         .pipe(del({dest: global.hugoConfig.srcDir + '/static', force: true}))
         .pipe(gulp.dest(global.hugoConfig.srcDir + '/static'));
+}
+
+// separately copy source maps
+gulp.task('copy-js-map', gulp.series( function () {
+    return gulp.src(global.hugoConfig.stagingDir + '/js/**/*.js.map')
+        .pipe(gulp.dest(global.hugoConfig.srcDir + '/static/js'));
+}));
+
+gulp.task('revision:all', gulp.series(gulp.parallel('styles', 'scripts:all', 'images', 'fonts'),'copy-js-map', function() {
+    return revisionTask();
+}));
+
+gulp.task('revision:publish', gulp.series(gulp.parallel('styles', 'scripts:publish', 'images', 'fonts'),'copy-js-map', function() {
+    return revisionTask();
 }));
