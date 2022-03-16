@@ -28,6 +28,12 @@ disablePathToLower: true
 enableRobotsTXT: true
 googleAnalytics: 'UA-7036673-1'
 
+# after hugo 0.60 it's prop for using html tags in markdown pages
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 mediaTypes:
   application/rdf:
     suffixes:

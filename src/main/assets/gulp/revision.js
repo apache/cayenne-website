@@ -53,6 +53,6 @@ gulp.task('revision:all', gulp.series(gulp.parallel('styles', 'scripts:all', 'im
     return revisionTask();
 }));
 
-gulp.task('revision:publish', gulp.series(gulp.parallel('styles', 'scripts:publish', 'images', 'fonts'),'copy-js-map', function() {
+gulp.task('revision:publish', gulp.series(gulp.series('styles', 'scripts:publish', 'images', 'fonts'),'copy-js-map', function() {
     return revisionTask();
 }));

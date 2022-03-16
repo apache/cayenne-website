@@ -49,13 +49,11 @@ function scriptConfig(modeType) {
         .pipe(gulp.dest(global.hugoConfig.stagingDir + '/js'));
 }
 
-gulp.task('scripts:all', gulp.series('clean-static', function(done) {
-   scriptConfig('development');
-   done();
+gulp.task('scripts:all', gulp.series('clean-static', function() {
+   return scriptConfig('development');
 }));
 
-gulp.task('scripts:publish', gulp.series('clean-static', function(done) {
-   scriptConfig('production');
-   done();
+gulp.task('scripts:publish', gulp.series('clean-static', function() {
+   return scriptConfig('production');
 }));
 

@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "dependencies": {
-    "jquery": "3.4.1",
-    "bootstrap": "4.3.1",
-    "popper.js": "1.16.0",
-    "highlight.js": "9.18.1",
+    "jquery": "3.6.0",
+    "bootstrap": "4.6.1",
+    "popper.js": "1.16.1",
+    "highlight.js": "11.5.0",
     "@fortawesome/fontawesome-free": "6.0.0",
-    "anchor-js": "4.2.1"
+    "anchor-js": "4.3.1"
   },
   "devDependencies" : {
     "gulp": "^4.0.2",
