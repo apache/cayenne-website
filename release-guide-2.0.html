@@ -86,102 +86,91 @@
         <section>
             <article>
                 <h1 class="text-center">Legacy Release Guide 2.0</h1>
-                
-
-<p>Note that this page is of use for committers only. It describes the general
+                <p>Note that this page is of use for committers only. It describes the general
 procedure of building a Cayenne release.</p>
-
 <p><em>THIS ONLY REFERS TO 2.0.x RELEASE BRANCH</em></p>
-
-<p><a name="ReleaseGuide2.0-Prerequisites"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="prerequisites">Prerequisites</h2>
-
 <p>Refer to the Prerequisites section of the <a href="/dev/release-guide.html">main release guide</a></p>
-
-<p><a name="ReleaseGuide2.0-PreparingSources"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="preparing-sources">Preparing Sources</h2>
-
 <ul>
-<li><p>Export and commit the latest documentation per Documentation Guidelines
-.</p></li>
-
-<li><p>Create a report in Jira listing all issues that are FIXED but not CLOSED,
+<li>
+<p>Export and commit the latest documentation per Documentation Guidelines
+.</p>
+</li>
+<li>
+<p>Create a report in Jira listing all issues that are FIXED but not CLOSED,
 paste its contents to RELEASE-NOTES.txt. Bulk-close all involved issues.
 <em>Note that issues that affect multiple releases are usually closed
 immediately when they are fixed, and the note is placed in
-RELEASE-NOTES.txt immediately when this happens.</em></p></li>
-
-<li><p>Edit UPGRADE-NOTES.txt if there is anything to add there.</p></li>
-
-<li><p>Check Sources Compliance with ARAT. <a href="http://code.google.com/p/arat/">ARAT</a>
+RELEASE-NOTES.txt immediately when this happens.</em></p>
+</li>
+<li>
+<p>Edit UPGRADE-NOTES.txt if there is anything to add there.</p>
+</li>
+<li>
+<p>Check Sources Compliance with ARAT. <a href="http://code.google.com/p/arat/">ARAT</a>
 (A Release Audit Tool) is a Java tool written by Robert Burrell Donkin for
 checking the release files for ASF licensing compliance. To run ARAT, <a href="http://arat.googlecode.com/svn/tags/RAT_0_4/">check it out of SVN</a>
 <em>(we are using version 0.4)</em>, build with Ant, and run against unpacked
-distro (or the release tag), read the report and fix any issues.</p></li>
+distro (or the release tag), read the report and fix any issues.</p>
+</li>
 </ul>
-
 <h2 id="building-release-artifacts">Building Release Artifacts</h2>
-
 <ul>
-<li><p>Tag <code>cayenne</code> directory under the repository trunk (assuming
+<li>
+<p>Tag <code>cayenne</code> directory under the repository trunk (assuming
 <code>release_version</code> is a version tag identifying the release, such as
 <code>&quot;1.2B3&quot;</code>):</p>
-
-<p>svn copy <a href="https://svn.apache.org/repos/asf/cayenne/main/trunk/cayenne">https://svn.apache.org/repos/asf/cayenne/main/trunk/cayenne</a> <br />
- <a href="https://svn.apache.org/repos/asf/cayenne/main/tags/release_version/cayenne">https://svn.apache.org/repos/asf/cayenne/main/tags/release_version/cayenne</a> -m &ldquo;tagging B3 release&rdquo;</p></li>
-
-<li><p>Switch an existing working copy on a build machine to the release tag:
+<p>svn copy <a href="https://svn.apache.org/repos/asf/cayenne/main/trunk/cayenne">https://svn.apache.org/repos/asf/cayenne/main/trunk/cayenne</a><br>
+<a href="https://svn.apache.org/repos/asf/cayenne/main/tags/release_version/cayenne">https://svn.apache.org/repos/asf/cayenne/main/tags/release_version/cayenne</a> -m &ldquo;tagging B3 release&rdquo;</p>
+</li>
+<li>
+<p>Switch an existing working copy on a build machine to the release tag:
 If you don&rsquo;t have a local copy, do &ldquo;checkout&rdquo; instead of &ldquo;switch&rdquo;. <em>Do not
 forget to switch the local copy back to the appropriate branch in case you
-are using it to make the code changes.</em></p></li>
-
-<li><p>Note that all Ant commands now must contain <em>&ldquo;project.version&rdquo;</em>
+are using it to make the code changes.</em></p>
+</li>
+<li>
+<p>Note that all Ant commands now must contain <em>&ldquo;project.version&rdquo;</em>
 property corresponding to the release version. The property is passed on
-the command line as <em>&rdquo;-Dproject.version=2.0.x&rdquo;</em>. See examples below.</p></li>
-
-<li><p>Run a test to make sure the checkout is ok:<br />
+the command line as <em>&quot;-Dproject.version=2.0.x&rdquo;</em>. See examples below.</p>
+</li>
+<li>
+<p>Run a test to make sure the checkout is ok: <br>
 Test with all supported databases listed <a href="/database-support.html">here</a>
 , or at least as many as possible.  See <a href="/legacy-ant-unit-tests.html">Legacy Ant Unit Tests</a>
 for more details on how to test each of the various database servers with
-legacy versions of Cayenne.</p></li>
-
-<li><p>Build a release for the target platform:</p></li>
-
-<li><p>Build Release Maven Bundles for ibiblio upload:</p></li>
-
-<li><p>Signing release
+legacy versions of Cayenne.</p>
+</li>
+<li>
+<p>Build a release for the target platform:</p>
+</li>
+<li>
+<p>Build Release Maven Bundles for ibiblio upload:</p>
+</li>
+<li>
+<p>Signing release
 For more info visit <a href="http://www.apache.org/dev/release-signing.html">this page</a>
 . Release manager key must be in the project KEYS file. Signing is a manual
 procedure not included in the Ant or Maven script. Here is how it might
-work (&ldquo;-u&rdquo; option can be omitted if you have only one GPG key):</p></li>
+work (&quot;-u&rdquo; option can be omitted if you have only one GPG key):</p>
+</li>
 </ul>
-
-<p><a name="ReleaseGuide2.0-Voting"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="voting">Voting</h2>
-
 <p>Refer to the Voting section of the <a href="/dev/release-guide.html">main release guide</a></p>
-
-<p><a name="ReleaseGuide2.0-PublishingtheRelease"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="publishing-the-release">Publishing the Release</h2>
-
 <p>Copy KEYS file if updated to <code>&quot;/www/www.apache.org/dist/cayenne/&quot;</code>
 <em>(TODO: automate publishing the keys - maybe create a &ldquo;dist&rdquo; site project?)</em></p>
-
 <pre><code>chmod 664 /www/www.apache.org/dist/cayenne/*
 </code></pre>
-
-<p><a name="ReleaseGuide2.0-PublishingMavenArtifacts"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="publishing-maven-artifacts">Publishing Maven Artifacts</h3>
-
 <p><em>(TODO: automate rsync with Ant)</em></p>
-
 <p>Assuming release version is 2.0.2, on a <em>local machine</em> do</p>
-
 <pre><code>ant clean mvn-install -Dproject.version=2.0.2
 
 rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne-nodeps/2.0.2 \
@@ -196,11 +185,8 @@ people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/ap
 rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne-modeler/2.0.2 \
 people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/apache/cayenne/cayenne-modeler/
 </code></pre>
-
-<p><a name="ReleaseGuide2.0-Aftertherelease"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="after-the-release">After the release</h2>
-
 <ul>
 <li>Update the <a href="http://svn.apache.org/repos/asf/cayenne/site/trunk/tlp-site/src/doap/cayenne.rdf">DOAP file</a>
 (held in the Cayenne svn) which will update
@@ -326,6 +312,11 @@ add any new features</li>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -333,11 +324,6 @@ add any new features</li>
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

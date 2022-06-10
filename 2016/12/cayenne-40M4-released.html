@@ -89,10 +89,7 @@
                         <h1 class="text-center">Cayenne 4.0 Milestone 4 Released<br />
                             <small class="font-size-1rem text-muted">Dec 31, 2016</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce the latest milestone of Cayenne - 4.0.M. The new release features a number of important things:</p>
-
+                        <p>Apache Cayenne team is glad to announce the latest milestone of Cayenne - 4.0.M. The new release features a number of important things:</p>
 <ul>
 <li>Stabilizes database reverse-engineering tools for DB-first ORM flow.</li>
 <li>Plugs holes and omissions in the fluent query API.</li>
@@ -102,21 +99,13 @@
 <li>Includes a new Modeler welcome screen.</li>
 <li>Fixes numerous bugs, updates docs, etc., etc.</li>
 </ul>
-
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>. Make sure to consult <a href="https://github.com/apache/cayenne/blob/4.0.M4/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> file before updating.</p>
-
 <p>Before we start discussing individual features, a few words on the future development effort. Cayenne 4.0 is quickly approaching &ldquo;beta&rdquo; status. There&rsquo;s a good chance that the following release will be feature-complete and we will enter &ldquo;beta&rdquo; and associated code freeze of the runtime framework.</p>
-
 <p>Now the new things in a bit more detail:</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="fluent-query-api">Fluent query API</h3>
-
 <p>These fluent queries are new in M4:</p>
-
 <p><em>SQLExec</em></p>
-
 <pre><code>// insert
 int inserted = SQLExec.query(&quot;INSERT INTO ARTIST (ARTIST_ID, ARTIST_NAME) &quot; + 
   &quot;VALUES (#bind($id), #bind($name))&quot;)
@@ -128,21 +117,15 @@ int updated = SQLExec
   .query(&quot;UPDATE ARTIST SET ARTIST_NAME = 'b3' WHERE ARTIST_NAME = 'a3'&quot;)
   .update(context);
 </code></pre>
-
 <p><em>MappedSelect</em></p>
-
 <pre><code>List&lt;Artist&gt; artists = MappedSelect.query(&quot;SelectArtists&quot;, Artist.class)
   .param(&quot;name&quot;, &quot;artist1&quot;)
   .select(context);
 </code></pre>
-
 <p><em>MappedExec</em></p>
-
 <pre><code>int[] updated = MappedExec.query(&quot;UpdateArtists&quot;).param(&quot;name&quot;, &quot;artist2&quot;).update(context);
 </code></pre>
-
 <p><em>ProcedureCall</em></p>
-
 <pre><code>// select
 List&lt;Artist&gt; artists = ProcedureCall.query(&quot;select_sp&quot;, Artist.class)
                 .param(&quot;name&quot;, &quot;Artist&quot;)
@@ -158,35 +141,19 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
                 .param(&quot;name&quot;, &quot;Artist&quot;)
                 .call(context).getOutParam(&quot;artist_out&quot;);
 </code></pre>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="reverse-engineering-improvements">Reverse Engineering Improvements</h3>
-
 <p>There are a lot of improvements and bug fixes covering reverse engineering functionality (aka &ldquo;DB-first flow&rdquo;). There&rsquo;s still more work to do to make it perfect, but the API is starting to stabilize and the tools have already become very usable (as in actually used in production on many projects). Follow this <a href="/docs/4.0/cayenne-guide/cayenne-guide-part4.html">link</a> to learn what DB-First flow is all about and how to use it.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="cayenne-crypto-improvements">Cayenne Crypto Improvements</h3>
-
 <p>We&rsquo;ve aded support for mapping encrypted columns to numbers, Strings, etc.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="transaction-control">Transaction control</h3>
-
 <p>Added TransactionListener to allow for better control of manual transactions.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="rop-improvements">ROP Improvements</h3>
-
 <p>With M4 it&rsquo;s much easier to plug external tools for ROP connectivity and serialization purposes. Jetty HTTP/1.1 and HTTP/2 Client and Protostuff have been already added to the Cayenne and are supported out of the box.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <ul>
 <li>CAY-2051 Applying new Reverse Engineering to the Modeler</li>
 <li>CAY-2053 SQLExec fluent query API</li>
@@ -219,11 +186,8 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
 <li>CAY-2136 Allow Ordering.orderedList(…) methods to accept a Collection rather than only a List</li>
 <li>CAY-2160 Modeler: new welcome screen</li>
 </ul>
-
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <h4 id="bug-fixes">Bug Fixes:</h4>
-
 <ul>
 <li>CAY-2016 cdbimport: Rename table with toMany relationship causes migration error</li>
 <li>CAY-2064 Issue with BeanAccessor for classes with complex inheritance</li>
@@ -392,6 +356,11 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -399,11 +368,6 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

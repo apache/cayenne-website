@@ -87,59 +87,42 @@
                 <section>
                     <article>
                         <h1 class="text-center">Guide to Cayenne CMS</h1>
-                        
-
-<p>Cayenne Site source code (content + styling + scripts) can be obtained from Apache Git repo:<br />
+                        <p>Cayenne Site source code (content + styling + scripts) can be obtained from Apache Git repo:<br>
 <a href="https://gitbox.apache.org/repos/asf/cayenne-website.git">https://gitbox.apache.org/repos/asf/cayenne-website.git</a></p>
-
 <p>Or from GitHub mirror (in read only mode): <a href="https://github.com/apache/cayenne-website.git">https://github.com/apache/cayenne-website.git</a></p>
 
+
 <div class="pb-3"></div>
-
 <h2 id="dev-mode">Dev mode</h2>
-
 <p>Just clone and run maven, nothing else required.</p>
-
 <pre><code>git clone https://gitbox.apache.org/repos/asf/cayenne-website.git
 cd cayenne-website
 mvn
 </code></pre>
-
-<p>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser. In dev mode site supports live-reloading.</p>
-
+<p>Open http://localhost:3000 in your browser. In dev mode site supports live-reloading.</p>
 <p><em>You can change host and port by setting <code>dev.host</code> and <code>dev.port</code> properties:</em></p>
-
 <pre><code>mvn -Ddev.host=&quot;my.local&quot; -Ddev.port=&quot;8080&quot;
 </code></pre>
 
+
 <div class="pb-3"></div>
-
 <h2 id="publish">Publish</h2>
-
 <p>To publish a new version just run Maven with <code>publish</code> profile. This will build a production version of the site (with <code>cayenne.apache.org</code> base URL)
 and push commit into <code>asf-site</code> branch that will be synced with actual site content location:</p>
-
 <pre><code>mvn -Ppublish -Dmsg=&quot;commit message describing site changes&quot;
 </code></pre>
-
 <p>That&rsquo;s all, so be careful and review your changes before publishing (also don&rsquo;t forget to check them after).</p>
-
 <p>Don&rsquo;t forget to push your source&rsquo;s changes so others won&rsquo;t rewrite them.</p>
-
 <p><em>NOTE</em>: This process can be automated by Jenkins. It can run publish on every commit to <code>master</code>.
 But for now it is better to use manual publishing.</p>
 
+
 <div class="pb-3"></div>
-
 <h2 id="content-modifications">Content modifications</h2>
-
 <h3 id="publishing-news">Publishing news</h3>
-
 <p>To publish news simply add new file at <code>src/main/site/content/news/</code> folder.
 You can use the following template:</p>
-
 <p><code>some-good-news.md</code></p>
-
 <pre><code>---
 title: Good news everyone!
 date: 2017-01-01T00:00:00+03:00
@@ -147,63 +130,45 @@ date: 2017-01-01T00:00:00+03:00
 
 Content goes here
 </code></pre>
-
 <h3 id="releasing-new-cayenne-version">Releasing new cayenne version</h3>
-
 <p>To update site content with information about new Cayenne version you need to perform these steps:</p>
-
 <ul>
 <li>Update data in <code>src/main/site/data/cayenne.yaml</code> file.
 This automatically update <a href="/download/">download</a> page and <code>/doap/caynne.rdf</code> file.</li>
 <li>Write news (see information above).</li>
 <li>Update documentation (see next section).</li>
-<li>Publish your changes (see <a href="#Publish">publish</a> section)
-<br /></li>
+<li>Publish your changes (see <a href="#Publish">publish</a> section)</li>
 </ul>
-
 <h3 id="update-cayenne-documentation">Update Cayenne Documentation</h3>
-
 <p>There are two helpers shell scripts to update Cayenne documentation:</p>
-
 <ul>
 <li>build-docs.sh that updates both JavaDoc and Asciidoc</li>
 <li>build-asciidocs.sh that update Asciidoc only</li>
 </ul>
-
 <p>Usage:</p>
-
 <ul>
-<li><p>Update all docs after the release</p>
-
-<pre><code>./build-docs.sh 4.1.RC2
-</code></pre></li>
-
-<li><p>Add fixes to the docs</p>
-
-<pre><code>./build-asciidocs.sh STABLE-4.0 4.0.2
-</code></pre></li>
+<li>Update all docs after the release</li>
 </ul>
+<pre><code>    ./build-docs.sh 4.1.RC2
+</code></pre><ul>
+<li>Add fixes to the docs</li>
+</ul>
+<pre><code>    ./build-asciidocs.sh STABLE-4.0 4.0.2
+</code></pre><p>These scripts don&rsquo;t commit changes so you should commit them manually and publish the site as usual.</p>
 
-<p>These scripts don&rsquo;t commit changes so you should commit them manually and publish the site as usual.</p>
 
 <div class="pb-3"></div>
-
 <h2 id="advanced">Advanced</h2>
-
 <p>Node.js, Yarn, Gulp and Hugo are used to build this site, Maven used just to bootstrap Node.js and
 Yarn tools and launch Gulp tasks.
 Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-bin</a> NPM module.</p>
-
 <h3 id="src-structure">Src structure</h3>
-
 <p>There are two main parts of site src:</p>
-
 <ul>
-<li><p><code>src/main/assets</code> assets processed by <a href="https://gulpjs.com">Gulp</a> tasks</p>
-
+<li>
+<p><code>src/main/assets</code> assets processed by <a href="https://gulpjs.com">Gulp</a> tasks</p>
 <ul>
 <li><code>/gulp/</code> - list of Gulp tasks:
-
 <ul>
 <li><code>hugo.js</code> - contains tasks that launch Hugo to process all content</li>
 <li><code>images.js</code> - compress and copy images</li>
@@ -212,7 +177,8 @@ Hugo binaries managed by <a href="https://www.npmjs.com/package/hugo-bin">hugo-b
 <li><code>scripts.js</code> - launch Webpack to process JavaScript resources</li>
 <li><code>serve.js</code> - launch dev-version of site with live-reloading</li>
 <li><code>styles.js</code> - generate CSS bundle (concat, minify, etc..)</li>
-</ul></li>
+</ul>
+</li>
 <li><code>/images/</code> - images that will be compressed and published into site <code>/img</code> directory,
 you can put any stuff used by site here (see <code>/gulp/images.js</code>)</li>
 <li><code>/scripts/</code> - JavaScript sources, <code>main.js</code> is an entry point for the final bundle,
@@ -221,18 +187,19 @@ will be processed by Webpack (see <code>/gulp/scripts.js</code>)</li>
 (see <code>/gulp/styles.js</code>)</li>
 <li><code>gulpfile.js</code> - main file for Gulp tasks, define some global path constants</li>
 <li><code>package.json</code> - all project dependencies are defined here</li>
-</ul></li>
-
-<li><p><code>src/main/site</code> assets processed by <a href="https://gohugo.io">Hugo</a> site generator</p>
-
+</ul>
+</li>
+<li>
+<p><code>src/main/site</code> assets processed by <a href="https://gohugo.io">Hugo</a> site generator</p>
 <ul>
 <li><code>/content/</code> - main content part of the site, markdown and HTML files</li>
 <li><code>/data/</code> - data files in <em>yaml</em> format</li>
 <li><code>/layouts/</code> - site templates, using <a href="https://golang.org/pkg/text/template/">GO templates</a></li>
 <li><code>/static/</code> - files that will be copied as is to the final site content, note that <code>js</code>, <code>img</code> and <code>css</code> directories
-are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use coresponding directories in <code>assets</code>.<br /></li>
+are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use coresponding directories in <code>assets</code>.</li>
 <li><code>config.yaml</code> - Hugo configuration</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
                     </article>
@@ -363,6 +330,11 @@ are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use 
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -370,11 +342,6 @@ are processed via Gulp tasks, and shouldn&rsquo;t be used directly, instead use 
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

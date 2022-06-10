@@ -89,50 +89,65 @@
                         <h1 class="text-center">Cayenne 4.2 Beta 1 Released<br />
                             <small class="font-size-1rem text-muted">Dec 06, 2021</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce the first beta release of Cayenne 4.2.
+                        <p>Apache Cayenne team is glad to announce the first beta release of Cayenne 4.2.
 The API is frozen now, and it is safe to try it out. From now on the 4.2 branch will concentrate on bug fixes.</p>
-
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
 
+
 <div class="pb-3"></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-
-<div class="pb-2"></div>
-
-<h4 id="changes-new-features">Changes/New Features:</h4>
-
+<!-- raw HTML omitted -->
+<h4 id="changesnew-features">Changes/New Features:</h4>
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2399">CAY-2399</a> Convert string values to Enum in qualifiers</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2637">CAY-2637</a> Allow forcing a custom Connection for a transaction</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2718">CAY-2718</a> Use testcontainers for the integration tests</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2399">CAY-2399</a> Convert string values to Enum in qualifiers</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2637">CAY-2637</a> Allow forcing a custom Connection for a transaction</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2718">CAY-2718</a> Use testcontainers for the integration tests</li>
 </ul>
 
+
 <div class="pb-2"></div>
-
 <h4 id="bug-fixes">Bug Fixes:</h4>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2092">CAY-2092</a> Exception for query that uses pagination and sorting on to-many</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2694">CAY-2694</a> Precision issues with reverse / forward engineering of time types on MySQL</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2699">CAY-2699</a> Modeler: dbimport schema view not working on SQLite</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2702">CAY-2702</a> Modeler: Callbacks table has too small default width</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2703">CAY-2703</a> Modeler: incorrect active tab style on the MacOS version</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2704">CAY-2704</a> Vertical inheritance with Embeddedables looses ObjAttribute information</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2705">CAY-2705</a> Performance of callback annotation processing</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2706">CAY-2706</a> Modeler: object attribute dialog doesn&rsquo;t properly initialized for the embeddable type</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2707">CAY-2707</a> Modeler: code generation is broken in the DataDomain tab</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2708">CAY-2708</a> Gradle build plugin fails on Java 16</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2709">CAY-2709</a> Modeler: Cgen fails to generate code for a new unsaved project with all settings set to default</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2710">CAY-2710</a> Modeler: modeler throws IllegalArgumentsException when root and rel paths have different root</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2712">CAY-2712</a> Shouldn&rsquo;t run batch inserts with generated keys if there is reflexive dependency</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2713">CAY-2713</a> ConcurrentModificationException when Inserting</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2714">CAY-2714</a> Offset value is not copied to column select metadata</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2716">CAY-2716</a> Wrong operator for the bitwise NOT</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2720">CAY-2720</a> ConcurrentModificationException in the TypeAwareSQLTreeProcessor</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2721">CAY-2721</a> Platform builds of CayenneModeler don&rsquo;t work with Java 17</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2723">CAY-2723</a> Phantom update of a to-dependent-pk relationship</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2092">CAY-2092</a> Exception for query that uses pagination and sorting on to-many</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2694">CAY-2694</a> Precision issues with reverse / forward engineering of time types on MySQL</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2699">CAY-2699</a> Modeler: dbimport schema view not working on SQLite</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2702">CAY-2702</a> Modeler: Callbacks table has too small default width</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2703">CAY-2703</a> Modeler: incorrect active tab style on the MacOS version</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2704">CAY-2704</a> Vertical inheritance with Embeddedables looses ObjAttribute information</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2705">CAY-2705</a> Performance of callback annotation processing</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2706">CAY-2706</a> Modeler: object attribute dialog doesn&rsquo;t properly initialized for the embeddable type</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2707">CAY-2707</a> Modeler: code generation is broken in the DataDomain tab</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2708">CAY-2708</a> Gradle build plugin fails on Java 16</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2709">CAY-2709</a> Modeler: Cgen fails to generate code for a new unsaved project with all settings set to default</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2710">CAY-2710</a> Modeler: modeler throws IllegalArgumentsException when root and rel paths have different root</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2712">CAY-2712</a> Shouldn&rsquo;t run batch inserts with generated keys if there is reflexive dependency</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2713">CAY-2713</a> ConcurrentModificationException when Inserting</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2714">CAY-2714</a> Offset value is not copied to column select metadata</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2716">CAY-2716</a> Wrong operator for the bitwise NOT</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2720">CAY-2720</a> ConcurrentModificationException in the TypeAwareSQLTreeProcessor</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2721">CAY-2721</a> Platform builds of CayenneModeler don&rsquo;t work with Java 17</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2723">CAY-2723</a> Phantom update of a to-dependent-pk relationship</li>
 </ul>
 
                     </article>
@@ -268,6 +283,11 @@ The API is frozen now, and it is safe to try it out. From now on the 4.2 branch 
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -275,11 +295,6 @@ The API is frozen now, and it is safe to try it out. From now on the 4.2 branch 
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

@@ -88,145 +88,27 @@
                 <h1 class="text-center">Database Support</h1>
                 <p>This page provides useful information about JDBC driver settings for various database.
 All databases below have custom Cayenne DbAdapters and are automatically recognized by Cayenne AutoAdapter.</p>
-
-<table id="db-support" class="table table-bordered">
-<thead>
-<tr>
-<th>Database</th>
-<th>Driver Name</th>
-<th>Sample URL</th>
-<th>Notes</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><a href="http://www.ibm.com/db2/">DB2</a></td>
-<td>com.<wbr>ibm.<wbr>db2.<wbr>jcc.<wbr>DB2<wbr>Driver</td>
-<td>jdbc:<wbr>db2:<wbr>//127.0.0.1:<wbr>50000<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://db.apache.org/derby/">Derby</a></td>
-<td>org.<wbr>apache.<wbr>derby.<wbr>jdbc.<wbr>Client<wbr>Driver</td>
-<td>jdbc:<wbr>derby:<wbr>//127.0.0.1<wbr>/testdb</td>
-<td>client<wbr>/<wbr>server</td>
-</tr>
-
-<tr>
-<td></td>
-<td>org.<wbr>apache.<wbr>derby.<wbr>jdbc.<wbr>Em<wbr>bedded<wbr>Driver</td>
-<td>jdbc:<wbr>derby:<wbr>path-to-<wbr>db-dir;<wbr>create=<wbr>true</td>
-<td>em<wbr>bedd<wbr>ed</td>
-</tr>
-
-<tr>
-<td><a href="http://www.frontbase.com/">FrontBase</a></td>
-<td>jdbc.<wbr>Front<wbr>Base.<wbr>FBJ<wbr>Driver</td>
-<td>jdbc:<wbr>Front<wbr>Base:<wbr>//127.0.0.1<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://hsqldb.org/">HSQLDB</a></td>
-<td>org.<wbr>hsqldb.<wbr>jdbc<wbr>Driver</td>
-<td>jdbc:<wbr>hsqldb:<wbr>hsql:<wbr>//127.0.0.1</td>
-<td>client<wbr>/<wbr>server</td>
-</tr>
-
-<tr>
-<td></td>
-<td>jdbc:<wbr>hsqldb:</td>
-<td>file:<wbr>/path-to-<wbr>hsql-db-<wbr>files</td>
-<td>em<wbr>bedd<wbr>ed</td>
-</tr>
-
-<tr>
-<td><a href="http://www.h2database.com/">H2</a></td>
-<td>org.<wbr>h2.<wbr>Driver</td>
-<td>jdbc:<wbr>h2:<wbr>mem:<wbr>myTestMem;<wbr>MVCC=<wbr>TRUE</td>
-<td>em<wbr>bedd<wbr>ed in-<wbr>me<wbr>mory</td>
-</tr>
-
-<tr>
-<td><a href="http://www.ingres.com/products/ingres-database.php">Ingres</a></td>
-<td>com.<wbr>ingres.<wbr>jdbc.<wbr>Ingres<wbr>Driver</td>
-<td>jdbc:<wbr>ingres:<wbr>//127.0.0.1<wbr>:II7<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://www.mysql.com/">MySQL</a></td>
-<td>com.<wbr>mysql.<wbr>jdbc.<wbr>Driver</td>
-<td>jdbc:<wbr>mysql:<wbr>//127.0.0.1<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://www.openbase.com">OpenBase</a></td>
-<td>com.<wbr>open<wbr>base.<wbr>jdbc.<wbr>Ob<wbr>Driver</td>
-<td>jdbc:<wbr>open<wbr>base:<wbr>//127.0.0.1<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://www.oracle.com/">Oracle</a></td>
-<td>oracle.<wbr>jdbc.<wbr>driver.<wbr>Oracle<wbr>Driver</td>
-<td>jdbc:<wbr>oracle<wbr>:thin:<wbr>@//127.0.0.1<wbr>:1521<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://www.postgresql.org/">PostgreSQL</a></td>
-<td>org.<wbr>postgre<wbr>sql.<wbr>Driver</td>
-<td>jdbc:<wbr>postgre<wbr>sql:<wbr>//127.0.0.1<wbr>:5432<wbr>/dbname</td>
-<td></td>
-</tr>
-
-<tr>
-<td><a href="http://www.sqlite.org/">SQLite 3.*</a></td>
-<td>org.<wbr>sqlite.<wbr>JDBC</td>
-<td>jdbc:<wbr>sqlite:<wbr>path_<wbr>to_<wbr>dbfile</td>
-<td>driver from zentus<wbr>.com</td>
-</tr>
-
-<tr>
-<td><a href="http://www.microsoft.com/sqlserver">SQLServer</a></td>
-<td><a href="http://msdn.microsoft.com/en-us/data/aa937724.aspx">com.<wbr>microsoft.<wbr>sqlserver.<wbr>jdbc.<wbr>SQLServer<wbr>Driver</a></td>
-<td>jdbc:<wbr>sql<wbr>server:<wbr>//127.0.0.1;<wbr>data<wbr>base<wbr>Name=<wbr>dbname</td>
-<td>Micro<wbr>soft Driver</td>
-</tr>
-
-<tr>
-<td></td>
-<td>com.<wbr>micro<wbr>soft.<wbr>jdbc.<wbr>sql<wbr>server.<wbr>SQL<wbr>Server<wbr>Driver</td>
-<td>jdbc:<wbr>micro<wbr>soft:<wbr>sql<wbr>server:<wbr>//127.0.0.1<wbr>;data<wbr>base<wbr>Name<wbr>=dbname;<wbr>Select<wbr>Method<wbr>=cursor</td>
-<td>Micro<wbr>soft Driver, SQL Server prior to 2005</td>
-</tr>
-
-<tr>
-<td></td>
-<td>net.<wbr>source<wbr>forge.<wbr>jtds.<wbr>jdbc.<wbr>Driver</td>
-<td>jdbc:<wbr>jtds:<wbr>sql<wbr>server:<wbr>//127.0.0.1<wbr>:5000<wbr>/dbname</td>
-<td><a href="http://jtds.sourceforge.net/">jTDS Driver</a></td>
-</tr>
-
-<tr>
-<td><a href="http://www.sybase.com/">Sybase</a></td>
-<td>com.<wbr>sybase.<wbr>jdbc3.<wbr>jdbc.<wbr>Syb<wbr>Driver</td>
-<td>jdbc:<wbr>sybase:<wbr>Tds:<wbr>127.0.0.1<wbr>:5000<wbr>/dbname</td>
-<td>Sy<wbr>base driver</td>
-</tr>
-
-<tr>
-<td></td>
-<td>net.<wbr>source<wbr>forge.<wbr>jtds.<wbr>jdbc.<wbr>Driver</td>
-<td>jdbc:<wbr>jtds:<wbr>sybase:<wbr>//127.0.0.1<wbr>:5000<wbr>/dbname;<wbr>useLOBs=<wbr>false;<wbr>TDS=4.2</td>
-<td><a href="http://jtds.sourceforge.net/">jTDS Driver</a></td>
-</tr>
-</tbody>
-</table>
+<p>{#db-support .table .table-bordered}
+Database                                 | Driver Name                                                  | Sample URL                                                        | Notes      <br>
+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-|&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-
+<a href="http://www.ibm.com/db2/">DB2</a>           | com.<!-- raw HTML omitted -->ibm.<!-- raw HTML omitted -->db2.<!-- raw HTML omitted -->jcc.<!-- raw HTML omitted -->DB2<!-- raw HTML omitted -->Driver                | jdbc:<!-- raw HTML omitted -->db2:<!-- raw HTML omitted -->//127.0.0.1:<!-- raw HTML omitted -->50000<!-- raw HTML omitted -->/dbname             |            <br>
+<a href="http://db.apache.org/derby/">Derby</a>     | org.<!-- raw HTML omitted -->apache.<!-- raw HTML omitted -->derby.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Client<!-- raw HTML omitted -->Driver  | jdbc:<!-- raw HTML omitted -->derby:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->/testdb                      | client<!-- raw HTML omitted -->/<!-- raw HTML omitted -->server
+| org.<!-- raw HTML omitted -->apache.<!-- raw HTML omitted -->derby.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Em<!-- raw HTML omitted -->bedded<!-- raw HTML omitted -->Driver| jdbc:<!-- raw HTML omitted -->derby:<!-- raw HTML omitted -->path-to-<!-- raw HTML omitted -->db-dir;<!-- raw HTML omitted -->create=<!-- raw HTML omitted -->true    | em<!-- raw HTML omitted -->bedd<!-- raw HTML omitted -->ed   <br>
+<a href="http://www.frontbase.com/">FrontBase</a>   | jdbc.<!-- raw HTML omitted -->Front<!-- raw HTML omitted -->Base.<!-- raw HTML omitted -->FBJ<!-- raw HTML omitted -->Driver 	                        | jdbc:<!-- raw HTML omitted -->Front<!-- raw HTML omitted -->Base:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->/dbname                  |
+<a href="http://hsqldb.org/">HSQLDB</a>             | org.<!-- raw HTML omitted -->hsqldb.<!-- raw HTML omitted -->jdbc<!-- raw HTML omitted -->Driver 	                            | jdbc:<!-- raw HTML omitted -->hsqldb:<!-- raw HTML omitted -->hsql:<!-- raw HTML omitted -->//127.0.0.1                       | client<!-- raw HTML omitted -->/<!-- raw HTML omitted -->server
+| jdbc:<!-- raw HTML omitted -->hsqldb:                                            | file:<!-- raw HTML omitted -->/path-to-<!-- raw HTML omitted -->hsql-db-<!-- raw HTML omitted -->files                        | em<!-- raw HTML omitted -->bedd<!-- raw HTML omitted -->ed
+<a href="http://www.h2database.com/">H2</a>                | org.<!-- raw HTML omitted -->h2.<!-- raw HTML omitted -->Driver 	                                    | jdbc:<!-- raw HTML omitted -->h2:<!-- raw HTML omitted -->mem:<!-- raw HTML omitted -->myTestMem;<!-- raw HTML omitted -->MVCC=<!-- raw HTML omitted -->TRUE          | em<!-- raw HTML omitted -->bedd<!-- raw HTML omitted -->ed in-<!-- raw HTML omitted -->me<!-- raw HTML omitted -->mory
+<a href="http://www.ingres.com/products/ingres-database.php">Ingres</a>| com.<!-- raw HTML omitted -->ingres.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Ingres<!-- raw HTML omitted -->Driver | jdbc:<!-- raw HTML omitted -->ingres:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->:II7<!-- raw HTML omitted -->/dbname     |            <br>
+<a href="http://www.mysql.com/">MySQL</a>           | com.<!-- raw HTML omitted -->mysql.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Driver                         | jdbc:<!-- raw HTML omitted -->mysql:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->/dbname 	                    |           <br>
+<a href="http://www.openbase.com">OpenBase</a>             | com.<!-- raw HTML omitted -->open<!-- raw HTML omitted -->base.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Ob<!-- raw HTML omitted -->Driver                    | jdbc:<!-- raw HTML omitted -->open<!-- raw HTML omitted -->base:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->/dbname 	                |           <br>
+<a href="http://www.oracle.com/">Oracle</a>         | oracle.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->driver.<!-- raw HTML omitted -->Oracle<!-- raw HTML omitted -->Driver          | jdbc:<!-- raw HTML omitted -->oracle<!-- raw HTML omitted -->:thin:<!-- raw HTML omitted -->@//127.0.0.1<!-- raw HTML omitted -->:1521<!-- raw HTML omitted -->/dbname|	        <br>
+<a href="http://www.postgresql.org/">PostgreSQL</a> | org.<!-- raw HTML omitted -->postgre<!-- raw HTML omitted -->sql.<!-- raw HTML omitted -->Driver                              | jdbc:<!-- raw HTML omitted -->postgre<!-- raw HTML omitted -->sql:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->:5432<!-- raw HTML omitted -->/dbname 	    |            <br>
+<a href="http://www.sqlite.org/">SQLite 3.*</a>     | org.<!-- raw HTML omitted -->sqlite.<!-- raw HTML omitted -->JDBC                                    | jdbc:<!-- raw HTML omitted -->sqlite:<!-- raw HTML omitted -->path_<!-- raw HTML omitted -->to_<!-- raw HTML omitted -->dbfile 	                | driver from zentus<!-- raw HTML omitted -->.com
+<a href="http://www.microsoft.com/sqlserver">SQLServer</a>| <a href="http://msdn.microsoft.com/en-us/data/aa937724.aspx">com.<!-- raw HTML omitted -->microsoft.<!-- raw HTML omitted -->sqlserver.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->SQLServer<!-- raw HTML omitted -->Driver</a>| jdbc:<!-- raw HTML omitted -->sql<!-- raw HTML omitted -->server:<!-- raw HTML omitted -->//127.0.0.1;<!-- raw HTML omitted -->data<!-- raw HTML omitted -->base<!-- raw HTML omitted -->Name=<!-- raw HTML omitted -->dbname 	| Micro<!-- raw HTML omitted -->soft Driver
+| com.<!-- raw HTML omitted -->micro<!-- raw HTML omitted -->soft.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->sql<!-- raw HTML omitted -->server.<!-- raw HTML omitted -->SQL<!-- raw HTML omitted -->Server<!-- raw HTML omitted -->Driver  | jdbc:<!-- raw HTML omitted -->micro<!-- raw HTML omitted -->soft:<!-- raw HTML omitted -->sql<!-- raw HTML omitted -->server:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->;data<!-- raw HTML omitted -->base<!-- raw HTML omitted -->Name<!-- raw HTML omitted -->=dbname;<!-- raw HTML omitted -->Select<!-- raw HTML omitted -->Method<!-- raw HTML omitted -->=cursor | Micro<!-- raw HTML omitted -->soft Driver, SQL Server prior to 2005
+| net.<!-- raw HTML omitted -->source<!-- raw HTML omitted -->forge.<!-- raw HTML omitted -->jtds.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Driver    | jdbc:<!-- raw HTML omitted -->jtds:<!-- raw HTML omitted -->sql<!-- raw HTML omitted -->server:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->:5000<!-- raw HTML omitted -->/dbname  | <a href="http://jtds.sourceforge.net/">jTDS Driver</a>
+<a href="http://www.sybase.com/">Sybase</a>         | com.<!-- raw HTML omitted -->sybase.<!-- raw HTML omitted -->jdbc3.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Syb<!-- raw HTML omitted -->Driver          | jdbc:<!-- raw HTML omitted -->sybase:<!-- raw HTML omitted -->Tds:<!-- raw HTML omitted -->127.0.0.1<!-- raw HTML omitted -->:5000<!-- raw HTML omitted -->/dbname    | Sy<!-- raw HTML omitted -->base driver<br>
+| net.<!-- raw HTML omitted -->source<!-- raw HTML omitted -->forge.<!-- raw HTML omitted -->jtds.<!-- raw HTML omitted -->jdbc.<!-- raw HTML omitted -->Driver 	| jdbc:<!-- raw HTML omitted -->jtds:<!-- raw HTML omitted -->sybase:<!-- raw HTML omitted -->//127.0.0.1<!-- raw HTML omitted -->:5000<!-- raw HTML omitted -->/dbname;<!-- raw HTML omitted -->useLOBs=<!-- raw HTML omitted -->false;<!-- raw HTML omitted -->TDS=4.2 | <a href="http://jtds.sourceforge.net/">jTDS Driver</a></p>
 
             </article>
         </section>
@@ -339,6 +221,11 @@ All databases below have custom Cayenne DbAdapters and are automatically recogni
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -346,11 +233,6 @@ All databases below have custom Cayenne DbAdapters and are automatically recogni
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

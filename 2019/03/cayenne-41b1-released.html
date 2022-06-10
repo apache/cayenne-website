@@ -89,88 +89,134 @@
                         <h1 class="text-center">Cayenne 4.1 Beta 1 Released<br />
                             <small class="font-size-1rem text-muted">Mar 18, 2019</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce the first beta release of Cayenne 4.1.
+                        <p>Apache Cayenne team is glad to announce the first beta release of Cayenne 4.1.
 The API is frozen now and it is safe to try it out. From now on the 4.1 branch will concentrate on bug fixes.
 The highlights of this release are:</p>
-
 <ul>
-<li><p>Cross-context synchronization is turned off by default. This should improve commit performance and data consistency in app clustering scenarios. It can be turned back on via <code>cayenne.server.contexts_sync_strategy</code> property (aka <code>Constants.SERVER_CONTEXTS_SYNC_PROPERTY</code>).</p></li>
-
-<li><p>Improved &ldquo;DB Import&rdquo; tab for DataMaps</p></li>
-
-<li><p>&ldquo;Class Generation&rdquo; dialog is now implemented as a DataMap tab. Class generation user selections are preserved in the project and can be reused from Maven/Gradle/Ant cgen.</p></li>
-
-<li><p>General Modeler cleanup and bugfixes; framework bugfixes.</p></li>
+<li>
+<p>Cross-context synchronization is turned off by default. This should improve commit performance and data consistency in app clustering scenarios. It can be turned back on via <code>cayenne.server.contexts_sync_strategy</code> property (aka <code>Constants.SERVER_CONTEXTS_SYNC_PROPERTY</code>).</p>
+</li>
+<li>
+<p>Improved &ldquo;DB Import&rdquo; tab for DataMaps</p>
+</li>
+<li>
+<p>&ldquo;Class Generation&rdquo; dialog is now implemented as a DataMap tab. Class generation user selections are preserved in the project and can be reused from Maven/Gradle/Ant cgen.</p>
+</li>
+<li>
+<p>General Modeler cleanup and bugfixes; framework bugfixes.</p>
+</li>
 </ul>
-
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
 
+
 <div class="pb-3"></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-
-<div class="pb-2"></div>
-
-<h4 id="changes-new-features">Changes/New Features:</h4>
-
+<!-- raw HTML omitted -->
+<h4 id="changesnew-features">Changes/New Features:</h4>
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2446">CAY-2446</a> Run Disjoint By Id queries outside of synchronized block</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2447">CAY-2447</a> Crypto support for LocalDateTime</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2471">CAY-2471</a> Support multiple XML project versions</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2473">CAY-2473</a> Modeler: cleanup attributes and relationship editors</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2474">CAY-2474</a> Modeler: swap buttons in dialog toolbar</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2475">CAY-2475</a> Modeler: move inheritance icon to name column in objAttr table and objRel table</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2478">CAY-2478</a> cgen: Generate properties for PK</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2481">CAY-2481</a> Support for Object[] as return type in SQLTemplate and SQLExec</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2485">CAY-2485</a> Compact Slf4j Logger</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2487">CAY-2487</a> Removed usage of CayenneException.</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2489">CAY-2489</a> Modeler: Add validation to the case of not to PK relationships</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2491">CAY-2491</a> Modeler: Remaster Db Import View</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2493">CAY-2493</a> Save cgen configuration with datamap XML</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2494">CAY-2494</a> Rename dbImport tag from &lsquo;config&rsquo; to &lsquo;dbImport&rsquo;</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2499">CAY-2499</a> Support for COUNT(DISTINCT(column)) function aggregate</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2514">CAY-2514</a> Set SERVER_CONTEXTS_SYNC_PROPERTY default value to false</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2517">CAY-2517</a> EventManager: optimization of adding listeners</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2446">CAY-2446</a> Run Disjoint By Id queries outside of synchronized block</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2447">CAY-2447</a> Crypto support for LocalDateTime</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2471">CAY-2471</a> Support multiple XML project versions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2473">CAY-2473</a> Modeler: cleanup attributes and relationship editors</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2474">CAY-2474</a> Modeler: swap buttons in dialog toolbar</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2475">CAY-2475</a> Modeler: move inheritance icon to name column in objAttr table and objRel table</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2478">CAY-2478</a> cgen: Generate properties for PK</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2481">CAY-2481</a> Support for Object[] as return type in SQLTemplate and SQLExec</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2485">CAY-2485</a> Compact Slf4j Logger</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2487">CAY-2487</a> Removed usage of CayenneException.</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2489">CAY-2489</a> Modeler: Add validation to the case of not to PK relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2491">CAY-2491</a> Modeler: Remaster Db Import View</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2493">CAY-2493</a> Save cgen configuration with datamap XML</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2494">CAY-2494</a> Rename dbImport tag from &lsquo;config&rsquo; to &lsquo;dbImport&rsquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2499">CAY-2499</a> Support for COUNT(DISTINCT(column)) function aggregate</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2514">CAY-2514</a> Set SERVER_CONTEXTS_SYNC_PROPERTY default value to false</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2517">CAY-2517</a> EventManager: optimization of adding listeners</li>
 </ul>
 
+
 <div class="pb-2"></div>
-
 <h4 id="bug-fixes">Bug Fixes:</h4>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2320">CAY-2320</a> Modeler: Limit input into numeric fields to 10 digits</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2444">CAY-2444</a> Change URI from http:// to https:// in xsi:schemaLocation</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2445">CAY-2445</a> Oracle: Problem with ExpressionFactory.notInExp()</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2449">CAY-2449</a> Modeler: Needless scrollbar in Generate DB Schema result menu</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2450">CAY-2450</a> Modeler: Impossible to update Attribute title after syncing ObjEntity</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2451">CAY-2451</a> Modeler: ObjEntity &ldquo;Edit&rdquo; button doesn&rsquo;t open editor for Relationship</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2454">CAY-2454</a> Modeler: Unable to read validation message if it&rsquo;s truncated</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2455">CAY-2455</a> Modeler: The width of the pop-up window is very large</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2459">CAY-2459</a> Modeler: DataMap paste function is not working</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2462">CAY-2462</a> Modeler: Clipboard holds old content after application was reloaded</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2463">CAY-2463</a> Modeler: DB Schema generation doesn&rsquo;t work</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2464">CAY-2464</a> ClassCastException when returning PRUNED_NODE in expression transformer</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2470">CAY-2470</a> Can&rsquo;t bind SQLExec parameters in a loop</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2472">CAY-2472</a> Clear cached replacement query on mutation in all indirect queries</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2476">CAY-2476</a> Modeller: Fixed wrong behaviour of code generation dialog</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2480">CAY-2480</a> cayenne:cdbgen and cayenne:cgen have identical text in cayenne-maven-plugin</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2484">CAY-2484</a> maven plugins missing in 4.1.M2 release</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2490">CAY-2490</a> Modeler: Added dbEntities from other datamaps in dbRelationship dialog.</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2496">CAY-2496</a> Modeler: Fixed wrong table behavior: focus color, cleanup DBAttribute Path cell on select.</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2497">CAY-2497</a> Modeler: SQL Scripts tab isn&rsquo;t scrollable</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2501">CAY-2501</a> Modeler: DbImport ui not loading columns for MySQL connector v8.0</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2502">CAY-2502</a> Modeler: DataMap in DataNode tree view disappears after dbImport</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2504">CAY-2504</a> Broken detection logic of NoopEventBridge in DataRowStoreFactory</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2505">CAY-2505</a> EventBridge providers should be bound without scope</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2521">CAY-2521</a> Expression without Object ID disjoint issue</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2530">CAY-2530</a> Modeler: DB Import and Class Generation from Project is performed for removed datamaps</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2531">CAY-2531</a> Modeler: Importing same schema after Import Revert clears all entities in datamap</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2533">CAY-2533</a> Modeler: Exception on validating ObjRelationship without db path</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2535">CAY-2535</a> Modeler: Impossible to import stored procedure apart from db tables</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2537">CAY-2537</a> Modeler: Schema Generation Complete popup window is hidden</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2544">CAY-2544</a> Possible name clash of ivar and property name in generated class</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2547">CAY-2547</a> CayenneDataObject serialization issue</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2320">CAY-2320</a> Modeler: Limit input into numeric fields to 10 digits</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2444">CAY-2444</a> Change URI from http:// to https:// in xsi:schemaLocation</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2445">CAY-2445</a> Oracle: Problem with ExpressionFactory.notInExp()</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2449">CAY-2449</a> Modeler: Needless scrollbar in Generate DB Schema result menu</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2450">CAY-2450</a> Modeler: Impossible to update Attribute title after syncing ObjEntity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2451">CAY-2451</a> Modeler: ObjEntity &ldquo;Edit&rdquo; button doesn&rsquo;t open editor for Relationship</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2454">CAY-2454</a> Modeler: Unable to read validation message if it&rsquo;s truncated</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2455">CAY-2455</a> Modeler: The width of the pop-up window is very large</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2459">CAY-2459</a> Modeler: DataMap paste function is not working</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2462">CAY-2462</a> Modeler: Clipboard holds old content after application was reloaded</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2463">CAY-2463</a> Modeler: DB Schema generation doesn&rsquo;t work</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2464">CAY-2464</a> ClassCastException when returning PRUNED_NODE in expression transformer</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2470">CAY-2470</a> Can&rsquo;t bind SQLExec parameters in a loop</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2472">CAY-2472</a> Clear cached replacement query on mutation in all indirect queries</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2476">CAY-2476</a> Modeller: Fixed wrong behaviour of code generation dialog</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2480">CAY-2480</a> cayenne:cdbgen and cayenne:cgen have identical text in cayenne-maven-plugin</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2484">CAY-2484</a> maven plugins missing in 4.1.M2 release</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2490">CAY-2490</a> Modeler: Added dbEntities from other datamaps in dbRelationship dialog.</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2496">CAY-2496</a> Modeler: Fixed wrong table behavior: focus color, cleanup DBAttribute Path cell on select.</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2497">CAY-2497</a> Modeler: SQL Scripts tab isn&rsquo;t scrollable</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2501">CAY-2501</a> Modeler: DbImport ui not loading columns for MySQL connector v8.0</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2502">CAY-2502</a> Modeler: DataMap in DataNode tree view disappears after dbImport</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2504">CAY-2504</a> Broken detection logic of NoopEventBridge in DataRowStoreFactory</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2505">CAY-2505</a> EventBridge providers should be bound without scope</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2521">CAY-2521</a> Expression without Object ID disjoint issue</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2530">CAY-2530</a> Modeler: DB Import and Class Generation from Project is performed for removed datamaps</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2531">CAY-2531</a> Modeler: Importing same schema after Import Revert clears all entities in datamap</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2533">CAY-2533</a> Modeler: Exception on validating ObjRelationship without db path</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2535">CAY-2535</a> Modeler: Impossible to import stored procedure apart from db tables</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2537">CAY-2537</a> Modeler: Schema Generation Complete popup window is hidden</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2544">CAY-2544</a> Possible name clash of ivar and property name in generated class</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2547">CAY-2547</a> CayenneDataObject serialization issue</li>
 </ul>
 
                     </article>
@@ -306,6 +352,11 @@ The highlights of this release are:</p>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -313,11 +364,6 @@ The highlights of this release are:</p>
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

@@ -89,11 +89,8 @@
                         <h1 class="text-center">Cayenne 4.0 Milestone 5 Released<br />
                             <small class="font-size-1rem text-muted">Mar 06, 2017</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce the latest milestone of Cayenne - 4.0.M5.
+                        <p>Apache Cayenne team is glad to announce the latest milestone of Cayenne - 4.0.M5.
 The new release features a number of important things:</p>
-
 <ul>
 <li>New fluent API for SQL functions (including long-awaited <strong>aggregate</strong> functions).</li>
 <li>Auto-loading of additional Cayenne modules.</li>
@@ -101,35 +98,23 @@ The new release features a number of important things:</p>
 <li>Further improvements and stabilization of database reverse-engineering tools.</li>
 <li>Fixes bugs, updates docs, etc.</li>
 </ul>
-
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>. Make sure to consult <a href="https://github.com/apache/cayenne/blob/4.0.M5/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> file before updating.</p>
-
 <p>Before we start discussing individual features, a few words on the future development effort.
 Cayenne 4.0 is quickly approaching &ldquo;beta&rdquo; status. There&rsquo;s a good chance that the following release will be
 feature-complete and we will enter &ldquo;beta&rdquo; and associated code freeze of the runtime framework.</p>
-
 <p>Now the new things in a bit more detail:</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="fluent-query-api">Fluent query API</h3>
-
 <p>These great additions to Fluent API are new in M5:</p>
-
 <p><em>ColumnSelect</em></p>
-
 <pre><code>List&lt;String&gt; names = ObjectSelect.query(Artist.class)
                      .column(Artist.ARTIST_NAME).select(context);
 </code></pre>
-
 <p><em>Aggregate Functions</em></p>
-
 <pre><code>// easy way to select count
 long count = ObjectSelect.query(Artist.class).selectCount(context);
 </code></pre>
-
 <p><em>GROUP BY .. HAVING</em></p>
-
 <pre><code>Property&lt;Double&gt; minPrice = Artist.PAINTING_ARRAY.dot(Painting.ESTIMATED_PRICE).min();
 
 // Object[0] is a name (String)
@@ -140,73 +125,89 @@ List&lt;Object[]&gt; nameAndMinPrice = ObjectSelect.query(Artist.class)
                     .having(minPrice.gt(2000.0))
                     .select(context);
 </code></pre>
-
 <p><em>SQL Functions</em></p>
-
 <pre><code>Property&lt;Integer&gt; nameLength = Artist.ARTIST_NAME.length();
 List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class, nameLength.gt(5))
                         .select(context);
 </code></pre>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-    
-
+<!-- raw HTML omitted -->
 <h3 id="reverse-engineering-improvements">Reverse Engineering Improvements</h3>
-
 <p>We pushed DB reverse engineering functionality further. This time in addition to clearing bugs and perform smoother importing
 we changed cdbimport plugin configuration to make it clearer and ready for future improvements we have in mind.</p>
-
 <p>The plugin itself has changed it&rsquo;s name to <em>&ldquo;cayenne-maven-plugin&rdquo;</em>, so now you can use short commands like the following:</p>
-
 <pre><code>mvn cayenne:cdbimport
 </code></pre>
-
 <p><strong><em>Important note</em></strong>: please refer to <a href="https://github.com/apache/cayenne/blob/4.0.M5/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> for detailed changes in <em>cdbimport</em> configuration.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2139">CAY-2139</a> Upgrade HSQLDB dependency to the most recent version (2.3.4)</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2150">CAY-2150</a> Refactoring: ParameterBinding to contain ExtendedType property</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2163">CAY-2163</a> Property.path() , ExpressionFactory.pathExp()</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2164">CAY-2164</a> Relocate builder bootstrap methods from ServerRuntimeBuilder to ServerRuntime</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2165">CAY-2165</a> Explicit &ldquo;contribution&rdquo; API for easier expansion of DI collections and maps</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2166">CAY-2166</a> Auto-loading of Cayenne modules</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2168">CAY-2168</a> Split DbLoader to parts and clean it up</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2169">CAY-2169</a> Split DbMerger to parts and clean it up</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2170">CAY-2170</a> MergeToken sorting is highly unstable</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2172">CAY-2172</a> Cleanup Modeler import and migrate db actions</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2176">CAY-2176</a> Java 7 diamond class generation templates</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2177">CAY-2177</a> Sync auto generated state of PK between model and DB</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2187">CAY-2187</a> Support for the scalar and aggregate SQL functions in ObjectSelect API</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2197">CAY-2197</a> Update sqlite version and enable in-memory default config</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2212">CAY-2212</a> cdbimport cleanup and configuration schema refactoring</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2223">CAY-2223</a> JCacheQueryCache - a query cache provider to plug in JCache implementers</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2225">CAY-2225</a> Extensible CacheInvalidationFilter logic</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2228">CAY-2228</a> Deprecate multiple cache groups in caching and query API</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2231">CAY-2231</a> Support for collections in new functional expressions and old math expressions</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2232">CAY-2232</a> Proper conversion to String for new functional expressions</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2235">CAY-2235</a> Deprecate Query.getDataMap() method</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2139">CAY-2139</a> Upgrade HSQLDB dependency to the most recent version (2.3.4)</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2150">CAY-2150</a> Refactoring: ParameterBinding to contain ExtendedType property</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2163">CAY-2163</a> Property.path() , ExpressionFactory.pathExp()</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2164">CAY-2164</a> Relocate builder bootstrap methods from ServerRuntimeBuilder to ServerRuntime</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2165">CAY-2165</a> Explicit &ldquo;contribution&rdquo; API for easier expansion of DI collections and maps</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2166">CAY-2166</a> Auto-loading of Cayenne modules</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2168">CAY-2168</a> Split DbLoader to parts and clean it up</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2169">CAY-2169</a> Split DbMerger to parts and clean it up</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2170">CAY-2170</a> MergeToken sorting is highly unstable</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2172">CAY-2172</a> Cleanup Modeler import and migrate db actions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2176">CAY-2176</a> Java 7 diamond class generation templates</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2177">CAY-2177</a> Sync auto generated state of PK between model and DB</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2187">CAY-2187</a> Support for the scalar and aggregate SQL functions in ObjectSelect API</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2197">CAY-2197</a> Update sqlite version and enable in-memory default config</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2212">CAY-2212</a> cdbimport cleanup and configuration schema refactoring</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2223">CAY-2223</a> JCacheQueryCache - a query cache provider to plug in JCache implementers</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2225">CAY-2225</a> Extensible CacheInvalidationFilter logic</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2228">CAY-2228</a> Deprecate multiple cache groups in caching and query API</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2231">CAY-2231</a> Support for collections in new functional expressions and old math expressions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2232">CAY-2232</a> Proper conversion to String for new functional expressions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2235">CAY-2235</a> Deprecate Query.getDataMap() method</li>
 </ul>
-
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <h4 id="bug-fixes">Bug Fixes:</h4>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2032">CAY-2032</a> SelectAction: DistinctResultIterator ignores flattened relationships</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2137">CAY-2137</a> When generating SQL from EJBQL, use &ldquo;AND&rdquo; to separate multiple join conditions</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2174">CAY-2174</a> Change FK attribute name cause ObjAttribute appear after Reverse Engineering</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2175">CAY-2175</a> AliasName used in EJBQLQuery is not working if it contains mixed case</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2183">CAY-2183</a> Newly created DbRelationship is unexpectedly renamed by the Modeler</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2199">CAY-2199</a> Modeler on Windows: The same project is displayed twice in &ldquo;Recent Projects&rdquo;</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2207">CAY-2207</a> Modeler: &ldquo;Java Type&rdquo; and &ldquo;DbAttribute Path&rdquo; are not saved with using TAB to move forward</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2221">CAY-2221</a> In-memory expression evaluation gives different result than select query</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2236">CAY-2236</a> Modeler Migrate DB Schema: unable to Reverse All Operations</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2238">CAY-2238</a> Modeler: Preserve manually set DbRelationship name when syncing with ObjEntity</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2242">CAY-2242</a> Vertical Inheritance: Cannot Insert Record For Implementing Class with Attribute And Relationship</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2032">CAY-2032</a> SelectAction: DistinctResultIterator ignores flattened relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2137">CAY-2137</a> When generating SQL from EJBQL, use &ldquo;AND&rdquo; to separate multiple join conditions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2174">CAY-2174</a> Change FK attribute name cause ObjAttribute appear after Reverse Engineering</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2175">CAY-2175</a> AliasName used in EJBQLQuery is not working if it contains mixed case</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2183">CAY-2183</a> Newly created DbRelationship is unexpectedly renamed by the Modeler</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2199">CAY-2199</a> Modeler on Windows: The same project is displayed twice in &ldquo;Recent Projects&rdquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2207">CAY-2207</a> Modeler: &ldquo;Java Type&rdquo; and &ldquo;DbAttribute Path&rdquo; are not saved with using TAB to move forward</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2221">CAY-2221</a> In-memory expression evaluation gives different result than select query</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2236">CAY-2236</a> Modeler Migrate DB Schema: unable to Reverse All Operations</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2238">CAY-2238</a> Modeler: Preserve manually set DbRelationship name when syncing with ObjEntity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2242">CAY-2242</a> Vertical Inheritance: Cannot Insert Record For Implementing Class with Attribute And Relationship</li>
 </ul>
 
                     </article>
@@ -342,6 +343,11 @@ we changed cdbimport plugin configuration to make it clearer and ready for futur
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -349,11 +355,6 @@ we changed cdbimport plugin configuration to make it clearer and ready for futur
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

@@ -89,104 +89,141 @@
                         <h1 class="text-center">Cayenne 4.1 Milestone 2 Released<br />
                             <small class="font-size-1rem text-muted">Jul 23, 2018</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce next milestone release of Cayenne 4.1.
+                        <p>Apache Cayenne team is glad to announce next milestone release of Cayenne 4.1.
 This is a development release that introduces a number of nice new features along with many fixes and improvements.</p>
-
 <h5 id="notable-changes-are">Notable changes are:</h5>
-
 <ol>
-<li><p>New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable,
-more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.
-<p style="text-align: center;">
-<img class="img-fluid" src="/img/modeler-cdbimport-829523ac21.png" alt="New reverse engineering UI"/>
-</p></p></li>
-
-<li><p>User controlled transaction propagation logic and isolation level.</p>
-
-<pre><code>TransactionManager manager = runtime.getInjector().getInstance(TransactionManager.class);
-TransactionDescriptor descriptor = new TransactionDescriptor(
-        Connection.TRANSACTION_SERIALIZABLE, // set transaction isolation to SERIALIZABLE 
-        TransactionPropagation.REQUIRES_NEW  // require new transaction for every operation
-);
-manager.performInTransaction(() -&gt; {
-    // perform some DB operations...
-    return null;
-}, descriptor);
-    
-</code></pre></li>
+<li>New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable,
+more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.</li>
 </ol>
-
-<p><strong>Important note</strong>: this release removes all code deprecated in Cayenne 4.0, so review and fix your code before update.</p>
-
+<!-- raw HTML omitted -->
+<ol start="2">
+<li>User controlled transaction propagation logic and isolation level.</li>
+</ol>
+<pre><code>    TransactionManager manager = runtime.getInjector().getInstance(TransactionManager.class);
+    TransactionDescriptor descriptor = new TransactionDescriptor(
+            Connection.TRANSACTION_SERIALIZABLE, // set transaction isolation to SERIALIZABLE 
+            TransactionPropagation.REQUIRES_NEW  // require new transaction for every operation
+    );
+    manager.performInTransaction(() -&gt; {
+        // perform some DB operations...
+        return null;
+    }, descriptor);
+    
+</code></pre><p><strong>Important note</strong>: this release removes all code deprecated in Cayenne 4.0, so review and fix your code before update.</p>
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
 
+
 <div class="pb-3"></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-
-<div class="pb-2"></div>
-
-<h4 id="changes-new-features">Changes/New Features:</h4>
-
+<!-- raw HTML omitted -->
+<h4 id="changesnew-features">Changes/New Features:</h4>
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-1683">CAY-1683</a> Injectable PkGenerator</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2304">CAY-2304</a> Custom ClassLoader for Maven and Gradle plugins that use project dependencies</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2334">CAY-2334</a> cgen: option to force run from maven/gradle</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2337">CAY-2337</a> Save reverse engineering configuration with datamap XML</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2372">CAY-2372</a> Extract new modules from cayenne-server</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2377">CAY-2377</a> Cleanup deprecated code.</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2391">CAY-2391</a> cdbimport: add option to skip user-defined relationships</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2393">CAY-2393</a> Add sqlserver-docker profile to automate tests on SQLServer</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2394">CAY-2394</a> Upgrade to Apache Velocity 2.0</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2395">CAY-2395</a> cdbimport: add option to create project file</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2396">CAY-2396</a> Upgrade maven-assembly-plugin to 3.1.0</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2398">CAY-2398</a> Deprecate cayenne-joda</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2400">CAY-2400</a> Deprecate cayenne-dbcp2</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2403">CAY-2403</a> Extract eventbridges to top level</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2404">CAY-2404</a> Move itests to maven-plugins</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2406">CAY-2406</a> Add prefetch-related API to SQLSelect</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2407">CAY-2407</a> Modeler: add prefetch support for the SQLTemplate query</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2410">CAY-2410</a> Add prefetch type support for SQLTemplate query and SelectQuery</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2414">CAY-2414</a> Modeler: new icon design</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2415">CAY-2415</a> Transaction isolation and propagation support</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2416">CAY-2416</a> Change TreeMap for HashMap to store data in Cayenne model classes</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2422">CAY-2422</a> Modeler: Open driver setup window on driver load error</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2438">CAY-2438</a> Split DataChannel filter into two independent filters</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2440">CAY-2440</a> cdbimport: allow cross-schema relationships</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2443">CAY-2443</a> Make SqlTemplate and SqlExec possible to return generated keys</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-1683">CAY-1683</a> Injectable PkGenerator</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2304">CAY-2304</a> Custom ClassLoader for Maven and Gradle plugins that use project dependencies</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2334">CAY-2334</a> cgen: option to force run from maven/gradle</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2337">CAY-2337</a> Save reverse engineering configuration with datamap XML</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2372">CAY-2372</a> Extract new modules from cayenne-server</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2377">CAY-2377</a> Cleanup deprecated code.</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2391">CAY-2391</a> cdbimport: add option to skip user-defined relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2393">CAY-2393</a> Add sqlserver-docker profile to automate tests on SQLServer</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2394">CAY-2394</a> Upgrade to Apache Velocity 2.0</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2395">CAY-2395</a> cdbimport: add option to create project file</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2396">CAY-2396</a> Upgrade maven-assembly-plugin to 3.1.0</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2398">CAY-2398</a> Deprecate cayenne-joda</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2400">CAY-2400</a> Deprecate cayenne-dbcp2</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2403">CAY-2403</a> Extract eventbridges to top level</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2404">CAY-2404</a> Move itests to maven-plugins</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2406">CAY-2406</a> Add prefetch-related API to SQLSelect</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2407">CAY-2407</a> Modeler: add prefetch support for the SQLTemplate query</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2410">CAY-2410</a> Add prefetch type support for SQLTemplate query and SelectQuery</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2414">CAY-2414</a> Modeler: new icon design</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2415">CAY-2415</a> Transaction isolation and propagation support</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2416">CAY-2416</a> Change TreeMap for HashMap to store data in Cayenne model classes</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2422">CAY-2422</a> Modeler: Open driver setup window on driver load error</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2438">CAY-2438</a> Split DataChannel filter into two independent filters</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2440">CAY-2440</a> cdbimport: allow cross-schema relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2443">CAY-2443</a> Make SqlTemplate and SqlExec possible to return generated keys</li>
 </ul>
 
+
 <div class="pb-2"></div>
-
 <h4 id="bug-fixes">Bug Fixes:</h4>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2282">CAY-2282</a> Various Update Issues With Vertical Inheritance</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2370">CAY-2370</a> ValueObjectType for byte[] fails lookup</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2380">CAY-2380</a> ReferenceMap should not store or return null values</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2381">CAY-2381</a> cgen: meaningful PK with boxed type ends up with primitive type in generated source</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2382">CAY-2382</a> Lack of synchronization in DataContext serialization</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2387">CAY-2387</a> Can&rsquo;t select byte[] property with ColumnSelect</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2388">CAY-2388</a> Modeler: Visualization issues with undo/redo actions for attributes and relationships</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2389">CAY-2389</a> DbEntity qualifier with DbPath expression translates into wrong SQL</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2392">CAY-2392</a> Modeler: Unable to remove DataNode</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2397">CAY-2397</a> Modeler: Unable to set enum:value as Entity qualifier</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2401">CAY-2401</a> Modeler: NPE in ObjEntity sync action</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2405">CAY-2405</a> Broken prefetch of entity with inheritance and attribute with custom java type</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2408">CAY-2408</a> Cayenne JDK 10 compatibility</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2411">CAY-2411</a> Wrong resolution of ExtendedType with ValueObjectType for inherited class</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2418">CAY-2418</a> Modeler: unable to edit entity selected via Search</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2419">CAY-2419</a> Modeler: Not changing highlight on selecting search results within one entity</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2420">CAY-2420</a> Modeler: search is not performed for Stored Procedures</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2425">CAY-2425</a> Modeler: Migrate DB Direction field is locked if no option was selected in dropdown list</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2427">CAY-2427</a> Modeler: Undo throws exception</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2429">CAY-2429</a> Generate classes: Invalid template type: EMBEDDABLE_SINGLE_CLASS</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2430">CAY-2430</a> Modeler: Redo throws NPE</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2435">CAY-2435</a> cdbimport: procedure parameters are not imported</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2436">CAY-2436</a> NPE in CayenneRuntimeException constructor</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2439">CAY-2439</a> Modeler: Error deleting dbEntity when show only dbEntities filter is set</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2442">CAY-2442</a> Broken EventBridge providers implementations</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2282">CAY-2282</a> Various Update Issues With Vertical Inheritance</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2370">CAY-2370</a> ValueObjectType for byte[] fails lookup</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2380">CAY-2380</a> ReferenceMap should not store or return null values</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2381">CAY-2381</a> cgen: meaningful PK with boxed type ends up with primitive type in generated source</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2382">CAY-2382</a> Lack of synchronization in DataContext serialization</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2387">CAY-2387</a> Can&rsquo;t select byte[] property with ColumnSelect</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2388">CAY-2388</a> Modeler: Visualization issues with undo/redo actions for attributes and relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2389">CAY-2389</a> DbEntity qualifier with DbPath expression translates into wrong SQL</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2392">CAY-2392</a> Modeler: Unable to remove DataNode</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2397">CAY-2397</a> Modeler: Unable to set enum:value as Entity qualifier</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2401">CAY-2401</a> Modeler: NPE in ObjEntity sync action</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2405">CAY-2405</a> Broken prefetch of entity with inheritance and attribute with custom java type</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2408">CAY-2408</a> Cayenne JDK 10 compatibility</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2411">CAY-2411</a> Wrong resolution of ExtendedType with ValueObjectType for inherited class</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2418">CAY-2418</a> Modeler: unable to edit entity selected via Search</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2419">CAY-2419</a> Modeler: Not changing highlight on selecting search results within one entity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2420">CAY-2420</a> Modeler: search is not performed for Stored Procedures</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2425">CAY-2425</a> Modeler: Migrate DB Direction field is locked if no option was selected in dropdown list</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2427">CAY-2427</a> Modeler: Undo throws exception</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2429">CAY-2429</a> Generate classes: Invalid template type: EMBEDDABLE_SINGLE_CLASS</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2430">CAY-2430</a> Modeler: Redo throws NPE</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2435">CAY-2435</a> cdbimport: procedure parameters are not imported</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2436">CAY-2436</a> NPE in CayenneRuntimeException constructor</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2439">CAY-2439</a> Modeler: Error deleting dbEntity when show only dbEntities filter is set</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2442">CAY-2442</a> Broken EventBridge providers implementations</li>
 </ul>
 
                     </article>
@@ -322,6 +359,11 @@ manager.performInTransaction(() -&gt; {
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -329,11 +371,6 @@ manager.performInTransaction(() -&gt; {
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

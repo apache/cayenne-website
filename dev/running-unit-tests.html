@@ -87,84 +87,61 @@
                 <section>
                     <article>
                         <h1 class="text-center">Running Unit Tests</h1>
-                        
-
-<p>Cayenne provides a comprehensive suite of unit tests. To execute unit tests
+                        <p>Cayenne provides a comprehensive suite of unit tests. To execute unit tests
 you must first get Cayenne from Git, install JDK 1.8 and obtain the latest Maven.</p>
-
 <h2 id="prerequisites">Prerequisites</h2>
-
 <p>Maven <a href="/dev/building-cayenne.html">build prerequisites and recommended settings</a> apply here.</p>
 
-<div class="pb-2"></div>    
-    
 
+<div class="pb-2"></div>
 <h2 id="running-against-embedded-hsqldb">Running Against Embedded HSQLDB</h2>
-
 <p>No extra setup is required. Just run Maven:</p>
-
 <pre><code>$ cd cayenne
 $ mvn install
 </code></pre>
-
 <p>or</p>
-
 <pre><code>$ cd cayenne
 $ mvn clean verify
 </code></pre>
 
+
 <div class="pb-3"></div>
-
 <h2 id="running-against-in-memory-database">Running Against In-memory Database</h2>
-
 <p>Besides HSQLDB mentioned above Cayenne has preconfigured connection information for
 following databases that support in-memory mode:</p>
-
 <ul>
 <li>derby</li>
 <li>h2</li>
 <li>sqlite</li>
 </ul>
-
 <p>For this databases you can run tests without any additional configuration by only specifying
 <em>cayenneTestConnection</em> property that will activate required Maven profile:</p>
-
 <pre><code>$ mvn verify -DcayenneTestConnection=derby    
 </code></pre>
 
+
 <div class="pb-3"></div>
-
 <h2 id="running-against-database-in-docker">Running Against Database in Docker</h2>
-
 <p><strong>(Before Cayenne 4.2)</strong></p>
-
 <p>Another handy option to run Cayenne tests is with preconfigured docker profiles.
 The only thing you need is to install Docker.</p>
-
 <p>You can run tests using following <em>cayenneTestConnection</em> properties:</p>
-
 <ul>
 <li>mysql-docker</li>
 <li>postgres-docker</li>
 <li>sqlserver-docker</li>
 </ul>
-
 <p>Like with in-memory databases no additional setup is required:</p>
-
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql-docker   
 </code></pre>
 
+
 <div class="pb-3"></div>
-
 <h2 id="running-against-database-with-testcontainer">Running Against Database with TestContainer</h2>
-
 <p><strong>(Since Cayenne 4.2)</strong></p>
-
 <p>Another handy option to run Cayenne tests is with <a href="https://www.testcontainers.org/">TestContainer</a> which use Docker.
 The only thing you need is to install Docker and run it.</p>
-
 <p>You can run tests using following <em>cayenneTestConnection</em> properties:</p>
-
 <ul>
 <li>mysql-tc</li>
 <li>postgres-tc</li>
@@ -173,60 +150,45 @@ The only thing you need is to install Docker and run it.</p>
 <li>oracle-tc</li>
 <li>db2-tc</li>
 </ul>
-
 <p>Like with in-memory databases no additional setup is required:</p>
-
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql-tc   
 </code></pre>
 
+
 <div class="pb-3"></div>
-
 <h2 id="running-against-a-specific-database">Running Against a Specific Database</h2>
-
 <p>Final option to run tests against any supported database is with manual configuration.</p>
 
+
 <div class="pb-1l2"></div>
-
 <h5 id="step-1-install-jdbc-driver-jars-in-a-local-maven-repo">Step 1. Install JDBC Driver Jars in a Local Maven Repo</h5>
-
 <p>Most commercial drivers are not present in the public Maven repositories.
 So they have to be installed by the tester locally. The group and artifact
 ids are arbitrarily assigned in the main Cayenne POM, so users must follow
 the POM or the examples below.</p>
-
 <p><strong>FrontBase:</strong></p>
-
 <pre><code>$ mvn install:install-file -Dfile=frontbasejdbc.jar -DgroupId=com.frontbase \
        -DartifactId=frontbase-driver -Dversion=4.1 -Dpackaging=jar -DgeneratePom=true
 </code></pre>
-
 <p><strong>OpenBase:</strong></p>
-
 <pre><code>$ mvn install:install-file -Dfile=OpenBaseJDBC.jar -DgroupId=com.openbase \
        -DartifactId=openbase-driver -Dversion=9 -Dpackaging=jar -DgeneratePom=true
 </code></pre>
-
 <p><strong>Oracle:</strong></p>
-
 <pre><code>$ mvn install:install-file -Dfile=ojdbc5.jar -DgroupId=com.oracle \
        -DartifactId=oracle-driver -Dversion=11 -Dpackaging=jar -DgeneratePom=true
 </code></pre>
-
 <p><strong>Sybase:</strong></p>
-
 <pre><code>$ mvn install:install-file -Dfile=jconn3.jar -DgroupId=com.sybase \
        -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
 </code></pre>
 
+
 <div class="pb-3l2"></div>
-    
-
 <h5 id="step-2-run-tests-against-configured-data-source">Step 2. Run Tests Against Configured Data Source</h5>
-
 <p>Database type and connection information can be specified either on the
 command line or via a configuration file. First let&rsquo;s look at the command
 line options:</p>
-
 <pre><code>$ mvn verify -DcayenneTestConnection=&lt;profile_name&gt; \
    -DcayenneAdapter=org.apache.cayenne.dba.mysql.MySQLAdapter \
    -DcayenneJdbcUsername=myuser \
@@ -234,10 +196,8 @@ line options:</p>
    -DcayenneJdbcUrl=jdbc:mysql://localhost/cayenne \
    -DcayenneJdbcDriver=com.mysql.jdbc.Driver
 </code></pre>
-
 <p><em>cayenneTestConnection</em> is a property activating a DB-specific Maven
-profile. <em><profile_name></em> can be one of:</p>
-
+profile. <em>&lt;profile_name&gt;</em> can be one of:</p>
 <ul>
 <li>db2</li>
 <li>derby</li>
@@ -253,12 +213,10 @@ profile. <em><profile_name></em> can be one of:</p>
 <li>sqlserver</li>
 <li>sybase</li>
 </ul>
-
 <p>Another way to store this information permanently for each profile is to
 create a directory <em>$HOME/.cayenne/</em> and place a file called
 <em>connection.properties</em> in this directory. File contents should be
 similar to this example:</p>
-
 <pre><code>mysql.cayenne.adapter = org.apache.cayenne.dba.mysql.MySQLAdapter
 mysql.jdbc.username = someuser
 mysql.jdbc.password = somepasswd
@@ -289,13 +247,10 @@ db2.jdbc.password = somepasswd
 db2.jdbc.url = jdbc:db2://db2.host:50000/test_db
 db2.jdbc.driver = com.ibm.db2.jcc.DB2Driver
 </code></pre>
-
 <p>Each property starts with the Maven profile name (&ldquo;mysql&rdquo; and &ldquo;oracle&rdquo; in
 the example above). Note that in this case you should still use
 <em>cayenneTestConnection</em>. E.g.:</p>
-
-<pre><code>$ mvn verify -DcayenneTestConnection=mysql
-</code></pre>
+<pre><code>$ mvn verify -DcayenneTestConnection=mysql</code></pre>
 
                     </article>
                 </section>
@@ -431,6 +386,11 @@ the example above). Note that in this case you should still use
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -438,11 +398,6 @@ the example above). Note that in this case you should still use
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

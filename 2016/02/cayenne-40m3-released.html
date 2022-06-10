@@ -89,34 +89,20 @@
                         <h1 class="text-center">Cayenne 4.0 Milestone 3 Released<br />
                             <small class="font-size-1rem text-muted">Feb 12, 2016</small>
                         </h1>
-                        
-
-<p>This new milestone release has plenty of new features, bug fixes and other improvements. Below are just the main highlights. For more details check out the full release notes further down, as well as <a href="https://github.com/apache/cayenne/blob/4.0.M3/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a>.</p>
-
+                        <p>This new milestone release has plenty of new features, bug fixes and other improvements. Below are just the main highlights. For more details check out the full release notes further down, as well as <a href="https://github.com/apache/cayenne/blob/4.0.M3/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a>.</p>
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="java-7">Java 7</h3>
-
 <p>Since this milestone minimal Java version is 1.7. If you still need Java 1.6, you can use Cayenne 3.1 or 4.0.M2 until your application is able to upgrade.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
-<h3 id="java-8-date-time-and-joda-time-support">Java 8 Date/Time and Joda-Time Support</h3>
-
+<!-- raw HTML omitted -->
+<h3 id="java-8-datetime-and-joda-time-support">Java 8 Date/Time and Joda-Time Support</h3>
 <p>Cayenne now has two additional modules that contain ExtendedTypes for Java 8 Date/Time and Joda-Time support. You will need to add appropriate dependency and then create a coresponding module and add it to the ServerRuntime. For example:</p>
-
 <pre><code>Module java8Module = new CayenneJava8Module();
 this.runtime = new ServerRuntime(&quot;cayenne-project.xml&quot;, java8Module);
 </code></pre>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="improvements-in-query-api">Improvements in Query API</h3>
-
 <p>All new fluent query classes (ObjectSelect, SQLSelect, SelectById) have the following new methods:</p>
-
 <ul>
 <li><code>List&lt;T&gt; select(ObjectContext context);</code></li>
 <li><code>T selectOne(ObjectContext context);</code></li>
@@ -125,33 +111,18 @@ this.runtime = new ServerRuntime(&quot;cayenne-project.xml&quot;, java8Module);
 <li><code>ResultIterator&lt;T&gt; iterator(ObjectContext context);</code></li>
 <li><code>ResultBatchIterator&lt;T&gt; batchIterator(ObjectContext context, int size);</code></li>
 </ul>
-
 <p>The &ldquo;old&rdquo; style SelectQuery is still supported and also includes these methods.</p>
-
 <p>Also ResultIterator and ResultBatchIterator are both AutoCloseable now. So you will be able to use try-with-resources with them.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="non-blocking-datasource">Non-blocking DataSource</h3>
-
 <p>Default Cayenne DataSource provider is switched to a non-blocking implementation that has a much better concurrency compared to the old version.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="dbcp2">DBCP2</h3>
-
 <p>DBCPDataSourceFactory is now based on DBCP2 (which is required under Java 1.7 and newer). If you are using it, you will need to take a few steps to upgrade. For more details see <a href="https://github.com/apache/cayenne/blob/4.0.M3/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a>.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="capturing-a-stream-of-commit-changes">Capturing a stream of commit changes</h3>
-
 <p>Sometimes it is very useful to capture all or parts of &ldquo;commit log&rdquo; for commits made through Cayenne (for audit purposes, etc). It has always been a challenge to do it in a consistent and convenient manner. We&rsquo;ve made a few attempts to solve this before. M3 features new and the most comprehensive solution. There is a <a href="https://github.com/apache/cayenne/blob/4.0.M3/cayenne-lifecycle/src/main/java/org/apache/cayenne/lifecycle/postcommit/PostCommitModuleBuilder.java">PostCommitBuilder</a> class that helps to create a special DI module with all required extensions for this to work. It allows to register <a href="https://github.com/apache/cayenne/blob/4.0.M3/cayenne-lifecycle/src/main/java/org/apache/cayenne/lifecycle/postcommit/PostCommitListener.java">PostCommitListeners</a> that will receive an event on every commit, containing a full commit log object.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <ul>
 <li>CAY-1626 Add JodaTime DateTime support</li>
 <li>CAY-1902 Implement resolving Db paths for DataObjects</li>
@@ -180,11 +151,8 @@ this.runtime = new ServerRuntime(&quot;cayenne-project.xml&quot;, java8Module);
 <li>CAY-2044 Collection setter for to-many relationships</li>
 <li>CAY-2045 Add autosuggestion fields to choose attributes and relationships</li>
 </ul>
-
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="bug-fixes">Bug Fixes:</h3>
-
 <ul>
 <li>CAY-1977 Cleanup Modeler reverse engineering functionality</li>
 <li>CAY-1987 Widen types before performing in-memory evaluation of qualifiers using j.l.Number subclasses</li>
@@ -335,6 +303,11 @@ this.runtime = new ServerRuntime(&quot;cayenne-project.xml&quot;, java8Module);
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -342,11 +315,6 @@ this.runtime = new ServerRuntime(&quot;cayenne-project.xml&quot;, java8Module);
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

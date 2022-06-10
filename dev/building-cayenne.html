@@ -87,64 +87,45 @@
                 <section>
                     <article>
                         <h1 class="text-center">Building Cayenne</h1>
-                        
-
-<h2 id="prerequisites">Prerequisites</h2>
-
+                        <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li>Make sure <a href="http://maven.apache.org/">Maven</a> is installed.</li>
 <li><a href="/dev/code-repository.html">Get the source code</a>.</li>
 </ul>
 
+
 <div class="pb-3"></div>
-
 <h2 id="recommended-maven-settings">Recommended Maven Settings</h2>
-
 <p>Here are the MAVEN_OPTS that should be used for the build. MAVEN_OPTS variable can either be exported in a shell,
 or placed in <em>$HOME/.mavenrc</em>. Optimal values vary from platform to platform and between Cayenne versions,
 but these should probably work for everyone:</p>
-
 <pre><code>MAVEN_OPTS=&quot;-Djava.net.preferIPv4Stack=true -Xms512m&quot;
 </code></pre>
 
+
 <div class="pb-3"></div>
-
 <h2 id="building-with-maven">Building with Maven</h2>
-
 <p>Depending on what you want to do, there are various flavors of the builds
 discussed below. All builds should be executed from the root folder of the source checkout.</p>
-
 <p>The most common flavor is building Cayenne and executing unit and integration tests :</p>
-
 <pre><code>mvn clean verify
 </code></pre>
-
 <p>For the build to produce a release-like assembly, activate &ldquo;assembly&rdquo;
 profile. Additionally activate a profile specific for the target platform
 of a given assembly (otherwise assembly profile won&rsquo;t produce anything).</p>
-
 <p>Source assembly:</p>
-
 <pre><code>mvn clean verify -Passembly,src
 </code></pre>
-
 <p>Cross-platform assembly:</p>
-
 <pre><code>mvn clean verify -Passembly,generic
 </code></pre>
-
 <p>Windows assembly:</p>
-
 <pre><code>mvn clean verify -Passembly,windows
 </code></pre>
-
 <p>Mac OS X assembly:</p>
-
 <pre><code>mvn clean verify -Passembly,mac
 </code></pre>
-
 <p>Multiple assemblies built at once:</p>
-
 <pre><code>mvn clean verify -Passembly,src,generic,mac
 </code></pre>
 
@@ -282,6 +263,11 @@ of a given assembly (otherwise assembly profile won&rsquo;t produce anything).</
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -289,11 +275,6 @@ of a given assembly (otherwise assembly profile won&rsquo;t produce anything).</
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

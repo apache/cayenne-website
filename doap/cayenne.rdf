@@ -41,15 +41,15 @@
         <category rdf:resource="http://projects.apache.org/category/web-framework" />
         <release>
             <Version>
-                <name>Stable</name>
-                <created>2021-12-24</created>
-                <revision>4.1.1</revision>
+                <name>Release Candidate</name>
+                <created>2022-06-10</created>
+                <revision>4.2.RC1</revision>
             </Version>
         </release><release>
             <Version>
-                <name>Beta</name>
-                <created>2021-12-06</created>
-                <revision>4.2.B1</revision>
+                <name>Stable</name>
+                <created>2021-12-24</created>
+                <revision>4.1.1</revision>
             </Version>
         </release><release>
             <Version>

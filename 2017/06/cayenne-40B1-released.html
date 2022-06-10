@@ -89,20 +89,15 @@
                         <h1 class="text-center">Cayenne 4.0 Beta 1 Released<br />
                             <small class="font-size-1rem text-muted">Jun 12, 2017</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce a beta release of Cayenne 4.0. What this means for our users is
+                        <p>Apache Cayenne team is glad to announce a beta release of Cayenne 4.0. What this means for our users is
 that now the API is frozen and it is safe to try it out even if you are not usually comfortable living
 on the bleeding edge of unstable releases. We&rsquo;d like to hear from you about your upgrade experiences.
 And of course we&rsquo;ll strive to fix any remaining bugs before 4.0 goes final. To give you more confidence,
 we&rsquo;d like to mention that most of the Cayenne developers have been using 4.0 in production for years.</p>
-
 <p>From now on the 4.0 branch will concentrate on bug fixes, Modeler improvements, documentation, web site
 and other such things.</p>
-
 <p>We are planning to publish a more detailed 4.0 comparision with 3.1 shortly. For now let&rsquo;s take a look at
 things that have changed since the late milestone - M5:</p>
-
 <ul>
 <li>A native <strong>Gradle Plugin</strong>.</li>
 <li>Fresh <strong>Modeler design</strong> (along with many small UI improvements and bug fixes).</li>
@@ -110,11 +105,8 @@ things that have changed since the late milestone - M5:</p>
 <li>Optional <strong>HMAC</strong> in crypto module</li>
 <li>Numerous bug fixes, updated docs, etc.</li>
 </ul>
-
 <p>Cayenne can be downloaded from <a href="https://cayenne.apache.org/download/">here</a>. Make sure to consult <a href="https://github.com/apache/cayenne/blob/4.0.B1/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> file before updating.</p>
-
 <p>BTW, here is an example of the Gradle plugin use :</p>
-
 <pre><code>buildscript {
     repositories {
         mavenCentral()
@@ -133,65 +125,105 @@ dependencies {
     compile cayenne.dependency('java8')
 }
 </code></pre>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-1873">CAY-1873</a> Move DataDomain cache configuration from the Modeler and into DI</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-1891">CAY-1891</a> Modeler: Add To-Many Warning</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-1892">CAY-1892</a> Modeler: Add Relationship Data Type Warning</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2057">CAY-2057</a> Modeler: Clean up OS X version</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2109">CAY-2109</a> cayenne-crypto: add value authentication (HMAC)</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2210">CAY-2210</a> Query cache: incorrect cache key for queries with custom value objects</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2255">CAY-2255</a> ObjectSelect improvement: columns as full entities</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2258">CAY-2258</a> DI: type-safe binding of List and Map</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2259">CAY-2259</a> QueryCache: support for referencing type-safe caches</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2261">CAY-2261</a> Replace NamedQuery with MappedXYZ in *datamap.vm</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2262">CAY-2262</a> Module auto-loading</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2266">CAY-2266</a> Move EventBridge implementations into autoloadable modules</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2267">CAY-2267</a> Contribute lifecycle events listeners via DI</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2268">CAY-2268</a> DI: Refactor ListBuilder API ambiguities for before() / after() bindings</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2269">CAY-2269</a> Add support for date/time components extraction in expression functions</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2270">CAY-2270</a> Update function support in expression parser</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2271">CAY-2271</a> ColumnSelect: support for prefetch and limit</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2272">CAY-2272</a> ColumnSelect: methods to manually control DISTINCT clause</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2274">CAY-2274</a> Modeler: Validate case when dependent PK is marked as “generated”</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2277">CAY-2277</a> Create ClientRuntime with ClientRuntimeBuilder just like ServerRuntime</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2278">CAY-2278</a> Extract cayenne-postcommit module from cayenne-lifecycle</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2280">CAY-2280</a> Switch from commons-logging to slf4j</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2295">CAY-2295</a> &ldquo;Sync ObjEntity with DbEntity&rdquo; and &ldquo;View related DbEntity&rdquo; buttons aren&rsquo;t disabled, if DbEntity doesn&rsquo;t have ObjEntity</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2296">CAY-2296</a> cayenne-crypto: Get java type for DbAttribute bound to ObjAttributes with the same type</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2300">CAY-2300</a> Modeler: New icons and design improvements</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2302">CAY-2302</a> Rename postcommit module and its content to commitlog</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-1873">CAY-1873</a> Move DataDomain cache configuration from the Modeler and into DI</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-1891">CAY-1891</a> Modeler: Add To-Many Warning</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-1892">CAY-1892</a> Modeler: Add Relationship Data Type Warning</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2057">CAY-2057</a> Modeler: Clean up OS X version</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2109">CAY-2109</a> cayenne-crypto: add value authentication (HMAC)</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2210">CAY-2210</a> Query cache: incorrect cache key for queries with custom value objects</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2255">CAY-2255</a> ObjectSelect improvement: columns as full entities</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2258">CAY-2258</a> DI: type-safe binding of List and Map</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2259">CAY-2259</a> QueryCache: support for referencing type-safe caches</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2261">CAY-2261</a> Replace NamedQuery with MappedXYZ in *datamap.vm</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2262">CAY-2262</a> Module auto-loading</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2266">CAY-2266</a> Move EventBridge implementations into autoloadable modules</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2267">CAY-2267</a> Contribute lifecycle events listeners via DI</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2268">CAY-2268</a> DI: Refactor ListBuilder API ambiguities for before() / after() bindings</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2269">CAY-2269</a> Add support for date/time components extraction in expression functions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2270">CAY-2270</a> Update function support in expression parser</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2271">CAY-2271</a> ColumnSelect: support for prefetch and limit</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2272">CAY-2272</a> ColumnSelect: methods to manually control DISTINCT clause</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2274">CAY-2274</a> Modeler: Validate case when dependent PK is marked as “generated”</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2277">CAY-2277</a> Create ClientRuntime with ClientRuntimeBuilder just like ServerRuntime</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2278">CAY-2278</a> Extract cayenne-postcommit module from cayenne-lifecycle</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2280">CAY-2280</a> Switch from commons-logging to slf4j</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2295">CAY-2295</a> &ldquo;Sync ObjEntity with DbEntity&rdquo; and &ldquo;View related DbEntity&rdquo; buttons aren&rsquo;t disabled, if DbEntity doesn&rsquo;t have ObjEntity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2296">CAY-2296</a> cayenne-crypto: Get java type for DbAttribute bound to ObjAttributes with the same type</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2300">CAY-2300</a> Modeler: New icons and design improvements</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2302">CAY-2302</a> Rename postcommit module and its content to commitlog</li>
 </ul>
-
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <h3 id="bug-fixes">Bug Fixes:</h3>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2021">CAY-2021</a> cdbimport: detect when same FK constraint is defined twice</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2077">CAY-2077</a> Bug in CayenneRuntimeException using wrong specified string in Formatter</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2094">CAY-2094</a> SelectById query doesn&rsquo;t work from ROP client</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2161">CAY-2161</a> &lsquo;Not for Client Use&rsquo; option is ignored at Class Generation</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2171">CAY-2171</a> Modeler: Undo db Entity Sync throws error</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2208">CAY-2208</a> SQLTemplate: LEFT JOIN to a subset of a table returns nulls for entries that don&rsquo;t have a match in the subset</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2230">CAY-2230</a> Error using connection to postgresql with db schema in DB URL</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2240">CAY-2240</a> Modeler: issue with cursor rendering for EJBQL query</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2243">CAY-2243</a> ObjectContext.getGraphManager().unregisterObject() inconsistencies</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2250">CAY-2250</a> Remove: Incorrect text in Confirm Remove message when cursor is set on attribute row</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2256">CAY-2256</a> Cannot Save/Insert an Object With null Flattened (complex) toOne Relationship (see also <a href="https://issues.apache.org/jira/browse/CAY-2146">CAY-2146</a>)</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2265">CAY-2265</a> ServerRuntime.builder() fails to set default runtime name when a the project file doesn&rsquo;t follow recognized pattern</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2273">CAY-2273</a> Modeler: default suggested cgen location is rooted in subpackage</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2275">CAY-2275</a> Documentation: tutorial is out of sync with 4.0.M5 version</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2276">CAY-2276</a> PrePersist listener registered as PostPersist in LifecycleCallbackRegistry.addListener(Class&lt;?&gt;, LifecycleListener)</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2279">CAY-2279</a> cdbimport: skip PK comparison for VIEWs</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2281">CAY-2281</a> ObjEntity attribute overrides are never deleted</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2284">CAY-2284</a> Expression likeIgnoreCase can&rsquo;t handle unicode chars in in-memory evaluation</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2286">CAY-2286</a> Filter out inherited ObjEntities from sync with DbEntity</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2326">CAY-2326</a> DI: can&rsquo;t override List/Map elements from another Module</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2021">CAY-2021</a> cdbimport: detect when same FK constraint is defined twice</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2077">CAY-2077</a> Bug in CayenneRuntimeException using wrong specified string in Formatter</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2094">CAY-2094</a> SelectById query doesn&rsquo;t work from ROP client</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2161">CAY-2161</a> &lsquo;Not for Client Use&rsquo; option is ignored at Class Generation</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2171">CAY-2171</a> Modeler: Undo db Entity Sync throws error</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2208">CAY-2208</a> SQLTemplate: LEFT JOIN to a subset of a table returns nulls for entries that don&rsquo;t have a match in the subset</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2230">CAY-2230</a> Error using connection to postgresql with db schema in DB URL</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2240">CAY-2240</a> Modeler: issue with cursor rendering for EJBQL query</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2243">CAY-2243</a> ObjectContext.getGraphManager().unregisterObject() inconsistencies</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2250">CAY-2250</a> Remove: Incorrect text in Confirm Remove message when cursor is set on attribute row</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2256">CAY-2256</a> Cannot Save/Insert an Object With null Flattened (complex) toOne Relationship (see also 
+<a href="https://issues.apache.org/jira/browse/CAY-2146">CAY-2146</a>)</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2265">CAY-2265</a> ServerRuntime.builder() fails to set default runtime name when a the project file doesn&rsquo;t follow recognized pattern</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2273">CAY-2273</a> Modeler: default suggested cgen location is rooted in subpackage</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2275">CAY-2275</a> Documentation: tutorial is out of sync with 4.0.M5 version</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2276">CAY-2276</a> PrePersist listener registered as PostPersist in LifecycleCallbackRegistry.addListener(Class&lt;?&gt;, LifecycleListener)</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2279">CAY-2279</a> cdbimport: skip PK comparison for VIEWs</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2281">CAY-2281</a> ObjEntity attribute overrides are never deleted</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2284">CAY-2284</a> Expression likeIgnoreCase can&rsquo;t handle unicode chars in in-memory evaluation</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2286">CAY-2286</a> Filter out inherited ObjEntities from sync with DbEntity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2326">CAY-2326</a> DI: can&rsquo;t override List/Map elements from another Module</li>
 </ul>
 
                     </article>
@@ -327,6 +359,11 @@ dependencies {
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -334,11 +371,6 @@ dependencies {
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

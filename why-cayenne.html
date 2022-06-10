@@ -86,13 +86,12 @@
         <section>
             <article>
                 <h1 class="text-center">Why Cayenne?</h1>
-                <p>Cayenne is a Java <em>object relational mapping (ORM) framework</em>.  In other
+                <p>Cayenne is a Java <em>object relational mapping (ORM) framework</em>.	In other
 words, it is a tool for Java developers who need to talk to a database (or
 many databases).  Rather than hardcoding SQL statements through Java code,
 Cayenne allows a programmer to work only with Java objects abstracted from
 the database.  Here are just a few benefits of the Cayenne approach to
 persistence:</p>
-
 <ul>
 <li>Portability between almost any <a href="/database-support.html">database</a>
 that has a JDBC driver without changing a single line of code in your
@@ -101,7 +100,7 @@ application.</li>
 <li>Code which validates any data committed to the database is easy to write
 and foolproof in operation.  This might be as simple as ensuring passwords
 have enough characters, or a complex check on the validity of a set of
-accounting operations in a general ledger transaction.  This allows you to
+accounting operations in a general ledger transaction.	This allows you to
 move common error checking code out of the GUI layer and provides valuable
 protection against programming mistakes.</li>
 <li>Caching in order to make your application faster and avoid repeated hits
@@ -121,27 +120,29 @@ Cayenne-based application had the same record loaded to make changes).</li>
 <li>A GUI-based database/schema modeler to simplify learning Cayenne.  The
 modeler saves to XML-based files, which can be hand-edited if needed.</li>
 </ul>
-
 <p>Also here are a few things that set Cayenne apart from other ORM products:</p>
-
 <ul>
-<li><p>Cayenne can also work in three tier (ROP) mode where multiple clients
+<li>
+<p>Cayenne can also work in three tier (ROP) mode where multiple clients
 connect to the data source not via JDBC but through a remote Cayenne
 controlled service.  This gives much greater control over centralized
 validation, caching and a seamless persistence of objects from the server
 through to the clients.  The clients might themselves be web servers
 delivering a distributed load balancing web farm or a rich GUI client such
-as a desktop Swing/SWT application.</p></li>
-
-<li><p>A persistent object doesn&rsquo;t have to be of a class known at compile time.
+as a desktop Swing/SWT application.</p>
+</li>
+<li>
+<p>A persistent object doesn&rsquo;t have to be of a class known at compile time.
 Instead Cayenne can use a generic class with mapping defined dynamically in
-runtime (all without any bytecode manipulation).</p></li>
-
-<li><p>Cayenne supports &ldquo;nested contexts&rdquo; allowing an arbitrary number of
+runtime (all without any bytecode manipulation).</p>
+</li>
+<li>
+<p>Cayenne supports &ldquo;nested contexts&rdquo; allowing an arbitrary number of
 nesting levels for commit/rollback operations. This way a user can create
 &ldquo;scratch contexts&rdquo; for working with objects, with the ability to discard
 (or save) those changes without affecting an overall larger set of
-uncommitted changes.</p></li>
+uncommitted changes.</p>
+</li>
 </ul>
 
             </article>
@@ -255,6 +256,11 @@ uncommitted changes.</p></li>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -262,11 +268,6 @@ uncommitted changes.</p></li>
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

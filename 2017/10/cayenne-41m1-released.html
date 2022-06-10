@@ -89,68 +89,90 @@
                         <h1 class="text-center">Cayenne 4.1 Milestone 1 Released<br />
                             <small class="font-size-1rem text-muted">Oct 14, 2017</small>
                         </h1>
-                        
-
-<p>Apache Cayenne team is glad to announce the first milestone release of Cayenne 4.1.
+                        <p>Apache Cayenne team is glad to announce the first milestone release of Cayenne 4.1.
 This is a development release that introduces a number of nice new major features:</p>
-
 <ul>
-<li>New field-based data objects (see <a href="https://issues.apache.org/jira/browse/CAY-2330">CAY-2330</a>),
+<li>New field-based data objects (see 
+<a href="https://issues.apache.org/jira/browse/CAY-2330">CAY-2330</a>),
 that are much faster to read and write, while significantly reducing the app memory footprint.</li>
 <li>Dependency-free Cayenne core. No more velocity or commons-collections compile dependencies. Only &ldquo;slf4j-api&rdquo; is required in the base config.</li>
 <li>New extensible project XML structure. In M1 we are using this to store comments for entities, attributes and relationships.
 Future milestones will add storing configuration for cdbimport and cgen.</li>
 </ul>
-
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
-
-<div class="pb-3"><!-- gap 3rem --></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-<div class="pb-2"><!-- gap 2rem --></div>
-
-<h4 id="changes-new-features">Changes/New Features:</h4>
-
+<!-- raw HTML omitted -->
+<h4 id="changesnew-features">Changes/New Features:</h4>
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2152">CAY-2152</a> Redesign project file upgrade system</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2329">CAY-2329</a> Update project dependencies</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2330">CAY-2330</a> Field based data objects</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2335">CAY-2335</a> New XML loading/saving mechanics with support of plugable handlers</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2336">CAY-2336</a> Support for comments in Modeler</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2339">CAY-2339</a> Compatibility module to support old versions of projects at runtime</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2344">CAY-2344</a> Modeler: Save ER-Graph and class diagram</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2345">CAY-2345</a> Own template renderer as a replacement for Velocity</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2346">CAY-2346</a> Field-based data object with Map-based storage fallback</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2351">CAY-2351</a> Remove commons-collections usage completely</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2152">CAY-2152</a> Redesign project file upgrade system</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2329">CAY-2329</a> Update project dependencies</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2330">CAY-2330</a> Field based data objects</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2335">CAY-2335</a> New XML loading/saving mechanics with support of plugable handlers</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2336">CAY-2336</a> Support for comments in Modeler</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2339">CAY-2339</a> Compatibility module to support old versions of projects at runtime</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2344">CAY-2344</a> Modeler: Save ER-Graph and class diagram</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2345">CAY-2345</a> Own template renderer as a replacement for Velocity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2346">CAY-2346</a> Field-based data object with Map-based storage fallback</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2351">CAY-2351</a> Remove commons-collections usage completely</li>
 </ul>
-
-<div class="pb-2"><!-- gap 2rem --></div>
-
+<!-- raw HTML omitted -->
 <h4 id="bug-fixes">Bug Fixes:</h4>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2312">CAY-2312</a> Modeler: Undo does not work for checkboxes</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2318">CAY-2318</a> Modeler: Query. Exception after Undo clicking</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2319">CAY-2319</a> Modeler: Embeddable &gt; Attributes. Undo does not cancel pasted objects</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2321">CAY-2321</a> cdbimport: Reverse relationship is not created after adding and rev engineeering new db table</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2323">CAY-2323</a> Modeler: Graph. No warning while saving the image with existing name</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2331">CAY-2331</a> cgen: broken templates for data map</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2347">CAY-2347</a> cdbimport: can&rsquo;t get all relationships on the first pass</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2349">CAY-2349</a> Cache issue: &lsquo;SelectQuery&rsquo; with prefetches loses relationships</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2350">CAY-2350</a> Expression: NotIn with empty collection returns empty result</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2353">CAY-2353</a> Broken paginated column select with only one entity in the result</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2354">CAY-2354</a> DbGenerator.runGenerator must commit its connection</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2356">CAY-2356</a> EJBQL: Incorrect COUNT() on outer joined table</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2357">CAY-2357</a> Generic select queries silently convert result to nulls if no PK column found</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2358">CAY-2358</a> NPE when callbacks invoked on null objects</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2359">CAY-2359</a> EJBQL: db path in not supported in ORDER BY</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2361">CAY-2361</a> PostgreSQL DbGenerator issues</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2362">CAY-2362</a> ColumnSelect: unable to use Property without type</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2363">CAY-2363</a> ColumnSelect: unable to use from nested context</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2364">CAY-2364</a> Wrong logging in SQLTemplate</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2365">CAY-2365</a> SQLExec query tries to convert (unexpected) result set into objects</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2366">CAY-2366</a> Incorrect EJBQL COUNT translation</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2367">CAY-2367</a> ClassCastException reading object with an attribute of type &lsquo;char&rsquo;</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2368">CAY-2368</a> ColumnSelect: Property.self() translates into wrong SQL code</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2312">CAY-2312</a> Modeler: Undo does not work for checkboxes</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2318">CAY-2318</a> Modeler: Query. Exception after Undo clicking</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2319">CAY-2319</a> Modeler: Embeddable &gt; Attributes. Undo does not cancel pasted objects</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2321">CAY-2321</a> cdbimport: Reverse relationship is not created after adding and rev engineeering new db table</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2323">CAY-2323</a> Modeler: Graph. No warning while saving the image with existing name</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2331">CAY-2331</a> cgen: broken templates for data map</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2347">CAY-2347</a> cdbimport: can&rsquo;t get all relationships on the first pass</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2349">CAY-2349</a> Cache issue: &lsquo;SelectQuery&rsquo; with prefetches loses relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2350">CAY-2350</a> Expression: NotIn with empty collection returns empty result</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2353">CAY-2353</a> Broken paginated column select with only one entity in the result</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2354">CAY-2354</a> DbGenerator.runGenerator must commit its connection</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2356">CAY-2356</a> EJBQL: Incorrect COUNT() on outer joined table</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2357">CAY-2357</a> Generic select queries silently convert result to nulls if no PK column found</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2358">CAY-2358</a> NPE when callbacks invoked on null objects</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2359">CAY-2359</a> EJBQL: db path in not supported in ORDER BY</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2361">CAY-2361</a> PostgreSQL DbGenerator issues</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2362">CAY-2362</a> ColumnSelect: unable to use Property without type</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2363">CAY-2363</a> ColumnSelect: unable to use from nested context</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2364">CAY-2364</a> Wrong logging in SQLTemplate</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2365">CAY-2365</a> SQLExec query tries to convert (unexpected) result set into objects</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2366">CAY-2366</a> Incorrect EJBQL COUNT translation</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2367">CAY-2367</a> ClassCastException reading object with an attribute of type &lsquo;char&rsquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2368">CAY-2368</a> ColumnSelect: Property.self() translates into wrong SQL code</li>
 </ul>
 
                     </article>
@@ -286,6 +308,11 @@ Future milestones will add storing configuration for cdbimport and cgen.</li>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -293,11 +320,6 @@ Future milestones will add storing configuration for cdbimport and cgen.</li>
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

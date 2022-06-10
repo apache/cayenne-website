@@ -90,53 +90,59 @@
                             <small class="font-size-1rem text-muted">Jul 21, 2020</small>
                         </h1>
                         <p>Apache Cayenne team is really glad to announce a final (general availability) release of <em>Cayenne 4.1</em>.</p>
-
 <p>Here is a recap of changes made since 4.0:</p>
-
 <ul>
-<li><p>New field-based data objects (see <a href="https://issues.apache.org/jira/browse/CAY-2330">CAY-2330</a>),
-that are <strong>much faster</strong> to read and write, while <strong>significantly</strong> reducing the app memory footprint.</p></li>
-
-<li><p>Dependency-free Cayenne core. No more velocity or commons-collections compile dependencies. Only &ldquo;slf4j-api&rdquo; is required in the base config.</p></li>
-
-<li><p>New extensible project XML structure. This allows to store cgen and reverse engineering configs along with the project.</p></li>
-
-<li><p>New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable,
-more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.
-<p style="text-align: center;">
-<img class="img-fluid" src="/docs/4.1/upgrade-guide/images/modeler-dbimport.png" alt="New reverse engineering UI"/>
-</p></p></li>
-
-<li><p>User controlled transaction propagation logic and isolation level.</p>
-
-<pre><code>TransactionManager manager = runtime.getInjector().getInstance(TransactionManager.class);
-TransactionDescriptor descriptor = new TransactionDescriptor(
-        Connection.TRANSACTION_SERIALIZABLE, // set transaction isolation to SERIALIZABLE 
-        TransactionPropagation.REQUIRES_NEW  // require new transaction for every operation
-);
-manager.performInTransaction(() -&gt; {
-    // perform some DB operations...
-    return null;
-}, descriptor);
-    
-</code></pre></li>
-
-<li><p>And numerous minor fixes and improvements.</p></li>
+<li>
+<p>New field-based data objects (see 
+<a href="https://issues.apache.org/jira/browse/CAY-2330">CAY-2330</a>),
+that are <strong>much faster</strong> to read and write, while <strong>significantly</strong> reducing the app memory footprint.</p>
+</li>
+<li>
+<p>Dependency-free Cayenne core. No more velocity or commons-collections compile dependencies. Only &ldquo;slf4j-api&rdquo; is required in the base config.</p>
+</li>
+<li>
+<p>New extensible project XML structure. This allows to store cgen and reverse engineering configs along with the project.</p>
+</li>
+<li>
+<p>New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable,
+more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.</p>
+</li>
 </ul>
-
+<!-- raw HTML omitted -->
+<ul>
+<li>User controlled transaction propagation logic and isolation level.</li>
+</ul>
+<pre><code>    TransactionManager manager = runtime.getInjector().getInstance(TransactionManager.class);
+    TransactionDescriptor descriptor = new TransactionDescriptor(
+            Connection.TRANSACTION_SERIALIZABLE, // set transaction isolation to SERIALIZABLE 
+            TransactionPropagation.REQUIRES_NEW  // require new transaction for every operation
+    );
+    manager.performInTransaction(() -&gt; {
+        // perform some DB operations...
+        return null;
+    }, descriptor);
+    
+</code></pre><ul>
+<li>And numerous minor fixes and improvements.</li>
+</ul>
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
 
+
 <div class="pb-3"></div>
-
 <p>Here is bug fixes since the last release candidate:</p>
-
 <ul>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2642">CAY-2642</a> EhCache memory leak due to misconfiguration</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2643">CAY-2643</a> ObjectSelect.prefetch(name, semantics) method creates a phantom node</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2646">CAY-2646</a> Wrong target path selection logic in cgen config</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2647">CAY-2647</a> Modeler: project upgrade from 4.0.B2 to 4.1.RC2 failure</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2653">CAY-2653</a> No methods for queries with qualifier parameters generated</li>
-<li><a href="https://issues.apache.org/jira/browse/CAY-2654">CAY-2654</a> Exception in dbimport when relationships should be imported, but no explicit configuration exists</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2642">CAY-2642</a> EhCache memory leak due to misconfiguration</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2643">CAY-2643</a> ObjectSelect.prefetch(name, semantics) method creates a phantom node</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2646">CAY-2646</a> Wrong target path selection logic in cgen config</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2647">CAY-2647</a> Modeler: project upgrade from 4.0.B2 to 4.1.RC2 failure</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2653">CAY-2653</a> No methods for queries with qualifier parameters generated</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2654">CAY-2654</a> Exception in dbimport when relationships should be imported, but no explicit configuration exists</li>
 </ul>
 
                     </article>
@@ -272,6 +278,11 @@ manager.performInTransaction(() -&gt; {
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -279,11 +290,6 @@ manager.performInTransaction(() -&gt; {
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

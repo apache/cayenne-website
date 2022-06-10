@@ -86,16 +86,11 @@
         <section>
             <article>
                 <h1 class="text-center">Legacy Eclipse</h1>
-                <p><a name="LegacyEclipse-UsingEclipsewithAntCayenne"></a></p>
-
+                <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="using-eclipse-with-ant-cayenne">Using Eclipse with Ant Cayenne</h2>
-
 <p><em>(versions 1.2 and 2.0)</em></p>
-
-<p><a name="LegacyEclipse-ConfiguringEclipseWorkspaceforCayenne"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="configuring-eclipse-workspace-for-cayenne">Configuring Eclipse Workspace for Cayenne</h3>
-
 <ul>
 <li>Download and install <a href="http://wwww.eclipse.org">Eclipse</a>
 . Eclipse 3.1.1 or newer is recommended, as there are some per-project
@@ -105,65 +100,27 @@ settings in repository that are not understood by older Eclipse.</li>
 Cayenne with just 1.5 or just 1.4, but make sure you understand what you
 are doing.</li>
 <li>Set JVM 1.4 as default workspace JVM.</li>
-<li>Define <em>&quot;JRE_LIB_15&quot;</em> Eclipse variable (Preferences -&gt; Java -&gt; Build
+<li>Define <em>&ldquo;JRE_LIB_15&rdquo;</em> Eclipse variable (Preferences -&gt; Java -&gt; Build
 Path -&gt; Classpath Variable) to point to the JRE 1.5 class library (e.g.
-<em>&quot;JRE15_HOME/jre/lib/rt.jar&quot;</em> on Windows and Linux or
-<em>&quot;/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Classes/classes.jar&quot;</em>
+<em>&ldquo;JRE15_HOME/jre/lib/rt.jar&rdquo;</em> on Windows and Linux or
+<em>&quot;/System/Library/Frameworks/JavaVM.framework/Versions/1.5/Classes/classes.jar&rdquo;</em>
 on Mac OS X). Cayenne projects that are compatible with 1.5 rely on this
 variable.</li>
 </ul>
-
-<p><a name="LegacyEclipse-CheckingOutEclipseProjects"></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h3 id="checking-out-eclipse-projects">Checking Out Eclipse Projects</h3>
-
 <p>Under <a href="https://svn.apache.org/repos/asf/cayenne/main/branches/STABLE-2.0/cayenne/">cayenne folder</a>
- in Subversion you'll find 4 Eclipse projects that need to be checked out
+in Subversion you&rsquo;ll find 4 Eclipse projects that need to be checked out
 to the same workspace. You may skip projects marked as optional if you are
 not planning to use/change them.</p>
-
-<table class="table table-bordered">
-<thead>
-<tr>
-<th>Project Folder</th>
-<th>JVM</th>
-<th>Special Setup</th>
-<th>Notes</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><em>/cayenne-java</em></td>
-<td>1.4.x</td>
-<td>n/a</td>
-<td>Eclipse project containing main Cayenne source and library folders. Source and binary compatibility must be set to JDK 1.4.</td>
-</tr>
-
-<tr>
-<td><em>/cayenne-java-1.5</em></td>
-<td>1.5.x</td>
-<td><em>JRE_LIB_15</em> variable</td>
-<td>Eclipse projectcontaining Cayenne JDK 1.5 specific code. Requires &quot;cayenne-java&quot; project to be present in workspace. Source and binary compatibility must be set to JDK 1.5.</td>
-</tr>
-
-<tr>
-<td><em>/cayenne-other</em></td>
-<td>1.5.x</td>
-<td><em>JRE_LIB_15</em> variable</td>
-<td>Optional Eclipse project that contains Cayenne documentation, contrib folders and such.</td>
-</tr>
-
-<tr>
-<td><em>/cayenne-ant</em></td>
-<td>n/a</td>
-<td>n/a</td>
-<td>Eclipse project with Ant build files to build the entire Cayenne workspace. Needed if you are planning to build Cayenne with Ant outside of Eclipse (i.e. to create JAR files or run a test suite).</td>
-</tr>
-</tbody>
-</table>
-
-<p>There are also various tutorials in &quot;cayenne&quot; folder that are not needed to
+<p>{.table .table-bordered}
+Project Folder | JVM | Special Setup | Notes
+&mdash;&mdash;&mdash;&mdash;&mdash;|&mdash;&ndash;|&mdash;&mdash;&mdash;&mdash;&mdash;|&mdash;&mdash;
+<em>/cayenne-java</em> | 1.4.x | n/a | Eclipse project containing main Cayenne source and library folders. Source and binary compatibility must be set to JDK 1.4.
+<em>/cayenne-java-1.5</em> | 1.5.x | <em>JRE_LIB_15</em> variable | Eclipse projectcontaining Cayenne JDK 1.5 specific code. Requires &ldquo;cayenne-java&rdquo; project to be present in workspace. Source and binary compatibility must be set to JDK 1.5.
+<em>/cayenne-other</em> | 1.5.x | <em>JRE_LIB_15</em> variable | Optional Eclipse project that contains Cayenne documentation, contrib folders and such.
+<em>/cayenne-ant</em> | n/a | n/a | Eclipse project with Ant build files to build the entire Cayenne workspace. Needed if you are planning to build Cayenne with Ant outside of Eclipse (i.e. to create JAR files or run a test suite).</p>
+<p>There are also various tutorials in &ldquo;cayenne&rdquo; folder that are not needed to
 build the framework or the tools.</p>
 
             </article>
@@ -277,6 +234,11 @@ build the framework or the tools.</p>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2022-06-10 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Jun 10, 2022</time>
+                        <a href="/2022/06/cayenne-42rc1-released/">Cayenne 4.2 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2021-12-24 12:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 24, 2021</time>
                         <a href="/2021/12/cayenne-411-released/">Cayenne 4.1.1 Released</a>
                     </li>
@@ -284,11 +246,6 @@ build the framework or the tools.</p>
                     <li>
                         <time datetime="2021-12-06 15:00:00 &#43;0300 &#43;03" class="xsmall d-block">Dec 06, 2021</time>
                         <a href="/2021/12/cayenne-42b1-released/">Cayenne 4.2 Beta 1 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2021-03-19 18:00:00 &#43;0300 &#43;03" class="xsmall d-block">Mar 19, 2021</time>
-                        <a href="/2021/03/cayenne-42m3-released/">Cayenne 4.2 Milestone 3 Released</a>
                     </li>
                     
                 </ul>

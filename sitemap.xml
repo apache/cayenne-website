@@ -152,16 +152,21 @@
   
   <url>
     <loc>https://cayenne.apache.org/</loc>
-    <lastmod>2021-12-24T12:00:00+03:00</lastmod>
+    <lastmod>2022-06-10T15:00:00+03:00</lastmod>
   </url>
   
   <url>
-    <loc>https://cayenne.apache.org/2021/12/cayenne-411-released/</loc>
-    <lastmod>2021-12-24T12:00:00+03:00</lastmod>
+    <loc>https://cayenne.apache.org/2022/06/cayenne-42rc1-released/</loc>
+    <lastmod>2022-06-10T15:00:00+03:00</lastmod>
   </url>
   
   <url>
     <loc>https://cayenne.apache.org/news/</loc>
+    <lastmod>2022-06-10T15:00:00+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://cayenne.apache.org/2021/12/cayenne-411-released/</loc>
     <lastmod>2021-12-24T12:00:00+03:00</lastmod>
   </url>
   
@@ -299,101 +304,11 @@
   </url>
   
   <url>
-    <loc>https://cayenne.apache.org/docs/3.1/cayenne-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/3.1/getting-started-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/3.1/getting-started-rop.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/3.1/upgrade-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://cayenne.apache.org/docs/4.0/</loc>
   </url>
   
   <url>
-    <loc>https://cayenne.apache.org/docs/4.0/cayenne-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.0/getting-started-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.0/getting-started-rop.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.0/upgrade-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://cayenne.apache.org/docs/4.1/</loc>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.1/cayenne-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.1/getting-started-db-first.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.1/getting-started-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.1/getting-started-rop.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.1/upgrade-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.2/cayenne-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.2/getting-started-db-first.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.2/getting-started-guide.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.2/getting-started-rop.toc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/docs/4.2/upgrade-guide.toc/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
