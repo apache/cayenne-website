@@ -2,6 +2,7 @@
 This short code simply insert one of pb-x classes from bootstrap, see bootstrap docs for possible values.
 Default is pb-3, i.e. padding-bottom: 3rem.
  -->
+{{ $_hugo_config := `{ "version": 1 }` }}
 {{ if (.Get 0) -}}
 {{- with .Get 0 -}}
 <div class="pb-{{ . }}"><!-- gap user defined rem --></div>
