@@ -18,7 +18,6 @@ To unsubscribe send empty email to user-unsubscribe@cayenne.apache.org
 To post a message use the following address: user@cayenne.apache.org
 
 * [Apache Message Archive](https://lists.apache.org/list.html?user@cayenne.apache.org)
-* [Apache Message Archive - Old Style](http://mail-archives.apache.org/mod_mbox/cayenne-user/)
 * [ObjectStyle.org Archive](http://objectstyle.org/cayenne/lists/cayenne-user/) (legacy, does not store new messages, but has very old messages not available elsewhere)
 
 {{% gap %}}
@@ -37,7 +36,6 @@ To unsubscribe send empty email to dev-unsubscribe@cayenne.apache.org
 To post a message use the following address: dev@cayenne.apache.org
 
 * [Apache Message Archive](https://lists.apache.org/list.html?dev@cayenne.apache.org)
-* [Apache Message Archive - Old Style](http://mail-archives.apache.org/mod_mbox/cayenne-dev/)
 * [ObjectStyle.org Archive](http://objectstyle.org/cayenne/lists/cayenne-devel/) (legacy, does not store new messages, but has very old messages not available elsewhere)
 
 {{% gap 2 %}}
@@ -52,4 +50,3 @@ To subscribe send empty email to commits-subscribe@cayenne.apache.org
 To unsubscribe send empty email to commits-unsubscribe@cayenne.apache.org
 
 * [Apache Message Archive](https://lists.apache.org/list.html?commits@cayenne.apache.org)
-* [Apache Message Archive - Old Style](http://mail-archives.apache.org/mod_mbox/cayenne-commits/)
