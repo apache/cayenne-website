@@ -1,6 +1,6 @@
 ---
 title: Cayenne 4.2 Release Candidate 2 Released
-date: 2022-12-05T15:00:00+03:00
+date: 2022-12-05T12:00:00+03:00
 --- 
 
 Apache Cayenne team is glad to announce second release candidate of _Cayenne 4.2_. 
