@@ -28,7 +28,7 @@ weight: 50
  <h2 id="java-version"><a class="anchor" href="#java-version"></a>1. Java Version</h2> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>Minimum required JDK version is 1.8 or newer. Cayenne 4.2 is fully tested with Java 1.8 and 11.</p> 
+   <p>Minimum required JDK version is 8 or newer. Cayenne 4.2 is fully tested with Java 8, 11 and 17.</p> 
   </div> 
  </div> 
 </div> 
@@ -54,10 +54,10 @@ List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
   <div class="sect2"> 
    <h3 id="new-property-api"><a class="anchor" href="#new-property-api"></a>2.2. New Property API</h3> 
    <div class="paragraph"> 
-    <p>Property API are greatly revised. This API allows to use type aware expression factories aka Properties. These properties are normally generated as static constants in model classes, but they can also be created manually by <code>PropertyFactory</code> if needed.</p> 
+    <p>Property API are greatly revised. This API allows to use type aware expression factories aka Properties. These properties are normally generated as static constants in model classes, but they can also be created manually by <code>PropertyFactory</code> if needed. New API provides designated properties for different datatypes and relationships, including special variant that represents primary keys.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>Typical usage in select queries:</p> 
+    <p>Usage example in <code>ObjectSelect</code> query:</p> 
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
@@ -68,6 +68,51 @@ Artist artist = ObjectSelect.query(Artist.class)
         .and(Artist.ARTIST_NAME.lower().like("pablo%"))
         .selectOne(context);</code></pre> 
     </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>See <a href="https://cayenne.apache.org/docs/4.2/api/org/apache/cayenne/exp/property/package-summary.html">JavaDoc</a> for details.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="new-types-support"><a class="anchor" href="#new-types-support"></a>2.3. New types support</h3> 
+   <div class="paragraph"> 
+    <p>Cayenne 4.2 brings support for the Json and Geo types that are common now in RDBMS, see <a href="https://github.com/apache/cayenne-examples/tree/master/cayenne-jdbc-type-other">this demo</a> for the usage example. Additionally, Cayenne now supports <code>java.time.Duration</code> and <code>java.time.Period</code> out of the box.</p> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="deprecations-and-api-incompatibilities"><a class="anchor" href="#deprecations-and-api-incompatibilities"></a>3. Deprecations and API incompatibilities</h2> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>For the full list of deprecations refer to <code>UPGRADE.txt</code>. Here’s the most important changes.</p> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="selectquery"><a class="anchor" href="#selectquery"></a>3.1. SelectQuery</h3> 
+   <div class="paragraph"> 
+    <p><code>SelectQuery</code> is deprecated in favour of <code>ObjectSelect</code>. It’s still fully functional and could be used, but it will be removed in a future.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="obsolete-modules"><a class="anchor" href="#obsolete-modules"></a>3.2. Obsolete modules</h3> 
+   <div class="paragraph"> 
+    <p>There are several modules that are deprecated in Cayenne 4.2 and will be removed in a later version:</p> 
+   </div> 
+   <div class="ulist"> 
+    <ul> 
+     <li> <p>Cayenne ROP</p> </li> 
+     <li> <p>Cayenne Web</p> </li> 
+     <li> <p>Event bridges: XMPP, JMS and JGroups</p> </li> 
+    </ul> 
+   </div> 
+   <div class="paragraph"> 
+    <p>These modules could be still safely used in 4.2.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="objectid"><a class="anchor" href="#objectid"></a>3.3. ObjectId</h3> 
+   <div class="paragraph"> 
+    <p>ObjectId can’t be instantiated directly, <code>ObjectId.of(..)</code> factory methods should be used. E.g. <code>ObjectId.of("Artist", 1)</code> instead of <code>new ObjectId("Artist", 1)</code>.</p> 
    </div> 
   </div> 
  </div> 
