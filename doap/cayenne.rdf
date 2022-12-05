@@ -42,8 +42,8 @@
         <release>
             <Version>
                 <name>Release Candidate</name>
-                <created>2022-06-10</created>
-                <revision>4.2.RC1</revision>
+                <created>2022-12-05</created>
+                <revision>4.2.RC2</revision>
             </Version>
         </release><release>
             <Version>
