@@ -24,10 +24,10 @@
 #
 releases:
   - version: "4.2"
-    latestRevision: "4.2.RC1"
+    latestRevision: "4.2.RC2"
     type: "Release Candidate"
     description: "Latest development release"
-    date: "2022-06-10"
+    date: "2022-12-05"
     docs: true
     downloadable: true
     jdk: 1.8
