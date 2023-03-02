@@ -44,10 +44,10 @@ releases:
     newRepoLayout: true
 
   - version: "4.0"
-    latestRevision: "4.0.2"
+    latestRevision: "4.0.3"
     type: "Stable"
     description: "Previous stable release"
-    date: "2019-10-14"
+    date: "2023-03-02"
     docs: true
     downloadable: true
     jdk: 1.7
