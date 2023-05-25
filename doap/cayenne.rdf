@@ -41,9 +41,9 @@
         <category rdf:resource="http://projects.apache.org/category/web-framework" />
         <release>
             <Version>
-                <name>Release Candidate</name>
-                <created>2022-12-05</created>
-                <revision>4.2.RC2</revision>
+                <name>Stable</name>
+                <created>2023-05-25</created>
+                <revision>4.2</revision>
             </Version>
         </release><release>
             <Version>
@@ -53,13 +53,13 @@
             </Version>
         </release><release>
             <Version>
-                <name>Stable</name>
+                <name>Aging</name>
                 <created>2023-03-02</created>
                 <revision>4.0.3</revision>
             </Version>
         </release><release>
             <Version>
-                <name>Aging</name>
+                <name>Legacy</name>
                 <created>2018-07-23</created>
                 <revision>3.1.3</revision>
             </Version>
