@@ -1,14 +1,38 @@
 ---
 title: Cayenne 4.2 Final Released
 date: 2023-05-25T18:00:00+03:00
+extensions: ["definitionLists"]
 ---
 
-Apache Cayenne team is really glad to announce a final (general availability) release of _Cayenne 4.2_.
+Apache Cayenne team is really glad to announce a final (general availability) release of _Cayenne 4.2_. A brief overview of changes since 4.1 includes:
 
-Cayenne can be downloaded from [here](/download.html).
+- Runtime
+  - Callback annotations on entity classes
+  - Customizable SQL generator API
+  - Nested queries
+  - Ordering on aggregate functions
+  - Property API made type-specific
+  - Custom functions and operators in queries
+  - New attributes types: JSON, geospatial
+
+- Modeler
+  - Acquire JDBC drivers from Maven Central
+  - Improvements to attribute and relationships mapping
+  - Lots of bug fixes in DB Import, etc.
+
+- Deprecations (to be removed in 5.0)
+  - ROP-related modules
+  - cayenne-web
+  - Clustering transports (cayenne-xmpp, etc.)
+
+Full release notes can be read [here](https://github.com/apache/cayenne/blob/STABLE-4.2/RELEASE-NOTES.txt).
+
+Cayenne Framework and Modeler can be downloaded [here](/download.html).
 
 {{% gap %}}
-<h2 class="text-center">Here changes since the last release candidate:</h2>
+
+## Updates since the last release candidate (4.2.RC2)
+
 {{% gap 2 %}}
 
 #### Changes/New Features:
