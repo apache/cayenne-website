@@ -461,7 +461,7 @@ ServerRuntime runtime = ServerRuntime.builder()
    <div class="sect3"> 
     <h4 id="web-applications"><a class="anchor" href="#web-applications"></a>2.2.3. Web Applications</h4> 
     <div class="paragraph"> 
-     <p>Web applications can use a variety of mechanisms to configure and start the "services" they need, Cayenne being one of such services. Configuration can be done within standard Servlet specification objects like Servlets, Filters, or ServletContextListeners, or can use Spring, JEE CDI, etc. This is a user’s architectural choice and Cayenne is agnostic to it and will happily work in any environment. As described above, all that is needed is to create an instance of ServerRuntime somewhere and provide the application code with means to access it. And shut it down when the application ends to avoid container leaks.</p> 
+     <p>Web applications can use a variety of mechanisms to configure and start the "services" they need, Cayenne being one of such services. Configuration can be done within standard servlet specification objects like Servlets, Filters, or ServletContextListeners, or can use Spring, JEE CDI, etc. This is a user’s architectural choice and Cayenne is agnostic to it and will happily work in any environment. As described above, all that is needed is to create an instance of ServerRuntime somewhere and provide the application code with means to access it, and to shut it down when the application ends to avoid container leaks.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Still Cayenne includes a piece of web app configuration code that can assist in quickly setting up simple Cayenne-enabled web applications. We are talking about CayenneFilter. It is declared in web.xml:</p> 
@@ -483,10 +483,10 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>When started by the web container, it creates a instance of ServerRuntime and stores it in the ServletContext. Note that the name of Cayenne XML project file is derived from the "filter-name". In the example above CayenneFilter will look for an XML file "cayenne-project.xml". This can be overridden with "configuration-location" init parameter.</p> 
+     <p>When started by the web container, it creates a instance of ServerRuntime and stores it in the ServletContext. Note that the name of a Cayenne XML project file is derived from the "filter-name". In the example above, CayenneFilter will look for an XML file "cayenne-project.xml". This can be overridden with the "configuration-location" init parameter.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>When the application runs, all HTTP requests matching the filter url-pattern will have access to a session-scoped ObjectContext like this:</p> 
+     <p>When the application runs, all HTTP requests matching the filter url-pattern have access to a session-scoped ObjectContext like this:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -494,17 +494,17 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Of course the ObjectContext scope, and other behavior of the Cayenne runtime can be customized via dependency injection. For this another filter init parameter called "extra-modules" is used. "extra-modules" is a comma or space-separated list of class names, with each class implementing Module interface. These optional custom modules are loaded after the the standard ones, which allows users to override all standard definitions.</p> 
+     <p>Of course, the ObjectContext scope and other behavior of the Cayenne runtime can be customized via dependency injection. For this, another filter init parameter called "extra-modules" is used. "extra-modules" is a comma- or space-separated list of class names, with each class implementing Module interface. These optional custom modules are loaded after the the standard ones, which allows users to override all standard definitions.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>For those interested in the DI container contents of the runtime created by CayenneFilter, it is the same ServerRuntime as would’ve been created by other means, but with an extra <code>org.apache.cayenne.configuration.web.WebModule</code> module that provides <code>org.apache.cayenne.configuration.web.RequestHandler</code> service. This is the service to override in the custom modules if you need to provide a different ObjectContext scope, etc.</p> 
+     <p>For those interested in the DI container contents of the runtime created by CayenneFilter, it is the same ServerRuntime as would have been created by other means, but with an extra <code>org.apache.cayenne.configuration.web.WebModule</code> module that provides the <code>org.apache.cayenne.configuration.web.RequestHandler</code> service. This is the service to override in the custom modules if you need to provide a different ObjectContext scope, etc.</p> 
     </div> 
     <div class="admonitionblock note"> 
      <table> 
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> You should not think of CayenneFilter as the only way to start and use Cayenne in a web application. In fact CayenneFilter is entirely optional. Use it if you don’t have any special design for application service management. If you do, simply integrate Cayenne into that design. </td> 
+        <td class="content"> You should not think of CayenneFilter as the only way to start and use Cayenne in a web application. In fact, CayenneFilter is entirely optional. Use it if you don’t have any special design for application service management. If you do, simply integrate Cayenne into that design. </td> 
        </tr> 
       </tbody>
      </table> 
@@ -524,22 +524,22 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>The call above creates a new instance of ObjectContext that can access the database via this runtime. ObjectContext is a single "work area" in Cayenne, storing persistent objects. ObjectContext guarantees that for each database row with a unique ID it will contain at most one instance of an object, thus ensuring object graph consistency between multiple selects (a feature called "uniquing"). At the same time different ObjectContexts will have independent copies of objects for each unique database row. This allows users to isolate object changes from one another by using separate ObjectContexts.</p> 
+     <p>The call above creates a new instance of ObjectContext that can access the database via this runtime. ObjectContext is a single "work area" in Cayenne, storing persistent objects. ObjectContext guarantees that, for each database row with a unique ID, it will contain at most one instance of an object, thus ensuring object graph consistency between multiple selects (a feature called "uniquing"). At the same time, different ObjectContexts will have independent copies of objects for each unique database row. This allows users to isolate object changes from one another by using separate ObjectContexts.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>These properties directly affect the strategies for scoping and sharing (or not sharing) ObjectContexts. Contexts that are only used to fetch objects from the database and whose objects are never modified by the application can be shared between mutliple users (and multiple threads). Contexts that store modified objects should be accessed only by a single user (e.g. a web application user might reuse a context instance between multiple web requests in the same HttpSession, thus carrying uncommitted changes to objects from request to request, until he decides to commit or rollback them). Even for a single user it might make sense to use mutliple ObjectContexts (e.g. request-scoped contexts to allow concurrent requests from the browser that change and commit objects independently).</p> 
+     <p>These properties directly affect the strategies for scoping and sharing (or not sharing) ObjectContexts. Contexts that are only used to fetch objects from the database and whose objects are never modified by the application can be shared between mutliple users (and multiple threads). Contexts that store modified objects should be accessed only by a single user (e.g. a web application user might reuse a context instance between multiple web requests in the same HttpSession, thus carrying uncommitted changes to objects from request to request, until they decide to commit them or roll them back). Even for a single user it might make sense to use mutliple ObjectContexts (e.g. request-scoped contexts to allow concurrent requests from the browser that change and commit objects independently).</p> 
     </div> 
     <div class="paragraph"> 
-     <p>ObjectContext is serializable and does not permanently hold to any of the application resources. So it does not have to be closed. If the context is not used anymore, it should simply be allowed to go out of scope and get garbage collected, just like any other Java object.</p> 
+     <p>ObjectContext is serializable and does not permanently hold any of the application resources. So it does not have to be closed. If the context is not used anymore, it should simply be allowed to go out of scope and get garbage collected, just like any other Java object.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="persistent-object-and-its-lifecycle"><a class="anchor" href="#persistent-object-and-its-lifecycle"></a>2.3.2. Persistent Object and its Lifecycle</h4> 
     <div class="paragraph"> 
-     <p>Cayenne can persist Java objects that implement <code>org.apache.cayenne.Persistent</code> interface. Generally persistent classes are generated from the model as described above, so users do not have to worry about superclass and property implementation details.</p> 
+     <p>Cayenne can persist Java objects that implement the <code>org.apache.cayenne.Persistent</code> interface. Generally, persistent classes are generated from the model as described above, so users do not have to worry about superclass and property implementation details.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Persistent interface provides access to 3 persistence-related properties - <em>objectId</em>, <em>persistenceState</em> and <em>objectContext</em>. All 3 are initialized by Cayenne runtime framework. Application code should not attempt to change them. However it is allowed to read them, which provides valuable runtime information. E.g. ObjectId can be used for quick equality check of 2 objects, knowing persistence state would allow highlighting changed objects, etc.</p> 
+     <p> The persistent interface provides access to three persistence-related properties - <em>objectId</em>, <em>persistenceState</em> and <em>objectContext</em>. All three are initialized by the Cayenne runtime framework. Your application code should not attempt to change them. However, it is allowed to read them, which provides valuable runtime information. E.g. ObjectId can be used for a quick equality check of two objects, knowing persistence state would allow highlighting changed objects, etc.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Each persistent object belongs to a single ObjectContext, and can be in one of the following persistence states (as defined in <code>org.apache.cayenne.PersistenceState</code>) :</p> 
@@ -595,7 +595,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      <p>We’ll discuss queries in some detail in the <a href="#queries">Queries</a> chapter. The example above is self-explanatory - we create a <code>ObjectSelect</code> that matches all <code>Artist</code> objects present in the database, and then use <code>select</code> to get the result.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries ObjectContext provides <code>performGenericQuery()</code> method. While not commonly-used, it is nevertheless important in some situations. E.g.:</p> 
+     <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries, ObjectContext provides the <code>performGenericQuery()</code> method. While not commonly used, it is nevertheless important in some situations. E.g.:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -623,10 +623,10 @@ selectedArtist.setName("Dali");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>At this point all in-memory changes are analyzed and a minimal set of SQL statements is issued in a single transaction to synchronize the database with the in-memory state. In our example <code>commitChanges</code> commits just one object, but generally it can be any number of objects.</p> 
+     <p>At this point, all in-memory changes are analyzed and a minimal set of SQL statements is issued in a single transaction to synchronize the database with the in-memory state. In our example, <code>commitChanges</code> commits just one object, but generally it can be any number of objects.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>If instead of commit, we wanted to reset all changed objects to the previously committed state, we’d call <code>rollbackChanges</code> instead:</p> 
+     <p>If, instead of commit, we wanted to reset all changed objects to the previously committed state, we’d call <code>rollbackChanges</code> instead:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -643,10 +643,10 @@ newArtist.setName("Picasso");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>It will only exist in memory until <code>commitChanges</code> is issued. On commit Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an <code>INSERT</code> SQL statement to permanently store the object.</p> 
+     <p>It only exists in memory until <code>commitChanges</code> is issued. On commit, Cayenne might generate a new primary key (unless a user set it explicitly, or a PK was inferred from a relationship) and issue an <code>INSERT</code> SQL statement to permanently store the object.</p> 
     </div> 
     <div class="paragraph"> 
-     <p><code>deleteObjects</code> method takes one or more Persistent objects and marks them as <strong>DELETED</strong>:</p> 
+     <p>The <code>deleteObjects</code> method takes one or more persistent objects and marks them as <strong>DELETED</strong>:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -655,13 +655,13 @@ context.deleteObjects(artist2, artist3, artist4);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Additionally <code>deleteObjects</code> processes all delete rules modeled for the affected objects. This may result in implicitly deleting or modifying extra related objects. Same as insert and update, delete operations are sent to the database only when <code>commitChanges</code> is called. Similarly <code>rollbackChanges</code> will undo the effect of <code>newObject</code> and <code>deleteObjects</code>.</p> 
+     <p>Additionally, <code>deleteObjects</code> processes all delete rules modeled for the affected objects. This may result in implicitly deleting or modifying extra related objects. As with insert and update, delete operations are sent to the database only when <code>commitChanges</code> is called. Similarly, <code>rollbackChanges</code> will undo the effect of <code>newObject</code> and <code>deleteObjects</code>.</p> 
     </div> 
     <div class="paragraph"> 
      <p><code>localObject</code> returns a copy of a given persistent object that is <em>local</em> to a given ObjectContext:</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Since an application often works with more than one context, <code>localObject</code> is a rather common operation. E.g. to improve performance a user might utilize a single shared context to select and cache data, and then occasionally transfer some selected objects to another context to modify and commit them:</p> 
+     <p>Since an application often works with more than one context, <code>localObject</code> is a rather common operation. E.g. to improve performance, a user might utilize a single shared context to select and cache data, and then occasionally transfer some selected objects to another context to modify and commit them:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -678,13 +678,13 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Here we discussed the most commonly used subset of the ObjectContext API. There are other useful methods, e.g. those allowing to inspect registered objects state in bulk, etc. Check the latest JavaDocs for details.</p> 
+     <p>Here we discussed the most commonly-used subset of the ObjectContext API. There are other useful methods, e.g. those allowing you to inspect registered objects' state in bulk, etc. Check the latest JavaDocs for details.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="cayenne-helper-class"><a class="anchor" href="#cayenne-helper-class"></a>2.3.4. Cayenne Helper Class</h4> 
     <div class="paragraph"> 
-     <p>There is a useful helper class called <code>Cayenne</code> (fully-qualified name <code>org.apache.cayenne.Cayenne</code>) that builds on ObjectContext API to provide a number of very common operations. E.g. get a primary key (most entities do not model PK as an object property) :</p> 
+     <p>There is a useful helper class called <code>Cayenne</code> (fully-qualified name <code>org.apache.cayenne.Cayenne</code>) that builds on the ObjectContext API to provide a number of very common operations. E.g. get a primary key (most entities do not model PK as an object property) :</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -700,25 +700,25 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>For more flexibility, you could use <a href="#selectbyid">SelectById</a> query instead.</p> 
+     <p>For more flexibility, you could use the <a href="#selectbyid">SelectById</a> query instead.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Feel free to explore <code>Cayenne</code> class API for other useful methods.</p> 
+     <p>Feel free to explore the <code>Cayenne</code> class API for other useful methods.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="objectcontext-nesting"><a class="anchor" href="#objectcontext-nesting"></a>2.3.5. ObjectContext Nesting</h4> 
     <div class="paragraph"> 
-     <p>In all the examples shown so far an ObjectContext would directly connect to a database to select data or synchronize its state (either via commit or rollback). However another context can be used in all these scenarios instead of a database. This concept is called ObjectContext "nesting". Nesting is a parent/child relationship between two contexts, where child is a nested context and selects or commits its objects via a parent.</p> 
+     <p>In all the examples shown so far, an ObjectContext would directly connect to a database to select data or synchronize its state (either via commit or rollback). However, another context can be used in all these scenarios instead of a database. This concept is called ObjectContext "nesting". Nesting is a parent/child relationship between two contexts, where a child is a nested context and selects or commits its objects via a parent.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Nesting is useful to create isolated object editing areas (child contexts) that need to all be committed to an intermediate in-memory store (parent context), or rolled back without affecting changes already recorded in the parent. Think cascading GUI dialogs, or parallel AJAX requests coming to the same session.</p> 
+     <p>Nesting is useful to create isolated object editing areas (child contexts) that all need to be committed to an intermediate in-memory store (parent context), or rolled back without affecting changes already recorded in the parent. Think cascading GUI dialogs, or parallel AJAX requests coming to the same session.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>In theory Cayenne supports any number of nesting levels, however applications should generally stay with one or two, as deep hierarchies will most certainly degrade the performance of the deeply nested child contexts. This is due to the fact that each context in a nesting chain has to update its own objects during most operations.</p> 
+     <p>In theory, Cayenne supports any number of nesting levels; however, applications should generally stay with one or two levels, as deep hierarchies will almost certainly degrade the performance of the deeply-nested child contexts. This is due to the fact that each context in a nesting chain has to update its own objects during most operations.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Cayenne ROP is an extreme case of nesting when a child context is located in a separate JVM and communicates with its parent via a web service. ROP is discussed in details in the following chapters. Here we concentrate on the same-VM nesting.</p> 
+     <p>Cayenne ROP is an extreme case of nesting when a child context is located in a separate JVM and communicates with its parent via a web service. ROP is discussed in detail in the following chapters. Here we concentrate on the same-VM nesting.</p> 
     </div> 
     <div class="paragraph"> 
      <p>To create a nested context, use an instance of ServerRuntime, passing it the desired parent:</p> 
@@ -730,7 +730,7 @@ ObjectContext nested = runtime.newContext(parent);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>From here a nested context operates just like a regular context (you can perform queries, create and delete objects, etc.). The only difference is that commit and rollback operations can either be limited to synchronization with the parent, or cascade all the way to the database:</p> 
+     <p>From here, a nested context operates just like a regular context (you can perform queries, create and delete objects, etc.). The only difference is that commit and rollback operations can either be limited to synchronization with the parent, or cascade all the way to the database:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -756,13 +756,13 @@ nested.rollbackChanges();</code></pre>
    <div class="sect3"> 
     <h4 id="generic-persistent-objects"><a class="anchor" href="#generic-persistent-objects"></a>2.3.6. Generic Persistent Objects</h4> 
     <div class="paragraph"> 
-     <p>As described in the CayenneModeler chapter, Cayenne supports mapping of completely generic classes to specific entities. Although for conveniece most applications should stick with entity-specific class mappings, the generic feature offers some interesting possibilities, such as creating mappings completely on the fly in a running application, etc.</p> 
+     <p>As described in the CayenneModeler chapter, Cayenne supports mapping of completely generic classes to specific entities. Although for conveniece most applications should stick with entity-specific class mappings, the generic feature offers some interesting possibilities, such as creating mappings completely on the fly in a running application.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Generic objects are first class citizens in Cayenne, and all common persistent operations apply to them as well. There are some pecularities however, described below.</p> 
+     <p>Generic objects are first-class citizens in Cayenne, and all common persistent operations apply to them as well. There are some pecularities, however, described below.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>When creating a new generic object, either cast your ObjectContext to DataContext (that provides <code>newObject(String)</code> API), or provide your object with an explicit ObjectId:</p> 
+     <p>When creating a generic object, either cast your ObjectContext to DataContext (that provides the <code>newObject(String)</code> API), or provide your object with an explicit ObjectId:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -777,7 +777,7 @@ context.registerNewObject(generic);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>ObjectSelect for a generic object should be created passing entity name String, instead of just a Java class:</p> 
+     <p>ObjectSelect for a generic object should be created by passing the entity name String, instead of just a Java class:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -794,7 +794,7 @@ generic.writeProperty("name", "New Name");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>This is how an application can obtain entity name of a generic object:</p> 
+     <p>This is how an application can obtain the entity name of a generic object:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -805,16 +805,16 @@ generic.writeProperty("name", "New Name");</code></pre>
    <div class="sect3"> 
     <h4 id="transactions"><a class="anchor" href="#transactions"></a>2.3.7. Transactions</h4> 
     <div class="paragraph"> 
-     <p>Considering how much attention is given to managing transactions in most other ORMs, transactions have been conspicuously absent from the ObjectContext discussion till now. The reason is that transactions are seamless in Cayenne in all but a few special cases. ObjectContext is an in-memory container of objects that is disconnected from the database, except when it needs to run an operation. So it does not care about any surrounding transaction scope. Sure enough all database operations are transactional, so when an application does a commit, all SQL execution is wrapped in a database transaction. But this is done behind the scenes and is rarely a concern to the application code.</p> 
+     <p>Considering how much attention is given to managing transactions in most other ORMs, transactions have been conspicuously absent from the ObjectContext discussion till now. The reason is that transactions are seamless in Cayenne in all but a few special cases. ObjectContext is an in-memory container of objects that is disconnected from the database, except when it needs to run an operation. So it does not care about any surrounding transaction scope. Sure enough, all database operations are transactional, so when an application does a commit, all SQL execution is wrapped in a database transaction. But this is done behind the scenes and is rarely a concern to the application code.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Two cases where transactions need to be taken into consideration are container- and application-managed transactions.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>If you are using Spring, EJB or another environment that manages transactions, you’ll likely need to switch Cayenne runtime into "external transactions mode". This is done by setting DI configuration property defined in <code>Constants.SERVER_EXTERNAL_TX_PROPERTY</code> (see Appendix A). If this property is set to "true", Cayenne assumes that JDBC Connections obtained by runtime whenever that might happen are all coming from a transactional DataSource managed by the container. In this case Cayenne does not attempt to commit or rollback the connections, leaving it up to the container to do that when appropriate.</p> 
+     <p>If you are using Spring, EJB or another environment that manages transactions, you’ll likely need to switch the Cayenne runtime into "external transactions mode". This is done by setting the DI configuration property defined in <code>Constants.SERVER_EXTERNAL_TX_PROPERTY</code> (see Appendix A). If this property is set to "true", Cayenne assumes that JDBC Connections obtained by runtime, whenever that might happen, are all coming from a transactional DataSource managed by the container. In this case, Cayenne does not attempt to commit or roll back the connections, leaving it up to the container to do that when appropriate.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>In the second scenario, an application might need to define its own transaction scope that spans more than one Cayenne operation. E.g. two sequential commits that need to be rolled back together in case of failure. This can be done via <code>ServerRuntime.performInTransaction</code> method:</p> 
+     <p>In the second scenario, an application might need to define its own transaction scope that spans more than one Cayenne operation. E.g. two sequential commits that need to be rolled back together in case of failure. This can be done via the <code>ServerRuntime.performInTransaction</code> method:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -857,12 +857,12 @@ transactionManager.performInTransaction(transactionalOperation, descriptor);</co
   <div class="sect2"> 
    <h3 id="expressions"><a class="anchor" href="#expressions"></a>2.4. Expressions</h3> 
    <div class="paragraph"> 
-    <p>Cayenne provides a simple yet powerful object-based expression language. The most common use of expressions are to build qualifiers and orderings of queries that are later converted to SQL by Cayenne and to evaluate in-memory against specific objects (to access certain values in the object graph or to perform in-memory object filtering and sorting). Cayenne provides API to build expressions in the code and a parser to create expressions from strings.</p> 
+    <p>Cayenne provides a simple, yet powerful, object-based expression language. The most common uses of expressions are to build qualifiers and orderings of queries that are later converted to SQL by Cayenne and to evaluate in-memory against specific objects (to access certain values in the object graph or to perform in-memory object filtering and sorting). Cayenne provides an API to build expressions in the code and a parser to create expressions from strings.</p> 
    </div> 
    <div class="sect3"> 
     <h4 id="path-expressions"><a class="anchor" href="#path-expressions"></a>2.4.1. Path Expressions</h4> 
     <div class="paragraph"> 
-     <p>Before discussing how to build expressions, it is important to understand one group of expressions widely used in Cayenne - path expressions. There are two types of path expressions - object and database, used for navigating graphs of connected objects or joined DB tables respectively. Object paths are much more commonly used, as after all Cayenne is supposed to provide a degree of isolation of the object model from the database. However database paths are helpful in certain situations. General structure of path expressions is the following:</p> 
+     <p>Before discussing how to build expressions, it is important to understand one group of expressions widely used in Cayenne - path expressions. There are two types of path expressions - object and database, used for navigating graphs of connected objects or joined DB tables, respectively. Object paths are much more commonly used, as, after all, Cayenne is supposed to provide a degree of isolation of the object model from the database. However, database paths are helpful in certain situations. The general structure of path expressions is the following:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -872,7 +872,7 @@ transactionManager.performInTransaction(transactionalOperation, descriptor);</co
     <div class="ulist"> 
      <ul> 
       <li> <p><code>db:</code> is an optional prefix indicating that the following path is a DB path. Otherwise it is an object path.</p> </li> 
-      <li> <p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. Path must have at least one segment; segments are separated by dot (".").</p> </li> 
+      <li> <p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. The path must have at least one segment; segments are separated by a dot (".").</p> </li> 
       <li> <p><code>+</code> An "OUTER JOIN" path component. Currently "+" only has effect when translated to SQL as OUTER JOIN. When evaluating expressions in memory, it is ignored.</p> </li> 
      </ul> 
     </div> 
@@ -891,12 +891,12 @@ transactionManager.performInTransaction(transactionalOperation, descriptor);</co
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p><code>db:NAME</code> - can be used to navigate to the value of "NAME" column of some unspecified table.</p> </li> 
+      <li> <p><code>db:NAME</code> - can be used to navigate to a value in the "NAME" column of some unspecified table.</p> </li> 
       <li> <p><code>db:artist.artistExhibits.exhibit.CLOSING_DATE</code> - can be used to match a closing date of any of the exhibits of a related artist record.</p> </li> 
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>Cayenne supports "aliases" in path Expressions. E.g. the same expression can be written using explicit path or an alias:</p> 
+     <p>Cayenne supports "aliases" in path expressions. E.g. the same expression can be written using the explicit path or an alias:</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
@@ -905,13 +905,13 @@ transactionManager.performInTransaction(transactionalOperation, descriptor);</co
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>SelectQuery using the second form of the path expression must be made aware of the alias via <code>SelectQuery.aliasPathSplits(..)</code>, otherwise an Exception will be thrown. The main use of aliases is to allow users to control how SQL joins are generated if the same path is encountered more than once in any given Expression. Each alias for any given path would result in a separate join. Without aliases, a single join will be used for a group of matching paths.</p> 
+     <p>SelectQuery using the second form of the path expression must be made aware of the alias via <code>SelectQuery.aliasPathSplits(..)</code>; otherwise, an exception will be thrown. The main use of aliases is to allow users to control how SQL joins are generated if the same path is encountered more than once in any given expression. Each alias for any given path would result in a separate join. Without aliases, a single join will be used for a group of matching paths.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="creating-expressions-from-strings"><a class="anchor" href="#creating-expressions-from-strings"></a>2.4.2. Creating Expressions from Strings</h4> 
     <div class="paragraph"> 
-     <p>While in most cases users are likely to rely on API from the following section for expression creation, we’ll start by showing String expressions, as this will help to understand the semantics. A Cayenne expression can be represented as a String, which can be converted to an expression object using <code>ExpressionFactory.exp</code> static method. Here is an example:</p> 
+     <p>While in most cases users are likely to rely on the API from the following section for expression creation, we’ll start by showing String expressions, as this will help you understand the semantics. A Cayenne expression can be represented as a String, which can be converted to an expression object using the <code>ExpressionFactory.exp</code> static method. Here is an example:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -920,7 +920,7 @@ Expression exp = ExpressionFactory.exp(expString);</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>This particular expression may be used to match Paintings whose names that start with "A" and whose price is less than $1000. While this example is pretty self-explanatory, there are a few points worth mentioning. "name" and "price" here are object paths discussed earlier. As always, paths themselves are not attached to a specific root entity and can be applied to any entity that has similarly named attributes or relationships. So when we are saying that this expression "may be used to match Paintings", we are implying that there may be other entities, for which this expression is valid. Now the expression details…​</p> 
+     <p>This particular expression may be used to match Paintings whose names start with "A" and whose price is less than $1000. While this example is pretty self-explanatory, there are a few points worth mentioning. "name" and "price" here are object paths discussed earlier. As always, paths themselves are not attached to a specific root entity and can be applied to any entity that has similarly named attributes or relationships. So, when we say that this expression "may be used to match Paintings", we are implying that there may be other entities for which this expression is valid. Now the expression details…​</p> 
     </div> 
     <div class="paragraph"> 
      <p>Character constants that are not paths or numeric values should be enclosed in single or double quotes. Two of the expressions below are equivalent:</p> 
@@ -954,7 +954,7 @@ name LIKEIGNORECASE 'A%'</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Path prefixes. Object expressions are unquoted strings, optionally prefixed by <code>obj:</code> (usually they are not prefixed at all actually). Database expressions are always prefixed with <code>db:</code>. A special kind of prefix, not discussed yet is <code>enum:</code> that prefixes an enumeration constant:</p> 
+     <p>Path prefixes. Object expressions are unquoted strings, optionally prefixed by <code>obj:</code> (usually they are not prefixed at all). Database expressions are always prefixed with <code>db:</code>. A special kind of prefix, not discussed yet, is <code>enum:</code> that prefixes an enumeration constant:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -975,7 +975,7 @@ name = enum:org.foo.EnumClass.VALUE1</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Binary conditions are expressions that contain a path on the left, a value on the right, and some operation between them, such as equals, like, etc. They can be used as qualifiers in SelectQueries:</p> 
+     <p>Binary conditions are expressions that contain a path on the left, a value on the right, and some operation between them, such as equals like, etc. They can be used as qualifiers in SelectQueries:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -983,7 +983,7 @@ name = enum:org.foo.EnumClass.VALUE1</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Parameters. Expressions can contain named parameters (names that start with "$") that can be substituted with values either by name or by position. Parameterized expressions allow to create reusable expression templates. Also if an Expression contains a complex object that doesn’t have a simple String representation (e.g. a Date, a DataObject, an ObjectId), parameterizing such expression is the only way to represent it as String. Here are the examples of both positional and named parameter bindings:</p> 
+     <p>Parameters. Expressions can contain named parameters (names that start with "$") that can be substituted with values either by name or by position. Parameterized expressions let you create reusable expression templates. Also, if an expression contains a complex object that doesn’t have a simple String representation (e.g. a Date, a DataObject, an ObjectId), parameterizing the expression is the only way to represent it as String. Here are examples of both positional and named parameter bindings:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1006,7 +1006,7 @@ Expression qualifier2 = template.paramsArray("Monet");</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>In parameterized expressions with LIKE clause, SQL wildcards must be part of the values in the Map and not the expression string itself:</p> 
+     <p>In parameterized expressions with a LIKE clause, SQL wildcards must be part of the values in the Map and not the expression string itself:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1018,12 +1018,12 @@ Expression qualifier2 = template.paramsArray("Monet");</code></pre>
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="highlight"><code class="language-java java" data-lang="java">Artist dali = ... // asume we fetched this one already
+      <pre class="highlight"><code class="language-java java" data-lang="java">Artist dali = ... // assume we fetched this one already
 Expression qualifier = ExpressionFactory.exp("artist = $artist", dali);</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>When using positional binding, Cayenne would expect values for all parameters to be present. Binding by name offers extra flexibility: subexpressions with uninitialized parameters are automatically pruned from the expression. So e.g. if certain parts of the expression criteria are not provided to the application, you can still build a valid expression:</p> 
+     <p>When you use positional binding, Cayenne expects values for all parameters to be present. Binding by name offers extra flexibility: subexpressions with uninitialized parameters are automatically pruned from the expression. So, e.g., if certain parts of the expression criteria are not provided to the application, you can still build a valid expression:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1038,13 +1038,13 @@ Expression qualifier1 = template.params(p1);
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Null handling. Handling of Java nulls as operands is no different from normal values. Instead of using special conditional operators, like SQL does (<code>IS NULL</code>, <code>IS NOT NULL</code>), "=" and "!=" expressions are used directly with null values. It is up to Cayenne to translate expressions with nulls to the valid SQL.</p> 
+     <p>Null handling. Handling of Java nulls as operands is no different handling from normal values. Instead of using special conditional operators, like SQL does (<code>IS NULL</code>, <code>IS NOT NULL</code>), "=" and "!=" expressions are used directly with null values. It is up to Cayenne to translate expressions with nulls to the valid SQL.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="creating-expressions-via-api"><a class="anchor" href="#creating-expressions-via-api"></a>2.4.3. Creating Expressions via API</h4> 
     <div class="paragraph"> 
-     <p>Creating expressions from Strings is a powerful and dynamic approach, however a safer alternative is to use Java API. It provides compile-time checking of expressions validity. The API in question is provided by <code>ExpressionFactory</code> class (that we’ve seen already), Property class and Expression class itself. <code>ExpressionFactory</code> contains a number of self-explanatory static methods that can be used to build expressions. E.g.:</p> 
+     <p>Creating expressions from Strings is a powerful and dynamic approach, however a safer alternative is to use the Java API. It provides compile-time checking of the expression's validity. The API in question is provided by the <code>ExpressionFactory</code> class (that we’ve seen already), the Property class and the Expression class itself. <code>ExpressionFactory</code> contains a number of self-explanatory static methods that can be used to build expressions. E.g.:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1059,13 +1059,13 @@ Expression finalExp = e1.andExp(e2);</code></pre>
       <tbody>
        <tr> 
         <td class="icon"> <i class="fa fa-info-circle fa-2x" title="Note"></i> </td> 
-        <td class="content"> The last line in the example above shows how to create a new expression by "chaining" two other expressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact a new expression is created. I.e. Expression API treats existing expressions as immutable. </td> 
+        <td class="content"> The last line in the example above shows how to create a new expression by "chaining" two other expressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact, a new expression is created. Expression API treats existing expressions as immutable. </td> 
        </tr> 
       </tbody>
      </table> 
     </div> 
     <div class="paragraph"> 
-     <p>As discussed earlier, Cayenne supports aliases in path Expressions, allowing to control how SQL joins are generated if the same path is encountered more than once in the same Expression. Two ExpressionFactory methods allow to implicitly generate aliases to "split" match paths into individual joins if needed:</p> 
+     <p>As discussed earlier, Cayenne supports aliases in path Expressions, so you can control how SQL joins are generated if the same path is encountered more than once in the same Expression. Two ExpressionFactory methods let you implicitly generate aliases to "split" match paths into individual joins if needed:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -1074,29 +1074,29 @@ Expression matchAllExp(String path, Object... values)</code></pre>
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>"Path" argument to both of these methods can use a split character (a pipe symbol '|') instead of dot to indicate that relationship following a path should be split into a separate set of joins, one per collection value. There can only be one split at most in any given path. Split must always precede a relationship. E.g. <code>"|exhibits.paintings"</code>, <code>"exhibits|paintings"</code>, etc. Internally Cayenne would generate distinct aliases for each of the split expressions, forcing separate joins.</p> 
+     <p>The "Path" argument to both of these methods can use a split character (a pipe symbol '|') instead of a dot to indicate that the relationship following a path should be split into a separate set of joins, one per collection value. There can only be one split at most in any given path. The split must always precede a relationship. E.g. <code>"|exhibits.paintings"</code>, <code>"exhibits|paintings"</code>, etc. Internally, Cayenne generates distinct aliases for each of the split expressions, forcing separate joins.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>While ExpressionFactory is pretty powerful, there’s an even easier way to create expression using static Property objects generated by Cayenne for each persistent class. Some examples:</p> 
+     <p>While ExpressionFactory is pretty powerful, there’s an even easier way to create an expression using static Property objects generated by Cayenne for each persistent class. Some examples:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
       <pre class="highlight"><code class="language-java java" data-lang="java">// Artist.NAME is generated by Cayenne and has a type of Property&lt;String&gt;
 Expression e1 = Artist.NAME.eq("Pablo");
 
-// Chaining multiple properties into a path..
+// Chaining multiple properties into a path.
 // Painting.ARTIST is generated by Cayenne and has a type of Property&lt;Artist&gt;
 Expression e2 = Painting.ARTIST.dot(Artist.NAME).eq("Pablo");</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Property objects provide the API mostly analogius to ExpressionFactory, though it is significantly shorter and is aware of the value types. It provides compile-time checks of both property names and types of arguments in conditions. We will use Property-based API in further examples.</p> 
+     <p>Property objects provide the API mostly analogous to ExpressionFactory, though it is significantly shorter and is aware of the value types. It provides compile-time checks of both property names and types of arguments in conditions. We will use Property-based API in further examples.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="evaluate"><a class="anchor" href="#evaluate"></a>2.4.4. Evaluating Expressions in Memory</h4> 
     <div class="paragraph"> 
-     <p>When used in a query, an expression is converted to SQL WHERE clause (or ORDER BY clause) by Cayenne during query execution. Thus the actual evaluation against the data is done by the database engine. However the same expressions can also be used for accessing object properties, calculating values, in-memory filtering.</p> 
+     <p>When used in a query, an expression is converted to a SQL WHERE or ORDER BY clause by Cayenne during query execution. Thus the actual evaluation against the data is done by the database engine. However, the same expressions can also be used for accessing object properties, calculating values, and in-memory filtering.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Checking whether an object satisfies an expression:</p> 
