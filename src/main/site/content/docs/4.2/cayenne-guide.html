@@ -37,7 +37,7 @@ menu:
     <h4 id="system-requirements"><a class="anchor" href="#system-requirements"></a>1.1.1. System Requirements</h4> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>Java: The Cayenne runtime framework and CayenneModeler GUI tool are written 100% in Java, and run on any Java-compatible platform. Minimal required JDK version depends on the version of Cayenne you are using, as shown in the following table:</p> </li> 
+      <li> <p>Java: Cayenne runtime framework and CayenneModeler GUI tool are written in 100% Java, and run on any Java-compatible platform. Minimal required JDK version depends on the version of Cayenne you are using, as shown in the following table:</p> </li> 
      </ul> 
     </div> 
     <table id="versionHistory" class="tableblock frame-all grid-all stretch table table-bordered"> 
@@ -91,21 +91,21 @@ menu:
     </table> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>JDBC Driver: An appropriate DB-specific JDBC driver is needed to access the database. It can be included in the application or used in a web container DataSource configuration.</p> </li> 
-      <li> <p>Third-party Libraries: The Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See the <a href="#including-cayenne-in-project">Including Cayenne in a Project</a> chapter for details.</p> </li> 
+      <li> <p>JDBC Driver: An appropriate DB-specific JDBC driver is needed to access the database. It can be included in the application or used in web container DataSource configuration.</p> </li> 
+      <li> <p>Third-party Libraries: Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See <a href="#including-cayenne-in-project">Including Cayenne in a Project</a> chapter for details.</p> </li> 
      </ul> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="runModeler"><a class="anchor" href="#runModeler"></a>1.1.2. Running CayenneModeler</h4> 
     <div class="paragraph"> 
-     <p>CayenneModeler GUI tool is intended to work with object relational mapping projects. While you can edit your XML by hand, it is rarely needed, as the Modeler is a pretty advanced tool that is included in Cayenne distributions. To obtain CayenneModeler, download a Cayenne distribution archive from <a href="http://cayenne.apache.org/download.html" class="bare">http://cayenne.apache.org/download.html</a> that matches the OS you are using. Of course, Java needs to be installed on the machine where you are going to run the Modeler.</p> 
+     <p>CayenneModeler GUI tool is intended to work with object relational mapping projects. While you can edit your XML by hand, it is rarely needed, as the Modeler is a pretty advanced tool included in Cayenne distribution. To obtain CayenneModeler, download Cayenne distribution archive from <a href="http://cayenne.apache.org/download.html" class="bare">http://cayenne.apache.org/download.html</a> matching the OS you are using. Of course Java needs to be installed on the machine where you are going to run the Modeler.</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
       <li> <p>OS X distribution contains CayenneModeler.app at the root of the distribution disk image.</p> </li> 
       <li> <p>Windows distribution contains CayenneModeler.exe file in the bin directory.</p> </li> 
-      <li> <p>Cross-platform distribution (targeting Linux, but, as the name implies, compatible with any OS) contains a runnable CayenneModeler.jar in the bin directory. It can be executed either by double-clicking, or, if the environment is not configured to execute jars, by running it from command-line:</p> </li> 
+      <li> <p>Cross-platform distribution (targeting Linux, but as the name implies, compatible with any OS) contains a runnable CayenneModeler.jar in the bin directory. It can be executed either by double-clicking, or if the environment is not configured to execute jars, by running from command-line:</p> </li> 
      </ul> 
     </div> 
     <div class="listingblock"> 
@@ -114,7 +114,7 @@ menu:
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>The Modeler can also be started from Maven. While it may look like an exotic way to start a GUI application, it has its benefits - no need to download a Cayenne distribution, the version of the Modeler always matches the version of the framework, the plugin can find mapping files in the project automatically. So it is an attractive option to some developers. The Maven option requires a declaration in the POM:</p> 
+     <p>The Modeler can also be started from Maven. While it may look like an exotic way to start a GUI application, it has its benefits - no need to download Cayenne distribution, the version of the Modeler always matches the version of the framework, the plugin can find mapping files in the project automatically. So it is an attractive option to some developers. Maven option requires a declaration in the POM:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -185,11 +185,10 @@ menu:
    <div class="sect3"> 
     <h4 id="cayenne-project"><a class="anchor" href="#cayenne-project"></a>1.2.1. Cayenne Project</h4> 
     <div class="paragraph"> 
-     <p>A Cayenne project is an XML representation of a model connecting a database schema with Java classes. A project is normally created and manipulated via the CayenneModeler GUI and then used to initialize the Cayenne runtime. A project is made of one or more files. There’s always a root project descriptor file in any valid project. It is normally called cayenne-xyz.xml, where "xyz" is the name of the project.</p> 
+     <p>A Cayenne project is an XML representation of a model connecting database schema with Java classes. A project is normally created and manipulated via CayenneModeler GUI and then used to initialize Cayenne runtime. A project is made of one or more files. There’s always a root project descriptor file in any valid project. It is normally called cayenne-xyz.xml, where "xyz" is the name of the project.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>The project descriptor can reference DataMap files, one per DataMap. DataMap files are normally called xyz.map.xml, where "xyz" is the name of the DataMap. For legacy reasons this naming convention is different from the convention for the root project descriptor above, and we may align it in the future versions.</p>
-     <p>Here is how a typical project might look on the file system:</p> 
+     <p>Project descriptor can reference DataMap files, one per DataMap. DataMap files are normally called xyz.map.xml, where "xyz" is the name of the DataMap. For legacy reasons this naming convention is different from the convention for the root project descriptor above, and we may align it in the future versions. Here is how a typical project might look on the file system:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -200,7 +199,7 @@ total 24
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>A DataMap is referenced by name in the root descriptor:</p> 
+     <p>DataMap are referenced by name in the root descriptor:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -208,43 +207,43 @@ total 24
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>Cayenne resolves map files by appending the ".map.xml" extension to the map name, and resolving the resulting string relative to the root descriptor URI. The following sections discuss varios ORM model objects, without regard to their XML representation. XML format details are really unimportant to Cayenne users.</p> 
+     <p>Map files are resolved by Cayenne by appending ".map.xml" extension to the map name, and resolving the resulting string relative to the root descriptor URI. The following sections discuss varios ORM model objects, without regards to their XML representation. XML format details are really unimportant to the Cayenne users.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="datamap"><a class="anchor" href="#datamap"></a>1.2.2. DataMap</h4> 
     <div class="paragraph"> 
-     <p>A DataMap is a container of persistent entities and other object-relational metadata. A DataMap provides developers with a scope to organize their entities, but it does not provide a namespace for entities. In fact, all DataMaps present in the runtime are combined in a single namespace. Each DataMap must be associated with a DataNode. This is how Cayenne knows which database to use when running a query.</p> 
+     <p>DataMap is a container of persistent entities and other object-relational metadata. DataMap provides developers with a scope to organize their entities, but it does not provide a namespace for entities. In fact all DataMaps present in runtime are combined in a single namespace. Each DataMap must be associated with a DataNode. This is how Cayenne knows which database to use when running a query.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="datanode"><a class="anchor" href="#datanode"></a>1.2.3. DataNode</h4> 
     <div class="paragraph"> 
-     <p>A DataNode is model of a database. It is actually pretty simple. It has an arbitrary, user-provided name and information needed to create or locate a JDBC DataSource. Most projects only have one DataNode, though there may be any number of nodes if needed.</p> 
+     <p>DataNode is model of a database. It is actually pretty simple. It has an arbitrary user-provided name and information needed to create or locate a JDBC DataSource. Most projects only have one DataNode, though there may be any number of nodes if needed.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="dbentity"><a class="anchor" href="#dbentity"></a>1.2.4. DbEntity</h4> 
     <div class="paragraph"> 
-     <p>A DbEntity is a model of a single DB table or view. A DbEntity is made of DbAttributes that correspond to columns, and DbRelationships that map PK/FK pairs. DbRelationships are not strictly tied to FK constraints in DB, and should be mapped for all logical "relationships" between the tables.</p> 
+     <p>DbEntity is a model of a single DB table or view. DbEntity is made of DbAttributes that correspond to columns, and DbRelationships that map PK/FK pairs. DbRelationships are not strictly tied to FK constraints in DB, and should be mapped for all logical "relationships" between the tables.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="objentity"><a class="anchor" href="#objentity"></a>1.2.5. ObjEntity</h4> 
     <div class="paragraph"> 
-     <p>An ObjEntity is a model of a single persistent Java class. An ObjEntity is made up of ObjAttributes and ObjRelationships. Both correspond to entity class properties. However, ObjAttributes represent "simple" properties (normally things like strings, numbers, and dates), while ObjRelationships correspond to properties that have a type of another entity.</p> 
+     <p>ObjEntity is a model of a single persistent Java class. ObjEntity is made of ObjAttributes and ObjRelationships. Both correspond to entity class properties. However ObjAttributes represent "simple" properties (normally things like String, numbers, dates, etc.), while ObjRelationships correspond to properties that have a type of another entity.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>An ObjEntity maps to one or more DbEntities. There’s always one "root" DbEntity for each ObjEntity. An ObjAttribiute maps to a DbAttribute or an Embeddable. Most often the mapped DbAttribute is from the root DbEntity. Sometimes mapping is done to a DbAttribute from another DbEntity somehow related to the root DbEntity. Such an ObjAttribute is called "flattened". Similarly, an ObjRelationship maps either to a single DbRelationship, or to a chain of DbRelationships ("flattened" ObjRelationship).</p> 
+     <p>ObjEntity maps to one or more DbEntities. There’s always one "root" DbEntity for each ObjEntity. ObjAttribiute maps to a DbAttribute or an Embeddable. Most often mapped DbAttribute is from the root DbEntity. Sometimes mapping is done to a DbAttribute from another DbEntity somehow related to the root DbEntity. Such ObjAttribute is called "flattened". Similarly ObjRelationship maps either to a single DbRelationship, or to a chain of DbRelationships ("flattened" ObjRelationship).</p> 
     </div> 
     <div class="paragraph"> 
-     <p>ObjEntities may also contain a mapping of their lifecycle callback methods.</p> 
+     <p>ObjEntities may also contain mapping of their lifecycle callback methods.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="embeddable"><a class="anchor" href="#embeddable"></a>1.2.6. Embeddable</h4> 
     <div class="paragraph"> 
-     <p>An Embeddable is a model of a Java class that acts as a single attribute of an ObjEntity, but maps to multiple columns in the database.</p> 
+     <p>Embeddable is a model of a Java class that acts as a single attribute of an ObjEntity, but maps to multiple columns in the database.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -256,7 +255,7 @@ total 24
    <div class="sect3"> 
     <h4 id="query"><a class="anchor" href="#query"></a>1.2.8. Query</h4> 
     <div class="paragraph"> 
-     <p>A model of a query. Cayenne allows queries to be mapped in a Cayenne project, or created in the code. Depending on the circumstances, users may take one or the other approach.</p> 
+     <p>A model of a query. Cayenne allows queries to be mapped in Cayenne project, or created in the code. Depending on the circumstances the users may take one or the other approach.</p> 
     </div> 
    </div> 
   </div> 
@@ -271,22 +270,22 @@ total 24
    <div class="sect3"> 
     <h4 id="generating-database-schema"><a class="anchor" href="#generating-database-schema"></a>1.3.2. Generating Database Schema</h4> 
     <div class="paragraph"> 
-     <p>With Cayenne Modeler, you can create simple database schemas without additional database tools. This is a good option for initial database setup if you completely created your model with the Modeler. You can start SQL schema generation by selecting in the menu <strong>Tools &gt; Generate Database Schema</strong></p> 
+     <p>With Cayenne Modeler you can create simple database schemas without any additional database tools. This is a good option for initial database setup if you completely created you model with the Modeler. You can start SQL schema generation by selecting menu <strong>Tools &gt; Generate Database Schema</strong></p> 
     </div> 
     <div class="paragraph"> 
-     <p>You can select what database parts should be generated and what tables you want.</p> 
+     <p>You can select what database parts should be generated and what tables you want</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="generating-java-classes"><a class="anchor" href="#generating-java-classes"></a>1.3.3. Generating Java Classes</h4> 
     <div class="paragraph"> 
-     <p>Before using Cayenne in your code you need to generate Java source code for persistent objects. This can be done with Modeler GUI or via the <a href="#cgen">cgen</a> maven/ant plugin.</p> 
+     <p>Before using Cayenne in you code you need to generate java source code for persistent objects. This can be done with Modeler GUI or via <a href="#cgen">cgen</a> maven/ant plugin.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>To generate classes in the modeler, use <strong>Tools &gt; Generate Classes</strong></p> 
+     <p>To generate classes in the modeler use <strong>Tools &gt; Generate Classes</strong></p> 
     </div> 
     <div class="paragraph"> 
-     <p>There are three default types of code generation</p> 
+     <p>There is three default types of code generation</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
@@ -294,7 +293,7 @@ total 24
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>Default type of generation suitable for almost all cases. Use this type unless you know exactly what you need to customize.</p> 
+     <p>Default type of generation suitable for almost all cases. Use this type unless you now what exactly you need to customize.</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
@@ -302,7 +301,7 @@ total 24
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>This type is for generating code for the client part of a ROP setup.</p> 
+     <p>This type is for generating code for client part of a ROP setup.</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
@@ -310,16 +309,16 @@ total 24
      </ul> 
     </div> 
     <div class="paragraph"> 
-     <p>In advanced mode you can control almost all aspects of code generation, including custom templates for Java code. See default Cayenne templates on GitHub as examples.</p> 
+     <p>In advanced mode you can control almost all aspects of code generation including custom templates for java code. See default Cayenne templates on GitHub as an example.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="modeling-generic-persistent-classes"><a class="anchor" href="#modeling-generic-persistent-classes"></a>1.3.4. Modeling Generic Persistent Classes</h4> 
     <div class="paragraph"> 
-     <p>Normally, each ObjEntity is mapped to a specific Java class (such as Artist or Painting) that explicitly declares all entity properties as pairs of getters and setters. However, Cayenne allows you to map a completly generic class to any number of entities. The only expectation is that a generic class implements org.apache.cayenne.DataObject. So an ideal candidate for a generic class is CayenneDataObject, or some custom subclass of CayenneDataObject.</p> 
+     <p>Normally each ObjEntity is mapped to a specific Java class (such as Artist or Painting) that explicitly declare all entity properties as pairs of getters and setters. However Cayenne allows to map a completly generic class to any number of entities. The only expectation is that a generic class implements org.apache.cayenne.DataObject. So an ideal candidate for a generic class is CayenneDataObject, or some custom subclass of CayenneDataObject.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>If you don’t enter anything for Java Class of an ObjEntity, Cayenne assumes generic mapping and uses the following implicit rules to determine the class of a generic object. If DataMap "Custom Superclass" is set, the runtime uses this class to instantiate new objects. If not, <code>org.apache.cayenne.CayenneDataObject</code> is used.</p> 
+     <p>If you don’t enter anything for Java Class of an ObjEntity, Cayenne assumes generic mapping and uses the following implicit rules to determine a class of a generic object. If DataMap "Custom Superclass" is set, runtime uses this class to instantiate new objects. If not, <code>org.apache.cayenne.CayenneDataObject</code> is used.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Class generation procedures (either done in the Modeler or with Ant or Maven) would skip entities that are mapped to CayenneDataObject explicitly or have no class mapping.</p> 
@@ -332,13 +331,13 @@ total 24
     </div> 
     <div class="olist arabic"> 
      <ol class="arabic"> 
-      <li> <p><strong>Cayenne Generated</strong>. This is the default strategy. Cayenne uses a special table <code>AUTO_PK_SUPPORT</code> for managing primary keys.</p> </li> 
-      <li> <p><strong>Database Generated</strong>. Cayenne delegates PK generation to the database (e.g. auto increment fields in MySQL or <code>serial</code> type in PostgreSQL).</p> </li> 
-      <li> <p><strong>Custom Sequence</strong>. In this case Cayenne will use a provided sequence to generate primary keys.</p> </li> 
+      <li> <p><strong>Cayenne Generated</strong>. This is default strategy. Cayenne will use special table <code>AUTO_PK_SUPPORT</code> for managing primary keys.</p> </li> 
+      <li> <p><strong>Database Generated</strong>. Cayenne will delegate PK generation to database (e.g. auto increment fields on MySQL or <code>serial</code> type on PostgreSQL)</p> </li> 
+      <li> <p><strong>Custom Sequence</strong>. In this case Cayenne will use provided sequence to generate primary keys.</p> </li> 
      </ol> 
     </div> 
     <div class="paragraph"> 
-     <p>A strategy should be set per each <code>DbEntity</code> independently.</p> 
+     <p>Strategy should be set per each <code>DbEntity</code> independently.</p> 
     </div> 
     <div class="imageblock text-center"> 
      <div class="content"> 
@@ -372,7 +371,7 @@ total 24
    <div class="sect3"> 
     <h4 id="gradle"><a class="anchor" href="#gradle"></a>2.1.2. Gradle</h4> 
     <div class="paragraph"> 
-     <p>To add Cayenne to your Gradle project, include the <code>cayenne-server</code> module:</p> 
+     <p>To add Cayenne to your Gradle project, include <code>cayenne-server</code> module:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -383,7 +382,7 @@ total 24
    <div class="sect3"> 
     <h4 id="ant-etc"><a class="anchor" href="#ant-etc"></a>2.1.3. Ant, etc.</h4> 
     <div class="paragraph"> 
-     <p>If your environment requires manual dependency management (like Ant), check the <code>lib</code> and <code>lib/third-party</code> folders of Cayenne distribution. They contains all Cayenne jars as well as the minimal set of third-party libraries to get you started.</p> 
+     <p>If your environment requires manual dependency management (like Ant), check <code>lib</code> and <code>lib/third-party</code> folders of Cayenne distribution. It contains all Cayenne jars as well as the minimal set of third-party libraries to get you started.</p> 
     </div> 
    </div> 
   </div> 
@@ -392,7 +391,7 @@ total 24
    <div class="sect3"> 
     <h4 id="starting-and-stopping-serverruntime"><a class="anchor" href="#starting-and-stopping-serverruntime"></a>2.2.1. Starting and Stopping ServerRuntime</h4> 
     <div class="paragraph"> 
-     <p>At runtime Cayenne is accessed via <code>org.apache.cayenne.configuration.server.ServerRuntime</code>. ServerRuntime is created by calling a convenient builder:</p> 
+     <p>In runtime Cayenne is accessed via <code>org.apache.cayenne.configuration.server.ServerRuntime</code>. ServerRuntime is created by calling a convenient builder:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -402,10 +401,10 @@ total 24
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>The parameter you pass to the builder is the location of the main project file. The location is a '/'-separated path (same path separator is used for UNIX and Windows) that is resolved relative to the application classpath. The project file can be placed in the root package or in a subpackage (e.g. if the code above it is in a "com/example" subpackage).</p> 
+     <p>The parameter you pass to the builder is a location of the main project file. Location is a '/'-separated path (same path separator is used on UNIX and Windows) that is resolved relative to the application classpath. The project file can be placed in the root package or in a subpackage (e.g. in the code above it is in "com/example" subpackage).</p> 
     </div> 
     <div class="paragraph"> 
-     <p>ServerRuntime encapsulates a single Cayenne stack. Most applications will just have one ServerRuntime, using it to create as many ObjectContexts as needed, access the Dependency Injection (DI) container, and work with other Cayenne features. Internally, ServerRuntime is just a thin wrapper around the DI container. Detailed features of the container are discussed in the <a href="#customizing-cayenne-runtime">Customizing Cayenne Runtime</a> chapter. Here, we’ll just show an example of how an application might turn on external transactions:</p> 
+     <p>ServerRuntime encapsulates a single Cayenne stack. Most applications will just have one ServerRuntime using it to create as many ObjectContexts as needed, access the Dependency Injection (DI) container and work with other Cayenne features. Internally ServerRuntime is just a thin wrapper around the DI container. Detailed features of the container are discussed in <a href="#customizing-cayenne-runtime">Customizing Cayenne Runtime</a> chapter. Here we’ll just show an example of how an application might turn on external transactions:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -419,7 +418,7 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>It is a good idea to shut down the runtime when it is no longer needed, usually before the application itself is shut down:</p> 
+     <p>It is a good idea to shut down the runtime when it is no longer needed, usually before the application itself is shutdown:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -427,13 +426,13 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>When a runtime object has the same scope as the application, this may not be always necessary; however in some cases it is essential, and is generally considered a good practice. E.g. in a web container, hot redeploy of a webapp will cause resource leaks and an eventual OutOfMemoryError if the application fails to shut down CayenneRuntime.</p> 
+     <p>When a runtime object has the same scope as the application, this may not be always necessary, however in some cases it is essential, and is generally considered a good practice. E.g. in a web container hot redeploy of a webapp will cause resource leaks and eventual OutOfMemoryError if the application fails to shutdown CayenneRuntime.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="merging-multiple-projects"><a class="anchor" href="#merging-multiple-projects"></a>2.2.2. Merging Multiple Projects</h4> 
     <div class="paragraph"> 
-     <p>ServerRuntime requires at least one mapping project to run. But it can also take multiple projects and merge them together in a single configuration. This way different parts of a database can be mapped independently from each other (even by different software providers), and combined in runtime when assembling an application. Doing it is as easy as passing multiple project locations to the ServerRuntime builder:</p> 
+     <p>ServerRuntime requires at least one mapping project to run. But it can also take multiple projects and merge them together in a single configuration. This way different parts of a database can be mapped independently from each other (even by different software providers), and combined in runtime when assembling an application. Doing it is as easy as passing multiple project locations to ServerRuntime builder:</p> 
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
@@ -445,16 +444,16 @@ ServerRuntime runtime = ServerRuntime.builder()
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>When projects are merged, the following rules are applied:</p> 
+     <p>When the projects are merged, the following rules are applied:</p> 
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>The order of projects matters during merge. If there are two conflicting metadata objects belonging to two projects, an object from the last project takes precedence over the object from the first one. This makes it possible to override pieces of metadata. This is similar to how DI modules are merged in Cayenne.</p> </li> 
-      <li> <p>The Runtime DataDomain name is set to the name of the last project in the list.</p> </li> 
+      <li> <p>The order of projects matters during merge. If there are two conflicting metadata objects belonging to two projects, an object from the last project takes precedence over the object from the first one. This makes possible to override pieces of metadata. This is also similar to how DI modules are merged in Cayenne.</p> </li> 
+      <li> <p>Runtime DataDomain name is set to the name of the last project in the list.</p> </li> 
       <li> <p>Runtime DataDomain properties are the same as the properties of the last project in the list. I.e. properties are not merged to avoid invalid combinations and unexpected runtime behavior.</p> </li> 
-      <li> <p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project; the rest are discarded. Same precedence rules apply: the DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p> </li> 
-      <li> <p>If there are two or more DataNodes with the same name, only one DataNode is used in the merged project; the rest are discarded. The DataNode coming from the project with the highest index in the project list is chosen, per the precedence rule above.</p> </li> 
-      <li> <p>There is a notion of a "default" DataNode. After the merge, if any DataMaps are not explicitly linked to DataNodes, their queries will be executed via a default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database at runtime. If there’s only one DataNode in the merged project, it will be automatically chosen as the default. A way to explicitly designate a specific node as default is to override the <code>DataDomainProvider.createAndInitDataDomain()</code>.</p> </li> 
+      <li> <p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project, the rest are discarded. Same precedence rules apply - DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p> </li> 
+      <li> <p>If there are two or more DataNodes with the same name, only one DataNode is used in the merged project, the rest are discarded. DataNode coming from project with the highest index in the project list is chosen per precedence rule above.</p> </li> 
+      <li> <p>There is a notion of "default" DataNode. After the merge if any DataMaps are not explicitly linked to DataNodes, their queries will be executed via a default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime. If there’s only one DataNode in the merged project, it will be automatically chosen as default. A possible way to explicitly designate a specific node as default is to override <code>DataDomainProvider.createAndInitDataDomain()</code>.</p> </li> 
      </ul> 
     </div> 
    </div> 
