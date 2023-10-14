@@ -24,12 +24,12 @@ require('bootstrap/js/dist/scrollspy');
 
 var anchorJS = require('anchor-js');
 
-var hljs     = require('highlight.js/lib/highlight.js');
-var xml      = require('highlight.js/lib/languages/xml.js');
-var java     = require('highlight.js/lib/languages/java.js');
-var sql      = require('highlight.js/lib/languages/sql.js');
-var groovy   = require('highlight.js/lib/languages/groovy.js');
-var bash     = require('highlight.js/lib/languages/bash.js');
+var hljs     = require('highlight.js/lib/core');
+var xml      = require('highlight.js/lib/languages/xml');
+var java     = require('highlight.js/lib/languages/java');
+var sql      = require('highlight.js/lib/languages/sql');
+var groovy   = require('highlight.js/lib/languages/groovy');
+var bash     = require('highlight.js/lib/languages/bash');
 
 function initHljs() {
     hljs.registerLanguage('xml',    xml);
@@ -37,7 +37,10 @@ function initHljs() {
     hljs.registerLanguage('sql',    sql);
     hljs.registerLanguage('groovy', groovy);
     hljs.registerLanguage('bash',   bash);
-    hljs.initHighlightingOnLoad();
+    hljs.configure({
+        ignoreUnescapedHTML: true
+    });
+    hljs.highlightAll();
 }
 
 function initGitHubBadge() {

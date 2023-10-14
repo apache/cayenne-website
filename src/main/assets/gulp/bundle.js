@@ -18,5 +18,6 @@
  */
 
 const gulp = require("gulp");
+require("./build.js");
 
-gulp.task('bundle', ['build:publish']);
+gulp.task('bundle', gulp.series('build:publish'));

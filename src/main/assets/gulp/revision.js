@@ -22,25 +22,12 @@ const rev   = require('gulp-rev');
 const del   = require('rev-del');
 const path  = require('path');
 const clean = require('gulp-clean');
+require("./styles.js");
+require("./scripts.js");
+require("./images.js");
+require("./fonts.js");
 
-// styles, scripts, images, fonts depends on this
-gulp.task('clean-static', function() {
-    return gulp.src(
-        [
-            global.hugoConfig.srcDir + '/static/css/**/*.css',
-            global.hugoConfig.srcDir + '/static/js/**/*.js',
-            global.hugoConfig.srcDir + '/static/js/**/*.js.map'
-        ],{base: global.hugoConfig.srcDir, read: false})
-        .pipe(clean({force: true}));
-});
-
-// separately copy source maps
-gulp.task('copy-js-map', ['scripts'], function () {
-    return gulp.src(global.hugoConfig.stagingDir + '/js/**/*.js.map')
-        .pipe(gulp.dest(global.hugoConfig.srcDir + '/static/js'));
-});
-
-gulp.task('revision', ['styles', 'scripts', 'images', 'fonts', 'copy-js-map'], function() {
+function revisionTask() {
     return gulp.src(
         [
             global.hugoConfig.stagingDir + '/css/**/*.css',
@@ -54,4 +41,18 @@ gulp.task('revision', ['styles', 'scripts', 'images', 'fonts', 'copy-js-map'], f
         .pipe(rev.manifest('../../../../target/site/staging/rev-manifest.json'))
         .pipe(del({dest: global.hugoConfig.srcDir + '/static', force: true}))
         .pipe(gulp.dest(global.hugoConfig.srcDir + '/static'));
-});
+}
+
+// separately copy source maps
+gulp.task('copy-js-map', gulp.series( function () {
+    return gulp.src(global.hugoConfig.stagingDir + '/js/**/*.js.map')
+        .pipe(gulp.dest(global.hugoConfig.srcDir + '/static/js'));
+}));
+
+gulp.task('revision:all', gulp.series(gulp.parallel('styles', 'scripts:all', 'images', 'fonts'),'copy-js-map', function() {
+    return revisionTask();
+}));
+
+gulp.task('revision:publish', gulp.series(gulp.series('styles', 'scripts:publish', 'images', 'fonts'),'copy-js-map', function() {
+    return revisionTask();
+}));

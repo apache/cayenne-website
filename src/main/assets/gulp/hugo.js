@@ -16,35 +16,40 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 const gulp = require('gulp');
 const childProcess = require('child_process');
-const hugo = require('hugo-bin');
+require("./revision.js");
 
-function runHugo(publish) {
-    const src = global.hugoConfig.srcDir;
-    const dst = global.hugoConfig.publicDir;
-    const conf = global.hugoConfig.srcDir + 'config.yaml';
-    const argv = require('yargs').argv;
+async function runHugo(publish) {
+    return new Promise(async (resolve, reject) => {
+            const hugo = await import('hugo-bin');
 
-    let cmd = hugo + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
+            const src = global.hugoConfig.srcDir;
+            const dst = global.hugoConfig.publicDir;
+            const conf = global.hugoConfig.srcDir + 'config.yaml';
+            const argv = require('yargs').argv;
 
-    if (publish) {
-        cmd += ' --baseUrl="' + argv.prod_host + '" ';
-    } else {
-        cmd += ' --baseUrl="http://' + argv.host + ':' + argv.port + '/" '
-            + ' --buildDrafts=true --verbose=true --buildFuture';
-    }
+            let cmd = hugo.default + ' --config=' + conf + ' -s ' + src + ' -d ' + dst;
 
-    console.log("Running " + cmd);
-    const result = childProcess.execSync(cmd, {encoding: 'utf-8'});
-    console.log('hugo out: \n' + result);
+            if (publish) {
+                cmd += ' --baseUrl="' + argv.prod_host + '" ';
+            } else {
+                cmd += ' --baseUrl="http://' + argv.host + ':' + argv.port + '/" '
+                    + ' --buildDrafts=true --verbose=true --buildFuture';
+            }
+
+            console.log("Running " + cmd);
+            const result = childProcess.execSync(cmd, {encoding: 'utf-8'});
+            console.log('hugo out: \n' + result);
+
+            resolve();
+        })
 }
 
-gulp.task('hugo:all', ['revision'], function() {
-    runHugo(false);
-});
+gulp.task('hugo:all', gulp.series('revision:all', function(done) {
+  runHugo(false).then(function () { done(); })
+}));
 
-gulp.task('hugo:publish', ['revision'], function() {
-    runHugo(true);
-});
+gulp.task('hugo:publish', gulp.series('revision:publish', function(done) {
+    runHugo(true).then(function () { done(); })
+}));

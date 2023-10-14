@@ -21,6 +21,8 @@ const gulp    = require("gulp");
 const replace = require("gulp-rev-replace");
 const size    = require('gulp-size');
 const del     = require('del');
+require('./revision.js');
+require('./hugo.js');
 
 // replace references to generated resources inside content,
 // like <script src='bundle.js' -> <script src='styles-f12328c2b2.js'..
@@ -42,16 +44,16 @@ function updateResourceRefs() {
 }
 
 // dev start
-gulp.task('reference:all', ['hugo:all'], function() {
+gulp.task('reference:all', gulp.series('hugo:all', function() {
     return updateResourceRefs();
-});
+}));
 
 // release build
-gulp.task('reference:publish', ['hugo:publish'], function() {
+gulp.task('reference:publish', gulp.series('hugo:publish', function() {
     return updateResourceRefs();
-});
+}));
 
 // live rebuild
-gulp.task('reference:content', ['revision'], function() {
+gulp.task('reference:content', gulp.series('revision:all', function() {
     return updateResourceRefs();
-});
+}));

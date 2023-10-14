@@ -20,8 +20,9 @@
 const gulp        = require("gulp");
 const browserSync = require("browser-sync");
 const watch       = require("gulp-watch");
+require("./build.js");
 
-gulp.task('serve', ['build:all'], function() {
+gulp.task('serve', gulp.series('build:all', function(done) {
 
     const argv = require('yargs').argv;
 
@@ -40,10 +41,7 @@ gulp.task('serve', ['build:all'], function() {
             global.hugoConfig.srcDir + '/data/**/*',
             global.hugoConfig.srcDir + '/layouts/**/*',
             global.hugoConfig.srcDir + '/config.yaml'
-        ], {},
-        function handle() {
-		    gulp.start('build:all');
-	    }
+        ], gulp.series('build:all')
     );
 
     watch(
@@ -52,9 +50,7 @@ gulp.task('serve', ['build:all'], function() {
             'styles/**/*.css',
             'scripts/**/*.js',
             'images/**/*.*'
-        ], {},
-        function handle() {
-		    gulp.start('build:all');
-        }
+        ], gulp.series('build:all')
     );
-});
+    done();
+}));

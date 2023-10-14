@@ -40,7 +40,8 @@
 @include customFontFace('montserrat', 'fonts/montserrat-bolditalic', 700, italic);
 
 // FA ICONS
-@import "../node_modules/font-awesome/scss/font-awesome";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/v4-shims";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 @include customFontFace('fontawesome', 'fonts/fontawesome-webfont', 400);
 
 // Bootstrap v4 bet2
@@ -52,6 +53,18 @@
 // INNER PAGE
 @import "cd";
 
+//For applying fontawesome icons
+.fa {
+    font-family: "FontAwesome" !important;
+}
+.fa.fa-long-arrow-right::before {
+    content: "\f178";
+}
+
+// from hljs, because of changed background color in github.css
+.hljs {
+    background: #f8f8f8 !important; // for change in
+}
 
 //
 // [Extend] Text utilities

@@ -18,13 +18,14 @@
  */
 
 const gulp 		 = require('gulp');
-const sass 		 = require('gulp-sass');
+const sass 		 = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss 	 = require('gulp-clean-css');
 const merge 	 = require('merge-stream');
 const concat 	 = require('gulp-concat');
+require("./util.js");
 
-gulp.task('styles', ['clean-static'], function() {
+gulp.task('styles', gulp.series('clean-static', function() {
     const scssStream = gulp.src('styles/**/*.scss')
         .pipe(sass())
         .pipe(concat('scss-files.css'));
@@ -37,4 +38,4 @@ gulp.task('styles', ['clean-static'], function() {
 		.pipe(cleancss({advanced:false}))
         .pipe(concat('styles.css'))
         .pipe(gulp.dest(global.hugoConfig.stagingDir + '/css'));
-});
+}));

@@ -18,12 +18,20 @@
  */
 
 const gulp     = require('gulp');
-const imagemin = require('gulp-imagemin');
 const changed  = require('gulp-changed');
+require("./util.js");
 
-gulp.task('images', ['clean-static'], function () {
-  return gulp.src('images/**/*.*')
-    .pipe(changed(global.hugoConfig.stagingDir + '/img'))
-    .pipe(imagemin())
-    .pipe(gulp.dest(global.hugoConfig.stagingDir + '/img'));
-});
+async function configImage() {
+    const imagemin = (await import("gulp-imagemin")).default;
+    return new Promise(function (resolve, reject) {
+                                   gulp.src('images/**/*.*')
+                                        .pipe(changed(global.hugoConfig.stagingDir + '/img'))
+                                        .pipe(imagemin())
+                                        .pipe(gulp.dest(global.hugoConfig.stagingDir + '/img'))
+                                        .on('finish', resolve)
+                                        .on('error', reject);
+                                   });}
+
+gulp.task('images', gulp.series('clean-static', function(done) {
+                                                  configImage().then(function () { done();})
+    }));
