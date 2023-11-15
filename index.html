@@ -14,7 +14,8 @@
         <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-c1116f84b2.css"/>
-        <script src="https://cayenne.apache.org/js/bundle-16fc0c2ea0.js"></script>
+        <script src="https://cayenne.apache.org/js/bundle-55c7adf70f.js"></script>
+        <script src="https://www.apachecon.com/event-images/snippet.js"></script>
         <title>Apache Cayenne</title>
     </head>
     <body>
@@ -33,6 +34,7 @@
             <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
             <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
             <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
           </div>
         </li>
         
@@ -66,7 +68,8 @@
           <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
             <li class="nav-item  d-flex">
               <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
-                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" /><span class="stargazers_count  ml-1l2"></span></a>
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
             </li>
             <li class="nav-item  d-flex">
               <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
@@ -92,8 +95,16 @@
             </h1>
             <p class="d-inline-block mw-460px  small  font-italic  mb-0">Apache Cayenne™ is an open source Java object-to-relational mapping framework</p>
 			<div class="embed-responsive mw-560px mt-3 mx-auto  embed-responsive-16by9">
-				<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0H5HIA03xFc?html5=1&controls=1&showinfo=0&fs=1&rel=0" frameborder="0" allowfullscreen></iframe>
+				<iframe class="embed-iframe"
+						srcdoc="<style>*{padding:0;margin:0;overflow:hidden}</style>
+                        <a href=https://www.youtube.com/embed/0H5HIA03xFc?html5=1&controls=1&autoplay=1&showinfo=0&fs=1&rel=0>
+                        <img src=img/cayenne-tutorial-preview-62b4329689.png alt='Play Cayenne video tutorial'>
+                        </a>"
+						allowfullscreen
+						title="Play Cayenne video tutorial"
+				></iframe>
 			</div>
+			<p class="xsmall">Clicking on this link will load and send data from and to Google.</p>
         </div>
     </div>
 
@@ -177,20 +188,20 @@
 			<div class="tab-content  px-lg-5" id="myTabContent">
 				<div class="tab-pane fade show active" id="modeler" role="tabpanel" aria-labelledby="modeler-tab">
 					<h4>Modeler</h4>
-					<p>Cayenne is distributed with CayenneModeler - a complete GUI mapping tool that supports reverse-engineering of RDBMS schemas, editing object-relational mapping projects, generation of Java source code for the persistent objects and other functions.</p>
+					<p>Cayenne is distributed with CayenneModeler - a complete GUI mapping tool that supports reverse-engineering of RDBMS schemas, editing object-relational mapping projects, generating Java source code for persistent objects and other functions.</p>
 					
 		            <img class="img-fluid  mb-2" src="img/cayenne-modeler1-720ebf6dbf.png" alt="Cayenne Modeler" />
 
 				</div>
 				<div class="tab-pane fade" id="db-first-flow" role="tabpanel" aria-labelledby="db-first-flow-tab">
 					<h4>DB-first-flow</h4>
-					<p>Cayenne allows you to design your data model in a single place - the database. Other layers (OR mapping and Java objects) are synchronized automatically via CayenneModeler or a build script, so you don't have to repeat yourself. Such approach is called "database-first". It saves you development time and prevents errors by ensuring that your model is in sync across multiple layers. It is also quite flexible. It works well with common DB migrations frameworks like Liquibase or Flyway, allows object structure customizations and is designed for iterative schema evolution.
+					<p>Cayenne allows you to design your data model in a single place - the database. Other layers (OR mapping and Java objects) are synchronized automatically via CayenneModeler or a build script, so you don't have to repeat yourself. Such an approach is called "database-first". It saves you development time and prevents errors by ensuring that your model is in sync across multiple layers. It is also quite flexible. It works well with common DB migration frameworks like Liquibase or Flyway, allows object structure customizations and is designed for iterative schema evolution.
 					</p>
 				</div>
 				<div class="tab-pane fade" id="transparent-transactions" role="tabpanel" aria-labelledby="transparent-transactions-tab">
 					<h4>Transparent transactions</h4>
 					<p>
-						Most ORM frameworks require you to manage transactions manually or with external tools like Spring. Also you must always ensure you stay within transaction bounds when traversing relationships between objects. Cayenne takes a notably different approach, freeing you from writing lots of trivial code. Transaction management happens automatically behind the scenes. Object graph can be expanded lazily on demand without any special considerations. 
+						Most ORM frameworks require you to manage transactions manually or with external tools like Spring. Also you must always ensure you stay within transaction bounds when traversing relationships between objects. Cayenne takes a notably different approach, freeing you from writing lots of trivial code. Transaction management happens automatically behind the scenes. Object graphs can be expanded lazily on demand, without any special considerations. 
 					</p>
 					<p>
 						At the same time Cayenne works well with external transaction managers. It also has its own transaction API that can be used to run multiple operations atomically in regards to DB commit/rollback. The good thing is that it is completely optional and should be used only when needed.
@@ -199,19 +210,19 @@
 				<div class="tab-pane fade" id="objectcontext" role="tabpanel" aria-labelledby="objectcontext-tab">
 					<h4>Object Context</h4>
 					<p>
-						At the heart of Cayenne persistence API lies ObjectContext. ObjectContext can be thought of as a unit of work. It  has its own copy of persistent objects. While vaguely similar to JPA EntityManager, ObjectContext is closer to a version control client. It is not connected to the database except when a read or write operation is in progress, it doesn't hold on to any resources (such as DB connections), and doesn't need to be closed. 
+						At the heart of Cayenne's persistence API lies ObjectContext. ObjectContext can be thought of as a unit of work. It has its own copy of persistent objects. While vaguely similar to JPA EntityManager, ObjectContext is closer to a version control client. It is not connected to the database except when a read or write operation is in progress, it doesn't hold on to any resources (such as DB connections), and doesn't need to be closed. 
 					</p>
 					<p>
-						As a result ObjectContexts are serializable and rather lightweight. Contexts can be nested (a child context can read/write from/to parent without affecting the DB). There is even a version of ObjectContext that can run in an entirely different JVM from the main app, and communicate with the app via a binary web service.
+						As a result ObjectContexts are serializable and rather lightweight. Contexts can be nested (a child context can read/write from/to its parent without affecting the DB). There is even a version of ObjectContext that can run in an entirely different JVM from the main app, and communicate with the app via a binary web service.
 					</p>
 				</div>
 				<div class="tab-pane fade" id="extension-api" role="tabpanel" aria-labelledby="extension-api-tab">
 					<h4>Extension API</h4>
 					<p>
-						 Cayenne stack is built around a small dependency injection (DI) container responsible for configuring and binding all framework services. It provides a simple API to define custom implementations of core services and strategies or add extensions to the existing ones (e.g. custom value types). Additionally many things can be configured via system properties.
+						 Cayenne stack is built around a small dependency injection (DI) container responsible for configuring and binding all framework services. It provides a simple API to define custom implementations of core services and strategies or add extensions to the existing ones (e.g. custom value types). Additionally, many things can be configured via system properties.
 					</p>
 					<p>
-						Cayenne is truly modular. The above-mentioned DI container supports autoloading of extra modules from classpath. Cayenne itself takes advantage of this, isolating various optional features and integrations into optional modules. You can do the same with your own code.
+						Cayenne is truly modular. The above-mentioned DI container supports autoloading of extra modules from the classpath. Cayenne itself takes advantage of this, isolating various optional features and integrations into optional modules. You can do the same with your own code.
 					</p>
 				</div>
 				<div class="tab-pane fade" id="generic-objects" role="tabpanel" aria-labelledby="generic-objects-tab">
@@ -219,16 +230,16 @@
 					<p>
 						Traditional Java ORMs depend on bytecode generation or dynamic proxies to "connect" persistent objects with the framework. In constrast, Cayenne objects implement a simple API contract to interact with the ORM runtime, but otherwise can be structured arbitrarily, not requiring any annotation or "enhancement".
 					</p>
-					<p>This opens up some interesting possibilities. E.g. Cayenne provides a Map-based "generic" persistent object that can be dynamically mapped to any entity. This means that ORM model can be created in runtime without recompiling the code. Combined with DB reverse-engineering feature, this allows building completely generic data tools and services.
+					<p>This opens up some interesting possibilities. E.g. Cayenne provides a Map-based "generic" persistent object that can be dynamically mapped to any entity. This means that an ORM model can be created in runtime without recompiling the code. Combined with the DB reverse-engineering feature, this allows building completely generic data tools and services.
 					</p>
 				</div>
 				<div class="tab-pane fade" id="data-encryption" role="tabpanel" aria-labelledby="data-encryption-tab">
 					<h4>Data Encryption</h4>
 					<p>
-						Traditionally protecting DB data at rest stops at encrypting entire hard drive partitions. Cayenne goes a few steps further, offering a more secure and flexible solution - "cayenne-crypto" module with field-level data encryption. 
+						Traditionally, protecting DB data at rest stops at encrypting entire hard drive partitions. Cayenne goes a few steps further, offering a more secure and flexible solution - the "cayenne-crypto" module with field-level data encryption. 
 					</p>
 					<p>
-						 You can designate any number of columns in multiple tables in your model as encrypted, and Cayenne will transparently encrypt and decrypt data with minimal overhead. Default encryption algorithm is AES/CBC/PKCS#5 with 128 or 256-bit key. Other useful features are key revocation, data compression, HMAC signatures.
+						 You can designate any number of columns in multiple tables in your model as encrypted, and Cayenne will transparently encrypt and decrypt data with minimal overhead. The default encryption algorithm is AES/CBC/PKCS#5 with a 128 or 256-bit key. Other useful features are key revocation, data compression, and HMAC signatures.
 					</p>
 		            <img class="img-fluid  mb-2" src="img/crypto-protocol-d2cc175f70.png" alt="Cayenne Crypto Protocol" />
 				</div>
@@ -236,6 +247,7 @@
 		</div>
 	</div>
 </section>
+
 </main>
 
 
@@ -368,24 +380,12 @@
         </div>
         <hr class="mt-0 mb-3" />
         <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
-            Copyright © 2001-2023 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation. <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
+            Copyright © 2001-2023 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://cayenne.apache.org/privacy-policy.html">Privacy policy</a>.
             <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
         </p>
     </div>
 </footer>
     
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-7036673-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-
     </body>
 </html>
