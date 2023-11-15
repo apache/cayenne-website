@@ -40,13 +40,6 @@ function initHljs() {
     hljs.initHighlightingOnLoad();
 }
 
-function initGitHubBadge() {
-    var ghUrl = "https://api.github.com/repos/apache/cayenne";
-    $.getJSON(ghUrl, function ghCallback(ghData) {
-        $(".stargazers_count").text(ghData.stargazers_count || '');
-    });
-}
-
 function initAnchors() {
     var anchors = new anchorJS();
     anchors
@@ -59,7 +52,6 @@ function initAnchors() {
 
 $(document).ready(function () {
     initAnchors();
-    initGitHubBadge();
 });
 
 initHljs();
