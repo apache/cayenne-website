@@ -43,11 +43,5 @@ Windows users can use `CertUtil` or use the equivalent *nix tools as part of the
 
 ## Legacy Releases
 
-<ul class="list-unstyled  mb-5">
-	<li>
-		<a href="https://archive.apache.org/dist/cayenne/">All Apache Cayenne releases</a>
-	</li>
-	<li>
-		<a href="https://sourceforge.net/project/showfiles.php?group_id=48132">All pre-Apache (SourceForge) Cayenne Releases</a>
-	</li>
-</ul>
+* [All Apache Cayenne releases](https://archive.apache.org/dist/cayenne/)
+* [All pre-Apache (SourceForge) Cayenne Releases](https://sourceforge.net/project/showfiles.php?group_id=48132)
