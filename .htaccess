@@ -8,6 +8,7 @@ Redirect permanent /documentation.html /docs/index.html
 Redirect permanent /doc12/documentation.html /docs/1.2/index.html
 Redirect permanent /doc20/documentation.html /docs/2.0/index.html
 Redirect permanent /doc/documentation.html /docs/3.0/index.html
+Redirect permanent /privacy-policy.html https://privacy.apache.org/policies/privacy-policy-public.html
 
 # Remaping legacy doc folders
 Redirect permanent /doc12/ /docs/1.2/
