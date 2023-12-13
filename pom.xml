@@ -30,7 +30,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <node.version>v8.9.1</node.version>
+        <node.version>v8.9.1</node.version> <!-- TODO: need to upgrade Gulp in order to upgrade node -->
         <yarn.version>v1.22.19</yarn.version>
         <frontend.plugin.version>1.15.0</frontend.plugin.version>
         <gulp.task>serve</gulp.task>
