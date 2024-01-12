@@ -40,7 +40,11 @@
                 <ul class="list-unstyled">
                     {{- range $.Site.Data.download.extensions -}}
                     <li>
+                        {{- if .scarf -}}
+                        <a href="https://apachecayenne.gateway.scarf.sh/modeler-{{ .scarf }}/{{ $revision }}">Cayenne {{ $revision }}</a>
+                        {{- else -}}
                         <a href="https://www.apache.org/dyn/closer.cgi/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $revision }}</a>
+                        {{- end }}
                         {{ .description }}
                         (<a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
                         <a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.sha512">sha512</a>)

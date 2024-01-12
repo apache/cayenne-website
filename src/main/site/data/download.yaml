@@ -23,12 +23,15 @@
 extensions:
   - ext: ".tar.gz" # file extension
     description: "binary distribution with cross-platform Java CayenneModeler"
+    scarf: generic
 
   - ext: "-macosx.dmg"
     description: "binary distribution with Mac OS X CayenneModeler"
+    scarf: macos
 
   - ext: "-win.zip"
     description: "binary distribution with Windows CayenneModeler"
+    scarf: win
 
   - ext: "-src.tar.gz"
     description: "source code distribution"
