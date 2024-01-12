@@ -1,0 +1,6 @@
+{{/* Scarf.sh statistics pixel, see also pixel.yaml for the real pixel ids */}}
+{{- if (.Scratch.Get "pix") -}}
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid={{- index .Site.Data.pixel ( .Scratch.Get "pix" ) -}}" />
+{{- else -}}
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid={{- index .Site.Data.pixel "general" -}}" />
+{{- end -}}
