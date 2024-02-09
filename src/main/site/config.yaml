@@ -45,7 +45,7 @@ menu:
   main:
     - name: Documentation
       weight: 20
-      url: "/docs/4.1/getting-started-guide/"
+      url: "/docs/4.2/getting-started-guide/"
 
   footer:
     - name: Bug/Feature Tracker
