@@ -1,0 +1,128 @@
+---
+title: Database Support
+url: /database-support.html
+---
+<p>This page provides useful information about JDBC driver settings for various database.
+    All databases below have custom Cayenne DbAdapters and are automatically recognized by Cayenne AutoAdapter.</p>
+<table id="db-support" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Database</th>
+        <th>Driver Name</th>
+        <th>Sample URL</th>
+        <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><a href="https://www.ibm.com/db2/">DB2</a></td>
+        <td>com.ibm.db2.jcc.DB2Driver</td>
+        <td>jdbc:db2://127.0.0.1:50000/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://db.apache.org/derby/">Derby</a></td>
+        <td>org.apache.derby.jdbc.ClientDriver</td>
+        <td>jdbc:derby://127.0.0.1/testdb</td>
+        <td>client/server</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>org.apache.derby.jdbc.EmbeddedDriver</td>
+        <td>jdbc:derby:path-to-db-dir;create=true</td>
+        <td>embedded</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.frontbase.com/">FrontBase</a></td>
+        <td>jdbc.FrontBase.FBJDriver</td>
+        <td>jdbc:FrontBase://127.0.0.1/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://hsqldb.org/">HSQLDB</a></td>
+        <td>org.hsqldb.jdbcDriver</td>
+        <td>jdbc:hsqldb:hsql://127.0.0.1</td>
+        <td>client/server</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>jdbc:hsqldb:file:/path-to-hsql-db-files</td>
+        <td>embedded</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.h2database.com/">H2</a></td>
+        <td>org.h2.Driver</td>
+        <td>jdbc:h2:mem:myTestMem;MVCC=TRUE</td>
+        <td>embedded in-memory</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.ingres.com/products/ingres-database.php">Ingres</a></td>
+        <td>com.ingres.jdbc.IngresDriver</td>
+        <td>jdbc:ingres://127.0.0.1:II7/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.mysql.com/">MySQL</a></td>
+        <td>com.mysql.jdbc.Driver</td>
+        <td>jdbc:mysql://127.0.0.1/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.openbase.com">OpenBase</a></td>
+        <td>com.openbase.jdbc.ObDriver</td>
+        <td>jdbc:openbase://127.0.0.1/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.oracle.com/">Oracle</a></td>
+        <td>oracle.jdbc.driver.OracleDriver</td>
+        <td>jdbc:oracle:thin:@//127.0.0.1:1521/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.postgresql.org/">PostgreSQL</a></td>
+        <td>org.postgresql.Driver</td>
+        <td>jdbc:postgresql://127.0.0.1:5432/dbname</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.sqlite.org/">SQLite 3.*</a></td>
+        <td>org.sqlite.JDBC</td>
+        <td>jdbc:sqlite:path_to_dbfile</td>
+        <td>driver from zentus.com</td>
+    </tr>
+    <tr>
+        <td><a href="https://www.microsoft.com/sqlserver">SQLServer</a></td>
+        <td>
+            <a href="https://msdn.microsoft.com/en-us/data/aa937724.aspx">com.microsoft.sqlserver.jdbc.SQLServerDriver</a>
+        </td>
+        <td>jdbc:sqlserver://127.0.0.1;databaseName=dbname</td>
+        <td>Microsoft Driver</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>com.microsoft.jdbc.sqlserver.SQLServerDriver</td>
+        <td>jdbc:microsoft:sqlserver://127.0.0.1;databaseName=dbname;SelectMethod=cursor</td>
+        <td>Microsoft Driver, SQL Server prior to 2005</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>net.sourceforge.jtds.jdbc.Driver</td>
+        <td>jdbc:jtds:sqlserver://127.0.0.1:5000/dbname</td>
+        <td><a href="https://jtds.sourceforge.net/">jTDS Driver</a></td>
+    </tr>
+    <tr>
+        <td><a href="https://www.sybase.com/">Sybase</a></td>
+        <td>com.sybase.jdbc3.jdbc.SybDriver</td>
+        <td>jdbc:sybase:Tds:127.0.0.1:5000/dbname</td>
+        <td>Sybase driver</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>net.sourceforge.jtds.jdbc.Driver</td>
+        <td>jdbc:jtds:sybase://127.0.0.1:5000/dbname;useLOBs=false;TDS=4.2</td>
+        <td><a href="https://jtds.sourceforge.net/">jTDS Driver</a></td>
+    </tr>
+    </tbody>
+</table>
