@@ -13,7 +13,7 @@ url: "/thanks.html"
 Apache Cayenne PMC would like to thank the following companies for granting our community 
 free licenses to use their tools in the development process:
 
-<a href="http://www.oxygenxml.com" title="Oxygen XML Editor" rel="nofollow" target="_blank" style="border: none;">
+<a href="https://www.oxygenxml.com" title="Oxygen XML Editor" rel="nofollow" target="_blank" style="border: none;">
 <img src="/img/oxygen190x62.png" width="190" height="62" alt="Oxygen XML Editor" border="0"/>
 </a> 
 
