@@ -82,7 +82,7 @@ ErrorDocument 404 /404.html
 RedirectMatch 404 /\.git
 
 # Cache for one month static assets
-<filesMatch ".(css|jpg|jpeg|png|gif|svg|js|ico)$">
+<filesMatch ".(css|jpg|jpeg|png|gif|svg|js|ico|zip)$">
 Header set Cache-Control "max-age=2628000, public"
 </filesMatch>
 
