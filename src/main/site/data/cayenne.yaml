@@ -67,7 +67,7 @@ releases:
     description: "Legacy release"
     type: "Legacy"
     date: "2011-06-21"
-    docs: true
+    docs: false
     downloadable: false
     customLink: "cayenne-3.0.2" # custom download link, full link will be like:
                                 # http://www.apache.org/dyn/closer.lua/cayenne/{{ customLink }}-src.tar.gz
@@ -78,7 +78,7 @@ releases:
     description: "Legacy release"
     type: "Legacy"
     date: "2007-10-12"
-    docs: true
+    docs: false
     downloadable: false
     jdk: 1.5
 
@@ -87,6 +87,6 @@ releases:
     description: "Legacy release"
     type: "Legacy"
     date: "2007-10-12"
-    docs: true
+    docs: false
     downloadable: false
     jdk: 1.5
