@@ -65,7 +65,12 @@
                     {{ end -}}
                     {{- end }}
                     <div class="cd-toc-item">
+                        {{- if eq "3.1" $docVersion }}
+                        <!-- Download offline JavaDocs for the legacy Cayenne 3.1 -->
+                        <a class="cd-toc-link" href="/docs/Apache_Cayenne_v3.1_javadoc.zip">Download JavaDoc</a>
+                        {{- else }}
                         <a class="cd-toc-link" href="/docs/{{ $docVersion }}/api/">JavaDoc</a>
+                        {{- end }}
                     </div>
                 </div>
             </div>
