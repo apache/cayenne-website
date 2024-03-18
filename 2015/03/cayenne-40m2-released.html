@@ -123,7 +123,7 @@
 <p>While we are on the topic of ServerRuntime, we now also have an ability to start a mapping-free runtime, which turns Cayenne into a powerful SQL execution stack without the ORM part (e.g. useful for unit tests).</p>
 <!-- raw HTML omitted -->
 <h3 id="transparent-database-cryptography-with-cayenne-crypto">Transparent Database Cryptography with &lsquo;cayenne-crypto&rsquo;</h3>
-<p>Cayenne now includes <a href="http://search.maven.org/#artifactdetails%7Corg.apache.cayenne%7Ccayenne-crypto%7C4.0.M2%7Cjar">cayenne-crypto.jar</a>, that allows you to implement seamless data encryption. With a bit of extra configuration (as you may have guessed - another DI module) you get automatic encryption/decryption of data in certain columns:</p>
+<p>Cayenne now includes <a href="https://search.maven.org/#artifactdetails%7Corg.apache.cayenne%7Ccayenne-crypto%7C4.0.M2%7Cjar">cayenne-crypto.jar</a>, that allows you to implement seamless data encryption. With a bit of extra configuration (as you may have guessed - another DI module) you get automatic encryption/decryption of data in certain columns:</p>
 <pre><code>Module cryptoModule = new CryptoModuleBuilder()
    .keyStore(&quot;file:///mykeystore&quot;, &quot;changeit&quot;.toCharArray(), &quot;keyalias&quot;)
    .compress()
