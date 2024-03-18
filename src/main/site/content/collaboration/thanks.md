@@ -24,4 +24,4 @@ A license for Oxygen XML Editor is provided by Syncro Soft.
 ### ASF Sponsorship
 
 Information about the Apache Software Foundation sponsorship program 
-and the Foundation sponsors can be found [here](http://www.apache.org/foundation/sponsorship.html).
+and the Foundation sponsors can be found [here](https://www.apache.org/foundation/sponsorship.html).

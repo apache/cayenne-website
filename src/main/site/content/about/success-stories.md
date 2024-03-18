@@ -16,8 +16,8 @@ objectstyle.org".</p>
 
 {{% gap 2 %}}
 
-<a name="Successstories-AccessPointInc.(http://www.accesspointinc.com/)"></a>
-#### AccessPoint Inc. (<http://www.accesspointinc.com/>)
+<a name="Successstories-AccessPointInc.(https://www.accesspointinc.com/)"></a>
+#### AccessPoint Inc. (<https://www.accesspointinc.com/>)
 
 A story submitted by Bret Gregory: "I work for AccessPoint Inc., a
 privately-held CLEC offering integrated communications services to small-
@@ -30,8 +30,8 @@ the company."
 
 {{% gap 2 %}}
 
-<a name="Successstories-GlobalLegalInformationNetwork(GLIN)(http://www.glin.gov/)"></a>
-#### Global Legal Information Network (GLIN) (<http://www.glin.gov/>)
+<a name="Successstories-GlobalLegalInformationNetwork(GLIN)(https://www.glin.gov/)"></a>
+#### Global Legal Information Network (GLIN) (<https://www.glin.gov/>)
 
 GLIN is a legal repository for the Law Library of Congress. It has been
 around for 30 years, and in digital form since the early 90s. However, it
@@ -46,8 +46,8 @@ the IRS.
 
 {{% gap 2 %}}
 
-<a name="Successstories-ishonCourse(http://www.ish.com.au/oncourse)"></a>
-#### ish onCourse (<http://www.ish.com.au/oncourse>)
+<a name="Successstories-ishonCourse(https://www.ish.com.au/oncourse)"></a>
+#### ish onCourse (<https://www.ish.com.au/oncourse>)
 
 A story submitted by Aristedes Maniatis, ish owner: "Written for the
 education sector, ish onCourse is a student and enrolment tracking system
@@ -60,8 +60,8 @@ links."
 
 {{% gap 2 %}}
 
-<a name="Successstories-NationalHockeyLeague(http://www.nhl.com/)"></a>
-#### National Hockey League (<http://www.nhl.com/>)
+<a name="Successstories-NationalHockeyLeague(https://www.nhl.com/)"></a>
+#### National Hockey League (<https://www.nhl.com/>)
 
 NHL was one of the first large-scale Cayenne deployments. After the initial
 trial of Cayenne in 2002, NHL switched all their web applications to
@@ -75,7 +75,7 @@ Cayenne trunk to take advantage of the latest framework features.
 <a name="Successstories-ObjectVisualizer"></a>
 #### ObjectVisualizer
 
-[ObjectVisualizer](http://oreports.com/index.php?option=com_content&task=view&id=20&Itemid=35)
+[ObjectVisualizer](https://oreports.com/index.php?option=com_content&task=view&id=20&Itemid=35)
  is a business intelligence tool that builds upon Object Persistence
 technology to provide easy to use query, reporting, and charting
 capabilities. Features include: Query and filter data using objects,
@@ -85,8 +85,8 @@ mapping projects.
 
 {{% gap 2 %}}
 
-<a name="Successstories-PixxuresInc.(http://www.pixxures.ca/)"></a>
-#### Pixxures Inc. (<http://www.pixxures.ca/>)
+<a name="Successstories-PixxuresInc.(https://www.pixxures.ca/)"></a>
+#### Pixxures Inc. (<https://www.pixxures.ca/>)
 
 Pixxures Inc. is the world's largest provider of digital mapping products,
 services, and online delivery capabilities. Pixxures used Cayenne to create
@@ -103,14 +103,14 @@ methods.
 
 Two leading local search sites for Croatia and Bosnia and Herzegovina are
 using Cayenne to store and retrieve indexed data for blog search engine:
-<http://www.pogodak.hr/index.jsp?tab=blog> and
-<http://www.pogodak.ba/index.jsp?tab=blog>. There are plans to switch to
+<https://www.pogodak.hr/index.jsp?tab=blog> and
+<https://www.pogodak.ba/index.jsp?tab=blog>. There are plans to switch to
 Cayenne similar sites for Slovenia, Serbia and Macedonia.
 
 {{% gap 2 %}}
 
-<a name="Successstories-ProvestaWonen(http://www.provesta.nl/)"></a>
-#### Provesta Wonen (<http://www.provesta.nl/>)
+<a name="Successstories-ProvestaWonen(https://www.provesta.nl/)"></a>
+#### Provesta Wonen (<https://www.provesta.nl/>)
 
 Provesta Wonen is a semi-government housing company. It rents houses to
 people who need them. Cayenne is a part of the engine for using and reusing
@@ -120,8 +120,8 @@ complexes (collection of addresses).
 
 {{% gap 2 %}}
 
-<a name="Successstories-RossoAlice(http://www.rossoalice.it/)"></a>
-#### RossoAlice (<http://www.rossoalice.it/>)
+<a name="Successstories-RossoAlice(https://www.rossoalice.it/)"></a>
+#### RossoAlice (<https://www.rossoalice.it/>)
 
 RossoAlice is an Italian media portal. This is a site where users can
 download music, watch films, download games, watch television news and
@@ -130,8 +130,8 @@ component is developed with Cayenne.
 
 {{% gap 2 %}}
 
-<a name="Successstories-Unilever(http://www.rossoalice.it/)"></a>
-#### Unilever (<http://www.unilever-bilddatenbank.de/>), Ascensys (<http://www.ascensys.de/>)
+<a name="Successstories-Unilever(https://www.unilever-bilddatenbank.de/)"></a>
+#### Unilever (<https://www.unilever-bilddatenbank.de/>), Ascensys (<https://www.ascensys.de/>)
 
 Ascensys developed a new media management system for Unilever Germany using
 Cayenne. The software supports internal planning processes, provides the

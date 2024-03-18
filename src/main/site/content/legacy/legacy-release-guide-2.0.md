@@ -26,9 +26,9 @@ RELEASE-NOTES.txt immediately when this happens._
 
 * Edit UPGRADE-NOTES.txt if there is anything to add there.
 
-* Check Sources Compliance with ARAT. [ARAT](http://code.google.com/p/arat/)
+* Check Sources Compliance with ARAT. [ARAT](https://code.google.com/p/arat/)
  (A Release Audit Tool) is a Java tool written by Robert Burrell Donkin for
-checking the release files for ASF licensing compliance. To run ARAT, [check it out of SVN](http://arat.googlecode.com/svn/tags/RAT_0_4/)
+checking the release files for ASF licensing compliance. To run ARAT, [check it out of SVN](https://arat.googlecode.com/svn/tags/RAT_0_4/)
  _(we are using version 0.4)_, build with Ant, and run against unpacked
 distro (or the release tag), read the report and fix any issues.
 
@@ -65,7 +65,7 @@ legacy versions of Cayenne.
 * Build Release Maven Bundles for ibiblio upload:
     
 * Signing release
-    For more info visit [this page](http://www.apache.org/dev/release-signing.html)
+    For more info visit [this page](https://www.apache.org/dev/release-signing.html)
 . Release manager key must be in the project KEYS file. Signing is a manual
 procedure not included in the Ant or Maven script. Here is how it might
 work ("-u" option can be omitted if you have only one GPG key):
@@ -108,11 +108,11 @@ Assuming release version is 2.0.2, on a *local machine* do
 <a name="ReleaseGuide2.0-Aftertherelease"></a>
 ## After the release
 
-* Update the [DOAP file](http://svn.apache.org/repos/asf/cayenne/site/trunk/tlp-site/src/doap/cayenne.rdf)
+* Update the [DOAP file](https://svn.apache.org/repos/asf/cayenne/site/trunk/tlp-site/src/doap/cayenne.rdf)
  (held in the Cayenne svn) which will update
 https://projects.apache.org/project.html?cayenne automatically
 * Update Freshmeat with new release number
-(http://freshmeat.net/projects/cayenne/)
+(https://freshmeat.net/projects/cayenne/)
 * If the release is significant, consider press releases to relevant news
 sources
 * Review the main website pages (front page and why-cayenne especially) to

@@ -16,9 +16,9 @@ are also available for evaluation during the vote.
 
 * A release manager must have his public key appended to the KEYS file
 checked in to source control and the key published on one of the public key servers.
-More info can be found at [http://www.apache.org/dev/release-signing.html](http://www.apache.org/dev/release-signing.html)
+More info can be found at [https://www.apache.org/dev/release-signing.html](https://www.apache.org/dev/release-signing.html)
 * Make sure "apache-releases" repository is configured in
-*~/.m2/settings.xml* and an appropriate password is setup. See [this page](http://www.apache.org/dev/publishing-maven-artifacts.html)
+*~/.m2/settings.xml* and an appropriate password is setup. See [this page](https://www.apache.org/dev/publishing-maven-artifacts.html)
  for details.
 * As Cayenne has modules which require Java 1.8, you should use at least Java 1.8 to perform the release.
 
@@ -29,7 +29,7 @@ More info can be found at [http://www.apache.org/dev/release-signing.html](http:
 
 * Edit `UPGRADE-NOTES.txt` if there is anything to add there.
 * Update `RELEASE-NOTES.txt` with actual release name and current date as a release date.
-* Check Sources Compliance with [RAT](http://creadur.apache.org/rat/). To run RAT,
+* Check Sources Compliance with [RAT](https://creadur.apache.org/rat/). To run RAT,
   download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne 
   source. Then read the report and fix any issues.
   ```bash
@@ -103,8 +103,8 @@ be used by the people voting on Cayenne. It may look like this:
 
 * Signing assemblies
 
-  You can find additional information in official Apache [Release Distribution policy](http://www.apache.org/dev/release-distribution) 
-  and on [this page](http://www.apache.org/dev/release-signing.html). 
+  You can find additional information in official Apache [Release Distribution policy](https://www.apache.org/dev/release-distribution) 
+  and on [this page](https://www.apache.org/dev/release-signing.html). 
   Release manager key must be in the project KEYS file. Signing is a manual
   procedure not included in the Ant or Maven script. Here is how it might
   work ("-u" option can be omitted if you have only one GPG key):
@@ -116,7 +116,7 @@ be used by the people voting on Cayenne. It may look like this:
 
 * Assemblies, signature and checksum files are committed to the special SVN repo
   used for staging development releases: [https://dist.apache.org/repos/dist/dev/cayenne/](https://dist.apache.org/repos/dist/dev/cayenne/). 
-  Use a separate folder for each release. For more info on this repository check [the infrastructure docs](http://apache.org/legal/release-policy.html#stage).
+  Use a separate folder for each release. For more info on this repository check [the infrastructure docs](https://apache.org/legal/release-policy.html#stage).
 
 {{% gap %}}
 
@@ -164,7 +164,7 @@ select the staging repo and click "Release".
 
 
 * Delete a **previous version** of Cayenne release of the same branch from the dist server. 
-  It should be already [archived by Apache] (http://www.apache.org/dev/release.html#when-to-archive). Do this with an svn command like this:
+  It should be already [archived by Apache] (https://www.apache.org/dev/release.html#when-to-archive). Do this with an svn command like this:
   ```bash
   svn rm https://dist.apache.org/repos/dist/release/cayenne/Y.Y
   ```
@@ -180,14 +180,14 @@ add any new features
 * Add new cayenne version and a news item to the Cayenne web site (see [CMS Guide]({{< ref "cms-guide.md#content-modifications" >}}))
 * Send an email to the Cayenne user and developer lists
 * Send a notification email to announce(at)apache.org
-* Update http://en.wikipedia.org/wiki/Apache_Cayenne
+* Update https://en.wikipedia.org/wiki/Apache_Cayenne
 
 {{% gap %}}
 
     
 ## Reference:
     
-* Apache release publishing: http://www.apache.org/dev/release-publishing.html
-* Apache Maven release publishing: http://www.apache.org/dev/publishing-maven-artifacts.html
+* Apache release publishing: https://www.apache.org/dev/release-publishing.html
+* Apache Maven release publishing: https://www.apache.org/dev/publishing-maven-artifacts.html
 * Apache RAT: https://creadur.apache.org/rat/
-* Signing Releases: http://www.apache.org/dev/release-signing.html
+* Signing Releases: https://www.apache.org/dev/release-signing.html

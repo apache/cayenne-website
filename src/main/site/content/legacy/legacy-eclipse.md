@@ -10,7 +10,7 @@ _(versions 1.2 and 2.0)_
 <a name="LegacyEclipse-ConfiguringEclipseWorkspaceforCayenne"></a>
 ### Configuring Eclipse Workspace for Cayenne
 
-* Download and install [Eclipse](http://wwww.eclipse.org)
+* Download and install [Eclipse](https://wwww.eclipse.org)
 . Eclipse 3.1.1 or newer is recommended, as there are some per-project
 settings in repository that are not understood by older Eclipse.
 * Install both JDK1.4 and 1.5. Some Cayenne projects below require JVM

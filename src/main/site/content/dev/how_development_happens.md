@@ -14,7 +14,7 @@ for the project as a whole and for ensuring that releases meet all the
 appropriate standards.
 1. _PMC Chair_. This person has a has a special responsibility to the Apache board,
 but otherwise is an equal member of the PMC. 
-For further details consult the official [Apache handbook](http://www.apache.org/foundation/how-it-works.html#roles).
+For further details consult the official [Apache handbook](https://www.apache.org/foundation/how-it-works.html#roles).
 
 In addition to the general Apache responsibilities, this is what is
 expected of everyone with privileges within the Cayenne project.

@@ -6,7 +6,7 @@ url: /dev/building-cayenne.html
 
 ## Prerequisites
 
-* Make sure [Maven](http://maven.apache.org/) is installed.
+* Make sure [Maven](https://maven.apache.org/) is installed.
 * [Get the source code](/dev/code-repository.html).
 
 {{% gap %}}

@@ -61,7 +61,7 @@ We found that customizing ServerRuntime is a frequent task in most applications.
 
 ### Transparent Database Cryptography with 'cayenne-crypto'
 
-Cayenne now includes [cayenne-crypto.jar](http://search.maven.org/#artifactdetails|org.apache.cayenne|cayenne-crypto|4.0.M2|jar), that allows you to implement seamless data encryption. With a bit of extra configuration (as you may have guessed - another DI module) you get automatic encryption/decryption of data in certain columns:
+Cayenne now includes [cayenne-crypto.jar](https://search.maven.org/#artifactdetails|org.apache.cayenne|cayenne-crypto|4.0.M2|jar), that allows you to implement seamless data encryption. With a bit of extra configuration (as you may have guessed - another DI module) you get automatic encryption/decryption of data in certain columns:
 
     Module cryptoModule = new CryptoModuleBuilder()
        .keyStore("file:///mykeystore", "changeit".toCharArray(), "keyalias")
