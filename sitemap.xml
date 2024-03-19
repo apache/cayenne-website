@@ -295,10 +295,6 @@
   </url>
   
   <url>
-    <loc>https://cayenne.apache.org/categories/</loc>
-  </url>
-  
-  <url>
     <loc>https://cayenne.apache.org/legacy/legacy-docs/</loc>
   </url>
   
@@ -348,10 +344,6 @@
   
   <url>
     <loc>https://cayenne.apache.org/mailing-lists.html</loc>
-  </url>
-  
-  <url>
-    <loc>https://cayenne.apache.org/tags/</loc>
   </url>
   
   <url>
