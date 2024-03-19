@@ -22,7 +22,11 @@ defaultContentLanguage: en
 
 canonifyURLs: false
 uglyURLs: false
-disableKinds: ['RSS']
+disableKinds:
+  - RSS
+  - taxonomy
+  - term
+
 disableHugoGeneratorInject: true
 disablePathToLower: true
 enableRobotsTXT: true
