@@ -32,6 +32,10 @@ disablePathToLower: true
 enableRobotsTXT: true
 #googleAnalytics: 'UA-7036673-1' # disabled per Apache privacy policy
 
+params:
+  sitemapExcludes: ["/categories/", "/tags/", "/about/", "/legacy/", "/collaboration/",
+                    "/docs/", "/docs/3.1/", "/docs/4.0/", "/docs/4.1/", "/docs/4.2/"]
+
 mediaTypes:
   application/rdf:
     suffixes:
