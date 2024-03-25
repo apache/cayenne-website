@@ -249,4 +249,10 @@
   <url>
     <loc>https://cayenne.apache.org/thanks.html</loc>
   </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/4.2/api/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/4.2/api/index-all.html</loc>
+  </url>
 </urlset>
