@@ -32,6 +32,7 @@ releases:
     downloadable: true
     jdk: 1.8
     newRepoLayout: true
+    javaDoc: "online"
 
   - version: "4.1"                            # major version
     latestRevision: "4.1.1"                   # exact latest version
@@ -41,7 +42,11 @@ releases:
     docs: true                                # this version is visible in Docs section
     downloadable: true                        # this version is visible in Download section, also see "customLink" attribute
     jdk: 1.8                                  # min supported Java version
-    newRepoLayout: true
+    newRepoLayout: true                       # flags affects links to the release notes and upgrade
+    javaDoc: "no-index"                       # "no" - no JavaDocs at all,
+                                              # "offline" - downloadable offline package
+                                              # "no-index" - online but not accessible for the search crawlers (see robots.txt)
+                                              # "online" - online and accessible for search crawlers
 
   - version: "4.0"
     latestRevision: "4.0.3"
@@ -52,6 +57,7 @@ releases:
     downloadable: true
     jdk: 1.7
     newRepoLayout: true
+    javaDoc: "no-index"
 
   - version: "3.1"
     latestRevision: "3.1.3"
@@ -61,6 +67,7 @@ releases:
     docs: true
     downloadable: true
     jdk: 1.5
+    javaDoc: "offline"
 
   - version: "3.0"
     latestRevision: "3.0.2"
@@ -72,6 +79,7 @@ releases:
     customLink: "cayenne-3.0.2" # custom download link, full link will be like:
                                 # http://www.apache.org/dyn/closer.lua/cayenne/{{ customLink }}-src.tar.gz
     jdk: 1.5
+    javaDoc: "no"
 
   - version: "2.0"
     latestRevision: "2.0.4"
@@ -81,6 +89,7 @@ releases:
     docs: false
     downloadable: false
     jdk: 1.5
+    javaDoc: "no"
 
   - version: "1.2"
     latestRevision: "1.2.4"
@@ -90,3 +99,4 @@ releases:
     docs: false
     downloadable: false
     jdk: 1.5
+    javaDoc: "no"

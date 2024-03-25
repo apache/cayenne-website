@@ -65,12 +65,19 @@
                     {{ end -}}
                     {{- end }}
                     <div class="cd-toc-item">
-                        {{- if eq "3.1" $docVersion }}
-                        <!-- Download offline JavaDocs for the legacy Cayenne 3.1 -->
-                        <a class="cd-toc-link" href="/docs/Apache_Cayenne_v3.1_javadoc.zip">Download JavaDoc</a>
-                        {{- else }}
-                        <a class="cd-toc-link" href="/docs/{{ $docVersion }}/api/">JavaDoc</a>
-                        {{- end }}
+                        <!-- this range should return a single collection element,
+                        but we don't check it here and just iterate on all elements returned -->
+                        {{- range where $.Site.Data.cayenne.releases "version" $docVersion -}}
+                        {{- if or (eq .javaDoc "online") (eq .javaDoc "no-index") }}
+                        <!-- Online version of JavaDocs -->
+                        <a class="cd-toc-link" href="/docs/{{ .version }}/api/">JavaDoc</a>
+                        {{- else -}}
+                        {{- if eq .javaDoc "offline" -}}
+                        <!-- Offline package of JavaDocs for the legacy Cayenne versions -->
+                        <a class="cd-toc-link" href="/docs/Apache_Cayenne_v{{ .version }}_javadoc.zip">Download JavaDoc</a>
+                        {{- end -}}
+                        {{- end -}}
+                        {{- end -}}
                     </div>
                 </div>
             </div>

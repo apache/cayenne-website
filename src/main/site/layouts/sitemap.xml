@@ -8,21 +8,26 @@
   {{- range $pagesInSitemap  -}}
   {{- if .Permalink }}
   <url>
-    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
-    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
-    <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
-    <priority>{{ .Sitemap.Priority }}</priority>{{ end }}{{ if .IsTranslated }}{{ range .Translations }}
-    <xhtml:link
-      rel="alternate"
-      hreflang="{{ .Language.LanguageCode }}"
-      href="{{ .Permalink }}"
-    />{{ end }}
-    <xhtml:link
-      rel="alternate"
-      hreflang="{{ .Language.LanguageCode }}"
-      href="{{ .Permalink }}"
-    />{{ end }}
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>
+    {{- end -}}
+    {{- with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>
+    {{- end -}}
+    {{- if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>
+    {{ end }}
   </url>
   {{- end -}}
   {{ end }}
+  {{- $baseUrl := .Site.BaseURL -}}
+  {{- range where $.Site.Data.cayenne.releases "javaDoc" "online" }}
+  <url>
+    <loc>{{ $baseUrl }}docs/{{ .version }}/api/</loc>
+  </url>
+  <url>
+    <loc>{{ $baseUrl }}docs/{{ .version }}/api/index-all.html</loc>
+  </url>
+  {{- end }}
 </urlset>
