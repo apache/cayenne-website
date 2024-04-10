@@ -86,7 +86,7 @@ RedirectMatch 404 /\.git
 Header set Cache-Control "max-age=2628000, public"
 </filesMatch>
 
-Header set Content-Security-Policy "default-src 'self'; img-src https://*; child-src 'none'; frame-src youtube.com https://www.youtube.com;"
+Header set Content-Security-Policy "img-src https://*; frame-src youtube.com https://www.youtube.com;"
 
 # Enable gzip compression
 <IfModule mod_deflate.c>
