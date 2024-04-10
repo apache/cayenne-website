@@ -43,11 +43,11 @@ Redirect permanent /legacy-ant-documentation-export.html /
 ##################################################
 
 # Redirect main sections of Cayenne Guide
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part1.html$ /docs/$1/cayenne-guide/#object-relational-mapping-with-cayenne
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part2.html$ /docs/$1/cayenne-guide/#cayenne-framework
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part3.html$ /docs/$1/cayenne-guide/#cayenne-framework-remote-object-persistence
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part4.html$ /docs/$1/cayenne-guide/#db-first-flow
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/cayenne-guide-part5.html$ /docs/$1/cayenne-guide/#cayenne-additional-modules
+RedirectMatch permanent ^/docs/([3-4]\.[0-9]+)/cayenne-guide/cayenne-guide-part1.html$ /docs/$1/cayenne-guide/#object-relational-mapping-with-cayenne
+RedirectMatch permanent ^/docs/([3-4]\.[0-9]+)/cayenne-guide/cayenne-guide-part2.html$ /docs/$1/cayenne-guide/#cayenne-framework
+RedirectMatch permanent ^/docs/([3-4]\.[0-9]+)/cayenne-guide/cayenne-guide-part3.html$ /docs/$1/cayenne-guide/#cayenne-framework-remote-object-persistence
+RedirectMatch permanent ^/docs/([3-4]\.[0-9]+)/cayenne-guide/cayenne-guide-part4.html$ /docs/$1/cayenne-guide/#db-first-flow
+RedirectMatch permanent ^/docs/([3-4]\.[0-9]+)/cayenne-guide/cayenne-guide-part5.html$ /docs/$1/cayenne-guide/#cayenne-additional-modules
 # Tutorial
 RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part1.html$ /docs/$1/getting-started-guide/#setting-up-the-environment
 RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part2.html$ /docs/$1/getting-started-guide/#learning-mapping-basics
@@ -63,7 +63,7 @@ RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part1
 RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part2.html$ /docs/$1/getting-started-rop/#remote-object-persistence-quick-start
 
 # Redirect all except index.html to exclude cyclic redirection
-RedirectMatch permanent ^/docs/([0-9\.]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
+RedirectMatch permanent ^/docs/([3-4]\.[0-9]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
 RedirectMatch permanent ^/docs/([0-9\.]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/$1/upgrade-guide/#$2
 
 # Redirect everything else
