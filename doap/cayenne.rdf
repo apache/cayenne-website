@@ -41,6 +41,12 @@
         <category rdf:resource="http://projects.apache.org/category/web-framework" />
         <release>
             <Version>
+                <name>Alpha</name>
+                <created>2024-06-06</created>
+                <revision>5.0-SNAPSHOT</revision>
+            </Version>
+        </release><release>
+            <Version>
                 <name>Stable</name>
                 <created>2023-05-25</created>
                 <revision>4.2</revision>

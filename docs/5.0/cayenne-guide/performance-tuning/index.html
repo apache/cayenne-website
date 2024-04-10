@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
+        <title>Cayenne Guide 5.0 · Performance Tuning &middot; Apache Cayenne</title>
+    </head>
+    <body  class="cd-head">
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.2/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 5.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/5.0/cayenne-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">Cayenne Guide 5.0</span><div id="toc" class="toc toc-side">
+<ul class="sectlevel1 nav">
+  <li><a href="/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne" id="object-relational-mapping-with-cayenne" class="nav-link">1. Object Relational Mapping with Cayenne</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/setup" id="setup" class="nav-link">1.1. Setup</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" id="cayenne-mapping-structure" class="nav-link">1.2. Cayenne Mapping Structure</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" id="cayenne-modeler" class="nav-link">1.3. CayenneModeler Application</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-framework" id="cayenne-framework" class="nav-link">2. Cayenne Framework</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" id="including-cayenne-in-project" class="nav-link">2.1. Including Cayenne in a Project</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" id="starting-cayenne" class="nav-link">2.2. Starting Cayenne</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" id="persistent-objects-objectcontext" class="nav-link">2.3. Persistent Objects and ObjectContext</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/expressions" id="expressions" class="nav-link">2.4. Expressions</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/orderings" id="orderings" class="nav-link">2.5. Orderings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/queries" id="queries" class="nav-link">2.6. Queries</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" id="lifecycle-events" class="nav-link">2.7. Lifecycle Events</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/performance-tuning" id="performance-tuning" class="nav-link">2.8. Performance Tuning</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" id="customizing-cayenne-runtime" class="nav-link">2.9. Customizing Cayenne Runtime</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/db-first-flow" id="db-first-flow" class="nav-link">3. DB-First Flow</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/re-introduction" id="re-introduction" class="nav-link">3.1. Introduction</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-filtering" id="re-filtering" class="nav-link">3.2. Filtering</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" id="re-relationships-loading-control" class="nav-link">3.3. Other Settings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-modeler" id="re-modeler" class="nav-link">3.4. Reverse Engineering in Cayenne Modeler</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/additional-modules" id="additional-modules" class="nav-link">4. Additional Modules</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" id="ext-cache-invalidation" class="nav-link">4.1. Cache Invalidation Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-commit-log" id="ext-commit-log" class="nav-link">4.2. Commit log extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-crypto" id="ext-crypto" class="nav-link">4.3. Crypto extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-jcache" id="ext-jcache" class="nav-link">4.4. JCache integration</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" id="ext-project-compatibility" class="nav-link">4.5. Project compatibility extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-velocity" id="ext-velocity" class="nav-link">4.6. Apache Velocity Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-osgi" id="ext-osgi" class="nav-link">4.7. Cayenne OSGI extension</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/build_tools" id="build_tools" class="nav-link">5. Build Tools</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/maven_plugin" id="maven_plugin" class="nav-link">5.1. Maven Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" id="gradle_plugin" class="nav-link">5.2. Gradle Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ant_tasks" id="ant_tasks" class="nav-link">5.3. Ant Tasks</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" id="appendix-a-configuration-properties" class="nav-link">6. Appendix A. Configuration Properties</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" id="appendix-b-service-collections" class="nav-link">7. Appendix B. Service Collections</a></li>
+</ul>
+</div>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+                <article>
+                    <header>
+                    </header>
+                    <section>
+                        <div class="sect2">
+ <h3 id="performance-tuning"><a class="anchor" href="#performance-tuning"></a>2.8. Performance Tuning</h3>
+ <div class="sect3">
+  <h4 id="prefetching"><a class="anchor" href="#prefetching"></a>2.8.1. Prefetching</h4>
+  <div class="paragraph">
+   <p>Prefetching is a technique that allows to bring back in one query not only the queried objects, but also objects related to them. In other words it is a controlled eager relationship resolving mechanism. Prefetching is discussed in the "Performance Tuning" chapter, as it is a powerful performance optimization method. However another common application of prefetching is to refresh stale object relationships, so more generally it can be viewed as a technique for managing subsets of the object graph.</p>
+  </div>
+  <div class="paragraph">
+   <p>Prefetching example:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">List&lt;Artist&gt; artists = ObjectSelect
+    .query(Artist.class)
+    .prefetch(Artist.PAINTINGS.disjoint()) <i class="conum" data-value="1"></i><b>(1)</b>
+    .select(context); <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+   </div>
+  </div>
+  <div class="colist arabic">
+   <table>
+    <tbody>
+     <tr>
+      <td><i class="conum" data-value="1"></i><b>1</b></td>
+      <td>Instructs Cayenne to prefetch one of Artist’s relationships.</td>
+     </tr>
+     <tr>
+      <td><i class="conum" data-value="2"></i><b>2</b></td>
+      <td>Query is executed as usual, but the resulting Artists will have their paintings "inflated"</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="paragraph">
+   <p>All types of relationships can be prefetched - to-one, to-many, flattened. A prefetch can span multiple relationships:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">query.prefetch(Artist.PAINTINGS.dot(Painting.GALLERY).disjoint());</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>A query can have multiple prefetches:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">query.prefetch(Artist.PAINTINGS.disjoint())
+   .prefetch(Artist.PAINTINGS.dot(Painting.GALLERY).disjoint());</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>If a query is fetching DataRows, all "disjoint" prefetches are ignored, only "joint" prefetches are executed (see prefetching semantics discussion below for what disjoint and joint prefetches mean).</p>
+  </div>
+  <div class="paragraph">
+   <p>A strategy to prefetch relationships is defined by prefetch "semantics". Depending on semantics, Cayenne would generate different types of queries. The end result is the same - query root objects with related objects fully resolved. However semantics can affect performance, in some cases significantly. There are 3 types of prefetch semantics defined as constants in <code>org.apache.cayenne.query.PrefetchTreeNode</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code>PrefetchTreeNode.JOINT_PREFETCH_SEMANTICS
+PrefetchTreeNode.DISJOINT_PREFETCH_SEMANTICS
+PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p><strong>Disjoint prefetch semantics</strong> results in Cayenne generating one SQL statement for the main objects, and a separate statement for each prefetch path (hence "disjoint" - related objects are not fetched with the main query). Each additional SQL statement uses a qualifier of the main query plus a set of joins traversing the prefetch path between the main and related entity.</p>
+  </div>
+  <div class="paragraph">
+   <p>This strategy has an advantage of efficient JVM memory use, and faster overall result processing by Cayenne, but it requires (1+N) SQL statements to be executed, where N is the number of prefetched relationships.</p>
+  </div>
+  <div class="paragraph">
+   <p><strong>Disjoint-by-ID prefetch semantics</strong> is a variation of disjoint prefetch where related objects are matched against a set of IDs derived from the fetched main objects (or intermediate objects in a multi-step prefetch). Cayenne limits the size of the generated WHERE clause, as most DBs can’t parse arbitrary large SQL. So prefetch queries are broken into smaller queries. The size of is controlled by the DI property <code>Constants.MAX_ID_QUALIFIER_SIZE_PROPERTY</code> (the default number of conditions in the generated WHERE clause is 10000). Cayenne will generate (1 + N * M) SQL statements for each query using disjoint-by-ID prefetches, where N is the number of relationships to prefetch, and M is the number of queries for a given prefetch that is dependent on the number of objects in the result (ideally M = 1).</p>
+  </div>
+  <div class="paragraph">
+   <p>The advantage of this type of prefetch is that matching database rows by ID may be much faster than matching the qualifier of the original query. Moreover this is <strong>the only type of prefetch</strong> that can handle SelectQueries with <strong>fetch</strong> limit. Both joint and regular disjoint prefetches may produce invalid results or generate inefficient fetch-the-entire table SQL when fetch limit is in effect.</p>
+  </div>
+  <div class="paragraph">
+   <p>The disadvantage is that query SQL can get unwieldy for large result sets, as each object will have to have its own condition in the WHERE clause of the generated SQL.</p>
+  </div>
+  <div class="paragraph">
+   <p><strong>Joint prefetch semantics</strong> results in a single SQL statement for root objects and any number of jointly prefetched paths. Cayenne processes in memory a cartesian product of the entities involved, converting it to an object tree. It uses OUTER joins to connect prefetched entities.</p>
+  </div>
+  <div class="paragraph">
+   <p>Joint is the most efficient prefetch type of the three as far as generated SQL goes. There’s always just 1 SQL query generated. Its downsides are the potentially increased amount of data that needs to get across the network between the application server and the database, and more data processing that needs to be done on the Cayenne side.</p>
+  </div>
+  <div class="paragraph">
+   <p><code><a href="/docs/5.0/cayenne-guide/queries#select">ObjectSelect</a></code> query supports all three types of semantics. You can mix and match them in the same query for different prefetches.</p>
+  </div>
+  <div class="paragraph">
+   <p><code><a href="/docs/5.0/cayenne-guide/queries#sqlselect">SQLSelect</a></code> query supports "JOINT" and "DISJOINT_BY_ID". It does not work with "DISJOINT", as the query does not provide enough information to Cayenne to build dependent prefetch queries. So "DISJOINT" will result in exception. "JOINT" prefetching requires a bit of effort shaping the SQL to include the right columns in the result and label them properly to be convertible into object properties. The main rules to follow are:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p>Include <em>all</em> columns from the root entity and every prefetched entity.</p></li>
+    <li><p>Label each prefetched entity columns as "dbRelationship.column".</p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>E.g.:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">List&lt;Artist&gt; objects = SQLSelect.query(Artist.class, "SELECT "
+    + "#result('ESTIMATED_PRICE' 'BigDecimal' '' 'paintingArray.ESTIMATED_PRICE'), "
+    + "#result('PAINTING_TITLE' 'String' '' 'paintingArray.PAINTING_TITLE'), "
+    + "#result('GALLERY_ID' 'int' '' 'paintingArray.GALLERY_ID'), "
+    + "#result('PAINTING_ID' 'int' '' 'paintingArray.PAINTING_ID'), "
+    + "#result('t1.ARTIST_ID' 'int' '' 'paintingArray.ARTIST_ID'), "
+    + "#result('ARTIST_NAME' 'String'), "
+    + "#result('DATE_OF_BIRTH' 'java.util.Date'), "
+    + "#result('t0.ARTIST_ID' 'int' '' 'ARTIST_ID') "
+    + "FROM ARTIST t0, PAINTING t1 "
+    + "WHERE t0.ARTIST_ID = t1.ARTIST_ID")
+    .addPrefetch(Artist.PAINTING_ARRAY.joint())
+    .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p><code><a href="/docs/5.0/cayenne-guide/queries#ejbql">EJBQLQuery</a></code> uses the "FETCH" keyword to enable prefetching:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT a FROM Artist a LEFT JOIN FETCH a.paintings</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="data-rows"><a class="anchor" href="#data-rows"></a>2.8.2. Data Rows</h4>
+  <div class="paragraph">
+   <p>Converting result set data to Persistent objects and registering these objects in the ObjectContext can be an expensive operation comparable to the time spent running the query (and frequently exceeding it). Internally Cayenne builds the result as a list of DataRows, that are later converted to objects. Skipping the last step and using data in the form of DataRows can significantly increase performance.</p>
+  </div>
+  <div class="paragraph">
+   <p>DataRow is a simply a map of values keyed by their DB column name. It is a ubiquitous representation of DB data used internally by Cayenne. And it can be quite usable as is in the application in many cases. So performance sensitive selects should consider DataRows - it saves memory and CPU cycles. All selecting queries support DataRows option, e.g.:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">ObjectSelect&lt;DataRow&gt; query = ObjectSelect.dataRowQuery(Artist.class);
+
+List&lt;DataRow&gt; rows = query.select(context);</code></pre>
+   </div>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">SQLSelect&lt;DataRow&gt; query = SQLSelect.dataRowQuery("SELECT * FROM ARTIST");
+List&lt;DataRow&gt; rows = query.select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Individual DataRows may be converted to Persistent objects as needed. So e.g. you may implement some in-memory filtering, only converting a subset of fetched objects:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">// you need to cast ObjectContext to DataContext to get access to 'objectFromDataRow'
+DataContext dataContext = (DataContext) context;
+
+for(DataRow row : rows) {
+    if(row.get("DATE_OF_BIRTH") != null) {
+        Artist artist = dataContext.objectFromDataRow(Artist.class, row);
+        // do something with Artist...
+        ...
+    }
+}</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="specific-attributes-and-relationships-with-ejbql"><a class="anchor" href="#specific-attributes-and-relationships-with-ejbql"></a>2.8.3. Specific Attributes and Relationships with EJBQL</h4>
+  <div class="paragraph">
+   <p>It is possible to fetch specific attributes and relationships from a model using <a href="/docs/5.0/cayenne-guide/queries#ejbql">EJBQLQuery</a>. The following example would return a java.util.List of String objects;</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT a.name FROM Artist a</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The following will yield a java.util.List containing Object[] instances, each of which would contain the name followed by the dateOfBirth value.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT a.name, a.dateOfBirth FROM Artist a</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Refer to third-party query language documentation for further detail on this mechanism.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="iterated-queries"><a class="anchor" href="#iterated-queries"></a>2.8.4. Iterated Queries</h4>
+  <div class="paragraph">
+   <p>While contemporary hardware may easily allow applications to fetch hundreds of thousands or even millions of objects into memory, it doesn’t mean this is always a good idea to do so. You can optimize processing of very large result sets with two techniques discussed in this and the following chapter - iterated and paginated queries.</p>
+  </div>
+  <div class="paragraph">
+   <p>Iterated query is not actually a special query. Any selecting query can be executed in iterated mode by an ObjectContext. ObjectContext creates an object called <code>ResultIterator</code> that is backed by an open ResultSet. Iterator provides constant memory performance for arbitrarily large ResultSets. This is true at least on the Cayenne end, as JDBC driver may still decide to bring the entire ResultSet into the JVM memory.</p>
+  </div>
+  <div class="paragraph">
+   <p>Data is read from ResultIterator one row/object at a time until it is exhausted. There are two styles of accessing ResultIterator - direct access which requires explicit closing to avoid JDBC resources leak, or a callback that lets Cayenne handle resource management. In both cases iteration can be performed using "for" loop, as ResultIterator is "Iterable".</p>
+  </div>
+  <div class="paragraph">
+   <p>Direct access. Here common sense tells us that ResultIterators instances should be processed and closed as soon as possible to release the DB connection. E.g. storing open iterators between HTTP requests for unpredictable length of time would quickly exhaust the connection pool.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">try(ResultIterator&lt;Artist&gt; it = ObjectSelect.query(Artist.class).iterator(context)) {
+    for(Artist a : it) {
+       // do something with the object...
+       ...
+    }
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Same thing with a callback:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">ObjectSelect.query(Artist.class).iterate(context, (Artist a) -&gt; {
+    // do something with the object...
+    ...
+});</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Another example is a batch iterator that allows to process more than one object in each iteration. This is a common scenario in various data processing jobs - read a batch of objects, process them, commit the results, and then repeat. This allows to further optimize processing (e.g. by avoiding frequent commits).</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">try(ResultBatchIterator&lt;Artist&gt; it = ObjectSelect.query(Artist.class).batchIterator(context, 100)) {
+    for(List&lt;Artist&gt; list : it) {
+       // do something with each list
+       ...
+       // possibly commit your changes
+       context.commitChanges();
+    }
+}</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="paginated-queries"><a class="anchor" href="#paginated-queries"></a>2.8.5. Paginated Queries</h4>
+  <div class="paragraph">
+   <p>Enabling query pagination allows to load very large result sets in a Java app with very little memory overhead (much smaller than even the DataRows option discussed above). Moreover it is completely transparent to the application - a user gets what appears to be a list of Persistent objects - there’s no iterator to close or DataRows to convert to objects:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">// the fact that result is paginated is transparent
+List&lt;Artist&gt; artists =
+    ObjectSelect.query(Artist.class).pageSize(50).select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Having said that, DataRows option can be combined with pagination, providing the best of both worlds:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">List&lt;DataRow&gt; rows =
+    ObjectSelect.dataRowQuery(Artist.class).pageSize(50).select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The way pagination works internally, it first fetches a list of IDs for the root entity of the query. This is very fast and initially takes very little memory. Then when an object is requested at an arbitrary index in the list, this object and adjacent objects (a "page" of objects that is determined by the query pageSize parameter) are fetched together by ID. Subsequent requests to the objects of this "page" are served from memory.</p>
+  </div>
+  <div class="paragraph">
+   <p>An obvious limitation of pagination is that if you eventually access all objects in the list, the memory use will end up being the same as with no pagination. However it is still a very useful approach. With some lists (e.g. multi-page search results) only a few top objects are normally accessed. At the same time pagination allows to estimate the full list size without fetching all the objects. And again - it is completely transparent and looks like a normal query.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="caching"><a class="anchor" href="#caching"></a>2.8.6. Caching and Fresh Data</h4>
+  <div class="sect4">
+   <h5 id="object-caching"><a class="anchor" href="#object-caching"></a>2.8.6.1. Object Caching</h5>
+  </div>
+  <div class="sect4">
+   <h5 id="query-result-caching"><a class="anchor" href="#query-result-caching"></a>2.8.6.2. Query Result Caching</h5>
+   <div class="paragraph">
+    <p>Cayenne supports mostly transparent caching of the query results. There are two levels of the cache: local (i.e. results cached by the ObjectContext) and shared (i.e. the results cached at the stack level and shared between all contexts). Local cache is much faster then the shared one, but is limited to a single context. It is often used with a shared read-only ObjectContext.</p>
+   </div>
+   <div class="paragraph">
+    <p>To take advantage of query result caching, the first step is to mark your queries appropriately. Here is an example for ObjectSelect query. Other types of queries have similar API:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-Java Java" data-lang="Java">ObjectSelect.query(Artist.class).localCache("artists");</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>This tells Cayenne that the query created here would like to use local cache of the context it is executed against. A vararg parameter to <code>localCache()</code> (or <code>sharedCache()</code>) method contains so called "cache groups". Those are arbitrary names that allow to categorize queries for the purpose of setting cache policies or explicit invalidation of the cache. More on that below.</p>
+   </div>
+   <div class="paragraph">
+    <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="/docs/5.0/cayenne-guide/ext-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p>
+   </div>
+   <div class="paragraph">
+    <p>Often "passive" cache expiration policies used by caching providers are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly with <code>RefreshQuery</code>:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-Java Java" data-lang="Java">RefreshQuery refresh = new RefreshQuery("artist");
+context.performGenericQuery(refresh);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>The above can be used e.g. to build UI for manual cache invalidation. It is also possible to automate cache refresh when certain entities are committed. This can be done with the help of <a href="/docs/5.0/cayenne-guide/ext-cache-invalidation">Cache invalidation extension</a>.</p>
+   </div>
+   <div class="paragraph">
+    <p>Finally you may cluster cache group events. They are very small and can be efficiently sent over the wire to other JVMs running Cayenne. An example of Cayenne setup with event clustering is <a href="https://github.com/andrus/wowodc13/tree/master/services/src/main/java/demo/services/cayenne">available on GitHub</a>.</p>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="turning-off-synchronization-of-objectcontexts"><a class="anchor" href="#turning-off-synchronization-of-objectcontexts"></a>2.8.7. Turning off Synchronization of ObjectContexts</h4>
+  <div class="paragraph">
+   <p>By default when a single ObjectContext commits its changes, all other contexts in the same runtime receive an event that contains all the committed changes. This allows them to update their cached object state to match the latest committed data. There are however many problems with this ostensibly helpful feature. In short - it works well in environments with few contexts and in unclustered scenarios, such as single user desktop applications, or simple webapps with only a few users. More specifically:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p>The performance of synchronization is (probably worse than) O(N) where N is the number of peer ObjectContexts in the system. In a typical webapp N can be quite large. Besides for any given context, due to locking on synchronization, context own performance will depend not only on the queries that it runs, but also on external events that it does not control. This is unacceptable in most situations.</p></li>
+    <li><p>Commit events are untargeted - even contexts that do not hold a given updated object will receive the full event that they will have to process.</p></li>
+    <li><p>Clustering between JVMs doesn’t scale - apps with large volumes of commits will quickly saturate the network with events, while most of those will be thrown away on the receiving end as mentioned above.</p></li>
+    <li><p>Some contexts may not want to be refreshed. A refresh in the middle of an operation may lead to unpredictable results.</p></li>
+    <li><p>Synchronization will interfere with optimistic locking.</p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>So we’ve made a good case for disabling synchronization in most webapps. To do that, set to "false" the following DI property - <code>Constants.CONTEXTS_SYNC_PROPERTY</code>, using one of the standard Cayenne DI approaches. E.g. from command line:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code>$ java -Dcayenne.contexts_sync_strategy=false</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Or by changing the standard properties Map in a custom extensions module:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class MyModule implements Module {
+
+    @Override
+    public void configure(Binder binder) {
+        CoreModule.contributeProperties(binder)
+            .put(Constants.CONTEXTS_SYNC_PROPERTY, "false");
+    }
+}</code></pre>
+   </div>
+  </div>
+ </div>
+</div>
+                    </section>
+                </article>
+
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=5c836e39-be6b-4a21-a946-a97b5b69f172" />
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/legacy/legacy-docs/">Legacy Documentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
+                        <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
+                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2022-12-05 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Dec 05, 2022</time>
+                        <a href="/2022/12/cayenne-42rc2-released/">Cayenne 4.2 Release Candidate 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2024 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    </body>
+</html>

@@ -2,4 +2,5 @@ User-agent: *
 Allow: *
 Disallow: /docs/4.1/api/*
 Disallow: /docs/4.0/api/*
+Disallow: /docs/5.0/*
 Sitemap: https://cayenne.apache.org/sitemap.xml

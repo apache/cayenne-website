@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
+        <title>Cayenne Guide 5.0 · Filtering &middot; Apache Cayenne</title>
+    </head>
+    <body  class="cd-head">
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.2/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 5.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/5.0/cayenne-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">Cayenne Guide 5.0</span><div id="toc" class="toc toc-side">
+<ul class="sectlevel1 nav">
+  <li><a href="/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne" id="object-relational-mapping-with-cayenne" class="nav-link">1. Object Relational Mapping with Cayenne</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/setup" id="setup" class="nav-link">1.1. Setup</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" id="cayenne-mapping-structure" class="nav-link">1.2. Cayenne Mapping Structure</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" id="cayenne-modeler" class="nav-link">1.3. CayenneModeler Application</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-framework" id="cayenne-framework" class="nav-link">2. Cayenne Framework</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" id="including-cayenne-in-project" class="nav-link">2.1. Including Cayenne in a Project</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" id="starting-cayenne" class="nav-link">2.2. Starting Cayenne</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" id="persistent-objects-objectcontext" class="nav-link">2.3. Persistent Objects and ObjectContext</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/expressions" id="expressions" class="nav-link">2.4. Expressions</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/orderings" id="orderings" class="nav-link">2.5. Orderings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/queries" id="queries" class="nav-link">2.6. Queries</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" id="lifecycle-events" class="nav-link">2.7. Lifecycle Events</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/performance-tuning" id="performance-tuning" class="nav-link">2.8. Performance Tuning</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" id="customizing-cayenne-runtime" class="nav-link">2.9. Customizing Cayenne Runtime</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/db-first-flow" id="db-first-flow" class="nav-link">3. DB-First Flow</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/re-introduction" id="re-introduction" class="nav-link">3.1. Introduction</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-filtering" id="re-filtering" class="nav-link">3.2. Filtering</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" id="re-relationships-loading-control" class="nav-link">3.3. Other Settings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-modeler" id="re-modeler" class="nav-link">3.4. Reverse Engineering in Cayenne Modeler</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/additional-modules" id="additional-modules" class="nav-link">4. Additional Modules</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" id="ext-cache-invalidation" class="nav-link">4.1. Cache Invalidation Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-commit-log" id="ext-commit-log" class="nav-link">4.2. Commit log extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-crypto" id="ext-crypto" class="nav-link">4.3. Crypto extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-jcache" id="ext-jcache" class="nav-link">4.4. JCache integration</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" id="ext-project-compatibility" class="nav-link">4.5. Project compatibility extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-velocity" id="ext-velocity" class="nav-link">4.6. Apache Velocity Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-osgi" id="ext-osgi" class="nav-link">4.7. Cayenne OSGI extension</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/build_tools" id="build_tools" class="nav-link">5. Build Tools</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/maven_plugin" id="maven_plugin" class="nav-link">5.1. Maven Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" id="gradle_plugin" class="nav-link">5.2. Gradle Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ant_tasks" id="ant_tasks" class="nav-link">5.3. Ant Tasks</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" id="appendix-a-configuration-properties" class="nav-link">6. Appendix A. Configuration Properties</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" id="appendix-b-service-collections" class="nav-link">7. Appendix B. Service Collections</a></li>
+</ul>
+</div>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+                <article>
+                    <header>
+                    </header>
+                    <section>
+                        <div class="sect2">
+ <h3 id="re-filtering"><a class="anchor" href="#re-filtering"></a>3.2. Filtering</h3>
+ <div class="paragraph">
+  <p>The first thing you usually want to control during reverse engineering is what exactly should be loaded from database and what not. One of the most common cases is excluding system tables, as you usually don’t want to map them.</p>
+ </div>
+ <div class="paragraph">
+  <p>Briefly, you are able to include/exclude tables, columns and procedures and do it at several levels: default, catalog, schema. Although everything defined at the top level (default rules) will be applied for the nested elements, all rules from the most specific areas will override general rules (i.e. rules from schemas override rules from catalogs and even more override default rules).</p>
+ </div>
+ <div class="paragraph">
+  <p>The following use-cases will provide you a better understanding of how filtering works and how you could use it.</p>
+ </div>
+ <div class="sect3">
+  <h4 id="process-everything-from-schemacatalog"><a class="anchor" href="#process-everything-from-schemacatalog"></a>3.2.1. Process everything from schema/catalog</h4>
+  <div class="paragraph">
+   <p>The simplest example of reverse engineering is processing tables from one schema of catalog and there are several options to do this. Basic syntax is described below:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+    &lt;!-- Ant/Maven in case you only want to specify the schema to import --&gt;
+    &lt;schema&gt;SCHEMA_NAME&lt;/schema&gt;
+
+    &lt;!-- Maven way in case you have nested elements in the schema  --&gt;
+    &lt;schema&gt;
+        &lt;name&gt;SCHEMA_NAME&lt;/name&gt;
+        ...
+    &lt;/schema&gt;
+
+    &lt;!-- Ant way in case you have nested elements in the schema --&gt;
+    &lt;schema name="SCHEMA_NAME"&gt;
+        ...
+    &lt;/schema&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The same options are available for catalogs:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+    &lt;!-- Ant/Maven in case you only want to specify the catalog to import --&gt;
+    &lt;catalog&gt;CATALOG_NAME&lt;/catalog&gt;
+
+    &lt;!-- Maven way in case you have nested elements in the catalog --&gt;
+    &lt;catalog&gt;
+        &lt;name&gt;CATALOG_NAME&lt;/name&gt;
+        ...
+    &lt;/catalog&gt;
+
+    &lt;!-- Ant way in case you have nested elements in the catalog --&gt;
+    &lt;catalog name="CATALOG_NAME"&gt;
+        ...
+    &lt;/catalog&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">Current version of reverse engineering doesn’t support catalog filtering for Postgres database.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="combine-schema-and-catalog-filters"><a class="anchor" href="#combine-schema-and-catalog-filters"></a>3.2.2. Combine Schema and Catalog filters</h4>
+  <div class="paragraph">
+   <p>Cayenne supports combination of different schemas and catalogs, and it filters data according to your requirements. You could achieve this by the following example of reverse engineering configuration:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop_01&lt;/name&gt;
+        &lt;schema&gt;schema-name-01&lt;/schema&gt;
+        &lt;schema&gt;schema-name-02&lt;/schema&gt;
+        &lt;schema&gt;schema-name-03&lt;/schema&gt;
+    &lt;/catalog&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop_02&lt;/name&gt;
+        &lt;schema&gt;schema-name-01&lt;/schema&gt;
+    &lt;/catalog&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop_03&lt;/name&gt;
+        &lt;schema&gt;schema-name-01&lt;/schema&gt;
+        &lt;schema&gt;schema-name-02&lt;/schema&gt;
+        &lt;schema&gt;schema-name-03&lt;/schema&gt;
+    &lt;/catalog&gt;
+
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>In the example above, Cayenne reverse engineering process contains three catalogs named as shop_01, shop_02 and shop_03, each of which has their own schemas. Cayenne will load all data only from the declared catalogs and schemas.</p>
+  </div>
+  <div class="paragraph">
+   <p>If you want to load everything from database, you could simply declare catalog specification alone.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+
+    &lt;catalog&gt;shop_01&lt;/catalog&gt;
+    &lt;catalog&gt;shop_02&lt;/catalog&gt;
+    &lt;catalog&gt;shop_03&lt;/catalog&gt;
+
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>If you want to do reverse engineering for specific schemas, just remove unwanted schemas from the catalog section. For example, if you want to process schema-name-01 and schema-name-03 schemas only, then you should change reverse engineering section like this.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop_01&lt;/name&gt;
+        &lt;schema&gt;schema-name-01&lt;/schema&gt;
+        &lt;schema&gt;schema-name-03&lt;/schema&gt;
+    &lt;/catalog&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop_02&lt;/name&gt;
+        &lt;schema&gt;schema-name-01&lt;/schema&gt;
+    &lt;/catalog&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop_03&lt;/name&gt;
+        &lt;schema&gt;schema-name-01&lt;/schema&gt;
+        &lt;schema&gt;schema-name-03&lt;/schema&gt;
+    &lt;/catalog&gt;
+
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="including-and-excluding-tables-columns-procedures-and-relationships"><a class="anchor" href="#including-and-excluding-tables-columns-procedures-and-relationships"></a>3.2.3. Including and Excluding tables, columns, procedures and relationships</h4>
+  <div class="paragraph">
+   <p>Cayenne reverse engineering let you fine tune table, columns and stored procedures names that you need to import to your model file. In every filter you can use regexp syntax. Here is some examples of configuration for common tasks.</p>
+  </div>
+  <div class="paragraph">
+   <p>1) Include tables with ‘CRM_’ prefix if you are working in that domain of application:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;includeTable&gt;CRM_.*&lt;/includeTable&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>2) Include tables with ‘_LOOKUP’ suffix</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;includeTable&gt;
+    &lt;pattern&gt;.*_LOOKUP&lt;/pattern&gt;
+&lt;/includeTable&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>3) Exclude tables with ‘CRM_’ prefix if you are not working only in that domain of application:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;excludeTable&gt;CRM_.*&lt;/excludeTable&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>4) Include only specific columns that follows specific naming convention:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;includeColumn&gt;includeColumn01&lt;/includeColumn&gt;
+&lt;includeColumn&gt;includeColumn03&lt;/includeColumn&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>5) Exclude system or obsolete columns:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;excludeColumn&gt;excludeColumn01&lt;/excludeColumn&gt;
+&lt;excludeColumn&gt;excludeColumn03&lt;/excludeColumn&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>6) Include/Exclude columns for particular table or group of tables:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;includeTable&gt;
+    &lt;pattern&gt;table pattern&lt;/pattern&gt;
+    &lt;includeColumn&gt;includeColumn01&lt;/includeColumn&gt;
+    &lt;excludeColumn&gt;excludeColumn01&lt;/excludeColumn&gt;
+&lt;/includeTable&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>7) Include stored procedures:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;includeProcedure&gt;includeProcedure01&lt;/includeProcedure&gt;
+&lt;includeProcedure&gt;
+    &lt;pattern&gt;includeProcedure03&lt;/pattern&gt;
+&lt;/includeProcedure&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>8) Exclude stored procedures by pattern:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;excludeProcedure&gt;excludeProcedure01&lt;/excludeProcedure&gt;
+&lt;excludeProcedure&gt;
+    &lt;pattern&gt;excludeProcedure03&lt;/pattern&gt;
+&lt;/excludeProcedure&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>9) Exclude relationships:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;excludeRelationship&gt;excludeRelationship01&lt;/excludeRelationship&gt;
+&lt;excludeRelationship&gt;
+    &lt;pattern&gt;excludeRelationship03&lt;/pattern&gt;
+&lt;/excludeRelationship&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>All filtering tags <code>&lt;includeTable&gt;</code>, <code>&lt;excludeTable&gt;</code>, <code>&lt;includeColumn&gt;</code>, <code>&lt;excludeColumn&gt;</code>, <code>&lt;includeProcedure&gt;</code>, <code>&lt;excludeProcedure&gt;</code> and <code>&lt;excludeRelationship&gt;</code> have 2 ways to pass filtering RegExp.</p>
+  </div>
+  <div class="paragraph">
+   <p>1) text inside tag</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML"> &lt;includeTable&gt;CRM_.*&lt;/includeTable&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>2) pattern inner tag</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">  &lt;includeTable&gt;
+         &lt;pattern&gt;.*_LOOKUP&lt;/pattern&gt;
+     &lt;/includeTable&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>All filtering tags can be placed inside schema and catalog tags, but also inside <code>&lt;dbimport&gt;</code> tag. It means that filtering rules will be applied for all schemas and catalogs.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="complete-filtering-example"><a class="anchor" href="#complete-filtering-example"></a>3.2.4. Complete filtering example</h4>
+  <div class="paragraph">
+   <p>Initially, let’s make a small sample. Consider the following reverse engineering configuration.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+    &lt;catalog&gt;shop-01&lt;/catalog&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>In this case reverse engineering will not filter anything from the shop-01 catalog. If you really want to filter database columns, tables, stored procedures and relationships, you could do it in the following way.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+    &lt;catalog&gt;shop-01&lt;/catalog&gt;
+    &lt;catalog&gt;
+        &lt;name&gt;shop-02&lt;/name&gt;
+        &lt;includeTable&gt;includeTable-01&lt;/includeTable&gt;
+    &lt;/catalog&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Then Cayenne will do reverse engineering for both shop-01 and shop-02 catalogs. First catalog will not be processed for filtering, but the second catalog will be processed with “includeTable-01” filter.</p>
+  </div>
+  <div class="paragraph">
+   <p>Let’s assume you have a lot of table prefixes with the same names. Cayenne allows you to mention a pattern as regular expression. Using regular expressions is easier way to handle a big amount of database entities than writing filter config for each use-case. They make your configuration more readable, understandable and straightforward. There is not complex. Let’s see how to use patterns in reverse engineering configuration with complete example.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+
+    &lt;catalog&gt;shop-01&lt;/catalog&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop-02&lt;/name&gt;
+    &lt;/catalog&gt;
+
+    &lt;catalog&gt;
+        &lt;name&gt;shop-03&lt;/name&gt;
+        &lt;includeTable&gt;includeTable-01&lt;/includeTable&gt;
+
+        &lt;includeTable&gt;
+            &lt;pattern&gt;includeTable-02&lt;/pattern&gt;
+        &lt;/includeTable&gt;
+
+        &lt;includeTable&gt;
+            &lt;pattern&gt;includeTable-03&lt;/pattern&gt;
+            &lt;includeColumn&gt;includeColumn-01&lt;/includeColumn&gt;
+            &lt;excludeColumn&gt;excludeColumn-01&lt;/excludeColumn&gt;
+        &lt;/includeTable&gt;
+
+        &lt;excludeTable&gt;excludeTable-01&lt;/excludeTable&gt;
+
+        &lt;excludeTable&gt;
+            &lt;pattern&gt;excludeTable-02&lt;/pattern&gt;
+        &lt;/excludeTable&gt;
+
+        &lt;includeColumn&gt;includeColumn-01&lt;/includeColumn&gt;
+
+        &lt;includeColumn&gt;
+            &lt;pattern&gt;includeColumn-02&lt;/pattern&gt;
+        &lt;/includeColumn&gt;
+
+        &lt;excludeColumn&gt;excludeColumn-01&lt;/excludeColumn&gt;
+
+        &lt;excludeColumn&gt;
+            &lt;pattern&gt;excludeColumn-02&lt;/pattern&gt;
+        &lt;/excludeColumn&gt;
+
+        &lt;includeProcedure&gt;includeProcedure-01&lt;/includeProcedure&gt;
+
+        &lt;includeProcedure&gt;
+            &lt;pattern&gt;includeProcedure-02&lt;/pattern&gt;
+        &lt;/includeProcedure&gt;
+
+        &lt;excludeProcedure&gt;excludeProcedure-01&lt;/excludeProcedure&gt;
+
+        &lt;excludeProcedure&gt;
+            &lt;pattern&gt;excludeProcedure-02&lt;/pattern&gt;
+        &lt;/excludeProcedure&gt;
+
+        &lt;excludeRelationship&gt;excludeRelationship-01&lt;/excludeRelationship&gt;
+
+        &lt;excludeRelationship&gt;
+            &lt;pattern&gt;excludeRelationship-02&lt;/pattern&gt;
+        &lt;/excludeRelationship&gt;
+
+    &lt;/catalog&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The example above should provide you more idea about how to use filtering and patterns in Cayenne reverse engineering. You could notice that this example demonstrates you the "name" and "pattern" configurations. Yes, you could use these as separates xml element and xml attributes.</p>
+  </div>
+  <div class="paragraph">
+   <p>The cdbimport will execute reverse engineering task for all entities from “shop-01” and “shop-02”, including tables, views, stored procedures and table columns. As “shop-03” has variety filter tags, entities from this catalog will be filtered by cdbimport.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="ant-configuration-example"><a class="anchor" href="#ant-configuration-example"></a>3.2.5. Ant configuration example</h4>
+  <div class="paragraph">
+   <p>Here is config sample for <code>Ant</code> task:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;!-- inside &lt;cdbimport&gt; tag --&gt;
+&lt;catalog&gt;shop-01&lt;/catalog&gt;
+
+&lt;catalog name="shop-02"/&gt;
+
+&lt;catalog name="shop-03"&gt;
+
+    &lt;includeTable&gt;includeTable-01&lt;/includeTable&gt;
+    &lt;includeTable pattern="includeTable-02"/&gt;
+
+    &lt;includeTable pattern="includeTable-03"&gt;
+        &lt;includeColumn&gt;includeColumn-01&lt;/includeColumn&gt;
+        &lt;excludeColumn&gt;excludeColumn-01&lt;/excludeColumn&gt;
+    &lt;/includeTable&gt;
+
+    &lt;excludeTable&gt;excludeTable-01&lt;/excludeTable&gt;
+    &lt;excludeTable pattern="excludeTable-02"/&gt;
+
+    &lt;includeColumn&gt;includeColumn-01&lt;/includeColumn&gt;
+    &lt;includeColumn pattern="includeColumn-02"/&gt;
+
+    &lt;excludeColumn&gt;excludeColumn-01&lt;/excludeColumn&gt;
+    &lt;excludeColumn pattern="excludeColumn-02"/&gt;
+
+    &lt;includeProcedure&gt;includeProcedure-01&lt;/includeProcedure&gt;
+    &lt;includeProcedure pattern="includeProcedure-02"/&gt;
+
+    &lt;excludeProcedure&gt;excludeProcedure-01&lt;/excludeProcedure&gt;
+    &lt;excludeProcedure pattern="excludeProcedure-02"/&gt;
+
+    &lt;excludeRelationship&gt;excludeRelationship-01&lt;/excludeRelationship&gt;
+    &lt;excludeRelationship pattern="excludeRelationship-02"/&gt;
+
+&lt;/catalog&gt;</code></pre>
+   </div>
+  </div>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">In Ant task configuration all filter tags located inside root tag <code>&lt;cdbimport&gt;</code> as there is no <code>&lt;dbimport&gt;</code> tag.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</div>
+                    </section>
+                </article>
+
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=5c836e39-be6b-4a21-a946-a97b5b69f172" />
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/legacy/legacy-docs/">Legacy Documentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
+                        <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
+                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2022-12-05 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Dec 05, 2022</time>
+                        <a href="/2022/12/cayenne-42rc2-released/">Cayenne 4.2 Release Candidate 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2024 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    </body>
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
+        <title>Cayenne Guide 5.0 · Queries &middot; Apache Cayenne</title>
+    </head>
+    <body  class="cd-head">
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.2/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 5.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/5.0/cayenne-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">Cayenne Guide 5.0</span><div id="toc" class="toc toc-side">
+<ul class="sectlevel1 nav">
+  <li><a href="/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne" id="object-relational-mapping-with-cayenne" class="nav-link">1. Object Relational Mapping with Cayenne</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/setup" id="setup" class="nav-link">1.1. Setup</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" id="cayenne-mapping-structure" class="nav-link">1.2. Cayenne Mapping Structure</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" id="cayenne-modeler" class="nav-link">1.3. CayenneModeler Application</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-framework" id="cayenne-framework" class="nav-link">2. Cayenne Framework</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" id="including-cayenne-in-project" class="nav-link">2.1. Including Cayenne in a Project</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" id="starting-cayenne" class="nav-link">2.2. Starting Cayenne</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" id="persistent-objects-objectcontext" class="nav-link">2.3. Persistent Objects and ObjectContext</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/expressions" id="expressions" class="nav-link">2.4. Expressions</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/orderings" id="orderings" class="nav-link">2.5. Orderings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/queries" id="queries" class="nav-link">2.6. Queries</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" id="lifecycle-events" class="nav-link">2.7. Lifecycle Events</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/performance-tuning" id="performance-tuning" class="nav-link">2.8. Performance Tuning</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" id="customizing-cayenne-runtime" class="nav-link">2.9. Customizing Cayenne Runtime</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/db-first-flow" id="db-first-flow" class="nav-link">3. DB-First Flow</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/re-introduction" id="re-introduction" class="nav-link">3.1. Introduction</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-filtering" id="re-filtering" class="nav-link">3.2. Filtering</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" id="re-relationships-loading-control" class="nav-link">3.3. Other Settings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-modeler" id="re-modeler" class="nav-link">3.4. Reverse Engineering in Cayenne Modeler</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/additional-modules" id="additional-modules" class="nav-link">4. Additional Modules</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" id="ext-cache-invalidation" class="nav-link">4.1. Cache Invalidation Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-commit-log" id="ext-commit-log" class="nav-link">4.2. Commit log extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-crypto" id="ext-crypto" class="nav-link">4.3. Crypto extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-jcache" id="ext-jcache" class="nav-link">4.4. JCache integration</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" id="ext-project-compatibility" class="nav-link">4.5. Project compatibility extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-velocity" id="ext-velocity" class="nav-link">4.6. Apache Velocity Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-osgi" id="ext-osgi" class="nav-link">4.7. Cayenne OSGI extension</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/build_tools" id="build_tools" class="nav-link">5. Build Tools</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/maven_plugin" id="maven_plugin" class="nav-link">5.1. Maven Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" id="gradle_plugin" class="nav-link">5.2. Gradle Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ant_tasks" id="ant_tasks" class="nav-link">5.3. Ant Tasks</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" id="appendix-a-configuration-properties" class="nav-link">6. Appendix A. Configuration Properties</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" id="appendix-b-service-collections" class="nav-link">7. Appendix B. Service Collections</a></li>
+</ul>
+</div>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+                <article>
+                    <header>
+                    </header>
+                    <section>
+                        <div class="sect2">
+ <h3 id="queries"><a class="anchor" href="#queries"></a>2.6. Queries</h3>
+ <div class="paragraph">
+  <p>Queries are Java objects used by the application to communicate with the database. Cayenne knows how to translate queries into SQL statements appropriate for a particular database engine. Most often queries are used to find objects matching certain criteria, but there are other types of queries too. E.g. those allowing to run native SQL, call DB stored procedures, etc. When committing objects, Cayenne itself creates special queries to insert/update/delete rows in the database.</p>
+ </div>
+ <div class="paragraph">
+  <p>There is a number of built-in queries in Cayenne, described later in this chapter. Most of the newer queries use fluent API and can be created and executed as easy-to-read one-liners. Users can define their own query types to abstract certain DB interactions that for whatever reason can not be adequately described by the built-in set.</p>
+ </div>
+ <div class="paragraph">
+  <p>Queries can be roughly categorized as "object" and "native". Object queries (most notably <code>ObjectSelect</code>, <code>SelectById</code>, and <code>EJBQLQuery</code>) are built with abstractions originating in the object model (the "object" side in the "object-relational" divide). E.g. <code>ObjectSelect</code> consists of a Java class of objects to fetch, a qualifier expression, orderings, etc. - all of this expressed in terms of the object model.</p>
+ </div>
+ <div class="paragraph">
+  <p>Native queries describe a desired DB operation using SQL (<code>SQLSelect</code>, <code>SQLExec</code> query), a reference to a stored procedure (<code>ProcedureQuery</code>), etc. The results of native queries are lists of scalars, lists of <code>Object[]</code> or lists of maps (a term "data row" is often used to describe such a map). Some of them can potentially be converted to persistent objects (though usually with considerable effort). Native queries are less (if at all) portable across databases than object queries.</p>
+ </div>
+ <div class="sect3">
+  <h4 id="select"><a class="anchor" href="#select"></a>2.6.1. ObjectSelect</h4>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content"><code>ObjectSelect</code> supersedes older <code>SelectQuery</code>. <code>SelectQuery</code> is deprecated since 4.2 and removed in 5.0.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="sect4">
+   <h5 id="selecting-objects"><a class="anchor" href="#selecting-objects"></a>2.6.1.1. Selecting objects</h5>
+   <div class="paragraph">
+    <p><code>ObjectSelect</code> is the most commonly used query in Cayenne applications. This may be the only query you will ever need. It returns a list of persistent objects (or data rows) of a certain type specified in the query:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class).select(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>This returned all rows in the <em>ARTIST</em> table. If the logs were turned on, you might see the following SQL printed:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0
+INFO: === returned 5 row. - took 5 ms.</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>This SQL was generated by Cayenne from the <code>ObjectSelect</code> above. <code>ObjectSelect</code> can have a qualifier to select only the data matching specific criteria. Qualifier is simply an Expression (Expressions where discussed in the previous chapter), appended to the query using "where" method. If you only want artists whose name begins with 'Pablo', you might use the following qualifier expression:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class)
+    .where(Artist.NAME.like("Pablo%"))
+    .select(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>The SQL will look different this time:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0 WHERE t0.NAME LIKE ?
+[bind: 1-&gt;NAME:'Pablo%']
+INFO: === returned 1 row. - took 6 ms.</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p><code>ObjectSelect</code> allows to assemble qualifier from parts, using "and" and "or" method to chain them together:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class)
+    .where(Artist.NAME.like("A%"))
+    .and(Artist.DATE_OF_BIRTH.gt(someDate)
+    .select(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>To order the results of <code>ObjectSelect</code>, one or more orderings can be applied:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class)
+    .orderBy(Artist.DATE_OF_BIRTH.desc())
+    .orderBy(Artist.NAME.asc())
+    .select(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>There’s a number of other useful methods in <code>ObjectSelect</code> that define what to select and how to optimize database interaction (prefetching, caching, fetch offset and limit, pagination, etc.). Some of them are discussed in separate chapters on caching and performance optimization. Others are fairly self-explanatory. Please check the API docs for the full extent of the <code>ObjectSelect</code> features.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="selecting-individual-columns"><a class="anchor" href="#selecting-individual-columns"></a>2.6.1.2. Selecting individual columns</h5>
+   <div class="paragraph">
+    <p><code>ObjectSelect</code> query can be used to fetch individual properties of objects via type-safe API:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;String&gt; names = ObjectSelect.columnQuery(Artist.class, Artist.ARTIST_NAME)
+    .select(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>And here is an example of selecting several properties. The result is a list of <code>Object[]</code>:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Object[]&gt; nameAndDate = ObjectSelect
+    .columnQuery(Artist.class, Artist.ARTIST_NAME, Artist.DATE_OF_BIRTH)
+    .select(context);</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="selecting-using-aggregate-functions"><a class="anchor" href="#selecting-using-aggregate-functions"></a>2.6.1.3. Selecting using aggregate functions</h5>
+   <div class="paragraph">
+    <p>ObjectSelect query supports usage of aggregate functions. Most common variant of aggregation is selecting count of records, this can be done really easy:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">long count = ObjectSelect.query(Artist.class).selectCount(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>But you can use aggregates in more cases, even combine selecting individual properties and aggregates:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">// this is artificial property signaling that we want to get full object
+Property&lt;Artist&gt; artistProperty = Property.createSelf(Artist.class);
+
+List&lt;Object[]&gt; artistAndPaintingCount = ObjectSelect.columnQuery(Artist.class, artistProperty, Artist.PAINTING_ARRAY.count())
+    .where(Artist.ARTIST_NAME.like("a%"))
+    .having(Artist.PAINTING_ARRAY.count().lt(5L))
+    .orderBy(Artist.PAINTING_ARRAY.count().desc(), Artist.ARTIST_NAME.asc())
+    .select(context);
+
+for(Object[] next : artistAndPaintingCount) {
+    Artist artist = (Artist)next[0];
+    long paintings = (Long)next[1];
+    System.out.println(artist.getArtistName() + " have " + paintings + " paintings");
+}</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Here is generated <code>SQL</code> for this query:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT DISTINCT t0.ARTIST_NAME, t0.DATE_OF_BIRTH, t0.ARTIST_ID, COUNT(t1.PAINTING_ID)
+FROM ARTIST t0 JOIN PAINTING t1 ON (t0.ARTIST_ID = t1.ARTIST_ID)
+WHERE t0.ARTIST_NAME LIKE ?
+GROUP BY t0.ARTIST_NAME, t0.ARTIST_ID, t0.DATE_OF_BIRTH
+HAVING COUNT(t1.PAINTING_ID) &lt; ?
+ORDER BY COUNT(t1.PAINTING_ID) DESC, t0.ARTIST_NAME</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="subqueries"><a class="anchor" href="#subqueries"></a>2.6.1.4. Subqueries</h5>
+   <div class="paragraph">
+    <p>Since Cayenne 4.2 <code>ObjectSelect</code> supports subqueries. Here is a simple example of <code>NOT EXISTS</code> subquery:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Painting&gt; subQuery = ObjectSelect.query(Painting.class)
+        .where(Painting.TO_ARTIST.eq(Artist.ARTIST_ID_PK_PROPERTY.enclosing()));
+long count = ObjectSelect.query(Artist.class)
+        .where(ExpressionFactory.notExists(subQuery))
+        .selectCount(context);</code></pre>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="selectbyid"><a class="anchor" href="#selectbyid"></a>2.6.2. SelectById</h4>
+  <div class="paragraph">
+   <p>This query allows to search objects by their ID. It’s introduced in Cayenne 4.0 and uses new "fluent" API same as <code>ObjectSelect</code> query.</p>
+  </div>
+  <div class="paragraph">
+   <p>Here is example of how to use it:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Artist artistWithId1 = SelectById.query(Artist.class, 1)
+    .prefetch(Artist.PAINTING_ARRAY.joint())
+    .localCache()
+    .selectOne(context);</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="sqlselect"><a class="anchor" href="#sqlselect"></a>2.6.3. SQLSelect and SQLExec</h4>
+  <div class="paragraph">
+   <p>SQL is very powerful and allows to manipulate data in ways that can not always be described as a graph of related entities. Cayenne acknowledges this fact and provides a facility to execute SQL, sometimes allowing to map results back to persistent objects. <code>SQLSelect</code> and <code>SQLExec</code> are a pair of queries that allow to run native SQL. <code>SQLSelect</code> can be used (as the name suggests) to select custom data in form of entities, separate columns, collection of <code>DataRow</code> or <code>Object[]</code>. <code>SQLExec</code> is designed to execute any SQL (e.g. updates, deletes, DDLs, etc.).</p>
+  </div>
+  <div class="paragraph">
+   <p>Both queries support advanced SQL templating, with variable substitution and special directives as described <a href="/docs/5.0/cayenne-guide/queries#sqlscripting">in the next chapter</a>. Here we’ll just provide a few simple examples:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// Selecting objects
+List&lt;Painting&gt; paintings = SQLSelect
+    .query(Painting.class, "SELECT * FROM PAINTING WHERE PAINTING_TITLE LIKE 'A%'")
+    .upperColumnNames()
+    .localCache()
+    .limit(100)
+    .select(context);
+
+// Selecting scalar values
+List&lt;String&gt; paintingNames = SQLSelect
+    .scalarQuery(String.class, "SELECT PAINTING_TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; 100000")
+    .select(context);
+
+// Selecting DataRow with predefined types
+List&lt;DataRow&gt; result = SQLSelect
+    .dataRowQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
+    .select(context);
+
+// Selecting Object[] with predefined types
+List&lt;Object[]&gt; result = SQLSelect
+    .scalarQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
+    .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>And here is an example of how to use <code>SQLExec</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">int inserted = SQLExec
+    .query("INSERT INTO ARTIST (ARTIST_ID, ARTIST_NAME) VALUES (55, 'Picasso')")
+    .update(context);</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="sqlscripting"><a class="anchor" href="#sqlscripting"></a>2.6.4. Scripting SQL Queries</h4>
+  <div class="paragraph">
+   <p>A powerful feature of <code>SQLSelect</code> and <code>SQLExec</code> is that SQL string is treated by Cayenne as a dynamic template. Before creating a PreparedStatement, the String is evaluated, resolving its dynamic parts. The two main scripting elements are "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). In the discussion below we’ll use both selecting and updating examples, as scripting works the same way for both <code>SQLSelect</code> and <code>SQLExec</code>.</p>
+  </div>
+  <div class="sect4">
+   <h5 id="variable-substitution"><a class="anchor" href="#variable-substitution"></a>2.6.4.1. Variable Substitution</h5>
+   <div class="paragraph">
+    <p>All variables in the template string are replaced from query parameters:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">// this will generate SQL like this: "delete from mydb.PAINTING"
+SQLExec query = SQLExec.query("delete from $tableName")
+    .params("mydb.PAINTING");</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Variable substitution within the text uses <code>object.toString()</code> method to replace the variable value. This may not be appropriate in all situations. E.g. passing a date object in a <code>WHERE</code> clause expression may be converted to a String not understood by the target DB SQL parser. In such cases variable should be wrapped in <code>#bind</code> directive as described below.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="directives"><a class="anchor" href="#directives"></a>2.6.4.2. Directives</h5>
+   <div class="paragraph">
+    <p>"Directives" look like <code>#directive(p1 p2 p3)</code> (notice the absence of comma between the arguments). The following directives are supported in SQL templates:</p>
+   </div>
+   <div class="sect5">
+    <h6 id="bind"><a class="anchor" href="#bind"></a>#bind</h6>
+    <div class="paragraph">
+     <p>Creates a <code>PreparedStatement</code> positional parameter in place of the directive, binding the value to it before statement execution. <code>#bind</code> is allowed in places where a "?" would be allowed in a PreparedStatement. And in such places it almost always makes sense to pass objects to the template via some flavor of <code>#bind</code> instead of inserting them inline.</p>
+    </div>
+    <div class="paragraph">
+     <p>Semantics:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bind(value)
+#bind(value jdbcType)
+#bind(value jdbcType scale)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Arguments:</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li><p><code>value</code> - can either be a char constant or a variable that is resolved from the query parameters. Note that the variable can be a collection, that will be automatically expanded into a list of individual value bindings. This is useful for instance to build IN conditions.</p></li>
+      <li><p><code>jdbcType</code> - is a JDBC data type of the parameter as defined in <code>java.sql.Types</code>.</p></li>
+      <li><p><code>scale</code> - An optional scale of the numeric value. Same as "scale" in PreparedStatement.</p></li>
+     </ul>
+    </div>
+    <div class="paragraph">
+     <p>Usage:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bind($xyz)
+#bind('str')
+#bind($xyz 'VARCHAR')
+#bind($xyz 'DECIMAL' 2)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Full example:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">update ARTIST set NAME = #bind($name) where ID = #bind($id)</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="bindequal"><a class="anchor" href="#bindequal"></a>#bindEqual</h6>
+    <div class="paragraph">
+     <p>Same as <code>#bind</code>, but also includes the "=" sign in front of the value binding. Look at the example below - we took the #bind example and replaced <code>"ID = #bind(..)"</code> with <code>"ID #bindEqual(..)"</code>. Motivation for this directive is to handle NULL SQL syntax. If the value is not null, <code>= ?</code> is generated, but if it is, the resulting SQL would look like <code>IS NULL</code>, which is compliant with what the DB expects.</p>
+    </div>
+    <div class="paragraph">
+     <p>Semantics:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindEqual(value)
+#bindEqual(value jdbcType)
+#bindEqual(value jdbcType scale)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Arguments: (same as #bind)</p>
+    </div>
+    <div class="paragraph">
+     <p>Usage:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindEqual($xyz)
+#bindEqual('str')
+#bindEqual($xyz 'VARCHAR')
+#bindEqual($xyz 'DECIMAL' 2)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Full example:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">update ARTIST set NAME = #bind($name) where ID #bindEqual($id)</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="bindnotequal"><a class="anchor" href="#bindnotequal"></a>#bindNotEqual</h6>
+    <div class="paragraph">
+     <p>This directive deals with the same issue as <code>#bindEqual</code> above, only it generates "!=" in front of the value (or <code>IS NOT NULL</code>).</p>
+    </div>
+    <div class="paragraph">
+     <p>Semantics:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindNotEqual(value)
+#bindNotEqual(value jdbcType)
+#bindNotEqual(value jdbcType scale)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Arguments: (same as #bind)</p>
+    </div>
+    <div class="paragraph">
+     <p>Usage:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindNotEqual($xyz)
+#bindNotEqual('str')
+#bindNotEqual($xyz 'VARCHAR')
+#bindNotEqual($xyz 'DECIMAL' 2)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Full example:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">update ARTIST set NAME = #bind($name) where ID #bindNotEqual($id)</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="bindobjectequal"><a class="anchor" href="#bindobjectequal"></a>#bindObjectEqual</h6>
+    <div class="paragraph">
+     <p>It can be tricky to use a Persistent object or an ObjectId in a binding, especially for tables with compound primary keys. This directive helps to handle such binding. It maps columns in the query to the names of Persistent object ID columns, extracts ID values from the object, and generates SQL like "COL1 = ? AND COL2 = ? …​" , binding positional parameters to ID values. It can also correctly handle null object. Also notice how we are specifying an array for multi-column PK.</p>
+    </div>
+    <div class="paragraph">
+     <p>Semantics:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindObjectEqual(value columns idColumns)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Arguments:</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li><p><code>value</code> - must be a variable that is resolved from the query parameters to a Persistent or ObjectId.</p></li>
+      <li><p><code>columns</code> - the names of the columns to generate in the SQL.</p></li>
+      <li><p><code>idColumn</code> - the names of the ID columns for a given entity. Must match the order of "columns" to match against.</p></li>
+     </ul>
+    </div>
+    <div class="paragraph">
+     <p>Usage:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindObjectEqual($a 't0.ID' 'ID')
+#bindObjectEqual($b ['t0.FK1', 't0.FK2'] ['PK1', 'PK2'])</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Full example:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">String sql = "SELECT * FROM PAINTING t0 WHERE #bindObjectEqual($a 't0.ARTIST_ID' 'ARTIST_ID' )";
+Artist artistParam = ...;
+
+SQLSelect select = SQLSelect.query(Painting.class, sql)
+    .params("a", artistParam);</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="bindobjectnotequal"><a class="anchor" href="#bindobjectnotequal"></a>#bindObjectNotEqual</h6>
+    <div class="paragraph">
+     <p>Same as <code>#bindObjectEqual</code> above, only generates <code>!=</code> operator for value comparison (or <code>IS NOT NULL</code>).</p>
+    </div>
+    <div class="paragraph">
+     <p>Semantics:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindObjectNotEqual(value columns idColumns)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Arguments: (same as #bindObjectEqual)</p>
+    </div>
+    <div class="paragraph">
+     <p>Usage:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#bindObjectNotEqual($a 't0.ID' 'ID')
+#bindObjectNotEqual($b ['t0.FK1', 't0.FK2'] ['PK1', 'PK2'])</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Full example:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">String sql = "SELECT * FROM PAINTING t0 WHERE #bindObjectNotEqual($a 't0.ARTIST_ID' 'ARTIST_ID' )";
+Artist artistParam = ...;
+
+SQLSelect select = SQLSelect.query(Painting.class, sql)
+    .params("a", artistParam);</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="result"><a class="anchor" href="#result"></a>#result</h6>
+    <div class="paragraph">
+     <p>Used around a column in <code>SELECT</code> clause to define the type conversion of the column value (e.g. it may force a conversion from Integer to Long) and/or define column name in the result (useful when fetching objects or DataRows).</p>
+    </div>
+    <div class="admonitionblock note">
+     <table>
+      <tbody>
+       <tr>
+        <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+        <td class="content">You don’t have to use <code>#result</code> for any given query if the default data types and column names coming from the query suit your needs. But if you do, you have to provide <code>#result</code> for every single result column, otherwise such column will be ignored.</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="paragraph">
+     <p>Semantics:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#result(column)
+#result(column javaType)
+#result(column javaType alias)
+#result(column javaType alias dataRowKey)</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Arguments:</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li><p><code>column</code> - the name of the column to render in SQL SELECT clause.</p></li>
+      <li><p><code>javaType</code> - a fully-qualified Java class name for a given result column. For simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So <code>"#result('A' 'String')"</code>, <code>"#result('B' 'java.lang.String')"</code> and <code>"#result('C' 'int')"</code> are all valid</p></li>
+      <li><p><code>alias</code> - specifies both the SQL alias of the column and the value key in the DataRow. If omitted, "column" value is used.</p></li>
+      <li><p><code>dataRowKey</code> - needed if SQL 'alias' is not appropriate as a DataRow key on the Cayenne side. One common case when this happens is when a DataRow retrieved from a query is mapped using joint prefetch keys (see below). In this case DataRow must use database path expressions for joint column keys, and their format is incompatible with most databases alias format.</p></li>
+     </ul>
+    </div>
+    <div class="paragraph">
+     <p>Usage:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>#result('NAME')
+#result('DATE_OF_BIRTH' 'java.util.Date')
+#result('DOB' 'java.util.Date' 'DATE_OF_BIRTH')
+#result('DOB' 'java.util.Date' '' 'artist.DATE_OF_BIRTH')
+#result('SALARY' 'float')</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Full example:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT #result('ID' 'int'), #result('NAME' 'String'), #result('DATE_OF_BIRTH' 'java.util.Date') FROM ARTIST</code></pre>
+     </div>
+    </div>
+    <div class="admonitionblock note">
+     <table>
+      <tbody>
+       <tr>
+        <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+        <td class="content">For advanced features you may look at the <a href="/docs/5.0/cayenne-guide/ext-velocity">Apache Velocity Extension</a></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="mappedselect-and-mappedexec"><a class="anchor" href="#mappedselect-and-mappedexec"></a>2.6.5. MappedSelect and MappedExec</h4>
+  <div class="paragraph">
+   <p><code>MappedSelect</code> and <code>MappedExec</code> is a queries that are just a reference to another queries stored in the DataMap. The actual stored query can be SelectQuery, SQLTemplate, EJBQLQuery, etc. Difference between <code>MappedSelect</code> and <code>MappedExec</code> is (as reflected in their names) whether underlying query intended to select data or just to perform some generic SQL code.</p>
+  </div>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">These queries are "fluent" versions of deprecated <code>NamedQuery</code> class.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="paragraph">
+   <p>Here is example of how to use <code>MappedSelect</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; results = MappedSelect.query("artistsByName", Artist.class) 
+    .param("name", "Picasso") 
+    .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>And here is example of <code>MappedExec</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">QueryResult result = MappedExec.query("updateQuery") 
+    .param("var", "value") 
+    .execute(context);
+System.out.println("Rows updated: " + result.firstUpdateCount());</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="procedurecall"><a class="anchor" href="#procedurecall"></a>2.6.6. ProcedureCall</h4>
+  <div class="paragraph">
+   <p>Stored procedures are mapped as separate objects in CayenneModeler. <code>ProcedureCall</code> provides a way to execute them with a certain set of parameters. This query is a "fluent" version of older <code>ProcedureQuery</code>. Just like with <code>SQLTemplate</code>, the outcome of a procedure can be anything - a single result set, multiple result sets, some data modification (returned as an update count), or a combination of these. So use root class to get a single result set, and use only procedure name for anything else:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; result = ProcedureCall.query("my_procedure", Artist.class)
+    .param("p1", "abc")
+    .param("p2", 3000)
+    .call(context)
+    .firstList();</code></pre>
+   </div>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// here we do not bother with root class.
+// Procedure name gives us needed routing information
+ProcedureResult result = ProcedureCall.query("my_procedure")
+    .param("p1", "abc")
+    .param("p2", 3000)
+    .call();</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>A stored procedure can return data back to the application as result sets or via OUT parameters. To simplify the processing of the query output, QueryResponse treats OUT parameters as if it was a separate result set. For stored procedures declaref any OUT or INOUT parameters, <code>ProcedureResult</code> have convenient utility method to get them:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">ProcedureResult result = ProcedureCall.query("my_procedure")
+    .call(context);
+
+// read OUT parameters
+Object out = result.getOutParam("out_param");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>There maybe a situation when a stored procedure handles its own transactions, but an application is configured to use Cayenne-managed transactions. This is obviously conflicting and undesirable behavior. In this case ProcedureQueries should be executed explicitly wrapped in an "external" Transaction. This is one of the few cases when a user should worry about transactions at all. See Transactions section for more details.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="ejbql"><a class="anchor" href="#ejbql"></a>2.6.7. EJBQLQuery</h4>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">As soon as all of the <code>EJBQLQuery</code> capabilities become available in <code>ObjectSelect</code>, we are planning to deprecate <code>EJBQLQuery</code>.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="paragraph">
+   <p>EJBQLQuery was created as a part of an experiment in adopting some of Java Persistence API (JPA) approaches in Cayenne. It is a parameterized object query that is created from query String. A String used to build EJBQLQuery follows JPQL (JPA Query Language) syntax:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a FROM Artist a");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>JPQL details can be found in any JPA manual. Here we’ll focus on how this fits into Cayenne and what are the differences between EJBQL and other Cayenne queries.</p>
+  </div>
+  <div class="paragraph">
+   <p>Although most frequently EJBQLQuery is used as an alternative to ObjectSelect, there are also DELETE and UPDATE varieties available.</p>
+  </div>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">DELETE and UPDATE do not change the state of objects in the ObjectContext. They are run directly against the database instead.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery select =
+    new EJBQLQuery("select a FROM Artist a WHERE a.name = 'Salvador Dali'");
+List&lt;Artist&gt; artists = context.performQuery(select);</code></pre>
+   </div>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery delete = new EJBQLQuery("delete from Painting");
+context.performGenericQuery(delete);</code></pre>
+   </div>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery update =
+    new EJBQLQuery("UPDATE Painting AS p SET p.name = 'P2' WHERE p.name = 'P1'");
+context.performGenericQuery(update);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>In most cases <code>ObjectSelect</code> is preferred to <code>EJBQLQuery</code>, as it is API-based, and provides you with better compile-time checks. However sometimes you may want a completely scriptable object query. This is when you might prefer EJBQL. A more practical reason for picking EJBQL over <code>ObjectSelect</code> though is that the former offers a few extra capabilities, such as subqueries.</p>
+  </div>
+  <div class="paragraph">
+   <p>Just like <code>ObjectSelect</code> <code>EJBQLQuery</code> can return a <code>List</code> of <code>Object[]</code> elements, where each entry in an array is either a <code>Persistent</code> or a scalar, depending on the query SELECT clause.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a, COUNT(p) FROM Artist a JOIN a.paintings p GROUP BY a");
+List&lt;Object[]&gt; result = context.performQuery(query);
+for(Object[] artistWithCount : result) {
+    Artist a = (Artist) artistWithCount[0];
+    int hasPaintings = (Integer) artistWithCount[1];
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>A result can also be a list of scalars:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a.name FROM Artist a");
+List&lt;String&gt; names = context.performQuery(query);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>EJBQLQuery supports an "IN" clause with three different usage-patterns. The following example would require three individual positional parameters (named parameters could also have been used) to be supplied.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1,?2,?3)</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The following example requires a single positional parameter to be supplied. The parameter can be any concrete implementation of the <code>java.util.Collection</code> interface such as <code>java.util.List</code> or <code>java.util.Set</code>.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in ?1</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The following example is functionally identical to the one prior.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1)</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>It is possible to convert an <a href="/docs/5.0/cayenne-guide/expressions">Expression</a> object used with a <a href="/docs/5.0/cayenne-guide/queries#select">ObjectSelect</a> to EJBQL. Use the Expression#appendAsEJBQL methods for this purpose.</p>
+  </div>
+  <div class="paragraph">
+   <p>While Cayenne Expressions discussed previously can be thought of as identical to JPQL WHERE clause, and indeed they are very close, there are a few notable differences:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p>Null handling: SelectQuery would translate the expressions matching NULL values to the corresponding "X IS NULL" or "X IS NOT NULL" SQL syntax. EJBQLQuery on the other hand requires explicit "IS NULL" (or "IS NOT NULL") syntax to be used, otherwise the generated SQL will look like "X = NULL" (or "X &lt;&gt; NULL"), which will evaluate differently.</p></li>
+    <li><p>Expression Parameters: SelectQuery uses "$" to denote named parameters (e.g. "$myParam"), while EJBQL uses ":" (e.g. ":myParam"). Also EJBQL supports positional parameters denoted by the question mark: "?3".</p></li>
+   </ul>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="custom-queries"><a class="anchor" href="#custom-queries"></a>2.6.8. Custom Queries</h4>
+  <div class="paragraph">
+   <p>If a user needs some extra functionality not addressed by the existing set of Cayenne queries, he can write his own. The only requirement is to implement <code>org.apache.cayenne.query.Query</code> interface. The easiest way to go about it is to subclass some of the base queries in Cayenne.</p>
+  </div>
+  <div class="paragraph">
+   <p>E.g. to do something directly in the JDBC layer, you might subclass <code>AbstractQuery</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class MyQuery extends AbstractQuery {
+
+    @Override
+    public SQLAction createSQLAction(SQLActionVisitor visitor) {
+        return new SQLAction() {
+
+            @Override
+            public void performAction(Connection connection, OperationObserver observer) throws SQLException, Exception {
+                // 1. do some JDBC work using provided connection...
+                // 2. push results back to Cayenne via OperationObserver
+            }
+        };
+    }
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>To delegate the actual query execution to a standard Cayenne query, you may subclass <code>IndirectQuery</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class MyDelegatingQuery extends IndirectQuery {
+
+    @Override
+    protected Query createReplacementQuery(EntityResolver resolver) {
+        SQLTemplate delegate = new SQLTemplate(SomeClass.class, generateRawSQL());
+        delegate.setFetchingDataRows(true);
+        return delegate;
+    }
+
+    protected String generateRawSQL() {
+        // build some SQL string
+    }
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>In fact many internal Cayenne queries are <code>IndirectQueries</code>, delegating to <code>ObjectSelect</code> or <code>SQLTemplate</code> after some preprocessing.</p>
+  </div>
+ </div>
+</div>
+                    </section>
+                </article>
+
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=5c836e39-be6b-4a21-a946-a97b5b69f172" />
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/legacy/legacy-docs/">Legacy Documentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
+                        <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
+                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2022-12-05 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Dec 05, 2022</time>
+                        <a href="/2022/12/cayenne-42rc2-released/">Cayenne 4.2 Release Candidate 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2024 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    </body>
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
+        <title>Cayenne Guide 5.0 · Maven Plugin &middot; Apache Cayenne</title>
+    </head>
+    <body  class="cd-head">
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.2/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 5.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/5.0/cayenne-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">Cayenne Guide 5.0</span><div id="toc" class="toc toc-side">
+<ul class="sectlevel1 nav">
+  <li><a href="/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne" id="object-relational-mapping-with-cayenne" class="nav-link">1. Object Relational Mapping with Cayenne</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/setup" id="setup" class="nav-link">1.1. Setup</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" id="cayenne-mapping-structure" class="nav-link">1.2. Cayenne Mapping Structure</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" id="cayenne-modeler" class="nav-link">1.3. CayenneModeler Application</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-framework" id="cayenne-framework" class="nav-link">2. Cayenne Framework</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" id="including-cayenne-in-project" class="nav-link">2.1. Including Cayenne in a Project</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" id="starting-cayenne" class="nav-link">2.2. Starting Cayenne</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" id="persistent-objects-objectcontext" class="nav-link">2.3. Persistent Objects and ObjectContext</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/expressions" id="expressions" class="nav-link">2.4. Expressions</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/orderings" id="orderings" class="nav-link">2.5. Orderings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/queries" id="queries" class="nav-link">2.6. Queries</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" id="lifecycle-events" class="nav-link">2.7. Lifecycle Events</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/performance-tuning" id="performance-tuning" class="nav-link">2.8. Performance Tuning</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" id="customizing-cayenne-runtime" class="nav-link">2.9. Customizing Cayenne Runtime</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/db-first-flow" id="db-first-flow" class="nav-link">3. DB-First Flow</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/re-introduction" id="re-introduction" class="nav-link">3.1. Introduction</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-filtering" id="re-filtering" class="nav-link">3.2. Filtering</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" id="re-relationships-loading-control" class="nav-link">3.3. Other Settings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/re-modeler" id="re-modeler" class="nav-link">3.4. Reverse Engineering in Cayenne Modeler</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/additional-modules" id="additional-modules" class="nav-link">4. Additional Modules</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" id="ext-cache-invalidation" class="nav-link">4.1. Cache Invalidation Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-commit-log" id="ext-commit-log" class="nav-link">4.2. Commit log extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-crypto" id="ext-crypto" class="nav-link">4.3. Crypto extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-jcache" id="ext-jcache" class="nav-link">4.4. JCache integration</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" id="ext-project-compatibility" class="nav-link">4.5. Project compatibility extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-velocity" id="ext-velocity" class="nav-link">4.6. Apache Velocity Extension</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ext-osgi" id="ext-osgi" class="nav-link">4.7. Cayenne OSGI extension</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/build_tools" id="build_tools" class="nav-link">5. Build Tools</a>
+<ul class="sectlevel2 nav">
+  <li><a href="/docs/5.0/cayenne-guide/maven_plugin" id="maven_plugin" class="nav-link">5.1. Maven Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" id="gradle_plugin" class="nav-link">5.2. Gradle Plugin</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/ant_tasks" id="ant_tasks" class="nav-link">5.3. Ant Tasks</a></li>
+</ul>
+</li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" id="appendix-a-configuration-properties" class="nav-link">6. Appendix A. Configuration Properties</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" id="appendix-b-service-collections" class="nav-link">7. Appendix B. Service Collections</a></li>
+</ul>
+</div>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+                <article>
+                    <header>
+                    </header>
+                    <section>
+                        <div class="sect2">
+ <h3 id="maven_plugin"><a class="anchor" href="#maven_plugin"></a>5.1. Maven Plugin</h3>
+ <div class="paragraph">
+  <p>The full plugin Maven name is <code>org.apache.cayenne.plugins:cayenne-maven-plugin</code>. It can be executed as <code>mvn cayenne:&lt;goal&gt;</code>.</p>
+ </div>
+ <div class="sect3">
+  <h4 id="cgen"><a class="anchor" href="#cgen"></a>5.1.1. cgen</h4>
+  <div class="paragraph">
+   <p><code>cgen</code> is a goal that generates and maintains source (.java) files of persistent objects based on a DataMap. By default, it is bound to the generate-sources phase. If "makePairs" is set to "true" (which is the recommended default), this task will generate a pair of classes (superclass/subclass) for each ObjEntity in the DataMap. Superclasses should not be changed manually, since they are always overwritten. Subclasses are never overwritten and may be later customized by the user. If "makePairs" is set to "false", a single class will be generated for each ObjEntity.</p>
+  </div>
+  <div class="paragraph">
+   <p>By creating custom templates, you can use cgen to generate other output (such as web pages, reports, specialized code templates) based on DataMap information.</p>
+  </div>
+  <table id="tablecgen" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 5. cgen required parameters
+   </caption>
+   <colgroup>
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 66.6668%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-top">
+      <div class="content">
+       <div class="paragraph">
+        <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p>
+       </div>
+       <div class="listingblock">
+        <div class="content">
+         <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre>
+        </div>
+       </div>
+      </div></td>
+    </tr>
+   </tbody>
+  </table>
+  <table id="cgenOptional" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 6. cgen optional parameters
+   </caption>
+   <colgroup>
+    <col style="width: 25%;">
+    <col style="width: 12.5%;">
+    <col style="width: 62.5%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">additionalMaps</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A directory that contains additional DataMap XML files that may be needed to resolve cross-DataMap relationships for the the main DataMap, for which class generation occurs.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">destDir</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Root destination directory for Java classes (ignoring their package names). The default is "src/main/java".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableTemplate</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable class generation. If omitted, default template is used.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableSuperTemplate</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable superclass generation. Ignored unless "makepairs" set to "true". If omitted, default template is used.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">encoding</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Generated files encoding if different from the default on current platform. Target encoding must be supported by the JVM running the build. Standard encodings supported by Java on all platforms are US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See javadocs for java.nio.charset.Charset for more information.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">excludeEntities</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to exclude from template generation. By default none of the DataMap entities are excluded.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">includeEntities</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to include from template generation. By default all DataMap entities are included.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">makePairs</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">If "true" (a recommended default), will generate subclass/superclass pairs, with all generated code placed in superclass.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">mode</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Specifies class generator iteration target. There are three possible values: "entity" (default), "datamap", "all". "entity" performs one generator iteration for each included ObjEntity, applying either standard to custom entity templates. "datamap" performs a single iteration, applying DataMap templates. "All" is a combination of entity and datamap.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">overwrite</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Only has effect when "makePairs" is set to "false". If "overwrite" is "true", will overwrite older versions of generated classes.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">superPkg</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Java package name of all generated superclasses. If omitted, each superclass will be placed in the subpackage of its subclass called "auto". Doesn’t have any effect if either "makepairs" or "usePkgPath" are false (both are true by default).</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">superTemplate</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity superclass generation. Only has effect if "makepairs" set to "true". If omitted, default template is used.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">template</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity class generation. If omitted, default template is used.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">usePkgPath</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true" (default), a directory tree will be generated in "destDir" corresponding to the class package structure, if set to "false", classes will be generated in "destDir" ignoring their package.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">createPropertyNames</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate String Property names. Default is "false"</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">force</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will force run from maven/gradle.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">createPKProperties</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate PK attributes as Properties. Default is "false".</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <div class="paragraph">
+   <p>Example - a typical class generation scenario, where pairs of classes are generated with default Maven source destination and superclass package:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;5.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;configuration&gt;
+        &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+    &lt;/configuration&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cgen&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>5.1.2. cdbimport</h4>
+  <div class="paragraph">
+   <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a></p>
+  </div>
+  <table id="cdbimportTable" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 7. cdbimport parameters
+   </caption>
+   <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 10%;">
+    <col style="width: 20%;">
+    <col style="width: 50%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Required</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">DataMap XML file which is the destination of the schema import. Can be an existing file. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/my.map.xml</code>. If "overwrite" is true (the default), an existing DataMap will be used as a template for the new imported DataMap, i.e. all its entities will be cleared and recreated, but its common settings, such as default Java package, will be preserved (unless changed explicitly in the plugin configuration).</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">cayenneProject</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Project XML file which will be used. Can be an existing file, in this case data map will be added to project if it’s not already there. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/cayenne-project.xml</code>.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java class name implementing org.apache.cayenne.dba.DbAdapter. This attribute is optional. If not specified, AutoAdapter is used, which will attempt to guess the DB type.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">dbimport</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a> chapter.</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <table id="cdbimportDataSource" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 8. &lt;dataSource&gt; parameters
+   </caption>
+   <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 10%;">
+    <col style="width: 20%;">
+    <col style="width: 50%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Required</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <table id="dbimportParameters" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 9. &lt;dbimport&gt; parameters
+   </caption>
+   <colgroup>
+    <col style="width: 37.5%;">
+    <col style="width: 12.5%;">
+    <col style="width: 50%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">defaultPackage</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java package that will be set as the imported DataMap default and a package of all the persistent Java classes. This is a required attribute if the "map" itself does not already contain a default package, as otherwise all the persistent classes will be mapped with no package, and will not compile.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapCatalog</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapCatalog</code> to <code>true</code> will set DbEntity catalog to one in the DataMap. Default value is <code>false</code>.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapSchema</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapSchema</code> to <code>true</code> will set DbEntity schema to one in the DataMap. Default value is <code>false</code>.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">meaningfulPkTables</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">namingStrategy</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">skipPrimaryKeyLoading</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load primary keys. Default "false".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">skipRelationshipsLoading</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load relationships. Default "false".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">stripFromTableNames</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-top">
+      <div class="content">
+       <div class="paragraph">
+        <p>Regex that matches the part of the table name that needs to be stripped off when generating ObjEntity name. Here are some examples:</p>
+       </div>
+       <div class="listingblock">
+        <div class="content">
+         <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;!-- Strip prefix --&gt;
+&lt;stripFromTableNames&gt;^myt_&lt;/stripFromTableNames&gt;
+
+&lt;!-- Strip suffix --&gt;
+&lt;stripFromTableNames&gt;_s$&lt;/stripFromTableNames&gt;
+
+&lt;!-- Strip multiple occurrences in the middle --&gt;
+&lt;stripFromTableNames&gt;_abc&lt;/stripFromTableNames&gt;</code></pre>
+        </div>
+       </div>
+      </div></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">usePrimitives</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether numeric and boolean data types should be mapped as Java primitives or Java classes. Default is "true", i.e. primitives will be used.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">useJava7Types</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether <em>DATE</em>, <em>TIME</em> and <em>TIMESTAMP</em> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">tableTypes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Collection&lt;String&gt;</p></td>
+     <td class="tableblock halign-left valign-top">
+      <div class="content">
+       <div class="paragraph">
+        <p>Collection of table types to import. By default "TABLE" and "VIEW" types are used. Typical types are:</p>
+       </div>
+       <div class="ulist">
+        <ul>
+         <li><p>TABLE</p></li>
+         <li><p>VIEW</p></li>
+         <li><p>SYSTEM TABLE</p></li>
+         <li><p>GLOBAL TEMPORARY</p></li>
+         <li><p>LOCAL TEMPORARY</p></li>
+         <li><p>ALIAS</p></li>
+         <li><p>SYNONYM</p></li>
+        </ul>
+       </div>
+      </div></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">filters configuration</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-top">
+      <div class="content">
+       <div class="paragraph">
+        <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p>
+       </div>
+       <div class="listingblock">
+        <div class="content">
+         <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+	&lt;catalog name="test_catalog"&gt;
+		&lt;schema name="test_schema"&gt;
+			&lt;includeTable&gt;.*&lt;/includeTable&gt;
+			&lt;excludeTable&gt;test_table&lt;/excludeTable&gt;
+		&lt;/schema&gt;
+	&lt;/catalog&gt;
+
+	&lt;includeProcedure pattern=".*"/&gt;
+&lt;/dbimport&gt;</code></pre>
+        </div>
+       </div>
+      </div></td>
+    </tr>
+   </tbody>
+  </table>
+  <div class="paragraph">
+   <p>Example - loading a DB schema from a local HSQLDB database (essentially a reverse operation compared to the cdbgen example above) :</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;5.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;configuration&gt;
+                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+                &lt;dataSource&gt;
+                    &lt;url&gt;jdbc:mysql://127.0.0.1/mydb&lt;/url&gt;
+                    &lt;driver&gt;com.mysql.jdbc.Driver&lt;/driver&gt;
+                    &lt;username&gt;sa&lt;/username&gt;
+                &lt;/dataSource&gt;
+                &lt;dbimport&gt;
+                    &lt;defaultPackage&gt;com.example.cayenne&lt;/defaultPackage&gt;
+                &lt;/dbimport&gt;
+            &lt;/configuration&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cdbimport&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="cdbgen"><a class="anchor" href="#cdbgen"></a>5.1.3. cdbgen</h4>
+  <div class="paragraph">
+   <p><code>cdbgen</code> is a <code>cayenne-maven-plugin</code> goal that drops and/or generates tables in a database on Cayenne DataMap. By default, it is bound to the pre-integration-test phase.</p>
+  </div>
+  <table id="cdbgenTable" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 10. cdbgen required parameters
+   </caption>
+   <colgroup>
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 66.6668%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-top">
+      <div class="content">
+       <div class="paragraph">
+        <p>DataMap XML file which serves as a source of metadata for class generation. E.g.</p>
+       </div>
+       <div class="listingblock">
+        <div class="content">
+         <pre class="highlight"><code>${project.basedir}/src/main/resources/my.map.xml</code></pre>
+        </div>
+       </div>
+      </div></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <table id="dataSourceParameteres" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 11. &lt;dataSource&gt; parameters
+   </caption>
+   <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 10%;">
+    <col style="width: 20%;">
+    <col style="width: 50%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Required</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <table id="cdbgenOptionl" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 12. cdbgen optional parameters
+   </caption>
+   <colgroup>
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 66.6668%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Java class name implementing org.apache.cayenne.dba.DbAdapter. While this attribute is optional (a generic JdbcAdapter is used if not set), it is highly recommended to specify correct target adapter.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">createFK</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create foreign key constraints. Default is "true".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">createPK</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create Cayenne-specific auto PK objects. Default is "true".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">createTables</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create new tables. Default is "true".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">dropPK</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop Cayenne primary key support objects. Default is "false".</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">dropTables</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop the tables before attempting to create new ones. Default is "false".</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <div class="paragraph">
+   <p>Example - creating a DB schema on a local HSQLDB database:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;5.0-SNAPSHOT&lt;/version&gt;
+    &lt;executions&gt;
+        &lt;execution&gt;
+            &lt;configuration&gt;
+                &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
+                &lt;adapter&gt;org.apache.cayenne.dba.hsqldb.HSQLDBAdapter&lt;/adapter&gt;
+                &lt;dataSource&gt;
+                    &lt;url&gt;jdbc:hsqldb:hsql://localhost/testdb&lt;/url&gt;
+                    &lt;driver&gt;org.hsqldb.jdbcDriver&lt;/driver&gt;
+                    &lt;username&gt;sa&lt;/username&gt;
+                &lt;/dataSource&gt;
+            &lt;/configuration&gt;
+            &lt;goals&gt;
+                &lt;goal&gt;cdbgen&lt;/goal&gt;
+            &lt;/goals&gt;
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/plugin&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+</div>
+                    </section>
+                </article>
+
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=5c836e39-be6b-4a21-a946-a97b5b69f172" />
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/legacy/legacy-docs/">Legacy Documentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
+                        <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
+                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2022-12-05 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Dec 05, 2022</time>
+                        <a href="/2022/12/cayenne-42rc2-released/">Cayenne 4.2 Release Candidate 2 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2024 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache feather logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+    </div>
+</footer>
+    </body>
+</html>
