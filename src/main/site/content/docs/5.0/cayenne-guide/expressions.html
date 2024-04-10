@@ -1,0 +1,336 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Expressions"
+description: "Cayenne Guide 5.0, Expressions"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+---
+<div class="sect2">
+ <h3 id="expressions"><a class="anchor" href="#expressions"></a>2.4. Expressions</h3>
+ <div class="paragraph">
+  <p>Cayenne provides a simple, yet powerful, object-based expression language. The most common uses of expressions are to build qualifiers and orderings of queries that are later converted to SQL by Cayenne and to evaluate in-memory against specific objects (to access certain values in the object graph or to perform in-memory object filtering and sorting). Cayenne provides an API to build expressions in the code and a parser to create expressions from strings.</p>
+ </div>
+ <div class="sect3">
+  <h4 id="path-expressions"><a class="anchor" href="#path-expressions"></a>2.4.1. Path Expressions</h4>
+  <div class="paragraph">
+   <p>Before discussing how to build expressions, it is important to understand one group of expressions widely used in Cayenne - path expressions. There are two types of path expressions - object and database, used for navigating graphs of connected objects or joined DB tables, respectively. Object paths are much more commonly used, as, after all, Cayenne is supposed to provide a degree of isolation of the object model from the database. However, database paths are helpful in certain situations. The general structure of path expressions is the following:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java"> [db:]segment[+][.segment[+]...]</code></pre>
+   </div>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p><code>db:</code> is an optional prefix indicating that the following path is a DB path. Otherwise it is an object path.</p></li>
+    <li><p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. The path must have at least one segment; segments are separated by dot (".").</p></li>
+    <li><p><code>+</code> An "OUTER JOIN" path component. Currently "+" only has effect when translated to SQL as OUTER JOIN. When evaluating expressions in memory, it is ignored.</p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>An object path expression represents a chain of property names rooted in a certain (unspecified during expression creation) object and "navigating" to its related value. E.g. a path expression "artist.name" might be a property path starting from a Painting object, pointing to the related Artist object, and then to its name attribute. A few more examples:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p><code>name</code> - can be used to navigate (read) the "name" property of a Person (or any other type of object that has a "name" property).</p></li>
+    <li><p><code>artist.exhibits.closingDate</code> - can be used to navigate to a closing date of any of the exhibits of a Painting’s Artist object.</p></li>
+    <li><p><code>artist.exhibits+.closingDate</code> - same as the previous example, but when translated into SQL, an OUTER JOIN will be used for "exhibits".</p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>Similarly a database path expression is a dot-separated path through DB table joins and columns. In Cayenne joins are mapped as DbRelationships with some symbolic names (the closest concept to DbRelationship name in the DB world is a named foreign key constraint. But DbRelationship names are usually chosen arbitrarily, without regard to constraints naming or even constraints presence). A database path therefore might look like this - <code>db:dbrelationshipX.dbrelationshipY.COLUMN_Z"</code>. More specific examples:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p><code>db:NAME</code> - can be used to navigate to a value in the "NAME" column of some unspecified table.</p></li>
+    <li><p><code>db:artist.artistExhibits.exhibit.CLOSING_DATE</code> - can be used to match a closing date of any of the exhibits of a related artist record.</p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>Cayenne supports "aliases" in path expressions. E.g. the same expression can be written using the explicit path or an alias:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p><code>artist.exhibits.closingDate</code> - full path</p></li>
+    <li><p><code>e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>SelectQuery using the second form of the path expression must be made aware of the alias via <code>SelectQuery.aliasPathSplits(..)</code>; otherwise, an <code>Exception</code> will be thrown. The main use of aliases is to allow users to control how SQL joins are generated if the same path is encountered more than once in any given <code>Expression</code>. Each alias for any given path would result in a separate join. Without aliases, a single join will be used for a group of matching paths.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="creating-expressions-from-strings"><a class="anchor" href="#creating-expressions-from-strings"></a>2.4.2. Creating Expressions from Strings</h4>
+  <div class="paragraph">
+   <p>While in most cases users are likely to rely on the API from the following section for expression creation, we’ll start by showing String expressions, as this will help you understand the semantics. A Cayenne expression can be represented as a String, which can be converted to an expression object using the <code>ExpressionFactory.exp</code> static method. Here is an example:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">String expString = "name like 'A%' and price &lt; 1000";
+Expression exp = ExpressionFactory.exp(expString);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>This particular expression may be used to match Paintings whose names start with "A" and whose price is less than $1000. While this example is pretty self-explanatory, there are a few points worth mentioning. "name" and "price" here are object paths discussed earlier. As always, paths themselves are not attached to a specific root entity and can be applied to any entity that has similarly named attributes or relationships. So, when we say that this expression "may be used to match Paintings", we are implying that there may be other entities for which this expression is valid. Now the expression details…​</p>
+  </div>
+  <div class="paragraph">
+   <p>Character constants that are not paths or numeric values should be enclosed in single or double quotes. Two of the expressions below are equivalent:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">name = 'ABC'
+
+// double quotes are escaped inside Java Strings of course
+name = \"ABC\"</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Case sensitivity. Expression operators are case sensitive and are usually lowercase. Complex words follow the Java camel-case style:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// valid
+name likeIgnoreCase 'A%'
+
+// invalid - will throw a parse exception
+name LIKEIGNORECASE 'A%'</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Grouping with parenthesis:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">value = (price + 250.00) * 3</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Path prefixes. Object expressions are unquoted strings, optionally prefixed by <code>obj:</code> (usually they are not prefixed at all). Database expressions are always prefixed with <code>db:</code>. A special kind of prefix, not discussed yet, is <code>enum:</code> that prefixes an enumeration constant:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// object path
+name = 'Salvador Dali'
+
+// same object path - a rarely used form
+obj:name = 'Salvador Dali'
+
+// multi-segment object path
+artist.name = 'Salvador Dali'
+
+// db path
+db:NAME = 'Salvador Dali'
+
+// enumeration constant
+name = enum:org.foo.EnumClass.VALUE1</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Binary conditions are expressions that contain a path on the left, a value on the right, and some operation between them, such as equals like, etc. They can be used as qualifiers in SelectQueries:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">name like 'A%'</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Parameters. Expressions can contain named parameters (names that start with "$") that can be substituted with values either by name or by position. Parameterized expressions let you create reusable expression templates. Also, if an expression contains a complex object that doesn’t have a simple String representation (e.g. a <code>Date</code>, a <code>Persistent</code>, an <code>ObjectId</code>), parameterizing the expression is the only way to represent it as String. Here are examples of both positional and named parameter bindings:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression template = ExpressionFactory.exp("name = $name");
+...
+// name binding
+Map p1 = Collections.singletonMap("name", "Salvador Dali");
+Expression qualifier1 = template.params(p1);
+...
+// positional binding
+Expression qualifier2 = template.paramsArray("Monet");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Positional binding is usually shorter. You can pass positional bindings to the <code>exp(..)</code> factory method (its second argument is a params vararg):</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression qualifier = ExpressionFactory.exp("name = $name", "Monet");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>In parameterized expressions with a LIKE clause, SQL wildcards must be part of the values in the Map and not the expression string itself:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression qualifier = ExpressionFactory.exp("name like $name", "Salvador%");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>When matching on a relationship, the value parameter must be either a Persistent object, an <code>org.apache.cayenne.ObjectId</code>, or a numeric ID value (for single column IDs). E.g.:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Artist dali = ... // assume we fetched this one already
+Expression qualifier = ExpressionFactory.exp("artist = $artist", dali);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>When you use positional binding, Cayenne expects values for all parameters to be present. Binding by name offers extra flexibility: sub-expressions with uninitialized parameters are automatically pruned from the expression. So, e.g., if certain parts of the expression criteria are not provided to the application, you can still build a valid expression</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression template = ExpressionFactory.exp("name like $name and dateOfBirth &gt; $date");
+...
+Map p1 = Collections.singletonMap("name", "Salvador%");
+Expression qualifier1 = template.params(p1);
+
+// "qualifier1" is now "name like 'Salvador%'".
+// 'dateOfBirth &gt; $date' condition was pruned, as no value was specified for
+// the $date parameter</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Null handling. Handling of Java nulls as operands is no different handling from normal values. Instead of using special conditional operators, like SQL does (<code>IS NULL</code>, <code>IS NOT NULL</code>), "=" and "!=" expressions are used directly with null values. It is up to Cayenne to translate expressions with nulls to the valid SQL.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="creating-expressions-via-api"><a class="anchor" href="#creating-expressions-via-api"></a>2.4.3. Creating Expressions via API</h4>
+  <div class="paragraph">
+   <p>Creating expressions from Strings is a powerful and dynamic approach, however a safer alternative is to use the Java API. It provides compile-time checking of the expression’s validity. The API in question is provided by the <code>ExpressionFactory</code> class (that we’ve seen already), the Property class and the Expression class itself. <code>ExpressionFactory</code> contains a number of self-explanatory static methods that can be used to build expressions. E.g.:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// String expression: name like 'A%' and price &lt; 1000
+Expression e1 = ExpressionFactory.likeExp("name", "A%");
+Expression e2 = ExpressionFactory.lessExp("price", 1000);
+Expression finalExp = e1.andExp(e2);</code></pre>
+   </div>
+  </div>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">The last line in the example above shows how to create a new expression by "chaining" two other expressions. A common error when chaining expressions is to assume that "andExp" and "orExp" append another expression to the current expression. In fact, a new expression is created. Expression API treats existing expressions as immutable.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <div class="paragraph">
+   <p>As discussed earlier, Cayenne supports aliases in path Expressions, so you can control how SQL joins are generated if the same path is encountered more than once in the same Expression. Two ExpressionFactory methods let you implicitly generate aliases to "split" match paths into individual joins if needed:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression matchAllExp(String path, Collection values)
+Expression matchAllExp(String path, Object... values)</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The "Path" argument to both of these methods can use a split character (a pipe symbol '|') instead of a dot to indicate that the relationship following a path should be split into a separate set of joins, one per collection value. There can only be one split at most in any given path. The split must always precede a relationship. E.g. <code>"|exhibits.paintings"</code>, <code>"exhibits|paintings"</code>, etc. Internally, Cayenne generates distinct aliases for each of the split expressions, forcing separate joins.</p>
+  </div>
+  <div class="paragraph">
+   <p>While ExpressionFactory is pretty powerful, there’s an even easier way to create an expression using static Property objects generated by Cayenne for each persistent class. Some examples:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// Artist.NAME is generated by Cayenne and has a type of Property&lt;String&gt;
+Expression e1 = Artist.NAME.eq("Pablo");
+
+// Chaining multiple properties into a path.
+// Painting.ARTIST is generated by Cayenne and has a type of Property&lt;Artist&gt;
+Expression e2 = Painting.ARTIST.dot(Artist.NAME).eq("Pablo");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Property objects provide the API mostly analogous to ExpressionFactory, though it is significantly shorter and is aware of the value types. It provides compile-time checks of both property names and types of arguments in conditions. We will use Property-based API in further examples.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="evaluate"><a class="anchor" href="#evaluate"></a>2.4.4. Evaluating Expressions in Memory</h4>
+  <div class="paragraph">
+   <p>When used in a query, an expression is converted to a SQL WHERE or ORDER BY clause by Cayenne during query execution. Thus the actual evaluation against the data is done by the database engine. However, the same expressions can also be used for accessing object properties, calculating values, and in-memory filtering.</p>
+  </div>
+  <div class="paragraph">
+   <p>Checking whether an object satisfies an expression:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e = Artist.NAME.in("John", "Bob");
+Artist artist = ...
+if(e.match(artist)) {
+   ...
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Reading property value:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">String name = Artist.NAME.path().evaluate(artist);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Filtering a list of objects:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e = Artist.NAME.in("John", "Bob");
+List&lt;Artist&gt; unfiltered = ...
+List&lt;Artist&gt; filtered = e.filterObjects(unfiltered);</code></pre>
+   </div>
+  </div>
+  <div class="admonitionblock note">
+   <table>
+    <tbody>
+     <tr>
+      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+      <td class="content">Current limitation of in-memory expressions is that no collections are permitted in the property path.</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="translating-expressions-to-ejbql"><a class="anchor" href="#translating-expressions-to-ejbql"></a>2.4.5. Translating Expressions to EJBQL</h4>
+  <div class="paragraph">
+   <p><a href="/docs/5.0/cayenne-guide/queries#ejbql">EJBQL</a> is a textual query language that can be used with Cayenne. In some situations, it is convenient to be able to convert Expression instances into EJBQL. Expressions support this conversion. An example is shown below.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">String serial = ...
+Expression e = Pkg.SERIAL.eq(serial);
+List&lt;Object&gt; params = new ArrayList&lt;Object&gt;();
+EJBQLQuery query = new EJBQLQuery("SELECT p FROM Pkg p WHERE " + e.toEJBQL(params,"p");
+
+for(int i=0;i&lt;params.size();i++) {
+  query.setParameter(i+1, params.get(i));
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>This would be equivalent to the following purely EJBQL querying logic;</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("SELECT p FROM Pkg p WHERE p.serial = ?1");
+query.setParameter(1,serial);</code></pre>
+   </div>
+  </div>
+ </div>
+</div>

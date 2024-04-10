@@ -1,0 +1,70 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Ant Tasks"
+description: "Cayenne Guide 5.0, Ant Tasks"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+---
+<div class="sect2">
+ <h3 id="ant_tasks"><a class="anchor" href="#ant_tasks"></a>5.3. Ant Tasks</h3>
+ <div class="paragraph">
+  <p>Ant tasks are the same as <a href="/docs/5.0/cayenne-guide/maven_plugin">Maven plugin goals</a> described previously, namely "cgen", "cdbgen", "cdbimport". Configuration parameters are also similar (except Maven can guess many defaults that Ant can’t). To include Ant tasks in the project, use the following Antlib:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;typedef resource="org/apache/cayenne/tools/antlib.xml"&gt;
+   &lt;classpath&gt;
+   		&lt;fileset dir="lib" &gt;
+			&lt;include name="cayenne-*.jar" /&gt;
+			&lt;include name="cayenne-ant-*.jar" /&gt;
+			&lt;include name="cayenne-cgen-*.jar" /&gt;
+			&lt;include name="cayenne-dbsync-*.jar" /&gt;
+			&lt;include name="cayenne-di-*.jar" /&gt;
+			&lt;include name="cayenne-project-*.jar" /&gt;
+			&lt;include name="commons-collections-*.jar" /&gt;
+			&lt;include name="commons-lang-*.jar" /&gt;
+			&lt;include name="slf4j-api-*.jar" /&gt;
+			&lt;include name="velocity-*.jar" /&gt;
+		&lt;/fileset&gt;
+   &lt;/classpath&gt;
+&lt;/typedef&gt;</code></pre>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="cgen-3"><a class="anchor" href="#cgen-3"></a>5.3.1. cgen</h4>
+ </div>
+ <div class="sect3">
+  <h4 id="cdbgen-3"><a class="anchor" href="#cdbgen-3"></a>5.3.2. cdbgen</h4>
+ </div>
+ <div class="sect3">
+  <h4 id="cdbimport-2"><a class="anchor" href="#cdbimport-2"></a>5.3.3. cdbimport</h4>
+  <div class="paragraph">
+   <p>This is an Ant counterpart of "cdbimport" goal of cayenne-maven-plugin described above. It has exactly the same properties. Here is a usage example:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML"> &lt;cdbimport map="${context.dir}/WEB-INF/my.map.xml"
+    driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://127.0.0.1/mydb"
+    username="sa"
+    defaultPackage="com.example.cayenne"/&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+</div>

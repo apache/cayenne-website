@@ -50,9 +50,34 @@ function initAnchors() {
         .add(".cd-content h6");
 }
 
+function docTocActivate() {
+    var id = currentDocId();
+    if(id === undefined) {
+        return;
+    }
+    var element = $("#" + id);
+    if(element !== undefined && !element.hasClass('active')) {
+        element.addClass('active');
+        element.parent().parent().siblings('.nav-link').addClass('active');
+        $("#cd-docs-nav").scrollTop(element.offset().top - 210);
+    }
+}
+
+function currentDocId() {
+    var path = document.location.pathname.split('/');
+    if(path[1] !== 'docs') {
+        return undefined;
+    }
+    if(path[4] !== undefined) {
+        return path[4];
+    } else {
+        return path[3];
+    }
+}
+
 $(document).ready(function () {
     initAnchors();
+    docTocActivate();
 });
 
 initHljs();
-

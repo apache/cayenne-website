@@ -331,8 +331,8 @@
 				
 				// Сontent in admonition block
 				.content {
-				    font-size: .75em;
-				    font-weight: $font-weight-normal;
+				    // font-size: .75em;
+				    font-weight: $font-weight-light;
 				    color: $text-muted;
 
 				    p {

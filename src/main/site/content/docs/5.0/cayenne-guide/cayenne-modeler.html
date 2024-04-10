@@ -1,0 +1,102 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · CayenneModeler Application"
+description: "Cayenne Guide 5.0, CayenneModeler Application"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+---
+<div class="sect2">
+ <h3 id="cayenne-modeler"><a class="anchor" href="#cayenne-modeler"></a>1.3. CayenneModeler Application</h3>
+ <div class="sect3">
+  <h4 id="reverse-engineering-database"><a class="anchor" href="#reverse-engineering-database"></a>1.3.1. Reverse Engineering Database</h4>
+  <div class="paragraph">
+   <p>See chapter <a href="/docs/5.0/cayenne-guide/re-modeler">Reverse Engineering in Cayenne Modeler</a></p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="generating-database-schema"><a class="anchor" href="#generating-database-schema"></a>1.3.2. Generating Database Schema</h4>
+  <div class="paragraph">
+   <p>With Cayenne Modeler you can create simple database schemas without any additional database tools. This is a good option for initial database setup if you completely created you model with the Modeler. You can start SQL schema generation by selecting menu <strong>Tools &gt; Generate Database Schema</strong></p>
+  </div>
+  <div class="paragraph">
+   <p>You can select what database parts should be generated and what tables you want</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="generating-java-classes"><a class="anchor" href="#generating-java-classes"></a>1.3.3. Generating Java Classes</h4>
+  <div class="paragraph">
+   <p>Before using Cayenne in you code you need to generate java source code for persistent objects. This can be done with Modeler GUI or via <a href="/docs/5.0/cayenne-guide/maven_plugin#cgen">cgen</a> maven/ant plugin.</p>
+  </div>
+  <div class="paragraph">
+   <p>To generate classes in the modeler use <strong>Tools &gt; Generate Classes</strong></p>
+  </div>
+  <div class="paragraph">
+   <p>There is three default types of code generation</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p><strong>Standard Persistent Objects</strong></p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>Default type of generation suitable for almost all cases. Use this type unless you now what exactly you need to customize.</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p><strong>Advanced</strong></p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>In advanced mode you can control almost all aspects of code generation including custom templates for java code. See default Cayenne templates on GitHub as an example.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="modeling-generic-persistent-classes"><a class="anchor" href="#modeling-generic-persistent-classes"></a>1.3.4. Modeling Generic Persistent Classes</h4>
+  <div class="paragraph">
+   <p>Normally each ObjEntity is mapped to a specific Java class (such as Artist or Painting) that explicitly declare all entity properties as pairs of getters and setters. However, Cayenne allows to map a completely generic class to any number of entities. The only expectation is that a generic class implements <code>org.apache.cayenne.Persistent</code>. So an ideal candidate for a generic class is <code>GenericPersistentObject</code>, or some custom subclass of <code>GenericPersistentObject</code>.</p>
+  </div>
+  <div class="paragraph">
+   <p>If you don’t enter anything for Java Class of an ObjEntity, Cayenne assumes generic mapping and uses the following implicit rules to determine a class of a generic object. If DataMap "Custom Superclass" is set, runtime uses this class to instantiate new objects. If not, <code>org.apache.cayenne.GenericPersistentObject</code> is used.</p>
+  </div>
+  <div class="paragraph">
+   <p>Class generation procedures (either done in the Modeler or with Ant or Maven) would skip entities that are mapped to <code>GenericPersistentObject</code> explicitly or have no class mapping.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="modeling-primary-key-generation-strategy"><a class="anchor" href="#modeling-primary-key-generation-strategy"></a>1.3.5. Modeling Primary Key Generation Strategy</h4>
+  <div class="paragraph">
+   <p>Cayenne supports three PK generation strategies:</p>
+  </div>
+  <div class="olist arabic">
+   <ol class="arabic">
+    <li><p><strong>Cayenne Generated</strong>. This is default strategy. Cayenne will use special table <code>AUTO_PK_SUPPORT</code> for managing primary keys.</p></li>
+    <li><p><strong>Database Generated</strong>. Cayenne will delegate PK generation to database (e.g. auto increment fields on MySQL or <code>serial</code> type on PostgreSQL)</p></li>
+    <li><p><strong>Custom Sequence</strong>. In this case Cayenne will use provided sequence to generate primary keys.</p></li>
+   </ol>
+  </div>
+  <div class="paragraph">
+   <p>Strategy should be set per each <code>DbEntity</code> independently.</p>
+  </div>
+  <div class="imageblock text-center">
+   <div class="content">
+    <img src="../images/db-entity-pk.png" alt="db entity pk">
+   </div>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,177 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Setup"
+description: "Cayenne Guide 5.0, Setup"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+---
+<div class="sect2">
+ <h3 id="setup"><a class="anchor" href="#setup"></a>1.1. Setup</h3>
+ <div class="sect3">
+  <h4 id="system-requirements"><a class="anchor" href="#system-requirements"></a>1.1.1. System Requirements</h4>
+  <div class="ulist">
+   <ul>
+    <li><p>Java: Cayenne runtime framework and CayenneModeler GUI tool are written in 100% Java, and run on any Java-compatible platform. Minimal required JDK version depends on the version of Cayenne you are using, as shown in the following table:</p></li>
+   </ul>
+  </div>
+  <table id="versionHistory" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 1. Cayenne Version History
+   </caption>
+   <colgroup>
+    <col style="width: 28.5714%;">
+    <col style="width: 42.8571%;">
+    <col style="width: 28.5715%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Cayenne Version</th>
+     <th class="tableblock halign-left valign-top">Java Version</th>
+     <th class="tableblock halign-left valign-top">Status</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">5.0</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 11 or newer</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Development</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">4.2</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.8 or newer</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">4.1</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.8 — Java 17</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">4.0</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.7 — Java 11</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Aging</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">3.0 / 3.1</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.5 — Java 1.8</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Legacy</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">1.2 / 2.0</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.4</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Legacy</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">1.1</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Java 1.3</p></td>
+     <td class="tableblock halign-left valign-top"><p class="tableblock">Legacy</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <div class="ulist">
+   <ul>
+    <li><p>JDBC Driver: An appropriate DB-specific JDBC driver is needed to access the database. It can be included in the application or used in web container DataSource configuration.</p></li>
+    <li><p>Third-party Libraries: Cayenne runtime framework has a minimal set of required and a few more optional dependencies on third-party open source packages. See <a href="/docs/5.0/cayenne-guide/including-cayenne-in-project">Including Cayenne in a Project</a> chapter for details.</p></li>
+   </ul>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="runModeler"><a class="anchor" href="#runModeler"></a>1.1.2. Running CayenneModeler</h4>
+  <div class="paragraph">
+   <p>CayenneModeler GUI tool is intended to work with object relational mapping projects. While you can edit your XML by hand, it is rarely needed, as the Modeler is a pretty advanced tool included in Cayenne distribution. To obtain CayenneModeler, download Cayenne distribution archive from <a href="https://cayenne.apache.org/download.html" class="bare">https://cayenne.apache.org/download.html</a> matching the OS you are using. Of course Java needs to be installed on the machine where you are going to run the Modeler.</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li><p>OS X distribution contains CayenneModeler.app at the root of the distribution disk image.</p></li>
+    <li><p>Windows distribution contains CayenneModeler.exe file in the bin directory.</p></li>
+    <li><p>Cross-platform distribution (targeting Linux, but as the name implies, compatible with any OS) contains a runnable CayenneModeler.jar in the bin directory. It can be executed either by double-clicking, or if the environment is not configured to execute jars, by running from command-line:</p></li>
+   </ul>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code>$ java -jar CayenneModeler.jar</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The Modeler can also be started from Maven. While it may look like an exotic way to start a GUI application, it has its benefits - no need to download Cayenne distribution, the version of the Modeler always matches the version of the framework, the plugin can find mapping files in the project automatically. So it is an attractive option to some developers. Maven option requires a declaration in the POM:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;5.0-SNAPSHOT&lt;/version&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>And then can be run as</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code>$ mvn cayenne-modeler:run</code></pre>
+   </div>
+  </div>
+  <table id="pluginParameteres" class="tableblock frame-all grid-all stretch table table-bordered">
+   <caption class="title">
+    Table 2. Modeler plugin parameters
+   </caption>
+   <colgroup>
+    <col style="width: 22.2222%;">
+    <col style="width: 11.1111%;">
+    <col style="width: 66.6667%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Type</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">modelFile</p></td>
+     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-top">
+      <div class="content">
+       <div class="paragraph">
+        <p>Name of the model file to open. Here is some simple example:</p>
+       </div>
+       <div class="listingblock">
+        <div class="content">
+         <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;${cayenne.version}&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;modelFile&gt;src/main/resources/cayenne.xml&lt;/modelFile&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+        </div>
+       </div>
+      </div></td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</div>

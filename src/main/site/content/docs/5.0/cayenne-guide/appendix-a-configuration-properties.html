@@ -1,0 +1,138 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Appendix A. Configuration Properties"
+description: "Cayenne Guide 5.0, Appendix A. Configuration Properties"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+---
+<div class="sect1">
+ <h2 id="appendix-a-configuration-properties"><a class="anchor" href="#appendix-a-configuration-properties"></a>6. Appendix A. Configuration Properties</h2>
+ <div class="sectionbody">
+  <div class="paragraph">
+   <p>Note that the property names below are defined as constants in <code>org.apache.cayenne.configuration.Constants</code> interface.</p>
+  </div>
+  <div id="configProperties" class="ulist">
+   <ul>
+    <li><p><code>cayenne.jdbc.driver[.domain_name.node_name]</code> defines a JDBC driver class to use when creating a DataSource. If domain name and optionally - node name are specified, the setting overrides DataSource info just for this domain/node. Otherwise the override is applied to all domains/nodes in the system.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none, project DataNode configuration is used</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.url[.domain_name.node_name]</code> defines a DB URL to use when creating a DataSource. If domain name and optionally - node name are specified, the setting overrides DataSource info just for this domain/node. Otherwise the override is applied to all domains/nodes in the system.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none, project DataNode configuration is used</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.username[.domain_name.node_name]</code> defines a DB user name to use when creating a DataSource. If domain name and optionally - node name are specified, the setting overrides DataSource info just for this domain/node. Otherwise the override is applied to all domains/nodes in the system.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: any</p></li>
+       <li><p>Default value: none, project DataNode configuration is used</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.password[.domain_name.node_name]</code> defines a DB password to use when creating a DataSource. If domain name and optionally - node name are specified, the setting overrides DataSource info just for this domain/node. Otherwise the override is applied to all domains/nodes in the system</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none, project DataNode configuration is used</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.min_connections[.domain_name.node_name]</code> defines the DB connection pool minimal size. If domain name and optionally - node name are specified, the setting overrides DataSource info just for this domain/node. Otherwise the override is applied to all domains/nodes in the system</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none, project DataNode configuration is used</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.max_connections[.domain_name.node_name]</code> defines the DB connection pool maximum size. If domain name and optionally - node name are specified, the setting overrides DataSource info just for this domain/node. Otherwise the override is applied to all domains/nodes in the system</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none, project DataNode configuration is used</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.max_wait</code> defines a maximum time in milliseconds that a connection request could wait in the connection queue. After this period expires, an exception will be thrown in the calling method. A value of zero will make the thread wait until a connection is available with no time out.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: 20 seconds</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.jdbc.validation_query</code> defines a SQL string that returns some result. It will be used to validate connections in the pool.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.querycache.size</code> An integer defining the maximum number of entries in the query cache. Note that not all QueryCache providers may respect this property. MapQueryCache uses it, but the rest would use alternative configuration methods.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: any positive int value</p></li>
+       <li><p>Default value: 2000</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.DataRowStore.snapshot.size</code> defines snapshot cache max size</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: any positive int</p></li>
+       <li><p>Default value: 10000</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.contexts_sync_strategy</code> defines whether peer ObjectContexts should receive snapshot events after commits from other contexts. If true (<em>default</em>), the contexts would automatically synchronize their state with peers.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: true, false</p></li>
+       <li><p>Default value: false (since 4.1)</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.object_retain_strategy</code> defines fetched objects retain strategy for ObjectContexts. When weak or soft strategy is used, objects retained by ObjectContext that have no local changes can potentially get garbage collected when JVM feels like doing it.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: weak, soft, hard</p></li>
+       <li><p>Default value: weak</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.max_id_qualifier_size</code> defines a maximum number of ID qualifiers in the WHERE clause of queries that are generated for paginated queries and for DISJOINT_BY_ID prefetch processing. This is needed to avoid hitting WHERE clause size limitations and memory usage efficiency.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: any positive int</p></li>
+       <li><p>Default value: 10000</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.external_tx</code> defines whether runtime should use external transactions.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Possible values: true, false</p></li>
+       <li><p>Default value: false</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.query_execution_time_logging_threshold</code> defines the minimum number of milliseconds a query must run before it is logged. A value less than or equal to zero disables logging.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: 0</p></li>
+      </ul>
+     </div></li>
+    <li><p><code>cayenne.domain.name</code> defines an optional name of the runtime DataDomain. If not specified, the name is inferred from the configuration name.</p>
+     <div class="ulist">
+      <ul>
+       <li><p>Default value: none</p></li>
+      </ul>
+     </div></li>
+   </ul>
+  </div>
+ </div>
+</div>

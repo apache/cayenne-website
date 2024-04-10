@@ -1,0 +1,82 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Other Settings"
+description: "Cayenne Guide 5.0, Other Settings"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+---
+<div class="sect2">
+ <h3 id="re-relationships-loading-control"><a class="anchor" href="#re-relationships-loading-control"></a>3.3. Other Settings</h3>
+ <div class="paragraph">
+  <p>In databases relations are defined via foreign keys and there are a lot of different politics according to the level of relationships and ways how those relationships could be modeled in database. Anyway, cdbimport is able to recognize basic patterns of relationships, such as OneToMany, OneToOne and ManyToMany.</p>
+ </div>
+ <div class="sect3">
+  <h4 id="skip-relationships-loading"><a class="anchor" href="#skip-relationships-loading"></a>3.3.1. Skip Relationships Loading</h4>
+  <div class="paragraph">
+   <p>You are able to skip relationships loading by the <code>&lt;skipRelationshipsLoading&gt;</code> element.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+        &lt;skipRelationshipsLoading&gt;true&lt;/skipRelationshipsLoading&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="skip-primary-keys-loading"><a class="anchor" href="#skip-primary-keys-loading"></a>3.3.2. Skip Primary Keys Loading</h4>
+  <div class="paragraph">
+   <p>Another useful Cayenne reverse engineering property is <code>&lt;skipPrimaryKeyLoading&gt;</code>. If you decide to support all relationships at the application layer and avoid their management in database, you’ll find useful to turn off primary keys synchronization at all.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML"> &lt;dbimport&gt;
+        &lt;skipPrimaryKeyLoading&gt;true&lt;/skipPrimaryKeyLoading&gt;
+ &lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="table-types"><a class="anchor" href="#table-types"></a>3.3.3. Table Types</h4>
+  <div class="paragraph">
+   <p>By default, cdbimport imports tables and views. Some databases may support other table-like objects, e.g. <code>SYSTEM TABLE, GLOBAL TEMPORARY, LOCAL TEMPORARY, ALIAS, SYNONYM</code>, etc. To control which types should be included <code>&lt;tableType&gt;&lt;/tableType&gt;</code> element is used. Some examples:</p>
+  </div>
+  <div class="paragraph">
+   <p>Import tables only (skip views and others and other types):</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dbimport&gt;
+        &lt;tableType&gt;TABLE&lt;/tableType&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Tables and views (the default option):</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-XML XML" data-lang="XML"> &lt;dbimport&gt;
+        &lt;tableType&gt;TABLE&lt;/tableType&gt;
+        &lt;tableType&gt;VIEWS&lt;/tableType&gt;
+&lt;/dbimport&gt;</code></pre>
+   </div>
+  </div>
+ </div>
+</div>

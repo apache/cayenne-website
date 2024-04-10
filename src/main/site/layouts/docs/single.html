@@ -4,7 +4,9 @@
 
                 <article>
                     <header>
+                    {{- if not (eq .Params.cayenneNoToc true) }}
                         <h1>{{ .Title }}</h1>
+                    {{- end }}
                     </header>
                     <section>
                         {{ .Content }}

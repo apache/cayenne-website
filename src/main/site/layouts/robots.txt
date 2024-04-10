@@ -3,4 +3,5 @@ Allow: *
 {{- range where $.Site.Data.cayenne.releases "javaDoc" "no-index" }}
 Disallow: /docs/{{ .version }}/api/*
 {{- end }}
+Disallow: /docs/5.0/*
 Sitemap: {{ .Site.BaseURL }}sitemap.xml

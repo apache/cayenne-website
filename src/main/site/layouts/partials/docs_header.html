@@ -1,10 +1,13 @@
+{{ $docVersion := "4.2" }}
+{{ $docId := "index" }}
+
 {{ $urlComponents := split .RelPermalink "/" }}
 {{ if (isset $urlComponents 3) }}
-{{ $.Scratch.Set "cayenneUrlVersion" (index $urlComponents 2) }}
-{{ else }}
-{{ $.Scratch.Set "cayenneUrlVersion" "4.1" }}
+    {{ $docVersion = index $urlComponents 2 }}
 {{ end }}
-{{ $docVersion := ($.Scratch.Get "cayenneUrlVersion") }}
+{{ if (isset $urlComponents 4) }}
+    {{ $docId = index $urlComponents 3 }}
+{{ end }}
 {{ $currentPageURL := .RelPermalink }}
 
 
@@ -12,8 +15,10 @@
 {{- $ver := .version -}}
 {{- $.Scratch.SetInMap "indexUrlByVersion" $ver (printf "/docs/%s/api/" $ver) -}}
     {{- range (sort (where $.Site.Pages "Kind" "page") "Weight" "desc") -}}
-        {{- if eq .Params.cayenneVersion $ver -}}
-            {{- $.Scratch.SetInMap "indexUrlByVersion" $ver .RelPermalink -}}
+        {{- if not (eq .Params.cayenneNoToc true) -}}
+            {{- if eq .Params.cayenneVersion $ver -}}
+                {{- $.Scratch.SetInMap "indexUrlByVersion" $ver .RelPermalink -}}
+            {{- end -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
@@ -50,11 +55,12 @@
             <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
                 <div class="tab-content" id="cd-docs-nav">
                     {{ range (sort (where $.Site.Pages "Kind" "page") "Weight" ) -}}
-                    {{- if eq .Params.cayenneVersion $docVersion }}
+                    {{- if eq .Params.cayenneVersion $docVersion -}}
+                    {{- if not (eq .Params.cayenneNoToc true) }}
                     <div class="cd-toc-item">
-                        {{ if eq $currentPageURL .RelPermalink }}
+                        {{ if eq .File.BaseFileName $docId }}
                         <span class="cd-toc-link active">{{ if .Params.docsMenuTitle }}{{ .Params.docsMenuTitle }}{{ else }}{{ .Title }}{{ end }}</span>
-                            {{- $tocFile := printf "content/docs/%s/%s.toc.html" $docVersion .File.BaseFileName -}}
+                            {{- $tocFile := printf "content/docs/%s/%s.toc.html" $docVersion $docId -}}
                             {{- if (fileExists $tocFile) -}}
                                 {{ readFile $tocFile | safeHTML }}
                             {{- end -}}
@@ -63,6 +69,7 @@
                         {{ end }}
                     </div>
                     {{ end -}}
+                    {{- end -}}
                     {{- end }}
                     <div class="cd-toc-item">
                         <!-- this range should return a single collection element,

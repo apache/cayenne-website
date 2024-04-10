@@ -21,4 +21,4 @@
         <title>{{ .Site.Title }}</title>
         {{- end }}
     </head>
-    <body data-spy="scroll" data-target=".toc-side" class="cd-head"> 
+    <body {{ if not (eq .Params.cayenneNoToc true) }}data-spy="scroll" data-target=".toc-side"{{ end }} class="cd-head">

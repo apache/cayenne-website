@@ -23,6 +23,17 @@
 # Versions are rendered on Download page in the same order as in this file.
 #
 releases:
+  - version: "5.0"
+    latestRevision: "5.0-SNAPSHOT"
+    type: "Alpha"
+    description: "Alpha release"
+    date: "2024-06-06"
+    docs: true
+    downloadable: false
+    jdk: 11
+    newRepoLayout: true
+    javaDoc: "no"
+
   - version: "4.2"
     latestRevision: "4.2"
     type: "Stable"
