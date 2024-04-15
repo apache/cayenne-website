@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Maven Plugin"
 description: "Cayenne Guide 5.0, Maven Plugin"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 290
 ---
 <div class="sect2">
  <h3 id="maven_plugin"><a class="anchor" href="#maven_plugin"></a>5.1. Maven Plugin</h3>
@@ -52,8 +54,10 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">map</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">File</p></td>
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="paragraph">
@@ -86,89 +90,140 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">additionalMaps</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A directory that contains additional DataMap XML files that may be needed to resolve cross-DataMap relationships for the the main DataMap, for which class generation occurs.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">additionalMaps</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A directory that contains additional DataMap XML files that may be needed to resolve cross-DataMap relationships for the the main DataMap, for which class generation occurs.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">destDir</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Root destination directory for Java classes (ignoring their package names). The default is "src/main/java".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">destDir</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Root destination directory for Java classes (ignoring their package names). The default is "src/main/java".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableTemplate</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable class generation. If omitted, default template is used.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">embeddableTemplate</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Location of a custom Velocity template file for Embeddable class generation. If omitted, default template is used.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">embeddableSuperTemplate</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for Embeddable superclass generation. Ignored unless "makepairs" set to "true". If omitted, default template is used.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">embeddableSuperTemplate</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Location of a custom Velocity template file for Embeddable superclass generation. Ignored unless "makepairs" set to "true". If omitted, default template is used.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">encoding</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Generated files encoding if different from the default on current platform. Target encoding must be supported by the JVM running the build. Standard encodings supported by Java on all platforms are US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See javadocs for java.nio.charset.Charset for more information.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">encoding</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Generated files encoding if different from the default on current platform. Target encoding must be supported by the JVM running the build. Standard encodings supported by Java on all platforms are US-ASCII, ISO-8859-1, UTF-8, UTF-16BE, UTF-16LE, UTF-16. See javadocs for java.nio.charset.Charset for more information.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">excludeEntities</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to exclude from template generation. By default none of the DataMap entities are excluded.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">excludeEntities</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to exclude from template generation. By default none of the DataMap entities are excluded.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">includeEntities</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to include from template generation. By default all DataMap entities are included.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">includeEntities</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A comma-separated list of ObjEntity patterns (expressed as a perl5 regex) to include from template generation. By default all DataMap entities are included.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">makePairs</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">If "true" (a recommended default), will generate subclass/superclass pairs, with all generated code placed in superclass.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">makePairs</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">If "true" (a recommended default), will generate subclass/superclass pairs, with all generated code placed in superclass.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">mode</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Specifies class generator iteration target. There are three possible values: "entity" (default), "datamap", "all". "entity" performs one generator iteration for each included ObjEntity, applying either standard to custom entity templates. "datamap" performs a single iteration, applying DataMap templates. "All" is a combination of entity and datamap.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">mode</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Specifies class generator iteration target. There are three possible values: "entity" (default), "datamap", "all". "entity" performs one generator iteration for each included ObjEntity, applying either standard to custom entity templates. "datamap" performs a single iteration, applying DataMap templates. "All" is a combination of entity and datamap.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">overwrite</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Only has effect when "makePairs" is set to "false". If "overwrite" is "true", will overwrite older versions of generated classes.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">overwrite</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Only has effect when "makePairs" is set to "false". If "overwrite" is "true", will overwrite older versions of generated classes.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">superPkg</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Java package name of all generated superclasses. If omitted, each superclass will be placed in the subpackage of its subclass called "auto". Doesn’t have any effect if either "makepairs" or "usePkgPath" are false (both are true by default).</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">superPkg</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Java package name of all generated superclasses. If omitted, each superclass will be placed in the subpackage of its subclass called "auto". Doesn’t have any effect if either "makepairs" or "usePkgPath" are false (both are true by default).</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">superTemplate</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity superclass generation. Only has effect if "makepairs" set to "true". If omitted, default template is used.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">superTemplate</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Location of a custom Velocity template file for ObjEntity superclass generation. Only has effect if "makepairs" set to "true". If omitted, default template is used.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">template</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Location of a custom Velocity template file for ObjEntity class generation. If omitted, default template is used.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">template</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Location of a custom Velocity template file for ObjEntity class generation. If omitted, default template is used.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">usePkgPath</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true" (default), a directory tree will be generated in "destDir" corresponding to the class package structure, if set to "false", classes will be generated in "destDir" ignoring their package.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">usePkgPath</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">If set to "true" (default), a directory tree will be generated in "destDir" corresponding to the class package structure, if set to "false", classes will be generated in "destDir" ignoring their package.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">createPropertyNames</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate String Property names. Default is "false"</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">createPropertyNames</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">If set to "true", will generate String Property names. Default is "false"</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">force</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will force run from maven/gradle.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">force</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">If set to "true", will force run from maven/gradle.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">createPKProperties</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">If set to "true", will generate PK attributes as Properties. Default is "false".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">createPKProperties</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">If set to "true", will generate PK attributes as Properties. Default is "false".</p></td>
     </tr>
    </tbody>
   </table>
@@ -222,34 +277,54 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">DataMap XML file which is the destination of the schema import. Can be an existing file. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/my.map.xml</code>. If "overwrite" is true (the default), an existing DataMap will be used as a template for the new imported DataMap, i.e. all its entities will be cleared and recreated, but its common settings, such as default Java package, will be preserved (unless changed explicitly in the plugin configuration).</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">map</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">DataMap XML file which is the destination of the schema import. Can be an existing file. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/my.map.xml</code>. If "overwrite" is true (the default), an existing DataMap will be used as a template for the new imported DataMap, i.e. all its entities will be cleared and recreated, but its common settings, such as default Java package, will be preserved (unless changed explicitly in the plugin configuration).</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">cayenneProject</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Project XML file which will be used. Can be an existing file, in this case data map will be added to project if it’s not already there. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/cayenne-project.xml</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">cayenneProject</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Project XML file which will be used. Can be an existing file, in this case data map will be added to project if it’s not already there. If this file does not exist, it is created when cdbimport is executed. E.g. <code>${project.basedir}/src/main/resources/cayenne-project.xml</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java class name implementing org.apache.cayenne.dba.DbAdapter. This attribute is optional. If not specified, AutoAdapter is used, which will attempt to guess the DB type.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">adapter</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A Java class name implementing org.apache.cayenne.dba.DbAdapter. This attribute is optional. If not specified, AutoAdapter is used, which will attempt to guess the DB type.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">dataSource</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">An object that contains Data Source parameters.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">dbimport</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a> chapter.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">dbimport</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a> chapter.</p></td>
     </tr>
    </tbody>
   </table>
@@ -273,28 +348,44 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">driver</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A class of JDBC driver to use for the target database.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">url</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">JDBC URL of a target database.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">username</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Database user name.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">password</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Database user password.</p></td>
     </tr>
    </tbody>
   </table>
@@ -316,43 +407,66 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">defaultPackage</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A Java package that will be set as the imported DataMap default and a package of all the persistent Java classes. This is a required attribute if the "map" itself does not already contain a default package, as otherwise all the persistent classes will be mapped with no package, and will not compile.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">defaultPackage</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A Java package that will be set as the imported DataMap default and a package of all the persistent Java classes. This is a required attribute if the "map" itself does not already contain a default package, as otherwise all the persistent classes will be mapped with no package, and will not compile.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapCatalog</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapCatalog</code> to <code>true</code> will set DbEntity catalog to one in the DataMap. Default value is <code>false</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">forceDataMapCatalog</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapCatalog</code> to <code>true</code> will set DbEntity catalog to one in the DataMap. Default value is <code>false</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">forceDataMapSchema</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapSchema</code> to <code>true</code> will set DbEntity schema to one in the DataMap. Default value is <code>false</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">forceDataMapSchema</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Automatically tagging each DbEntity with the actual DB catalog/schema (default behavior) may sometimes be undesirable. If this is the case then setting <code>forceDataMapSchema</code> to <code>true</code> will set DbEntity schema to one in the DataMap. Default value is <code>false</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">meaningfulPkTables</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">meaningfulPkTables</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A comma-separated list of Perl5 patterns that defines which imported tables should have their primary key columns mapped as ObjAttributes. "*" would indicate all tables.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">namingStrategy</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">namingStrategy</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">The naming strategy used for mapping database names to object entity names. Default is <code>o.a.c.dbsync.naming.DefaultObjectNameGenerator</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">skipPrimaryKeyLoading</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load primary keys. Default "false".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">skipPrimaryKeyLoading</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Whether to load primary keys. Default "false".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">skipRelationshipsLoading</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether to load relationships. Default "false".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">skipRelationshipsLoading</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Whether to load relationships. Default "false".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">stripFromTableNames</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">stripFromTableNames</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="paragraph">
@@ -373,18 +487,26 @@ cayenneNoToc: true
       </div></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">usePrimitives</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether numeric and boolean data types should be mapped as Java primitives or Java classes. Default is "true", i.e. primitives will be used.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">usePrimitives</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Whether numeric and boolean data types should be mapped as Java primitives or Java classes. Default is "true", i.e. primitives will be used.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">useJava7Types</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Whether <em>DATE</em>, <em>TIME</em> and <em>TIMESTAMP</em> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">useJava7Types</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Whether <em>DATE</em>, <em>TIME</em> and <em>TIMESTAMP</em> data types should be mapped as <code>java.util.Date</code> or <code>java.time.* classes</code>. Default is "false", i.e. <code>java.time.*</code> will be used.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">tableTypes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Collection&lt;String&gt;</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">tableTypes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Collection&lt;String&gt;</p></td>
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="paragraph">
@@ -392,20 +514,29 @@ cayenneNoToc: true
        </div>
        <div class="ulist">
         <ul>
-         <li><p>TABLE</p></li>
-         <li><p>VIEW</p></li>
-         <li><p>SYSTEM TABLE</p></li>
-         <li><p>GLOBAL TEMPORARY</p></li>
-         <li><p>LOCAL TEMPORARY</p></li>
-         <li><p>ALIAS</p></li>
-         <li><p>SYNONYM</p></li>
+         <li>
+          <p>TABLE</p></li>
+         <li>
+          <p>VIEW</p></li>
+         <li>
+          <p>SYSTEM TABLE</p></li>
+         <li>
+          <p>GLOBAL TEMPORARY</p></li>
+         <li>
+          <p>LOCAL TEMPORARY</p></li>
+         <li>
+          <p>ALIAS</p></li>
+         <li>
+          <p>SYNONYM</p></li>
         </ul>
        </div>
       </div></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">filters configuration</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">filters configuration</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">XML</p></td>
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="paragraph">
@@ -484,8 +615,10 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">map</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">File</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">map</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">File</p></td>
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="paragraph">
@@ -499,9 +632,12 @@ cayenneNoToc: true
       </div></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">dataSource</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">XML</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">An object that contains Data Source parameters</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">dataSource</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">XML</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">An object that contains Data Source parameters</p></td>
     </tr>
    </tbody>
   </table>
@@ -525,28 +661,44 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">driver</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">A class of JDBC driver to use for the target database.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">driver</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">A class of JDBC driver to use for the target database.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">url</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Yes</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">JDBC URL of a target database.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">url</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Yes</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">JDBC URL of a target database.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">username</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user name.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">username</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Database user name.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">password</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">No</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Database user password.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">password</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">No</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Database user password.</p></td>
     </tr>
    </tbody>
   </table>
@@ -568,34 +720,52 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">adapter</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">String</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Java class name implementing org.apache.cayenne.dba.DbAdapter. While this attribute is optional (a generic JdbcAdapter is used if not set), it is highly recommended to specify correct target adapter.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">adapter</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">String</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Java class name implementing org.apache.cayenne.dba.DbAdapter. While this attribute is optional (a generic JdbcAdapter is used if not set), it is highly recommended to specify correct target adapter.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">createFK</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create foreign key constraints. Default is "true".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">createFK</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Indicates whether cdbgen should create foreign key constraints. Default is "true".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">createPK</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create Cayenne-specific auto PK objects. Default is "true".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">createPK</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Indicates whether cdbgen should create Cayenne-specific auto PK objects. Default is "true".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">createTables</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should create new tables. Default is "true".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">createTables</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Indicates whether cdbgen should create new tables. Default is "true".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">dropPK</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop Cayenne primary key support objects. Default is "false".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">dropPK</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Indicates whether cdbgen should drop Cayenne primary key support objects. Default is "false".</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">dropTables</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Indicates whether cdbgen should drop the tables before attempting to create new ones. Default is "false".</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">dropTables</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">boolean</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Indicates whether cdbgen should drop the tables before attempting to create new ones. Default is "false".</p></td>
     </tr>
    </tbody>
   </table>

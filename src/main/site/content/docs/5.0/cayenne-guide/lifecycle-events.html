@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Lifecycle Events"
 description: "Cayenne Guide 5.0, Lifecycle Events"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 120
 ---
 <div class="sect2">
  <h3 id="lifecycle-events"><a class="anchor" href="#lifecycle-events"></a>2.7. Lifecycle Events</h3>
@@ -53,42 +55,60 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PostAdd</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right after a new object is created inside <code>ObjectContext.newObject()</code>. When this event is fired the object is already registered with its ObjectContext and has its ObjectId and ObjectContext properties set.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PostAdd</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right after a new object is created inside <code>ObjectContext.newObject()</code>. When this event is fired the object is already registered with its ObjectContext and has its ObjectId and ObjectContext properties set.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PrePersist</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right before a new object is committed, inside <code>ObjectContext.commitChanges()</code> and <code>ObjectContext.commitChangesToParent()</code> (and after <code>"validateForInsert()"</code>).</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PrePersist</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right before a new object is committed, inside <code>ObjectContext.commitChanges()</code> and <code>ObjectContext.commitChangesToParent()</code> (and after <code>"validateForInsert()"</code>).</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PreUpdate</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right before a modified object is committed, inside <code>ObjectContext.commitChanges()</code> and <code>ObjectContext.commitChangesToParent()</code> (and after <code>"validateForUpdate()"</code>).</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PreUpdate</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right before a modified object is committed, inside <code>ObjectContext.commitChanges()</code> and <code>ObjectContext.commitChangesToParent()</code> (and after <code>"validateForUpdate()"</code>).</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PreRemove</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right before an object is deleted, inside <code>ObjectContext.deleteObjects()</code>. The event is also generated for each object indirectly deleted as a result of CASCADE delete rule.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PreRemove</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right before an object is deleted, inside <code>ObjectContext.deleteObjects()</code>. The event is also generated for each object indirectly deleted as a result of CASCADE delete rule.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PostPersist</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right after a commit of a new object is done, inside <code>ObjectContext.commitChanges()</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PostPersist</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right after a commit of a new object is done, inside <code>ObjectContext.commitChanges()</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PostUpdate</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right after a commit of a modified object is done, inside <code>ObjectContext.commitChanges()</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PostUpdate</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right after a commit of a modified object is done, inside <code>ObjectContext.commitChanges()</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PostRemove</p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">right after a commit of a deleted object is done, inside <code>ObjectContext.commitChanges()</code>.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PostRemove</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">right after a commit of a deleted object is done, inside <code>ObjectContext.commitChanges()</code>.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">PostLoad</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">PostLoad</p></td>
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="ulist">
         <ul>
-         <li><p>After an object is fetched inside ObjectContext.performQuery().</p></li>
-         <li><p>After an object is reverted inside ObjectContext.rollbackChanges().</p></li>
-         <li><p>Anytime a faulted object is resolved (i.e. if a relationship is fetched).</p></li>
+         <li>
+          <p>After an object is fetched inside ObjectContext.performQuery().</p></li>
+         <li>
+          <p>After an object is reverted inside ObjectContext.rollbackChanges().</p></li>
+         <li>
+          <p>Anytime a faulted object is resolved (i.e. if a relationship is fetched).</p></li>
         </ul>
        </div>
       </div></td>

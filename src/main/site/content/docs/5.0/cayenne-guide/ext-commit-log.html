@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Commit log extension"
 description: "Cayenne Guide 5.0, Commit log extension"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 220
 ---
 <div class="sect2">
  <h3 id="ext-commit-log"><a class="anchor" href="#ext-commit-log"></a>4.2. Commit log extension</h3>
@@ -53,7 +55,8 @@ cayenneNoToc: true
   </div>
   <div class="olist arabic">
    <ol class="arabic">
-    <li><p>Mark all entities which changes you are interested in with <code>@org.apache.cayenne.commitlog.CommitLog</code> annotation</p>
+    <li>
+     <p>Mark all entities which changes you are interested in with <code>@org.apache.cayenne.commitlog.CommitLog</code> annotation</p>
      <div class="listingblock">
       <div class="content">
        <pre class="highlight"><code class="language-Java Java" data-lang="Java">@CommitLog(ignoredProperties = {"somePrivatePropertyToSkip"})
@@ -62,7 +65,8 @@ public class MyEntity extends _MyEntity {
 }</code></pre>
       </div>
      </div></li>
-    <li><p>Implement <code>CommitLogListener</code> interface.</p>
+    <li>
+     <p>Implement <code>CommitLogListener</code> interface.</p>
      <div class="listingblock">
       <div class="content">
        <pre class="highlight"><code class="language-java java" data-lang="java">public class MyCommitLogListener implements CommitLogListener {
@@ -78,7 +82,8 @@ public class MyEntity extends _MyEntity {
 }</code></pre>
       </div>
      </div></li>
-    <li><p>Register your listener implementation.</p>
+    <li>
+     <p>Register your listener implementation.</p>
      <div class="listingblock">
       <div class="content">
        <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime.builder()

@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Persistent Objects and ObjectContext"
 description: "Cayenne Guide 5.0, Persistent Objects and ObjectContext"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 80
 ---
 <div class="sect2">
  <h3 id="persistent-objects-objectcontext"><a class="anchor" href="#persistent-objects-objectcontext"></a>2.3. Persistent Objects and ObjectContext</h3>
@@ -64,28 +66,40 @@ cayenneNoToc: true
    </colgroup>
    <tbody>
     <tr>
-     <td class="tableblock halign-center valign-middle"><p class="tableblock"><strong>TRANSIENT</strong></p></td>
-     <td class="tableblock halign-left valign-top"><p class="tableblock">The object is not registered with an ObjectContext and will not be persisted.</p></td>
+     <td class="tableblock halign-center valign-middle">
+      <p class="tableblock"><strong>TRANSIENT</strong></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">The object is not registered with an ObjectContext and will not be persisted.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-center valign-middle"><p class="tableblock"><strong>NEW</strong></p></td>
-     <td class="tableblock halign-left valign-top"><p class="tableblock">The object is freshly registered in an ObjectContext, but has not been saved to the database yet and there is no matching database row.</p></td>
+     <td class="tableblock halign-center valign-middle">
+      <p class="tableblock"><strong>NEW</strong></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">The object is freshly registered in an ObjectContext, but has not been saved to the database yet and there is no matching database row.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-center valign-middle"><p class="tableblock"><strong>COMMITTED</strong></p></td>
-     <td class="tableblock halign-left valign-top"><p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, and the object state corresponds to the last known state of the matching database row.</p></td>
+     <td class="tableblock halign-center valign-middle">
+      <p class="tableblock"><strong>COMMITTED</strong></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, and the object state corresponds to the last known state of the matching database row.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-center valign-middle"><p class="tableblock"><strong>MODIFIED</strong></p></td>
-     <td class="tableblock halign-left valign-top"><p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, but the object in-memory state has diverged from the last known state of the matching database row.</p></td>
+     <td class="tableblock halign-center valign-middle">
+      <p class="tableblock"><strong>MODIFIED</strong></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, but the object in-memory state has diverged from the last known state of the matching database row.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-center valign-middle"><p class="tableblock"><strong>HOLLOW</strong></p></td>
-     <td class="tableblock halign-left valign-top"><p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, but the object state is unknown. Whenever an application tries to access a property of such object, Cayenne attempts reading its values from the database and "inflate" the object, turning it to COMMITTED.</p></td>
+     <td class="tableblock halign-center valign-middle">
+      <p class="tableblock"><strong>HOLLOW</strong></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, but the object state is unknown. Whenever an application tries to access a property of such object, Cayenne attempts reading its values from the database and "inflate" the object, turning it to COMMITTED.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-center valign-middle"><p class="tableblock"><strong>DELETED</strong></p></td>
-     <td class="tableblock halign-left valign-top"><p class="tableblock">The object is registered in an ObjectContext and has been marked for deletion in-memory. The corresponding row in the database will get deleted upon ObjectContext commit, and the object state will be turned into TRANSIENT.</p></td>
+     <td class="tableblock halign-center valign-middle">
+      <p class="tableblock"><strong>DELETED</strong></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">The object is registered in an ObjectContext and has been marked for deletion in-memory. The corresponding row in the database will get deleted upon ObjectContext commit, and the object state will be turned into TRANSIENT.</p></td>
     </tr>
    </tbody>
   </table>

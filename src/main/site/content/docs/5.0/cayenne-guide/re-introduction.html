@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Introduction"
 description: "Cayenne Guide 5.0, Introduction"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 160
 ---
 <div class="sect2">
  <h3 id="re-introduction"><a class="anchor" href="#re-introduction"></a>3.1. Introduction</h3>
@@ -30,10 +32,14 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p>A SQL migrations framework is used to bring a local DB to a certain version. This is outside the scope of Cayenne and is done with a third-party tool, such as Liquibase or Flyway.</p></li>
-    <li><p>OR mapping model (Cayenne XML files) are synchronized with the state of the database using <code>"cdbimport"</code> tool provided by Cayenne.</p></li>
-    <li><p>Object layer of the OR mapping model is customized to the developer liking, usually via CayenneModeler. Subsequent runs of <code>"cdbimport"</code> will not override any customizations that you make.</p></li>
-    <li><p>Java classes are generated using <code>"cgen"</code> tool provided by Cayenne.</p></li>
+    <li>
+     <p>A SQL migrations framework is used to bring a local DB to a certain version. This is outside the scope of Cayenne and is done with a third-party tool, such as Liquibase or Flyway.</p></li>
+    <li>
+     <p>OR mapping model (Cayenne XML files) are synchronized with the state of the database using <code>"cdbimport"</code> tool provided by Cayenne.</p></li>
+    <li>
+     <p>Object layer of the OR mapping model is customized to the developer liking, usually via CayenneModeler. Subsequent runs of <code>"cdbimport"</code> will not override any customizations that you make.</p></li>
+    <li>
+     <p>Java classes are generated using <code>"cgen"</code> tool provided by Cayenne.</p></li>
    </ul>
   </div>
   <div class="paragraph">

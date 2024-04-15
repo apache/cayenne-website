@@ -2,6 +2,19 @@
 {{ partial "header.html" . }}
 {{ partial "docs_header.html" . }}
 
+{{ $curPage := .Page }}
+{{ $curPageIdx := -1 }}
+
+{{ $docPages := where $.Site.Pages "Params.cayenneversion" $curPage.Params.cayenneVersion }}
+{{ $docPages = sort (where $docPages "Params.docid" $curPage.Params.docId) "Weight" "asc" }}
+{{ range $i, $docPage := $docPages }}
+    {{ if $curPage.Eq $docPage }}
+        {{ $curPageIdx = $i }}
+    {{ end }}
+{{ end }}
+
+{{ $nextPage := index $docPages (add $curPageIdx 1) }}
+
                 <article>
                     <header>
                     {{- if not (eq .Params.cayenneNoToc true) }}
@@ -11,6 +24,22 @@
                     <section>
                         {{ .Content }}
                     </section>
+                    <footer>
+                        <div class="row">
+                            <div class="col-6 col-md-3  text-center text-md-left">
+                                &nbsp;
+                            </div>
+                            <div class="col-18 col-md-9  text-center text-md-right">
+                                {{ with $nextPage }}
+                                <a class="btn btn-link" href='{{ .Permalink | relURL }}'>
+                                    <span class="d-block d-md-none  text-muted">Next: </span>
+                                    Next: {{ .Title }}
+                                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                                </a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </footer>
                 </article>
 
 {{/* .Scratch.Set "pix" "docs" */}}

@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Starting Cayenne"
 description: "Cayenne Guide 5.0, Starting Cayenne"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 70
 ---
 <div class="sect2">
  <h3 id="starting-cayenne"><a class="anchor" href="#starting-cayenne"></a>2.2. Starting Cayenne</h3>
@@ -83,12 +85,18 @@ CayenneRuntime runtime = CayenneRuntime.builder()
   </div>
   <div class="ulist">
    <ul>
-    <li><p>The order of projects matters during merge. If there are two conflicting metadata objects belonging to two projects, an object from the last project takes precedence over the object from the first one. This makes possible to override pieces of metadata. This is also similar to how DI modules are merged in Cayenne.</p></li>
-    <li><p>Runtime DataDomain name is set to the name of the last project in the list.</p></li>
-    <li><p>Runtime DataDomain properties are the same as the properties of the last project in the list. I.e. properties are not merged to avoid invalid combinations and unexpected runtime behavior.</p></li>
-    <li><p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project, the rest are discarded. Same precedence rules apply - DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p></li>
-    <li><p>If there are two or more DataNodes with the same name, only one DataNode is used in the merged project, the rest are discarded. DataNode coming from project with the highest index in the project list is chosen per precedence rule above.</p></li>
-    <li><p>There is a notion of "default" DataNode. After the merge if any DataMaps are not explicitly linked to DataNodes, their queries will be executed via a default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime. If there’s only one DataNode in the merged project, it will be automatically chosen as default. A possible way to explicitly designate a specific node as default is to override <code>DataDomainProvider.createAndInitDataDomain()</code>.</p></li>
+    <li>
+     <p>The order of projects matters during merge. If there are two conflicting metadata objects belonging to two projects, an object from the last project takes precedence over the object from the first one. This makes possible to override pieces of metadata. This is also similar to how DI modules are merged in Cayenne.</p></li>
+    <li>
+     <p>Runtime DataDomain name is set to the name of the last project in the list.</p></li>
+    <li>
+     <p>Runtime DataDomain properties are the same as the properties of the last project in the list. I.e. properties are not merged to avoid invalid combinations and unexpected runtime behavior.</p></li>
+    <li>
+     <p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project, the rest are discarded. Same precedence rules apply - DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p></li>
+    <li>
+     <p>If there are two or more DataNodes with the same name, only one DataNode is used in the merged project, the rest are discarded. DataNode coming from project with the highest index in the project list is chosen per precedence rule above.</p></li>
+    <li>
+     <p>There is a notion of "default" DataNode. After the merge if any DataMaps are not explicitly linked to DataNodes, their queries will be executed via a default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime. If there’s only one DataNode in the merged project, it will be automatically chosen as default. A possible way to explicitly designate a specific node as default is to override <code>DataDomainProvider.createAndInitDataDomain()</code>.</p></li>
    </ul>
   </div>
  </div>

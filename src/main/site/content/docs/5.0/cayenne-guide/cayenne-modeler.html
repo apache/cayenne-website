@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · CayenneModeler Application"
 description: "Cayenne Guide 5.0, CayenneModeler Application"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 40
 ---
 <div class="sect2">
  <h3 id="cayenne-modeler"><a class="anchor" href="#cayenne-modeler"></a>1.3. CayenneModeler Application</h3>
@@ -51,7 +53,8 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><strong>Standard Persistent Objects</strong></p></li>
+    <li>
+     <p><strong>Standard Persistent Objects</strong></p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -59,7 +62,8 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><strong>Advanced</strong></p></li>
+    <li>
+     <p><strong>Advanced</strong></p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -85,9 +89,12 @@ cayenneNoToc: true
   </div>
   <div class="olist arabic">
    <ol class="arabic">
-    <li><p><strong>Cayenne Generated</strong>. This is default strategy. Cayenne will use special table <code>AUTO_PK_SUPPORT</code> for managing primary keys.</p></li>
-    <li><p><strong>Database Generated</strong>. Cayenne will delegate PK generation to database (e.g. auto increment fields on MySQL or <code>serial</code> type on PostgreSQL)</p></li>
-    <li><p><strong>Custom Sequence</strong>. In this case Cayenne will use provided sequence to generate primary keys.</p></li>
+    <li>
+     <p><strong>Cayenne Generated</strong>. This is default strategy. Cayenne will use special table <code>AUTO_PK_SUPPORT</code> for managing primary keys.</p></li>
+    <li>
+     <p><strong>Database Generated</strong>. Cayenne will delegate PK generation to database (e.g. auto increment fields on MySQL or <code>serial</code> type on PostgreSQL)</p></li>
+    <li>
+     <p><strong>Custom Sequence</strong>. In this case Cayenne will use provided sequence to generate primary keys.</p></li>
    </ol>
   </div>
   <div class="paragraph">

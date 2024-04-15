@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Performance Tuning"
 description: "Cayenne Guide 5.0, Performance Tuning"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 130
 ---
 <div class="sect2">
  <h3 id="performance-tuning"><a class="anchor" href="#performance-tuning"></a>2.8. Performance Tuning</h3>
@@ -112,8 +114,10 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
   </div>
   <div class="ulist">
    <ul>
-    <li><p>Include <em>all</em> columns from the root entity and every prefetched entity.</p></li>
-    <li><p>Label each prefetched entity columns as "dbRelationship.column".</p></li>
+    <li>
+     <p>Include <em>all</em> columns from the root entity and every prefetched entity.</p></li>
+    <li>
+     <p>Label each prefetched entity columns as "dbRelationship.column".</p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -333,11 +337,16 @@ context.performGenericQuery(refresh);</code></pre>
   </div>
   <div class="ulist">
    <ul>
-    <li><p>The performance of synchronization is (probably worse than) O(N) where N is the number of peer ObjectContexts in the system. In a typical webapp N can be quite large. Besides for any given context, due to locking on synchronization, context own performance will depend not only on the queries that it runs, but also on external events that it does not control. This is unacceptable in most situations.</p></li>
-    <li><p>Commit events are untargeted - even contexts that do not hold a given updated object will receive the full event that they will have to process.</p></li>
-    <li><p>Clustering between JVMs doesn’t scale - apps with large volumes of commits will quickly saturate the network with events, while most of those will be thrown away on the receiving end as mentioned above.</p></li>
-    <li><p>Some contexts may not want to be refreshed. A refresh in the middle of an operation may lead to unpredictable results.</p></li>
-    <li><p>Synchronization will interfere with optimistic locking.</p></li>
+    <li>
+     <p>The performance of synchronization is (probably worse than) O(N) where N is the number of peer ObjectContexts in the system. In a typical webapp N can be quite large. Besides for any given context, due to locking on synchronization, context own performance will depend not only on the queries that it runs, but also on external events that it does not control. This is unacceptable in most situations.</p></li>
+    <li>
+     <p>Commit events are untargeted - even contexts that do not hold a given updated object will receive the full event that they will have to process.</p></li>
+    <li>
+     <p>Clustering between JVMs doesn’t scale - apps with large volumes of commits will quickly saturate the network with events, while most of those will be thrown away on the receiving end as mentioned above.</p></li>
+    <li>
+     <p>Some contexts may not want to be refreshed. A refresh in the middle of an operation may lead to unpredictable results.</p></li>
+    <li>
+     <p>Synchronization will interfere with optimistic locking.</p></li>
    </ul>
   </div>
   <div class="paragraph">

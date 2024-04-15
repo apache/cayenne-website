@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Expressions"
 description: "Cayenne Guide 5.0, Expressions"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 90
 ---
 <div class="sect2">
  <h3 id="expressions"><a class="anchor" href="#expressions"></a>2.4. Expressions</h3>
@@ -38,9 +40,12 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>db:</code> is an optional prefix indicating that the following path is a DB path. Otherwise it is an object path.</p></li>
-    <li><p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. The path must have at least one segment; segments are separated by dot (".").</p></li>
-    <li><p><code>+</code> An "OUTER JOIN" path component. Currently "+" only has effect when translated to SQL as OUTER JOIN. When evaluating expressions in memory, it is ignored.</p></li>
+    <li>
+     <p><code>db:</code> is an optional prefix indicating that the following path is a DB path. Otherwise it is an object path.</p></li>
+    <li>
+     <p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. The path must have at least one segment; segments are separated by dot (".").</p></li>
+    <li>
+     <p>`` An "OUTER JOIN" path component. Currently "" only has effect when translated to SQL as OUTER JOIN. When evaluating expressions in memory, it is ignored.</p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -48,9 +53,12 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>name</code> - can be used to navigate (read) the "name" property of a Person (or any other type of object that has a "name" property).</p></li>
-    <li><p><code>artist.exhibits.closingDate</code> - can be used to navigate to a closing date of any of the exhibits of a Painting’s Artist object.</p></li>
-    <li><p><code>artist.exhibits+.closingDate</code> - same as the previous example, but when translated into SQL, an OUTER JOIN will be used for "exhibits".</p></li>
+    <li>
+     <p><code>name</code> - can be used to navigate (read) the "name" property of a Person (or any other type of object that has a "name" property).</p></li>
+    <li>
+     <p><code>artist.exhibits.closingDate</code> - can be used to navigate to a closing date of any of the exhibits of a Painting’s Artist object.</p></li>
+    <li>
+     <p><code>artist.exhibits+.closingDate</code> - same as the previous example, but when translated into SQL, an OUTER JOIN will be used for "exhibits".</p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -58,8 +66,10 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>db:NAME</code> - can be used to navigate to a value in the "NAME" column of some unspecified table.</p></li>
-    <li><p><code>db:artist.artistExhibits.exhibit.CLOSING_DATE</code> - can be used to match a closing date of any of the exhibits of a related artist record.</p></li>
+    <li>
+     <p><code>db:NAME</code> - can be used to navigate to a value in the "NAME" column of some unspecified table.</p></li>
+    <li>
+     <p><code>db:artist.artistExhibits.exhibit.CLOSING_DATE</code> - can be used to match a closing date of any of the exhibits of a related artist record.</p></li>
    </ul>
   </div>
   <div class="paragraph">
@@ -67,8 +77,10 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><code>artist.exhibits.closingDate</code> - full path</p></li>
-    <li><p><code>e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p></li>
+    <li>
+     <p><code>artist.exhibits.closingDate</code> - full path</p></li>
+    <li>
+     <p><code>e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p></li>
    </ul>
   </div>
   <div class="paragraph">

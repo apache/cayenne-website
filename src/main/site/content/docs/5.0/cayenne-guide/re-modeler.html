@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Reverse Engineering in Cayenne Modeler"
 description: "Cayenne Guide 5.0, Reverse Engineering in Cayenne Modeler"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 190
 ---
 <div class="sect2">
  <h3 id="re-modeler"><a class="anchor" href="#re-modeler"></a>3.4. Reverse Engineering in Cayenne Modeler</h3>
@@ -44,22 +46,38 @@ cayenneNoToc: true
   </div>
   <div class="ulist">
    <ul>
-    <li><p><strong>Add Catalog</strong></p></li>
-    <li><p><strong>Add Schema</strong></p></li>
-    <li><p><strong>Add Include Table</strong></p></li>
-    <li><p><strong>Add Exclude Table</strong></p></li>
-    <li><p><strong>Add Include Column</strong></p></li>
-    <li><p><strong>Add Exclude Column</strong></p></li>
-    <li><p><strong>Add Include Procedure</strong></p></li>
-    <li><p><strong>Add Exclude Procedure</strong></p></li>
-    <li><p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p></li>
-    <li><p><strong>Strip from table names</strong>: Regex that matches the part of the table name that needs to be stripped off generating ObjEntity name.</p></li>
-    <li><p><strong>Skip relationships loading</strong>: Whether to load relationships.</p></li>
-    <li><p><strong>Skip primary key loading</strong>: Whether to load primary keys.</p></li>
-    <li><p><strong>Force datamap catalog</strong>: will set DbEntity catalog to one in the DataMap.</p></li>
-    <li><p><strong>Force datamap schema</strong>: will set DbEntity schema to one in the DataMap.</p></li>
-    <li><p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p></li>
-    <li><p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p></li>
+    <li>
+     <p><strong>Add Catalog</strong></p></li>
+    <li>
+     <p><strong>Add Schema</strong></p></li>
+    <li>
+     <p><strong>Add Include Table</strong></p></li>
+    <li>
+     <p><strong>Add Exclude Table</strong></p></li>
+    <li>
+     <p><strong>Add Include Column</strong></p></li>
+    <li>
+     <p><strong>Add Exclude Column</strong></p></li>
+    <li>
+     <p><strong>Add Include Procedure</strong></p></li>
+    <li>
+     <p><strong>Add Exclude Procedure</strong></p></li>
+    <li>
+     <p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p></li>
+    <li>
+     <p><strong>Strip from table names</strong>: Regex that matches the part of the table name that needs to be stripped off generating ObjEntity name.</p></li>
+    <li>
+     <p><strong>Skip relationships loading</strong>: Whether to load relationships.</p></li>
+    <li>
+     <p><strong>Skip primary key loading</strong>: Whether to load primary keys.</p></li>
+    <li>
+     <p><strong>Force datamap catalog</strong>: will set DbEntity catalog to one in the DataMap.</p></li>
+    <li>
+     <p><strong>Force datamap schema</strong>: will set DbEntity schema to one in the DataMap.</p></li>
+    <li>
+     <p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p></li>
+    <li>
+     <p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p></li>
    </ul>
   </div>
  </div>

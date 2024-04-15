@@ -20,6 +20,8 @@ title: "Cayenne Guide 5.0 · Appendix B. Service Collections"
 description: "Cayenne Guide 5.0, Appendix B. Service Collections"
 cayenneVersion: "5.0"
 cayenneNoToc: true
+docId: cayenne-guide
+weight: 330
 ---
 <div class="sect1">
  <h2 id="appendix-b-service-collections"><a class="anchor" href="#appendix-b-service-collections"></a>7. Appendix B. Service Collections</h2>
@@ -45,39 +47,60 @@ cayenneNoToc: true
    </thead>
    <tbody>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.properties</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>Map&lt;String,String&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Properties used by built-in Cayenne services. The keys in this map are the property names from the table in Appendix A.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.properties</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>Map&lt;String,String&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Properties used by built-in Cayenne services. The keys in this map are the property names from the table in Appendix A.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.adapter_detectors</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;DbAdapterDetector&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Contains objects that can discover the type of current database and install the correct DbAdapter in runtime.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.adapter_detectors</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>List&lt;DbAdapterDetector&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Contains objects that can discover the type of current database and install the correct DbAdapter in runtime.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.domain_listeners</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;Object&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores DataDomain listeners.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.domain_listeners</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>List&lt;Object&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Stores DataDomain listeners.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.project_locations</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores locations of the one of more project configuration files.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.project_locations</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Stores locations of the one of more project configuration files.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.default_types</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;ExtendedType&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores default adapter-agnostic ExtendedTypes. Default ExtendedTypes can be overridden / extended by DB-specific DbAdapters as well as by user-provided types configured in another colltecion (see <code>"cayenne.user_types"</code>).</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.default_types</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>List&lt;ExtendedType&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Stores default adapter-agnostic ExtendedTypes. Default ExtendedTypes can be overridden / extended by DB-specific DbAdapters as well as by user-provided types configured in another colltecion (see <code>"cayenne.user_types"</code>).</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.user_types</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;ExtendedType&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores a user-provided ExtendedTypes. This collection will be merged into a full list of ExtendedTypes and would override any ExtendedTypes defined in a default list, or by a DbAdapter.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.user_types</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>List&lt;ExtendedType&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Stores a user-provided ExtendedTypes. This collection will be merged into a full list of ExtendedTypes and would override any ExtendedTypes defined in a default list, or by a DbAdapter.</p></td>
     </tr>
     <tr>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>cayenne.type_factories</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock"><code>List&lt;ExtendedTypeFactory&gt;</code></p></td>
-     <td class="tableblock halign-left valign-middle"><p class="tableblock">Stores default and user-provided ExtendedTypeFactories. ExtendedTypeFactory allows to define ExtendedTypes dynamically for the whole group of Java classes. E.g. Cayenne supplies a factory to map all Enums regardless of their type.</p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>cayenne.type_factories</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock"><code>List&lt;ExtendedTypeFactory&gt;</code></p></td>
+     <td class="tableblock halign-left valign-middle">
+      <p class="tableblock">Stores default and user-provided ExtendedTypeFactories. ExtendedTypeFactory allows to define ExtendedTypes dynamically for the whole group of Java classes. E.g. Cayenne supplies a factory to map all Enums regardless of their type.</p></td>
     </tr>
    </tbody>
   </table>
