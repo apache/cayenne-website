@@ -14,6 +14,9 @@
     <loc>https://cayenne.apache.org/docs/4.2/getting-started-guide/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/dev/how_development_happens.html</loc>
   </url>
   <url>
@@ -32,6 +35,9 @@
     <loc>https://cayenne.apache.org/docs/4.2/cayenne-guide/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/setup/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/dev/code-repository.html</loc>
   </url>
   <url>
@@ -45,6 +51,9 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-mapping-structure/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/success-stories.html</loc>
@@ -62,10 +71,16 @@
     <loc>https://cayenne.apache.org/docs/4.2/getting-started-rop/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-modeler/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/about/support/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/building-cayenne.html</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-framework/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/3.1/upgrade-guide/</loc>
@@ -80,13 +95,97 @@
     <loc>https://cayenne.apache.org/docs/4.2/upgrade-guide/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/including-cayenne-in-project/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/dev/release-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/starting-cayenne/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/running-unit-tests.html</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/persistent-objects-objectcontext/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/dev/cms-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/expressions/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/orderings/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/queries/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/lifecycle-events/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/performance-tuning/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/customizing-cayenne-runtime/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/db-first-flow/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-introduction/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-filtering/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-relationships-loading-control/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-modeler/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/additional-modules/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-cache-invalidation/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-commit-log/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-crypto/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-jcache/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-project-compatibility/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-velocity/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-osgi/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/build_tools/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/maven_plugin/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/gradle_plugin/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ant_tasks/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/appendix-a-configuration-properties/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/appendix-b-service-collections/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/</loc>
@@ -218,105 +317,6 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/doap/cayenne.rdf</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/additional-modules/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ant_tasks/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-velocity/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/appendix-a-configuration-properties/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/appendix-b-service-collections/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/build_tools/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-cache-invalidation/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-framework/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-mapping-structure/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-osgi/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-modeler/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-commit-log/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-crypto/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/customizing-cayenne-runtime/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/db-first-flow/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/expressions/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-filtering/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/gradle_plugin/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/including-cayenne-in-project/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-introduction/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-jcache/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/lifecycle-events/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/maven_plugin/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/orderings/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-relationships-loading-control/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/performance-tuning/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/persistent-objects-objectcontext/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-project-compatibility/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/queries/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-modeler/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/setup/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/starting-cayenne/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/legacy/legacy-docs/</loc>
