@@ -35,10 +35,10 @@ releases:
     javaDoc: "no"
 
   - version: "4.2"
-    latestRevision: "4.2"
+    latestRevision: "4.2.1"
     type: "Stable"
     description: "Latest stable release"
-    date: "2023-05-25"
+    date: "2024-06-20"
     docs: true
     downloadable: true
     jdk: 1.8
