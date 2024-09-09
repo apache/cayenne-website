@@ -60,3 +60,10 @@ menu:
       weight: 10
       url: 'https://issues.apache.org/jira/browse/CAY'
       parent: collaboration
+
+
+markup:
+  goldmark:
+    renderer:
+      # this enables raw HTML rendering
+      unsafe: true

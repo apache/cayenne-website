@@ -55,12 +55,12 @@
             <div class="tab-pane fade" id="maven_{{ $urlFriendlyRevision }}" role="tabpanel" aria-labelledby="maven_{{ $urlFriendlyRevision }}-tab">
                 <pre><code class="xml">&lt;dependency>
     &lt;groupId>org.apache.cayenne&lt;/groupId>
-    &lt;artifactId>cayenne-server&lt;/artifactId>
+    &lt;artifactId>{{ if .maven }}{{ .maven }}{{ else }}cayenne-server{{ end }}&lt;/artifactId>
     &lt;version>{{ $revision }}&lt;/version>
 &lt;/dependency></code></pre>
             </div>
             <div class="tab-pane fade" id="gradle_{{ $urlFriendlyRevision }}" role="tabpanel" aria-labelledby="gradle_{{ $urlFriendlyRevision }}-tab">
-                <pre><code class="groovy">compile group: 'org.apache.cayenne', name: 'cayenne-server', version: '{{ $revision }}'</code></pre>
+                <pre><code class="groovy">implementation 'org.apache.cayenne:{{ if .maven }}{{ .maven }}{{ else }}cayenne-server{{ end }}:{{ $revision }}'</code></pre>
             </div>
         </div>
         {{- end -}}
