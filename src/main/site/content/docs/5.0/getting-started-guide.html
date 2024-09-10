@@ -1,0 +1,746 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Getting Started Guide"
+description: "Tutorial how to quick start new Cayenne project"
+weight: 10
+docsMenuTitle: "Getting Started (5.0)"
+cayenneVersion: "5.0"
+---
+<div class="sect1">
+ <h2 id="setting-up-the-environment"><a class="anchor" href="#setting-up-the-environment"></a>1. Setting up the environment</h2>
+ <div class="sectionbody">
+  <div class="paragraph">
+   <p>The goal of this chapter of the tutorial is to install (or check that you already have installed) a minimally needed set of software to build a Cayenne application.</p>
+  </div>
+  <div class="sect2">
+   <h3 id="install-java"><a class="anchor" href="#install-java"></a>1.1. Install Java</h3>
+   <div class="paragraph">
+    <p>Obviously, JDK has to be installed. Cayenne 5.0 requires JDK 11 or newer.</p>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="install-intellij-idea"><a class="anchor" href="#install-intellij-idea"></a>1.2. Install IntelliJ IDEA</h3>
+   <div class="paragraph">
+    <p>Download and install IntelliJ IDEA Community Edition. This tutorial is based on version 2016.3, still it should work with any recent IntelliJ IDEA version.</p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="sect1">
+ <h2 id="learning-mapping-basics"><a class="anchor" href="#learning-mapping-basics"></a>2. Learning mapping basics</h2>
+ <div class="sectionbody">
+  <div class="sect2">
+   <h3 id="starting-a-project"><a class="anchor" href="#starting-a-project"></a>2.1. Starting a project</h3>
+   <div class="paragraph">
+    <p>The goal of this chapter is to create a new Java project in IntelliJ IDEA containing a basic Cayenne mapping. It presents an introduction to CayenneModeler GUI tool, showing how to create the initial mapping objects: <code>DataDomain</code>, <code>DataNode</code>, <code>DataMap</code>.</p>
+   </div>
+   <div class="sect3">
+    <h4 id="create-a-new-project-in-intellij-idea"><a class="anchor" href="#create-a-new-project-in-intellij-idea"></a>2.1.1. Create a new Project in IntelliJ IDEA</h4>
+    <div class="paragraph">
+     <p>In IntelliJ IDEA select <code>File &gt; New &gt; Project..</code> and then select <code>Maven</code> and click <code>Next</code>. In the dialog shown on the screenshot below, fill the <code>Group Id</code> and <code>Artifact Id</code> fields and click <code>Next</code>.</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/tutorial-idea-project.png" alt="tutorial idea project">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>On next dialog screen you can customize directory for your project and click <code>Finish</code>. Now you should have a new empty project.</p>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="download-and-start-cayennemodeler"><a class="anchor" href="#download-and-start-cayennemodeler"></a>2.1.2. Download and Start CayenneModeler</h4>
+    <div class="paragraph">
+     <p>Although later in this tutorial we’ll be using Maven to include Cayenne runtime jars in the project, you’ll still need to download Cayenne to get access to the CayenneModeler tool.</p>
+    </div>
+    <div class="admonitionblock note">
+     <table>
+      <tbody>
+       <tr>
+        <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+        <td class="content">If you are really into Maven, you can start CayenneModeler from Maven too. We’ll do it in a more traditional way here.</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="paragraph">
+     <p>Download the <a href="https://cayenne.apache.org/download.html">latest release</a>. Unpack the distribution somewhere in the file system and start CayenneModeler, following platform-specific instructions. On most platforms it is done simply by doubleclicking the Modeler icon. The welcome screen of the Modeler looks like this:</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/modeler-started.png" alt="modeler started">
+     </div>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="create-a-new-mapping-project-in-cayennemodeler"><a class="anchor" href="#create-a-new-mapping-project-in-cayennemodeler"></a>2.1.3. Create a New Mapping Project in CayenneModeler</h4>
+    <div class="paragraph">
+     <p>Click on the <code>New Project</code> button on Welcome screen. A new mapping project will appear that contains a single <strong>DataDomain</strong>. The meaning of a DataDomain is explained elsewhere in the User Guide. For now it is sufficient to understand that DataDomain is the root of your mapping project.</p>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="create-a-datanode"><a class="anchor" href="#create-a-datanode"></a>2.1.4. Create a DataNode</h4>
+    <div class="paragraph">
+     <p>The next project object you will create is a <strong>DataNode</strong>. DataNode is a descriptor of a single database your application will connect to. Cayenne mapping project can use more than one database, but for now, we’ll only use one. With "project" selected on the left, click on <code>Create DataNode</code> button <span class="image"><img src="images/icon-node.png" alt="icon node"></span> on the toolbar (or select <code>Project &gt; Create DataNode</code> from the menu).</p>
+    </div>
+    <div class="paragraph">
+     <p>A new DataNode is displayed. Now you need to specify JDBC connection parameters. For an in-memory Derby database you can enter the following settings:</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>JDBC Driver: <code>org.apache.derby.jdbc.EmbeddedDriver</code></p></li>
+      <li>
+       <p>DB URL: <code>jdbc:derby:memory:testdb;create=true</code></p></li>
+     </ul>
+    </div>
+    <div class="admonitionblock note">
+     <table>
+      <tbody>
+       <tr>
+        <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+        <td class="content">We are creating an in-memory database here. So when you stop your application, all the data will be lost. In most real-life cases you’ll be connecting to a database that actually persists its data on disk, but an in-memory DB will do for the simple tutorial.</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="paragraph">
+     <p>Also you will need to change "Schema Update Strategy". Select <code>org.apache.cayenne.access.dbsync.CreateIfNoSchemaStrategy</code> from the dropdown, so that Cayenne creates a new schema on Derby based on the ORM mapping when the application starts.</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/base-datanode.png" alt="base datanode">
+     </div>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="create-a-datamap"><a class="anchor" href="#create-a-datamap"></a>2.1.5. Create a DataMap</h4>
+    <div class="paragraph">
+     <p>Now you will create a <strong>DataMap</strong>. DataMap is an object that holds all the mapping information. To create it, click on "Create DataMap" button <span class="image"><img src="images/icon-datamap.png" alt="icon datamap"></span> (or select a corresponding menu item). Note that the newly created DataMap is automatically linked to the DataNode that you created in the previous step. If there is more than one DataNode, you may need to link a DataMap to the correct node manually. In other words a DataMap within DataDomain must point to a database described by the map.</p>
+    </div>
+    <div class="paragraph">
+     <p>You can leave all the DataMap defaults unchanged except for one - "Java Package". Enter <code>org.example.cayenne.persistent</code>. This name will later be used for all persistent classes.</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/base-datamap.png" alt="base datamap">
+     </div>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="save-the-project"><a class="anchor" href="#save-the-project"></a>2.1.6. Save the Project</h4>
+    <div class="imageblock right">
+     <div class="content">
+      <img src="images/idea-xmlfiles.png" alt="idea xmlfiles">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Before you proceed with the actual mapping, let’s save the project. Click on "Save" button in the toolbar and navigate to the <code>tutorial</code> IDEA project folder that was created earlier in this section and its <code>src/main/resources</code> subfolder and save the project there. Now go back to IDEA and you will see two Cayenne XML files.</p>
+    </div>
+    <div class="paragraph">
+     <p>Note that the location of the XML files is not coincidental. Cayenne runtime looks for <code>cayenne-*.xml</code> file in the application <code>CLASSPATH</code> and <code>src/main/resources</code> folder should already be a "class folder" in IDEA for our project (and is also a standard location that Maven would copy to a jar file, if we were using Maven from command-line).</p>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="getting-started-with-object-relational-mapping-orm"><a class="anchor" href="#getting-started-with-object-relational-mapping-orm"></a>2.2. Getting started with Object Relational Mapping (ORM)</h3>
+   <div class="paragraph">
+    <p>The goal of this section is to learn how to create a simple Object-Relational model with CayenneModeler. We will create a complete ORM model for the following database schema:</p>
+   </div>
+   <div class="imageblock text-center">
+    <div class="content">
+     <img src="images/cayenne-tutorial-model.png" alt="cayenne tutorial model">
+    </div>
+   </div>
+   <div class="admonitionblock note">
+    <table>
+     <tbody>
+      <tr>
+       <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+       <td class="content">Very often you’d have an existing database already, and it can be quickly imported in Cayenne via "Tools &gt; Reengineer Database Schema". This will save you lots of time compared to manual mapping. However understanding how to create the mapping by hand is important, so we are showing the "manual" approach below.</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect3">
+    <h4 id="mapping-database-tables-and-columns"><a class="anchor" href="#mapping-database-tables-and-columns"></a>2.2.1. Mapping Database Tables and Columns</h4>
+    <div class="paragraph">
+     <p>Lets go back to CayenneModeler where we have the newly created project open and start by adding the ARTIST table. Database tables are called <strong>DbEntities</strong> in Cayenne mapping (those can be actual tables or database views).</p>
+    </div>
+    <div class="paragraph">
+     <p>Select "datamap" on the left-hand side project tree and click "Create DbEntity" button <span class="image"><img src="images/icon-dbentity.png" alt="icon dbentity"></span> (or use "Project &gt; Create DbEntity" menu). A new DbEntity is created. In "DbEntity Name" field enter "ARTIST". Then click on "Create Attribute" button <span class="image"><img src="images/icon-attribute.png" alt="icon attribute"></span> on the entity toolbar. This action changes the view to the "Attribute" tab and adds a new attribute (attribute means a "table column" in this case) called "untitledAttr". Let’s rename it to ID, make it an <code>INTEGER</code> and make it a PK:</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/modeler-artistid.png" alt="modeler artistid">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Similarly add NAME <code>VARCHAR(200)</code> and DATE_OF_BIRTH <code>DATE</code> attributes. After that repeat this procedure for PAINTING and GALLERY entities to match DB schema shown above.</p>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="mapping-database-relationships"><a class="anchor" href="#mapping-database-relationships"></a>2.2.2. Mapping Database Relationships</h4>
+    <div class="paragraph">
+     <p>Now we need to specify relationships between ARTIST, PAINTING and GALLERY tables. Start by creating a one-to-many ARTIST/PAINTING relationship:</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Select the ARTIST DbEntity on the left and click on the "Properties" tab.</p></li>
+      <li>
+       <p>Click on "Create Relationship" button on the entity toolbar <span class="image"><img src="images/icon-relationship.png" alt="icon relationship"></span> - relationship configuration dialog is presented.</p></li>
+      <li>
+       <p>Choose the "Target" to be "Painting".</p></li>
+      <li>
+       <p>Assign names for relationship and reverse relationship. This name can be anything (this is really a symbolic name of the database referential constraint), but it is recommended to use a valid Java identifier, as this will save some typing later. We’ll call the relationship "paintings" and reverse relationship "artist".</p></li>
+      <li>
+       <p>Check "ToMany" checkbox for "paintings" relationship</p></li>
+      <li>
+       <p>Click on "Add" button on the right to add a join</p></li>
+      <li>
+       <p>Select "ID" column for the "Source" and "ARTIST_ID" column for the target.</p></li>
+      <li>
+       <p>Relationship information should now look like this:</p></li>
+     </ul>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/modeler-dbrelationship.png" alt="modeler dbrelationship">
+     </div>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Click "Done" to confirm the changes and close the dialog.</p></li>
+      <li>
+       <p>Two complimentary relationships have been created - from ARTIST to PAINTING and back.</p></li>
+      <li>
+       <p>Repeat the steps above to create a many-to-one relationship from PAINTING to GALLERY, calling the relationships pair "gallery" and "paintings".</p></li>
+     </ul>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="mapping-java-classes"><a class="anchor" href="#mapping-java-classes"></a>2.2.3. Mapping Java Classes</h4>
+    <div class="paragraph">
+     <p>Now that the database schema mapping is complete, CayenneModeler can create mappings of Java classes (aka "ObjEntities") by deriving everything from DbEntities. At present there is no way to do it for the entire DataMap in one click, so we’ll do it for each table individually.</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Select "ARTIST" DbEntity and click on "Create ObjEntity" button <span class="image"><img src="images/icon-new_objentity.png" alt="icon new objentity"></span> either on the entity toolbar or on the main toolbar. An ObjEntity called "Artist" is created with a Java class field set to <code>org.example.cayenne.persistent.Artist</code>. The modeler transformed the database names to the Java-friendly names (e.g., if you click on the "Attributes" tab, you’ll see that "DATE_OF_BIRTH" column was converted to "dateOfBirth" Java class attribute).</p></li>
+      <li>
+       <p>Select "GALLERY" DbEntity and click on "Create ObjEntity" button again - you’ll see a "Gallery" ObjEntity created.</p></li>
+      <li>
+       <p>Finally, do the same thing for "PAINTING".</p></li>
+     </ul>
+    </div>
+    <div class="paragraph">
+     <p>Now you need to synchronize relationships. Artist and Gallery entities were created when there was no related "Painting" entity, so their relationships were not set.</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Click on the "Artist" ObjEntity. Now click on "Sync ObjEntity with DbEntity" button on the toolbar <span class="image"><img src="images/icon-sync.png" alt="icon sync"></span> - you will see the "paintings" relationship appear.</p></li>
+      <li>
+       <p>Do the same for the "Gallery" entity.</p></li>
+     </ul>
+    </div>
+    <div class="paragraph">
+     <p>Unless you want to customize the Java class and property names (which you can do easily) the mapping is complete.</p>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="creating-java-classes"><a class="anchor" href="#creating-java-classes"></a>2.3. Creating Java Classes</h3>
+   <div class="paragraph">
+    <p>Here we’ll generate the Java classes from the model that was created in the previous section. CayenneModeler can be used to also generate the database schema, but since we specified “CreateIfNoSchemaStrategy” earlier when we created a DataNode, we’ll skip the database schema step. Still be aware that you can do it if you need to via "Tools &gt; Create Database Schema".</p>
+   </div>
+   <div class="sect3">
+    <h4 id="creating-java-classes-2"><a class="anchor" href="#creating-java-classes-2"></a>2.3.1. Creating Java Classes</h4>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Select your datamap in a project tree and open "Class Generation" tab.</p></li>
+      <li>
+       <p>For "Type" select "Standard Persistent Objects", if it is not already selected.</p></li>
+      <li>
+       <p>For the "Output Directory" select “src/main/java” folder under your IDEA project folder (this is a "peer" location to the <code>cayenne-*.xml</code> location we selected before).</p></li>
+      <li>
+       <p>Select all object entities (unless they are already checked).</p></li>
+      <li>
+       <p>Finally, click "Generate"</p></li>
+     </ul>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/class-generation.png" alt="class generation">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now go back to IDEA - you should see pairs of classes generated for each mapped entity. You probably also see that there’s a bunch of red squiggles next to the newly generated Java classes in IDEA. This is because our project does not include Cayenne as a Maven dependency yet. Let’s fix it now by adding "cayenne" artifact in the bottom of the <code>pom.xml</code> file. Also we should tell Maven compile plugin that our project needs Java 8. The resulting POM should look like this:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;org.example.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;tutorial&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;cayenne.version&gt;5.0-M1&lt;/cayenne.version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+        &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+            &lt;artifactId&gt;cayenne&lt;/artifactId&gt;
+            &lt;version&gt;${cayenne.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-simple&lt;/artifactId&gt;
+            &lt;version&gt;1.7.36&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+     </div>
+    </div>
+    <div class="colist arabic">
+     <table>
+      <tbody>
+       <tr>
+        <td><i class="conum" data-value="1"></i><b>1</b></td>
+        <td>Here you can specify the version of Cayenne you are actually using</td>
+       </tr>
+       <tr>
+        <td><i class="conum" data-value="2"></i><b>2</b></td>
+        <td>Tell Maven to support Java 11</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="paragraph">
+     <p>Your computer must be connected to the internet. Once you edit the <code>pom.xml</code>, IDEA will download the needed Cayenne jar file and add it to the project build path. As a result, all the errors should disappear. In tutorial for console output we use slf4j-simple logger implementation. Due to use SLF4J logger in Apache Cayenne, you can use your custom logger (e.g. log4j or commons-logging) through bridges.</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/idea-generated-classes.png" alt="idea generated classes">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now let’s check the entity class pairs. Each one is made of a superclass (e.g. <code>auto/_Artist</code>) and a subclass (e.g. <code>Artist</code>). You <strong>should not</strong> modify the superclasses whose names start with "_" (underscore), as they will be replaced on subsequent generator runs. Instead all custom logic should be placed in the subclasses in <code>org.example.cayenne.persistent</code> package - those will never be overwritten by the class generator.</p>
+    </div>
+    <div class="admonitionblock tip">
+     <table>
+      <tbody>
+       <tr>
+        <td class="icon"><i class="fa fa-lightbulb-o fa-2x" title="Tip"></i></td>
+        <td class="content">
+         <div class="title">
+          Class Generation Hint
+         </div>
+         <div class="paragraph">
+          <p>Often you’d start by generating classes from the Modeler, but at the later stages of the project the generation is usually automated either via Ant cgen task or Maven cgen mojo. All three methods are interchangeable, however Ant and Maven methods would ensure that you never forget to regenerate classes on mapping changes, as they are integrated into the build cycle.</p>
+         </div></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="sect1">
+ <h2 id="learning-cayenne-api"><a class="anchor" href="#learning-cayenne-api"></a>3. Learning Cayenne API</h2>
+ <div class="sectionbody">
+  <div class="sect2">
+   <h3 id="getting-started-with-objectcontext"><a class="anchor" href="#getting-started-with-objectcontext"></a>3.1. Getting started with ObjectContext</h3>
+   <div class="paragraph">
+    <p>In this section we’ll write a simple main class to run our application, and get a brief introduction to Cayenne ObjectContext.</p>
+   </div>
+   <div class="sect3">
+    <h4 id="creating-the-main-class"><a class="anchor" href="#creating-the-main-class"></a>3.1.1. Creating the Main Class</h4>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>In IDEA create a new class called “Main” in the “org.example.cayenne” package.</p></li>
+      <li>
+       <p>Create a standard "main" method to make it a runnable class:</p></li>
+     </ul>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">package org.example.cayenne;
+
+public class Main {
+
+    public static void main(String[] args) {
+    }
+}</code></pre>
+     </div>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>The first thing you need to be able to access the database is to create a <code>CayenneRuntime</code> object (which is essentially a wrapper around Cayenne stack) and use it to obtain an instance of an <code>ObjectContext</code>.</p></li>
+     </ul>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">package org.example.cayenne;
+
+import org.apache.cayenne.ObjectContext;
+import org.apache.cayenne.runtime.CayenneRuntime;
+
+public class Main {
+
+    public static void main(String[] args) {
+        CayenneRuntime cayenneRuntime = CayenneRuntime.builder()
+                        .addConfig("cayenne-project.xml")
+                        .build();
+        ObjectContext context = cayenneRuntime.newContext();
+    }
+}</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p><code>ObjectContext</code> is an isolated "session" in Cayenne that provides all needed API to work with data. ObjectContext has methods to execute queries and manage persistent objects. We’ll discuss them in the following sections. When the first ObjectContext is created in the application, Cayenne loads XML mapping files and creates a shared access stack that is later reused by other ObjectContexts.</p>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="running-application"><a class="anchor" href="#running-application"></a>3.1.2. Running Application</h4>
+    <div class="paragraph">
+     <p>Let’s check what happens when you run the application. But before we do that we need to add another dependency to the <code>pom.xml</code> - Apache Derby, our embedded database engine. The following piece of XML needs to be added to the <code>&lt;dependencies&gt;…​&lt;/dependencies&gt;</code> section, where we already have Cayenne jars:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.apache.derby&lt;/groupId&gt;
+    &lt;artifactId&gt;derby&lt;/artifactId&gt;
+    &lt;version&gt;10.14.2.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now we are ready to run. Right click the "Main" class in IDEA and select "Run 'Main.main()'".</p>
+    </div>
+    <div class="imageblock text-center">
+     <div class="content">
+      <img src="images/idea-file-run-menu.png" alt="idea file run menu">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>In the console you’ll see output similar to this, indicating that Cayenne stack has been started:</p>
+    </div>
+    <div class="literalblock">
+     <div class="content">
+      <pre>INFO: Loading XML configuration resource from file:/.../cayenne-project.xml
+INFO: Loading XML DataMap resource from file:/.../datamap.map.xml
+INFO: loading user name and password.
+INFO: Connecting to 'jdbc:derby:memory:testdb;create=true' as 'null'
+INFO: +++ Connecting: SUCCESS.
+INFO: setting DataNode 'datanode' as default, used by all unlinked DataMaps&lt;/screen&gt;</pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="how-to-configure-cayenne-logging"><a class="anchor" href="#how-to-configure-cayenne-logging"></a>3.1.3. How to Configure Cayenne Logging</h4>
+    <div class="paragraph">
+     <p>Follow the instructions in the logging chapter to tweak verbosity of the logging output.</p>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="getting-started-with-persistent-objects"><a class="anchor" href="#getting-started-with-persistent-objects"></a>3.2. Getting started with persistent objects</h3>
+   <div class="paragraph">
+    <p>In this chapter we’ll learn about persistent objects, how to customize them and how to create and save them in DB.</p>
+   </div>
+   <div class="sect3">
+    <h4 id="inspecting-and-customizing-persistent-objects"><a class="anchor" href="#inspecting-and-customizing-persistent-objects"></a>3.2.1. Inspecting and Customizing Persistent Objects</h4>
+    <div class="paragraph">
+     <p>Persistent classes in Cayenne implement a <code>Persistent</code> interface. If you inspect any of the classes generated earlier in this tutorial (e.g. <code>org.example.cayenne.persistent.Artist</code>), you’ll see that it extends a class with the name that starts with underscore (<code>org.example.cayenne.persistent.auto._Artist</code>), which in turn extends from <code>org.apache.cayenne.PersistentObject</code>. Splitting each persistent class into user-customizable subclass (<code>Xyz</code>) and a generated superclass (<code>_Xyz</code>) is a useful technique to avoid overwriting the custom code when refreshing classes from the mapping model.</p>
+    </div>
+    <div class="paragraph">
+     <p>Let’s for instance add a utility method to the Artist class that sets Artist date of birth, taking a string argument for the date. It will be preserved even if the model changes later:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">public class Artist extends _Artist {
+
+    static final String DEFAULT_DATE_FORMAT = "yyyyMMdd";
+
+    /**
+     * Sets date of birth using a string in format yyyyMMdd.
+     */
+    public void setDateOfBirthString(String yearMonthDay) {
+        if (yearMonthDay == null) {
+            setDateOfBirth(null);
+            return;
+        }
+
+        LocalDate date;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter
+                    .ofPattern(DEFAULT_DATE_FORMAT);
+            date = LocalDate.parse(yearMonthDay, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(
+                    "A date argument must be in format '"
+                            + DEFAULT_DATE_FORMAT + "': " + yearMonthDay);
+        }
+        setDateOfBirth(date);
+    }
+}</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="create-new-objects"><a class="anchor" href="#create-new-objects"></a>3.2.2. Create New Objects</h4>
+    <div class="paragraph">
+     <p>Now we’ll create a bunch of objects and save them to the database. An object is created and registered with <code>ObjectContext</code> using “newObject” method. Objects <strong>must</strong> be registered with <code>DataContext</code> to be persisted and to allow setting relationships with other objects. Add this code to the "main" method of the Main class:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">Artist picasso = context.newObject(Artist.class);
+picasso.setName("Pablo Picasso");
+picasso.setDateOfBirthString("18811025");</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Note that at this point "picasso" object is only stored in memory and is not saved in the database. Let’s continue by adding a Metropolitan Museum “Gallery” object and a few Picasso "Paintings":</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">Gallery metropolitan = context.newObject(Gallery.class);
+metropolitan.setName("Metropolitan Museum of Art");
+Painting girl = context.newObject(Painting.class);
+girl.setName("Girl Reading at a Table");
+Painting stein = context.newObject(Painting.class);
+stein.setName("Gertrude Stein");</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now we can link the objects together, establishing relationships. Note that in each case below relationships are automatically established in both directions (e.g. <code>picasso.addToPaintings(girl)</code> has exactly the same effect as <code>girl.setToArtist(picasso)</code>).</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">picasso.addToPaintings(girl);
+picasso.addToPaintings(stein);
+girl.setGallery(metropolitan);
+stein.setGallery(metropolitan);</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now lets save all five new objects, in a single method call:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">context.commitChanges();</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now you can run the application again as described in the previous chapter. The new output will show a few actual DB operations:</p>
+    </div>
+    <div class="literalblock">
+     <div class="content">
+      <pre>...
+INFO: --- transaction started.
+INFO: No schema detected, will create mapped tables
+INFO: CREATE TABLE GALLERY (ID INTEGER NOT NULL, NAME VARCHAR (200), PRIMARY KEY (ID))
+INFO: CREATE TABLE ARTIST (DATE_OF_BIRTH DATE, ID INTEGER NOT NULL, NAME VARCHAR (200), PRIMARY KEY (ID))
+INFO: CREATE TABLE PAINTING (ARTIST_ID INTEGER, GALLERY_ID INTEGER, ID INTEGER NOT NULL,
+      NAME VARCHAR (200), PRIMARY KEY (ID))
+INFO: ALTER TABLE PAINTING ADD FOREIGN KEY (ARTIST_ID) REFERENCES ARTIST (ID)
+INFO: ALTER TABLE PAINTING ADD FOREIGN KEY (GALLERY_ID) REFERENCES GALLERY (ID)
+INFO: CREATE TABLE AUTO_PK_SUPPORT (
+      TABLE_NAME CHAR(100) NOT NULL,  NEXT_ID BIGINT NOT NULL,  PRIMARY KEY(TABLE_NAME))
+INFO: DELETE FROM AUTO_PK_SUPPORT WHERE TABLE_NAME IN ('ARTIST', 'GALLERY', 'PAINTING')
+INFO: INSERT INTO AUTO_PK_SUPPORT (TABLE_NAME, NEXT_ID) VALUES ('ARTIST', 200)
+INFO: INSERT INTO AUTO_PK_SUPPORT (TABLE_NAME, NEXT_ID) VALUES ('GALLERY', 200)
+INFO: INSERT INTO AUTO_PK_SUPPORT (TABLE_NAME, NEXT_ID) VALUES ('PAINTING', 200)
+INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'ARTIST']
+INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'GALLERY']
+INFO: SELECT NEXT_ID FROM AUTO_PK_SUPPORT WHERE TABLE_NAME = ? FOR UPDATE [bind: 1:'PAINTING']
+INFO: INSERT INTO GALLERY (ID, NAME) VALUES (?, ?)
+INFO: [batch bind: 1-&gt;ID:200, 2-&gt;NAME:'Metropolitan Museum of Art']
+INFO: === updated 1 row.
+INFO: INSERT INTO ARTIST (DATE_OF_BIRTH, ID, NAME) VALUES (?, ?, ?)
+INFO: [batch bind: 1-&gt;DATE_OF_BIRTH:'1881-10-25 00:00:00.0', 2-&gt;ID:200, 3-&gt;NAME:'Pablo Picasso']
+INFO: === updated 1 row.
+INFO: INSERT INTO PAINTING (ARTIST_ID, GALLERY_ID, ID, NAME) VALUES (?, ?, ?, ?)
+INFO: [batch bind: 1-&gt;ARTIST_ID:200, 2-&gt;GALLERY_ID:200, 3-&gt;ID:200, 4-&gt;NAME:'Gertrude Stein']
+INFO: [batch bind: 1-&gt;ARTIST_ID:200, 2-&gt;GALLERY_ID:200, 3-&gt;ID:201, 4-&gt;NAME:'Girl Reading at a Table']
+INFO: === updated 2 rows.
+INFO: +++ transaction committed.</pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>So first Cayenne creates the needed tables (remember, we used “CreateIfNoSchemaStrategy”). Then it runs a number of inserts, generating primary keys on the fly. Not bad for just a few lines of code.</p>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="selecting-objects"><a class="anchor" href="#selecting-objects"></a>3.3. Selecting Objects</h3>
+   <div class="paragraph">
+    <p>This chapter shows how to select objects from the database using <code>ObjectSelect</code> query.</p>
+   </div>
+   <div class="sect3">
+    <h4 id="introducing-objectselect"><a class="anchor" href="#introducing-objectselect"></a>3.3.1. Introducing ObjectSelect</h4>
+    <div class="paragraph">
+     <p>It was shown before how to persist new objects. Cayenne queries are used to access already saved objects. The primary query type used for selecting objects is <code>ObjectSelect</code>. It can be mapped in CayenneModeler or created via the API. We’ll use the latter approach in this section. We don’t have too much data in the database yet, but we can still demonstrate the main principles below.</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Select all paintings (the code, and the log output it generates):</p></li>
+     </ul>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Painting&gt; paintings1 = ObjectSelect.query(Painting.class).select(context);</code></pre>
+     </div>
+    </div>
+    <div class="literalblock">
+     <div class="content">
+      <pre>INFO: SELECT t0.GALLERY_ID, t0.ARTIST_ID, t0.NAME, t0.ID FROM PAINTING t0
+INFO: === returned 2 rows. - took 18 ms.</pre>
+     </div>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Select paintings that start with “gi”, ignoring case:</p></li>
+     </ul>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Painting&gt; paintings2 = ObjectSelect.query(Painting.class)
+        .where(Painting.NAME.likeIgnoreCase("gi%")).select(context);</code></pre>
+     </div>
+    </div>
+    <div class="literalblock">
+     <div class="content">
+      <pre>INFO: SELECT t0.GALLERY_ID, t0.NAME, t0.ARTIST_ID, t0.ID FROM PAINTING t0 WHERE UPPER(t0.NAME) LIKE UPPER(?)
+  [bind: 1-&gt;NAME:'gi%'] - prepared in 6 ms.
+INFO: === returned 1 row. - took 18 ms.</pre>
+     </div>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>Select all paintings done by artists who were born more than a 100 years ago:</p></li>
+     </ul>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Painting&gt; paintings3 = ObjectSelect.query(Painting.class)
+        .where(Painting.ARTIST.dot(Artist.DATE_OF_BIRTH).lt(LocalDate.of(1900,1,1)))
+        .select(context);</code></pre>
+     </div>
+    </div>
+    <div class="literalblock">
+     <div class="content">
+      <pre>INFO: SELECT t0.GALLERY_ID, t0.NAME, t0.ARTIST_ID, t0.ID FROM PAINTING t0 JOIN ARTIST t1 ON (t0.ARTIST_ID = t1.ID)
+  WHERE t1.DATE_OF_BIRTH &lt; ? [bind: 1-&gt;DATE_OF_BIRTH:'1911-01-01 00:00:00.493'] - prepared in 7 ms.
+INFO: === returned 2 rows. - took 25 ms.</pre>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="deleting-objects"><a class="anchor" href="#deleting-objects"></a>3.4. Deleting Objects</h3>
+   <div class="paragraph">
+    <p>This chapter explains how to model relationship delete rules and how to delete individual objects as well as sets of objects. Also demonstrated the use of Cayenne class to run a query.</p>
+   </div>
+   <div class="sect3">
+    <h4 id="setting-up-delete-rules"><a class="anchor" href="#setting-up-delete-rules"></a>3.4.1. Setting Up Delete Rules</h4>
+    <div class="paragraph">
+     <p>Before we discuss the API for object deletion, lets go back to CayenneModeler and set up some delete rules. Doing this is optional but will simplify correct handling of the objects related to deleted objects. In the Modeler go to "Artist" ObjEntity, "Relationships" tab and select "Cascade" for the "paintings" relationship delete rule:</p>
+    </div>
+    <div class="imageblock">
+     <div class="content">
+      <img src="images/modeler-deleterule.png" alt="modeler deleterule">
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Repeat this step for other relationships:</p>
+    </div>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>For Gallery set "paintings" relationship to be "Nullify", as a painting can exist without being displayed in a gallery.</p></li>
+      <li>
+       <p>For Painting set both relationships rules to "Nullify".</p></li>
+     </ul>
+    </div>
+    <div class="paragraph">
+     <p>Now save the mapping.</p>
+    </div>
+   </div>
+   <div class="sect3">
+    <h4 id="deleting-objects-2"><a class="anchor" href="#deleting-objects-2"></a>3.4.2. Deleting Objects</h4>
+    <div class="paragraph">
+     <p>While deleting objects is possible via SQL, qualifying a delete on one or more IDs, a more common way in Cayenne (or ORM in general) is to get a hold of the object first, and then delete it via the context. Let’s use utility class Cayenne to find an artist:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">Artist picasso = ObjectSelect.query(Artist.class)
+            .where(Artist.NAME.eq("Pablo Picasso")).selectOne(context);</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Now let’s delete the artist:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">if (picasso != null) {
+    context.deleteObject(picasso);
+    context.commitChanges();
+}</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>Since we set up "Cascade" delete rule for the Artist.paintings relationships, Cayenne will automatically delete all paintings of this artist. So when your run the app you’ll see this output:</p>
+    </div>
+    <div class="literalblock">
+     <div class="content">
+      <pre>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0
+  WHERE t0.NAME = ? [bind: 1-&gt;NAME:'Pablo Picasso'] - prepared in 6 ms.
+INFO: === returned 1 row. - took 18 ms.
+INFO: +++ transaction committed.
+INFO: --- transaction started.
+INFO: DELETE FROM PAINTING WHERE ID = ?
+INFO: [batch bind: 1-&gt;ID:200]
+INFO: [batch bind: 1-&gt;ID:201]
+INFO: === updated 2 rows.
+INFO: DELETE FROM ARTIST WHERE ID = ?
+INFO: [batch bind: 1-&gt;ID:200]
+INFO: === updated 1 row.
+INFO: +++ transaction committed.</pre>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
