@@ -14,6 +14,9 @@
     <loc>https://cayenne.apache.org/docs/4.2/getting-started-guide/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/getting-started-guide/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne/</loc>
   </url>
   <url>
@@ -93,6 +96,9 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/4.2/upgrade-guide/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/upgrade-guide/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/including-cayenne-in-project/</loc>
@@ -189,14 +195,18 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/</loc>
-    <lastmod>2024-06-20T12:00:00+03:00</lastmod>
+    <lastmod>2024-09-09T12:00:00+03:00</lastmod>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/2024/06/cayenne-421-released/</loc>
-    <lastmod>2024-06-20T12:00:00+03:00</lastmod>
+    <loc>https://cayenne.apache.org/2024/09/cayenne-50m1-released/</loc>
+    <lastmod>2024-09-09T12:00:00+03:00</lastmod>
   </url>
   <url>
     <loc>https://cayenne.apache.org/news/</loc>
+    <lastmod>2024-09-09T12:00:00+03:00</lastmod>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/2024/06/cayenne-421-released/</loc>
     <lastmod>2024-06-20T12:00:00+03:00</lastmod>
   </url>
   <url>
@@ -323,6 +333,9 @@
     <loc>https://cayenne.apache.org/doap/cayenne.rdf</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/getting-started-db-first/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/legacy/legacy-docs/</loc>
   </url>
   <url>
@@ -354,6 +367,12 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/thanks.html</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/api/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/api/index-all.html</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/4.2/api/</loc>

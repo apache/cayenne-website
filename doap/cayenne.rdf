@@ -42,8 +42,8 @@
         <release>
             <Version>
                 <name>Alpha</name>
-                <created>2024-06-06</created>
-                <revision>5.0-SNAPSHOT</revision>
+                <created>2024-09-09</created>
+                <revision>5.0-M1</revision>
             </Version>
         </release><release>
             <Version>

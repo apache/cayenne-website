@@ -105,7 +105,7 @@
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>. Make sure to consult <a href="https://github.com/apache/cayenne/blob/4.0.M4/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> file before updating.</p>
 <p>Before we start discussing individual features, a few words on the future development effort. Cayenne 4.0 is quickly approaching &ldquo;beta&rdquo; status. There&rsquo;s a good chance that the following release will be feature-complete and we will enter &ldquo;beta&rdquo; and associated code freeze of the runtime framework.</p>
 <p>Now the new things in a bit more detail:</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="fluent-query-api">Fluent query API</h3>
 <p>These fluent queries are new in M4:</p>
 <p><em>SQLExec</em></p>
@@ -144,19 +144,21 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
                 .param(&quot;name&quot;, &quot;Artist&quot;)
                 .call(context).getOutParam(&quot;artist_out&quot;);
 </code></pre>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="reverse-engineering-improvements">Reverse Engineering Improvements</h3>
 <p>There are a lot of improvements and bug fixes covering reverse engineering functionality (aka &ldquo;DB-first flow&rdquo;). There&rsquo;s still more work to do to make it perfect, but the API is starting to stabilize and the tools have already become very usable (as in actually used in production on many projects). Follow this <a href="/docs/4.0/cayenne-guide/cayenne-guide-part4.html">link</a> to learn what DB-First flow is all about and how to use it.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="cayenne-crypto-improvements">Cayenne Crypto Improvements</h3>
 <p>We&rsquo;ve aded support for mapping encrypted columns to numbers, Strings, etc.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="transaction-control">Transaction control</h3>
 <p>Added TransactionListener to allow for better control of manual transactions.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="rop-improvements">ROP Improvements</h3>
 <p>With M4 it&rsquo;s much easier to plug external tools for ROP connectivity and serialization purposes. Jetty HTTP/1.1 and HTTP/2 Client and Protostuff have been already added to the Cayenne and are supported out of the box.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
 <ul>
 <li>CAY-2051 Applying new Reverse Engineering to the Modeler</li>
 <li>CAY-2053 SQLExec fluent query API</li>
@@ -189,7 +191,7 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
 <li>CAY-2136 Allow Ordering.orderedList(…) methods to accept a Collection rather than only a List</li>
 <li>CAY-2160 Modeler: new welcome screen</li>
 </ul>
-<!-- raw HTML omitted -->
+<div class="pb-2"><!-- gap 2rem --></div>
 <h4 id="bug-fixes">Bug Fixes:</h4>
 <ul>
 <li>CAY-2016 cdbimport: Rename table with toMany relationship causes migration error</li>
@@ -364,6 +366,11 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
+                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2024-06-20 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 20, 2024</time>
                         <a href="/2024/06/cayenne-421-released/">Cayenne 4.2.1 Released</a>
                     </li>
@@ -371,11 +378,6 @@ int outParam = ProcedureCall.query(&quot;out_sp&quot;)
                     <li>
                         <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
                         <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
-                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
                     </li>
                     
                 </ul>

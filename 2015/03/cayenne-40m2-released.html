@@ -94,7 +94,7 @@
                         </h1>
                         <p>This is a big and important new milestone release of the development branch of Apache Cayenne. Existing users may have noticed that we renamed version 3.2 to 4.0 as the scope had been vastly expanded. So 4.0.M2 is a direct successor of 3.2M1. There are tons of new features and bug fixes included. Below are just the main highlights. For more details read upgrade-guide.pdf and check out the full release notes further down.</p>
 <p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="fluent-type-safe-query-api">Fluent Type-Safe Query API</h3>
 <p>Cayenne now provides a set of new fluent query classes: ObjectSelect, SQLSelect, SelectById. More will be coming in the future releases. Here is a simple example of a query selecting a single object by a given criteria:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Artist a <span style="color:#f92672">=</span> ObjectSelect
@@ -102,16 +102,16 @@
     <span style="color:#f92672">.</span><span style="color:#a6e22e">where</span><span style="color:#f92672">(</span>Artist<span style="color:#f92672">.</span><span style="color:#a6e22e">NAME</span><span style="color:#f92672">.</span><span style="color:#a6e22e">eq</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Picasso&#34;</span><span style="color:#f92672">))</span>
     <span style="color:#f92672">.</span><span style="color:#a6e22e">selectOne</span><span style="color:#f92672">(</span>context<span style="color:#f92672">);</span></code></pre></div>
 <p>A related addition is positional bindings in Expression, SQLTemplate and the new query classes. Using the new API you&rsquo;ll avoid boilerplate in the most-commonly written Cayenne code, all this with full support for generics and type safety. The &ldquo;old&rdquo; style of bean-like queries (SelectQuery) is still supported.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="powerful-automated-workflow-with-cdbimport">Powerful Automated Workflow with &lsquo;cdbimport&rsquo;</h3>
 <p>&lsquo;cdbimport&rsquo; (a Maven/Ant task that generates DataMap from DB) was always there in Cayenne, just not very usable. In this release it was reworked to become a cornerstone of an automated workflow that allows you to keep mapping and Java classes always in sync with the underlying DB, and yet provide arbitrary customizations to the object layer.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="osgi-support">OSGI Support</h3>
 <p>All Cayenne runtime jars have proper OSGi manifests and can be used as OSGi bundles. Here is a <a href="https://github.com/andrus/cayenne-osgi-example">demo</a> showing how to write an OSGi Cayenne app. The main trick is to add an OSGi module to Cayenne runtime that will take care of classloading, etc.:</p>
 <pre><code>Module osgiModule = 
    OsgiModuleBuilder.forProject(Activator.class).withDriver(Driver.class).module();
 </code></pre>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="serverruntimebuilder-and-mapping-free-runtime">ServerRuntimeBuilder and Mapping-Free Runtime</h3>
 <p>We found that customizing ServerRuntime is a frequent task in most applications. Things like setting a proper DataSource, loading multiple projects into a single runtime, overriding a service here and there are all very common customizations. While all of those can be done via ServerRuntime constructor and custom DI modules, we decided to add some syntactic sugar to streamline configuration. Enter ServerRuntimeBuilder:</p>
 <pre><code>ServerRuntime runtime = new ServerRuntimeBuilder(&quot;myproject&quot;)
@@ -121,7 +121,7 @@
     .build();
 </code></pre>
 <p>While we are on the topic of ServerRuntime, we now also have an ability to start a mapping-free runtime, which turns Cayenne into a powerful SQL execution stack without the ORM part (e.g. useful for unit tests).</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="transparent-database-cryptography-with-cayenne-crypto">Transparent Database Cryptography with &lsquo;cayenne-crypto&rsquo;</h3>
 <p>Cayenne now includes <a href="https://search.maven.org/#artifactdetails%7Corg.apache.cayenne%7Ccayenne-crypto%7C4.0.M2%7Cjar">cayenne-crypto.jar</a>, that allows you to implement seamless data encryption. With a bit of extra configuration (as you may have guessed - another DI module) you get automatic encryption/decryption of data in certain columns:</p>
 <pre><code>Module cryptoModule = new CryptoModuleBuilder()
@@ -130,7 +130,7 @@
    .build();
 </code></pre>
 <p>By default columns that start with &lsquo;CRYPTO_&rsquo; are designated as encrypted, but this is <a href="https://github.com/apache/cayenne/blob/master/cayenne-crypto/src/main/java/org/apache/cayenne/crypto/map/ColumnMapper.java">fully customizable</a>. The rest of your application code doesn&rsquo;t need to worry about cryptography, and would look like a regular Cayenne application.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="di-container-decorators">DI Container Decorators</h3>
 <p>In addition to overriding services in DI container, now Cayenne would allow to supply decorators. True to the &ldquo;smallest-footprint&rdquo; DI philosophy, decorator approach is very simple and does not rely on proxies or class enhancement. Just implement the decorated interface and provide a constructor that takes a delegate instance being decorated:</p>
 <pre><code>public class MyInterfaceDecorator implements MyInterface {
@@ -155,10 +155,12 @@ Module module = new Module() {
     }
 };
 </code></pre>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="stability-improvements">Stability Improvements</h3>
 <p>We got rid of the hated &ldquo;runtime&rdquo; ObjRelationships that caused random issues, and fixed more than 30 other bugs.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
 <ul>
 <li>CAY-1267 Some changes to LogDialog</li>
 <li>CAY-1826 Merge Entity Attributes and Relationships tabs together with one toolbar.</li>
@@ -227,7 +229,7 @@ Module module = new Module() {
 <li>CAY-1981 Add support of JDBC 4.0 N-types (nchar, nvarchar, longnvarchar, nclob)</li>
 <li>CAY-1984 cdbimport doesn&rsquo;t flatten many to many relationships</li>
 </ul>
-<!-- raw HTML omitted -->
+<div class="pb-2"><!-- gap 2rem --></div>
 <h3 id="bug-fixes">Bug Fixes:</h3>
 <ul>
 <li>CAY-1480 Implement cross-db functional expressions</li>
@@ -401,6 +403,11 @@ Module module = new Module() {
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
+                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2024-06-20 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 20, 2024</time>
                         <a href="/2024/06/cayenne-421-released/">Cayenne 4.2.1 Released</a>
                     </li>
@@ -408,11 +415,6 @@ Module module = new Module() {
                     <li>
                         <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
                         <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
-                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
                     </li>
                     
                 </ul>

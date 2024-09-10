@@ -102,7 +102,7 @@
                                 Cayenne Version 5.0
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/5.0/cayenne-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/5.0/getting-started-db-first/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -115,6 +115,18 @@
         <div class="row no-gutters  ">
             <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
                 <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/5.0/getting-started-db-first/">Database First Tutorial (5.0)</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/5.0/getting-started-guide/">Getting Started (5.0)</a>
+                        
+                    </div>
                     
                     <div class="cd-toc-item">
                         
@@ -171,7 +183,15 @@
                     </div>
                     
                     <div class="cd-toc-item">
-                        </div>
+                        
+                            <a class="cd-toc-link" href="/docs/5.0/upgrade-guide/">Upgrade Guide</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                        
+                        <a class="cd-toc-link" href="/docs/5.0/api/">JavaDoc</a></div>
                 </div>
             </div>
             
@@ -354,28 +374,7 @@
  <div class="sect3">
   <h4 id="callbacks-on-persistent-objects"><a class="anchor" href="#callbacks-on-persistent-objects"></a>2.7.2. Callbacks on Persistent Objects</h4>
   <div class="paragraph">
-   <p>Callback methods on Persistent classes are mapped in CayenneModeler for each ObjEntity. Empty callback methods are automatically created as a part of class generation (either with Maven, Ant or the Modeler) and are later filled with appropriate logic by the programmer. E.g. assuming we mapped a 'post-add' callback called 'onNewOrder' in ObjEntity 'Order', the following code will be generated:</p>
-  </div>
-  <div class="listingblock">
-   <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">public abstract class _Order extends PersistentObject {
-    protected abstract void onNewOrder();
-}
-
-public class Order extends _Order {
-
-    @Override
-    protected void onNewOrder() {
-        //TODO: implement onNewOrder
-    }
-}</code></pre>
-   </div>
-  </div>
-  <div class="paragraph">
-   <p>As <code>onNewOrder()</code> is already declared in the mapping, it does not need to be registered explicitly. Implementing the method in subclass to do something meaningful is all that is required at this point.</p>
-  </div>
-  <div class="paragraph">
-   <p>As a rule callback methods do not have any knowledge of the outside application, and can only access the state of the object itself and possibly the state of other persistent objects via object’s own ObjectContext.</p>
+   <p>Apache Cayenne provides two main methods to set up callbacks for Persistent objects: using annotated methods or configuring them via Cayenne Modeler. As a rule callback methods do not have any knowledge of the outside application, and can only access the state of the object itself and possibly the state of other persistent objects via object’s own ObjectContext.</p>
   </div>
   <div class="admonitionblock note">
    <table>
@@ -386,6 +385,47 @@ public class Order extends _Order {
      </tr>
     </tbody>
    </table>
+  </div>
+  <div class="sect4">
+   <h5 id="annotated-callbacks-methods"><a class="anchor" href="#annotated-callbacks-methods"></a>2.7.2.1. Annotated Callbacks Methods</h5>
+   <div class="paragraph">
+    <p>You can define callback methods directly in your Persistent object class using annotations. These methods are invoked automatically by Cayenne during the lifecycle of the object.</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class Order extends _Order {
+
+    @PostAdd
+    public void onNewOrder() {
+        // Custom logic before inserting
+    }
+}</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="cayenne-modeler-callbacks-configuration"><a class="anchor" href="#cayenne-modeler-callbacks-configuration"></a>2.7.2.2. Cayenne Modeler Callbacks Configuration</h5>
+   <div class="paragraph">
+    <p>Alternatively, you can configure callbacks using the Cayenne Modeler for each ObjEntity. Empty callback methods are automatically created as a part of class generation (either with Maven, Ant or the Modeler) and are later filled with appropriate logic by the programmer. E.g. assuming we mapped a 'post-add' callback called 'onNewOrder' in ObjEntity 'Order', the following code will be generated:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public abstract class _Order extends PersistentObject {
+    protected abstract void onNewOrder();
+}
+
+public class Order extends _Order {
+
+    @Override
+    protected void onNewOrder() {
+        //TODO: implement onNewOrder
+    }
+}</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>As <code>onNewOrder()</code> is already declared in the mapping, it does not need to be registered explicitly. Implementing the method in subclass to do something meaningful is all that is required at this point.</p>
+   </div>
   </div>
  </div>
  <div class="sect3">
@@ -712,6 +752,11 @@ CayenneRuntime runtime = CayenneRuntime.builder()
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
+                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2024-06-20 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 20, 2024</time>
                         <a href="/2024/06/cayenne-421-released/">Cayenne 4.2.1 Released</a>
                     </li>
@@ -719,11 +764,6 @@ CayenneRuntime runtime = CayenneRuntime.builder()
                     <li>
                         <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
                         <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
-                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
                     </li>
                     
                 </ul>

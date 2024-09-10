@@ -92,10 +92,10 @@
                 <p>Note that this page is of use for committers only. It describes the general
 procedure of building a Cayenne release.</p>
 <p><em>THIS ONLY REFERS TO 2.0.x RELEASE BRANCH</em></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ReleaseGuide2.0-Prerequisites"></a></p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>Refer to the Prerequisites section of the <a href="/dev/release-guide.html">main release guide</a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ReleaseGuide2.0-PreparingSources"></a></p>
 <h2 id="preparing-sources">Preparing Sources</h2>
 <ul>
 <li>
@@ -161,16 +161,16 @@ procedure not included in the Ant or Maven script. Here is how it might
 work (&quot;-u&rdquo; option can be omitted if you have only one GPG key):</p>
 </li>
 </ul>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ReleaseGuide2.0-Voting"></a></p>
 <h2 id="voting">Voting</h2>
 <p>Refer to the Voting section of the <a href="/dev/release-guide.html">main release guide</a></p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ReleaseGuide2.0-PublishingtheRelease"></a></p>
 <h2 id="publishing-the-release">Publishing the Release</h2>
 <p>Copy KEYS file if updated to <code>&quot;/www/www.apache.org/dist/cayenne/&quot;</code>
 <em>(TODO: automate publishing the keys - maybe create a &ldquo;dist&rdquo; site project?)</em></p>
 <pre><code>chmod 664 /www/www.apache.org/dist/cayenne/*
 </code></pre>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ReleaseGuide2.0-PublishingMavenArtifacts"></a></p>
 <h3 id="publishing-maven-artifacts">Publishing Maven Artifacts</h3>
 <p><em>(TODO: automate rsync with Ant)</em></p>
 <p>Assuming release version is 2.0.2, on a <em>local machine</em> do</p>
@@ -188,7 +188,7 @@ people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/ap
 rsync -azv ~/.m2/repository/org/apache/cayenne/cayenne-modeler/2.0.2 \
 people.apache.org:/www/people.apache.org/repo/m2-ibiblio-rsync-repository/org/apache/cayenne/cayenne-modeler/
 </code></pre>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="ReleaseGuide2.0-Aftertherelease"></a></p>
 <h2 id="after-the-release">After the release</h2>
 <ul>
 <li>Update the <a href="https://svn.apache.org/repos/asf/cayenne/site/trunk/tlp-site/src/doap/cayenne.rdf">DOAP file</a>
@@ -320,6 +320,11 @@ add any new features</li>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
+                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2024-06-20 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 20, 2024</time>
                         <a href="/2024/06/cayenne-421-released/">Cayenne 4.2.1 Released</a>
                     </li>
@@ -327,11 +332,6 @@ add any new features</li>
                     <li>
                         <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
                         <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
-                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
                     </li>
                     
                 </ul>

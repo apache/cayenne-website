@@ -92,7 +92,7 @@
                 <p>Cayenne provides a comprehensive suite of unit tests. To execute unit tests
 you must first <a href="/dev/code-repository.html">get Cayenne from SVN</a>
 , install JDK 1.5 and obtain the latest Ant.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="LegacyAntUnitTests-SummaryofBuildProperties"></a></p>
 <h2 id="summary-of-build-properties">Summary of Build Properties</h2>
 <p>These properties can be passed to ant build via <em>-DpropName=value</em>.</p>
 <p>{.table .table-bordered}
@@ -101,7 +101,7 @@ Property | Description
 <em>cayenne.test.connection</em> | Named connection source (see below)
 <em>test.filter</em> | Running a subset of tests (see below)
 <em>cayenne.test.schema.skip</em> | If &ldquo;true&rdquo;, won&rsquo;t attempt to recreate the test database, i.e. the database must already be present.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="LegacyAntUnitTests-RunningAgainstEmbeddedHSQLDB"></a></p>
 <h2 id="running-against-embedded-hsqldb">Running Against Embedded HSQLDB</h2>
 <p>No extra setup is required. Just run Ant:</p>
 <pre><code># cd cayenne/cayenne-ant
@@ -114,9 +114,9 @@ on your machine):</p>
 </code></pre>
 <p>This will use an embedded HSQLDB. Running tests against your own database
 requires a few extra steps described below.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="LegacyAntUnitTests-RunningAgainstaSpecificDatabase"></a></p>
 <h2 id="running-against-a-specific-database">Running Against a Specific Database</h2>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="LegacyAntUnitTests-Step1:ConfigureOneorMoreDataSources"></a></p>
 <h4 id="step-1-configure-one-or-more-data-sources">Step 1: Configure One or More Data Sources</h4>
 <p>Create a directory <em>$HOME/.cayenne/</em> and place a file called
 <em>connection.properties</em> in this directory. File contents should be
@@ -136,7 +136,7 @@ example2.jdbc.driver = com.xyz.MyDriverClass
 <p>Each key starts with an identifier for a datasource. In the file above,
 &ldquo;example1&rdquo; and &ldquo;example2&rdquo; are such identifiers. They can be arbitrary
 strings without &ldquo;.&rdquo; (dot) symbols.</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="LegacyAntUnitTests-Step2.RunTestsAgainstConfiguredDataSource"></a></p>
 <h4 id="step-2-run-tests-against-configured-data-source">Step 2. Run Tests Against Configured Data Source</h4>
 <pre><code># cd cayenne/cayenne-ant
 # ant test -Dcayenne.test.connection=example1
@@ -148,7 +148,7 @@ generated in HTML format under
 <em>cayenne/cayenne-ant/build/tests-report-example1/index.html</em> and can be
 viewed using a web browser (again, substitute &ldquo;example1&rdquo; in this path with
 the name of data source used).</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a name="LegacyAntUnitTests-FilteringTests"></a></p>
 <h2 id="filtering-tests">Filtering Tests</h2>
 <p>To run only a subset of test cases, Ant-style pattern matching can be used.
 A property called <em>test.filter</em> defines a set of class files to be run.
@@ -274,6 +274,11 @@ startup parameters can be used:</p>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
+                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2024-06-20 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 20, 2024</time>
                         <a href="/2024/06/cayenne-421-released/">Cayenne 4.2.1 Released</a>
                     </li>
@@ -281,11 +286,6 @@ startup parameters can be used:</p>
                     <li>
                         <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
                         <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
-                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
                     </li>
                     
                 </ul>

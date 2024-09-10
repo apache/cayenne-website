@@ -106,7 +106,7 @@ The new release features a number of important things:</p>
 Cayenne 4.0 is quickly approaching &ldquo;beta&rdquo; status. There&rsquo;s a good chance that the following release will be
 feature-complete and we will enter &ldquo;beta&rdquo; and associated code freeze of the runtime framework.</p>
 <p>Now the new things in a bit more detail:</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="fluent-query-api">Fluent query API</h3>
 <p>These great additions to Fluent API are new in M5:</p>
 <p><em>ColumnSelect</em></p>
@@ -133,7 +133,7 @@ List&lt;Object[]&gt; nameAndMinPrice = ObjectSelect.query(Artist.class)
 List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class, nameLength.gt(5))
                         .select(context);
 </code></pre>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
 <h3 id="reverse-engineering-improvements">Reverse Engineering Improvements</h3>
 <p>We pushed DB reverse engineering functionality further. This time in addition to clearing bugs and perform smoother importing
 we changed cdbimport plugin configuration to make it clearer and ready for future improvements we have in mind.</p>
@@ -141,7 +141,9 @@ we changed cdbimport plugin configuration to make it clearer and ready for futur
 <pre><code>mvn cayenne:cdbimport
 </code></pre>
 <p><strong><em>Important note</em></strong>: please refer to <a href="https://github.com/apache/cayenne/blob/4.0.M5/docs/doc/src/main/resources/UPGRADE.txt">UPGRADE.txt</a> for detailed changes in <em>cdbimport</em> configuration.</p>
-<!-- raw HTML omitted -->
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
 <ul>
 <li>
 <a href="https://issues.apache.org/jira/browse/CAY-2139">CAY-2139</a> Upgrade HSQLDB dependency to the most recent version (2.3.4)</li>
@@ -186,7 +188,7 @@ we changed cdbimport plugin configuration to make it clearer and ready for futur
 <li>
 <a href="https://issues.apache.org/jira/browse/CAY-2235">CAY-2235</a> Deprecate Query.getDataMap() method</li>
 </ul>
-<!-- raw HTML omitted -->
+<div class="pb-2"><!-- gap 2rem --></div>
 <h4 id="bug-fixes">Bug Fixes:</h4>
 <ul>
 <li>
@@ -351,6 +353,11 @@ we changed cdbimport plugin configuration to make it clearer and ready for futur
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
+                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2024-06-20 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 20, 2024</time>
                         <a href="/2024/06/cayenne-421-released/">Cayenne 4.2.1 Released</a>
                     </li>
@@ -358,11 +365,6 @@ we changed cdbimport plugin configuration to make it clearer and ready for futur
                     <li>
                         <time datetime="2023-05-25 18:00:00 &#43;0300 &#43;0300" class="xsmall d-block">May 25, 2023</time>
                         <a href="/2023/05/cayenne-42-final-released/">Cayenne 4.2 Final Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2023-03-02 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 02, 2023</time>
-                        <a href="/2023/03/cayenne-403-released/">Cayenne 4.0.3 Released</a>
                     </li>
                     
                 </ul>
