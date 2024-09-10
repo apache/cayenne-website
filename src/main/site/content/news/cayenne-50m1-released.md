@@ -4,13 +4,13 @@ date: 2024-09-09T12:00:00+03:00
 ---
 
 Apache Cayenne development team is glad to announce the first milestone of a new major version of Cayenne.
-New version can be downloaded from [here](/download.html).
+The latest version can be downloaded from [here](/download.html).
 
 ### Incompatible changes
 
 Apache Cayenne 5.0-M1 removes support for a multi-layered stack, so no more Cayenne RoP and all the related client parts.
-Moreover, this release renames every part that contained `server` in its name, and that includes main library.
-So from now on, this is how dropping Cayenne to you project would look like:
+Moreover, this release renames every part that contains `server` in its name, including the main library. 
+So from now on, this is how dropping Cayenne into your project would look like:
 
 ```xml
 <dependency>
@@ -33,17 +33,25 @@ For more details about incompatible changes and deprecations, please consult [up
 
 #### Java Version
 
-Minimum required Java version is now 11, so no more support for the Java 8.
+The minimum required Java version is now 11, Java 8 is no longer supported.
+
+#### New Dev Versioning Scheme
+
+From now on a snapshot version of Cayenne is a constant value, so the dev version of 5.0 will always be 5.0-SNAPSHOT. So you can always stay at the bleeding edge of development if needed.
 
 #### New Class Generation UI:
 
-New UI simplifies configuration, allows multiple `cgen` setups per project, and includes template editor.
+The new Class Generation UI in the Cayenne Modeler simplifies configuration, allows multiple `cgen` setups per project, 
+and includes a template editor.
 
 <p style="text-align: center;">
     <img class="img-fluid" style="max-width: 70%;" src="/img/cayenne-5.0-m1-cgen.png" alt="Cayenne Modeler 5.0-M1 Class Generation"/>
 </p>
 
 #### Better support for the `(not)exists` queries:
+
+In most cases, you don’t need to deal with a subquery for `(not)exists` queries, as it is now directly supported by the Expression API. 
+That includes `Expression`, expression parser, and Property API.
 
 ```java
 long count = ObjectSelect.query(Artist.class)
@@ -55,6 +63,7 @@ long count = ObjectSelect.query(Artist.class)
 
 `ANY` and `ALL` subqueries are now supported, as well as `case-when` expressions.
 
+**NOTE**: `case-when` is a bit experimental, and implementation could change.
 
 <div class="pb-3"><!-- gap 2rem --></div>
 
