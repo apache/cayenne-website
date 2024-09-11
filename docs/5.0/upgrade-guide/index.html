@@ -118,19 +118,19 @@
                     
                     <div class="cd-toc-item">
                         
-                            <a class="cd-toc-link" href="/docs/5.0/getting-started-db-first/">Database First Tutorial (5.0)</a>
+                            <a class="cd-toc-link" href="/docs/5.0/getting-started-db-first/">Database First Tutorial</a>
                         
                     </div>
                     
                     <div class="cd-toc-item">
                         
-                            <a class="cd-toc-link" href="/docs/5.0/getting-started-guide/">Getting Started (5.0)</a>
+                            <a class="cd-toc-link" href="/docs/5.0/getting-started-guide/">Getting Started</a>
                         
                     </div>
                     
                     <div class="cd-toc-item">
                         
-                            <a class="cd-toc-link" href="/docs/5.0/cayenne-guide/">Cayenne Guide 5.0</a>
+                            <a class="cd-toc-link" href="/docs/5.0/cayenne-guide/">Cayenne Guide</a>
                         
                     </div>
                     
@@ -142,7 +142,21 @@
  </div>
  <ul class="sectlevel1 nav">
   <li><a href="#java-version" class="nav-link">1. Java Version</a></li>
-  <li><a href="#new-features" class="nav-link">2. New Features</a></li>
+  <li><a href="#incompatible-changes" class="nav-link">2. Incompatible Changes</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="#main-library-renaming" class="nav-link">2.1. Main Library Renaming</a></li>
+    <li><a href="#server-runtime-and-module-deprecation" class="nav-link">2.2. Server Runtime and Module Deprecation</a></li>
+    <li><a href="#new-modules-extenders" class="nav-link">2.3. New Modules Extenders</a></li>
+    <li><a href="#removal-of-deprecated-modules" class="nav-link">2.4. Removal of Deprecated Modules</a></li>
+    <li><a href="#removal-of-deprecated-code" class="nav-link">2.5. Removal of Deprecated Code</a></li>
+   </ul></li>
+  <li><a href="#new-features" class="nav-link">3. New Features</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="#new-dev-versioning-scheme" class="nav-link">3.1. New Dev Versioning Scheme</a></li>
+    <li><a href="#new-class-generation-ui" class="nav-link">3.2. New Class Generation UI</a></li>
+    <li><a href="#improved-notexists-queries" class="nav-link">3.3. Improved <code>(not)exists</code> Queries</a></li>
+    <li><a href="#improved-sql-support" class="nav-link">3.4. Improved SQL Support</a></li>
+   </ul></li>
  </ul>
 </div>
                     </div>
@@ -186,13 +200,140 @@
  <h2 id="java-version"><a class="anchor" href="#java-version"></a>1. Java Version</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>Minimum required JDK version is 11 or newer. Cayenne 5.0 is fully tested with Java 11, 17 and 21.</p>
+   <p>Minimum required JDK version is 11 or newer. If your project requires Java 8, you should keep using Cayenne 4.2. Cayenne 5.0 is fully tested with Java 11, 17 and 21.</p>
   </div>
  </div>
 </div>
 <div class="sect1">
- <h2 id="new-features"><a class="anchor" href="#new-features"></a>2. New Features</h2>
+ <h2 id="incompatible-changes"><a class="anchor" href="#incompatible-changes"></a>2. Incompatible Changes</h2>
  <div class="sectionbody">
+  <div class="paragraph">
+   <p>Apache Cayenne 5.0-M1 removes support for a multi-layered stack, so no more Cayenne ROP and all the related client parts. Moreover, this release renames every part that contains <code>server</code> in its name, including the main library. For all the details please consult <code>UPGRADE.txt</code>, as this document only highlights the most impactful changes.</p>
+  </div>
+  <div class="sect2">
+   <h3 id="main-library-renaming"><a class="anchor" href="#main-library-renaming"></a>2.1. Main Library Renaming</h3>
+   <div class="paragraph">
+    <p>Main Cayenne artifact is renamed from <code>cayenne-server</code> to <code>cayenne</code>, so you need to change your dependencies accordingly</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne&lt;/artifactId&gt;
+    &lt;version&gt;{version}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="server-runtime-and-module-deprecation"><a class="anchor" href="#server-runtime-and-module-deprecation"></a>2.2. Server Runtime and Module Deprecation</h3>
+   <div class="paragraph">
+    <p><code>ServerRuntime</code> is deprecated and replaced by <code>CayenneRuntime</code>. As well as <code>ServerModule</code> renamed to <code>CoreModule</code>.</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.builder()
+                .addConfig("cayenne-project.xml")
+                .module(b -&gt; CoreModule.extend(b).setProperty("some_property", "some_value"))
+                .build();</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="new-modules-extenders"><a class="anchor" href="#new-modules-extenders"></a>2.3. New Modules Extenders</h3>
+   <div class="paragraph">
+    <p>Each Cayenne module now provides a module-specific extender created with an "extend(Binder)" method. It is usually invoked within a lambda that produces a Module, or within an app Module.</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime.builder(..)
+    .addModule(b -&gt; CacheInvalidationModule.extend(b).addHandler(MyHandler.class))
+    .build();</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="removal-of-deprecated-modules"><a class="anchor" href="#removal-of-deprecated-modules"></a>2.4. Removal of Deprecated Modules</h3>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p>All modules related to the ROP functionality is completely gone. That includes <code>cayenne-rop-server</code>, <code>cayenne-client</code> and other related parts.</p></li>
+     <li>
+      <p><code>cayenne-xmpp</code>, <code>cayenne-jms</code> and <code>cayenne-jgroups</code> event bridges are removed.</p></li>
+     <li>
+      <p>Finally <code>cayenne-joda</code> and <code>cayenne-web</code> modules are gone.</p></li>
+    </ul>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="removal-of-deprecated-code"><a class="anchor" href="#removal-of-deprecated-code"></a>2.5. Removal of Deprecated Code</h3>
+   <div class="paragraph">
+    <p>As always, code deprecated in earlier versions is gone. One notable class removed is <code>SelectQuery</code>, so you should use <code>ObjectSelect</code> from now on.</p>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="sect1">
+ <h2 id="new-features"><a class="anchor" href="#new-features"></a>3. New Features</h2>
+ <div class="sectionbody">
+  <div class="sect2">
+   <h3 id="new-dev-versioning-scheme"><a class="anchor" href="#new-dev-versioning-scheme"></a>3.1. New Dev Versioning Scheme</h3>
+   <div class="paragraph">
+    <p>From now on a snapshot version of Cayenne is a constant value, so the dev version of 5.0 will always be 5.0-SNAPSHOT. So you can always stay at the bleeding edge of development if needed.</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;cayenne&lt;/artifactId&gt;
+    &lt;version&gt;5.0-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="new-class-generation-ui"><a class="anchor" href="#new-class-generation-ui"></a>3.2. New Class Generation UI</h3>
+   <div class="paragraph">
+    <p>The new Class Generation UI in the Cayenne Modeler simplifies configuration, allows multiple <code>cgen</code> setups per project, and includes a template editor.</p>
+   </div>
+   <div class="paragraph">
+    <p>Custom templates are now part of the project XML configuration and don’t require separate setup in either Modeler, or Maven/Gradle plugins.</p>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="improved-notexists-queries"><a class="anchor" href="#improved-notexists-queries"></a>3.3. Improved <code>(not)exists</code> Queries</h3>
+   <div class="paragraph">
+    <p>In most cases, you don’t need to deal with a subquery for <code>(not)exists</code> queries, as it is now directly supported by the Expression API. That includes <code>Expression</code>, expression parser, and Property API.</p>
+   </div>
+   <div class="paragraph">
+    <p>This feature can handle any expression and spawn several sub-queries per expression if needed.</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">long count = ObjectSelect.query(Artist.class)
+        .where(Artist.PAINTING_ARRAY.dot(Painting.PAINTING_TITLE).like("painting%").exists())
+        .selectCount(context);</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="improved-sql-support"><a class="anchor" href="#improved-sql-support"></a>3.4. Improved SQL Support</h3>
+   <div class="paragraph">
+    <p><code>ANY</code> and <code>ALL</code> subqueries are now supported, as well as <code>case-when</code> expressions.</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">import static org.apache.cayenne.exp.ExpressionFactory.*;
+// ...
+Expression caseWhenExp = caseWhen(
+                List.of((betweenExp("estimatedPrice", 0, 9)),
+                        (betweenExp("estimatedPrice", 10, 20))),
+                List.of((wrapScalarValue("low")),
+                        (wrapScalarValue("high"))),
+                wrapScalarValue("error"));</code></pre>
+    </div>
+   </div>
+  </div>
  </div>
 </div>
                     </section>
@@ -268,6 +409,10 @@
                     
                     <li>
                         <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/5.0/cayenne-guide/">Cayenne Guide (5.0)</a>
                     </li>
                     
                     <li>
