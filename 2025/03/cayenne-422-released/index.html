@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
         <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
         <script src="https://www.apachecon.com/event-images/snippet.js"></script>
-        <title>Cayenne 4.2.1 Released &middot; Apache Cayenne</title>
+        <title>Cayenne 4.2.2 Released &middot; Apache Cayenne</title>
     </head>
     <body>
 
@@ -89,10 +89,10 @@
         
                 <section>
                     <article>
-                        <h1 class="text-center">Cayenne 4.2.1 Released<br />
-                            <small class="font-size-1rem text-muted">Jun 20, 2024</small>
+                        <h1 class="text-center">Cayenne 4.2.2 Released<br />
+                            <small class="font-size-1rem text-muted">Mar 24, 2025</small>
                         </h1>
-                        <p>This is a maintenance release of Cayenne 4.2. This version brings support for JDK 21 and 22, and a few bug fixes.
+                        <p>This is a maintenance release of Cayenne 4.2. This version fixes several important issues and recomended for the upgrade.
 It can be downloaded from <a href="/download.html">here</a>.</p>
 <div class="pb-3"><!-- gap 3rem --></div>
 <h2 class="text-center">A full list of changes in this release:</h2>
@@ -100,13 +100,9 @@ It can be downloaded from <a href="/download.html">here</a>.</p>
 <h4 id="changesnew-features">Changes/New Features:</h4>
 <ul>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2849">CAY-2849</a> Switch documentation to <code>hugo-asciidoctorj-extension</code></li>
+<a href="https://issues.apache.org/jira/browse/CAY-2867">CAY-2867</a> Tweak GraphBasedDbRowOpSorter logic to allow related updates</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2852">CAY-2852</a> Update velocity-engine-core dependency</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2856">CAY-2856</a> Upgrade <code>Gradle</code> to 8.8</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2857">CAY-2857</a> Java 22 support</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2873">CAY-2873</a> Change Orderings.orderedList() to accept a Collection rather than a List</li>
 </ul>
 
 
@@ -114,31 +110,17 @@ It can be downloaded from <a href="/download.html">here</a>.</p>
 <h4 id="bug-fixes">Bug Fixes:</h4>
 <ul>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2806">CAY-2806</a> Incorrect processing of unicode escape syntax in JSON</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2866">CAY-2866</a> DefaultDataDomainFlushAction breaks on circular relationship update</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2809">CAY-2809</a> Cayenne Expression grammar doesn&rsquo;t allow custom function as an argument for string functions</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2868">CAY-2868</a> Regression: DefaultDbRowOpSorter shouldn&rsquo;t sort update operations</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2810">CAY-2810</a> Can&rsquo;t use custom operator expression with aggregate functions</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2871">CAY-2871</a> QualifierTranslator breaks on a relationship with a compound FK</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2813">CAY-2813</a> Regression: <code>Constants.CI_PROPERTY</code> flag is no longer working for <code>MySQL</code></li>
+<a href="https://issues.apache.org/jira/browse/CAY-2872">CAY-2872</a> CayenneModeler &ldquo;Documentation&rdquo; link is broken</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2815">CAY-2815</a> Incorrect translation of aliased expression</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2876">CAY-2876</a> Memory leak in the ObjectStore</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2838">CAY-2838</a> Vertical Inheritance: Problem setting db attribute to <code>null</code> via flattened path</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2840">CAY-2840</a> Vertical Inheritance: Missing subclass attributes with joint prefetch</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2841">CAY-2841</a> Multi column <code>ColumnSelect</code> with <code>SHARED_CACHE</code> fails after 1st select</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2844">CAY-2844</a> Joint prefetch doesn&rsquo;t use ObjEntity qualifier</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2848">CAY-2848</a> Vertical Inheritance: Updating one-to-many with inverse nullifies other columns</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2850">CAY-2850</a> Query using Clob comparison with empty String fails</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2851">CAY-2851</a> Replace Existing OneToOne From New Object</li>
-<li>
-<a href="https://issues.apache.org/jira/browse/CAY-2853">CAY-2853</a> Incorrect deletion of entities from flattened attributes</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2879">CAY-2879</a> Negative number for non parameterized ObjectSelect query not processed correctly</li>
 </ul>
 
                     </article>
@@ -148,18 +130,12 @@ It can be downloaded from <a href="/download.html">here</a>.</p>
         <div class="row">
             <div class="col-12 col-md-6  text-center text-md-left">
                 
-                <a class="btn btn-link" href='/2024/09/cayenne-50m1-released/'>
-                    <span class="d-block d-md-none  text-muted">Prev: </span>
-                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    Cayenne 5.0 Milestone 1 Released
-                </a>
-                
             </div>
             <div class="col-12 col-md-6  text-center text-md-right">
                 
-                <a class="btn btn-link" href='/2023/05/cayenne-42-final-released/'>
+                <a class="btn btn-link" href='/2024/09/cayenne-50m1-released/'>
                     <span class="d-block d-md-none  text-muted">Next: </span>
-                    Cayenne 4.2 Final Released
+                    Cayenne 5.0 Milestone 1 Released
                     <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
                 </a>
                 
