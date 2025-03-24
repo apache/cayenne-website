@@ -36,10 +36,10 @@ releases:
     maven: "cayenne"
 
   - version: "4.2"
-    latestRevision: "4.2.1"
+    latestRevision: "4.2.2"
     type: "Stable"
     description: "Latest stable release"
-    date: "2024-06-20"
+    date: "2025-03-24"
     docs: true
     downloadable: true
     jdk: 1.8
