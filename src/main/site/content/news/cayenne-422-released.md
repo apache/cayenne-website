@@ -1,6 +1,6 @@
 ---
 title: Cayenne 4.2.2 Released
-date: 2025-03-24T12:00:00+03:00
+date: 2025-03-24T10:00:00+03:00
 --- 
 This is a maintenance release of Cayenne 4.2. This version fixes several important issues and recomended for the upgrade.
 It can be downloaded from [here](/download.html).
