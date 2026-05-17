@@ -5,38 +5,26 @@ url: /dev/running-unit-tests.html
 ---
 
 Cayenne provides a comprehensive suite of unit and integration tests. To
-execute tests you must first get Cayenne from Git and satisfy the Maven build
-prerequisites.
-
-## Prerequisites
-
-Maven [build prerequisites and recommended settings](/dev/building-cayenne.html) apply here.    
-    
-{{% gap 2 %}}    
+execute tests you must first get Cayenne from Git and satisfy the [Maven build
+prerequisites](/dev/building-cayenne.html)
     
 ## Running Against a Test Database
+
+The *cayenneTestConnection* property selects the database backend for tests. By default it is *hsql*, so it can be omitted:
     
-No extra setup is required to run the default test suite. By default,
-*cayenneTestConnection* is *hsql*:
-    
-    $ cd cayenne
     $ mvn verify
 
-The *cayenneTestConnection* property selects the database backend for tests.
-Cayenne has preconfigured local backends that do not require Docker:
+
+The following are in-memory database backends and can be executed without additional setup:
 
 * hsql
 * h2
 * derby
 * sqlite
-
-For example:
  
     $ mvn verify -DcayenneTestConnection=derby
 
-Cayenne also has preconfigured backends based on
-[Testcontainers](https://www.testcontainers.org/). To run these, Docker must be
-installed and running:
+Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :
 
 * mysql
 * mariadb
@@ -44,8 +32,6 @@ installed and running:
 * sqlserver
 * oracle
 * db2
-
-For example:
 
     $ mvn verify -DcayenneTestConnection=mysql
 
@@ -57,7 +43,6 @@ databases with *cayenneTestDbVersion*:
 {{% gap %}}
 
 
-    
 ## Using a Custom Database
 
 You can configure your own database to be used with tests instead of the built-in options by following these steps:
