@@ -99,21 +99,13 @@ prerequisites</a></p>
 </code></pre>
 <p>The following are in-memory database backends and can be executed without additional setup:</p>
 <ul>
-<li>
-<p>hsql</p>
-</li>
-<li>
-<p>h2</p>
-</li>
-<li>
-<p>derby</p>
-</li>
-<li>
-<p>sqlite</p>
-<p>$ mvn verify -DcayenneTestConnection=derby</p>
-</li>
+<li>hsql</li>
+<li>h2</li>
+<li>derby</li>
+<li>sqlite</li>
 </ul>
-<p>Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :</p>
+<pre><code>$ mvn verify -DcayenneTestConnection=derby
+</code></pre><p>Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :</p>
 <ul>
 <li>
 <p>mysql</p>
