@@ -10,39 +10,30 @@ prerequisites](/dev/building-cayenne.html)
     
 ## Running Against a Test Database
 
-The *cayenneTestConnection* property selects the database backend for tests. By default it is *hsql*, so it can be omitted:
-    
-```
-$ mvn verify
-```
-
-
-The following are in-memory database backends and can be executed without additional setup:
-
-* hsql
-* h2
-* derby
-* sqlite
+The *cayenneTestConnection* property selects the database backend for tests. The following are in-memory database backends and can be executed without additional setup:
 
 ```
-$ mvn verify -DcayenneTestConnection=derby
+# "hsql" is the default, and can be omitted
+# mvn verify -DcayenneTestConnection=hsql
+mvn verify
+
+mvn verify -DcayenneTestConnection=h2
+mvn verify -DcayenneTestConnection=derby
+mvn verify -DcayenneTestConnection=sqlite
 ```
 
-Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :
-
-* mysql
-* mariadb
-* postgres
-* sqlserver
-* oracle
-* db2
+Cayenne also has a few preconfigured backends that it starts on Docker (so Docker must be installed and running) :
 
 ```
 $ mvn verify -DcayenneTestConnection=mysql
+$ mvn verify -DcayenneTestConnection=mariadb
+$ mvn verify -DcayenneTestConnection=postgres
+$ mvn verify -DcayenneTestConnection=sqlserver
+$ mvn verify -DcayenneTestConnection=oracle
+$ mvn verify -DcayenneTestConnection=db2
 ```
 
-You can override the default Docker image tag for Testcontainers-backed
-databases with *cayenneTestDbVersion*:
+You can override the default Docker image tag for Testcontainers-backed databases with *cayenneTestDbVersion*:
 
 ```
 $ mvn verify -DcayenneTestConnection=mysql -DcayenneTestDbVersion=8.4
