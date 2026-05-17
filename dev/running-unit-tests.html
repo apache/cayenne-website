@@ -96,8 +96,7 @@ prerequisites</a></p>
 <h2 id="running-against-a-test-database">Running Against a Test Database</h2>
 <p>The <em>cayenneTestConnection</em> property selects the database backend for tests. By default it is <em>hsql</em>, so it can be omitted:</p>
 <pre><code>$ mvn verify
-</code></pre>
-<p>The following are in-memory database backends and can be executed without additional setup:</p>
+</code></pre><p>The following are in-memory database backends and can be executed without additional setup:</p>
 <ul>
 <li>hsql</li>
 <li>h2</li>
@@ -107,38 +106,19 @@ prerequisites</a></p>
 <pre><code>$ mvn verify -DcayenneTestConnection=derby
 </code></pre><p>Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :</p>
 <ul>
-<li>
-<p>mysql</p>
-</li>
-<li>
-<p>mariadb</p>
-</li>
-<li>
-<p>postgres</p>
-</li>
-<li>
-<p>sqlserver</p>
-</li>
-<li>
-<p>oracle</p>
-</li>
-<li>
-<p>db2</p>
-<p>$ mvn verify -DcayenneTestConnection=mysql</p>
-</li>
+<li>mysql</li>
+<li>mariadb</li>
+<li>postgres</li>
+<li>sqlserver</li>
+<li>oracle</li>
+<li>db2</li>
 </ul>
-<p>You can override the default Docker image tag for Testcontainers-backed
+<pre><code>$ mvn verify -DcayenneTestConnection=mysql
+</code></pre><p>You can override the default Docker image tag for Testcontainers-backed
 databases with <em>cayenneTestDbVersion</em>:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql -DcayenneTestDbVersion=8.4
-</code></pre>
-
-
-<div class="pb-3"></div>
-<h2 id="using-a-custom-database">Using a Custom Database</h2>
+</code></pre><h2 id="using-a-custom-database">Using a Custom Database</h2>
 <p>You can configure your own database to be used with tests instead of the built-in options by following these steps:</p>
-
-
-<div class="pb-1l2"></div>
 <h3 id="install-special-drivers">Install Special Drivers</h3>
 <p>Most drivers used by Cayenne tests are available from Maven Central. A few
 commercial drivers still have to be installed by the tester locally. The group
@@ -147,19 +127,13 @@ POM or the examples below.</p>
 <p><strong>FrontBase:</strong></p>
 <pre><code>$ mvn install:install-file -Dfile=frontbasejdbc.jar -DgroupId=com.frontbase \
        -DartifactId=frontbase-driver -Dversion=4.1 -Dpackaging=jar -DgeneratePom=true
-</code></pre>
-<p><strong>Ingres:</strong></p>
+</code></pre><p><strong>Ingres:</strong></p>
 <pre><code>$ mvn install:install-file -Dfile=ingres-jdbc.jar -DgroupId=com.ingres \
        -DartifactId=ingres-driver -Dversion=4.0.7 -Dpackaging=jar -DgeneratePom=true
-</code></pre>
-<p><strong>Sybase:</strong></p>
+</code></pre><p><strong>Sybase:</strong></p>
 <pre><code>$ mvn install:install-file -Dfile=jconn3.jar -DgroupId=com.sybase \
        -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
-</code></pre>
-
-
-<div class="pb-3l2"></div>
-<h3 id="define-datasource-explicitly-with-cli-arguments">Define DataSource Explicitly with CLI Arguments</h3>
+</code></pre><h3 id="define-datasource-explicitly-with-cli-arguments">Define DataSource Explicitly with CLI Arguments</h3>
 <p>Database connection information can be specified either on the command line or
 via a configuration file. Built-in datasource names may also be overridden this
 way. First let&rsquo;s look at the command line options:</p>
@@ -185,31 +159,9 @@ postgres.jdbc.username = someuser
 postgres.jdbc.password = somepasswd
 postgres.jdbc.url = jdbc:postgresql://postgresql.host:5432/test_db
 postgres.jdbc.driver = org.postgresql.Driver
-
-oracle.jdbc.username = someuser
-oracle.jdbc.password = somepasswd
-oracle.jdbc.url = jdbc:oracle:thin:@//oracle.host:1521/XE
-oracle.jdbc.driver = oracle.jdbc.OracleDriver
-
-sqlserver.jdbc.url = jdbc:sqlserver://sqlserver.host:1433;databaseName=test_db
-sqlserver.jdbc.driver = com.microsoft.sqlserver.jdbc.SQLServerDriver
-sqlserver.jdbc.username = someuser
-sqlserver.jdbc.password = somepasswd
-
-db2.jdbc.username = someuser
-db2.jdbc.password = somepasswd
-db2.jdbc.url = jdbc:db2://db2.host:50000/test_db
-db2.jdbc.driver = com.ibm.db2.jcc.DB2Driver
-</code></pre>
-<p>Each property starts with the connection name (&ldquo;mysql&rdquo; and &ldquo;oracle&rdquo; in the
-example above). Note that in this case you should still use
-<em>cayenneTestConnection</em>. E.g.:</p>
+</code></pre><p>Each property starts with the connection name, so you can still do this:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql
-</code></pre>
-
-
-<div class="pb-3"></div>
-<h2 id="legacy-configuration">Legacy Configuration</h2>
+</code></pre><h2 id="legacy-configuration">Legacy Configuration</h2>
 <p>In Cayenne 4.2 and earlier the DB adapter class had to be configured explicitly for
 custom datasources. This is the main difference from current Cayenne versions:
 newer versions detect the adapter from the JDBC connection, while Cayenne 4.2
@@ -222,31 +174,26 @@ expects you to provide it.</p>
    -DcayenneJdbcPassword=mypassword \
    -DcayenneJdbcUrl=jdbc:mysql://localhost/cayenne \
    -DcayenneJdbcDriver=com.mysql.cj.jdbc.Driver
-</code></pre>
-<p>In <em>$HOME/.cayenne/connection.properties</em>, Cayenne 4.2 expects the same
+</code></pre><p>In <em>$HOME/.cayenne/connection.properties</em>, Cayenne 4.2 expects the same
 connection-name prefix, but also needs an adapter key. For example, this is a
 current Cayenne 5.0 style entry:</p>
 <pre><code>mysql.jdbc.username = someuser
 mysql.jdbc.password = somepasswd
 mysql.jdbc.url = jdbc:mysql://mysql.host:3306/test_db
 mysql.jdbc.driver = com.mysql.cj.jdbc.Driver
-</code></pre>
-<p>The Cayenne 4.2 version must add <em>mysql.adapter</em>:</p>
+</code></pre><p>The Cayenne 4.2 version must add <em>mysql.adapter</em>:</p>
 <pre><code>mysql.adapter = org.apache.cayenne.dba.mysql.MySQLAdapter
 mysql.jdbc.username = someuser
 mysql.jdbc.password = somepasswd
 mysql.jdbc.url = jdbc:mysql://mysql.host:3306/test_db
 mysql.jdbc.driver = com.mysql.cj.jdbc.Driver
-</code></pre>
-<p>The even older <em>mysql.cayenne.adapter</em> key is also recognized as a legacy alias.</p>
+</code></pre><p>The even older <em>mysql.cayenne.adapter</em> key is also recognized as a legacy alias.</p>
 <p>Testcontainers-backed profiles are another key-name difference. Cayenne 4.2
 used the <em>-tc</em> suffix:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql-tc
-</code></pre>
-<p>Current Cayenne uses the database name without the suffix:</p>
+</code></pre><p>Current Cayenne uses the database name without the suffix:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql
-</code></pre>
-<p>The same old-vs-new pattern applies to other Testcontainers-backed databases,
+</code></pre><p>The same old-vs-new pattern applies to other Testcontainers-backed databases,
 for example <em>postgres-tc</em> became <em>postgres</em>, and <em>sqlserver-tc</em> became
 <em>sqlserver</em>.</p>
 
