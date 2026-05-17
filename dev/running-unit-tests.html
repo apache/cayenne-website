@@ -91,44 +91,50 @@
                     <article>
                         <h1 class="text-center">Running Unit Tests</h1>
                         <p>Cayenne provides a comprehensive suite of unit and integration tests. To
-execute tests you must first get Cayenne from Git and satisfy the Maven build
-prerequisites.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Maven <a href="/dev/building-cayenne.html">build prerequisites and recommended settings</a> apply here.</p>
-
-
-<div class="pb-2"></div>
+execute tests you must first get Cayenne from Git and satisfy the <a href="/dev/building-cayenne.html">Maven build
+prerequisites</a></p>
 <h2 id="running-against-a-test-database">Running Against a Test Database</h2>
-<p>No extra setup is required to run the default test suite. By default,
-<em>cayenneTestConnection</em> is <em>hsql</em>:</p>
-<pre><code>$ cd cayenne
-$ mvn verify
+<p>The <em>cayenneTestConnection</em> property selects the database backend for tests. By default it is <em>hsql</em>, so it can be omitted:</p>
+<pre><code>$ mvn verify
 </code></pre>
-<p>The <em>cayenneTestConnection</em> property selects the database backend for tests.
-Cayenne has preconfigured local backends that do not require Docker:</p>
+<p>The following are in-memory database backends and can be executed without additional setup:</p>
 <ul>
-<li>hsql</li>
-<li>h2</li>
-<li>derby</li>
-<li>sqlite</li>
+<li>
+<p>hsql</p>
+</li>
+<li>
+<p>h2</p>
+</li>
+<li>
+<p>derby</p>
+</li>
+<li>
+<p>sqlite</p>
+<p>$ mvn verify -DcayenneTestConnection=derby</p>
+</li>
 </ul>
-<p>For example:</p>
-<pre><code>$ mvn verify -DcayenneTestConnection=derby
-</code></pre>
-<p>Cayenne also has preconfigured backends based on
-<a href="https://www.testcontainers.org/">Testcontainers</a>. To run these, Docker must be
-installed and running:</p>
+<p>Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :</p>
 <ul>
-<li>mysql</li>
-<li>mariadb</li>
-<li>postgres</li>
-<li>sqlserver</li>
-<li>oracle</li>
-<li>db2</li>
+<li>
+<p>mysql</p>
+</li>
+<li>
+<p>mariadb</p>
+</li>
+<li>
+<p>postgres</p>
+</li>
+<li>
+<p>sqlserver</p>
+</li>
+<li>
+<p>oracle</p>
+</li>
+<li>
+<p>db2</p>
+<p>$ mvn verify -DcayenneTestConnection=mysql</p>
+</li>
 </ul>
-<p>For example:</p>
-<pre><code>$ mvn verify -DcayenneTestConnection=mysql
-</code></pre>
 <p>You can override the default Docker image tag for Testcontainers-backed
 databases with <em>cayenneTestDbVersion</em>:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql -DcayenneTestDbVersion=8.4
