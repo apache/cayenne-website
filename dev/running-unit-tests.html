@@ -94,28 +94,22 @@
 execute tests you must first get Cayenne from Git and satisfy the <a href="/dev/building-cayenne.html">Maven build
 prerequisites</a></p>
 <h2 id="running-against-a-test-database">Running Against a Test Database</h2>
-<p>The <em>cayenneTestConnection</em> property selects the database backend for tests. By default it is <em>hsql</em>, so it can be omitted:</p>
-<pre><code>$ mvn verify
-</code></pre><p>The following are in-memory database backends and can be executed without additional setup:</p>
-<ul>
-<li>hsql</li>
-<li>h2</li>
-<li>derby</li>
-<li>sqlite</li>
-</ul>
-<pre><code>$ mvn verify -DcayenneTestConnection=derby
-</code></pre><p>Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :</p>
-<ul>
-<li>mysql</li>
-<li>mariadb</li>
-<li>postgres</li>
-<li>sqlserver</li>
-<li>oracle</li>
-<li>db2</li>
-</ul>
+<p>The <em>cayenneTestConnection</em> property selects the database backend for tests. The following are in-memory database backends and can be executed without additional setup:</p>
+<pre><code># &quot;hsql&quot; is the default, and can be omitted
+# mvn verify -DcayenneTestConnection=hsql
+mvn verify
+
+mvn verify -DcayenneTestConnection=h2
+mvn verify -DcayenneTestConnection=derby
+mvn verify -DcayenneTestConnection=sqlite
+</code></pre><p>Cayenne also has a few preconfigured backends that it starts on Docker (so Docker must be installed and running) :</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql
-</code></pre><p>You can override the default Docker image tag for Testcontainers-backed
-databases with <em>cayenneTestDbVersion</em>:</p>
+$ mvn verify -DcayenneTestConnection=mariadb
+$ mvn verify -DcayenneTestConnection=postgres
+$ mvn verify -DcayenneTestConnection=sqlserver
+$ mvn verify -DcayenneTestConnection=oracle
+$ mvn verify -DcayenneTestConnection=db2
+</code></pre><p>You can override the default Docker image tag for Testcontainers-backed databases with <em>cayenneTestDbVersion</em>:</p>
 <pre><code>$ mvn verify -DcayenneTestConnection=mysql -DcayenneTestDbVersion=8.4
 </code></pre><h2 id="using-a-custom-database">Using a Custom Database</h2>
 <p>You can configure your own database to be used with tests instead of the built-in options by following these steps:</p>
