@@ -21,8 +21,10 @@ The following are in-memory database backends and can be executed without additi
 * h2
 * derby
 * sqlite
- 
-    $ mvn verify -DcayenneTestConnection=derby
+
+```
+$ mvn verify -DcayenneTestConnection=derby
+```
 
 Cayenne also has preconfigured backends that it starts on Docker (so Docker must be installed and running) :
 
