@@ -22,7 +22,7 @@ Open http://localhost:3000 in your browser. In dev mode site supports live-reloa
 mvn -Ddev.host="my.local" -Ddev.port="8080"
 ```
 
-### Publish
+### Publish Site Update
 
 To publish a new version just run Maven with `publish` profile. This will build a production version of the site (with cayenne.apache.org base URL) and push commit into `asf-site` branch that will be synced with actual site content location:
     
@@ -36,11 +36,8 @@ Don't forget to push your source's changes so others won't rewrite them.
 
 *NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`.
 
-## CMS guide
 
-### Content modifications
-
-#### Publishing news
+### Create News
 
 To publish news simply add new file at `src/main/site/content/news/` folder.
 You can use the following template: 
@@ -56,8 +53,7 @@ date: 2017-01-01T00:00:00+03:00
 Content goes here
 ```
 
-
-#### Releasing new cayenne version
+### Update for New Cayenne Version
 
 To update site content with information about new Cayenne version you need to perform these steps:
 
@@ -65,7 +61,7 @@ To update site content with information about new Cayenne version you need to pe
 * Write news (see information above).
 * Update documentation, see next section.
   
-####  Update Cayenne Documentation
+###  Update Cayenne Documentation
 
 There are two helpers shell scripts to update Cayenne documentation:
 
@@ -87,12 +83,12 @@ Usage:
 These scripts don't commit changes so you should commit them manually and publish the site as usual. 
 
 
-### Advanced 
+## Advanced 
 
 Node.js, Yarn, Gulp and Hugo tools are used to build this site, Maven used just to bootstrap Node.js and Yarn tools and launch Gulp tasks.
 Hugo binaries managed by [hugo-bin](https://www.npmjs.com/package/hugo-bin) NPM module.
 
-#### Src structure
+### Src structure
 
 There are two main parts of the site src:
 * `src/main/assets` assets processed by [Gulp](https://gulpjs.com) tasks
