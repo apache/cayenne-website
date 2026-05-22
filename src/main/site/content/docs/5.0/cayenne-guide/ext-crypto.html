@@ -21,37 +21,37 @@ description: "Cayenne Guide 5.0, Crypto extension"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 230
+weight: 270
 ---
 <div class="sect2">
- <h3 id="ext-crypto"><a class="anchor" href="#ext-crypto"></a>4.3. Crypto extension</h3>
+ <h3 id="ext-crypto"><a class="anchor" href="#ext-crypto"></a>5.3. Crypto extension</h3>
  <div class="paragraph">
   <p>Crypto module allows encrypt and decrypt values stored in DB transparently to your Java app.</p>
  </div>
  <div class="sect3">
-  <h4 id="maven-4"><a class="anchor" href="#maven-4"></a>4.3.1. Maven</h4>
+  <h4 id="maven-4"><a class="anchor" href="#maven-4"></a>5.3.1. Maven</h4>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-crypto&lt;/artifactId&gt;
-    &lt;version&gt;5.0-M1&lt;/version&gt;
+    &lt;version&gt;5.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="gradle-4"><a class="anchor" href="#gradle-4"></a>4.3.2. Gradle</h4>
+  <h4 id="gradle-4"><a class="anchor" href="#gradle-4"></a>5.3.2. Gradle</h4>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:5.0-M1'</code></pre>
+    <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-crypto:5.0'</code></pre>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="usage-3"><a class="anchor" href="#usage-3"></a>4.3.3. Usage</h4>
+  <h4 id="usage-3"><a class="anchor" href="#usage-3"></a>5.3.3. Usage</h4>
   <div class="sect4">
-   <h5 id="setup-your-model-and-db"><a class="anchor" href="#setup-your-model-and-db"></a>4.3.3.1. Setup your model and DB</h5>
+   <h5 id="setup-your-model-and-db"><a class="anchor" href="#setup-your-model-and-db"></a>5.3.3.1. Setup your model and DB</h5>
    <div class="paragraph">
     <p>To use crypto module you must prepare your database to allow <code>byte[]</code> storage and properly name columns that will contain encrypted values.</p>
    </div>
@@ -96,7 +96,7 @@ weight: 230
    </div>
   </div>
   <div class="sect4">
-   <h5 id="setup-keystore"><a class="anchor" href="#setup-keystore"></a>4.3.3.2. Setup keystore</h5>
+   <h5 id="setup-keystore"><a class="anchor" href="#setup-keystore"></a>5.3.3.2. Setup keystore</h5>
    <div class="paragraph">
     <p>To perform encryption you must provide <code>KEYSTORE_URL</code> and <code>KEY_PASSWORD</code>. Currently crypto module supports only Java "jceks" KeyStore.</p>
    </div>
@@ -109,7 +109,7 @@ weight: 230
    </div>
   </div>
   <div class="sect4">
-   <h5 id="additional-settings"><a class="anchor" href="#additional-settings"></a>4.3.3.3. Additional settings</h5>
+   <h5 id="additional-settings"><a class="anchor" href="#additional-settings"></a>5.3.3.3. Additional settings</h5>
    <div class="paragraph">
     <p>In addition to <code>ColumnMapper</code> mentioned above you can customize other parts of <code>crypto module</code>. You can enable <code>gzip</code> compression and <code>HMAC</code> usage (later will ensure integrity of data).</p>
    </div>

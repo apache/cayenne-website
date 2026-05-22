@@ -21,10 +21,10 @@ description: "Cayenne Guide 5.0, Filtering"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 170
+weight: 210
 ---
 <div class="sect2">
- <h3 id="re-filtering"><a class="anchor" href="#re-filtering"></a>3.2. Filtering</h3>
+ <h3 id="re-filtering"><a class="anchor" href="#re-filtering"></a>4.2. Filtering</h3>
  <div class="paragraph">
   <p>The first thing you usually want to control during reverse engineering is what exactly should be loaded from database and what not. One of the most common cases is excluding system tables, as you usually don’t want to map them.</p>
  </div>
@@ -35,7 +35,7 @@ weight: 170
   <p>The following use-cases will provide you a better understanding of how filtering works and how you could use it.</p>
  </div>
  <div class="sect3">
-  <h4 id="process-everything-from-schemacatalog"><a class="anchor" href="#process-everything-from-schemacatalog"></a>3.2.1. Process everything from schema/catalog</h4>
+  <h4 id="process-everything-from-schemacatalog"><a class="anchor" href="#process-everything-from-schemacatalog"></a>4.2.1. Process everything from schema/catalog</h4>
   <div class="paragraph">
    <p>The simplest example of reverse engineering is processing tables from one schema of catalog and there are several options to do this. Basic syntax is described below:</p>
   </div>
@@ -92,7 +92,7 @@ weight: 170
   </div>
  </div>
  <div class="sect3">
-  <h4 id="combine-schema-and-catalog-filters"><a class="anchor" href="#combine-schema-and-catalog-filters"></a>3.2.2. Combine Schema and Catalog filters</h4>
+  <h4 id="combine-schema-and-catalog-filters"><a class="anchor" href="#combine-schema-and-catalog-filters"></a>4.2.2. Combine Schema and Catalog filters</h4>
   <div class="paragraph">
    <p>Cayenne supports combination of different schemas and catalogs, and it filters data according to your requirements. You could achieve this by the following example of reverse engineering configuration:</p>
   </div>
@@ -168,7 +168,7 @@ weight: 170
   </div>
  </div>
  <div class="sect3">
-  <h4 id="including-and-excluding-tables-columns-procedures-and-relationships"><a class="anchor" href="#including-and-excluding-tables-columns-procedures-and-relationships"></a>3.2.3. Including and Excluding tables, columns, procedures and relationships</h4>
+  <h4 id="including-and-excluding-tables-columns-procedures-and-relationships"><a class="anchor" href="#including-and-excluding-tables-columns-procedures-and-relationships"></a>4.2.3. Including and Excluding tables, columns, procedures and relationships</h4>
   <div class="paragraph">
    <p>Cayenne reverse engineering let you fine tune table, columns and stored procedures names that you need to import to your model file. In every filter you can use regexp syntax. Here is some examples of configuration for common tasks.</p>
   </div>
@@ -287,7 +287,7 @@ weight: 170
   </div>
  </div>
  <div class="sect3">
-  <h4 id="complete-filtering-example"><a class="anchor" href="#complete-filtering-example"></a>3.2.4. Complete filtering example</h4>
+  <h4 id="complete-filtering-example"><a class="anchor" href="#complete-filtering-example"></a>4.2.4. Complete filtering example</h4>
   <div class="paragraph">
    <p>Initially, let’s make a small sample. Consider the following reverse engineering configuration.</p>
   </div>
@@ -390,7 +390,7 @@ weight: 170
   </div>
  </div>
  <div class="sect3">
-  <h4 id="ant-configuration-example"><a class="anchor" href="#ant-configuration-example"></a>3.2.5. Ant configuration example</h4>
+  <h4 id="ant-configuration-example"><a class="anchor" href="#ant-configuration-example"></a>4.2.5. Ant configuration example</h4>
   <div class="paragraph">
    <p>Here is config sample for <code>Ant</code> task:</p>
   </div>

@@ -54,7 +54,7 @@ weight: 20
      <td class="tableblock halign-left valign-top">
       <p class="tableblock">5.0</p></td>
      <td class="tableblock halign-left valign-top">
-      <p class="tableblock">Java 11 or newer</p></td>
+      <p class="tableblock">Java 21 or newer</p></td>
      <td class="tableblock halign-left valign-top">
       <p class="tableblock">Development</p></td>
     </tr>
@@ -138,71 +138,66 @@ weight: 20
    </div>
   </div>
   <div class="paragraph">
-   <p>The Modeler can also be started from Maven. While it may look like an exotic way to start a GUI application, it has its benefits - no need to download Cayenne distribution, the version of the Modeler always matches the version of the framework, the plugin can find mapping files in the project automatically. So it is an attractive option to some developers. Maven option requires a declaration in the POM:</p>
+   <p>A path to an existing Cayenne project file can be passed as the only argument to open the project on startup:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;build&gt;
-    &lt;plugins&gt;
-        &lt;plugin&gt;
-            &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
-            &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
-            &lt;version&gt;5.0-M1&lt;/version&gt;
-        &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;</code></pre>
+    <pre class="highlight"><code>$ java -jar CayenneModeler.jar path/to/cayenne-project.xml</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>And then can be run as</p>
+   <p>On macOS the same applies to the <code>.app</code> bundle:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code>$ mvn cayenne-modeler:run</code></pre>
+    <pre class="highlight"><code>$ open CayenneModeler.app --args path/to/cayenne-project.xml</code></pre>
    </div>
   </div>
-  <table id="pluginParameteres" class="tableblock frame-all grid-all stretch table table-bordered">
-   <caption class="title">
-    Table 2. Modeler plugin parameters
-   </caption>
-   <colgroup>
-    <col style="width: 22.2222%;">
-    <col style="width: 11.1111%;">
-    <col style="width: 66.6667%;">
-   </colgroup>
-   <thead>
-    <tr>
-     <th class="tableblock halign-left valign-top">Name</th>
-     <th class="tableblock halign-left valign-top">Type</th>
-     <th class="tableblock halign-left valign-top">Description</th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr>
-     <td class="tableblock halign-left valign-middle">
-      <p class="tableblock">modelFile</p></td>
-     <td class="tableblock halign-left valign-middle">
-      <p class="tableblock">File</p></td>
-     <td class="tableblock halign-left valign-top">
-      <div class="content">
-       <div class="paragraph">
-        <p>Name of the model file to open. Here is some simple example:</p>
-       </div>
-       <div class="listingblock">
-        <div class="content">
-         <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;cayenne-modeler-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;${cayenne.version}&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;modelFile&gt;src/main/resources/cayenne.xml&lt;/modelFile&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;</code></pre>
-        </div>
-       </div>
-      </div></td>
-    </tr>
-   </tbody>
-  </table>
+  <div class="sect4">
+   <h5 id="running-from-maven"><a class="anchor" href="#running-from-maven"></a>1.1.2.1. Running from Maven</h5>
+   <div class="paragraph">
+    <p>The Modeler can also be started from Maven. While it may look like an exotic way to start a GUI application, it has its benefits - no need to download Cayenne distribution, and the version of the Modeler always matches the version of the framework. Add the <code>cayenne-modeler</code> dependency and an <code>exec-maven-plugin</code> execution to the project POM:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.cayenne.modeler&lt;/groupId&gt;
+        &lt;artifactId&gt;cayenne-modeler&lt;/artifactId&gt;
+        &lt;version&gt;5.0&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+            &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.5.0&lt;/version&gt;
+            &lt;executions&gt;
+                &lt;execution&gt;
+                    &lt;id&gt;run-modeler&lt;/id&gt;
+                    &lt;goals&gt;
+                        &lt;goal&gt;java&lt;/goal&gt;
+                    &lt;/goals&gt;
+                &lt;/execution&gt;
+            &lt;/executions&gt;
+            &lt;configuration&gt;
+                &lt;mainClass&gt;org.apache.cayenne.modeler.Main&lt;/mainClass&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Then run:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>$ mvn exec:java@run-modeler</code></pre>
+    </div>
+   </div>
+  </div>
  </div>
 </div>

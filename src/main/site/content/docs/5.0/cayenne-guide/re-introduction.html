@@ -21,12 +21,12 @@ description: "Cayenne Guide 5.0, Introduction"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 160
+weight: 200
 ---
 <div class="sect2">
- <h3 id="re-introduction"><a class="anchor" href="#re-introduction"></a>3.1. Introduction</h3>
+ <h3 id="re-introduction"><a class="anchor" href="#re-introduction"></a>4.1. Introduction</h3>
  <div class="sect3">
-  <h4 id="db-first-flow-2"><a class="anchor" href="#db-first-flow-2"></a>3.1.1. "DB-first" Flow</h4>
+  <h4 id="db-first-flow-2"><a class="anchor" href="#db-first-flow-2"></a>4.1.1. "DB-first" Flow</h4>
   <div class="paragraph">
    <p>An ORM system consists of three parts: database, OR mapping and persistent Java classes. These parts always need to be kept in sync with each other for the application to work. "DB-first" flow is a common and practical approach to synchronization that assumes the database to be the master source of the metadata, with other two parts synchronized from the DB as the schema evolves. Cayenne provides a number of tools to automate and control it. Here is how "DB-first" flow is typically implemented:</p>
   </div>
@@ -50,7 +50,7 @@ weight: 160
   </div>
  </div>
  <div class="sect3">
-  <h4 id="introduction-to-cdbimport"><a class="anchor" href="#introduction-to-cdbimport"></a>3.1.2. Introduction to "cdbimport"</h4>
+  <h4 id="introduction-to-cdbimport"><a class="anchor" href="#introduction-to-cdbimport"></a>4.1.2. Introduction to "cdbimport"</h4>
   <div class="paragraph">
    <p>Here is a simple Maven configuration of "cdbimport" (for details see <a href="/docs/5.0/cayenne-guide/maven_plugin#mavenCdbimort">cayenne-maven-plugin</a> documentation)</p>
   </div>
@@ -59,7 +59,7 @@ weight: 160
     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
 	&lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
 	&lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-	&lt;version&gt;5.0-M1&lt;/version&gt;
+	&lt;version&gt;5.0&lt;/version&gt;
 
 	&lt;configuration&gt;
         &lt;cayenneProject&gt;${project.basedir}/src/main/resources/cayenne/cayenne-project.xml&lt;/cayenneProject&gt;

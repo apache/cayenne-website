@@ -21,35 +21,35 @@ description: "Cayenne Guide 5.0, JCache integration"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 240
+weight: 280
 ---
 <div class="sect2">
- <h3 id="ext-jcache"><a class="anchor" href="#ext-jcache"></a>4.4. JCache integration</h3>
+ <h3 id="ext-jcache"><a class="anchor" href="#ext-jcache"></a>5.4. JCache integration</h3>
  <div class="paragraph">
   <p>Allows to integrate any JCache (JSR 107) compatible caching provider with Cayenne.</p>
  </div>
  <div class="sect3">
-  <h4 id="maven-5"><a class="anchor" href="#maven-5"></a>4.4.1. Maven</h4>
+  <h4 id="maven-5"><a class="anchor" href="#maven-5"></a>5.4.1. Maven</h4>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
-    &lt;version&gt;5.0-M1&lt;/version&gt;
+    &lt;version&gt;5.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="gradle-5"><a class="anchor" href="#gradle-5"></a>4.4.2. Gradle</h4>
+  <h4 id="gradle-5"><a class="anchor" href="#gradle-5"></a>5.4.2. Gradle</h4>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:5.0-M1'</code></pre>
+    <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:5.0'</code></pre>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="usage-4"><a class="anchor" href="#usage-4"></a>4.4.3. Usage</h4>
+  <h4 id="usage-4"><a class="anchor" href="#usage-4"></a>5.4.3. Usage</h4>
   <div class="paragraph">
    <p>To use JCache provider in your app you need to include this module and caching provider libs (e.g. Ehcache). You can provide own implementation of <code>org.apache.cayenne.jcache.JCacheConfigurationFactory</code> to customize cache configuration if required.</p>
   </div>
@@ -90,7 +90,7 @@ weight: 240
    <p>You may else be interested in <a href="/docs/5.0/cayenne-guide/ext-cache-invalidation">Cache invalidation extension</a>.</p>
   </div>
   <div class="sect4">
-   <h5 id="ehcache-setup-example"><a class="anchor" href="#ehcache-setup-example"></a>4.4.3.1. Ehcache setup example</h5>
+   <h5 id="ehcache-setup-example"><a class="anchor" href="#ehcache-setup-example"></a>5.4.3.1. Ehcache setup example</h5>
    <div class="paragraph">
     <p>Here is an example of using <code>ehcache</code> as cache manager.</p>
    </div>
@@ -102,7 +102,7 @@ weight: 240
      <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.ehcache&lt;/groupId&gt;
     &lt;artifactId&gt;ehcache&lt;/artifactId&gt;
-    &lt;version&gt;{ehcache-version}&lt;/version&gt;
+    &lt;version&gt;3.8.1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
     </div>
    </div>
