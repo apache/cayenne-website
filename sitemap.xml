@@ -137,6 +137,18 @@
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/customizing-cayenne-runtime/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/agentic-coding/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/overview/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/installing-the-cayenne-mcp-server/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/mcp-tools/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/db-first-flow/</loc>
   </url>
   <url>
