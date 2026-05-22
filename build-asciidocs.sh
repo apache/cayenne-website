@@ -97,9 +97,7 @@ cd  "$CAYENNE_TMP_DIR"
 # build it
 echo "Running Maven build... it can take a while..."
 mvn package -Passembly -q -DskipTests -Dcayenne.version=${VERSION} -pl !modeler,!modeler/cayenne-modeler,\
-!modeler/cayenne-modeler-generic,!modeler/cayenne-modeler-generic-ext,\
-!modeler/cayenne-modeler-mac,!modeler/cayenne-modeler-mac-ext,\
-!modeler/cayenne-modeler-win,!modeler/cayenne-modeler-win-ext,\
+!modeler/cayenne-modeler-generic,!modeler/cayenne-modeler-mac,!modeler/cayenne-modeler-win,\
 !modeler/cayenne-wocompat,!assembly,!cayenne-gradle-plugin,!docs/doc\
  > /dev/null 2>&1
 echo "Maven build complete"

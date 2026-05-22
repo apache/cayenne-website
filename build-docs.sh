@@ -96,17 +96,21 @@ cd  "$CAYENNE_TMP_DIR" || exit 3
 
 # build it
 echo "Running Maven build... it can take a while..."
-mvn package -Passembly -q -DskipTests -Dcayenne.version=${VERSION} -pl !modeler,!modeler/cayenne-modeler,\
-!modeler/cayenne-modeler-generic,!modeler/cayenne-modeler-generic-ext,\
-!modeler/cayenne-modeler-mac,!modeler/cayenne-modeler-mac-ext,\
-!modeler/cayenne-modeler-win,!modeler/cayenne-modeler-win-ext,\
+mvn package -Passembly -DskipTests -Dcayenne.version=${VERSION} -pl !modeler,!modeler/cayenne-modeler,\
+!modeler/cayenne-modeler-generic,!modeler/cayenne-modeler-mac,!modeler/cayenne-modeler-win,\
 !modeler/cayenne-wocompat,!assembly\
  > /dev/null 2>&1
 echo "Maven build complete"
 
 # copy JavaDoc
 echo "Syncing JavaDoc to \"docs/$MAJOR_VERSION/api/\""
-rsync -a --delete "./docs/doc/target/site/apidocs/doc/api/" "$JAVA_DOC_DIR/api/"
+MAJOR_NUM="${VERSION%%.*}"
+if [ "$MAJOR_NUM" -ge 5 ]; then
+    APIDOC_SRC="./docs/doc/target/site/apidocs/"
+else
+    APIDOC_SRC="./docs/doc/target/site/apidocs/doc/api/"
+fi
+rsync -a --delete "$APIDOC_SRC" "$JAVA_DOC_DIR/api/"
 
 # copy everything from ./docs/asciidoc/**/target/site/** directories
 cd "$CAYENNE_TMP_DIR/docs/asciidoc/" || exit 4
