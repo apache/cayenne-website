@@ -57,6 +57,7 @@ org.apache.cayenne.exp.property
 org.apache.cayenne.graph
 org.apache.cayenne.log
 org.apache.cayenne.map
+org.apache.cayenne.map.event
 org.apache.cayenne.query
 org.apache.cayenne.reflect
 org.apache.cayenne.reflect.generic
