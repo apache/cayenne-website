@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
         <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
-        <title>Cayenne Guide 5.0 · Reverse Engineering in Cayenne Modeler &middot; Apache Cayenne</title>
+        <title>Cayenne Guide 5.0 · Installing apache-cayenne Plugin (Claude Code) &middot; Apache Cayenne</title>
     </head>
     <body  class="cd-head">
 <header class="page-header">
@@ -239,21 +239,21 @@
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
         
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -292,79 +292,19 @@
                     </header>
                     <section>
                         <div class="sect2">
- <h3 id="re-modeler"><a class="anchor" href="#re-modeler"></a>4.4. Reverse Engineering in Cayenne Modeler</h3>
+ <h3 id="installing-apache-cayenne-plugin-claude-code"><a class="anchor" href="#installing-apache-cayenne-plugin-claude-code"></a>3.2. Installing <code>apache-cayenne</code> Plugin (Claude Code)</h3>
  <div class="paragraph">
-  <p>Alternative approach to using <a href="/docs/5.0/cayenne-guide/re-introduction">build tools</a> is doing reverse engineering from <a href="/docs/5.0/cayenne-guide/cayenne-modeler">CayenneModeler</a>.</p>
+  <p>Install the <code>apache-cayenne</code> plugin with Cayenne-specific skills under Claude Code:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-bash bash" data-lang="bash">/plugin marketplace add apache/cayenne
+/plugin install apache-cayenne@apache-cayenne
+/reload-plugins</code></pre>
+  </div>
  </div>
  <div class="paragraph">
-  <p>You can find reverse engineering tool in dataMap view on <strong>DbImport Tab</strong>.</p>
- </div>
- <div class="sect3">
-  <h4 id="reverse-engineering-options"><a class="anchor" href="#reverse-engineering-options"></a>4.4.1. Reverse engineering options</h4>
-  <div class="imageblock text-center">
-   <div class="content">
-    <img src="../images/re-modeler-reverseengineering-dialog.png" alt="re modeler reverseengineering dialog">
-   </div>
-  </div>
-  <div class="paragraph">
-   <p>Reverse Engineering dialog.</p>
-  </div>
-  <div class="paragraph">
-   <p>Here is a list of options to tune what will be processed by reverse engineering:</p>
-  </div>
-  <div class="ulist">
-   <ul>
-    <li>
-     <p><strong>Add Catalog</strong></p></li>
-    <li>
-     <p><strong>Add Schema</strong></p></li>
-    <li>
-     <p><strong>Add Include Table</strong></p></li>
-    <li>
-     <p><strong>Add Exclude Table</strong></p></li>
-    <li>
-     <p><strong>Add Include Column</strong></p></li>
-    <li>
-     <p><strong>Add Exclude Column</strong></p></li>
-    <li>
-     <p><strong>Add Include Procedure</strong></p></li>
-    <li>
-     <p><strong>Add Exclude Procedure</strong></p></li>
-    <li>
-     <p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p></li>
-    <li>
-     <p><strong>Strip from table names</strong>: Regex that matches the part of the table name that needs to be stripped off generating ObjEntity name.</p></li>
-    <li>
-     <p><strong>Skip relationships loading</strong>: Whether to load relationships.</p></li>
-    <li>
-     <p><strong>Skip primary key loading</strong>: Whether to load primary keys.</p></li>
-    <li>
-     <p><strong>Force datamap catalog</strong>: will set DbEntity catalog to one in the DataMap.</p></li>
-    <li>
-     <p><strong>Force datamap schema</strong>: will set DbEntity schema to one in the DataMap.</p></li>
-    <li>
-     <p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p></li>
-    <li>
-     <p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p></li>
-   </ul>
-  </div>
- </div>
- <div class="sect3">
-  <h4 id="datasource-selection"><a class="anchor" href="#datasource-selection"></a>4.4.2. DataSource selection</h4>
-  <div class="paragraph">
-   <p>Then you click <code>Run Import</code> or <code>Configure Connection</code> to set DataSource. If you don’t have any DataSource yet you can create one from this menu.</p>
-  </div>
-  <div class="imageblock text-center">
-   <div class="content">
-    <img src="../images/re-modeler-datasource-select.png" alt="re modeler datasource select">
-   </div>
-  </div>
-  <div class="paragraph">
-   <p>Datasource selection dialog.</p>
-  </div>
-  <div class="paragraph">
-   <p>Then click <code>continue</code> to start dbImport.</p>
-  </div>
+  <p>The plugin adds skills for DataMap editing, class generation, reverse engineering, query writing, and runtime setup. The skills work best with the MCP server present (see the next chapter).</p>
  </div>
 </div>
                     </section>
@@ -375,9 +315,9 @@
                             </div>
                             <div class="col-18 col-md-9  text-center text-md-right">
                                 
-                                <a class="btn btn-link" href='/docs/5.0/cayenne-guide/additional-modules/'>
+                                <a class="btn btn-link" href='/docs/5.0/cayenne-guide/installing-the-cayenne-mcp-server/'>
                                     <span class="d-block d-md-none  text-muted">Next: </span>
-                                    Next: Cayenne Guide 5.0 · Additional Modules
+                                    Next: Cayenne Guide 5.0 · Installing the Cayenne MCP Server
                                     <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
                                 </a>
                                 

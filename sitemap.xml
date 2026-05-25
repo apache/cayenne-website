@@ -143,6 +143,9 @@
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/overview/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/installing-apache-cayenne-plugin-claude-code/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/installing-the-cayenne-mcp-server/</loc>
   </url>
   <url>
@@ -167,10 +170,10 @@
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/additional-modules/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-cache-invalidation/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-commit-log/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-commit-log/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-cache-invalidation/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-crypto/</loc>
