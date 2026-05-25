@@ -21,15 +21,18 @@ description: "Cayenne Guide 5.0, MCP Tools"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 190
+weight: 200
 ---
 <div class="sect2">
- <h3 id="mcp-tools"><a class="anchor" href="#mcp-tools"></a>3.3. MCP Tools</h3>
+ <h3 id="mcp-tools"><a class="anchor" href="#mcp-tools"></a>3.4. MCP Tools</h3>
  <div class="paragraph">
-  <p>The server exposes three tools. Your agent will discover them on its own, but it is useful to understand the capabilities and possible prompts. All tools operate on a Cayenne project descriptor (a <code>cayenne-*.xml</code> file) and take absolute paths - agents should resolve relative paths against the current workspace before invoking.</p>
+  <p>The server exposes three tools. Your agent will discover them on its own, but it is useful to understand the capabilities and possible prompts. All tools operate on a Cayenne project descriptor (a <code>cayenne-*.xml</code> file) and take absolute paths — agents should resolve relative paths against the current workspace before invoking.</p>
+ </div>
+ <div class="paragraph">
+  <p>If you are using the <code>apache-cayenne</code> Claude Code plugin, its skills (<code>cayenne-cgen</code>, <code>cayenne-modeler</code>, <code>cayenne-db-import</code>) call these tools automatically. You can verify the server is available with <code>claude mcp list</code> — look for an entry named <code>cayenne</code>.</p>
  </div>
  <div class="sect3">
-  <h4 id="open_project"><a class="anchor" href="#open_project"></a>3.3.1. open_project</h4>
+  <h4 id="open_project"><a class="anchor" href="#open_project"></a>3.4.1. open_project</h4>
   <div class="paragraph">
    <p>Launches CayenneModeler with the given project file pre-loaded. The call is non-blocking; the server waits for the Modeler to confirm a successful project load via a short startup handshake, then returns.</p>
   </div>
@@ -82,7 +85,7 @@ weight: 190
   </div>
  </div>
  <div class="sect3">
-  <h4 id="cgen_run"><a class="anchor" href="#cgen_run"></a>3.3.2. cgen_run</h4>
+  <h4 id="cgen_run"><a class="anchor" href="#cgen_run"></a>3.4.2. cgen_run</h4>
   <div class="paragraph">
    <p>Runs the Cayenne class generator (<code>cgen</code>) for a single DataMap inside the project, using the <code>cgen</code> configuration stored in the DataMap XML. The tool returns a JSON report describing which files were written, which were already up-to-date, and any errors encountered.</p>
   </div>
@@ -143,12 +146,12 @@ weight: 190
   </div>
  </div>
  <div class="sect3">
-  <h4 id="dbimport_run"><a class="anchor" href="#dbimport_run"></a>3.3.3. dbimport_run</h4>
+  <h4 id="dbimport_run"><a class="anchor" href="#dbimport_run"></a>3.4.3. dbimport_run</h4>
   <div class="paragraph">
-   <p>Runs Cayenne reverse engineering (dbimport) for a single DataMap inside the project. The tool reads the JDBC connection from the DBConnector that CayenneModeler stored in preferences when the user last ran the reverse-engineering dialog for this DataMap. If the DataMap has a <code>&lt;reverse-engineering&gt;</code> block its filters are applied; otherwise the full database schema is imported. The DataMap XML is rewritten on disk with the merged schema, and a JSON summary of what changed is returned.</p>
+   <p>Runs Cayenne reverse engineering (dbimport) for a single DataMap inside the project. The tool reads the JDBC connection from CayenneModeler preferences on the local machine (the agent doesn’t see the credentials). If the DataMap has a <code>&lt;reverse-engineering&gt;</code> block its filters are applied; otherwise the full database schema is imported. The DataMap XML is rewritten on disk with the merged schema, and a JSON summary of what changed is returned.</p>
   </div>
   <div class="paragraph">
-   <p>JDBC credentials are not passed as arguments — they come from CayenneModeler preferences. If no connection has been saved yet (<code>dbconnector_not_configured</code> error), open the project in the Modeler with <code>open_project</code>, run the dialog once to save the connection, then call <code>dbimport_run</code> again.</p>
+   <p>If no connection has been saved yet (<code>dbconnector_not_configured</code> error), open the project in the Modeler with <code>open_project</code>, run the dialog once to save the connection, then call <code>dbimport_run</code> again.</p>
   </div>
   <table class="tableblock frame-all grid-all stretch">
    <caption class="title">
