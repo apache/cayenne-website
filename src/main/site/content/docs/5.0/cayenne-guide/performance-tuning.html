@@ -21,12 +21,12 @@ description: "Cayenne Guide 5.0, Performance Tuning"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 130
+weight: 140
 ---
 <div class="sect2">
- <h3 id="performance-tuning"><a class="anchor" href="#performance-tuning"></a>2.8. Performance Tuning</h3>
+ <h3 id="performance-tuning"><a class="anchor" href="#performance-tuning"></a>2.9. Performance Tuning</h3>
  <div class="sect3">
-  <h4 id="prefetching"><a class="anchor" href="#prefetching"></a>2.8.1. Prefetching</h4>
+  <h4 id="prefetching"><a class="anchor" href="#prefetching"></a>2.9.1. Prefetching</h4>
   <div class="paragraph">
    <p>Prefetching is a technique that allows to bring back in one query not only the queried objects, but also objects related to them. In other words it is a controlled eager relationship resolving mechanism. Prefetching is discussed in the "Performance Tuning" chapter, as it is a powerful performance optimization method. However another common application of prefetching is to refresh stale object relationships, so more generally it can be viewed as a technique for managing subsets of the object graph.</p>
   </div>
@@ -150,7 +150,7 @@ PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="data-rows"><a class="anchor" href="#data-rows"></a>2.8.2. Data Rows</h4>
+  <h4 id="data-rows"><a class="anchor" href="#data-rows"></a>2.9.2. Data Rows</h4>
   <div class="paragraph">
    <p>Converting result set data to Persistent objects and registering these objects in the ObjectContext can be an expensive operation comparable to the time spent running the query (and frequently exceeding it). Internally Cayenne builds the result as a list of DataRows, that are later converted to objects. Skipping the last step and using data in the form of DataRows can significantly increase performance.</p>
   </div>
@@ -189,7 +189,7 @@ for(DataRow row : rows) {
   </div>
  </div>
  <div class="sect3">
-  <h4 id="specific-attributes-and-relationships-with-ejbql"><a class="anchor" href="#specific-attributes-and-relationships-with-ejbql"></a>2.8.3. Specific Attributes and Relationships with EJBQL</h4>
+  <h4 id="specific-attributes-and-relationships-with-ejbql"><a class="anchor" href="#specific-attributes-and-relationships-with-ejbql"></a>2.9.3. Specific Attributes and Relationships with EJBQL</h4>
   <div class="paragraph">
    <p>It is possible to fetch specific attributes and relationships from a model using <a href="/docs/5.0/cayenne-guide/queries#ejbql">EJBQLQuery</a>. The following example would return a java.util.List of String objects;</p>
   </div>
@@ -211,7 +211,7 @@ for(DataRow row : rows) {
   </div>
  </div>
  <div class="sect3">
-  <h4 id="iterated-queries"><a class="anchor" href="#iterated-queries"></a>2.8.4. Iterated Queries</h4>
+  <h4 id="iterated-queries"><a class="anchor" href="#iterated-queries"></a>2.9.4. Iterated Queries</h4>
   <div class="paragraph">
    <p>While contemporary hardware may easily allow applications to fetch hundreds of thousands or even millions of objects into memory, it doesn’t mean this is always a good idea to do so. You can optimize processing of very large result sets with two techniques discussed in this and the following chapter - iterated and paginated queries.</p>
   </div>
@@ -262,7 +262,7 @@ for(DataRow row : rows) {
   </div>
  </div>
  <div class="sect3">
-  <h4 id="paginated-queries"><a class="anchor" href="#paginated-queries"></a>2.8.5. Paginated Queries</h4>
+  <h4 id="paginated-queries"><a class="anchor" href="#paginated-queries"></a>2.9.5. Paginated Queries</h4>
   <div class="paragraph">
    <p>Enabling query pagination allows to load very large result sets in a Java app with very little memory overhead (much smaller than even the DataRows option discussed above). Moreover it is completely transparent to the application - a user gets what appears to be a list of Persistent objects - there’s no iterator to close or DataRows to convert to objects:</p>
   </div>
@@ -290,12 +290,12 @@ List&lt;Artist&gt; artists =
   </div>
  </div>
  <div class="sect3">
-  <h4 id="caching"><a class="anchor" href="#caching"></a>2.8.6. Caching and Fresh Data</h4>
+  <h4 id="caching"><a class="anchor" href="#caching"></a>2.9.6. Caching and Fresh Data</h4>
   <div class="sect4">
-   <h5 id="object-caching"><a class="anchor" href="#object-caching"></a>2.8.6.1. Object Caching</h5>
+   <h5 id="object-caching"><a class="anchor" href="#object-caching"></a>2.9.6.1. Object Caching</h5>
   </div>
   <div class="sect4">
-   <h5 id="query-result-caching"><a class="anchor" href="#query-result-caching"></a>2.8.6.2. Query Result Caching</h5>
+   <h5 id="query-result-caching"><a class="anchor" href="#query-result-caching"></a>2.9.6.2. Query Result Caching</h5>
    <div class="paragraph">
     <p>Cayenne supports mostly transparent caching of the query results. There are two levels of the cache: local (i.e. results cached by the ObjectContext) and shared (i.e. the results cached at the stack level and shared between all contexts). Local cache is much faster then the shared one, but is limited to a single context. It is often used with a shared read-only ObjectContext.</p>
    </div>
@@ -331,7 +331,7 @@ context.performGenericQuery(refresh);</code></pre>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="turning-off-synchronization-of-objectcontexts"><a class="anchor" href="#turning-off-synchronization-of-objectcontexts"></a>2.8.7. Turning off Synchronization of ObjectContexts</h4>
+  <h4 id="turning-off-synchronization-of-objectcontexts"><a class="anchor" href="#turning-off-synchronization-of-objectcontexts"></a>2.9.7. Turning off Synchronization of ObjectContexts</h4>
   <div class="paragraph">
    <p>By default when a single ObjectContext commits its changes, all other contexts in the same runtime receive an event that contains all the committed changes. This allows them to update their cached object state to match the latest committed data. There are however many problems with this ostensibly helpful feature. In short - it works well in environments with few contexts and in unclustered scenarios, such as single user desktop applications, or simple webapps with only a few users. More specifically:</p>
   </div>

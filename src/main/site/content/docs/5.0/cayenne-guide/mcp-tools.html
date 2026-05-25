@@ -21,12 +21,12 @@ description: "Cayenne Guide 5.0, MCP Tools"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 180
+weight: 190
 ---
 <div class="sect2">
  <h3 id="mcp-tools"><a class="anchor" href="#mcp-tools"></a>3.3. MCP Tools</h3>
  <div class="paragraph">
-  <p>The server currently exposes two tools. Your agent will discover them on its own, but it is useful to understand the capabilities and possible prompts. Both tools operate on a Cayenne project descriptor (a <code>cayenne-*.xml</code> file) and take absolute paths - agents should resolve relative paths against the current workspace before invoking.</p>
+  <p>The server exposes three tools. Your agent will discover them on its own, but it is useful to understand the capabilities and possible prompts. All tools operate on a Cayenne project descriptor (a <code>cayenne-*.xml</code> file) and take absolute paths - agents should resolve relative paths against the current workspace before invoking.</p>
  </div>
  <div class="sect3">
   <h4 id="open_project"><a class="anchor" href="#open_project"></a>3.3.1. open_project</h4>
@@ -138,6 +138,70 @@ weight: 180
    <blockquote>
     <div class="paragraph">
      <p>regenerate Java classes from Cayenne model</p>
+    </div>
+   </blockquote>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="dbimport_run"><a class="anchor" href="#dbimport_run"></a>3.3.3. dbimport_run</h4>
+  <div class="paragraph">
+   <p>Runs Cayenne reverse engineering (dbimport) for a single DataMap inside the project. The tool reads the JDBC connection from the DBConnector that CayenneModeler stored in preferences when the user last ran the reverse-engineering dialog for this DataMap. If the DataMap has a <code>&lt;reverse-engineering&gt;</code> block its filters are applied; otherwise the full database schema is imported. The DataMap XML is rewritten on disk with the merged schema, and a JSON summary of what changed is returned.</p>
+  </div>
+  <div class="paragraph">
+   <p>JDBC credentials are not passed as arguments — they come from CayenneModeler preferences. If no connection has been saved yet (<code>dbconnector_not_configured</code> error), open the project in the Modeler with <code>open_project</code>, run the dialog once to save the connection, then call <code>dbimport_run</code> again.</p>
+  </div>
+  <table class="tableblock frame-all grid-all stretch">
+   <caption class="title">
+    Table 6. Parameters
+   </caption>
+   <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 20%;">
+    <col style="width: 60%;">
+   </colgroup>
+   <thead>
+    <tr>
+     <th class="tableblock halign-left valign-top">Name</th>
+     <th class="tableblock halign-left valign-top">Required</th>
+     <th class="tableblock halign-left valign-top">Description</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock"><code>projectPath</code></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">yes</p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">Absolute path to the top-level Cayenne project descriptor (<code>cayenne-*.xml</code>), not a DataMap file.</p></td>
+    </tr>
+    <tr>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock"><code>dataMap</code></p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">yes</p></td>
+     <td class="tableblock halign-left valign-top">
+      <p class="tableblock">Name of the target DataMap as it appears in the <code>&lt;map name='…​'&gt;</code> element of the project descriptor.</p></td>
+    </tr>
+   </tbody>
+  </table>
+  <div class="paragraph">
+   <p>A typical agent prompt that triggers this tool:</p>
+  </div>
+  <div class="quoteblock">
+   <blockquote>
+    <div class="paragraph">
+     <p>sync the Cayenne model with the database</p>
+    </div>
+   </blockquote>
+  </div>
+  <div class="paragraph">
+   <p>Or more specifically:</p>
+  </div>
+  <div class="quoteblock">
+   <blockquote>
+    <div class="paragraph">
+     <p>re-import the <code>MyDataMap</code> schema from the database into <code>/path/to/cayenne-project.xml</code></p>
     </div>
    </blockquote>
   </div>
