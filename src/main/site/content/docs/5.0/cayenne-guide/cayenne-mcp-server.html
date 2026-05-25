@@ -1,0 +1,292 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Cayenne MCP Server"
+description: "Cayenne Guide 5.0, Cayenne MCP Server"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 190
+---
+<div class="sect2">
+ <h3 id="cayenne-mcp-server"><a class="anchor" href="#cayenne-mcp-server"></a>3.3. Cayenne MCP Server</h3>
+ <div class="paragraph">
+  <p>The MCP server is a self-contained, stdio-based process that the AI agent launches on demand. It works with most agents (not only Claude). The MCP server is bundled with the platform-specific CayenneModeler and requires Java 21 or later on the system <code>PATH</code>. So to get it, first download the Modeler at <a href="https://cayenne.apache.org/download/" class="bare">https://cayenne.apache.org/download/</a> .</p>
+ </div>
+ <div class="paragraph">
+  <p>MCP runnable jar is <code>CayenneMCPServer.jar</code>. Its location is OS-dependent (you will need this location in the next step):</p>
+ </div>
+ <div class="paragraph">
+  <p>Mac:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code># &lt;install-dir&gt; is typically "/Applications", but it can be any other directory
+&lt;install-dir&gt;/CayenneModeler.app/Contents/Resources/mcp/CayenneMCPServer.jar</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>Windows:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code>&lt;install-dir&gt;\bin\CayenneMCPServer.jar</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>Linux / cross-platform:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code>&lt;install-dir&gt;/bin/CayenneMCPServer.jar</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>When installing the MCP, replace <code>/path/to/CayenneMCPServer.jar</code> mentioned in the instructions with the actual jar path:</p>
+ </div>
+ <div class="sect3">
+  <h4 id="installing-on-claude-code"><a class="anchor" href="#installing-on-claude-code"></a>3.3.1. Installing on Claude Code</h4>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-bash bash" data-lang="bash"># Register the MCP server (--scope user makes it available across all projects)
+claude mcp add cayenne --scope user -- java -jar /path/to/CayenneMCPServer.jar
+
+# Verify it is connected
+claude mcp list</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="installing-on-cursor"><a class="anchor" href="#installing-on-cursor"></a>3.3.2. Installing on Cursor</h4>
+  <div class="paragraph">
+   <p>Edit <code>~/.cursor/mcp.json</code> (global, all projects) or <code>.cursor/mcp.json</code> in your project (per-project):</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-json json" data-lang="json">{
+  "mcpServers": {
+    "cayenne": {
+      "command": "java",
+      "args": ["-jar", "/path/to/CayenneMCPServer.jar"]
+    }
+  }
+}</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="installing-on-codex"><a class="anchor" href="#installing-on-codex"></a>3.3.3. Installing on Codex</h4>
+  <div class="paragraph">
+   <p>Add a <code>[mcp_servers.cayenne]</code> entry to <code>~/.codex/config.toml</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-toml toml" data-lang="toml">[mcp_servers.cayenne]
+command = "java"
+args = ["-jar", "/path/to/CayenneMCPServer.jar"]</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="available-mcp-tools"><a class="anchor" href="#available-mcp-tools"></a>3.3.4. Available MCP Tools</h4>
+  <div class="paragraph">
+   <p>The server exposes three tools. Your agent will discover them on its own, but it is useful to understand the capabilities and possible prompts. All tools operate on a Cayenne project descriptor (a <code>cayenne-*.xml</code> file) and take absolute paths — agents should resolve relative paths against the current workspace before invoking.</p>
+  </div>
+  <div class="paragraph">
+   <p>If you are using the <code>apache-cayenne</code> Claude Code plugin, its skills (<code>cayenne-cgen</code>, <code>cayenne-modeler</code>, <code>cayenne-db-import</code>) call these tools automatically. You can verify the server is available with <code>claude mcp list</code> — look for an entry named <code>cayenne</code>.</p>
+  </div>
+  <div class="sect4">
+   <h5 id="open_project"><a class="anchor" href="#open_project"></a>3.3.4.1. open_project</h5>
+   <div class="paragraph">
+    <p>Launches CayenneModeler with the given project file pre-loaded. The call is non-blocking; the server waits for the Modeler to confirm a successful project load via a short startup handshake, then returns.</p>
+   </div>
+   <table class="tableblock frame-all grid-all stretch">
+    <caption class="title">
+     Table 4. Parameters
+    </caption>
+    <colgroup>
+     <col style="width: 20%;">
+     <col style="width: 20%;">
+     <col style="width: 60%;">
+    </colgroup>
+    <thead>
+     <tr>
+      <th class="tableblock halign-left valign-top">Name</th>
+      <th class="tableblock halign-left valign-top">Required</th>
+      <th class="tableblock halign-left valign-top">Description</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock"><code>projectPath</code></p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">yes</p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">Absolute path to the top-level Cayenne project descriptor (<code>cayenne-*.xml</code>).</p></td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="paragraph">
+    <p>In most cases your agent knows where the project is, so a typical prompt that triggers this tool is just this:</p>
+   </div>
+   <div class="quoteblock">
+    <blockquote>
+     <div class="paragraph">
+      <p>open my Cayenne project in the Modeler</p>
+     </div>
+    </blockquote>
+   </div>
+   <div class="paragraph">
+    <p>Though you can be more specific and indicate the exact project to open:</p>
+   </div>
+   <div class="quoteblock">
+    <blockquote>
+     <div class="paragraph">
+      <p>open the Cayenne project at @/path/to/cayenne-project.xml in the Modeler.</p>
+     </div>
+    </blockquote>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="cgen_run"><a class="anchor" href="#cgen_run"></a>3.3.4.2. cgen_run</h5>
+   <div class="paragraph">
+    <p>Runs the Cayenne class generator (<code>cgen</code>) for a single DataMap inside the project, using the <code>cgen</code> configuration stored in the DataMap XML. The tool returns a JSON report describing which files were written, which were already up-to-date, and any errors encountered.</p>
+   </div>
+   <table class="tableblock frame-all grid-all stretch">
+    <caption class="title">
+     Table 5. Parameters
+    </caption>
+    <colgroup>
+     <col style="width: 20%;">
+     <col style="width: 20%;">
+     <col style="width: 60%;">
+    </colgroup>
+    <thead>
+     <tr>
+      <th class="tableblock halign-left valign-top">Name</th>
+      <th class="tableblock halign-left valign-top">Required</th>
+      <th class="tableblock halign-left valign-top">Description</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock"><code>projectPath</code></p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">yes</p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">Absolute path to the top-level Cayenne project descriptor (<code>cayenne-*.xml</code>), not a DataMap file.</p></td>
+     </tr>
+     <tr>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock"><code>dataMap</code></p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">yes</p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">Name of the target DataMap as it appears in the <code>&lt;map name='…​'&gt;</code> element of the project descriptor.</p></td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="paragraph">
+    <p>A typical agent prompt that triggers this tool:</p>
+   </div>
+   <div class="quoteblock">
+    <blockquote>
+     <div class="paragraph">
+      <p>regenerate Java classes for the <code>MyDataMap</code> DataMap in <code>/path/to/cayenne-project.xml</code>.</p>
+     </div>
+    </blockquote>
+   </div>
+   <div class="paragraph">
+    <p>Or if you only have one project and one DataMap:</p>
+   </div>
+   <div class="quoteblock">
+    <blockquote>
+     <div class="paragraph">
+      <p>regenerate Java classes from Cayenne model</p>
+     </div>
+    </blockquote>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="dbimport_run"><a class="anchor" href="#dbimport_run"></a>3.3.4.3. dbimport_run</h5>
+   <div class="paragraph">
+    <p>Runs Cayenne reverse engineering (dbimport) for a single DataMap inside the project. The tool reads the JDBC connection from CayenneModeler preferences on the local machine (the agent doesn’t see the credentials). If the DataMap has a <code>&lt;reverse-engineering&gt;</code> block its filters are applied; otherwise the full database schema is imported. The DataMap XML is rewritten on disk with the merged schema, and a JSON summary of what changed is returned.</p>
+   </div>
+   <div class="paragraph">
+    <p>If no connection has been saved yet (<code>dbconnector_not_configured</code> error), open the project in the Modeler with <code>open_project</code>, run the dialog once to save the connection, then call <code>dbimport_run</code> again.</p>
+   </div>
+   <table class="tableblock frame-all grid-all stretch">
+    <caption class="title">
+     Table 6. Parameters
+    </caption>
+    <colgroup>
+     <col style="width: 20%;">
+     <col style="width: 20%;">
+     <col style="width: 60%;">
+    </colgroup>
+    <thead>
+     <tr>
+      <th class="tableblock halign-left valign-top">Name</th>
+      <th class="tableblock halign-left valign-top">Required</th>
+      <th class="tableblock halign-left valign-top">Description</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock"><code>projectPath</code></p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">yes</p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">Absolute path to the top-level Cayenne project descriptor (<code>cayenne-*.xml</code>), not a DataMap file.</p></td>
+     </tr>
+     <tr>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock"><code>dataMap</code></p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">yes</p></td>
+      <td class="tableblock halign-left valign-top">
+       <p class="tableblock">Name of the target DataMap as it appears in the <code>&lt;map name='…​'&gt;</code> element of the project descriptor.</p></td>
+     </tr>
+    </tbody>
+   </table>
+   <div class="paragraph">
+    <p>A typical agent prompt that triggers this tool:</p>
+   </div>
+   <div class="quoteblock">
+    <blockquote>
+     <div class="paragraph">
+      <p>sync the Cayenne model with the database</p>
+     </div>
+    </blockquote>
+   </div>
+   <div class="paragraph">
+    <p>Or more specifically:</p>
+   </div>
+   <div class="quoteblock">
+    <blockquote>
+     <div class="paragraph">
+      <p>re-import the <code>MyDataMap</code> schema from the database into <code>/path/to/cayenne-project.xml</code></p>
+     </div>
+    </blockquote>
+   </div>
+  </div>
+ </div>
+</div>
