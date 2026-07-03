@@ -1,4 +1,4 @@
-# 
+#
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -23,6 +23,18 @@
 # Versions are rendered on Download page in the same order as in this file.
 #
 releases:
+  - version: "5.0"
+    latestRevision: "5.0-M2"
+    type: "Alpha"
+    description: "Alpha release"
+    date: "2026-06-24"
+    docs: true
+    downloadable: true
+    jdk: 21
+    newRepoLayout: true
+    javaDoc: "online"
+    maven: "cayenne"
+
   - version: "5.0"
     latestRevision: "5.0-M1"
     type: "Alpha"
