@@ -42,6 +42,12 @@
         <release>
             <Version>
                 <name>Alpha</name>
+                <created>2026-06-24</created>
+                <revision>5.0-M2</revision>
+            </Version>
+        </release><release>
+            <Version>
+                <name>Alpha</name>
                 <created>2024-09-09</created>
                 <revision>5.0-M1</revision>
             </Version>

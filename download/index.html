@@ -85,7 +85,54 @@
 
 <main class="container  py-5">
     <section>
-        <h1 class="text-center">Download</h1><h2>Alpha release - 5.0-M1 (Alpha)</h2>
+        <h1 class="text-center">Download</h1><h2>Alpha release - 5.0-M2 (Alpha)</h2>
+        <p>
+            Requires <strong>Java 21</strong> or above.
+            You can find full release notes
+            <a href="https://github.com/apache/cayenne/blob/5.0-M2/RELEASE-NOTES.txt">here</a>.
+        </p>
+        <ul class="nav nav-tabs" id="tab_5_0-M2" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="bin_5_0-M2-tab" data-toggle="tab" href="#bin_5_0-M2" role="tab" aria-controls="bin_5_0-M2" aria-selected="true">Binary</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="maven_5_0-M2-tab" data-toggle="tab" href="#maven_5_0-M2" role="tab" aria-controls="maven_5_0-M2" aria-selected="false">Maven</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="gradle_5_0-M2-tab" data-toggle="tab" href="#gradle_5_0-M2" role="tab" aria-controls="gradle_5_0-M2" aria-selected="false">Gradle</a>
+            </li>
+        </ul>
+        <div class="tab-content  px-1 pt-1 mb-5" id="tab_5_0-M2_content">
+            <div class="tab-pane fade show active" id="bin_5_0-M2" role="tabpanel" aria-labelledby="bin_5_0-M2-tab">
+                <ul class="list-unstyled"><li><a href="https://apachecayenne.gateway.scarf.sh/modeler-generic/5.0-M2">Cayenne 5.0-M2</a>
+                        binary distribution with cross-platform Java CayenneModeler
+                        (<a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2.tar.gz.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2.tar.gz.sha512">sha512</a>)
+                    </li><li><a href="https://apachecayenne.gateway.scarf.sh/modeler-macos/5.0-M2">Cayenne 5.0-M2</a>
+                        binary distribution with Mac OS X CayenneModeler
+                        (<a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2-macosx.dmg.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2-macosx.dmg.sha512">sha512</a>)
+                    </li><li><a href="https://apachecayenne.gateway.scarf.sh/modeler-win/5.0-M2">Cayenne 5.0-M2</a>
+                        binary distribution with Windows CayenneModeler
+                        (<a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2-win.zip.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2-win.zip.sha512">sha512</a>)
+                    </li><li><a href="https://www.apache.org/dyn/closer.cgi/cayenne/5.0-M2/cayenne-5.0-M2-src.tar.gz">Cayenne 5.0-M2</a>
+                        source code distribution
+                        (<a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2-src.tar.gz.asc">pgp</a>,
+                        <a href="https://downloads.apache.org/cayenne/5.0-M2/cayenne-5.0-M2-src.tar.gz.sha512">sha512</a>)
+                    </li></ul>
+            </div>
+            <div class="tab-pane fade" id="maven_5_0-M2" role="tabpanel" aria-labelledby="maven_5_0-M2-tab">
+                <pre><code class="xml">&lt;dependency>
+    &lt;groupId>org.apache.cayenne&lt;/groupId>
+    &lt;artifactId>cayenne&lt;/artifactId>
+    &lt;version>5.0-M2&lt;/version>
+&lt;/dependency></code></pre>
+            </div>
+            <div class="tab-pane fade" id="gradle_5_0-M2" role="tabpanel" aria-labelledby="gradle_5_0-M2-tab">
+                <pre><code class="groovy">implementation 'org.apache.cayenne:cayenne:5.0-M2'</code></pre>
+            </div>
+        </div><h2>Alpha release - 5.0-M1 (Alpha)</h2>
         <p>
             Requires <strong>Java 11</strong> or above.
             You can find full release notes
@@ -461,6 +508,11 @@ Windows users can use <code>CertUtil</code> or use the equivalent *nix tools as 
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
+                        <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
                         <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
                     </li>
@@ -468,11 +520,6 @@ Windows users can use <code>CertUtil</code> or use the equivalent *nix tools as 
                     <li>
                         <time datetime="2025-03-24 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 24, 2025</time>
                         <a href="/2025/03/cayenne-422-released/">Cayenne 4.2.2 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2024-09-09 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Sep 09, 2024</time>
-                        <a href="/2024/09/cayenne-50m1-released/">Cayenne 5.0 Milestone 1 Released</a>
                     </li>
                     
                 </ul>

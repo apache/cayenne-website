@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
         <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
         <script src="https://www.apachecon.com/event-images/snippet.js"></script>
-        <title>Cayenne 4.2 Beta 1 Released &middot; Apache Cayenne</title>
+        <title>Cayenne 5.0 Milestone 2 Released &middot; Apache Cayenne</title>
     </head>
     <body>
 
@@ -89,71 +89,163 @@
         
                 <section>
                     <article>
-                        <h1 class="text-center">Cayenne 4.2 Beta 1 Released<br />
-                            <small class="font-size-1rem text-muted">Dec 06, 2021</small>
+                        <h1 class="text-center">Cayenne 5.0 Milestone 2 Released<br />
+                            <small class="font-size-1rem text-muted">Jun 24, 2026</small>
                         </h1>
-                        <p>Apache Cayenne team is glad to announce the first beta release of Cayenne 4.2.
-The API is frozen now, and it is safe to try it out. From now on the 4.2 branch will concentrate on bug fixes.</p>
-<p>Cayenne can be downloaded from <a href="/download.html">here</a>.</p>
-
-
-<div class="pb-3"></div>
-<h2 class="text-center">A full list of changes in this release:</h2>
-
-
-<div class="pb-2"></div>
-<h4 id="changesnew-features">Changes/New Features:</h4>
+                        <p>Apache Cayenne development team is glad to announce the second milestone of a new major version of Cayenne.
+The latest version can be downloaded from <a href="/download.html">here</a>.</p>
+<p><strong>NOTE:</strong> Since this is Milestone 2, please see <a href="/2024/09/cayenne-50m1-released/">Milestone 1</a> release notes for more information on Cayenne 5.</p>
+<h3 id="incompatible-changes">Incompatible Changes</h3>
+<h4 id="java-version">Java Version</h4>
+<p>The minimum required Java version is now <strong>Java 21</strong>, Java 8 and 11 are no longer supported.</p>
+<h4 id="maven-dependency">Maven Dependency</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency&gt;</span>
+    <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.cayenne<span style="color:#f92672">&lt;/groupId&gt;</span>
+    <span style="color:#f92672">&lt;artifactId&gt;</span>cayenne<span style="color:#f92672">&lt;/artifactId&gt;</span>
+    <span style="color:#f92672">&lt;version&gt;</span>5.0-M2<span style="color:#f92672">&lt;/version&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div><p>For more details about incompatible changes and deprecations, please consult the <a href="https://github.com/apache/cayenne/blob/cayenne-parent-5.0-M2/UPGRADE.md">upgrade notes</a>.</p>
+<h3 id="notable-new-features">Notable New Features</h3>
+<h4 id="ai-assisted-development">AI-Assisted Development</h4>
+<p>Native support for AI-assisted development. This includes an MCP server bundled with the Modeler that allows your favorite agent to (A) open your project in the Modeler, (B) run DB Import, (C) run cgen. MCP works with any agent of course. Additionally, there is a plugin for Claude Code with a number of typical &ldquo;skills&rdquo;. See the docs for details: <a href="https://cayenne.apache.org/docs/5.0/cayenne-guide/agentic-coding/">https://cayenne.apache.org/docs/5.0/cayenne-guide/agentic-coding/</a>  And we&rsquo;d love feedback on this too.</p>
+<h4 id="modeler-polished">Modeler Polished</h4>
+<p>Claude Code was used to polish the Modeler. While it generally looks the same as before, active users will notice that a number of small annoying UI/UX issues were fixed. If your own pet Modeler bug/quirk is not yet addressed, please let us know on the mailing list.</p>
+<h3 id="full-list-of-changes-in-this-release">Full List of Changes in this Release</h3>
+<h4 id="changesnew-features">Changes/New Features</h4>
 <ul>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2399">CAY-2399</a> Convert string values to Enum in qualifiers</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2859">CAY-2859</a> Redesign SelectById factory methods</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2637">CAY-2637</a> Allow forcing a custom Connection for a transaction</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2873">CAY-2873</a> Change Orderings.orderedList() to accept a Collection rather than a List</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2718">CAY-2718</a> Use testcontainers for the integration tests</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2884">CAY-2884</a> Upgrade gradle to 8.13</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2893">CAY-2893</a> Update velocity-engine-core dependency</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2897">CAY-2897</a> Add no-op default implementations to the GraphChangeHandler interface</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2905">CAY-2905</a> Upgrade Gradle to 8.14</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2906">CAY-2906</a> In-memory evaluation of <code>(not) exists</code> expressions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2908">CAY-2908</a> Review and upgrade dependencies</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2916">CAY-2916</a> SelectById: unify logic for null/empty values</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2917">CAY-2917</a> Add Qualifier Joins Before Depenent Table Joins</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2918">CAY-2918</a> Remove OGNL Binding Architecture from CayenneModeler</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2920">CAY-2920</a> Remove &ldquo;Reengineer Database Schema&rdquo; menu</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2922">CAY-2922</a> Modeler: remove support for upgrading from file-based preferences</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2923">CAY-2923</a> Modeler: Restore table cell editor borders</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2924">CAY-2924</a> Move MapEvent and subclasses from the core to the Modeler</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2925">CAY-2925</a> Remove &ldquo;cayenne-modeler-maven-plugin&rdquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2927">CAY-2927</a> Modeler: Better-looking &ldquo;Update Entity Class Name&rdquo; dialog</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2928">CAY-2928</a> Modeler: remove floating log console modality</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2929">CAY-2929</a> Modeler: Prefrences management UI</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2930">CAY-2930</a> Modeler: remove &ldquo;rename&rdquo; button from DB Import toolbar</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2932">CAY-2932</a> Remove &ldquo;Generate Classes&rdquo; menu</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2933">CAY-2933</a> Modeler: DB Type Column Unreadable for Selected Rows</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2935">CAY-2935</a> Upgrade Cayenne 5.0 to Java 21</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2936">CAY-2936</a> Add a placeholder MCP server to the Modeler distribution</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2937">CAY-2937</a> Decommission &ldquo;graph&rdquo; Support</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2938">CAY-2938</a> Modeler: prettier DB Import - part 1</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2940">CAY-2940</a> Upgrade to SLF4J version 2.0.17</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2942">CAY-2942</a> CayenneModeler MCP: cgen_run tool</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2943">CAY-2943</a> CayenneModeler MCP: open_project tool</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2945">CAY-2945</a> CayenneModeler universal &ldquo;main&rdquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2946">CAY-2946</a> Claude Code &ldquo;plugin&rdquo; for agentic coding with Cayenne</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2947">CAY-2947</a> Merge &ldquo;cayenne-commitlog&rdquo; into the core</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2948">CAY-2948</a> Modeler: use native FileDialog on Mac</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2953">CAY-2953</a> Upgrade Gradle to 9.4.0</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2955">CAY-2955</a> Get rid of QueryEngine abstraction</li>
 </ul>
-
-
-<div class="pb-2"></div>
-<h4 id="bug-fixes">Bug Fixes:</h4>
+<h4 id="bug-fixes">Bug Fixes</h4>
 <ul>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2092">CAY-2092</a> Exception for query that uses pagination and sorting on to-many</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2701">CAY-2701</a> MySQL DST-related LocalDateTime issues</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2694">CAY-2694</a> Precision issues with reverse / forward engineering of time types on MySQL</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2836">CAY-2836</a> ObjectSelect.selectCount() throws if a query contains ordering</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2699">CAY-2699</a> Modeler: dbimport schema view not working on SQLite</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2860">CAY-2860</a> Translate (not)in expression with empty values</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2702">CAY-2702</a> Modeler: Callbacks table has too small default width</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2863">CAY-2863</a> DbEntity qualifiers are no longer applied to JOIN conditions</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2703">CAY-2703</a> Modeler: incorrect active tab style on the MacOS version</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2871">CAY-2871</a> QualifierTranslator breaks on a relationship with a compound FK</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2704">CAY-2704</a> Vertical inheritance with Embeddedables looses ObjAttribute information</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2872">CAY-2872</a> CayenneModeler &ldquo;Documentation&rdquo; link is broken</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2705">CAY-2705</a> Performance of callback annotation processing</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2876">CAY-2876</a> Memory leak in the ObjectStore</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2706">CAY-2706</a> Modeler: object attribute dialog doesn&rsquo;t properly initialized for the embeddable type</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2879">CAY-2879</a> Negative number for non parameterized ObjectSelect query not processed correctly</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2707">CAY-2707</a> Modeler: code generation is broken in the DataDomain tab</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2883">CAY-2883</a> License and notice templates are not processed by the Gradle build</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2708">CAY-2708</a> Gradle build plugin fails on Java 16</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2885">CAY-2885</a> Modeler: DbImport fails to load DB schema view</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2709">CAY-2709</a> Modeler: Cgen fails to generate code for a new unsaved project with all settings set to default</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2887">CAY-2887</a> Expressions: Incorrect serialization to string of numeric literals</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2710">CAY-2710</a> Modeler: modeler throws IllegalArgumentsException when root and rel paths have different root</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2889">CAY-2889</a> Make subclassing a PK Generator easier</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2712">CAY-2712</a> Shouldn&rsquo;t run batch inserts with generated keys if there is reflexive dependency</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2891">CAY-2891</a> Expressions: incorrect SQL translation of the ASTNegate node with scalar argument</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2713">CAY-2713</a> ConcurrentModificationException when Inserting</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2895">CAY-2895</a> Incorrect Lazy Pagination Comparison for BigInteger PK</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2714">CAY-2714</a> Offset value is not copied to column select metadata</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2896">CAY-2896</a> Inserting two identical objects into two datamaps stores both objects in the last used datamap</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2716">CAY-2716</a> Wrong operator for the bitwise NOT</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2898">CAY-2898</a> Crypto: NPE in a ColumnQuery</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2720">CAY-2720</a> ConcurrentModificationException in the TypeAwareSQLTreeProcessor</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2899">CAY-2899</a> CommitLog: missing lifecycle-induced changes in <code>excludeFromTransaction</code> mode</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2721">CAY-2721</a> Platform builds of CayenneModeler don&rsquo;t work with Java 17</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2900">CAY-2900</a> Meaningful generated PKs could lead to the ClassCastException</li>
 <li>
-<a href="https://issues.apache.org/jira/browse/CAY-2723">CAY-2723</a> Phantom update of a to-dependent-pk relationship</li>
+<a href="https://issues.apache.org/jira/browse/CAY-2901">CAY-2901</a> Loosing comments on the existing ObjAttribute after DB import</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2902">CAY-2902</a> Shared query cache clobbers newer object state</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2904">CAY-2904</a> Disjoint prefetch returns incorrect data</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2914">CAY-2914</a> Modeler: DB Import &ldquo;Table Types&rdquo; filter change does not refresh the schema tree</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2919">CAY-2919</a> Exception in &ldquo;Generate Database Schema&rdquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2921">CAY-2921</a> Modeler: consistent duplicate name handling</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2926">CAY-2926</a> Modeler: renaming an ObjEntity adds it to cgen excludeEntities</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2931">CAY-2931</a> Modeler: default encoding detected as UTF8, should be UTF-8</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2934">CAY-2934</a> Modeler: dropdown data trunction</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2944">CAY-2944</a> MergerTokenFactoryProvider does not resolve adapter subclasses</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2951">CAY-2951</a> Newly reverse-engineered entities are excluded from CGen</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2952">CAY-2952</a> Unstable project extension ordering</li>
 </ul>
 
                     </article>
@@ -163,18 +255,12 @@ The API is frozen now, and it is safe to try it out. From now on the 4.2 branch 
         <div class="row">
             <div class="col-12 col-md-6  text-center text-md-left">
                 
-                <a class="btn btn-link" href='/2021/12/cayenne-411-released/'>
-                    <span class="d-block d-md-none  text-muted">Prev: </span>
-                    <i class="small  fa fa-chevron-left  mr-3l2  d-none d-md-inline"></i>
-                    Cayenne 4.1.1 Released
-                </a>
-                
             </div>
             <div class="col-12 col-md-6  text-center text-md-right">
                 
-                <a class="btn btn-link" href='/2021/03/cayenne-42m3-released/'>
+                <a class="btn btn-link" href='/2025/11/cayenne-423-released/'>
                     <span class="d-block d-md-none  text-muted">Next: </span>
-                    Cayenne 4.2 Milestone 3 Released
+                    Cayenne 4.2.3 Released
                     <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
                 </a>
                 
