@@ -46,6 +46,8 @@ function checkAndCreateDir() {
     if [ ! -d "$1" ]; then
         echo "Creating doc dir: $1"
         mkdir "$1"
+    else
+        clearDir "$1"
     fi
 }
 

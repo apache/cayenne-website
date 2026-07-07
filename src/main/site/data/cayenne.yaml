@@ -35,18 +35,6 @@ releases:
     javaDoc: "online"
     maven: "cayenne"
 
-  - version: "5.0"
-    latestRevision: "5.0-M1"
-    type: "Alpha"
-    description: "Alpha release"
-    date: "2024-09-09"
-    docs: true
-    downloadable: true
-    jdk: 11
-    newRepoLayout: true
-    javaDoc: "online"
-    maven: "cayenne"
-
   - version: "4.2"
     latestRevision: "4.2.3"
     type: "Stable"
