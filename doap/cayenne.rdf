@@ -47,12 +47,6 @@
             </Version>
         </release><release>
             <Version>
-                <name>Alpha</name>
-                <created>2024-09-09</created>
-                <revision>5.0-M1</revision>
-            </Version>
-        </release><release>
-            <Version>
                 <name>Stable</name>
                 <created>2025-11-19</created>
                 <revision>4.2.3</revision>

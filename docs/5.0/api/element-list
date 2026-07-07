@@ -20,6 +20,9 @@ org.apache.cayenne.annotation
 org.apache.cayenne.ashwood
 org.apache.cayenne.ashwood.graph
 org.apache.cayenne.cache
+org.apache.cayenne.commitlog
+org.apache.cayenne.commitlog.meta
+org.apache.cayenne.commitlog.model
 org.apache.cayenne.configuration
 org.apache.cayenne.configuration.runtime
 org.apache.cayenne.configuration.server
