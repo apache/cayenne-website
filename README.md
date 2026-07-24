@@ -1,122 +1,165 @@
-# Apache Cayenne Website Sources 
+# Apache Cayenne Website
 
-Contains sources of [Cayenne website](http://cayenne.apache.org).
+Sources for [https://cayenne.apache.org](https://cayenne.apache.org).
 
-## How To Run
+The marketing site is built with [Hugo Extended](https://gohugo.io/) (via [`hugo-bin`](https://www.npmjs.com/package/hugo-bin)).
+Versioned documentation is built with [Antora](https://antora.org/) and written under `/docs` in the published site.
 
-### Dev mode
+## Requirements
 
-Just clone and run maven, nothing else required.
+- [Node.js](https://nodejs.org/) 20+ (or use Maven, which downloads Node/Yarn)
+- [Yarn](https://yarnpkg.com/) 1.x (or Maven frontend plugin)
+- Optional: [Maven](https://maven.apache.org/) 3.9+ for the ASF-style wrapper and publish profile
+- Git access to Cayenne documentation branches configured in `docs/antora-playbook.yml`
 
-```
-git clone https://gitbox.apache.org/repos/asf/cayenne-website.git
-cd cayenne-website
-mvn
-```
+Hugo Extended is installed automatically as an npm dependency (`hugo-bin`). You do not need a system Hugo install.
 
-Open http://localhost:3000 in your browser. In dev mode site supports live-reloading.
+## Quick start (npm / Yarn)
 
-:grey_exclamation: _You can change host and port by setting `dev.host` and `dev.port` properties:_
-   
-```
-mvn -Ddev.host="my.local" -Ddev.port="8080"
-```
-
-### Publish Site Update
-
-To publish a new version just run Maven with `publish` profile. This will build a production version of the site (with cayenne.apache.org base URL) and push commit into `asf-site` branch that will be synced with actual site content location:
-    
-```
-mvn -Ppublish -Dmsg="commit message describing site changes"
-```
-    
-That's all, so be careful and review your changes before publishing (also don't forget to check them after).
-
-Don't forget to push your source's changes so others won't rewrite them.
-
-*NOTE*: This process can be automated by Jenkins. It can run publish on every commit to `master`.
-
-
-### Create News
-
-To publish news simply add new file at `src/main/site/content/news/` folder.
-You can use the following template: 
-
-`some-good-news.md`
-
-```
----
-title: Good news everyone!
-date: 2017-01-01T00:00:00+03:00
----
-
-Content goes here
+```bash
+yarn install
+yarn run build
 ```
 
-### Update for New Cayenne Version
+Output: `target/site/` (Hugo pages + Antora docs at `target/site/docs/`).
 
-To update site content with information about new Cayenne version you need to perform these steps:
+| Script                | Purpose                                                |
+|-----------------------|--------------------------------------------------------|
+| `yarn run build`      | Hugo → `target/site`, then Antora → `target/site/docs` |
+| `yarn run site`       | Hugo only                                              |
+| `yarn run site:watch` | Hugo dev server (live reload)                          |
+| `yarn run docs`       | Antora only                                            |
 
-* Update data in `src/main/site/data/cayenne.yaml` file.
-* Write news (see information above).
-* Update documentation, see next section.
-  
-###  Update Cayenne Documentation
+### Preview marketing site
 
-There are two helpers shell scripts to update Cayenne documentation:
-
-* build-docs.sh that updates both JavaDoc and Asciidoc
-* build-asciidocs.sh that update Asciidoc only
-
-Usage:
-
-* Update all docs after the release
+```bash
+yarn run site:watch
 ```
-./build-docs.sh 4.1.RC2
+
+Open the URL Hugo prints (default `http://localhost:1313`).
+
+### Preview full static build
+
+```bash
+yarn run build
+# from repo root, serve the combined output
+npx --yes serve target/site
+# or: python -m http.server -d target/site 8080
 ```
-    
-* Add fixes to the docs
+
+## Quick start (Maven)
+
+Maven installs Node/Yarn under `node/`, runs `yarn install`, then `yarn run build`.
+
+```bash
+# production-oriented build (base URL https://cayenne.apache.org/)
+mvn clean package
+
+# local Hugo server (base URL http://localhost:8080/ by default)
+mvn -Pdev-server
+# optional: -Ddev.port=3000
 ```
-./build-asciidocs.sh STABLE-4.0 4.0.2
+
+Publish profile (builds and SCM-publishes `target/site`; configure `pubScmUrl` / branch in `pom.xml` before use):
+
+```bash
+mvn -Ppublish -Dmsg="Describe the site change"
 ```
-    
-These scripts don't commit changes so you should commit them manually and publish the site as usual. 
 
+## Directory layout
 
-## Advanced 
+```text
+cayenne-website/
+├── package.json              # scripts, Hugo, Antora, front-end deps
+├── yarn.lock
+├── pom.xml                   # optional Maven wrapper + publish
+├── docs/
+│   ├── antora-playbook.yml   # Antora content sources, UI, output
+│   └── supplemental-ui/      # Cayenne branding on top of Default UI
+│       ├── css/
+│       ├── img/
+│       └── partials/         # header, footer, head styles
+└── site/                     # Hugo site
+    ├── hugo.toml
+    ├── content/              # Markdown pages and news
+    ├── data/                 # TOML data (releases, contributors, …)
+    ├── assets/sass/          # styles (Hugo Pipes)
+    ├── layouts/              # templates
+    └── static/               # static assets, .htaccess, etc.
+```
 
-Node.js, Yarn, Gulp and Hugo tools are used to build this site, Maven used just to bootstrap Node.js and Yarn tools and launch Gulp tasks.
-Hugo binaries managed by [hugo-bin](https://www.npmjs.com/package/hugo-bin) NPM module.
+Build artifacts (not committed): `target/`, `node/`, `node_modules/`, `site/resources/_gen/`, `.hugo_build.lock`.
 
-### Src structure
+## Documentation (Antora)
 
-There are two main parts of the site src:
-* `src/main/assets` assets processed by [Gulp](https://gulpjs.com) tasks
+### Content sources
 
-    * `/gulp/` - list of Gulp tasks
-    
-        Important tasks:
-        * `hugo.js` - contains tasks that launch Hugo to process all content
-        * `images.js` - compress and copy images
-        * `reference.js` - replace references to generated resources inside content
-        * `revision.js` - generate manifest file with resources versions
-        * `scripts.js` - launch Webpack to process JavaScript resources
-        * `serve.js` - launch dev-version of site with live-reloading
-        * `styles.js` - generate CSS bundle (concat, minify, etc..)
-    * `/images/` - images that will be compressed and published into site `/img` directory, 
-    you can put any stuff used by site here (see `/gulp/images.js`)
-    * `/scripts/` - JavaScript sources, `main.js` is an entry point for the final bundle,
-    will be processed by Webpack (see `/gulp/scripts.js`)
-    * `/styles/` - Sass sources, `main.scss` is an entry point for the final bundle
-    (see `/gulp/styles.js`)
-    * `gulpfile.js` - main file for Gulp tasks, define some global path constants
-    * `package.json` - all project dependencies are defined here
+AsciiDoc lives in the main **cayenne** repository under `docs/*` (Antora components), not in this repo.
+`docs/antora-playbook.yml` lists git branches/tags and `start_paths: docs/*`.
 
-* `src/main/site` assets processed by [Hugo](https://gohugo.io) site generator
+For local builds, point `content.sources[].url` at your local cayenne clone (or a remote URL) and enable the branches you need. Commit only portable playbook settings appropriate for CI/ASF (avoid machine-specific absolute paths).
 
-    * `/content/` - main content part of the site, markdown and HTML files
-    * `/data/` - data files in *yaml* format
-    * `/layouts/` - site templates, using [GO templates](https://golang.org/pkg/text/template/)
-    * `/static/` - files that will be copied as is to the final site content, note that `js`, `img` and `css` directories
-    are processed via Gulp tasks, and shouldn't be used directly, instead use coresponding directories in `assets`.     
-    * `config.yaml` - Hugo configuration
+### UI
+
+- Base: [Antora Default UI](https://gitlab.com/antora/antora-ui-default) (MPL-2.0), loaded as a UI bundle.
+- Project overlays: `docs/supplemental-ui/` (header/footer branding, layout CSS). These supplemental files are project-owned; do **not** add an empty `ui.yml` there (Antora fails with `staticFiles` errors).
+
+### Search
+
+Offline full-text search uses [`@antora/lunr-extension`](https://gitlab.com/antora/antora-lunr-extension) (static `search-index.js`; no server-side search service).
+
+### Docs-only rebuild
+
+```bash
+yarn run docs
+```
+
+## Common maintenance
+
+### News
+
+Add `site/content/news/<slug>.md`:
+
+```toml
++++
+title = "Cayenne X.X Released"
+date = 2026-01-01
++++
+
+Content goes here.
+```
+
+Rendered under `/YYYY/MM/<slug>/` and listed on `/news/`.
+
+### New Cayenne release on the marketing site
+
+1. Update `site/data/cayenne.toml` (and related download data if needed).
+2. Add a news article.
+3. Adjust `docs/antora-playbook.yml` when a new docs branch/version should be published.
+4. Update javadoc redirects in `site/static/.htaccess` if applicable.
+5. Rebuild (`yarn run build` or `mvn clean package`).
+
+### Edit documentation content
+
+Change AsciiDoc in the cayenne repo on the relevant branch, then rebuild docs from this project.
+
+### Contributors
+
+Edit `site/data/contributors.toml` and rebuild the Hugo site.
+
+### Marketing site styling
+
+Edit `site/assets/sass/` (e.g. `style.scss`, `variables.scss`) and use `yarn run site:watch`.
+
+### Documentation chrome styling
+
+Edit `docs/supplemental-ui/` (partials and `css/cayenne-supplemental.css`), then `yarn run docs`.
+
+## License notes
+
+- Website content and project-owned code in this repository: Apache License 2.0 (see `LICENSE.txt`).
+- Antora Default UI (and modifications to its Covered Software, if any): Mozilla Public License 2.0. Supplemental UI files authored here should keep clear separation; label third-party UI in notices when distributing the site.
+
+## CI
+
+See `.github/workflows/` for automation. Align workflow steps with `yarn run build` (or Maven `package`) and the `target/site` output directory.

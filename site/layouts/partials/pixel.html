@@ -1,0 +1,4 @@
+{{ $pixel := hugo.Data.pixel }}
+{{ $context := .Params.pixel | default "general" }}
+{{ $pixelID := index $pixel $context | default (index $pixel "general") }}
+<img class="scarf-pixel" referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid={{ $pixelID }}" alt="" width="1" height="1">

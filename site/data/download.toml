@@ -1,0 +1,18 @@
+[[extensions]]
+ext = ".tar.gz"
+description = "binary distribution with cross-platform Java CayenneModeler"
+scarf = "generic"
+
+[[extensions]]
+ext = "-macosx.dmg"
+description = "binary distribution with Mac OS X CayenneModeler"
+scarf = "macos"
+
+[[extensions]]
+ext = "-win.zip"
+description = "binary distribution with Windows CayenneModeler"
+scarf = "win"
+
+[[extensions]]
+ext = "-src.tar.gz"
+description = "source code distribution"

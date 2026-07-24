@@ -1,0 +1,65 @@
+{{ define "main" }}
+<section>
+    <h1 class="text-center">{{ .Title }}</h1>
+    {{ $download := hugo.Data.download }}
+    {{ range hugo.Data.cayenne.releases }}
+    {{ if .downloadable }}
+    {{ $link := default (printf "cayenne-%s" .latestRevision) .customLink }}
+    {{ if .newRepoLayout }}{{ $link = printf "%s/cayenne-%s" .latestRevision .latestRevision }}{{ end }}
+    {{ $rev := .latestRevision }}
+    {{ $revID := replace $rev "." "_" }}
+    <h2>{{ .description }} - {{ $rev }} ({{ .type }})</h2>
+    <p>
+        Requires <strong>Java {{ .jdk }}</strong> or above.
+        You can find full release notes
+        {{ if .newRepoLayout }}
+        <a href="https://github.com/apache/cayenne/blob/{{ $rev }}/RELEASE-NOTES.txt">here</a>
+        {{ else }}
+        <a href="https://github.com/apache/cayenne/blob/{{ $rev }}/docs/doc/src/main/resources/RELEASE-NOTES.txt">here</a>
+        {{ end }}.
+    </p>
+    <ul class="nav nav-tabs" id="tab_{{ $revID }}" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="bin_{{ $revID }}-tab" data-toggle="tab" href="#bin_{{ $revID }}" role="tab" aria-controls="bin_{{ $revID }}" aria-selected="true">Binary</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="maven_{{ $revID }}-tab" data-toggle="tab" href="#maven_{{ $revID }}" role="tab" aria-controls="maven_{{ $revID }}" aria-selected="false">Maven</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="gradle_{{ $revID }}-tab" data-toggle="tab" href="#gradle_{{ $revID }}" role="tab" aria-controls="gradle_{{ $revID }}" aria-selected="false">Gradle</a>
+        </li>
+    </ul>
+    <div class="tab-content  px-1 pt-1 mb-5" id="tab_{{ $revID }}_content">
+        <div class="tab-pane fade show active" id="bin_{{ $revID }}" role="tabpanel" aria-labelledby="bin_{{ $revID }}-tab">
+            <ul class="list-unstyled">
+                {{ range $download.extensions }}
+                <li>
+                    {{ if .scarf }}
+                    <a href="https://apachecayenne.gateway.scarf.sh/modeler-{{ .scarf }}/{{ $rev }}">Cayenne {{ $rev }}</a>
+                    {{ else }}
+                    <a href="https://www.apache.org/dyn/closer.cgi/cayenne/{{ $link }}{{ .ext }}">Cayenne {{ $rev }}</a>
+                    {{ end }}
+                    {{ .description }}
+                    (<a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.asc">pgp</a>,
+                    <a href="https://downloads.apache.org/cayenne/{{ $link }}{{ .ext }}.sha512">sha512</a>)
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ $artifact := default "cayenne-server" .maven }}
+        <div class="tab-pane fade" id="maven_{{ $revID }}" role="tabpanel" aria-labelledby="maven_{{ $revID }}-tab">
+            <pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
+    &lt;artifactId&gt;{{ $artifact }}&lt;/artifactId&gt;
+    &lt;version&gt;{{ $rev }}&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+        </div>
+        <div class="tab-pane fade" id="gradle_{{ $revID }}" role="tabpanel" aria-labelledby="gradle_{{ $revID }}-tab">
+            <pre><code class="groovy">implementation 'org.apache.cayenne:{{ $artifact }}:{{ $rev }}'</code></pre>
+        </div>
+    </div>
+    {{ end }}
+    {{ end }}
+    {{ .Content }}
+</section>
+{{ end }}

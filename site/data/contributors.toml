@@ -1,0 +1,161 @@
+[[contributors]]
+name = "Andrus Adamchik"
+role = "PMC"
+email = "aadamchik at apache dot org"
+website = "[http://adamchik.org](http://adamchik.org) (personal) [http://objectstyle.com](http://objectstyle.com) (business)"
+active = true
+
+[[contributors]]
+name = "Cris Daniluk"
+role = "Committer"
+email = "cdaniluk at apache dot org"
+active = true
+
+[[contributors]]
+name = "Bill Dudney"
+role = "PMC"
+email = "bdudney at apache dot org"
+active = true
+
+[[contributors]]
+name = "Malcolm Edgar"
+role = "Committer"
+email = "medgar at apache dot org"
+active = true
+
+[[contributors]]
+name = "Michael Gentry"
+role = "PMC, Chair"
+email = "mgentry at apache dot org"
+active = true
+
+[[contributors]]
+name = "Tore Halset"
+role = "Committer"
+email = "torehalset at apache dot org"
+active = true
+
+[[contributors]]
+name = "John Huss"
+role = "PMC"
+email = "johnthuss at apache dot org"
+active = true
+
+[[contributors]]
+name = "Dzmitry Kazimirchyk"
+role = "Committer"
+email = "dkazimirchyk at apache dot org"
+active = true
+
+[[contributors]]
+name = "Xenia Khailenka"
+role = "Committer"
+email = "kseniak at apache dot org"
+active = true
+
+[[contributors]]
+name = "Mike Kienenberger"
+role = "PMC"
+email = "mkienenb at apache dot org"
+active = true
+
+[[contributors]]
+name = "Kevin Menard"
+role = "PMC"
+email = "kmenard at apache dot org"
+website = "[http://www.servprise.com/](http://www.servprise.com/)"
+active = true
+
+[[contributors]]
+name = "Aristedes Maniatis"
+role = "PMC"
+email = "amaniatis at apache dot org"
+website = "[http://www.ish.com.au](http://www.ish.com.au)"
+active = true
+
+[[contributors]]
+name = "Andrey Razumovsky"
+role = "Committer"
+email = "andrey at apache dot org"
+active = true
+
+[[contributors]]
+name = "Andriy Shapochka"
+role = "Committer"
+email = "ashapochka at apache dot org"
+active = true
+
+[[contributors]]
+name = "Olga Tkachova"
+role = "Committer"
+email = "oltka at apache dot org"
+active = true
+
+[[contributors]]
+name = "Robert Zeigler"
+role = "Committer"
+email = "robertdzeigler at apache dot org"
+active = true
+
+[[contributors]]
+name = "Evgeny Ryabitskiy"
+role = "Committer"
+email = "evgeny at apache dot org"
+website = "[http://www.diasoft.ru/](http://www.diasoft.ru/)"
+active = true
+
+[[contributors]]
+name = "Andrew Lindesay"
+role = "Committer"
+email = "apl at apache dot org"
+active = true
+
+[[contributors]]
+name = "Alex Kolonitsky"
+role = "Committer"
+email = "kolonitsky at apache dot org "
+active = true
+
+[[contributors]]
+name = "Savva Kolbachev"
+role = "PMC"
+email = "skolbachev at apache dot org"
+active = true
+
+[[contributors]]
+name = "Nikita Timofeev"
+role = "PMC"
+email = "ntimofeev at apache dot org"
+active = true
+
+[[contributors]]
+name = "Arseni Bulatski"
+role = "Committer"
+email = "abulatski at apache dot org "
+active = true
+
+[[contributors]]
+name = "Holger Hoffstaette"
+email = "holger at wizards dot de"
+active = false
+
+[[contributors]]
+name = "Craig Miskell"
+active = false
+
+[[contributors]]
+name = "Michael Shengaout"
+email = "mshenga at pobox dot org"
+website = "[http://reusablesoftwarecomponents.com](http://reusablesoftwarecomponents.com)"
+active = false
+
+[[contributors]]
+name = "Eric Schneider"
+email = "eric at centralparksoftware dot com"
+website = "[http://www.centralparksoftware.com/](http://www.centralparksoftware.com/)"
+active = false
+
+[[other]]
+name = "jianingwang"
+org = "Tencent's XuanWu Lab"
+comment = "Found and reported XXE Vulnerability in Cayenne Modeler"

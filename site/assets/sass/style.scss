@@ -1,0 +1,538 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with this
+ * work for additional information regarding copyright ownership. The ASF
+ * licenses this file to you under the Apache License, Version 2.0.
+ */
+
+@import "bootstrap/functions";
+@import "variables";
+@import "bootstrap/bootstrap";
+
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-200-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-300-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-400-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-400-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-500-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-500-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-600-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-700-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../vendor/fonts/montserrat/montserrat-latin-700-italic.woff') format('woff');
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  @media (min-width: 992px) {
+    padding-top: 76px;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  min-height: 100vh;
+}
+
+.font-weight-xlight  { font-weight: $font-weight-xlight !important; }
+.font-weight-medium  { font-weight: $font-weight-medium !important; }
+.font-weight-semibold { font-weight: $font-weight-semibold !important; }
+
+.font-size-1rem { font-size: 1rem; }
+
+.round-corners { border-radius: 500px !important; }
+.bt { border-top: 1px solid $border-color !important; }
+.br { border-right: 1px solid $border-color !important; }
+.bl { border-left: 1px solid $border-color !important; }
+.bb { border-bottom: 1px solid $border-color !important; }
+
+.mw-50  { max-width: 50% !important; }
+.mw-75  { max-width: 75% !important; }
+.mw-15px   { max-width: 15px !important; }
+.mw-460px  { max-width: 460px !important; }
+.mw-500px  { max-width: 500px !important; }
+.mw-560px  { max-width: 560px !important; }
+.mh-26px { max-height: 26px; }
+
+.mr-lg-3l2 { margin-right: 0; }
+.mx-3l2 { margin-left: 0; margin-right: 0; }
+
+@media (min-width: 992px) {
+  .mr-lg-3l2 { margin-right: 1.5rem !important; }
+  .mx-3l2 { margin-left: 1.5rem !important; margin-right: 1.5rem !important; }
+}
+
+.xsmall {
+  font-size: $xsmall-font-size;
+  font-weight: inherit;
+}
+
+.table {
+  @media (max-width: 767px) {
+    th,
+    td {
+      padding: .5rem;
+    }
+  }
+
+  thead th {
+    font-weight: $font-weight-medium;
+    border-bottom: (1 * $table-border-width) solid $table-border-color;
+  }
+}
+
+.btn-xlg {
+  padding: 0.9rem 4.3rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  border-radius: 50px;
+  padding-bottom: 0.7rem;
+}
+
+@media (max-width: 575px) {
+  .btn-xlg {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.dropdown-item {
+  font-weight: $font-weight-light;
+}
+
+.dropdown-toggle::after {
+  margin-left: 0.5em;
+  top: 0.1em;
+  position: relative;
+}
+
+h1, .h1 {
+  margin-bottom: 1em;
+}
+
+h4, h5, h6,
+.h4, .h5, .h6 {
+  font-weight: $font-weight-normal;
+}
+
+.solid-heading {
+  display: flex;
+  align-items: center;
+
+  &::before,
+  &::after {
+    content: '';
+    display: flex;
+    flex-grow: 1;
+    background: rgba($black, .1);
+    height: 1px;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  html {
+    font-size: 0.8rem;
+  }
+  h1 {
+    font-size: $font-size-base * 2.8;
+  }
+}
+
+a {
+  transition: all 0.1s linear;
+}
+
+a, button {
+  outline: 0 !important;
+}
+
+article {
+  li {
+    position: relative;
+    margin-bottom: 0.5em;
+    list-style: none inside;
+  }
+
+  ul {
+    padding: 0 0 0 2.5em;
+
+    li::before {
+      counter-increment: term;
+      content: '\25CF';
+      color: rgba($black, .5);
+      width: 2em;
+      margin-right: 0.5em;
+      margin-left: -2.5em;
+      text-align: center;
+      font-size: 0.8em;
+      float: left;
+      padding-top: 0.2em;
+    }
+  }
+
+  ol {
+    counter-reset: term;
+    padding: 0 0 0 2.5em;
+    margin-bottom: 0;
+
+    li::before {
+      counter-increment: term;
+      content: " ." counter(term);
+      font-weight: $font-weight-normal;
+      color: $body-color;
+      float: left;
+      width: 2em;
+      margin-right: 0.5em;
+      margin-left: -2.5em;
+      text-align: center;
+      direction: rtl;
+    }
+  }
+}
+
+footer ul {
+  line-height: 2rem;
+}
+
+.list-multiline-items li {
+  line-height: 1.5;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+
+  time {
+    line-height: 1.25;
+  }
+}
+
+// Hugo wraps fenced blocks as .highlight > pre; force light github-style chrome
+pre,
+.highlight pre {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+  background: #f8f8f8 !important;
+  font-size: 90%;
+}
+
+.highlight {
+  margin-bottom: 1rem;
+
+  pre {
+    margin-bottom: 0;
+  }
+}
+
+.page-header {
+  @media (min-width: 992px) {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1030;
+  }
+}
+
+.breadcrumb-dark,
+.bg-dark.breadcrumb {
+  &.breadcrumb {
+    background-color: transparent;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba($white, 0.5);
+  }
+
+  .breadcrumb-item,
+  .breadcrumb-item > a {
+    color: rgba($white, 0.75);
+  }
+
+  .breadcrumb-item.active {
+    color: rgba($white, 0.9);
+  }
+
+  .breadcrumb-item > a:hover,
+  .breadcrumb-item > a:focus {
+    color: $white;
+  }
+}
+
+.breadcrumb-sm {
+  .breadcrumb-item,
+  .dropdown-item {
+    font-size: $small-font-size;
+  }
+}
+
+.navbar-brand {
+  margin-right: 3rem;
+}
+
+#mainMenu .nav-link {
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  padding-top: 0.7rem;
+  padding-bottom: 0.3rem;
+
+  @media (max-width: 991px) {
+    text-align: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.4rem;
+    padding-left: 1.4rem;
+  }
+}
+
+#social-links-menu .nav-link {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  color: $white;
+  opacity: 0.5;
+
+  &:hover, &:focus {
+    opacity: 0.8;
+  }
+
+  img {
+    max-height: 27px;
+  }
+}
+
+.nav-pills {
+  overflow-y: auto;
+
+  .nav-link {
+    color: $headings-color;
+    font-weight: $display4-weight;
+    line-height: 1.4;
+    padding: 1rem;
+
+    @media (max-width: 575px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}
+
+.nav-tabs {
+  .nav-link {
+    color: #777;
+    border-width: 0 0 1px;
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: #444;
+    border-width: 0 0 2px;
+    border-color: #dc5656;
+  }
+}
+
+#intro {
+  text-align: center;
+
+  img {
+    @media (min-width: 1200px) {
+      max-width: 330px;
+    }
+
+    @media (min-width: 576px) and (max-width: 1199px) {
+      max-width: 460px;
+      margin-left: -500rem;
+      margin-right: -500rem;
+    }
+
+    max-width: 100%;
+  }
+
+  .embed-responsive {
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.11);
+    border-radius: 2px;
+    max-width: 560px;
+
+    @media (max-width: 575px) {
+      max-width: 460px;
+    }
+  }
+}
+
+footer {
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0.8rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .symbol {
+    font-size: 1.125rem;
+    margin-left: 1rem;
+    position: relative;
+    top: .0625rem;
+  }
+
+  .fa-lg.fa-long-arrow-right {
+    transform: scale(0.7);
+    margin-left: 0.6rem;
+    line-height: 0.6em;
+  }
+}
+
+.footer-nav .row [class^='col'] {
+  padding-bottom: 2rem;
+}
+
+$footer-nav-gutter-width: 74px;
+
+@media (min-width: 992px) {
+  .footer-nav {
+    overflow: hidden;
+
+    .row {
+      margin-left: ($footer-nav-gutter-width / -2);
+      margin-right: ($footer-nav-gutter-width / -2);
+    }
+
+    [class^='col'] {
+      padding-right: ($footer-nav-gutter-width / 2);
+      padding-left: ($footer-nav-gutter-width / 2);
+    }
+  }
+}
+
+footer.bg-dark {
+  overflow: hidden;
+  padding-bottom: 1rem;
+
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: rgba($white, 0.85);
+  }
+
+  a:not(.btn):not(.btn-link) {
+    color: rgba($white, 0.6);
+
+    &:hover, &:focus {
+      color: rgba($white, 0.9);
+    }
+  }
+
+  hr {
+    border-top: 1px solid rgba($white, 0.05) !important;
+  }
+
+  p {
+    color: rgba($white, 0.6);
+  }
+
+  time {
+    color: rgba($white, 0.35);
+  }
+
+  .copy {
+    color: rgba($white, 0.2);
+
+    a {
+      color: rgba($white, 0.35) !important;
+
+      &:hover, &:focus {
+        color: rgba($white, 0.5) !important;
+      }
+    }
+
+    img {
+      opacity: 0.15;
+    }
+  }
+}
+
+#db-support {
+  td, th {
+    padding: 0.3rem;
+  }
+}
+
+.scarf-pixel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

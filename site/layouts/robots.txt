@@ -1,0 +1,5 @@
+User-agent: *
+Allow: *
+{{ range hugo.Data.cayenne.releases }}{{ if eq .javaDoc "no-index" }}Disallow: /docs/{{ .version }}/api/*
+{{ end }}{{ end }}Disallow: /docs/5.0/*
+Sitemap: {{ "sitemap.xml" | absURL }}

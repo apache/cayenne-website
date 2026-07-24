@@ -1,0 +1,123 @@
+// Colors
+$cayenne-red: #dc5656;
+$cayenne-red-dark: #b33d3d;
+$dark: #404040;
+$white: #fff;
+$black: #000;
+$gray-200: #e9ecef;
+$gray-600: #6c757d;
+$gray-900: #212529;
+
+
+$primary: $cayenne-red;
+$link-color: $cayenne-red;
+
+// Add cayenne-red to theme colors
+$theme-colors: (
+        "primary": $primary,
+        "dark": $dark
+);
+
+// Body
+$body-color: #666;
+
+// Links
+$link-decoration: none;
+$link-hover-decoration: none;
+
+$font-family-sans-serif: "Montserrat", sans-serif;
+$font-weight-xlight: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-base: $font-weight-normal;
+$line-height-base: 1.875;
+
+$font-size-base: 1rem;
+$h1-font-size: $font-size-base * 3.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.65;
+$h4-font-size: $font-size-base * 1.35;
+$h5-font-size: $font-size-base * 1.125;
+$h6-font-size: $font-size-base * 1;
+
+$headings-margin-bottom: .5em;
+$headings-font-weight: 400;
+$headings-line-height: 1.2;
+$headings-color: #444;
+
+$display1-size: 4.125rem;
+$display2-size: 2.6875rem;
+$display3-size: 2rem;
+$display4-size: 1.625rem;
+$display1-weight: 300;
+$display2-weight: 300;
+$display3-weight: 300;
+$display4-weight: 400;
+
+$lead-font-size: ($font-size-base * 1.15);
+$lead-font-weight: 400;
+
+$small-font-size: 87.5%;
+$xsmall-font-size: 75%;
+
+// Spacers (add half-step values used by old site)
+$spacer: 1rem;
+$spacers: (
+        0: 0,
+        1l2: ($spacer * .5),
+        1: $spacer,
+        3l2: ($spacer * 1.5),
+        2: ($spacer * 2),
+        3: ($spacer * 3),
+        4: ($spacer * 4),
+        5: ($spacer * 5)
+);
+
+// Options
+$enable-shadows: true;
+
+// Borders
+$border-color: #dee2e6;
+
+// Tables
+$table-cell-padding: 1.25rem;
+$table-border-color: #ccc;
+
+// Dropdowns
+$dropdown-border-color: transparent;
+$dropdown-border-width: 0;
+$dropdown-box-shadow: 0 .05rem 1rem rgba($black, .175);
+$dropdown-link-active-color: $gray-900;
+$dropdown-link-active-bg: $gray-200;
+
+// Navs
+$nav-tabs-border-color: #ddd;
+$nav-tabs-border-radius: 0;
+$nav-tabs-link-active-border-color: #dc5656;
+
+$nav-pills-border-radius: 0;
+$nav-pills-link-active-color: $primary;
+$nav-pills-link-active-bg: rgba($primary, .1);
+
+// Navbar
+$navbar-padding-y: ($spacer * 1.1);
+$navbar-dark-color: rgba($white, .7);
+$navbar-dark-hover-color: rgba($white, .9);
+$navbar-dark-active-color: $white;
+$navbar-dark-toggler-border-color: transparent;
+
+// Z-index
+$zindex-navbars: 998;
+
+// Pagination
+$pagination-border-color: #ddd;
+$pagination-hover-border-color: #ddd;
+$pagination-disabled-border-color: #ddd;
+
+// Breadcrumbs
+$breadcrumb-bg: $gray-200;
+$breadcrumb-divider-color: $gray-600;
+$breadcrumb-active-color: $gray-600;

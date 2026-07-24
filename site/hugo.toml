@@ -1,0 +1,82 @@
+baseURL = "https://cayenne.apache.org/"
+title = "Apache Cayenne"
+defaultContentLanguage = "en"
+
+canonifyURLs = false
+uglyURLs = false
+disableKinds = ["RSS", "taxonomy", "term"]
+disableHugoGeneratorInject = true
+disablePathToLower = true
+enableRobotsTXT = true
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "../node_modules/bootstrap/scss"
+    target = "assets/sass/bootstrap"
+  [[module.mounts]]
+    source = "../node_modules/font-awesome/css"
+    target = "static/vendor/font-awesome/css"
+  [[module.mounts]]
+    source = "../node_modules/font-awesome/fonts"
+    target = "static/vendor/font-awesome/fonts"
+  [[module.mounts]]
+    source = "../node_modules/jquery/dist"
+    target = "static/vendor/js/jquery"
+  [[module.mounts]]
+    source = "../node_modules/bootstrap/dist/js"
+    target = "static/vendor/js/bootstrap"
+  [[module.mounts]]
+    source = "../node_modules/highlight.js/lib"
+    target = "static/vendor/js/highlight.js"
+  [[module.mounts]]
+    source = "../node_modules/highlight.js/styles"
+    target = "static/vendor/css/highlight.js"
+  [[module.mounts]]
+    source = "../node_modules/@fontsource/montserrat/files"
+    target = "static/vendor/fonts/montserrat"
+
+[permalinks]
+  news = "/:year/:month/:contentbasename/"
+
+[params]
+  description = "Apache Cayenne™ is an open source Java object-to-relational mapping framework."
+  sitemapExcludes = [
+    "/categories/", "/tags/", "/about/", "/legacy/", "/collaboration/",
+    "/docs/", "/docs/3.1/", "/docs/4.0/", "/docs/4.1/", "/docs/4.2/"
+  ]
+
+[outputs]
+  home = ["HTML", "ROBOTS"]
+  section = ["HTML"]
+  page = ["HTML"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+    noClasses = true
+    codeFences = true
+    wrapperClass = "highlight"
+
+[[menu.main]]
+  name = "Download"
+  weight = 10
+  url = "/download/"
+
+[[menu.main]]
+  name = "Documentation"
+  weight = 20
+  url = "/docs/"
+
+[[menu.main]]
+  name = "Support"
+  weight = 30
+  url = "/about/support/"

@@ -1,0 +1,29 @@
+{
+  "name": "cayenne-website-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Apache Cayenne website prototype using Hugo and Antora",
+  "scripts": {
+    "build": "npx hugo --source site --destination ../target/site && npx antora docs/antora-playbook.yml",
+    "docs": "npx antora docs/antora-playbook.yml",
+    "site": "npx hugo --source site --destination ../target/site",
+    "site:watch": "npx hugo server --source site --destination ../target/site --disableFastRender"
+  },
+  "hugo-bin": {
+    "buildTags": "extended",
+    "version": "0.164.0"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^5.3.0",
+    "bootstrap": "4.6.2",
+    "font-awesome": "4.7.0",
+    "highlight.js": "9.18.5",
+    "jquery": "3.7.1"
+  },
+  "devDependencies": {
+    "@antora/collector-extension": "^1.0.3",
+    "@antora/lunr-extension": "^1.0.0-alpha.13",
+    "antora": "^3.1.15",
+    "hugo-bin": "^0.149.2"
+  }
+}

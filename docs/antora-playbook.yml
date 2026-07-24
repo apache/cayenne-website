@@ -1,0 +1,39 @@
+site:
+  title: Apache Cayenne Documentation
+  url: https://m-dzianishchyts.github.io/cayenne-website/docs
+  start_page: getting-started::index.adoc
+antora:
+  extensions:
+    - '@antora/collector-extension'
+    - require: '@antora/lunr-extension'
+      index_latest_only: true
+asciidoc:
+  attributes:
+    project-version: '{page-component-version}'
+    project-major-version: '{page-component-version}'
+    ehcache-version: '3.8.1'
+content:
+  sources:
+    - url: c:/Users/mdzianishchyts/IdeaProjects/cayenne
+      branches:
+        - ALPHA-5.0-antora
+        - STABLE-4.2-antora
+        - STABLE-4.1-antora
+        - STABLE-4.0-antora
+      start_paths: docs/*
+    # - url: https://github.com/m-dzianishchyts/cayenne.git
+    #   branches:
+    #     - ALPHA-5.0-antora
+    #     - STABLE-4.2-antora
+    #     - STABLE-4.1-antora
+    #     - STABLE-4.0-antora
+    #   start_paths: docs/*
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ./supplemental-ui
+  # Avoid default "_" — GitHub Pages/Jekyll hides underscore paths unless .nojekyll is live
+  output_dir: ui
+output:
+  dir: ./../target/site/docs

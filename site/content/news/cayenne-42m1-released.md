@@ -1,0 +1,150 @@
++++
+title = "Cayenne 4.2 Milestone 1 Released"
+date = 2020-04-20 12:00:00+03:00
++++
+
+ 
+
+Apache Cayenne team is glad to announce the first milestone release of Cayenne 4.2. 
+
+This is a development release that introduces numerous fixes and new features. 
+While the biggest features are internal, securing future Cayenne development, 
+there are some nice ones in the user API.
+
+* Property API is greatly revised. 
+It is type aware now and allows safer usage of SQL functions.
+
+* Cayenne 4.2 brings support for subqueries.
+
+    ```java
+    ColumnSelect<Long> subQuery = ObjectSelect
+            .columnQuery(Artist.class, Artist.ARTIST_ID_PK_PROPERTY)
+            .where(Artist.DATE_OF_BIRTH.year().gt(1950));
+    
+    List<Artist> artists = ObjectSelect.query(Artist.class)
+            .where(Artist.ARTIST_ID_PK_PROPERTY.in(subQuery))
+            .select(context);
+    ```
+
+* SQL alias supported at the top-level API:
+   
+    ```java
+    ObjectSelect.query(Artist.class)
+        .where(Artist.PAINTING_ARRAY.alias("p1").dot(Painting.PAINTING_TITLE).eq("painting2"))
+        .and(Artist.PAINTING_ARRAY.alias("p2").dot(Painting.PAINTING_TITLE).eq("painting4"))
+        .select(context);
+    ```
+
+Cayenne can be downloaded from [here](/download/).
+
+<div class="pb-3"><!-- gap 3rem --></div>
+<h2 class="text-center">A full list of changes in this release:</h2>
+<div class="pb-2"><!-- gap 2rem --></div>
+
+
+#### Changes/New Features:
+
+- [CAY-2465](https://issues.apache.org/jira/browse/CAY-2465) New SelectTranslator implementation
+- [CAY-2466](https://issues.apache.org/jira/browse/CAY-2466) New internal API to build SQL
+- [CAY-2467](https://issues.apache.org/jira/browse/CAY-2467) New type-aware Property API
+- [CAY-2468](https://issues.apache.org/jira/browse/CAY-2468) Support subqueries in Expression API
+- [CAY-2507](https://issues.apache.org/jira/browse/CAY-2507) Property API to use path aliases
+- [CAY-2508](https://issues.apache.org/jira/browse/CAY-2508) Create api to add aliases in expressions
+- [CAY-2510](https://issues.apache.org/jira/browse/CAY-2510) Create builder to load custom modules into plugins and modeler
+- [CAY-2511](https://issues.apache.org/jira/browse/CAY-2511) Contribute custom properties for attributes
+- [CAY-2512](https://issues.apache.org/jira/browse/CAY-2512) Support for custom functions in Expression API and Property API
+- [CAY-2514](https://issues.apache.org/jira/browse/CAY-2514) Set SERVER_CONTEXTS_SYNC_PROPERTY default value to false
+- [CAY-2517](https://issues.apache.org/jira/browse/CAY-2517) EventManager: optimization of adding listeners
+- [CAY-2518](https://issues.apache.org/jira/browse/CAY-2518) Add method to append having qualifier expression to ObjectSelect
+- [CAY-2520](https://issues.apache.org/jira/browse/CAY-2520) Split ObjectId into several specialized variants
+- [CAY-2522](https://issues.apache.org/jira/browse/CAY-2522) Make ObjectSelect a direct query
+- [CAY-2523](https://issues.apache.org/jira/browse/CAY-2523) Deprecate SelectQuery
+- [CAY-2525](https://issues.apache.org/jira/browse/CAY-2525) Deprecate OpenBase adapter
+- [CAY-2527](https://issues.apache.org/jira/browse/CAY-2527) API to map Object[] result to POJO
+- [CAY-2539](https://issues.apache.org/jira/browse/CAY-2539) Import procedures with the help of MergerToken
+- [CAY-2540](https://issues.apache.org/jira/browse/CAY-2540) Modeler: redesign dbRelationship editor dialog
+- [CAY-2542](https://issues.apache.org/jira/browse/CAY-2542) Modeler: redesign ObjRelationship editor dialog
+- [CAY-2543](https://issues.apache.org/jira/browse/CAY-2543) Move ResultSetMapping generation from metadata to translator
+- [CAY-2549](https://issues.apache.org/jira/browse/CAY-2549) Modeler: Redesign ObjAttribute editor dialog
+- [CAY-2551](https://issues.apache.org/jira/browse/CAY-2551) Create extended type for abstract Number class
+- [CAY-2555](https://issues.apache.org/jira/browse/CAY-2555) Use explicit ArcId in GraphChangeHandler methods
+- [CAY-2557](https://issues.apache.org/jira/browse/CAY-2557) Add java.time.Duration and java.time.Period to supported types
+- [CAY-2562](https://issues.apache.org/jira/browse/CAY-2562) Make ROPServerModule autoloaded
+- [CAY-2563](https://issues.apache.org/jira/browse/CAY-2563) Deprecate old scalarQuery methods in SQLSelect
+- [CAY-2568](https://issues.apache.org/jira/browse/CAY-2568) Class Generation: Superclass Package setting persistence
+- [CAY-2569](https://issues.apache.org/jira/browse/CAY-2569) Custom 'Naming Strategy' in Cayenne Modeler
+- [CAY-2570](https://issues.apache.org/jira/browse/CAY-2570) Use MySQL adapter for latest versions of MariaDB
+- [CAY-2571](https://issues.apache.org/jira/browse/CAY-2571) DataDomainFlushAction redesign
+- [CAY-2579](https://issues.apache.org/jira/browse/CAY-2579) Review and possibly relax usage of readonly flag of ObjRelationship
+- [CAY-2585](https://issues.apache.org/jira/browse/CAY-2585) Rename scalarQuery and params methods in SQLSelect
+- [CAY-2590](https://issues.apache.org/jira/browse/CAY-2590) Add method to set query timeout to queries
+- [CAY-2592](https://issues.apache.org/jira/browse/CAY-2592) Modeler: make all datamaps selected in global cgen tab
+- [CAY-2593](https://issues.apache.org/jira/browse/CAY-2593) Add tableTypes field to dbImport config in dataMap
+- [CAY-2602](https://issues.apache.org/jira/browse/CAY-2602) Remove RTRIM of char columns in Sybase
+- [CAY-2604](https://issues.apache.org/jira/browse/CAY-2604) Specialization of property API for PK
+- [CAY-2610](https://issues.apache.org/jira/browse/CAY-2610) Align methods in ObjectSelect and SQLSelect
+- [CAY-2611](https://issues.apache.org/jira/browse/CAY-2611) Exclude system catalogs and schemas when run dbImport without config
+- [CAY-2612](https://issues.apache.org/jira/browse/CAY-2612) Modeler: add lazy-loading to dbImport tab
+- [CAY-2645](https://issues.apache.org/jira/browse/CAY-2645) Modeler: DbImport tree highlight improvement
+- [CAY-2650](https://issues.apache.org/jira/browse/CAY-2650) Support using generated primary keys along with batch inserts
+- [CAY-2651](https://issues.apache.org/jira/browse/CAY-2651) Support multiple IDs in the SelectById query
+
+<div class="pb-2"><!-- gap 2rem --></div>
+
+#### Bug Fixes:
+
+- [CAY-2019](https://issues.apache.org/jira/browse/CAY-2019) Optimistic locking always fails on CRYPTO columns
+- [CAY-2332](https://issues.apache.org/jira/browse/CAY-2332) Property API: unable to use eq() and in() methods for toMany relationships
+- [CAY-2417](https://issues.apache.org/jira/browse/CAY-2417) Modeler: wrong title in attribute context menu
+- [CAY-2506](https://issues.apache.org/jira/browse/CAY-2506) Java class generated for Embeddable object is not serializable
+- [CAY-2509](https://issues.apache.org/jira/browse/CAY-2509) Result of resolving lazily faulted relationships can be out-of-date
+- [CAY-2530](https://issues.apache.org/jira/browse/CAY-2530) Modeler: DB Import and Class Generation from Project is performed for removed datamaps
+- [CAY-2531](https://issues.apache.org/jira/browse/CAY-2531) Modeler: Importing same schema after Import Revert clears all entities in datamap
+- [CAY-2533](https://issues.apache.org/jira/browse/CAY-2533) Modeler: Exception on validating ObjRelationship without db path
+- [CAY-2535](https://issues.apache.org/jira/browse/CAY-2535) Modeler: Impossible to import stored procedure apart from db tables
+- [CAY-2537](https://issues.apache.org/jira/browse/CAY-2537) Modeler: Schema Generation Complete popup window is hidden
+- [CAY-2538](https://issues.apache.org/jira/browse/CAY-2538) Modeler: dbImport configuration unclear behavior
+- [CAY-2541](https://issues.apache.org/jira/browse/CAY-2541) Performing query with expression with ObjectId throws NPE in some cases
+- [CAY-2544](https://issues.apache.org/jira/browse/CAY-2544) Possible name clash of ivar and property name in generated class
+- [CAY-2547](https://issues.apache.org/jira/browse/CAY-2547) CayenneDataObject serialization issue
+- [CAY-2553](https://issues.apache.org/jira/browse/CAY-2553) Wrong disjoint prefetch query qualifier
+- [CAY-2559](https://issues.apache.org/jira/browse/CAY-2559) Modeler: Warning dialog shows wrong information after changing target entity in dbRelationship
+- [CAY-2561](https://issues.apache.org/jira/browse/CAY-2561) Modeler: cgen type combobox doesn't set templates
+- [CAY-2572](https://issues.apache.org/jira/browse/CAY-2572) Queries are not sorted by name in data map XML
+- [CAY-2573](https://issues.apache.org/jira/browse/CAY-2573) DI field injection is triggered when creating sql Driver
+- [CAY-2575](https://issues.apache.org/jira/browse/CAY-2575) Select translator: Wrong translation of IN Expression
+- [CAY-2576](https://issues.apache.org/jira/browse/CAY-2576) Ant cgen task is broken
+- [CAY-2577](https://issues.apache.org/jira/browse/CAY-2577) Between property with extended type failure
+- [CAY-2578](https://issues.apache.org/jira/browse/CAY-2578) Wrong bindings in select of related entity by compound FK
+- [CAY-2580](https://issues.apache.org/jira/browse/CAY-2580) Cgen: Can't use custom templates for client mode
+- [CAY-2582](https://issues.apache.org/jira/browse/CAY-2582) Double insert of manyToMany relationship mapped to Set
+- [CAY-2584](https://issues.apache.org/jira/browse/CAY-2584) Crypto: can't use ColumnSelect with encrypted columns
+- [CAY-2588](https://issues.apache.org/jira/browse/CAY-2588) IdRowReader: ArrayIndexOutOfBoundsException
+- [CAY-2591](https://issues.apache.org/jira/browse/CAY-2591) Modeler: project becomes dirty after click on dbImport or cgen tab
+- [CAY-2594](https://issues.apache.org/jira/browse/CAY-2594) DbImport: AutoAdapter resolving inside an import operation hangs up the op on Hana DB
+- [CAY-2595](https://issues.apache.org/jira/browse/CAY-2595) ObjAttributes are not sorted in alphabetical ordering on save
+- [CAY-2596](https://issues.apache.org/jira/browse/CAY-2596) DbImport xml config changes after dbImport plugin task execution
+- [CAY-2600](https://issues.apache.org/jira/browse/CAY-2600) Modeler DbImport: Can't retrieve schema for databases with no catalog support
+- [CAY-2601](https://issues.apache.org/jira/browse/CAY-2601) Modeler DbImport: result dialog issues
+- [CAY-2603](https://issues.apache.org/jira/browse/CAY-2603) NPE reloading project in the model
+- [CAY-2605](https://issues.apache.org/jira/browse/CAY-2605) Modeler: Unable to save - java.nio.file.InvalidPathException
+- [CAY-2606](https://issues.apache.org/jira/browse/CAY-2606) Can't resolve obj path with embeddable component
+- [CAY-2608](https://issues.apache.org/jira/browse/CAY-2608) CayenneModeler: NPE when reverse engineering with an auto-adapter DataSource
+- [CAY-2609](https://issues.apache.org/jira/browse/CAY-2609) Modeler: can't close dbImport result dialog window
+- [CAY-2616](https://issues.apache.org/jira/browse/CAY-2616) Modeler: Wrong handling of path with spaces
+- [CAY-2618](https://issues.apache.org/jira/browse/CAY-2618) Unstable property ordering in generated classes
+- [CAY-2619](https://issues.apache.org/jira/browse/CAY-2619) "to-dep PK" related dbimport delta confuses the Modeler
+- [CAY-2624](https://issues.apache.org/jira/browse/CAY-2624) SelectQuery "having" qualifier is not considered when calculating cache key
+- [CAY-2627](https://issues.apache.org/jira/browse/CAY-2627) Modeler: ObjRelationship creation dialog ignores delete rule
+- [CAY-2628](https://issues.apache.org/jira/browse/CAY-2628) dbimport: unable to add several relationships to existing entity
+- [CAY-2631](https://issues.apache.org/jira/browse/CAY-2631) Can no longer use "byte[]" as root of scalar SQLSelect
+- [CAY-2632](https://issues.apache.org/jira/browse/CAY-2632) Modeler: issue saving cgen path for maven project
+- [CAY-2633](https://issues.apache.org/jira/browse/CAY-2633) Modeler: attribute sorting logic in cgen can corrupt model
+- [CAY-2634](https://issues.apache.org/jira/browse/CAY-2634) Minor inconsistencies in Modeler "DB Import"
+- [CAY-2635](https://issues.apache.org/jira/browse/CAY-2635) Lambda expressions break ROP serialization
+- [CAY-2646](https://issues.apache.org/jira/browse/CAY-2646) Wrong target path selection logic in cgen config
+- [CAY-2647](https://issues.apache.org/jira/browse/CAY-2647) Modeler: project upgrade from 4.0.B2 to 4.1.RC2 failure
+- [CAY-2648](https://issues.apache.org/jira/browse/CAY-2648) Whitespace symbols in JDBC Driver and DB URL lines lead to incorrect driver loading
+- [CAY-2653](https://issues.apache.org/jira/browse/CAY-2653) No methods for queries with qualifier parameters generated
+- [CAY-2654](https://issues.apache.org/jira/browse/CAY-2654) Exception in dbimport when relationships should be imported, but no explicit configuration exists
+- [CAY-2655](https://issues.apache.org/jira/browse/CAY-2655) AutoAdapter missing supportsGeneratedKeysForBatchInserts() method

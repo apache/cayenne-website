@@ -1,0 +1,7 @@
+{{ if (.Get 0) -}}
+{{- with .Get 0 -}}
+<div class="pb-{{ . }}"></div>
+{{- end -}}
+{{- else -}}
+<div class="pb-3"></div>
+{{- end }}
