@@ -10,7 +10,7 @@ Apache Cayenne PMC would like to thank the following companies for granting our 
 free licenses to use their tools in the development process:
 
 <a href="https://www.oxygenxml.com" title="Oxygen XML Editor" rel="nofollow" target="_blank" style="border: none;">
-<img src="/img/oxygen190x62.png" width="190" height="62" alt="Oxygen XML Editor" border="0"/>
+<img src="{{< relurl "img/oxygen190x62.png" >}}" width="190" height="62" alt="Oxygen XML Editor" border="0"/>
 </a> 
 
 A license for Oxygen XML Editor is provided by Syncro Soft.
