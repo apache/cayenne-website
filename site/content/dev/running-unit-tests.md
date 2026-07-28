@@ -13,7 +13,7 @@ prerequisites](/dev/building-cayenne.html)
 
 The *cayenneTestConnection* property selects the database backend for tests. The following are in-memory database backends and can be executed without additional setup:
 
-```
+```bash
 # "hsql" is the default, and can be omitted
 # mvn verify -DcayenneTestConnection=hsql
 mvn verify
@@ -25,7 +25,7 @@ mvn verify -DcayenneTestConnection=sqlite
 
 Cayenne also has a few preconfigured backends that it starts on Docker (so Docker must be installed and running) :
 
-```
+```bash
 $ mvn verify -DcayenneTestConnection=mysql
 $ mvn verify -DcayenneTestConnection=mariadb
 $ mvn verify -DcayenneTestConnection=postgres
@@ -36,7 +36,7 @@ $ mvn verify -DcayenneTestConnection=db2
 
 You can override the default Docker image tag for Testcontainers-backed databases with *cayenneTestDbVersion*:
 
-```
+```bash
 $ mvn verify -DcayenneTestConnection=mysql -DcayenneTestDbVersion=8.4
 ```
 
@@ -54,21 +54,21 @@ POM or the examples below.
     
 **FrontBase:**
 
-```
+```bash
 $ mvn install:install-file -Dfile=frontbasejdbc.jar -DgroupId=com.frontbase \
        -DartifactId=frontbase-driver -Dversion=4.1 -Dpackaging=jar -DgeneratePom=true
 ```
 
 **Ingres:**
 
-```
+```bash
 $ mvn install:install-file -Dfile=ingres-jdbc.jar -DgroupId=com.ingres \
        -DartifactId=ingres-driver -Dversion=4.0.7 -Dpackaging=jar -DgeneratePom=true
 ```
 
 **Sybase:**
 
-```
+```bash
 $ mvn install:install-file -Dfile=jconn3.jar -DgroupId=com.sybase \
        -DartifactId=sybase-driver -Dversion=12 -Dpackaging=jar -DgeneratePom=true
 ```
@@ -96,7 +96,7 @@ to create a directory *$HOME/.cayenne/* and place a file called
 *connection.properties* in this directory. File contents should be similar to
 this example:
 
-```
+```properties
 mysql.jdbc.username = someuser
 mysql.jdbc.password = somepasswd
 mysql.jdbc.url = jdbc:mysql://mysql.host:3306/test_db?useUnicode=true&characterEncoding=UTF-8&generateSimpleParameterMetadata=true
@@ -110,7 +110,7 @@ postgres.jdbc.driver = org.postgresql.Driver
 
 Each property starts with the connection name, so you can still do this:
 
-```  
+```bash  
 $ mvn verify -DcayenneTestConnection=mysql
 ```
 
@@ -126,7 +126,7 @@ For those versions, when passing connection settings on the command line, use
 *cayenneAdapter* in addition to the JDBC properties:
 
 
-```
+```bash
 $ mvn verify -DcayenneTestConnection=<connection_name> \
    -DcayenneAdapter=org.apache.cayenne.dba.mysql.MySQLAdapter \
    -DcayenneJdbcUsername=myuser \
@@ -139,7 +139,7 @@ In *$HOME/.cayenne/connection.properties*, Cayenne 4.2 expects the same
 connection-name prefix, but also needs an adapter key. For example, this is a
 current Cayenne 5.0 style entry:
 
-```
+```properties
 mysql.jdbc.username = someuser
 mysql.jdbc.password = somepasswd
 mysql.jdbc.url = jdbc:mysql://mysql.host:3306/test_db
@@ -148,7 +148,7 @@ mysql.jdbc.driver = com.mysql.cj.jdbc.Driver
 
 The Cayenne 4.2 version must add *mysql.adapter*:
 
-```
+```properties
 mysql.adapter = org.apache.cayenne.dba.mysql.MySQLAdapter
 mysql.jdbc.username = someuser
 mysql.jdbc.password = somepasswd
@@ -161,13 +161,13 @@ The even older *mysql.cayenne.adapter* key is also recognized as a legacy alias.
 Testcontainers-backed profiles are another key-name difference. Cayenne 4.2
 used the *-tc* suffix:
 
-```
+```bash
 $ mvn verify -DcayenneTestConnection=mysql-tc
 ```
 
 Current Cayenne uses the database name without the suffix:
 
-```
+```bash
 $ mvn verify -DcayenneTestConnection=mysql
 ```
 

@@ -24,7 +24,7 @@ more over configuration is now saved so you can evolve it with your model and pe
 
 - User controlled transaction propagation logic and isolation level.
 
-```
+```java
     TransactionManager manager = runtime.getInjector().getInstance(TransactionManager.class);
     TransactionDescriptor descriptor = new TransactionDescriptor(
             Connection.TRANSACTION_SERIALIZABLE, // set transaction isolation to SERIALIZABLE 

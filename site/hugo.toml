@@ -32,12 +32,6 @@ enableRobotsTXT = true
     source = "../node_modules/bootstrap/dist/js"
     target = "static/vendor/js/bootstrap"
   [[module.mounts]]
-    source = "../node_modules/highlight.js/lib"
-    target = "static/vendor/js/highlight.js"
-  [[module.mounts]]
-    source = "../node_modules/highlight.js/styles"
-    target = "static/vendor/css/highlight.js"
-  [[module.mounts]]
     source = "../node_modules/@fontsource/montserrat/files"
     target = "static/vendor/fonts/montserrat"
 
@@ -61,7 +55,7 @@ enableRobotsTXT = true
     [markup.goldmark.renderer]
       unsafe = true
   [markup.highlight]
-    style = "github"
+    style = "xcode"
     noClasses = true
     codeFences = true
     wrapperClass = "highlight"

@@ -14,14 +14,14 @@ Make sure you get these files from the [main distribution directory](https://dow
 
 Then verify the signatures using
 
-```
+```bash
 $ pgp -ka KEYS
 $ pgp cayenne-X.Y.Z-src.tar.gz.asc
 ```
 
 or
 
-```
+```bash
 $ gpg --import KEYS
 $ gpg --verify cayenne-X.Y.Z-src.tar.gz.asc
 ```

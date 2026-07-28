@@ -82,12 +82,12 @@ There are two helpers shell scripts to update Cayenne documentation:
 Usage:
 
 * Update all docs after the release
-```
+```bash
     ./build-docs.sh 4.1.RC2
 ```
     
 * Add fixes to the docs
-```
+```bash
     ./build-asciidocs.sh STABLE-4.0 4.0.2
 ```
 
