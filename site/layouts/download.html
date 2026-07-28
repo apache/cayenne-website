@@ -48,14 +48,12 @@
         </div>
         {{ $artifact := default "cayenne-server" .maven }}
         <div class="tab-pane fade" id="maven_{{ $revID }}" role="tabpanel" aria-labelledby="maven_{{ $revID }}-tab">
-            <pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
-    &lt;artifactId&gt;{{ $artifact }}&lt;/artifactId&gt;
-    &lt;version&gt;{{ $rev }}&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+            {{ $mavenCode := printf "<dependency>\n    <groupId>org.apache.cayenne</groupId>\n    <artifactId>%s</artifactId>\n    <version>%s</version>\n</dependency>" $artifact $rev }}
+            {{ highlight $mavenCode "xml" "" | safeHTML }}
         </div>
         <div class="tab-pane fade" id="gradle_{{ $revID }}" role="tabpanel" aria-labelledby="gradle_{{ $revID }}-tab">
-            <pre><code class="groovy">implementation 'org.apache.cayenne:{{ $artifact }}:{{ $rev }}'</code></pre>
+            {{ $gradleCode := printf "implementation 'org.apache.cayenne:%s:%s'" $artifact $rev }}
+            {{ highlight $gradleCode "groovy" "" | safeHTML }}
         </div>
     </div>
     {{ end }}
