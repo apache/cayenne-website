@@ -16,9 +16,9 @@
   "dependencies": {
     "@fontsource/montserrat": "^5.3.0",
     "bootstrap": "4.6.2",
+    "jquery": "3.7.1",
     "font-awesome": "4.7.0",
-    "highlight.js": "9.18.5",
-    "jquery": "3.7.1"
+    "highlight.js": "9.18.5"
   },
   "devDependencies": {
     "@antora/collector-extension": "^1.0.3",
