@@ -4,19 +4,19 @@
         <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
            <img src="{{ "img/logo_mono_full.svg" | relURL }}" alt="{{ .Site.Title }}" />
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="mainMenu">
-          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+          <ul class="navbar-nav  mt-3 mt-lg-0 ms-auto">
             {{ range .Site.Menus.main }}
             <li class="nav-item">
               <a class="nav-link" href="{{ .URL | relURL }}">{{ upper .Name }}</a>
             </li>
             {{ end }}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="apacheDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="apacheDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="mw-15px mr-1" src="{{ "img/oakleaf.svg" | relURL }}" alt="" />APACHE
               </a>
               <div class="dropdown-menu rounded-0" aria-labelledby="apacheDropdown">
@@ -26,7 +26,7 @@
                 <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
                 <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
                 <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
-                <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+                <a class="ms-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
               </div>
             </li>
           </ul>

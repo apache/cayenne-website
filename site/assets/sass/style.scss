@@ -134,7 +134,7 @@ main {
 
   thead th {
     font-weight: $font-weight-medium;
-    border-bottom: (1 * $table-border-width) solid $table-border-color;
+    border-bottom: 1px solid $table-border-color;
   }
 }
 
@@ -144,6 +144,13 @@ main {
   line-height: 1.6;
   border-radius: 50px;
   padding-bottom: 0.7rem;
+}
+
+.btn-primary {
+  color: $white;
+  &:hover, &:focus {
+    color: $white;
+  }
 }
 
 @media (max-width: 575px) {
@@ -379,7 +386,7 @@ pre,
 
   .nav-link {
     color: $headings-color;
-    font-weight: $display4-weight;
+    font-weight: $font-weight-normal;
     line-height: 1.4;
     padding: 1rem;
 
@@ -421,7 +428,7 @@ pre,
     max-width: 100%;
   }
 
-  .embed-responsive {
+  .ratio {
     box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.11);
     border-radius: 2px;
     max-width: 560px;

@@ -26,9 +26,6 @@ enableRobotsTXT = true
     source = "../node_modules/font-awesome/fonts"
     target = "static/vendor/font-awesome/fonts"
   [[module.mounts]]
-    source = "../node_modules/jquery/dist"
-    target = "static/vendor/js/jquery"
-  [[module.mounts]]
     source = "../node_modules/bootstrap/dist/js"
     target = "static/vendor/js/bootstrap"
   [[module.mounts]]
