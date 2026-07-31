@@ -1,0 +1,60 @@
+Apache Cayenne Website
+Copyright 2001-2026 The Apache Software Foundation.
+
+This product includes software developed at The Apache Software Foundation
+(http://www.apache.org/).
+
+The Apache Cayenne name, Cayenne name, Apache name, Apache feather logo,
+and Apache Cayenne project logo are trademarks of The Apache Software
+Foundation. This notice does not grant permission to use those trademarks.
+
+Third-party components
+----------------------
+
+The following third-party components are used by the website source or are
+included in the generated website. They remain subject to their own license
+terms and are not relicensed under the Apache License, Version 2.0.
+
+Antora Default UI
+
+  Component: Antora Default UI
+  Source: https://gitlab.com/antora/antora-ui-default
+  License: Mozilla Public License, Version 2.0 (MPL-2.0)
+  License: https://mozilla.org/MPL/2.0/
+  Revision: 0e38223adfd81eb74d4b1779e158f8ad05ff8923
+  Bundle source:
+  https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/0e38223adfd81eb74d4b1779e158f8ad05ff8923/raw/build/ui-bundle.zip?job=bundle-stable
+
+The Antora Default UI is fetched as an external UI bundle. The Cayenne
+supplemental UI files under docs/supplemental-ui/ are separately authored by
+Apache Cayenne and are licensed under the Apache License, Version 2.0.
+
+Bootstrap 5.3.8
+
+  Source: https://github.com/twbs/bootstrap
+  License: MIT License
+  License: https://github.com/twbs/bootstrap/blob/v5.3.8/LICENSE
+  Copyright: 2011-2025 The Bootstrap Authors
+
+Font Awesome 4.7.0
+
+  Source: https://github.com/FortAwesome/Font-Awesome
+  CSS and Sass: MIT License
+  Fonts: SIL Open Font License, Version 1.1 (OFL-1.1)
+  License information: https://fontawesome.io/license/
+  Copyright: Dave Gandy and contributors
+
+Montserrat 5.3.0
+
+  Source: https://github.com/JulietaUla/Montserrat
+  License: SIL Open Font License, Version 1.1 (OFL-1.1)
+  License: https://scripts.sil.org/OFL
+  Copyright: 2011 The Montserrat Project Authors
+
+The complete license texts for the Apache License, Version 2.0, and the
+licenses applicable to third-party components are available from their
+respective license URLs above. When redistributing a generated website or
+other artifact that includes these components, retain the applicable
+copyright, license, and attribution notices and make the corresponding
+source and license information available as required by the applicable
+license.
