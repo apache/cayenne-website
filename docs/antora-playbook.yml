@@ -1,7 +1,7 @@
 site:
-  title: Apache Cayenne Documentation
+  title: Apache Cayenne
   url: https://m-dzianishchyts.github.io/cayenne-website/docs
-  start_page: getting-started::index.adoc
+  start_page: cayenne:getting-started:index.adoc
 antora:
   extensions:
     - '@antora/collector-extension'
@@ -9,8 +9,6 @@ antora:
       index_latest_only: true
 asciidoc:
   attributes:
-    project-version: '{page-component-version}'
-    project-major-version: '{page-component-version}'
     ehcache-version: '3.8.1'
 content:
   sources:
@@ -30,10 +28,8 @@ content:
     #   start_paths: docs/*
 ui:
   bundle:
-    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
-    snapshot: true
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/0e38223adfd81eb74d4b1779e158f8ad05ff8923/raw/build/ui-bundle.zip?job=bundle-stable
   supplemental_files: ./supplemental-ui
-  # Avoid default "_" — GitHub Pages/Jekyll hides underscore paths unless .nojekyll is live
   output_dir: ui
 output:
   dir: ./../target/site/docs
