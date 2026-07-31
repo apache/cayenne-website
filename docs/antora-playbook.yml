@@ -5,8 +5,7 @@ site:
 antora:
   extensions:
     - '@antora/collector-extension'
-    - require: '@antora/lunr-extension'
-      index_latest_only: true
+    - '@antora/lunr-extension'
 asciidoc:
   attributes:
     ehcache-version: '3.8.1'
