@@ -2,12 +2,13 @@
   "name": "cayenne-website",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "yarn@4.18.0",
   "description": "Apache Cayenne website",
   "scripts": {
-    "build": "npx hugo --source site --destination ../target/site && npx antora docs/antora-playbook.yml",
-    "docs": "npx antora docs/antora-playbook.yml",
-    "site": "npx hugo --source site --destination ../target/site",
-    "site:watch": "npx hugo server --source site --destination ../target/site --disableFastRender"
+    "build": "yarn run site && yarn run docs",
+    "docs": "antora --log-failure-level error --log-level info --log-format pretty docs/antora-playbook.yml",
+    "site": "hugo --source site --destination ../target/site",
+    "site:watch": "hugo server --source site --destination ../target/site --disableFastRender"
   },
   "hugo-bin": {
     "buildTags": "extended",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.3.0",
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "font-awesome": "4.7.0"
   },

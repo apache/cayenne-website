@@ -1,12 +1,13 @@
-.idea
+.idea/
 *.iml
 *.cloud
 *.cloudf
 .DS_Store
-target
-.scm-publish-checkout
-node
-node_modules
+target/
+.scm-publish-checkout/
+node/
+node_modules/
+.yarn/
 /site/resources/_gen
 
 **/.hugo_build.lock

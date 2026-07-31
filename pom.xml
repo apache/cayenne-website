@@ -32,7 +32,7 @@
     <properties>
         <hugo.baseurl>https://cayenne.apache.org/</hugo.baseurl>
         <node.version>v24.18.0</node.version>
-        <yarn.version>v1.22.22</yarn.version>
+        <corepack.version>0.35.0</corepack.version>
         <dev.port>8080</dev.port>
     </properties>
 
@@ -79,32 +79,32 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>install-node-and-yarn</id>
+                        <id>install-node-and-corepack</id>
                         <goals>
-                            <goal>install-node-and-yarn</goal>
+                            <goal>install-node-and-corepack</goal>
                         </goals>
                         <configuration>
                             <nodeVersion>${node.version}</nodeVersion>
-                            <yarnVersion>${yarn.version}</yarnVersion>
+                            <corepackVersion>${corepack.version}</corepackVersion>
                         </configuration>
                     </execution>
                     <execution>
                         <id>yarn-install</id>
                         <goals>
-                            <goal>yarn</goal>
+                            <goal>corepack</goal>
                         </goals>
                         <configuration>
-                            <arguments>install</arguments>
+                            <arguments>yarn install --immutable</arguments>
                         </configuration>
                     </execution>
                     <execution>
                         <id>yarn-build</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>yarn</goal>
+                            <goal>corepack</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>yarn run build</arguments>
                             <environmentVariables>
                                 <HUGO_BASEURL>${hugo.baseurl}</HUGO_BASEURL>
                             </environmentVariables>
@@ -127,20 +127,30 @@
                 <hugo.baseurl>http://localhost:${dev.port}/</hugo.baseurl>
             </properties>
             <build>
-                <defaultGoal>package frontend:yarn@site-dev</defaultGoal>
+                <defaultGoal>generate-resources frontend:corepack@site-docs frontend:corepack@site-dev</defaultGoal>
                 <plugins>
                     <plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>site-docs</id>
+                                <phase/>
+                                <goals>
+                                    <goal>corepack</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>yarn run docs</arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
                                 <id>site-dev</id>
                                 <phase/>
                                 <goals>
-                                    <goal>yarn</goal>
+                                    <goal>corepack</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>run site:watch -- --port ${dev.port}</arguments>
+                                    <arguments>yarn run site:watch --port ${dev.port}</arguments>
                                     <environmentVariables>
                                         <HUGO_BASEURL>${hugo.baseurl}</HUGO_BASEURL>
                                     </environmentVariables>
