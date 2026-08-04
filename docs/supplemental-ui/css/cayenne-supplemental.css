@@ -24,10 +24,35 @@
   --navbar-height: calc(72 / var(--rem-base) * 1rem);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body > .body {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Header */
 .navbar {
   background: var(--navbar-background);
   box-shadow: 0 0.05rem 0.5rem rgba(0, 0, 0, 0.12);
+  padding: 0 0.5rem;
 }
 
 .navbar-brand .navbar-logo {
@@ -42,7 +67,7 @@
 
 .navbar-item,
 .navbar-link {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.75) !important;
   background: transparent !important;
   font-size: 0.8rem;
   font-weight: 500;
@@ -54,7 +79,7 @@
 .navbar-item:focus,
 .navbar-link:hover,
 .navbar-link:focus {
-  color: #fff;
+  color: #fff !important;
   background: transparent !important;
 }
 
@@ -76,9 +101,37 @@
   display: block;
 }
 
+.navbar a:focus-visible,
+.navbar button:focus-visible,
+.footer a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 #search-field {
   display: flex;
   align-items: center;
+  gap: 0.45rem;
+}
+
+.search-control {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.65rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  color: #777;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search-icon svg {
+  display: block;
 }
 
 #search-input {
@@ -90,7 +143,7 @@
   font-size: 0.9rem;
   line-height: 1.5;
   min-width: 11rem;
-  padding: 0.3rem 0.55rem;
+  padding: 0.3rem 0.55rem 0.2rem 2rem !important;
   text-transform: none;
   letter-spacing: normal;
 }
@@ -104,7 +157,85 @@
   background: #fff;
 }
 
-/* Wider article column */
+@media screen and (max-width: 767px) {
+  .header,
+  .navbar,
+  .navbar-brand {
+    height: auto;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
+  body > .body {
+    margin-top: 3rem;
+  }
+
+  .navbar-brand {
+    flex-wrap: wrap;
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  .navbar-brand .navbar-logo {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .navbar-brand .navbar-burger {
+    order: 2;
+    flex: 0 0 3rem;
+    width: 3rem;
+    min-width: 3rem;
+  }
+
+  .navbar-menu.is-active {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    padding: 0.5rem 1rem 1rem;
+    background: var(--navbar-background);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.18);
+  }
+
+  .navbar-menu.is-active .navbar-end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-menu.is-active .navbar-item {
+    min-height: 2.75rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .navbar-brand .search {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+
+  #search-field,
+  .search-control,
+  #search-input {
+    width: 100%;
+  }
+
+  #search-field {
+    gap: 0.35rem;
+  }
+
+  #search-input {
+    min-width: 0;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .body {
     justify-content: flex-start;
@@ -141,40 +272,25 @@
 /* Footer — match Hugo site (bg-dark / #404040) */
 .footer {
   background: var(--cayenne-dark) !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.2) !important;
+  font-size: 0.75rem !important;
   line-height: 1.6;
-  padding: 2.5rem 1rem 2rem;
+  padding: 2rem 1rem 1.5rem;
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.35);
   text-decoration: none;
 }
 
 .footer a:hover {
-  color: #fff;
-  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .footer-container {
-  max-width: 48rem;
+  max-width: 45rem;
   margin: 0 auto;
   text-align: center;
-}
-
-.footer-legal {
-  margin: 0 auto 0.75rem;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.footer-legal a {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.footer-ui-note {
-  margin-bottom: 1.25rem;
 }
 
 .footer-mark {
@@ -182,9 +298,9 @@
 }
 
 .footer-mark img {
-  opacity: 0.9;
-  /* logo_mono is dark; invert for dark footer like Hugo mono mark on dark */
+  opacity: 0.15;
   filter: brightness(0) invert(1);
+  height: 30px;
 }
 
 /* Links in doc content */
@@ -192,4 +308,3 @@
 .doc a {
   color: var(--cayenne-red);
 }
-
