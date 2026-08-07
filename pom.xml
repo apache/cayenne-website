@@ -200,7 +200,7 @@
                             <content>${project.build.directory}/site</content>
                             <checkoutDirectory>${project.basedir}/.scm-publish-checkout</checkoutDirectory>
                             <checkinComment>${msg}</checkinComment>
-                            <pubScmUrl>scm:git:https://github.com/m-dzianishchyts/cayenne-website.git</pubScmUrl>
+                            <pubScmUrl>scm:git:https://github.com/apache/cayenne-website.git</pubScmUrl>
                             <scmBranch>gh-pages</scmBranch>
                         </configuration>
                         <executions>

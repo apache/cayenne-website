@@ -7,17 +7,18 @@ Versioned documentation is built with [Antora](https://antora.org/) and written 
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) 20+ (or use Maven, which downloads Node/Yarn)
-- [Yarn](https://yarnpkg.com/) 1.x (or Maven frontend plugin)
+- [Node.js](https://nodejs.org/) 20+ (or use Maven, which installs Node and Corepack)
+- [Corepack](https://nodejs.org/api/corepack.html), included with supported Node.js releases
 - Optional: [Maven](https://maven.apache.org/) 3.9+ for the ASF-style wrapper and publish profile
-- Git access to Cayenne documentation branches configured in `docs/antora-playbook.yml`
+- Git access to the Cayenne documentation branches configured in `docs/antora-playbook.yml`
 
-Hugo Extended is installed automatically as an npm dependency (`hugo-bin`). You do not need a system Hugo install.
+The repository pins Yarn 4.18.0 through the `packageManager` field in `package.json`. Hugo Extended is installed automatically as an npm dependency (`hugo-bin`); you do not need a system Hugo install.
 
-## Quick start (npm / Yarn)
+## Quick start (Corepack / Yarn)
 
 ```bash
-yarn install
+corepack enable
+yarn install --immutable
 yarn run build
 ```
 
@@ -49,7 +50,7 @@ npx --yes serve target/site
 
 ## Quick start (Maven)
 
-Maven installs Node/Yarn under `node/`, runs `yarn install`, then `yarn run build`.
+Maven installs Node and Corepack under `node/`, then runs `yarn install --immutable` followed by `yarn run build`.
 
 ```bash
 # production-oriented build (base URL https://cayenne.apache.org/)
@@ -60,18 +61,25 @@ mvn -Pdev-server
 # optional: -Ddev.port=3000
 ```
 
-Publish profile (builds and SCM-publishes `target/site`; configure `pubScmUrl` / branch in `pom.xml` before use):
+### SCM publishing
+
+The `publish` profile builds the site and publishes `target/site/` to the configured SCM branch using Maven SCM Publish Plugin.
+
+Review `pubScmUrl`, `scmBranch`, and `hugo.baseurl` in `pom.xml` before publishing. Supply a commit message with `-Dmsg`:
 
 ```bash
 mvn -Ppublish -Dmsg="Describe the site change"
 ```
+
+This command publishes the generated site to the remote website branch. Run it only when you intend to update the published site.
 
 ## Directory layout
 
 ```text
 cayenne-website/
 ├── package.json              # scripts, Hugo, Antora, front-end deps
-├── yarn.lock
+├── yarn.lock                 # immutable Yarn 4 dependency lockfile
+├── .yarnrc.yml               # Yarn 4 node-modules configuration
 ├── pom.xml                   # optional Maven wrapper + publish
 ├── docs/
 │   ├── antora-playbook.yml   # Antora content sources, UI, output
@@ -97,12 +105,12 @@ Build artifacts (not committed): `target/`, `node/`, `node_modules/`, `site/reso
 AsciiDoc lives in the main **cayenne** repository under `docs/*` (Antora components), not in this repo.
 `docs/antora-playbook.yml` lists git branches/tags and `start_paths: docs/*`.
 
-For local builds, point `content.sources[].url` at your local cayenne clone (or a remote URL) and enable the branches you need. Commit only portable playbook settings appropriate for CI/ASF (avoid machine-specific absolute paths).
+For local builds, point `content.sources[].url` at your local cayenne clone (or a remote URL) and enable the branches you need.
 
 ### UI
 
 - Base: [Antora Default UI](https://gitlab.com/antora/antora-ui-default) (MPL-2.0), loaded as a UI bundle.
-- Project overlays: `docs/supplemental-ui/` (header/footer branding, layout CSS). These supplemental files are project-owned; do **not** add an empty `ui.yml` there (Antora fails with `staticFiles` errors).
+- Project overlays: `docs/supplemental-ui/` (header/footer branding, layout CSS). These supplemental files are project-owned.
 
 ### Search
 
@@ -136,7 +144,7 @@ Rendered under `/YYYY/MM/<slug>/` and listed on `/news/`.
 1. Update `site/data/cayenne.toml` (and related download data if needed).
 2. Add a news article.
 3. Adjust `docs/antora-playbook.yml` when a new docs branch/version should be published.
-4. Update javadoc redirects in `site/static/.htaccess` if applicable.
+4. Update redirects in `site/static/.htaccess` if applicable.
 5. Rebuild (`yarn run build` or `mvn clean package`).
 
 ### Edit documentation content
@@ -157,9 +165,5 @@ Edit `docs/supplemental-ui/` (partials and `css/cayenne-supplemental.css`), then
 
 ## License notes
 
-- Website content and project-owned code in this repository: Apache License 2.0 (see `LICENSE.txt`).
+- Website content and project-owned code in this repository: Apache License 2.0 (see `LICENSE`).
 - Antora Default UI (and modifications to its Covered Software, if any): Mozilla Public License 2.0. Supplemental UI files authored here should keep clear separation; label third-party UI in notices when distributing the site.
-
-## CI
-
-See `.github/workflows/` for automation. Align workflow steps with `yarn run build` (or Maven `package`) and the `target/site` output directory.

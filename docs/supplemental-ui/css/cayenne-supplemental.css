@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to you under the Apache License, Version
+ * 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an AS IS BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for
+ * the specific language governing permissions and limitations under the
+ * License.
+ */
+
 /* Cayenne branding + layout. Complements Antora Default UI (MPL-2.0). */
 
 :root {
@@ -44,8 +60,6 @@ body {
 
 body > .body {
   flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
 }
 
 /* Header */
@@ -97,7 +111,7 @@ body > .body {
   background: transparent !important;
 }
 
-.navbar-item.navbar-icon svg {
+.navbar-item.navbar-icon img {
   display: block;
 }
 
@@ -130,7 +144,7 @@ body > .body {
   pointer-events: none;
 }
 
-.search-icon svg {
+.search-icon img {
   display: block;
 }
 
@@ -233,6 +247,43 @@ body > .body {
 
   #search-input {
     min-width: 0;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .navbar-burger {
+    display: flex;
+    flex: 0 0 3rem;
+    width: 3rem;
+    min-width: 3rem;
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+
+  .navbar-menu.is-active {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    padding: 0.5rem 1rem 1rem;
+    background: var(--navbar-background);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.18);
+  }
+
+  .navbar-menu.is-active .navbar-end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-menu.is-active .navbar-item {
+    min-height: 2.75rem;
+    padding: 0.75rem 0.5rem;
   }
 }
 

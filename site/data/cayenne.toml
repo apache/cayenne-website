@@ -1,3 +1,17 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements. See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to you under the Apache License, Version
+# 2.0 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at
+#
+# https://www.apache.org/licenses/LICENSE-2.0 Unless required by
+# applicable law or agreed to in writing, software distributed under the
+# License is distributed on an AS IS BASIS, WITHOUT WARRANTIES OR
+# CONDITIONS OF ANY KIND, either express or implied. See the License for
+# the specific language governing permissions and limitations under the
+# License.
+
 [[releases]]
 version = "5.0"
 latestRevision = "5.0-M2"
@@ -8,7 +22,6 @@ docs = true
 downloadable = true
 jdk = 21
 newRepoLayout = true
-javaDoc = "online"
 maven = "cayenne"
 
 [[releases]]
@@ -21,7 +34,6 @@ docs = true
 downloadable = true
 jdk = 1.8
 newRepoLayout = true
-javaDoc = "online"
 
 [[releases]]
 version = "4.1"
@@ -33,7 +45,6 @@ docs = true
 downloadable = true
 jdk = 1.8
 newRepoLayout = true
-javaDoc = "no-index"
 
 [[releases]]
 version = "4.0"
@@ -45,7 +56,6 @@ docs = true
 downloadable = true
 jdk = 1.7
 newRepoLayout = true
-javaDoc = "no-index"
 
 [[releases]]
 version = "3.1"
@@ -56,7 +66,6 @@ date = "2018-07-23"
 docs = true
 downloadable = true
 jdk = 1.5
-javaDoc = "offline"
 
 [[releases]]
 version = "3.0"
@@ -68,7 +77,6 @@ docs = false
 downloadable = false
 customLink = "cayenne-3.0.2"
 jdk = 1.5
-javaDoc = "no"
 
 [[releases]]
 version = "2.0"
@@ -79,7 +87,6 @@ date = "2007-10-12"
 docs = false
 downloadable = false
 jdk = 1.5
-javaDoc = "no"
 
 [[releases]]
 version = "1.2"
@@ -90,4 +97,3 @@ date = "2007-10-12"
 docs = false
 downloadable = false
 jdk = 1.5
-javaDoc = "no"

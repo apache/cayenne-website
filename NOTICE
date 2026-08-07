@@ -11,9 +11,10 @@ Foundation. This notice does not grant permission to use those trademarks.
 Third-party components
 ----------------------
 
-The following third-party components are used by the website source or are
-included in the generated website. They remain subject to their own license
-terms and are not relicensed under the Apache License, Version 2.0.
+The following third-party components are included in the generated website
+artifact. They remain subject to their own license terms and are not relicensed
+under the Apache License, Version 2.0. Build-only dependencies that are not
+included in the generated website are intentionally omitted.
 
 Antora Default UI
 

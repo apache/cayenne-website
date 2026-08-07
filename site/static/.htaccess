@@ -1,3 +1,17 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements. See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to you under the Apache License, Version
+# 2.0 (the "License"); you may not use this file except in compliance
+# with the License. You may obtain a copy of the License at
+#
+# https://www.apache.org/licenses/LICENSE-2.0 Unless required by
+# applicable law or agreed to in writing, software distributed under the
+# License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+# CONDITIONS OF ANY KIND, either express or implied. See the License for
+# the specific language governing permissions and limitations under the
+# License.
+
 ##################################################
 # Redirects carried from Apache CMS based site   #
 ##################################################
@@ -5,15 +19,15 @@
 # Individual deleted/renamed pages
 Redirect permanent /commercial-support.html /about/support/
 Redirect permanent /documentation.html /docs/
-Redirect permanent /doc12/documentation.html /docs/1.2/
-Redirect permanent /doc20/documentation.html /docs/2.0/
-Redirect permanent /doc/documentation.html /docs/3.0/
+Redirect permanent /doc12/documentation.html /docs/
+Redirect permanent /doc20/documentation.html /docs/
+Redirect permanent /doc/documentation.html /docs/
 Redirect permanent /privacy-policy.html https://privacy.apache.org/policies/privacy-policy-public.html
 
 # Remaping legacy doc folders
-Redirect permanent /doc12/ /docs/1.2/
-Redirect permanent /doc20/ /docs/2.0/
-Redirect permanent /doc/ /docs/3.0/
+Redirect permanent /doc12/ /docs/
+Redirect permanent /doc20/ /docs/
+Redirect permanent /doc/ /docs/
 
 # Remapping dev folders
 Redirect permanent /developer-guide.html /dev/
@@ -33,7 +47,7 @@ Redirect permanent /support.html /about/support/
 Redirect permanent /download.html /download/
 
 # Links without direct replacement in new site
-Redirect permanent /docs/legacy.html /docs/3.0/
+Redirect permanent /docs/legacy.html /docs/
 Redirect permanent /about.html /
 Redirect permanent /collaboration.html /
 Redirect permanent /legacy-ant-documentation-export.html /
@@ -43,32 +57,32 @@ Redirect permanent /legacy-ant-documentation-export.html /
 ##################################################
 
 # Redirect main sections of Cayenne Guide
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part1.html$ /docs/$1/cayenne-guide/#object-relational-mapping-with-cayenne
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part2.html$ /docs/$1/cayenne-guide/#cayenne-framework
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part3.html$ /docs/$1/cayenne-guide/#cayenne-framework-remote-object-persistence
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part4.html$ /docs/$1/cayenne-guide/#db-first-flow
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part5.html$ /docs/$1/cayenne-guide/#cayenne-additional-modules
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part1.html$ /docs/cayenne/4.2/guide/#object-relational-mapping-with-cayenne
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part2.html$ /docs/cayenne/4.2/guide/#cayenne-framework
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part3.html$ /docs/cayenne/4.2/guide/#cayenne-framework-remote-object-persistence
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part4.html$ /docs/cayenne/4.2/guide/#db-first-flow
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/cayenne-guide-part5.html$ /docs/cayenne/4.2/guide/#cayenne-additional-modules
 # Tutorial
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part1.html$ /docs/$1/getting-started-guide/#setting-up-the-environment
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part2.html$ /docs/$1/getting-started-guide/#learning-mapping-basics
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part3.html$ /docs/$1/getting-started-guide/#learning-cayenne-api
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part4.html$ /docs/$1/getting-started-guide/#converting-to-web-application
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part1.html$ /docs/cayenne/4.2/getting-started/#setting-up-the-environment
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part2.html$ /docs/cayenne/4.2/getting-started/#learning-mapping-basics
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part3.html$ /docs/cayenne/4.2/getting-started/#learning-cayenne-api
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/getting-started-part4.html$ /docs/cayenne/4.2/getting-started/#converting-to-web-application
 # Rop tutorial
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch01.html$ /docs/$1/getting-started-rop/#prerequisites-2
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch02.html$ /docs/$1/getting-started-rop/#starting-client-project
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch03.html$ /docs/$1/getting-started-rop/#setting-up-hessian-web-service
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch04.html$ /docs/$1/getting-started-rop/#porting-existing-code-to-connect-to-a-web-service-instead-of-a-database
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch05.html$ /docs/$1/getting-started-rop/#adding-basic-authentication
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part1.html$ /docs/$1/getting-started-rop/#prerequisites
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part2.html$ /docs/$1/getting-started-rop/#remote-object-persistence-quick-start
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch01.html$ /docs/cayenne/4.2/getting-started-rop/#prerequisites-2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch02.html$ /docs/cayenne/4.2/getting-started-rop/#starting-client-project
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch03.html$ /docs/cayenne/4.2/getting-started-rop/#setting-up-hessian-web-service
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch04.html$ /docs/cayenne/4.2/getting-started-rop/#porting-existing-code-to-connect-to-a-web-service-instead-of-a-database
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/ch05.html$ /docs/cayenne/4.2/getting-started-rop/#adding-basic-authentication
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part1.html$ /docs/cayenne/4.2/getting-started-rop/#prerequisites
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/getting-started-rop-part2.html$ /docs/cayenne/4.2/getting-started-rop/#remote-object-persistence-quick-start
 
 # Redirect all except index.html to exclude cyclic redirection
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/$1/cayenne-guide/#$2
-RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/$1/upgrade-guide/#$2
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/cayenne-guide/(?!index)(.*)\.html$ /docs/cayenne/4.2/guide/#$2
+RedirectMatch permanent ^/docs/([1-3]\.[0-9]+)/upgrade-guide/(?!index)(.*)\.html$ /docs/cayenne/4.2/upgrade-guide/#$2
 
 # Redirect everything else
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/(.*)\.html$ /docs/$1/getting-started-guide/\#$2
-RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/(.*)\.html$ /docs/$1/getting-started-rop/\#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial/(.*)\.html$ /docs/cayenne/4.2/getting-started/\#$2
+RedirectMatch permanent ^/docs/([0-9\.]+)/tutorial-rop/(.*)\.html$ /docs/cayenne/4.2/getting-started-rop/\#$2
 
 
 ##################################################
