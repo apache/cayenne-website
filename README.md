@@ -1,20 +1,96 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements. See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to you under the Apache License, Version
+  2.0 (the "License"); you may not use this file except in compliance
+  with the License. You may obtain a copy of the License at
+
+  https://www.apache.org/licenses/LICENSE-2.0 Unless required by
+  applicable law or agreed to in writing, software distributed under the
+  License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+  CONDITIONS OF ANY KIND, either express or implied. See the License for
+  the specific language governing permissions and limitations under the
+  License.
+-->
+
 # Apache Cayenne Website
 
 Sources for [https://cayenne.apache.org](https://cayenne.apache.org).
 
-The marketing site is built with [Hugo Extended](https://gohugo.io/) (via [`hugo-bin`](https://www.npmjs.com/package/hugo-bin)).
-Versioned documentation is built with [Antora](https://antora.org/) and written under `/docs` in the published site.
+The marketing site is built with [Hugo Extended](https://gohugo.io/), and versioned documentation is built with [Antora](https://antora.org/). Maven is the recommended entry point because it provisions the Node-based toolchain and runs the complete site build.
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) 20+ (or use Maven, which installs Node and Corepack)
-- [Corepack](https://nodejs.org/api/corepack.html), included with supported Node.js releases
-- Optional: [Maven](https://maven.apache.org/) 3.9+ for the ASF-style wrapper and publish profile
-- Git access to the Cayenne documentation branches configured in `docs/antora-playbook.yml`
+* [Maven](https://maven.apache.org/) 3.9 or newer.
+* Git access to the Cayenne repository and the documentation branches configured in `docs/antora-playbook.yml`.
 
-The repository pins Yarn 4.18.0 through the `packageManager` field in `package.json`. Hugo Extended is installed automatically as an npm dependency (`hugo-bin`); you do not need a system Hugo install.
+Maven downloads the configured Node.js and Corepack versions into the local `node/` directory, runs `yarn install --immutable`, and installs the pinned project dependencies, including Hugo Extended, Antora, and the frontend packages. A system Node.js, Corepack, Yarn, or Hugo installation is not required when using Maven.
 
-## Quick start (Corepack / Yarn)
+## Development with Maven
+
+Clone the repository and start the development server:
+
+```bash
+git clone https://github.com/apache/cayenne-website.git
+cd cayenne-website
+mvn -Pdev-server
+```
+
+The `dev-server` profile:
+
+1. Installs Node.js and Corepack when necessary.
+2. Runs the immutable Yarn installation.
+3. Builds the Antora documentation once.
+4. Starts the Hugo development server with live reload.
+
+The default address is:
+
+```text
+http://localhost:8080/
+```
+
+Use another port when needed:
+
+```bash
+mvn -Pdev-server -Ddev.port=3000
+```
+
+The selected port must be available before starting the server.
+
+## Production build
+
+Build the complete static site with Maven:
+
+```bash
+mvn clean package
+```
+
+Output is written to `target/site/`:
+
+* Hugo marketing pages are under `target/site/`.
+* Antora documentation is under `target/site/docs/`.
+
+To preview the generated files with a static server:
+
+```bash
+npx --yes serve target/site
+# or: python -m http.server -d target/site 8080
+```
+
+## SCM publishing
+
+The `publish` profile builds the production site and publishes `target/site/` to the configured SCM branch using Maven SCM Publish Plugin:
+
+```bash
+mvn -Ppublish -Dmsg="Describe the site change"
+```
+
+Review `pubScmUrl`, `scmBranch`, and `hugo.baseurl` in `pom.xml` before publishing. This command changes the remote website branch and should only be run when you intend to update the published site.
+
+## Optional direct Yarn commands
+
+Direct Yarn commands are available for frontend-focused work, but Maven is preferred for normal development because it provisions the complete toolchain and runs the same build steps used by the Maven profiles.
 
 ```bash
 corepack enable
@@ -22,113 +98,67 @@ yarn install --immutable
 yarn run build
 ```
 
-Output: `target/site/` (Hugo pages + Antora docs at `target/site/docs/`).
+Available scripts:
 
-| Script                | Purpose                                                |
-|-----------------------|--------------------------------------------------------|
-| `yarn run build`      | Hugo → `target/site`, then Antora → `target/site/docs` |
-| `yarn run site`       | Hugo only                                              |
-| `yarn run site:watch` | Hugo dev server (live reload)                          |
-| `yarn run docs`       | Antora only                                            |
-
-### Preview marketing site
-
-```bash
-yarn run site:watch
-```
-
-Open the URL Hugo prints (default `http://localhost:1313`).
-
-### Preview full static build
-
-```bash
-yarn run build
-# from repo root, serve the combined output
-npx --yes serve target/site
-# or: python -m http.server -d target/site 8080
-```
-
-## Quick start (Maven)
-
-Maven installs Node and Corepack under `node/`, then runs `yarn install --immutable` followed by `yarn run build`.
-
-```bash
-# production-oriented build (base URL https://cayenne.apache.org/)
-mvn clean package
-
-# local Hugo server (base URL http://localhost:8080/ by default)
-mvn -Pdev-server
-# optional: -Ddev.port=3000
-```
-
-### SCM publishing
-
-The `publish` profile builds the site and publishes `target/site/` to the configured SCM branch using Maven SCM Publish Plugin.
-
-Review `pubScmUrl`, `scmBranch`, and `hugo.baseurl` in `pom.xml` before publishing. Supply a commit message with `-Dmsg`:
-
-```bash
-mvn -Ppublish -Dmsg="Describe the site change"
-```
-
-This command publishes the generated site to the remote website branch. Run it only when you intend to update the published site.
+| Script | Purpose |
+| --- | --- |
+| `yarn run build` | Build Hugo and Antora output |
+| `yarn run site` | Build the Hugo site only |
+| `yarn run docs` | Build Antora documentation only |
+| `yarn run site:watch` | Run the Hugo development server |
 
 ## Directory layout
 
 ```text
 cayenne-website/
-├── package.json              # scripts, Hugo, Antora, front-end deps
-├── yarn.lock                 # immutable Yarn 4 dependency lockfile
-├── .yarnrc.yml               # Yarn 4 node-modules configuration
-├── pom.xml                   # optional Maven wrapper + publish
+├── package.json              # Yarn scripts and dependencies
+├── yarn.lock                 # Yarn 4 lockfile
+├── .yarnrc.yml               # Yarn configuration
+├── pom.xml                   # Maven build, development, and publish profiles
 ├── docs/
-│   ├── antora-playbook.yml   # Antora content sources, UI, output
-│   └── supplemental-ui/      # Cayenne branding on top of Default UI
-│       ├── css/
-│       ├── img/
-│       └── partials/         # header, footer, head styles
-└── site/                     # Hugo site
-    ├── hugo.toml
+│   ├── antora-playbook.yml   # Antora sources, UI bundle, and output
+│   └── supplemental-ui/      # Cayenne-specific Antora UI files
+└── site/
+    ├── hugo.toml             # Hugo configuration and mounts
     ├── content/              # Markdown pages and news
-    ├── data/                 # TOML data (releases, contributors, …)
-    ├── assets/sass/          # styles (Hugo Pipes)
-    ├── layouts/              # templates
-    └── static/               # static assets, .htaccess, etc.
+    ├── data/                 # TOML site data
+    ├── assets/sass/          # Hugo Pipes Sass sources
+    ├── layouts/              # Hugo templates
+    └── static/               # Copied assets and Apache redirects
 ```
 
-Build artifacts (not committed): `target/`, `node/`, `node_modules/`, `site/resources/_gen/`, `.hugo_build.lock`.
+Maven-managed and generated files are not committed. This includes `node/`, `target/`, `node_modules/`, `.yarn/`, and `site/resources/_gen/`.
 
-## Documentation (Antora)
+## Documentation
 
-### Content sources
+AsciiDoc sources live in the main **cayenne** repository under `docs/*`, not in this repository. `docs/antora-playbook.yml` selects the Cayenne branches and documentation start paths.
 
-AsciiDoc lives in the main **cayenne** repository under `docs/*` (Antora components), not in this repo.
-`docs/antora-playbook.yml` lists git branches/tags and `start_paths: docs/*`.
+The Antora Default UI is loaded as an MPL-2.0 UI bundle. Cayenne-specific overlays are maintained under `docs/supplemental-ui/`.
 
-For local builds, point `content.sources[].url` at your local cayenne clone (or a remote URL) and enable the branches you need.
+Offline full-text search is generated by `@antora/lunr-extension`; no server-side search service is required.
 
-### UI
-
-- Base: [Antora Default UI](https://gitlab.com/antora/antora-ui-default) (MPL-2.0), loaded as a UI bundle.
-- Project overlays: `docs/supplemental-ui/` (header/footer branding, layout CSS). These supplemental files are project-owned.
-
-### Search
-
-Offline full-text search uses [`@antora/lunr-extension`](https://gitlab.com/antora/antora-lunr-extension) (static `search-index.js`; no server-side search service).
-
-### Docs-only rebuild
+To rebuild only the documentation, use Maven’s dependency setup and then the direct documentation script:
 
 ```bash
-yarn run docs
+mvn validate
+corepack yarn run docs
 ```
+
+For the normal complete build, use:
+
+```bash
+mvn clean package
+```
+
+Javadoc is not generated or hosted by this website. The documentation includes an article linking to the external `javadoc.io` service.
 
 ## Common maintenance
 
 ### News
 
-Add `site/content/news/<slug>.md`:
+Add `site/content/news/<slug>.md` with TOML front matter:
 
-```toml
+```markdown
 +++
 title = "Cayenne X.X Released"
 date = 2026-01-01
@@ -137,33 +167,34 @@ date = 2026-01-01
 Content goes here.
 ```
 
-Rendered under `/YYYY/MM/<slug>/` and listed on `/news/`.
+Pages are rendered under `/YYYY/MM/<slug>/` and listed on `/news/`.
 
-### New Cayenne release on the marketing site
+### New Cayenne release
 
-1. Update `site/data/cayenne.toml` (and related download data if needed).
-2. Add a news article.
-3. Adjust `docs/antora-playbook.yml` when a new docs branch/version should be published.
+1. Update `site/data/cayenne.toml` and related download data if needed.
+2. Add a release news article.
+3. Adjust `docs/antora-playbook.yml` when a new documentation branch or version should be published.
 4. Update redirects in `site/static/.htaccess` if applicable.
-5. Rebuild (`yarn run build` or `mvn clean package`).
+5. Rebuild with `mvn clean package` and inspect `target/site/`.
 
-### Edit documentation content
+### Documentation content
 
-Change AsciiDoc in the cayenne repo on the relevant branch, then rebuild docs from this project.
+Change AsciiDoc in the Cayenne repository on the relevant branch, then run `mvn clean package` from this repository.
 
 ### Contributors
 
-Edit `site/data/contributors.toml` and rebuild the Hugo site.
+Edit `site/data/contributors.toml`, then run `mvn clean package` or use `mvn -Pdev-server` to verify the result.
 
-### Marketing site styling
+### Marketing styling
 
-Edit `site/assets/sass/` (e.g. `style.scss`, `variables.scss`) and use `yarn run site:watch`.
+Edit `site/assets/sass/`, then run `mvn -Pdev-server` for live reload.
 
-### Documentation chrome styling
+### Documentation UI styling
 
-Edit `docs/supplemental-ui/` (partials and `css/cayenne-supplemental.css`), then `yarn run docs`.
+Edit `docs/supplemental-ui/`, then run `mvn clean package` or rebuild the documentation with the direct Yarn command.
 
-## License notes
+## Licensing
 
-- Website content and project-owned code in this repository: Apache License 2.0 (see `LICENSE`).
-- Antora Default UI (and modifications to its Covered Software, if any): Mozilla Public License 2.0. Supplemental UI files authored here should keep clear separation; label third-party UI in notices when distributing the site.
+* Website content and project-owned code: Apache License 2.0 (see `LICENSE`).
+* Antora Default UI: Mozilla Public License 2.0. Supplemental UI files authored in this repository remain project-owned Apache-licensed files.
+* Third-party frontend components and their required attributions are listed in `NOTICE`.
