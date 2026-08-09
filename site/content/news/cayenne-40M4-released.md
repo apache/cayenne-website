@@ -87,7 +87,7 @@ These fluent queries are new in M4:
 
 ### Reverse Engineering Improvements
 
-There are a lot of improvements and bug fixes covering reverse engineering functionality (aka "DB-first flow"). There's still more work to do to make it perfect, but the API is starting to stabilize and the tools have already become very usable (as in actually used in production on many projects). Follow this [link](/docs/4.0/cayenne-guide/cayenne-guide-part4.html) to learn what DB-First flow is all about and how to use it.
+There are a lot of improvements and bug fixes covering reverse engineering functionality (aka "DB-first flow"). There's still more work to do to make it perfect, but the API is starting to stabilize and the tools have already become very usable (as in actually used in production on many projects). Follow this [guide](/docs/cayenne/4.0/guide/revEngineering.html) to learn what DB-First flow is all about and how to use it.
 
 <div class="pb-3"><!-- gap 3rem --></div>
 

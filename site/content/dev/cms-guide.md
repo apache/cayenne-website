@@ -91,6 +91,16 @@ npx --yes serve target/site
 # or: python -m http.server -d target/site 8080
 ```
 
+## Link validation
+
+Run Maven’s verification phase to build the complete site and check links in the generated output with Linkinator:
+
+```bash
+mvn clean verify
+```
+
+The check scans `target/site/` after Hugo and Antora finish. Its settings are stored in `test/linkinator.config.json`; external URLs and known local-development examples are skipped, while local pages, assets, clean URLs, and fragments are checked. Results are written to `target/linkinator-report.csv`.
+
 ## Publishing
 
 The Maven `publish` profile builds the production site and publishes `target/site/` to the configured SCM branch using Maven SCM Publish Plugin:

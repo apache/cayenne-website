@@ -47,7 +47,7 @@ For more details about incompatible changes and deprecations, please consult the
 
 #### AI-Assisted Development
 
-Native support for AI-assisted development. This includes an MCP server bundled with the Modeler that allows your favorite agent to (A) open your project in the Modeler, (B) run DB Import, (C) run cgen. MCP works with any agent of course. Additionally, there is a plugin for Claude Code with a number of typical "skills". See the docs for details: https://cayenne.apache.org/docs/5.0/cayenne-guide/agentic-coding/  And we'd love feedback on this too.
+Native support for AI-assisted development. This includes an MCP server bundled with the Modeler that allows your favorite agent to (A) open your project in the Modeler, (B) run DB Import, (C) run cgen. MCP works with any agent of course. Additionally, there is a plugin for Claude Code with a number of typical "skills". See the [MCP documentation](https://cayenne.apache.org/docs/cayenne/5.0/guide/mcp.html) for details. And we'd love feedback on this too.
 
 #### Modeler Polished
 

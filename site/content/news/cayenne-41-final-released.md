@@ -34,7 +34,7 @@ Here is a recap of changes made since 4.0:
 - New reverse engineering UI in Cayenne Modeler, that is much more intuitive and customizable, 
 more over configuration is now saved so you can evolve it with your model and perform reverse engineering in one click.
 <p style="text-align: center;">
-    <img class="img-fluid" src="/docs/4.1/upgrade-guide/images/modeler-dbimport.png" alt="New reverse engineering UI"/>
+    <img class="img-fluid" src="/docs/cayenne/4.1/upgrade-guide/_images/modeler-dbimport.png" alt="New reverse engineering UI"/>
 </p>
 
 - User controlled transaction propagation logic and isolation level.

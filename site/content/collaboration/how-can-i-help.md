@@ -30,7 +30,7 @@ this can be done in many different ways, by:
 implementing them
 
 If you want to contribute to Cayenne, first you should subscribe
-to the [developer mailing list](mailing-lists.html) to see what issues are discussed and to
+to the [developer mailing list](/collaboration/mailing-lists/) to see what issues are discussed and to
 communicate with the project team.
 
 Next, clone the git source and make your changes. You can submit a patch in standard diff format and attach it to our Jira task tracker, or more easily you can use [github](https://github.com/apache/cayenne) to fork the project and submit a [Pull Request](https://help.github.com/articles/using-pull-requests/).

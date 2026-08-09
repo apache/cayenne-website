@@ -8,6 +8,7 @@
     "build": "yarn run site && yarn run docs",
     "docs": "antora --log-failure-level error --log-level info --log-format pretty docs/antora-playbook.yml",
     "site": "hugo --source site --destination ../target/site",
+    "site:check": "linkinator target/site --config test/linkinator.config.json > target/linkinator-report.csv",
     "site:watch": "hugo server --source site --destination ../target/site --disableFastRender"
   },
   "hugo-bin": {
@@ -24,6 +25,7 @@
     "@antora/collector-extension": "^1.0.3",
     "@antora/lunr-extension": "^1.0.0-alpha.13",
     "antora": "^3.1.15",
-    "hugo-bin": "^0.149.2"
+    "hugo-bin": "^0.149.2",
+    "linkinator": "8.0.3"
   }
 }

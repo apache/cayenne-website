@@ -94,8 +94,8 @@ be used by the people voting on Cayenne. It may look like this:
   ```
     
 * Build binary assemblies. _Release manager may skip running unit tests from here, as shown
-  below, although release evaluators should use the src assembly for [unit testing](running-unit-tests.html)
-  and other kinds of testing._ For further details on a general Cayenne build process check [this page](building-cayenne.html).
+  below, although release evaluators should use the src assembly for [unit testing](/dev/running-unit-tests/)
+  and other kinds of testing._ For further details on a general Cayenne build process check [this page](/dev/building-cayenne/).
 
     * Take *"assembly/target/cayenne-XXX-src.tar.gz"*, unpack it somewhere, and
       perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT). 

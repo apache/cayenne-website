@@ -78,6 +78,16 @@ npx --yes serve target/site
 # or: python -m http.server -d target/site 8080
 ```
 
+## Link validation
+
+Run the Maven verification phase to build the complete site and check links in the generated output with Linkinator:
+
+```bash
+mvn clean verify
+```
+
+The link check scans `target/site/` after the Hugo and Antora build. Its settings are stored in `test/linkinator.config.json`; external URLs and known local-development examples are skipped, while local pages, assets, clean URLs, and fragments are checked. Results are written to `target/linkinator-report.csv`.
+
 ## SCM publishing
 
 The `publish` profile builds the production site and publishes `target/site/` to the configured SCM branch using Maven SCM Publish Plugin:
@@ -105,6 +115,7 @@ Available scripts:
 | `yarn run build` | Build Hugo and Antora output |
 | `yarn run site` | Build the Hugo site only |
 | `yarn run docs` | Build Antora documentation only |
+| `yarn run site:check` | Check site links with Linkinator |
 | `yarn run site:watch` | Run the Hugo development server |
 
 ## Directory layout
@@ -124,7 +135,8 @@ cayenne-website/
     ├── data/                 # TOML site data
     ├── assets/sass/          # Hugo Pipes Sass sources
     ├── layouts/              # Hugo templates
-    └── static/               # Copied assets and Apache redirects
+    ├── static/               # Copied assets and Apache redirects
+    └── test/                 # Linkinator configuration
 ```
 
 Maven-managed and generated files are not committed. This includes `node/`, `target/`, `node_modules/`, `.yarn/`, and `site/resources/_gen/`.

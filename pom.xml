@@ -110,6 +110,16 @@
                             </environmentVariables>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>link-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>corepack</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>yarn run site:check</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>

@@ -22,7 +22,7 @@ weight = 70
 
 Cayenne provides a comprehensive suite of unit and integration tests. To
 execute tests you must first get Cayenne from Git and satisfy the [Maven build
-prerequisites](/dev/building-cayenne.html)
+prerequisites](/dev/building-cayenne/)
     
 ## Running Against a Test Database
 

@@ -26,7 +26,7 @@ procedure of building a Cayenne release.
 <a name="ReleaseGuide2.0-Prerequisites"></a>
 ## Prerequisites
 
-Refer to the Prerequisites section of the [main release guide](/dev/release-guide.html)
+Refer to the Prerequisites section of the [main release guide](/dev/release-guide/)
 
 <a name="ReleaseGuide2.0-PreparingSources"></a>
 ## Preparing Sources
@@ -89,7 +89,7 @@ work ("-u" option can be omitted if you have only one GPG key):
 <a name="ReleaseGuide2.0-Voting"></a>
 ## Voting
 
-Refer to the Voting section of the [main release guide](/dev/release-guide.html)
+Refer to the Voting section of the [main release guide](/dev/release-guide/)
 
 <a name="ReleaseGuide2.0-PublishingtheRelease"></a>
 ## Publishing the Release

@@ -23,7 +23,7 @@ weight = 50
 ## Prerequisites
 
 * Make sure [Maven](https://maven.apache.org/) is installed.
-* [Get the source code](/dev/code-repository.html).
+* [Get the source code](/dev/code-repository/).
 
 <div class="gap" style="margin-bottom: 3rem;"></div>
 

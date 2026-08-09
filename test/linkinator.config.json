@@ -1,0 +1,14 @@
+{
+  "recurse": true,
+  "cleanUrls": true,
+  "checkFragments": true,
+  "timeout": 1000,
+  "retryErrors": true,
+  "skip": [
+    "^(?!https?://(localhost|127\\.0\\.0\\.1))",
+    "localhost:8080",
+    "_images",
+    "news.*page"
+  ],
+  "format": "csv"
+}

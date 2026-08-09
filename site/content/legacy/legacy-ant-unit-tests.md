@@ -19,7 +19,7 @@ title = "Legacy Ant Unit Tests"
 
 
 Cayenne provides a comprehensive suite of unit tests. To execute unit tests
-you must first [get Cayenne from SVN](/dev/code-repository.html)
+you must first [get Cayenne from SVN](/dev/code-repository/)
 , install JDK 1.5 and obtain the latest Ant.
 
 <a name="LegacyAntUnitTests-SummaryofBuildProperties"></a>
