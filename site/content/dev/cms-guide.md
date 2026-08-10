@@ -179,11 +179,18 @@ cayenne-website/
 ├── .yarnrc.yml               # Yarn configuration
 ├── pom.xml                   # Maven build, development, and publish profiles
 ├── docs/
-│   ├── antora-playbook.yml   # Antora sources, UI bundle, and output
+│   ├── antora-playbook.yml   # Antora content sources, UI bundle, and output
+│   ├── cayenne/legacy/       # Four standalone legacy Antora components
+│   │   ├── 1.2/              # Component metadata, page, nav, attachment
+│   │   ├── 2.0/
+│   │   ├── 3.0/
+│   │   └── 3.1/
 │   └── supplemental-ui/      # Cayenne-specific Antora UI files
+├── test/
+│   └── linkinator.config.json # Generated-site link-check configuration
 └── site/
     ├── hugo.toml             # Hugo configuration and mounts
-    ├── content/              # Markdown pages and news
+    ├── content/              # Marketing Markdown pages and news
     ├── data/                 # TOML site data
     ├── assets/sass/          # Hugo Pipes Sass sources
     ├── layouts/              # Hugo templates
