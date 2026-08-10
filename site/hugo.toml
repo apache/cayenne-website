@@ -18,71 +18,74 @@ defaultContentLanguage = "en"
 
 canonifyURLs = false
 uglyURLs = false
-disableKinds = ["RSS", "taxonomy", "term"]
+disableKinds = ["rss", "taxonomy", "term"]
 disableHugoGeneratorInject = true
 disablePathToLower = true
 enableRobotsTXT = true
 
 [module]
-  [[module.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.mounts]]
-    source = "static"
-    target = "static"
-  [[module.mounts]]
-    source = "../node_modules/bootstrap/scss"
-    target = "assets/sass/bootstrap"
-  [[module.mounts]]
-    source = "../node_modules/font-awesome/css"
-    target = "static/vendor/font-awesome/css"
-  [[module.mounts]]
-    source = "../node_modules/font-awesome/fonts"
-    target = "static/vendor/font-awesome/fonts"
-  [[module.mounts]]
-    source = "../node_modules/bootstrap/dist/js"
-    target = "static/vendor/js/bootstrap"
-  [[module.mounts]]
-    source = "../node_modules/@fontsource/montserrat/files"
-    target = "static/vendor/fonts/montserrat"
+[[module.mounts]]
+source = "assets"
+target = "assets"
+
+[[module.mounts]]
+source = "static"
+target = "static"
+
+[[module.mounts]]
+source = "../node_modules/bootstrap/scss"
+target = "assets/sass/bootstrap"
+
+[[module.mounts]]
+source = "../node_modules/font-awesome/css"
+target = "static/vendor/font-awesome/css"
+
+[[module.mounts]]
+source = "../node_modules/font-awesome/fonts"
+target = "static/vendor/font-awesome/fonts"
+
+[[module.mounts]]
+source = "../node_modules/bootstrap/dist/js"
+target = "static/vendor/js/bootstrap"
+
+[[module.mounts]]
+source = "../node_modules/@fontsource/montserrat/files"
+target = "static/vendor/fonts/montserrat"
 
 [permalinks]
-  news = "/:year/:month/:contentbasename/"
+news = "/:year/:month/:contentbasename/"
 
 [params]
-  description = "Apache Cayenne™ is an open source Java object-to-relational mapping framework."
-  sitemapExcludes = [
-    "/about/",
-    "/collaboration/",
-    "/docs/"
-  ]
+description = "Apache Cayenne™ is an open source Java object-to-relational mapping framework."
+sitemapExcludes = ["/about/", "/collaboration/", "/docs/"]
 
 [outputs]
-  home = ["HTML", "ROBOTS"]
-  section = ["HTML"]
-  page = ["HTML"]
+home = ["HTML", "ROBOTS"]
+section = ["HTML"]
+page = ["HTML"]
 
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-  [markup.highlight]
-    style = "xcode"
-    noClasses = true
-    codeFences = true
-    wrapperClass = "highlight"
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+style = "xcode"
+noClasses = true
+codeFences = true
+wrapperClass = "highlight"
 
 [[menu.main]]
-  name = "Download"
-  weight = 10
-  url = "/download/"
+name = "Download"
+weight = 10
+url = "/download/"
 
 [[menu.main]]
-  name = "Documentation"
-  weight = 20
-  url = "/docs/"
+name = "Documentation"
+weight = 20
+url = "/docs/"
 
 [[menu.main]]
-  name = "Support"
-  weight = 30
-  url = "/about/support/"
+name = "Support"
+weight = 30
+url = "/about/support/"
