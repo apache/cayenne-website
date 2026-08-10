@@ -52,8 +52,9 @@ enableRobotsTXT = true
 [params]
   description = "Apache Cayenne™ is an open source Java object-to-relational mapping framework."
   sitemapExcludes = [
-    "/categories/", "/tags/", "/about/", "/legacy/", "/collaboration/",
-    "/docs/", "/docs/3.1/", "/docs/4.0/", "/docs/4.1/", "/docs/4.2/"
+    "/about/",
+    "/collaboration/",
+    "/docs/"
   ]
 
 [outputs]

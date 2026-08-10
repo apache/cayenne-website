@@ -27,11 +27,19 @@ content:
   sources:
     - url: c:/Users/mdzianishchyts/IdeaProjects/cayenne
       branches:
-        - ALPHA-5.0-antora
-        - STABLE-4.2-antora
-        - STABLE-4.1-antora
         - STABLE-4.0-antora
+        - STABLE-4.1-antora
+        - STABLE-4.2-antora
+        - ALPHA-5.0-antora
       start_paths: docs/*
+    - url: ./..
+      branches:
+        - site-prototype
+      start_paths:
+        - docs/cayenne/legacy/1.2
+        - docs/cayenne/legacy/2.0
+        - docs/cayenne/legacy/3.0
+        - docs/cayenne/legacy/3.1
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/0e38223adfd81eb74d4b1779e158f8ad05ff8923/raw/build/ui-bundle.zip?job=bundle-stable
