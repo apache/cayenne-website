@@ -421,11 +421,13 @@
       </ul>
      </div></li>
     <li>
-     <p><code>cayenne.query_execution_time_logging_threshold</code> defines the minimum number of milliseconds a query must run before it is logged. A value less than or equal to zero disables logging.</p>
+     <p><code>cayenne.query_execution_time_logging_threshold</code> <em>(deprecated, ignored since 5.0)</em> used to define the minimum number of milliseconds a query must run before it is logged. The slow-query threshold warning was removed with the compact SQL logger redesign (CAY-2912).</p></li>
+    <li>
+     <p><code>cayenne.jdbc.log.batch.threshold</code> defines the maximum number of batch rows whose bindings are logged in full before the compact SQL logger truncates them to "first row .. elided count .. last row".</p>
      <div class="ulist">
       <ul>
        <li>
-        <p>Default value: 0</p></li>
+        <p>Default value: 3</p></li>
       </ul>
      </div></li>
     <li>
@@ -580,6 +582,11 @@
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2026-08-25 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Aug 25, 2026</time>
+                        <a href="/2026/08/cayenne-50m3-released/">Cayenne 5.0 Milestone 3 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
                         <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
                     </li>
@@ -587,11 +594,6 @@
                     <li>
                         <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
                         <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2025-03-24 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 24, 2025</time>
-                        <a href="/2025/03/cayenne-422-released/">Cayenne 4.2.2 Released</a>
                     </li>
                     
                 </ul>

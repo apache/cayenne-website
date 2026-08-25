@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
+        <script src="https://www.apachecon.com/event-images/snippet.js"></script>
+        <title>Cayenne 5.0 Milestone 3 Released &middot; Apache Cayenne</title>
+    </head>
+    <body>
+
+
+
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.2/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+    <main class="container  py-5">
+        
+                <section>
+                    <article>
+                        <h1 class="text-center">Cayenne 5.0 Milestone 3 Released<br />
+                            <small class="font-size-1rem text-muted">Aug 25, 2026</small>
+                        </h1>
+                        <p>Apache Cayenne development team is glad to announce the third milestone of a new major version of Cayenne.
+The latest version can be downloaded from <a href="/download.html">here</a>.</p>
+<p><strong>NOTE:</strong> Please see <a href="/2024/09/cayenne-50m1-released/">Milestone 1</a> and <a href="/2026/06/cayenne-50m2-released/">Milestone 2</a> release notes for more information on Cayenne 5.</p>
+<h3 id="full-list-of-changes-in-this-release">Full List of Changes in this Release</h3>
+<h4 id="changesnew-features">Changes/New Features</h4>
+<ul>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2861">CAY-2861</a> Derby version upgrade</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2912">CAY-2912</a> Compact SQL logger</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2954">CAY-2954</a> Don&rsquo;t wrap selecting queries in transactions</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2956">CAY-2956</a> Get rid of a dedicated adapter for Oracle 8</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2957">CAY-2957</a> Get rid of adapter for legacy HSQLDB &lt;= 1.8</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2962">CAY-2962</a> Allow unconstrained VARCHAR</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2963">CAY-2963</a> Replace TypesHandler / types.xml with hardcoded map</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2969">CAY-2969</a> Extender API for &ldquo;soft&rdquo; delete</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2970">CAY-2970</a> Tighten deferred value resolution contract on commit</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2971">CAY-2971</a> Remove extra spaces within SQL parenthesis</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2972">CAY-2972</a> Fewer parentheses in generated SQL</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2974">CAY-2974</a> CayenneSqlException with a reference to translated query</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2975">CAY-2975</a> Mnemonic table aliases in generated SQL</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2978">CAY-2978</a> AI skill: &ldquo;cayenne-model-naming&rdquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2979">CAY-2979</a> AI skill: &ldquo;cayenne-full-db-sync&rdquo;</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2980">CAY-2980</a> Improve model name generation</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2981">CAY-2981</a> Remove DataNode from XML mapping</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2982">CAY-2982</a> Modeler: when upgrading projects allow upgraders to send outcome messages</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2983">CAY-2983</a> CayenneDataSource: Public-facing DataSource builder</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2984">CAY-2984</a> Remove &ldquo;DataChannel&rdquo; injectable dependency</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2985">CAY-2985</a> DataDomain init and structure cleanup</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2986">CAY-2986</a> Cgen to run unconditionally</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2987">CAY-2987</a> DataNode to own PkGenerator</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2989">CAY-2989</a> Upgrade MCP SDK to 2.0</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2992">CAY-2992</a> dbimport: support postgres drivers newer than 42.7.4</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2994">CAY-2994</a> cgen: improve path handling</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2995">CAY-2995</a> Migrate Modeler to FlatLaf library</li>
+</ul>
+<h4 id="bug-fixes">Bug Fixes</h4>
+<ul>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2892">CAY-2892</a> Modeler: Exception when deleting a callback</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2941">CAY-2941</a> Modeler won&rsquo;t start on Windows on Java 25</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2958">CAY-2958</a> Empty join is saved</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2959">CAY-2959</a> Modeler: DbRelationship dialog &ldquo;Cancel&rdquo; doesn&rsquo;t cancel</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2960">CAY-2960</a> Undoing renamed relationship change throws</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2961">CAY-2961</a> PostgreSQL &ldquo;text&rdquo; column is reverse-engineered as CLOB</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2964">CAY-2964</a> ClassCastException for non-generated meaningful PKs</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2965">CAY-2965</a> MCP Cgen should not fail on an absent &ldquo;<cgen>&rdquo; tag</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2966">CAY-2966</a> &ldquo;comment&rdquo; field is lost when upgrading from v10 to v12</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2967">CAY-2967</a> SQLTemplate/SQLSelect broken pagination</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2968">CAY-2968</a> Vertical Inheritance: INSERT instead of UPDATE after updating flattened attribute</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2973">CAY-2973</a> Exception trying to copy/paste a callback</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2976">CAY-2976</a> Exception creating a relationship for an Incomplete ObjEntity</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2977">CAY-2977</a> DbImport confused by multi-key relationships</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2988">CAY-2988</a> Iterated queries commit transactions they don&rsquo;t own</li>
+<li>
+<a href="https://issues.apache.org/jira/browse/CAY-2990">CAY-2990</a> Gradle plugin tests are failing on Windows</li>
+</ul>
+
+                    </article>
+                </section>
+            
+        <div class="pb-3"></div>
+        <div class="row">
+            <div class="col-12 col-md-6  text-center text-md-left">
+                
+            </div>
+            <div class="col-12 col-md-6  text-center text-md-right">
+                
+                <a class="btn btn-link" href='/2026/06/cayenne-50m2-released/'>
+                    <span class="d-block d-md-none  text-muted">Next: </span>
+                    Cayenne 5.0 Milestone 2 Released
+                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                </a>
+                
+            </div>
+        </div>
+    </main>
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=5c836e39-be6b-4a21-a946-a97b5b69f172" />
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/5.0/cayenne-guide/">Cayenne Guide (5.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/legacy/legacy-docs/">Legacy Documentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2026-08-25 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Aug 25, 2026</time>
+                        <a href="/2026/08/cayenne-50m3-released/">Cayenne 5.0 Milestone 3 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
+                        <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
+                        <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2026 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+        <p class="copy xsmall text-center mx-auto">
+            <a href="https://www.apache.org/">Foundation</a> |
+            <a href="https://www.apache.org/events/current-event.html">Events</a> |
+            <a href="https://www.apache.org/licenses/">License</a> |
+            <a href="https://www.apache.org/security/">Security</a> |
+            <a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a> |
+            <a href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+        </p>
+    </div>
+</footer>
+
+    </body>
+</html>

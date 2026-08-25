@@ -382,7 +382,7 @@ public class Order extends _Order { ... }</code></pre>
    <h5 id="3-register-the-listener"><a class="anchor" href="#3-register-the-listener"></a>2.8.1.3. 3. Register the listener</h5>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.builder()
+     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
         .addConfig("cayenne-project.xml")
         .addModule(binder -&gt; CoreModule.extend(binder)
                 .addCommitLogListener(AuditListener.class))
@@ -592,6 +592,11 @@ public class Order extends _Order { ... }</code></pre>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2026-08-25 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Aug 25, 2026</time>
+                        <a href="/2026/08/cayenne-50m3-released/">Cayenne 5.0 Milestone 3 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
                         <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
                     </li>
@@ -599,11 +604,6 @@ public class Order extends _Order { ... }</code></pre>
                     <li>
                         <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
                         <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2025-03-24 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Mar 24, 2025</time>
-                        <a href="/2025/03/cayenne-422-released/">Cayenne 4.2.2 Released</a>
                     </li>
                     
                 </ul>

@@ -10,12 +10,13 @@ org.apache.cayenne.access.sqlbuilder
 org.apache.cayenne.access.sqlbuilder.sqltree
 org.apache.cayenne.access.translator
 org.apache.cayenne.access.translator.batch
-org.apache.cayenne.access.translator.batch.legacy
 org.apache.cayenne.access.translator.ejbql
 org.apache.cayenne.access.translator.procedure
 org.apache.cayenne.access.translator.select
+org.apache.cayenne.access.translator.sqltemplate
+org.apache.cayenne.access.translator.sqltemplate.directive
+org.apache.cayenne.access.translator.sqltemplate.parser
 org.apache.cayenne.access.types
-org.apache.cayenne.access.util
 org.apache.cayenne.annotation
 org.apache.cayenne.ashwood
 org.apache.cayenne.ashwood.graph
@@ -66,9 +67,6 @@ org.apache.cayenne.reflect.generic
 org.apache.cayenne.reflect.valueholder
 org.apache.cayenne.resource
 org.apache.cayenne.runtime
-org.apache.cayenne.template
-org.apache.cayenne.template.directive
-org.apache.cayenne.template.parser
 org.apache.cayenne.tx
 org.apache.cayenne.util
 org.apache.cayenne.util.commons
