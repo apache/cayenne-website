@@ -215,7 +215,7 @@ weight: 330
      <td class="tableblock halign-left valign-middle">
       <p class="tableblock">boolean</p></td>
      <td class="tableblock halign-left valign-middle">
-      <p class="tableblock">If set to "true", will force run from maven/gradle.</p></td>
+      <p class="tableblock"><em>Deprecated and ignored since 5.0.</em> cgen always regenerates classes, so there is nothing left to force.</p></td>
     </tr>
     <tr>
      <td class="tableblock halign-left valign-middle">
@@ -235,7 +235,7 @@ weight: 330
     <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;5.0-M2&lt;/version&gt;
+    &lt;version&gt;5.0-M3&lt;/version&gt;
 
     &lt;configuration&gt;
         &lt;map&gt;${project.basedir}/src/main/resources/my.map.xml&lt;/map&gt;
@@ -568,7 +568,7 @@ weight: 330
     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;5.0-M2&lt;/version&gt;
+    &lt;version&gt;5.0-M3&lt;/version&gt;
 
     &lt;executions&gt;
         &lt;execution&gt;
@@ -777,7 +777,7 @@ weight: 330
     <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;plugin&gt;
     &lt;groupId&gt;org.apache.cayenne.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-maven-plugin&lt;/artifactId&gt;
-    &lt;version&gt;5.0-M2&lt;/version&gt;
+    &lt;version&gt;5.0-M3&lt;/version&gt;
     &lt;executions&gt;
         &lt;execution&gt;
             &lt;configuration&gt;

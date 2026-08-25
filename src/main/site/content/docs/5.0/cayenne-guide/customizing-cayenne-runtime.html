@@ -220,7 +220,7 @@ binder.bind(Key.get(Service2.class, "i2")).to(Service2Impl.class);</code></pre>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-Java Java" data-lang="Java">Module extensions = new MyExtensionsModule();
-CayenneRuntime runtime = CayenneRuntime.builder()
+CayenneRuntime runtime = CayenneRuntime.of()
         .addConfig("com/example/cayenne-mydomain.xml")
         .addModule(extensions)
         .build();</code></pre>
@@ -278,15 +278,6 @@ CayenneRuntime runtime = CayenneRuntime.builder()
    <h5 id="alternative-service-implementations"><a class="anchor" href="#alternative-service-implementations"></a>2.10.2.3. Alternative Service Implementations</h5>
    <div class="paragraph">
     <p>As mentioned above, custom modules are loaded by CayenneRuntime after the built-in modules. So it is easy to redefine a built-in service in Cayenne by rebinding desired implementations or providers. To do that, first we need to know what those services to redefine are. While we describe some of them in the following sections, the best way to get a full list is to check the source code of the Cayenne version you are using and namely look in <code>org.apache.cayenne.configuration.runtime.CoreModule</code> - the main built-in module in Cayenne.</p>
-   </div>
-   <div class="paragraph">
-    <p>Now an example of overriding <code>JdbcEventLogger</code> service. The default implementation of this service is provided by <code>Slf4jJdbcEventLogger</code>. But if we want to use <code>FormattedSlf4jJdbcEventLogger</code> (a logger with basic SQL formatting), we can define it like this:</p>
-   </div>
-   <div class="listingblock">
-    <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">binder.bind(JdbcEventLogger.class)
-    .to(FormattedSlf4jJdbcEventLogger.class);</code></pre>
-    </div>
    </div>
   </div>
  </div>
@@ -356,7 +347,7 @@ CayenneRuntime runtime = CayenneRuntime.builder()
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">CayenneRuntime runtime = CayenneRuntime.builder()
+     <pre class="highlight"><code class="language-Java Java" data-lang="Java">CayenneRuntime runtime = CayenneRuntime.of()
     .addConfig("cayenne-project.xml")
     .addModule(binder -&gt;
         CoreModule.extend(binder)
@@ -451,7 +442,7 @@ public class DoubleArrayType implements ExtendedType {
     <div class="listingblock">
      <div class="content">
       <pre class="highlight"><code class="language-Java Java" data-lang="Java">// add DoubleArrayType to list of user types
-CayenneRuntime runtime = CayenneRuntime.builder()
+CayenneRuntime runtime = CayenneRuntime.of()
                 .addConfig("cayenne-project.xml")
                 .addModule(binder -&gt;
                     CoreModule.contributeUserTypes(binder)
@@ -471,9 +462,21 @@ CayenneRuntime runtime = CayenneRuntime.builder()
  <div class="sect3">
   <h4 id="noteworthy-built-in-services"><a class="anchor" href="#noteworthy-built-in-services"></a>2.10.4. Noteworthy Built-in Services</h4>
   <div class="sect4">
-   <h5 id="jdbceventlogger"><a class="anchor" href="#jdbceventlogger"></a>2.10.4.1. JdbcEventLogger</h5>
+   <h5 id="sqllogger"><a class="anchor" href="#sqllogger"></a>2.10.4.1. SqlLogger</h5>
    <div class="paragraph">
-    <p><code>org.apache.cayenne.log.JdbcEventLogger</code> is the service that defines logging API for Cayenne internals. It provides facilities for logging queries, commits, transactions, etc. The default implementation is <code>org.apache.cayenne.log.Slf4jJdbcEventLogger</code> that performs logging via slf4j-api library. Cayenne library includes another potentially useful logger - <code>org.apache.cayenne.log.FormattedSlf4jJdbcEventLogger</code> that produces formatted multiline SQL output that can be easier to read.</p>
+    <p><code>org.apache.cayenne.log.SqlLogger</code> is the service that defines the SQL logging API for Cayenne internals. It logs each executed statement as a single compact line combining the SQL, its bindings and the result count, e.g.:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre>SELECT t0.id FROM my_table t0 WHERE t0.user_id = ? [bind:[user_id:15]] [selected:1]
+INSERT INTO table1(id, name) VALUES(?, ?) [bind:[id:3,name:'n3']..3..[id:2,name:'n2']] [updated:5]</pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>A statement that produces more than one result (such as a stored procedure) reports the extra results on <code>also …​</code> continuation lines. The default implementation is <code>org.apache.cayenne.log.Slf4jSqlLogger</code>, which logs via the slf4j-api library under the fixed logger name <code>cayenne-sql</code>. Statement lines are logged at <code>INFO</code>; transaction boundaries (<code>tx started</code>, <code>tx committed</code>, <code>tx rolled back</code>) at <code>DEBUG</code>. To silence SQL logging entirely, set the <code>cayenne-sql</code> logger level above <code>INFO</code>.</p>
+   </div>
+   <div class="paragraph">
+    <p>Batch bindings are truncated to the first row, an elided-row count, and the last row once the batch exceeds <code>cayenne.jdbc.log.batch.threshold</code> rows (default 3).</p>
    </div>
   </div>
   <div class="sect4">

@@ -158,11 +158,13 @@ weight: 360
       </ul>
      </div></li>
     <li>
-     <p><code>cayenne.query_execution_time_logging_threshold</code> defines the minimum number of milliseconds a query must run before it is logged. A value less than or equal to zero disables logging.</p>
+     <p><code>cayenne.query_execution_time_logging_threshold</code> <em>(deprecated, ignored since 5.0)</em> used to define the minimum number of milliseconds a query must run before it is logged. The slow-query threshold warning was removed with the compact SQL logger redesign (CAY-2912).</p></li>
+    <li>
+     <p><code>cayenne.jdbc.log.batch.threshold</code> defines the maximum number of batch rows whose bindings are logged in full before the compact SQL logger truncates them to "first row .. elided count .. last row".</p>
      <div class="ulist">
       <ul>
        <li>
-        <p>Default value: 0</p></li>
+        <p>Default value: 3</p></li>
       </ul>
      </div></li>
     <li>

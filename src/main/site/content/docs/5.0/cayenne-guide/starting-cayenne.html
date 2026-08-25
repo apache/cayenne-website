@@ -32,7 +32,7 @@ weight: 70
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.builder()
+    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
                 .addConfig("com/example/cayenne-project.xml")
                 .build();</code></pre>
    </div>
@@ -48,7 +48,7 @@ weight: 70
     <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = binder -&gt;
       CoreModule.extend(binder).setProperty(Constants.EXTERNAL_TX_PROPERTY, "true");
 
-CayenneRuntime runtime = CayenneRuntime.builder()
+CayenneRuntime runtime = CayenneRuntime.of()
       .addConfig("com/example/cayenne-project.xml")
       .addModule(extensions)
       .build();</code></pre>
@@ -73,7 +73,7 @@ CayenneRuntime runtime = CayenneRuntime.builder()
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.builder()
+    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
         .addConfig("com/example/cayenne-project.xml")
         .addConfig("org/foo/cayenne-library1.xml")
         .addConfig("org/foo/cayenne-library2.xml")

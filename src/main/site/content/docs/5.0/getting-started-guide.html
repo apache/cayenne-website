@@ -230,7 +230,7 @@ cayenneVersion: "5.0"
       <li>
        <p>Click "Done" to confirm the changes and close the dialog.</p></li>
       <li>
-       <p>Two complimentary relationships have been created - from ARTIST to PAINTING and back.</p></li>
+       <p>Two complementary relationships have been created - from ARTIST to PAINTING and back.</p></li>
       <li>
        <p>Repeat the steps above to create a many-to-one relationship from PAINTING to GALLERY, calling the relationships pair "gallery" and "paintings".</p></li>
      </ul>
@@ -306,7 +306,7 @@ cayenneVersion: "5.0"
     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
 
     &lt;properties&gt;
-        &lt;cayenne.version&gt;5.0-M2&lt;/cayenne.version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        &lt;cayenne.version&gt;5.0-M3&lt;/cayenne.version&gt; <i class="conum" data-value="1"></i><b>(1)</b>
         &lt;maven.compiler.source&gt;21&lt;/maven.compiler.source&gt; <i class="conum" data-value="2"></i><b>(2)</b>
         &lt;maven.compiler.target&gt;21&lt;/maven.compiler.target&gt;
     &lt;/properties&gt;
@@ -416,7 +416,7 @@ import org.apache.cayenne.runtime.CayenneRuntime;
 public class Main {
 
     public static void main(String[] args) {
-        CayenneRuntime cayenneRuntime = CayenneRuntime.builder()
+        CayenneRuntime cayenneRuntime = CayenneRuntime.of()
                         .addConfig("cayenne-project.xml")
                         .build();
         ObjectContext context = cayenneRuntime.newContext();
@@ -436,9 +436,14 @@ public class Main {
     <div class="listingblock">
      <div class="content">
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;dependency&gt;
-   &lt;groupId&gt;org.apache.derby&lt;/groupId&gt;
+    &lt;groupId&gt;org.apache.derby&lt;/groupId&gt;
     &lt;artifactId&gt;derby&lt;/artifactId&gt;
-    &lt;version&gt;10.14.2.0&lt;/version&gt;
+    &lt;version&gt;10.17.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.derby&lt;/groupId&gt;
+    &lt;artifactId&gt;derbytools&lt;/artifactId&gt;
+    &lt;version&gt;10.17.1.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
      </div>
     </div>

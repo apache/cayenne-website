@@ -119,7 +119,7 @@ public class Order extends _Order { ... }</code></pre>
    <h5 id="3-register-the-listener"><a class="anchor" href="#3-register-the-listener"></a>2.8.1.3. 3. Register the listener</h5>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.builder()
+     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
         .addConfig("cayenne-project.xml")
         .addModule(binder -&gt; CoreModule.extend(binder)
                 .addCommitLogListener(AuditListener.class))

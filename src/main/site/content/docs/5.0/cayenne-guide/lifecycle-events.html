@@ -224,7 +224,7 @@ public class Listener2 {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">CayenneRuntime runtime = CayenneRuntime.builder()
+    <pre class="highlight"><code class="language-Java Java" data-lang="Java">CayenneRuntime runtime = CayenneRuntime.of()
        // ..
        .addModule(binder -&gt;
             CoreModule.extend(bidner)
@@ -349,7 +349,7 @@ public class MyEntity2 extends _MyEntity2 {
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-Java Java" data-lang="Java">// this will also add filter as a listener
-CayenneRuntime runtime = CayenneRuntime.builder()
+CayenneRuntime runtime = CayenneRuntime.of()
         // ..
         .addModule(b -&gt;
                 CoreModule.extend(b)

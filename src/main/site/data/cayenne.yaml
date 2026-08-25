@@ -24,10 +24,10 @@
 #
 releases:
   - version: "5.0"
-    latestRevision: "5.0-M2"
+    latestRevision: "5.0-M3"
     type: "Alpha"
     description: "Alpha release"
-    date: "2026-06-24"
+    date: "2026-08-25"
     docs: true
     downloadable: true
     jdk: 21
