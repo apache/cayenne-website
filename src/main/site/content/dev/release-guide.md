@@ -188,6 +188,51 @@ add any new features
 
 {{% gap %}}
 
+
+## Troubleshooting
+
+* **Retrying a failed step.** `release:prepare` records the last completed phase in
+  `release.properties` and resumes from there, so after a transient failure just run it again
+  (`-Dresume=false` starts over). `release:perform` wipes and re-creates *target/checkout* on every
+  run, so it can be re-run as is. Check and drop the half-filled staging repo in Nexus before retrying
+  `release:perform`.
+
+* **Undoing an attempt.** `release:rollback` restores the backup POMs, commits the revert and
+  deletes the tag:
+  ```bash
+  mvn release:rollback
+  ```
+  It only works **between `prepare` and `perform`**: a successful `release:perform` finishes by
+  calling `release:clean`, which deletes the *release.properties* and *pom.xml.releaseBackup* that
+  rollback needs. A *failed* `perform` leaves them in place, so rollback still works there. Rollback
+  cleans up after itself too, so it is a one-shot.
+
+  It knows nothing about Nexus or SVN: drop the staging repo by hand. 
+  Tag removal only logs a warning if it fails, so verify it:
+  ```bash
+  git ls-remote --tags origin
+  ```
+  On `STABLE-4.2` (maven-release-plugin 2.5.3) the tag is never removed - tag removal was only
+  implemented in 3.0.0-M1 - so delete it manually there.
+
+* **Nothing left to roll back**, i.e. `perform` succeeded but the release must be redone: drop the
+  staging repo, then clean up the tag and the two `[maven-release-plugin]` commits by hand.
+  ```bash
+  git tag -d X.X && git push --delete origin X.X
+  ```
+
+* **Nexus won't close the staging repo.** "Missing Signature", or missing sources / javadoc, means
+  `-P release` was not active. Drop the repo and re-run `mvn release:perform -P release`.
+
+* **GPG can't sign.** Export `GPG_TTY=$(tty)` so the agent can prompt for the passphrase, and pass
+  `-Dgpg.keyname` if you have more than one key. The `gpg.passphrase` property is deprecated in
+  maven-gpg-plugin 3.2.x - use the agent or the `MAVEN_GPG_PASSPHRASE` environment variable.
+
+* **`release:prepare` refuses to start** on local modifications: commit the `RELEASE-NOTES.txt` and
+  `UPGRADE.md` edits first.
+
+{{% gap %}}
+
     
 ## Reference:
     
