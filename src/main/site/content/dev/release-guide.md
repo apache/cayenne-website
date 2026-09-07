@@ -20,26 +20,25 @@ More info can be found at [https://www.apache.org/dev/release-signing.html](http
 * Make sure "apache-releases" repository is configured in
 *~/.m2/settings.xml* and an appropriate password is setup. See [this page](https://www.apache.org/dev/publishing-maven-artifacts.html)
  for details.
-* As Cayenne has modules which require Java 1.8, you should use at least Java 1.8 to perform the release.
+* Cayenne 5.0 requires Java 21, so the release must be built with JDK 21 or newer.
 
 {{% gap %}}
 
 
 ## Preparing Sources
 
-* Edit `UPGRADE-NOTES.txt` if there is anything to add there.
+* Edit `UPGRADE.md` if there is anything to add there. (Notes for 4.2 and older live in a separate
+`UPGRADE-4.2-and-older.md` and are normally left untouched.)
 * Update `RELEASE-NOTES.txt` with actual release name and current date as a release date.
-* Check Sources Compliance with [RAT](https://creadur.apache.org/rat/). To run RAT,
-  download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne 
-  source. Then read the report and fix any issues.
+* Check Sources Compliance with [RAT](https://creadur.apache.org/rat/). The Apache RAT Maven plugin
+  is already configured in Cayenne:
   ```bash
   cd cayenne
-  ./rat.sh ~/Desktop/apache-rat-0.14-SNAPSHOT.jar  > report.txt
-  ```
-  As an alternative you could use Apache RAT maven plugin already configured in the Cayenne:
-  ```bash    
   mvn apache-rat:check
   ```
+  Rat writes the report to `target/rat.txt`. Read it and fix any issues. 
+  Prefer adding a missing license header over adding an exclusion;  
+  when an exclusion really is warranted it goes into `build-tools/rat-excludes`.
 
 {{% gap %}}
     
@@ -52,8 +51,11 @@ More info can be found at [https://www.apache.org/dev/release-signing.html](http
   cd cayenne
   mvn release:clean
   mvn release:prepare -DpreparationGoals="clean install" -DautoVersionSubmodules=true
-  mvn release:perform -P gpg [-Dgpg.keyname=B8AF90BF]
+  mvn release:perform -P release [-Dgpg.keyname=B8AF90BF]
   ```
+
+  The `release` profile (named `gpg` prior to 5.0-M4) does two things: it GPG-signs the artifacts,
+  and it attaches a `-sources.jar` and a `-javadoc.jar`.
 
 * Close the staging repo. Login to [https://repository.apache.org/](https://repository.apache.org/) with
 Apache ID/password, go to "Staging Repositories" page. Select a staging
@@ -81,13 +83,13 @@ be used by the people voting on Cayenne. It may look like this:
   below, although release evaluators should use the src assembly for [unit testing](running-unit-tests.html)
   and other kinds of testing._ For further details on a general Cayenne build process check [this page](building-cayenne.html).
 
-    * Take *"assembly/target/cayenne-XXX-src.tar.gz"*, unpack it somewhere, and
+    * Take *"cayenne-assembly/target/cayenne-XXX-src.tar.gz"*, unpack it somewhere, and
       perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT). 
       
     * Per Apache release guidelines there shouldn't be any binaries in a release, so you need manually copy
     Gradle wrapper. Just copy *cayenne-gradle-plugin/gradle* folder to the corresponding folder in unpacked sources.
         ```bash
-        cp -r ./cayenne-gradle-plugin/gradle ./assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
+        cp -r ./cayenne-gradle-plugin/gradle ./cayenne-assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
         ```
       
     * Build binary artifacts
@@ -110,6 +112,8 @@ be used by the people voting on Cayenne. It may look like this:
   work ("-u" option can be omitted if you have only one GPG key):
   
   ```bash
+  # repeat for every assembly: cayenne-X.X-src.tar.gz, cayenne-X.X.tar.gz (generic),
+  # cayenne-X.X-win.zip and cayenne-X.X-macosx.dmg
   gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
   gpg --print-md SHA512 cayenne-X.X.tar.gz > cayenne-X.X.tar.gz.sha512
   ```
