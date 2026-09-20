@@ -106,23 +106,24 @@ More info can be found at <a href="https://www.apache.org/dev/release-signing.ht
 <li>Make sure &ldquo;apache-releases&rdquo; repository is configured in
 <em>~/.m2/settings.xml</em> and an appropriate password is setup. See <a href="https://www.apache.org/dev/publishing-maven-artifacts.html">this page</a>
 for details.</li>
-<li>As Cayenne has modules which require Java 1.8, you should use at least Java 1.8 to perform the release.</li>
+<li>Cayenne 5.0 requires Java 21, so the release must be built with JDK 21 or newer.</li>
 </ul>
 
 
 <div class="pb-3"></div>
 <h2 id="preparing-sources">Preparing Sources</h2>
 <ul>
-<li>Edit <code>UPGRADE-NOTES.txt</code> if there is anything to add there.</li>
+<li>Edit <code>UPGRADE.md</code> if there is anything to add there. (Notes for 4.2 and older live in a separate
+<code>UPGRADE-4.2-and-older.md</code> and are normally left untouched.)</li>
 <li>Update <code>RELEASE-NOTES.txt</code> with actual release name and current date as a release date.</li>
-<li>Check Sources Compliance with <a href="https://creadur.apache.org/rat/">RAT</a>. To run RAT,
-download the distro and unpack it somewhere. You can run it directly, or use a convenience script available at the root of Cayenne
-source. Then read the report and fix any issues.
+<li>Check Sources Compliance with <a href="https://creadur.apache.org/rat/">RAT</a>. The Apache RAT Maven plugin
+is already configured in Cayenne:
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd cayenne
-./rat.sh ~/Desktop/apache-rat-0.14-SNAPSHOT.jar  &gt; report.txt
-</code></pre></div><p>As an alternative you could use Apache RAT maven plugin already configured in the Cayenne:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn apache-rat:check
-</code></pre></div></li>
+mvn apache-rat:check
+</code></pre></div><p>Rat writes the report to <code>target/rat.txt</code>. Read it and fix any issues.
+Prefer adding a missing license header over adding an exclusion;<br>
+when an exclusion really is warranted it goes into <code>build-tools/rat-excludes</code>.</p>
+</li>
 </ul>
 
 
@@ -134,8 +135,10 @@ source. Then read the report and fix any issues.
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd cayenne
 mvn release:clean
 mvn release:prepare -DpreparationGoals<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;clean install&#34;</span> -DautoVersionSubmodules<span style="color:#f92672">=</span>true
-mvn release:perform -P gpg <span style="color:#f92672">[</span>-Dgpg.keyname<span style="color:#f92672">=</span>B8AF90BF<span style="color:#f92672">]</span>
-</code></pre></div></li>
+mvn release:perform -P release <span style="color:#f92672">[</span>-Dgpg.keyname<span style="color:#f92672">=</span>B8AF90BF<span style="color:#f92672">]</span>
+</code></pre></div><p>The <code>release</code> profile (named <code>gpg</code> prior to 5.0-M4) does two things: it GPG-signs the artifacts,
+and it attaches a <code>-sources.jar</code> and a <code>-javadoc.jar</code>.</p>
+</li>
 <li>
 <p>Close the staging repo. Login to <a href="https://repository.apache.org/">https://repository.apache.org/</a> with
 Apache ID/password, go to &ldquo;Staging Repositories&rdquo; page. Select a staging
@@ -164,13 +167,13 @@ below, although release evaluators should use the src assembly for <a href="runn
 and other kinds of testing.</em> For further details on a general Cayenne build process check <a href="building-cayenne.html">this page</a>.</p>
 <ul>
 <li>
-<p>Take <em>&ldquo;assembly/target/cayenne-XXX-src.tar.gz&rdquo;</em>, unpack it somewhere, and
+<p>Take <em>&ldquo;cayenne-assembly/target/cayenne-XXX-src.tar.gz&rdquo;</em>, unpack it somewhere, and
 perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT).</p>
 </li>
 <li>
 <p>Per Apache release guidelines there shouldn&rsquo;t be any binaries in a release, so you need manually copy
 Gradle wrapper. Just copy <em>cayenne-gradle-plugin/gradle</em> folder to the corresponding folder in unpacked sources.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp -r ./cayenne-gradle-plugin/gradle ./assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp -r ./cayenne-gradle-plugin/gradle ./cayenne-assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
 </code></pre></div></li>
 <li>
 <p>Build binary artifacts</p>
@@ -191,7 +194,9 @@ and on <a href="https://www.apache.org/dev/release-signing.html">this page</a>.
 Release manager key must be in the project KEYS file. Signing is a manual
 procedure not included in the Ant or Maven script. Here is how it might
 work (&quot;-u&rdquo; option can be omitted if you have only one GPG key):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># repeat for every assembly: cayenne-X.X-src.tar.gz, cayenne-X.X.tar.gz (generic),</span>
+<span style="color:#75715e"># cayenne-X.X-win.zip and cayenne-X.X-macosx.dmg</span>
+gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
 gpg --print-md SHA512 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512
 </code></pre></div></li>
 <li>
@@ -278,6 +283,51 @@ add any new features</p>
 </li>
 <li>
 <p>Update <a href="https://en.wikipedia.org/wiki/Apache_Cayenne">https://en.wikipedia.org/wiki/Apache_Cayenne</a></p>
+</li>
+</ul>
+
+
+<div class="pb-3"></div>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>
+<p><strong>Retrying a failed step.</strong> <code>release:prepare</code> records the last completed phase in
+<code>release.properties</code> and resumes from there, so after a transient failure just run it again
+(<code>-Dresume=false</code> starts over). <code>release:perform</code> wipes and re-creates <em>target/checkout</em> on every
+run, so it can be re-run as is. Check and drop the half-filled staging repo in Nexus before retrying
+<code>release:perform</code>.</p>
+</li>
+<li>
+<p><strong>Undoing an attempt.</strong> <code>release:rollback</code> restores the backup POMs, commits the revert and
+deletes the tag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn release:rollback
+</code></pre></div><p>It only works <strong>between <code>prepare</code> and <code>perform</code></strong>: a successful <code>release:perform</code> finishes by
+calling <code>release:clean</code>, which deletes the <em>release.properties</em> and <em>pom.xml.releaseBackup</em> that
+rollback needs. A <em>failed</em> <code>perform</code> leaves them in place, so rollback still works there. Rollback
+cleans up after itself too, so it is a one-shot.</p>
+<p>It knows nothing about Nexus or SVN: drop the staging repo by hand.
+Tag removal only logs a warning if it fails, so verify it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git ls-remote --tags origin
+</code></pre></div><p>On <code>STABLE-4.2</code> (maven-release-plugin 2.5.3) the tag is never removed - tag removal was only
+implemented in 3.0.0-M1 - so delete it manually there.</p>
+</li>
+<li>
+<p><strong>Nothing left to roll back</strong>, i.e. <code>perform</code> succeeded but the release must be redone: drop the
+staging repo, then clean up the tag and the two <code>[maven-release-plugin]</code> commits by hand.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag -d X.X <span style="color:#f92672">&amp;&amp;</span> git push --delete origin X.X
+</code></pre></div></li>
+<li>
+<p><strong>Nexus won&rsquo;t close the staging repo.</strong> &ldquo;Missing Signature&rdquo;, or missing sources / javadoc, means
+<code>-P release</code> was not active. Drop the repo and re-run <code>mvn release:perform -P release</code>.</p>
+</li>
+<li>
+<p><strong>GPG can&rsquo;t sign.</strong> Export <code>GPG_TTY=$(tty)</code> so the agent can prompt for the passphrase, and pass
+<code>-Dgpg.keyname</code> if you have more than one key. The <code>gpg.passphrase</code> property is deprecated in
+maven-gpg-plugin 3.2.x - use the agent or the <code>MAVEN_GPG_PASSPHRASE</code> environment variable.</p>
+</li>
+<li>
+<p><strong><code>release:prepare</code> refuses to start</strong> on local modifications: commit the <code>RELEASE-NOTES.txt</code> and
+<code>UPGRADE.md</code> edits first.</p>
 </li>
 </ul>
 

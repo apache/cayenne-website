@@ -298,7 +298,7 @@
     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
     &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
     &lt;artifactId&gt;cayenne-jcache&lt;/artifactId&gt;
-    &lt;version&gt;5.0-M3&lt;/version&gt;
+    &lt;version&gt;5.0&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
    </div>
   </div>
@@ -307,7 +307,7 @@
   <h4 id="gradle-4"><a class="anchor" href="#gradle-4"></a>5.3.2. Gradle</h4>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:5.0-M3'</code></pre>
+    <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-jcache:5.0'</code></pre>
    </div>
   </div>
  </div>
@@ -326,7 +326,8 @@
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
         .addModule(binder -&gt; JCacheModule.extend(binder)
-            .setJCacheProviderConfig("cache-config.xml"));</code></pre>
+                .setJCacheProviderConfig("cache-config.xml"))
+        .build();</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -334,9 +335,10 @@
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime.of()
+    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
         .addModule(binder -&gt;
-                binder.bind(CacheManager.class).toInstance(customCacheManager));</code></pre>
+                binder.bind(CacheManager.class).toInstance(customCacheManager))
+        .build();</code></pre>
    </div>
   </div>
   <div class="admonitionblock note">
@@ -376,7 +378,8 @@
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
         .addModule(binder -&gt; JCacheModule.extend(binder)
-            .setJCacheProviderConfig("file:/ehcache.xml"));</code></pre>
+                .setJCacheProviderConfig("file:/ehcache.xml"))
+        .build();</code></pre>
     </div>
    </div>
    <div class="paragraph">

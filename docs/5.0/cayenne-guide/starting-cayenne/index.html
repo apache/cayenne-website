@@ -296,8 +296,8 @@
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
-                .addConfig("com/example/cayenne-project.xml")
-                .build();</code></pre>
+        .addConfig("com/example/cayenne-project.xml")
+        .build();</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -309,12 +309,12 @@
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = binder -&gt;
-      CoreModule.extend(binder).setProperty(Constants.EXTERNAL_TX_PROPERTY, "true");
+        CoreModule.extend(binder).setProperty(Constants.EXTERNAL_TX_PROPERTY, "true");
 
 CayenneRuntime runtime = CayenneRuntime.of()
-      .addConfig("com/example/cayenne-project.xml")
-      .addModule(extensions)
-      .build();</code></pre>
+        .addConfig("com/example/cayenne-project.xml")
+        .addModule(extensions)
+        .build();</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -330,7 +330,55 @@ CayenneRuntime runtime = CayenneRuntime.of()
   </div>
  </div>
  <div class="sect3">
-  <h4 id="merging-multiple-projects"><a class="anchor" href="#merging-multiple-projects"></a>2.2.2. Merging Multiple Projects</h4>
+  <h4 id="connecting-to-a-database"><a class="anchor" href="#connecting-to-a-database"></a>2.2.2. Connecting to a Database</h4>
+  <div class="paragraph">
+   <p>The mapping project does not contain any database connection information. The database is defined in the code, when the runtime is created, as a DataNode. In the simplest case a DataNode is created from a <code>DataSource</code>. It can be any <code>DataSource</code>, e.g., the one provided by your application container, or the one built with <code>CayenneDataSource</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">DataSource dataSource = CayenneDataSource.of("jdbc:hsqldb:mem:starting")
+        .userName("sa")
+        .password("")
+        .pool(1, 5)
+        .build();
+
+CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("cayenne-project.xml")
+        .defaultDataNode(dataSource)
+        .build();</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>When a DataNode needs to be customized, e.g., to let Cayenne create the DB schema on the first connection, to set a specific DbAdapter, or to give the node a name, use a <code>DataNodeDescriptor</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">DataNodeDescriptor node = DataNodeDescriptor.of("node1")
+        .dataSource(dataSource)
+        .createSchemaIfNeeded()
+        .build();
+
+CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("cayenne-project.xml")
+        .defaultDataNode(node)
+        .build();</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>There can be more than one DataNode. Each one is linked to its DataMaps by name. The "default" DataNode is optional, and is used for all the DataMaps that are not linked to a node explicitly:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("cayenne-project.xml")
+        .addDataNode(ds1, "docs")
+        .defaultDataNode(ds2)
+        .build();</code></pre>
+   </div>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="merging-multiple-projects"><a class="anchor" href="#merging-multiple-projects"></a>2.2.3. Merging Multiple Projects</h4>
   <div class="paragraph">
    <p>CayenneRuntime requires at least one mapping project to run. But it can also take multiple projects and merge them together in a single configuration. This way different parts of a database can be mapped independently from each other (even by different software providers), and combined in runtime when assembling an application. Doing it is as easy as passing multiple project locations to CayenneRuntime builder:</p>
   </div>
@@ -357,62 +405,14 @@ CayenneRuntime runtime = CayenneRuntime.of()
     <li>
      <p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project, the rest are discarded. Same precedence rules apply - DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p></li>
     <li>
-     <p>If there are two or more DataNodes with the same name, only one DataNode is used in the merged project, the rest are discarded. DataNode coming from project with the highest index in the project list is chosen per precedence rule above.</p></li>
-    <li>
-     <p>There is a notion of "default" DataNode. After the merge if any DataMaps are not explicitly linked to DataNodes, their queries will be executed via a default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime. If there’s only one DataNode in the merged project, it will be automatically chosen as default. A possible way to explicitly designate a specific node as default is to override <code>DataDomainProvider.createAndInitDataDomain()</code>.</p></li>
+     <p>DataNodes are not a part of the projects. After the merge the DataMaps are linked to the DataNodes as described above. If any DataMaps are not explicitly linked to DataNodes, their queries will be executed via the default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime.</p></li>
    </ul>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="web-applications"><a class="anchor" href="#web-applications"></a>2.2.3. Web Applications</h4>
+  <h4 id="web-applications"><a class="anchor" href="#web-applications"></a>2.2.4. Web Applications</h4>
   <div class="paragraph">
    <p>Web applications can use a variety of mechanisms to configure and start the "services" they need, Cayenne being one of such services. Configuration can be done within standard servlet specification objects like Servlets, Filters, or ServletContextListeners, or can use Spring, JEE CDI, etc. This is a user’s architectural choice and Cayenne is agnostic to it and will happily work in any environment. As described above, all that is needed is to create an instance of CayenneRuntime somewhere and provide the application code with means to access it, and to shut it down when the application ends to avoid container leaks.</p>
-  </div>
-  <div class="paragraph">
-   <p>Still Cayenne includes a piece of web app configuration code that can assist in quickly setting up simple Cayenne-enabled web applications. We are talking about CayenneFilter. It is declared in web.xml:</p>
-  </div>
-  <div class="listingblock">
-   <div class="content">
-    <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;web-app&gt;
-    ...
-    &lt;filter&gt;
-        &lt;filter-name&gt;cayenne-project&lt;/filter-name&gt;
-        &lt;filter-class&gt;org.apache.cayenne.configuration.web.CayenneFilter&lt;/filter-class&gt;
-    &lt;/filter&gt;
-     &lt;filter-mapping&gt;
-        &lt;filter-name&gt;cayenne-project&lt;/filter-name&gt;
-        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-     &lt;/filter-mapping&gt;
-    ...
- &lt;/web-app&gt;</code></pre>
-   </div>
-  </div>
-  <div class="paragraph">
-   <p>When started by the web container, it creates a instance of CayenneRuntime and stores it in the ServletContext. Note that the name of a Cayenne XML project file is derived from the "filter-name". In the example above, CayenneFilter will look for an XML file "cayenne-project.xml". This can be overridden with the "configuration-location" init parameter.</p>
-  </div>
-  <div class="paragraph">
-   <p>When the application runs, all HTTP requests matching the filter url-pattern have access to a session-scoped ObjectContext like this:</p>
-  </div>
-  <div class="listingblock">
-   <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java"> ObjectContext context = DataContext.getThreadObjectContext();</code></pre>
-   </div>
-  </div>
-  <div class="paragraph">
-   <p>Of course, the ObjectContext scope and other behavior of the Cayenne runtime can be customized via dependency injection. For this, another filter init parameter called "extra-modules" is used. "extra-modules" is a comma- or space-separated list of class names, with each class implementing Module interface. These optional custom modules are loaded after the the standard ones, which allows users to override all standard definitions.</p>
-  </div>
-  <div class="paragraph">
-   <p>For those interested in the DI container contents of the runtime created by CayenneFilter, it is the same CayenneRuntime as would have been created by other means, but with an extra &lt;code&gt;org.apache.cayenne.configuration.web.WebModule&lt;/code&gt; module that provides the &lt;code&gt;org.apache.cayenne.configuration.web.RequestHandler&lt;/code&gt; service. This is the service to override in the custom modules if you need to provide a different ObjectContext scope, etc.</p>
-  </div>
-  <div class="admonitionblock note">
-   <table>
-    <tbody>
-     <tr>
-      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
-      <td class="content">You should not think of CayenneFilter as the only way to start and use Cayenne in a web application. In fact, CayenneFilter is entirely optional. Use it if you don’t have any special design for application service management. If you do, simply integrate Cayenne into that design.</td>
-     </tr>
-    </tbody>
-   </table>
   </div>
  </div>
 </div>

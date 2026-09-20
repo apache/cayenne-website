@@ -295,7 +295,7 @@
   <p>There is a number of built-in queries in Cayenne, described later in this chapter. Most of the newer queries use fluent API and can be created and executed as easy-to-read one-liners. Users can define their own query types to abstract certain DB interactions that for whatever reason can not be adequately described by the built-in set.</p>
  </div>
  <div class="paragraph">
-  <p>Queries can be roughly categorized as "object" and "native". Object queries (most notably <code>ObjectSelect</code>, <code>SelectById</code>, and <code>EJBQLQuery</code>) are built with abstractions originating in the object model (the "object" side in the "object-relational" divide). E.g. <code>ObjectSelect</code> consists of a Java class of objects to fetch, a qualifier expression, orderings, etc. - all of this expressed in terms of the object model.</p>
+  <p>Queries can be roughly categorized as "object" and "native". Object queries (most notably <code>ObjectSelect</code> and <code>EJBQLQuery</code>) are built with abstractions originating in the object model (the "object" side in the "object-relational" divide). E.g. <code>ObjectSelect</code> consists of a Java class of objects to fetch, a qualifier expression, orderings, etc. - all of this expressed in terms of the object model.</p>
  </div>
  <div class="paragraph">
   <p>Native queries describe a desired DB operation using SQL (<code>SQLSelect</code>, <code>SQLExec</code> query), a reference to a stored procedure (<code>ProcedureQuery</code>), etc. The results of native queries are lists of scalars, lists of <code>Object[]</code> or lists of maps (a term "data row" is often used to describe such a map). Some of them can potentially be converted to persistent objects (though usually with considerable effort). Native queries are less (if at all) portable across databases than object queries.</p>
@@ -327,7 +327,7 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0
+     <pre class="highlight"><code>INFO: SELECT t0.ARTIST_NAME, t0.DATE_OF_BIRTH, t0.ARTIST_ID FROM ARTIST t0
 INFO: === returned 5 row. - took 5 ms.</code></pre>
     </div>
    </div>
@@ -337,8 +337,8 @@ INFO: === returned 5 row. - took 5 ms.</code></pre>
    <div class="listingblock">
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class)
-    .where(Artist.NAME.like("Pablo%"))
-    .select(context);</code></pre>
+        .where(Artist.ARTIST_NAME.like("Pablo%"))
+        .select(context);</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -346,8 +346,8 @@ INFO: === returned 5 row. - took 5 ms.</code></pre>
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code>INFO: SELECT t0.DATE_OF_BIRTH, t0.NAME, t0.ID FROM ARTIST t0 WHERE t0.NAME LIKE ?
-[bind: 1-&gt;NAME:'Pablo%']
+     <pre class="highlight"><code>INFO: SELECT t0.ARTIST_NAME, t0.DATE_OF_BIRTH, t0.ARTIST_ID FROM ARTIST t0 WHERE t0.ARTIST_NAME LIKE ?
+[bind: 1-&gt;ARTIST_NAME:'Pablo%']
 INFO: === returned 1 row. - took 6 ms.</code></pre>
     </div>
    </div>
@@ -357,9 +357,9 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
    <div class="listingblock">
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class)
-    .where(Artist.NAME.like("A%"))
-    .and(Artist.DATE_OF_BIRTH.gt(someDate)
-    .select(context);</code></pre>
+        .where(Artist.ARTIST_NAME.like("A%"))
+        .and(Artist.DATE_OF_BIRTH.gt(someDate))
+        .select(context);</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -368,9 +368,9 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
    <div class="listingblock">
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = ObjectSelect.query(Artist.class)
-    .orderBy(Artist.DATE_OF_BIRTH.desc())
-    .orderBy(Artist.NAME.asc())
-    .select(context);</code></pre>
+        .orderBy(Artist.DATE_OF_BIRTH.desc())
+        .orderBy(Artist.ARTIST_NAME.asc())
+        .select(context);</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -385,7 +385,7 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
    <div class="listingblock">
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;String&gt; names = ObjectSelect.columnQuery(Artist.class, Artist.ARTIST_NAME)
-    .select(context);</code></pre>
+        .select(context);</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -394,8 +394,8 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
    <div class="listingblock">
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Object[]&gt; nameAndDate = ObjectSelect
-    .columnQuery(Artist.class, Artist.ARTIST_NAME, Artist.DATE_OF_BIRTH)
-    .select(context);</code></pre>
+        .columnQuery(Artist.class, Artist.ARTIST_NAME, Artist.DATE_OF_BIRTH)
+        .select(context);</code></pre>
     </div>
    </div>
   </div>
@@ -416,17 +416,17 @@ INFO: === returned 1 row. - took 6 ms.</code></pre>
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">// Artist.SELF - is a special property that denotes a full object in this case
 List&lt;Object[]&gt; artistAndPaintingCount = ObjectSelect.columnQuery(Artist.class,
-        Artist.SELF,
-        Artist.PAINTING_ARRAY.count())
-    .where(Artist.ARTIST_NAME.like("a%"))
-    .having(Artist.PAINTING_ARRAY.count().lt(5L))
-    .orderBy(Artist.PAINTING_ARRAY.count().desc(), Artist.ARTIST_NAME.asc())
-    .select(context);
+                Artist.SELF,
+                Artist.PAINTING_ARRAY.count())
+        .where(Artist.ARTIST_NAME.like("P%"))
+        .having(Artist.PAINTING_ARRAY.count().lt(5L))
+        .orderBy(Artist.PAINTING_ARRAY.count().desc(), Artist.ARTIST_NAME.asc())
+        .select(context);
 
-for(Object[] next : artistAndPaintingCount) {
-    Artist artist = (Artist)next[0];
-    long paintings = (Long)next[1];
-    System.out.println(artist.getArtistName() + " have " + paintings + " paintings");
+for (Object[] next : artistAndPaintingCount) {
+    Artist artist = (Artist) next[0];
+    long paintings = (Long) next[1];
+    System.out.println(artist.getArtistName() + " has " + paintings + " paintings");
 }</code></pre>
     </div>
    </div>
@@ -473,24 +473,429 @@ WHERE
   </div>
  </div>
  <div class="sect3">
-  <h4 id="selectbyid"><a class="anchor" href="#selectbyid"></a>2.6.2. SelectById</h4>
+  <h4 id="selectbyid"><a class="anchor" href="#selectbyid"></a>2.6.2. Selecting by ID</h4>
   <div class="paragraph">
-   <p>This query allows to search objects by their ID. It’s introduced in Cayenne 4.0 and uses new "fluent" API same as <code>ObjectSelect</code> query.</p>
-  </div>
-  <div class="paragraph">
-   <p>Here is example of how to use it:</p>
+   <p><code>ObjectSelect</code> can match objects of the root entity by their primary key with <code>byId(..)</code> and <code>byIds(..)</code>:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Artist artistWithId1 = SelectById.query(Artist.class, 1)
-    .prefetch(Artist.PAINTING_ARRAY.joint())
-    .localCache()
-    .selectOne(context);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">Artist artistWithId1 = ObjectSelect.query(Artist.class)
+        .byId(1)
+        .selectOne(context);
+
+List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
+        .byIds(1, 2, 3)
+        .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Both methods accept an id in any of three forms, and <code>byIds(..)</code> may mix them:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li>
+     <p>a scalar value, for entities with a single-column primary key;</p></li>
+    <li>
+     <p>a <code>Map</code> of DB attribute names to values, which is the form to use for a compound primary key;</p></li>
+    <li>
+     <p>an <code>ObjectId</code>.</p></li>
+   </ul>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">CompoundPk object = ObjectSelect.query(CompoundPk.class)
+        .byId(Map.of("KEY1", "x", "KEY2", "y"))
+        .selectOne(context);
+
+Artist artist = ObjectSelect.query(Artist.class)
+        .byId(objectId)
+        .selectOne(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Being an ordinary qualifier, an id match combines with everything else <code>ObjectSelect</code> offers - prefetching, caching, ordering, pagination and further conditions. Under the hood these are shorthands for the "id" expressions of the entity <code>SELF</code> property. So here is a somewhat more verbose equivalent that is also more flexible (e.g. allowing to chain id qualifier with "or") :</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
+        .where(Artist.ARTIST_NAME.eq("artist4"))
+        .or(Artist.SELF.idsIn(1, 2, 3))
+        .select(context);
+
+List&lt;Painting&gt; paintings = ObjectSelect.query(Painting.class)
+        .where(Painting.TO_ARTIST.eqId(1))
+        .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Yet another way to find a single object by PK per <a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext">the ObjectContext chapter</a> is <code>ObjectContext.objectForPK(..)</code>. It will look in the object cache before running a query.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="ql"><a class="anchor" href="#ql"></a>2.6.3. ObjectSelect Parsed from a String</h4>
+  <div class="paragraph">
+   <p>Since 5.0 an <code>ObjectSelect</code> or a <code>ColumnSelect</code> can be created from a String. This is an alernative to the fluent API. E.g.:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect
+        .parse(Artist.class, "from Artist where artistName like $name order by dateOfBirth desc limit 10", "A%")
+        .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The parser produces the same query object that the fluent API would, so everything said about <a href="/docs/5.0/cayenne-guide/queries#select">ObjectSelect</a> above applies. The parsed query can be customized further with the fluent API before it is executed:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect
+        .parse(Artist.class, "from Artist where artistName like $name", "A%")
+        .localCache("artists")
+        .pageSize(50)
+        .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="query-structure"><a class="anchor" href="#query-structure"></a>2.6.3.1. Query Structure</h5>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>[ select [ distinct ] columns ]
+from Entity
+[ where     expression ]
+[ having    expression ]
+[ order by  orderings ]
+[ limit n [ offset m ] ]
+[ prefetch  paths ]</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>The clauses must follow in this order, and all of them, except for <code>from</code>, are optional (even <code>select</code>!). Here are the rules of the language:</p>
+   </div>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p>There is a single root entity, named in the <code>from</code> clause. All other entities are reached via the relationship paths starting at the root (<code>paintingArray.toGallery.galleryName</code>), so there are no entity aliases and no explicit joins. Just like in expressions, a join is made outer by appending <code>` to a path component (`paintingArray</code>), and a join is split from the other joins over the same path with an alias (<code>paintingArray#p1</code>).</p></li>
+     <li>
+      <p>Every <code>expression</code> above, as well as every column and ordering, follows the syntax of Cayenne <a href="/docs/5.0/cayenne-guide/expressions">expressions</a>, the same one that <code>ExpressionFactory.exp(..)</code> takes. Anything that is valid in an expression is valid in a query: comparisons, <code>like</code>, <code>in</code>, <code>between</code>, arithmetics, functions, <code>db:</code> paths, etc.</p></li>
+     <li>
+      <p>The keywords are case-sensitive, and must be spelled exactly as shown here, which is also true for the expressions. The words that start the clauses are not reserved, and can be used as property names. The only reserved word is <code>self</code>, that denotes the root object. A property called "self" has to be written as <code>obj:self</code>.</p></li>
+     <li>
+      <p>A query with no <code>select</code> clause, or the one with <code>select self</code>, fetches the root objects and is an <code>ObjectSelect</code>. Any other <code>select</code> clause results in a <code>ColumnSelect</code>.</p></li>
+     <li>
+      <p>There is no <code>group by</code> clause. Just like with the fluent <code>ColumnSelect</code>, when any of the columns is an aggregate function, all the other columns become the grouping columns.</p></li>
+     <li>
+      <p>Only selecting queries are supported. There is no <code>update</code> or <code>delete</code>.</p></li>
+    </ul>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="parameters"><a class="anchor" href="#parameters"></a>2.6.3.2. Parameters</h5>
+   <div class="paragraph">
+    <p>A parameter is a name prefixed with <code>$</code>, the same as in expressions. The values are passed to the <code>parse(..)</code> method and are bound in the order in which the parameters first appear in the String. If the same name is used more than once, it takes a single value that is bound in all those places. A value can be anything that is a valid expression operand: a scalar, a collection for <code>in</code>, a persistent object to match a relationship, etc.:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Painting&gt; paintings = ObjectSelect
+        .parse(Painting.class,
+                "from Painting where toArtist = $artist and estimatedPrice between $low and $high",
+                artist, 10, 500)
+        .select(context);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>The parameters can be used anywhere in the expressions, including the nested selects. <code>limit</code> and <code>offset</code> only take integer literals.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="java-api"><a class="anchor" href="#java-api"></a>2.6.3.3. Java API</h5>
+   <div class="paragraph">
+    <p>There are four methods to parse a query, that differ in the type of the result:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">// any query. Returns either an ObjectSelect or a ColumnSelect
+FluentSelect&lt;?, ?&gt; q1 = ObjectSelect.parse("from Artist");
+
+// a query of the root objects. "DataRow.class" is used to fetch the data rows instead of objects
+ObjectSelect&lt;Artist&gt; q2 = ObjectSelect.parse(Artist.class, "from Artist");
+ObjectSelect&lt;DataRow&gt; q3 = ObjectSelect.parse(DataRow.class, "from Artist");
+
+// a query with a single column
+ColumnSelect&lt;String&gt; q4 = ObjectSelect.parseColumn(String.class, "select artistName from Artist");
+
+// a query with multiple columns
+ColumnSelect&lt;Object[]&gt; q5 = ObjectSelect.parseColumns("select artistName, dateOfBirth from Artist");</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>The last three are there to avoid the type casts. They throw an exception if the query is of a different kind, e.g. if a <code>select</code> clause is passed to <code>parse(Artist.class, ..)</code>.</p>
+   </div>
+   <div class="paragraph">
+    <p>The parser needs no mapping information, so the names of entities and properties, as well as the types of the columns, are only checked when the query is executed.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="examples"><a class="anchor" href="#examples"></a>2.6.3.4. Examples</h5>
+   <div class="paragraph">
+    <p>Each example shows a query String and the same query built with the fluent API.</p>
+   </div>
+   <div class="sect5">
+    <h6 id="objects-with-a-filter-ordering-and-a-limit"><a class="anchor" href="#objects-with-a-filter-ordering-and-a-limit"></a>Objects with a filter, ordering and a limit</h6>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from Artist where artistName like 'A%' order by dateOfBirth desc, artistName asc insensitive limit 10 offset 20</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(Artist.ARTIST_NAME.like("A%"))
+        .orderBy(Artist.DATE_OF_BIRTH.desc(), Artist.ARTIST_NAME.ascInsensitive())
+        .limit(10)
+        .offset(20);</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>An ordering is an expression, optionally followed by <code>asc</code> (the default) or <code>desc</code>, and then optionally by <code>insensitive</code>.</p>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="joins"><a class="anchor" href="#joins"></a>Joins</h6>
+    <div class="paragraph">
+     <p>The joins are implied by the paths. Here is an outer join, matching the artists with no paintings:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from Artist where paintingArray+ = null</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class).where(Artist.PAINTING_ARRAY.outer().isNull());</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>And here are two separate joins over the same relationship, matching the artists that have both paintings:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from Artist where paintingArray#p1.paintingTitle = 'P1' and paintingArray#p2.paintingTitle = 'P2'</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(Artist.PAINTING_ARRAY.alias("p1").dot(Painting.PAINTING_TITLE).eq("P1"))
+        .and(Artist.PAINTING_ARRAY.alias("p2").dot(Painting.PAINTING_TITLE).eq("P2"));</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="columns"><a class="anchor" href="#columns"></a>Columns</h6>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select artistName, dateOfBirth from Artist order by artistName</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Artist.class, Artist.ARTIST_NAME, Artist.DATE_OF_BIRTH)
+        .orderBy(Artist.ARTIST_NAME.asc());</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>The result is a <code>List&lt;Object[]&gt;</code>. With a single column it is a list of values:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select distinct toGallery.galleryName from Painting</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;String&gt; query = ObjectSelect
+        .columnQuery(Painting.class, Painting.TO_GALLERY.dot(Gallery.GALLERY_NAME))
+        .distinct();</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>A column can be any expression, and it can have an alias (the same as <code>BaseProperty.alias(..)</code>):</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select upper(artistName) as name, length(trim(artistName)) as size from Artist</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="aggregates"><a class="anchor" href="#aggregates"></a>Aggregates</h6>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select toArtist.artistName, sum(estimatedPrice), count(*)
+from Painting
+having sum(estimatedPrice) &gt; $min
+order by toArtist.artistName</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Painting.class,
+                Painting.TO_ARTIST.dot(Artist.ARTIST_NAME),
+                Painting.ESTIMATED_PRICE.sum(),
+                PropertyFactory.COUNT)
+        .having(Painting.ESTIMATED_PRICE.sum().gt(min))
+        .orderBy(Painting.TO_ARTIST.dot(Artist.ARTIST_NAME).asc());</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p><code>toArtist.artistName</code> becomes a grouping column here, as the other columns are aggregates.</p>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="objects-as-columns"><a class="anchor" href="#objects-as-columns"></a>Objects as columns</h6>
+    <div class="paragraph">
+     <p><code>self</code> is the root object, and a relationship path is a related object. Here each row is an <code>Object[]</code> with an <code>Artist</code> and a <code>Long</code>:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select self, count(paintingArray+) from Artist order by count(paintingArray+) desc</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Artist.class, Artist.SELF, Artist.PAINTING_ARRAY.outer().count())
+        .orderBy(Artist.PAINTING_ARRAY.outer().count().desc());</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>A to-one relationship gives a related object in each row:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select paintingTitle, toArtist, toGallery from Painting</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Painting.class, Painting.PAINTING_TITLE, Painting.TO_ARTIST, Painting.TO_GALLERY);</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>With a to-many relationship a row is repeated for each related object. This is the same as <code>flat()</code> in the fluent API:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>select artistName, paintingArray from Artist</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Artist.class, Artist.ARTIST_NAME, Artist.PAINTING_ARRAY.flat());</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p>In both cases a row with no related object is still present in the result, with a <code>null</code> in place of the object. To exclude such rows, add a condition to the <code>where</code> clause, e.g. <code>where exists paintingArray</code>.</p>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="subqueries-2"><a class="anchor" href="#subqueries-2"></a>Subqueries</h6>
+    <div class="paragraph">
+     <p>A nested select in parentheses can be used with <code>exists</code>, <code>not exists</code>, <code>in</code>, <code>not in</code>, <code>all</code> and <code>any</code>. It has the same structure as the main query, except for <code>prefetch</code>. Its paths are relative to its own root, and <code>enclosing(..)</code> is used to refer to the main query:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from Artist where exists (
+    from Painting where toArtist = enclosing(self) and estimatedPrice &gt; $price)</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(ExpressionFactory.exists(ObjectSelect.query(Painting.class)
+                .where(Painting.TO_ARTIST.eq(Artist.SELF.enclosing()))
+                .and(Painting.ESTIMATED_PRICE.gt(price))));</code></pre>
+     </div>
+    </div>
+    <div class="paragraph">
+     <p><code>enclosing(self)</code> is the root object of the enclosing query, <code>enclosing(artistName)</code> is its property, and <code>enclosing(enclosing(self))</code> goes two levels up.</p>
+    </div>
+    <div class="paragraph">
+     <p><code>in</code>, <code>all</code> and <code>any</code> take a nested select with a single column:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from Painting where toArtist.artistName in (select artistName from Artist where dateOfBirth &lt; $date)
+
+from Painting where estimatedPrice &gt; all (select estimatedPrice from Painting where paintingTitle = 'P2')
+
+from Painting where estimatedPrice = any (select max(estimatedPrice) from Painting)</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Painting&gt; query = ObjectSelect.query(Painting.class)
+        .where(Painting.TO_ARTIST.dot(Artist.ARTIST_NAME).in(
+                ObjectSelect.columnQuery(Artist.class, Artist.ARTIST_NAME)
+                        .where(Artist.DATE_OF_BIRTH.lt(date))));</code></pre>
+     </div>
+    </div>
+    <div class="admonitionblock note">
+     <table>
+      <tbody>
+       <tr>
+        <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+        <td class="content">When there is no need for a nested select with its own conditions,<code>exists</code> over a path is shorter: <code>from Artist where not exists paintingArray</code>.</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="dbentity-as-a-root"><a class="anchor" href="#dbentity-as-a-root"></a>DbEntity as a root</h6>
+    <div class="paragraph">
+     <p>A root prefixed with <code>db:</code> is a name of a DbEntity. Such a query fetches the data rows, and all its paths are the DB paths, with no need for a <code>db:</code> prefix:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from db:ARTIST where ARTIST_NAME like 'A%' order by ARTIST_ID desc</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;DataRow&gt; query = ObjectSelect.dbQuery("ARTIST")
+        .where(ExpressionFactory.likeDbExp("ARTIST_NAME", "A%"))
+        .orderBy(new Ordering(ExpressionFactory.dbPathExp("ARTIST_ID"), SortOrder.DESCENDING));</code></pre>
+     </div>
+    </div>
+   </div>
+   <div class="sect5">
+    <h6 id="prefetching"><a class="anchor" href="#prefetching"></a>Prefetching</h6>
+    <div class="paragraph">
+     <p><code>prefetch</code> is a comma-separated list of relationship paths, each optionally followed by the prefetch semantics - <code>joint</code>, <code>disjoint</code> or <code>disjointById</code>. If omitted, Cayenne picks the default semantics, the same as with <code>prefetch(String, int)</code>:</p>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code>from Artist where artistName = $name prefetch paintingArray joint, paintingArray.toGallery</code></pre>
+     </div>
+    </div>
+    <div class="listingblock">
+     <div class="content">
+      <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(Artist.ARTIST_NAME.eq(name))
+        .prefetch(Artist.PAINTING_ARRAY.joint())
+        .prefetch("paintingArray.toGallery", PrefetchTreeNode.UNDEFINED_SEMANTICS);</code></pre>
+     </div>
+    </div>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="sqlselect"><a class="anchor" href="#sqlselect"></a>2.6.3. SQLSelect and SQLExec</h4>
+  <h4 id="sqlselect"><a class="anchor" href="#sqlselect"></a>2.6.4. SQLSelect and SQLExec</h4>
   <div class="paragraph">
    <p>SQL is very powerful and allows to manipulate data in ways that can not always be described as a graph of related entities. Cayenne acknowledges this fact and provides a facility to execute SQL, sometimes allowing to map results back to persistent objects. <code>SQLSelect</code> and <code>SQLExec</code> are a pair of queries that allow to run native SQL. <code>SQLSelect</code> can be used (as the name suggests) to select custom data in form of entities, separate columns, collection of <code>DataRow</code> or <code>Object[]</code>. <code>SQLExec</code> is designed to execute any SQL (e.g. updates, deletes, DDLs, etc.).</p>
   </div>
@@ -501,26 +906,26 @@ WHERE
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">// Selecting objects
 List&lt;Painting&gt; paintings = SQLSelect
-    .query(Painting.class, "SELECT * FROM PAINTING WHERE PAINTING_TITLE LIKE 'A%'")
-    .upperColumnNames()
-    .localCache()
-    .limit(100)
-    .select(context);
+        .query(Painting.class, "SELECT * FROM PAINTING WHERE PAINTING_TITLE LIKE 'G%'")
+        .upperColumnNames()
+        .localCache()
+        .limit(100)
+        .select(context);
 
 // Selecting scalar values
 List&lt;String&gt; paintingNames = SQLSelect
-    .scalarQuery(String.class, "SELECT PAINTING_TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; 100000")
-    .select(context);
+        .scalarQuery("SELECT PAINTING_TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; 100000", String.class)
+        .select(context);
 
 // Selecting DataRow with predefined types
-List&lt;DataRow&gt; result = SQLSelect
-    .dataRowQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
-    .select(context);
+List&lt;DataRow&gt; rows = SQLSelect
+        .dataRowQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
+        .select(context);
 
 // Selecting Object[] with predefined types
-List&lt;Object[]&gt; result = SQLSelect
-    .scalarQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
-    .select(context);</code></pre>
+List&lt;Object[]&gt; arrays = SQLSelect
+        .columnQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
+        .select(context);</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -529,26 +934,26 @@ List&lt;Object[]&gt; result = SQLSelect
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">int inserted = SQLExec
-    .query("INSERT INTO ARTIST (ARTIST_ID, ARTIST_NAME) VALUES (55, 'Picasso')")
-    .update(context);</code></pre>
+        .query("INSERT INTO ARTIST (ARTIST_ID, ARTIST_NAME) VALUES (55, 'Picasso')")
+        .update(context);</code></pre>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="sqlscripting"><a class="anchor" href="#sqlscripting"></a>2.6.4. Scripting SQL Queries</h4>
+  <h4 id="sqlscripting"><a class="anchor" href="#sqlscripting"></a>2.6.5. Scripting SQL Queries</h4>
   <div class="paragraph">
    <p>A powerful feature of <code>SQLSelect</code> and <code>SQLExec</code> is that SQL string is treated by Cayenne as a dynamic template. Before creating a PreparedStatement, the String is evaluated, resolving its dynamic parts. The two main scripting elements are "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). In the discussion below we’ll use both selecting and updating examples, as scripting works the same way for both <code>SQLSelect</code> and <code>SQLExec</code>.</p>
   </div>
   <div class="sect4">
-   <h5 id="variable-substitution"><a class="anchor" href="#variable-substitution"></a>2.6.4.1. Variable Substitution</h5>
+   <h5 id="variable-substitution"><a class="anchor" href="#variable-substitution"></a>2.6.5.1. Variable Substitution</h5>
    <div class="paragraph">
     <p>All variables in the template string are replaced from query parameters:</p>
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-java java" data-lang="java">// this will generate SQL like this: "delete from mydb.PAINTING"
+     <pre class="highlight"><code class="language-java java" data-lang="java">// this will generate SQL like this: "delete from PUBLIC.PAINTING"
 SQLExec query = SQLExec.query("delete from $tableName")
-    .params("mydb.PAINTING");</code></pre>
+        .params("tableName", "PUBLIC.PAINTING");</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -556,7 +961,7 @@ SQLExec query = SQLExec.query("delete from $tableName")
    </div>
   </div>
   <div class="sect4">
-   <h5 id="directives"><a class="anchor" href="#directives"></a>2.6.4.2. Directives</h5>
+   <h5 id="directives"><a class="anchor" href="#directives"></a>2.6.5.2. Directives</h5>
    <div class="paragraph">
     <p>"Directives" look like <code>#directive(p1 p2 p3)</code> (notice the absence of comma between the arguments). The following directives are supported in SQL templates:</p>
    </div>
@@ -725,10 +1130,10 @@ SQLExec query = SQLExec.query("delete from $tableName")
     <div class="listingblock">
      <div class="content">
       <pre class="highlight"><code class="language-java java" data-lang="java">String sql = "SELECT * FROM PAINTING t0 WHERE #bindObjectEqual($a 't0.ARTIST_ID' 'ARTIST_ID' )";
-Artist artistParam = ...;
+Artist artistParam = dali;
 
-SQLSelect select = SQLSelect.query(Painting.class, sql)
-    .params("a", artistParam);</code></pre>
+SQLSelect&lt;Painting&gt; select = SQLSelect.query(Painting.class, sql)
+        .param("a", artistParam);</code></pre>
      </div>
     </div>
    </div>
@@ -763,10 +1168,10 @@ SQLSelect select = SQLSelect.query(Painting.class, sql)
     <div class="listingblock">
      <div class="content">
       <pre class="highlight"><code class="language-java java" data-lang="java">String sql = "SELECT * FROM PAINTING t0 WHERE #bindObjectNotEqual($a 't0.ARTIST_ID' 'ARTIST_ID' )";
-Artist artistParam = ...;
+Artist artistParam = dali;
 
-SQLSelect select = SQLSelect.query(Painting.class, sql)
-    .params("a", artistParam);</code></pre>
+SQLSelect&lt;Painting&gt; select = SQLSelect.query(Painting.class, sql)
+        .param("a", artistParam);</code></pre>
      </div>
     </div>
    </div>
@@ -845,28 +1250,18 @@ SQLSelect select = SQLSelect.query(Painting.class, sql)
   </div>
  </div>
  <div class="sect3">
-  <h4 id="mappedselect-and-mappedexec"><a class="anchor" href="#mappedselect-and-mappedexec"></a>2.6.5. MappedSelect and MappedExec</h4>
+  <h4 id="mappedselect-and-mappedexec"><a class="anchor" href="#mappedselect-and-mappedexec"></a>2.6.6. MappedSelect and MappedExec</h4>
   <div class="paragraph">
    <p><code>MappedSelect</code> and <code>MappedExec</code> is a queries that are just a reference to another queries stored in the DataMap. The actual stored query can be SelectQuery, SQLTemplate, EJBQLQuery, etc. Difference between <code>MappedSelect</code> and <code>MappedExec</code> is (as reflected in their names) whether underlying query intended to select data or just to perform some generic SQL code.</p>
-  </div>
-  <div class="admonitionblock note">
-   <table>
-    <tbody>
-     <tr>
-      <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
-      <td class="content">These queries are "fluent" versions of deprecated <code>NamedQuery</code> class.</td>
-     </tr>
-    </tbody>
-   </table>
   </div>
   <div class="paragraph">
    <p>Here is example of how to use <code>MappedSelect</code>:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; results = MappedSelect.query("artistsByName", Artist.class) 
-    .param("name", "Picasso") 
-    .select(context);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; results = MappedSelect.query("artistsByName", Artist.class)
+        .param("name", "Dali")
+        .select(context);</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -874,47 +1269,51 @@ SQLSelect select = SQLSelect.query(Painting.class, sql)
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">QueryResult result = MappedExec.query("updateQuery") 
-    .param("var", "value") 
-    .execute(context);
-System.out.println("Rows updated: " + result.firstUpdateCount());</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;QueryResult&gt; result = MappedExec.query("updatePaintingTitle")
+        .param("title", "Untitled")
+        .execute(context);
+QueryResult.Update update = (QueryResult.Update) result.getFirst();
+System.out.println("Rows updated: " + update.count());</code></pre>
    </div>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="procedurecall"><a class="anchor" href="#procedurecall"></a>2.6.6. ProcedureCall</h4>
+  <h4 id="procedurecall"><a class="anchor" href="#procedurecall"></a>2.6.7. ProcedureCall</h4>
   <div class="paragraph">
    <p>Stored procedures are mapped as separate objects in CayenneModeler. <code>ProcedureCall</code> provides a way to execute them with a certain set of parameters. This query is a "fluent" version of older <code>ProcedureQuery</code>. Just like with <code>SQLTemplate</code>, the outcome of a procedure can be anything - a single result set, multiple result sets, some data modification (returned as an update count), or a combination of these. So use root class to get a single result set, and use only procedure name for anything else:</p>
   </div>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; result = ProcedureCall.query("my_procedure", Artist.class)
-    .param("p1", "abc")
-    .param("p2", 3000)
-    .call(context)
-    .firstList();</code></pre>
+        .param("p1", "abc")
+        .param("p2", 3000)
+        .select(context);</code></pre>
    </div>
   </div>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">// here we do not bother with root class.
 // Procedure name gives us needed routing information
-ProcedureResult result = ProcedureCall.query("my_procedure")
-    .param("p1", "abc")
-    .param("p2", 3000)
-    .call();</code></pre>
+List&lt;QueryResult&gt; result = ProcedureCall.query("my_procedure")
+        .param("p1", "abc")
+        .param("p2", 3000)
+        .call(context);</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>A stored procedure can return data back to the application as result sets or via OUT parameters. To simplify the processing of the query output, QueryResponse treats OUT parameters as if it was a separate result set. For stored procedures declaref any OUT or INOUT parameters, <code>ProcedureResult</code> have convenient utility method to get them:</p>
+   <p><code>QueryResult</code> is a sealed interface with <code>Select</code>, <code>Update</code>, <code>Iterator</code> and <code>OutParameters</code> variants, listed in the order the procedure produced them, so the items can be accessed by index or scanned with a pattern-matching switch. A stored procedure can return data back to the application as result sets or via OUT parameters. The values of OUT and INOUT parameters are reported as a separate <code>QueryResult.OutParameters</code> item of the result, a map keyed by parameter name:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">ProcedureResult result = ProcedureCall.query("my_procedure")
-    .call(context);
-
-// read OUT parameters
-Object out = result.getOutParam("out_param");</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">for (QueryResult item : ProcedureCall.query("my_procedure").call(context)) {
+    switch (item) {
+        case QueryResult.Select&lt;?&gt; select -&gt; process(select.objects());
+        case QueryResult.Update update -&gt; process(update.counts());
+        case QueryResult.OutParameters out -&gt; process(out.values().get("out_param"));
+        default -&gt; {
+        }
+    }
+}</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -922,13 +1321,13 @@ Object out = result.getOutParam("out_param");</code></pre>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="ejbql"><a class="anchor" href="#ejbql"></a>2.6.7. EJBQLQuery</h4>
+  <h4 id="ejbql"><a class="anchor" href="#ejbql"></a>2.6.8. EJBQLQuery</h4>
   <div class="admonitionblock note">
    <table>
     <tbody>
      <tr>
       <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
-      <td class="content">As soon as all of the <code>EJBQLQuery</code> capabilities become available in <code>ObjectSelect</code>, we are planning to deprecate <code>EJBQLQuery</code>.</td>
+      <td class="content">Since 5.0 selecting queries can be written as Strings with <a href="/docs/5.0/cayenne-guide/queries#ql">ObjectSelect.parse(..)</a>, that is the recommended replacement for selecting <code>EJBQLQuery</code>. As soon as all of the <code>EJBQLQuery</code> capabilities become available in <code>ObjectSelect</code>, we are planning to deprecate <code>EJBQLQuery</code>.</td>
      </tr>
     </tbody>
    </table>
@@ -938,7 +1337,7 @@ Object out = result.getOutParam("out_param");</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a FROM Artist a");</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Artist&gt; query = new EJBQLQuery&lt;&gt;("select a FROM Artist a");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -959,22 +1358,22 @@ Object out = result.getOutParam("out_param");</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery select =
-    new EJBQLQuery("select a FROM Artist a WHERE a.name = 'Salvador Dali'");
-List&lt;Artist&gt; artists = context.performQuery(select);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Artist&gt; select =
+        new EJBQLQuery&lt;&gt;("select a FROM Artist a WHERE a.artistName = 'Dali'");
+List&lt;Artist&gt; artists = context.select(select);</code></pre>
    </div>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery delete = new EJBQLQuery("delete from Painting");
-context.performGenericQuery(delete);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;?&gt; delete = new EJBQLQuery&lt;&gt;("delete from Painting");
+context.execute(delete);</code></pre>
    </div>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery update =
-    new EJBQLQuery("UPDATE Painting AS p SET p.name = 'P2' WHERE p.name = 'P1'");
-context.performGenericQuery(update);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;?&gt; update =
+        new EJBQLQuery&lt;&gt;("UPDATE Painting AS p SET p.paintingTitle = 'P3' WHERE p.paintingTitle = 'P1'");
+context.execute(update);</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -985,11 +1384,12 @@ context.performGenericQuery(update);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a, COUNT(p) FROM Artist a JOIN a.paintings p GROUP BY a");
-List&lt;Object[]&gt; result = context.performQuery(query);
-for(Object[] artistWithCount : result) {
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Object[]&gt; query =
+        new EJBQLQuery&lt;&gt;("select a, COUNT(p) FROM Artist a JOIN a.paintingArray p GROUP BY a");
+List&lt;Object[]&gt; result = context.select(query);
+for (Object[] artistWithCount : result) {
     Artist a = (Artist) artistWithCount[0];
-    int hasPaintings = (Integer) artistWithCount[1];
+    long hasPaintings = (Long) artistWithCount[1];
 }</code></pre>
    </div>
   </div>
@@ -998,8 +1398,8 @@ for(Object[] artistWithCount : result) {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("select a.name FROM Artist a");
-List&lt;String&gt; names = context.performQuery(query);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;String&gt; query = new EJBQLQuery&lt;&gt;("select a.artistName FROM Artist a");
+List&lt;String&gt; names = context.select(query);</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -1007,7 +1407,11 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1,?2,?3)</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Painting&gt; query =
+        new EJBQLQuery&lt;&gt;("select p from Painting p where p.paintingTitle in (?1,?2,?3)");
+query.setParameter(1, "P1");
+query.setParameter(2, "P2");
+query.setParameter(3, "P3");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -1015,7 +1419,8 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in ?1</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Painting&gt; query = new EJBQLQuery&lt;&gt;("select p from Painting p where p.paintingTitle in ?1");
+query.setParameter(1, List.of("P1", "P2", "P3"));</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -1023,7 +1428,8 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">select p from Painting p where p.paintingTitle in (?1)</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Painting&gt; query = new EJBQLQuery&lt;&gt;("select p from Painting p where p.paintingTitle in (?1)");
+query.setParameter(1, List.of("P1", "P2", "P3"));</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -1035,30 +1441,34 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
   <div class="ulist">
    <ul>
     <li>
-     <p>Null handling: SelectQuery would translate the expressions matching NULL values to the corresponding "X IS NULL" or "X IS NOT NULL" SQL syntax. EJBQLQuery on the other hand requires explicit "IS NULL" (or "IS NOT NULL") syntax to be used, otherwise the generated SQL will look like "X = NULL" (or "X &lt;&gt; NULL"), which will evaluate differently.</p></li>
+     <p>Null handling: ObjectSelect would translate the expressions matching NULL values to the corresponding "X IS NULL" or "X IS NOT NULL" SQL syntax. EJBQLQuery on the other hand requires explicit "IS NULL" (or "IS NOT NULL") syntax to be used, otherwise the generated SQL will look like "X = NULL" (or "X &lt;&gt; NULL"), which will evaluate differently.</p></li>
     <li>
-     <p>Expression Parameters: SelectQuery uses "$" to denote named parameters (e.g. "$myParam"), while EJBQL uses ":" (e.g. ":myParam"). Also EJBQL supports positional parameters denoted by the question mark: "?3".</p></li>
+     <p>Expression Parameters: ObjectSelect uses "$" to denote named parameters (e.g. "$myParam"), while EJBQL uses ":" (e.g. ":myParam"). Also EJBQL supports positional parameters denoted by the question mark: "?3".</p></li>
    </ul>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="custom-queries"><a class="anchor" href="#custom-queries"></a>2.6.8. Custom Queries</h4>
+  <h4 id="custom-queries"><a class="anchor" href="#custom-queries"></a>2.6.9. Custom Queries</h4>
   <div class="paragraph">
-   <p>If a user needs some extra functionality not addressed by the existing set of Cayenne queries, he can write his own. The only requirement is to implement <code>org.apache.cayenne.query.Query</code> interface. The easiest way to go about it is to subclass some of the base queries in Cayenne.</p>
-  </div>
-  <div class="paragraph">
-   <p>E.g. to do something directly in the JDBC layer, you might subclass <code>AbstractQuery</code>:</p>
+   <p>If a user needs some extra functionality not addressed by the existing set of Cayenne queries, he can write his own. The only requirement is to implement <code>org.apache.cayenne.query.Query</code> interface. E.g. to do something directly in the JDBC layer, you might implement <code>Query</code> like this:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">public class MyQuery extends AbstractQuery {
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class MyQuery implements Query {
+
+    @Override
+    public QueryMetadata getMetaData(EntityResolver resolver) {
+        // the metadata tells Cayenne which DataNode to run the query on. Here we simply borrow it from a standard query
+        return ObjectSelect.query(Artist.class).getMetaData(resolver);
+    }
 
     @Override
     public SQLAction createSQLAction(SQLActionVisitor visitor) {
         return new SQLAction() {
 
             @Override
-            public void performAction(Connection connection, OperationObserver observer) throws SQLException, Exception {
+            public void performAction(Connection connection, OperationObserver observer)
+                    throws SQLException, Exception {
                 // 1. do some JDBC work using provided connection...
                 // 2. push results back to Cayenne via OperationObserver
             }
@@ -1076,13 +1486,14 @@ List&lt;String&gt; names = context.performQuery(query);</code></pre>
 
     @Override
     protected Query createReplacementQuery(EntityResolver resolver) {
-        SQLTemplate delegate = new SQLTemplate(SomeClass.class, generateRawSQL());
+        SQLTemplate delegate = new SQLTemplate(Artist.class, generateRawSQL());
         delegate.setFetchingDataRows(true);
         return delegate;
     }
 
     protected String generateRawSQL() {
         // build some SQL string
+        return "SELECT * FROM ARTIST";
     }
 }</code></pre>
    </div>

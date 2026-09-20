@@ -298,7 +298,7 @@
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java"> [db:]segment[+][.segment[+]...]</code></pre>
+    <pre class="highlight"><code>[db:]segment[+][#alias][.segment[+][#alias]...]</code></pre>
    </div>
   </div>
   <div class="ulist">
@@ -307,6 +307,8 @@
      <p><code>db:</code> is an optional prefix indicating that the following path is a DB path. Otherwise it is an object path.</p></li>
     <li>
      <p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. The path must have at least one segment; segments are separated by dot (".").</p></li>
+    <li>
+     <p><code>#alias</code> is an optional alias of a relationship segment, discussed below.</p></li>
     <li>
      <p>`` An "OUTER JOIN" path component. Currently "" only has effect when translated to SQL as OUTER JOIN. When evaluating expressions in memory, it is ignored.</p></li>
    </ul>
@@ -336,18 +338,18 @@
    </ul>
   </div>
   <div class="paragraph">
-   <p>Cayenne supports "aliases" in path expressions. E.g. the same expression can be written using the explicit path or an alias:</p>
+   <p>Cayenne supports "aliases" in path expressions. An alias is appended to a relationship segment after the <code>#</code> character:</p>
   </div>
   <div class="ulist">
    <ul>
     <li>
-     <p><code>artist.exhibits.closingDate</code> - full path</p></li>
+     <p><code>artist.exhibits.closingDate</code> - a path with no aliases</p></li>
     <li>
-     <p><code>e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p></li>
+     <p><code>artist.exhibits#e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p></li>
    </ul>
   </div>
   <div class="paragraph">
-   <p>SelectQuery using the second form of the path expression must be made aware of the alias via <code>SelectQuery.aliasPathSplits(..)</code>; otherwise, an <code>Exception</code> will be thrown. The main use of aliases is to allow users to control how SQL joins are generated if the same path is encountered more than once in any given <code>Expression</code>. Each alias for any given path would result in a separate join. Without aliases, a single join will be used for a group of matching paths.</p>
+   <p>The main use of aliases is to allow users to control how SQL joins are generated if the same path is encountered more than once in any given <code>Expression</code>. Each alias for any given path would result in a separate join. Without aliases, a single join will be used for a group of matching paths.</p>
   </div>
  </div>
  <div class="sect3">
@@ -369,10 +371,10 @@ Expression exp = ExpressionFactory.exp(expString);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">name = 'ABC'
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e1 = ExpressionFactory.exp("name = 'ABC'");
 
 // double quotes are escaped inside Java Strings of course
-name = \"ABC\"</code></pre>
+Expression e2 = ExpressionFactory.exp("name = \"ABC\"");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -380,7 +382,7 @@ name = \"ABC\"</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">// valid
+    <pre class="highlight"><code>// valid
 name likeIgnoreCase 'A%'
 
 // invalid - will throw a parse exception
@@ -392,7 +394,7 @@ name LIKEIGNORECASE 'A%'</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">value = (price + 250.00) * 3</code></pre>
+    <pre class="highlight"><code>value = (price + 250.00) * 3</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -400,7 +402,7 @@ name LIKEIGNORECASE 'A%'</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">// object path
+    <pre class="highlight"><code>// object path
 name = 'Salvador Dali'
 
 // same object path - a rarely used form
@@ -421,7 +423,7 @@ name = enum:org.foo.EnumClass.VALUE1</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">name like 'A%'</code></pre>
+    <pre class="highlight"><code>name like 'A%'</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -430,11 +432,11 @@ name = enum:org.foo.EnumClass.VALUE1</code></pre>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">Expression template = ExpressionFactory.exp("name = $name");
-...
+
 // name binding
-Map p1 = Collections.singletonMap("name", "Salvador Dali");
+Map&lt;String, Object&gt; p1 = Map.of("name", "Salvador Dali");
 Expression qualifier1 = template.params(p1);
-...
+
 // positional binding
 Expression qualifier2 = template.paramsArray("Monet");</code></pre>
    </div>
@@ -460,8 +462,8 @@ Expression qualifier2 = template.paramsArray("Monet");</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Artist dali = ... // assume we fetched this one already
-Expression qualifier = ExpressionFactory.exp("artist = $artist", dali);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">Artist dali = dali(); // assume we fetched this one already
+Expression qualifier = ExpressionFactory.exp("toArtist = $artist", dali);</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -470,8 +472,8 @@ Expression qualifier = ExpressionFactory.exp("artist = $artist", dali);</code></
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">Expression template = ExpressionFactory.exp("name like $name and dateOfBirth &gt; $date");
-...
-Map p1 = Collections.singletonMap("name", "Salvador%");
+
+Map&lt;String, Object&gt; p1 = Map.of("name", "Salvador%");
 Expression qualifier1 = template.params(p1);
 
 // "qualifier1" is now "name like 'Salvador%'".
@@ -507,12 +509,12 @@ Expression finalExp = e1.andExp(e2);</code></pre>
    </table>
   </div>
   <div class="paragraph">
-   <p>As discussed earlier, Cayenne supports aliases in path Expressions, so you can control how SQL joins are generated if the same path is encountered more than once in the same Expression. Two ExpressionFactory methods let you implicitly generate aliases to "split" match paths into individual joins if needed:</p>
+   <p>As discussed earlier, Cayenne supports aliases in path Expressions, so you can control how SQL joins are generated if the same path is encountered more than once in the same Expression. Two <code>ExpressionFactory.matchAllExp(..)</code> methods (one taking a <code>Collection</code> of values, another - a vararg) let you implicitly generate aliases to "split" match paths into individual joins if needed:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Expression matchAllExp(String path, Collection values)
-Expression matchAllExp(String path, Object... values)</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">// matches the artists that have both "P1" and "P2" paintings
+Expression e = ExpressionFactory.matchAllExp("|paintingArray.paintingTitle", "P1", "P2");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -523,12 +525,12 @@ Expression matchAllExp(String path, Object... values)</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">// Artist.NAME is generated by Cayenne and has a type of Property&lt;String&gt;
-Expression e1 = Artist.NAME.eq("Pablo");
+    <pre class="highlight"><code class="language-java java" data-lang="java">// Artist.ARTIST_NAME is generated by Cayenne and has a type of StringProperty&lt;String&gt;
+Expression e1 = Artist.ARTIST_NAME.eq("Pablo");
 
 // Chaining multiple properties into a path.
-// Painting.ARTIST is generated by Cayenne and has a type of Property&lt;Artist&gt;
-Expression e2 = Painting.ARTIST.dot(Artist.NAME).eq("Pablo");</code></pre>
+// Painting.TO_ARTIST is generated by Cayenne and has a type of EntityProperty&lt;Artist&gt;
+Expression e2 = Painting.TO_ARTIST.dot(Artist.ARTIST_NAME).eq("Pablo");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -545,10 +547,10 @@ Expression e2 = Painting.ARTIST.dot(Artist.NAME).eq("Pablo");</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e = Artist.NAME.in("John", "Bob");
-Artist artist = ...
-if(e.match(artist)) {
-   ...
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e = Artist.ARTIST_NAME.in("Dali", "Monet");
+Artist artist = dali();
+if (e.match(artist)) {
+    // do something with the matching object...
 }</code></pre>
    </div>
   </div>
@@ -557,7 +559,7 @@ if(e.match(artist)) {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">String name = Artist.NAME.path().evaluate(artist);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">String name = (String) Artist.ARTIST_NAME.getExpression().evaluate(artist);</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -565,8 +567,8 @@ if(e.match(artist)) {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e = Artist.NAME.in("John", "Bob");
-List&lt;Artist&gt; unfiltered = ...
+    <pre class="highlight"><code class="language-java java" data-lang="java">Expression e = Artist.ARTIST_NAME.in("Dali", "Monet");
+List&lt;Artist&gt; unfiltered = ObjectSelect.query(Artist.class).select(context);
 List&lt;Artist&gt; filtered = e.filterObjects(unfiltered);</code></pre>
    </div>
   </div>
@@ -588,13 +590,13 @@ List&lt;Artist&gt; filtered = e.filterObjects(unfiltered);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">String serial = ...
-Expression e = Pkg.SERIAL.eq(serial);
-List&lt;Object&gt; params = new ArrayList&lt;Object&gt;();
-EJBQLQuery query = new EJBQLQuery("SELECT p FROM Pkg p WHERE " + e.toEJBQL(params,"p");
+    <pre class="highlight"><code class="language-java java" data-lang="java">String title = "Guernica";
+Expression e = Painting.PAINTING_TITLE.eq(title);
+List&lt;Object&gt; params = new ArrayList&lt;&gt;();
+EJBQLQuery&lt;Painting&gt; query = new EJBQLQuery&lt;&gt;("SELECT p FROM Painting p WHERE " + e.toEJBQL(params, "p"));
 
-for(int i=0;i&lt;params.size();i++) {
-  query.setParameter(i+1, params.get(i));
+for (int i = 0; i &lt; params.size(); i++) {
+    query.setParameter(i + 1, params.get(i));
 }</code></pre>
    </div>
   </div>
@@ -603,8 +605,8 @@ for(int i=0;i&lt;params.size();i++) {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery query = new EJBQLQuery("SELECT p FROM Pkg p WHERE p.serial = ?1");
-query.setParameter(1,serial);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EJBQLQuery&lt;Painting&gt; query = new EJBQLQuery&lt;&gt;("SELECT p FROM Painting p WHERE p.paintingTitle = ?1");
+query.setParameter(1, title);</code></pre>
    </div>
   </div>
  </div>

@@ -280,7 +280,7 @@ ALTER TABLE painting ADD FOREIGN KEY (GALLERY_ID) REFERENCES gallery (ID) ON DEL
     <div class="listingblock">
      <div class="content">
       <pre class="highlight"><code class="language-xml xml" data-lang="xml">&lt;properties&gt;
-    &lt;cayenne.version&gt;5.0-M3&lt;/cayenne.version&gt;
+    &lt;cayenne.version&gt;5.0&lt;/cayenne.version&gt;
 &lt;/properties&gt;</code></pre>
      </div>
     </div>
@@ -730,7 +730,6 @@ ALTER TABLE cayenne_demo.painting ADD COLUMN __service_column INT;</code></pre>
 public class Main {
 
     public static void main(String[] args) {
-
     }
 }</code></pre>
         </div>
@@ -742,18 +741,19 @@ public class Main {
          <pre class="highlight"><code class="language-java java" data-lang="java">package org.apache.cayenne.tutorial;
 
 import org.apache.cayenne.ObjectContext;
+import org.apache.cayenne.datasource.CayenneDataSource;
 import org.apache.cayenne.runtime.CayenneRuntime;
 
 public class Main {
 
     public static void main(String[] args) {
         CayenneRuntime cayenneRuntime = CayenneRuntime.of()
-            .defaultDataNode(CayenneDataSource
-                    .of("jdbc:mysql://127.0.0.1:3306/cayenne_demo")
-                    .userName("root") // TODO: change to your actual username and password
-                    .password("your-password").build())
-            .addConfig("cayenne-project.xml")
-            .build();
+                .defaultDataNode(CayenneDataSource
+                        .of("jdbc:mysql://127.0.0.1:3306/cayenne_demo")
+                        .userName("root") // TODO: change to your actual username and password
+                        .password("your-password").build())
+                .addConfig("cayenne-project.xml")
+                .build();
         ObjectContext context = cayenneRuntime.newContext();
     }
 }</code></pre>

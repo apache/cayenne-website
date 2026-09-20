@@ -309,14 +309,14 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public interface Service1 {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public interface Service1 {
     String getString();
 }</code></pre>
     </div>
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public interface Service2 {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public interface Service2 {
     int getInt();
 }</code></pre>
     </div>
@@ -326,7 +326,7 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Service1Impl implements Service1 {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class Service1Impl implements Service1 {
     @Inject
     private Service2 service2;
 
@@ -341,7 +341,7 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Service1Impl implements Service1 {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class Service1Impl implements Service1 {
 
     private Service2 service2;
 
@@ -357,7 +357,7 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Service2Impl implements Service2 {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class Service2Impl implements Service2 {
     private int i;
 
     public int getInt() {
@@ -367,11 +367,11 @@
     </div>
    </div>
    <div class="paragraph">
-    <p>Now let’s create a module implementing <code>org.apache.cayenne.tutorial.di.Module</code> interface that will contain DI configuration. A module binds service objects to keys that are reference. Binder provided by container implements fluent API to connect the key to implementation, and to configure various binding options (the options, such as scope, are demonstrated later in this chapter). The simplest form of a key is a Java Class object representing service interface. Here is a module that binds Service1 and Service2 to corresponding default implementations:</p>
+    <p>Now let’s create a module implementing <code>org.apache.cayenne.di.Module</code> interface that will contain DI configuration. A module binds service objects to keys that are reference. Binder provided by container implements fluent API to connect the key to implementation, and to configure various binding options (the options, such as scope, are demonstrated later in this chapter). The simplest form of a key is a Java Class object representing service interface. Here is a module that binds Service1 and Service2 to corresponding default implementations:</p>
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Module1 implements Module {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class Module1 implements Module {
 
     public void configure(Binder binder) {
         binder.bind(Service1.class).to(Service1Impl.class);
@@ -385,7 +385,7 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">Injector injector = DIBootstrap.createInjector(new Module1());</code></pre>
+     <pre class="highlight"><code class="language-java java" data-lang="java">Injector injector = DIBootstrap.createInjector(new Module1());</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -393,7 +393,7 @@
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">Service1 s1 = injector.getInstance(Service1.class);
+     <pre class="highlight"><code class="language-java java" data-lang="java">Service1 s1 = injector.getInstance(Service1.class);
 for (int i = 0; i &lt; 5; i++) {
     System.out.println("S1 String: " + s1.getString());
 }</code></pre>
@@ -404,11 +404,11 @@ for (int i = 0; i &lt; 5; i++) {
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code>0_Service1Impl
-1_Service1Impl
-2_Service1Impl
-3_Service1Impl
-4_Service1Impl</code></pre>
+     <pre class="highlight"><code>S1 String: 0_Service1Impl
+S1 String: 1_Service1Impl
+S1 String: 2_Service1Impl
+S1 String: 3_Service1Impl
+S1 String: 4_Service1Impl</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -416,7 +416,7 @@ for (int i = 0; i &lt; 5; i++) {
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">// binding to instance - allowing user to create and configure instance
+     <pre class="highlight"><code class="language-java java" data-lang="java">// binding to instance - allowing user to create and configure instance
 // inside the module class
 binder.bind(Service2.class).toInstance(new Service2Impl());
 
@@ -452,7 +452,7 @@ binder.bind(Key.get(Service2.class, "i2")).to(Service2Impl.class);</code></pre>
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">binder.bind(Service2.class).to(Service2Impl.class).withoutScope();</code></pre>
+     <pre class="highlight"><code class="language-java java" data-lang="java">binder.bind(Service2.class).to(Service2Impl.class).withoutScope();</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -473,7 +473,7 @@ binder.bind(Key.get(Service2.class, "i2")).to(Service2Impl.class);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class MyExtensionsModule implements Module {
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class MyExtensionsModule implements Module {
     public void configure(Binder binder) {
         // customizations go here...
     }
@@ -482,7 +482,7 @@ binder.bind(Key.get(Service2.class, "i2")).to(Service2Impl.class);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">Module extensions = new MyExtensionsModule();
+    <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = new MyExtensionsModule();
 CayenneRuntime runtime = CayenneRuntime.of()
         .addConfig("com/example/cayenne-mydomain.xml")
         .addModule(extensions)
@@ -519,18 +519,19 @@ CayenneRuntime runtime = CayenneRuntime.of()
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class MyDbAdapterDetector implements DbAdapterDetector {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class MyDbAdapterDetector implements DbAdapterDetector {
     public DbAdapter createAdapter(DatabaseMetaData md) throws SQLException {
-        // check if we support this database and return custom adapter
-        ...
+        // check if we support this database and return custom adapter,
+        // or return null to let the other detectors handle it
+        return null;
     }
 }</code></pre>
     </div>
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">CoreModule.extend(binder)
-    .addAdapterDetector(MyDbAdapterDetector.class);</code></pre>
+     <pre class="highlight"><code class="language-java java" data-lang="java">CoreModule.extend(binder)
+        .addAdapterDetector(MyDbAdapterDetector.class);</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -556,7 +557,7 @@ CayenneRuntime runtime = CayenneRuntime.of()
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Money {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class Money {
     private BigDecimal value;
 
     public Money(BigDecimal value) {
@@ -576,7 +577,7 @@ CayenneRuntime runtime = CayenneRuntime.of()
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class MoneyValueObjectType implements ValueObjectType&lt;Money, BigDecimal&gt; {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public class MoneyValueObjectType implements ValueObjectType&lt;Money, BigDecimal&gt; {
 
     @Override
     public Class&lt;BigDecimal&gt; getTargetType() {
@@ -610,16 +611,16 @@ CayenneRuntime runtime = CayenneRuntime.of()
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">CayenneRuntime runtime = CayenneRuntime.of()
-    .addConfig("cayenne-project.xml")
-    .addModule(binder -&gt;
-        CoreModule.extend(binder)
-            .addValueObjectType(MoneyValueObjectType.class))
-    .build();</code></pre>
+     <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("cayenne-project.xml")
+        .addModule(binder -&gt;
+                CoreModule.extend(binder)
+                        .addValueObjectType(MoneyValueObjectType.class))
+        .build();</code></pre>
     </div>
    </div>
    <div class="paragraph">
-    <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/blob/master/cayenne/src/main/java/org/apache/cayenne/access/types/LocalDateValueType.java">cayenne core</a>.</p>
+    <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/blob/master/cayenne/src/main/java/org/apache/cayenne/access/types/PeriodValueType.java">cayenne core</a>.</p>
    </div>
   </div>
   <div class="sect4">
@@ -634,83 +635,79 @@ CayenneRuntime runtime = CayenneRuntime.of()
     </div>
     <div class="listingblock">
      <div class="content">
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">/**
-* Defines methods to read Java objects from JDBC ResultSets and write as parameters of
-* PreparedStatements.
-*/
-public class DoubleArrayType implements ExtendedType {
+      <pre class="highlight"><code class="language-java java" data-lang="java">/**
+ * Defines methods to read Java objects from JDBC ResultSets and write as parameters of
+ * PreparedStatements.
+ */
+public class DoubleArrayType implements ExtendedType&lt;Double[]&gt; {
 
     private final String SEPARATOR = ",";
 
     /**
-    * Returns a full name of Java class that this ExtendedType supports.
-    */
+     * Returns a full name of Java class that this ExtendedType supports.
+     */
     @Override
     public String getClassName() {
         return Double[].class.getCanonicalName();
     }
 
     /**
-    * Initializes a single parameter of a PreparedStatement with object value.
-    */
+     * Initializes a single parameter of a PreparedStatement with object value.
+     */
     @Override
-    public void setJdbcObject(PreparedStatement statement, Object value,
-            int pos, int type, int scale) throws Exception {
+    public void setJdbcObject(PreparedStatement statement, Double[] value,
+                              int pos, int type, int scale) throws Exception {
 
-        String str = StringUtils.join((Double[]) value, SEPARATOR);
-        statement.setString(pos, str);
-    }
-
-
-    /**
-    * Reads an object from JDBC ResultSet column, converting it to class returned by
-    * 'getClassName' method.
-    *
-    * @throws Exception if read error occurred, or an object can't be converted to a
-    *             target Java class.
-    */
-    @Override
-    public Object materializeObject(ResultSet rs, int index, int type) throws Exception {
-        String[] str = rs.getString(index).split(SEPARATOR);
-        Double[] res = new Double[str.length];
-
-        for (int i = 0; i &lt; str.length; i++) {
-            res[i] = Double.valueOf(str[i]);
-        }
-
-        return res;
+        statement.setString(pos, toString(value));
     }
 
     /**
-    * Reads an object from a stored procedure OUT parameter, converting it to class
-    * returned by 'getClassName' method.
-    *
-    * @throws Exception if read error ocurred, or an object can't be converted to a
-    *             target Java class.
-    */
+     * Reads an object from JDBC ResultSet column, converting it to class returned by
+     * 'getClassName' method.
+     *
+     * @throws Exception if read error occurred, or an object can't be converted to a
+     *                   target Java class.
+     */
     @Override
-    public Object materializeObject(CallableStatement rs, int index, int type) throws Exception {
-        String[] str = rs.getString(index).split(SEPARATOR);
-        Double[] res = new Double[str.length];
+    public Double[] materializeObject(ResultSet rs, int index, int type) throws Exception {
+        return fromString(rs.getString(index));
+    }
 
-        for (int i = 0; i &lt; str.length; i++) {
-            res[i] = Double.valueOf(str[i]);
-        }
+    /**
+     * Reads an object from a stored procedure OUT parameter, converting it to class
+     * returned by 'getClassName' method.
+     *
+     * @throws Exception if read error occurred, or an object can't be converted to a
+     *                   target Java class.
+     */
+    @Override
+    public Double[] materializeObject(CallableStatement rs, int index, int type) throws Exception {
+        return fromString(rs.getString(index));
+    }
 
-        return res;
+    /**
+     * Converts the value to a String. Used for the database write, as well as by Cayenne for logging.
+     */
+    @Override
+    public String toString(Double[] value) {
+        return Arrays.stream(value).map(String::valueOf).collect(Collectors.joining(SEPARATOR));
+    }
+
+    private Double[] fromString(String string) {
+        return Arrays.stream(string.split(SEPARATOR)).map(Double::valueOf).toArray(Double[]::new);
     }
 }</code></pre>
      </div>
     </div>
     <div class="listingblock">
      <div class="content">
-      <pre class="highlight"><code class="language-Java Java" data-lang="Java">// add DoubleArrayType to list of user types
+      <pre class="highlight"><code class="language-java java" data-lang="java">// add DoubleArrayType to list of user types
 CayenneRuntime runtime = CayenneRuntime.of()
-                .addConfig("cayenne-project.xml")
-                .addModule(binder -&gt;
-                    CoreModule.contributeUserTypes(binder)
-                        .add(new DoubleArrayType()))
-                .build();</code></pre>
+        .addConfig("cayenne-project.xml")
+        .addModule(binder -&gt;
+                CoreModule.extend(binder)
+                        .addUserExtendedType(new DoubleArrayType()))
+        .build();</code></pre>
      </div>
     </div>
    </div>
