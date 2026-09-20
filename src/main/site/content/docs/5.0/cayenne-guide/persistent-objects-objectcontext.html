@@ -42,7 +42,7 @@ weight: 80
    <p>These properties directly affect the strategies for scoping and sharing (or not sharing) ObjectContexts. Contexts that are only used to fetch objects from the database and whose objects are never modified by the application can be shared between multiple users (and multiple threads). Contexts that store modified objects should be accessed only by a single user (e.g. a web application user might reuse a context instance between multiple web requests in the same HttpSession, thus carrying uncommitted changes to objects from request to request, until they decide to commit them or roll them back). Even for a single user it might make sense to use multiple ObjectContexts (e.g. request-scoped contexts to allow concurrent requests from the browser that change and commit objects independently).</p>
   </div>
   <div class="paragraph">
-   <p>ObjectContext is serializable and does not permanently hold any of the application resources. So it does not have to be closed. If the context is not used anymore, it should simply be allowed to go out of scope and get garbage collected, just like any other Java object.</p>
+   <p>ObjectContext does not permanently hold any of the application resources. So it does not have to be closed. If the context is not used anymore, it should simply be allowed to go out of scope and get garbage collected, just like any other Java object.</p>
   </div>
  </div>
  <div class="sect3">
@@ -112,21 +112,41 @@ weight: 80
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect.query(Artist.class)
-    .select(context);</code></pre>
+        .select(context);</code></pre>
    </div>
   </div>
   <div class="paragraph">
    <p>We’ll discuss queries in some detail in the <a href="/docs/5.0/cayenne-guide/queries">Queries</a> chapter. The example above is self-explanatory - we create a <code>ObjectSelect</code> that matches all <code>Artist</code> objects present in the database, and then use <code>select</code> to get the result.</p>
   </div>
   <div class="paragraph">
-   <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries, ObjectContext provides the <code>performGenericQuery()</code> method. While not commonly used, it is nevertheless important in some situations. E.g.:</p>
+   <p>Some queries can be quite complex, returning multiple result sets or even updating the database. For such queries, ObjectContext provides the <code>execute()</code> method. While not commonly used, it is nevertheless important in some situations. E.g.:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Collection&lt;Query&gt; queries = ... // multiple queries that need to be run together
-QueryChain query = new QueryChain(queries);
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;QueryResult&gt; result = context.execute(query);
+for (QueryResult item : result) {
+    switch (item) {
+        case QueryResult.Select&lt;?&gt; select -&gt; process(select.objects());
+        case QueryResult.Update update -&gt; process(update.counts());
+        case QueryResult.Iterator&lt;?&gt; iterator -&gt; process(iterator.iterator());
+        case QueryResult.OutParameters out -&gt; process(out.values());
+    }
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>When multiple such queries need to run together, execute them inside an explicit transaction:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">Collection&lt;Query&gt; queries = List.of( // multiple queries that need to be run together
+        SQLExec.query("DELETE FROM PAINTING"),
+        SQLExec.query("DELETE FROM ARTIST"));
 
-QueryResponse response = context.performGenericQuery(query);</code></pre>
+runtime.performInTransaction(() -&gt; {
+    queries.forEach(context::execute);
+    return null;
+});</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -135,7 +155,7 @@ QueryResponse response = context.performGenericQuery(query);</code></pre>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">Artist selectedArtist = artists.get(0);
-selectedArtist.setName("Dali");</code></pre>
+selectedArtist.setArtistName("Dali");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -163,7 +183,7 @@ selectedArtist.setName("Dali");</code></pre>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">Artist newArtist = context.newObject(Artist.class);
-newArtist.setName("Picasso");</code></pre>
+newArtist.setArtistName("Picasso");</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -198,7 +218,7 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">EntityResolver resolver = objectContext.getEntityResolver();</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">EntityResolver resolver = context.getEntityResolver();</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -216,15 +236,15 @@ Artist localArtist = editingContext.localObject(artist);</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>It also provides the reverse operation - finding an object given a known PK:</p>
+   <p>The reverse operation - finding an object given a known PK - is a part of the ObjectContext API. It returns an object already registered in the context without a query, and consults the caches before going to the database:</p>
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-java java" data-lang="java">Artist artist = Cayenne.objectForPK(context, Artist.class, 34579);</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">Artist artist = context.objectForPK(Artist.class, 34579);</code></pre>
    </div>
   </div>
   <div class="paragraph">
-   <p>For more flexibility, you could use the <a href="/docs/5.0/cayenne-guide/queries#selectbyid">SelectById</a> query instead.</p>
+   <p>For more flexibility, you could <a href="/docs/5.0/cayenne-guide/queries#selectbyid">select by ID</a> with <code>ObjectSelect</code> instead.</p>
   </div>
   <div class="paragraph">
    <p>Feel free to explore the <code>Cayenne</code> class API for other useful methods.</p>
@@ -283,7 +303,7 @@ nested.rollbackChanges();</code></pre>
    <p>Generic objects are first-class citizens in Cayenne, and all common persistent operations apply to them as well. There are some peculiarities, however, described below.</p>
   </div>
   <div class="paragraph">
-   <p>When creating a generic object, either cast your ObjectContext to <code>DataContext</code> (that provides <code>newObject(String)</code> API), or provide your object with an explicit ObjectId:</p>
+   <p>When creating a generic object, either use <code>ObjectContext.newObject(String)</code>, that takes an entity name, or provide your object with an explicit ObjectId:</p>
   </div>
   <div class="listingblock">
    <div class="content">
@@ -343,10 +363,10 @@ generic.writeProperty("name", "New Name");</code></pre>
     // commit one or more contexts
     context1.commitChanges();
     context2.commitChanges();
-    ....
+
     // after changing some objects in context1, commit again
+    context1.newObject(Artist.class).setArtistName("a3");
     context1.commitChanges();
-    ....
 
     // return an arbitrary result or null if we don't care about the result
     return 5;

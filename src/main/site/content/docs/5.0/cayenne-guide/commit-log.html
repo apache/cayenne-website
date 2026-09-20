@@ -65,12 +65,14 @@ public class Order extends _Order {
    <div class="listingblock">
     <div class="content">
      <pre class="highlight"><code class="language-java java" data-lang="java">@CommitLog(
-    ignoredProperties = {"internalState"},         // exclude from change records
-    ignoreAttributes = false,                       // set true to skip all attributes
-    ignoreToOneRelationships = false,               // set true to skip all to-one relationships
-    ignoreToManyRelationships = false               // set true to skip all to-many relationships
+        ignoredProperties = {"internalState"},         // exclude from change records
+        ignoreAttributes = false,                       // set true to skip all attributes
+        ignoreToOneRelationships = false,               // set true to skip all to-one relationships
+        ignoreToManyRelationships = false               // set true to skip all to-many relationships
 )
-public class Order extends _Order { ... }</code></pre>
+public class Order extends _Order {
+    // ...
+}</code></pre>
     </div>
    </div>
    <div class="paragraph">
@@ -137,7 +139,7 @@ public class Order extends _Order { ... }</code></pre>
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">CoreModule.extend(binder)
         .commitLogAnnotationEntitiesOnly()
-        .addCommitLogListener(AuditListener.class)</code></pre>
+        .addCommitLogListener(AuditListener.class);</code></pre>
    </div>
   </div>
  </div>
@@ -150,7 +152,7 @@ public class Order extends _Order { ... }</code></pre>
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">CoreModule.extend(binder)
         .excludeCommitLogFromTransaction()
-        .addCommitLogListener(AuditListener.class)</code></pre>
+        .addCommitLogListener(AuditListener.class);</code></pre>
    </div>
   </div>
   <div class="admonitionblock important">
@@ -172,10 +174,31 @@ public class Order extends _Order { ... }</code></pre>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">public class MyEntityFactory implements CommitLogEntityFactory {
+
     @Override
-    public CommitLogEntity getEntity(ObjEntity entity) {
-        // return null to exclude the entity, or a CommitLogEntity instance to include it
-        ...
+    public CommitLogEntity getEntity(ObjectId id) {
+
+        // the returned CommitLogEntity defines whether the entity and its individual properties are included
+        boolean entityIncluded = !"Painting".equals(id.getEntityName());
+
+        return new CommitLogEntity() {
+
+            @Override
+            public boolean isIncluded() {
+                return entityIncluded;
+            }
+
+            @Override
+            public boolean isIncluded(String property) {
+                // all the properties of the excluded entity must be excluded as well
+                return entityIncluded;
+            }
+
+            @Override
+            public boolean isConfidential(String property) {
+                return false;
+            }
+        };
     }
 }</code></pre>
    </div>
@@ -184,7 +207,7 @@ public class Order extends _Order { ... }</code></pre>
    <div class="content">
     <pre class="highlight"><code class="language-java java" data-lang="java">CoreModule.extend(binder)
         .commitLogEntityFactory(MyEntityFactory.class)
-        .addCommitLogListener(AuditListener.class)</code></pre>
+        .addCommitLogListener(AuditListener.class);</code></pre>
    </div>
   </div>
  </div>

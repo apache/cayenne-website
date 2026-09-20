@@ -62,7 +62,7 @@ total 24
  <div class="sect3">
   <h4 id="datanode"><a class="anchor" href="#datanode"></a>1.2.3. DataNode</h4>
   <div class="paragraph">
-   <p>DataNode is model of a database. It is actually pretty simple. It has an arbitrary user-provided name and information needed to create or locate a JDBC DataSource. Most projects only have one DataNode, though there may be any number of nodes if needed.</p>
+   <p>DataNode is a model of a database. It is actually pretty simple. It has a name and a JDBC DataSource. Unlike the rest of the objects discussed here, DataNodes are not a part of the XML mapping project. They are defined in the code, when Cayenne runtime is created (see <a href="/docs/5.0/cayenne-guide/starting-cayenne">Starting Cayenne</a>). Most applications only have one DataNode, though there may be any number of nodes if needed.</p>
   </div>
  </div>
  <div class="sect3">

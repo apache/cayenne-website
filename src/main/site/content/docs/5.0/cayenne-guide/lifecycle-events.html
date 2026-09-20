@@ -104,7 +104,7 @@ weight: 120
        <div class="ulist">
         <ul>
          <li>
-          <p>After an object is fetched inside ObjectContext.performQuery().</p></li>
+          <p>After an object is fetched inside ObjectContext.select().</p></li>
          <li>
           <p>After an object is reverted inside ObjectContext.rollbackChanges().</p></li>
          <li>
@@ -155,7 +155,7 @@ weight: 120
    </div>
    <div class="listingblock">
     <div class="content">
-     <pre class="highlight"><code class="language-Java Java" data-lang="Java">public abstract class _Order extends PersistentObject {
+     <pre class="highlight"><code class="language-java java" data-lang="java">public abstract class _Order extends PersistentObject {
     protected abstract void onNewOrder();
 }
 
@@ -180,12 +180,12 @@ public class Order extends _Order {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java"> public class OrderListener {
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class OrderListener {
 
-   @PostAdd(Order.class)
-   public void setDefaultsForNewOrder(Order o) {
-      o.setCreatedOn(new Date());
-   }
+    @PostAdd(Order.class)
+    public void setDefaultsForNewOrder(Order o) {
+        o.setCreatedOn(new Date());
+    }
 }</code></pre>
    </div>
   </div>
@@ -197,7 +197,7 @@ public class Order extends _Order {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Listener1 {
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class Listener1 {
 
     @PostAdd(MyEntity.class)
     void postAdd(Persistent object) {
@@ -207,12 +207,12 @@ public class Order extends _Order {
 
 public class Listener2 {
 
-    @PostRemove({ MyEntity1.class, MyEntity2.class })
+    @PostRemove({MyEntity1.class, MyEntity2.class})
     void postRemove(Persistent object) {
         // do something
     }
 
-    @PostUpdate({ MyEntity1.class, MyEntity2.class })
+    @PostUpdate({MyEntity1.class, MyEntity2.class})
     void postUpdate(Persistent object) {
         // do something
     }
@@ -224,15 +224,15 @@ public class Listener2 {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">CayenneRuntime runtime = CayenneRuntime.of()
-       // ..
-       .addModule(binder -&gt;
-            CoreModule.extend(bidner)
-                .addListener(Listener1.class)
-                .addListener(new Listener2())
-       )
-       // ..
-       .build();</code></pre>
+    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
+        // ..
+        .addModule(binder -&gt;
+                CoreModule.extend(binder)
+                        .addListenerType(Listener1.class)
+                        .addListener(new Listener2())
+        )
+        // ..
+        .build();</code></pre>
    </div>
   </div>
   <div class="paragraph">
@@ -243,9 +243,9 @@ public class Listener2 {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">// this callback will be invoked on PostRemove event of any object
+    <pre class="highlight"><code class="language-java java" data-lang="java">// this callback will be invoked on PostRemove event of any object
 // belonging to MyEntity1, MyEntity2 or their subclasses
-@PostRemove({ MyEntity1.class, MyEntity2.class })
+@PostRemove({MyEntity1.class, MyEntity2.class})
 void postRemove(Persistent object) {
     // ...
 }</code></pre>
@@ -253,7 +253,7 @@ void postRemove(Persistent object) {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">// similar example with multiple annotations on a single method
+    <pre class="highlight"><code class="language-java java" data-lang="java">// similar example with multiple annotations on a single method
 // each matching just one entity
 @PostPersist(MyEntity1.class)
 @PostRemove(MyEntity1.class)
@@ -268,7 +268,7 @@ void postCommit(MyEntity1 object) {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">@Target(ElementType.TYPE)
+    <pre class="highlight"><code class="language-java java" data-lang="java">@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Tag {
 
@@ -280,7 +280,7 @@ public @interface Tag {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class Listener3 {
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class Listener3 {
 
     @PostAdd(entityAnnotations = Tag.class)
     void postAdd(Persistent object) {
@@ -294,7 +294,7 @@ public @interface Tag {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">@Tag
+    <pre class="highlight"><code class="language-java java" data-lang="java">@Tag
 public class MyEntity1 extends _MyEntity1 {
 
 }
@@ -313,13 +313,13 @@ public class MyEntity2 extends _MyEntity2 {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">public class CommittedObjectCounter implements DataChannelSyncFilter {
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class CommittedObjectCounter implements DataChannelSyncFilter {
 
     private ThreadLocal&lt;int[]&gt; counter = new ThreadLocal&lt;int[]&gt;();
 
     @Override
     public GraphDiff onSync(ObjectContext originatingContext, GraphDiff changes, int syncType,
-            DataChannelSyncFilterChain filterChain) {
+                            DataChannelSyncFilterChain filterChain) {
 
         // init the counter for the current commit
         counter.set(new int[1]);
@@ -348,7 +348,7 @@ public class MyEntity2 extends _MyEntity2 {
   </div>
   <div class="listingblock">
    <div class="content">
-    <pre class="highlight"><code class="language-Java Java" data-lang="Java">// this will also add filter as a listener
+    <pre class="highlight"><code class="language-java java" data-lang="java">// this will also add filter as a listener
 CayenneRuntime runtime = CayenneRuntime.of()
         // ..
         .addModule(b -&gt;
