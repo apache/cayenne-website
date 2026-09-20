@@ -21,25 +21,25 @@ description: "Cayenne Guide 5.0, Reverse Engineering in Cayenne Modeler"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 240
+weight: 130
 ---
 <div class="sect2">
- <h3 id="re-modeler"><a class="anchor" href="#re-modeler"></a>4.4. Reverse Engineering in Cayenne Modeler</h3>
+ <h3 id="re-modeler"><a class="anchor" href="#re-modeler"></a>Reverse Engineering in Cayenne Modeler</h3>
  <div class="paragraph">
-  <p>Alternative approach to using <a href="/docs/5.0/cayenne-guide/re-introduction">build tools</a> is doing reverse engineering from <a href="/docs/5.0/cayenne-guide/cayenne-modeler">CayenneModeler</a>.</p>
+  <p>Alternative approach to using <a href="/docs/5.0/cayenne-guide/build_tools">build tools</a> is doing reverse engineering from CayenneModeler.</p>
  </div>
  <div class="paragraph">
-  <p>You can find reverse engineering tool in dataMap view on <strong>DbImport Tab</strong>.</p>
+  <p>You can find the reverse engineering tool on the <strong>DB Import</strong> tab of a DataMap.</p>
  </div>
  <div class="sect3">
-  <h4 id="reverse-engineering-options"><a class="anchor" href="#reverse-engineering-options"></a>4.4.1. Reverse engineering options</h4>
+  <h4 id="reverse-engineering-options"><a class="anchor" href="#reverse-engineering-options"></a>Reverse engineering options</h4>
   <div class="imageblock text-center">
    <div class="content">
     <img src="../images/re-modeler-reverseengineering-dialog.png" alt="re modeler reverseengineering dialog">
    </div>
   </div>
   <div class="paragraph">
-   <p>Reverse Engineering dialog.</p>
+   <p>DB Import tab.</p>
   </div>
   <div class="paragraph">
    <p>Here is a list of options to tune what will be processed by reverse engineering:</p>
@@ -51,40 +51,49 @@ weight: 240
     <li>
      <p><strong>Add Schema</strong></p></li>
     <li>
-     <p><strong>Add Include Table</strong></p></li>
+     <p><strong>Include Table</strong></p></li>
     <li>
-     <p><strong>Add Exclude Table</strong></p></li>
+     <p><strong>Exclude Table</strong></p></li>
     <li>
-     <p><strong>Add Include Column</strong></p></li>
+     <p><strong>Include Column</strong></p></li>
     <li>
-     <p><strong>Add Exclude Column</strong></p></li>
+     <p><strong>Exclude Column</strong></p></li>
     <li>
-     <p><strong>Add Include Procedure</strong></p></li>
+     <p><strong>Include Procedure</strong></p></li>
     <li>
-     <p><strong>Add Exclude Procedure</strong></p></li>
+     <p><strong>Exclude Procedure</strong></p></li>
+   </ul>
+  </div>
+  <div class="paragraph">
+   <p>More options are available after clicking <strong>Advanced Options</strong>:</p>
+  </div>
+  <div class="ulist">
+   <ul>
     <li>
-     <p><strong>Tables with Meaningful PK Pattern</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p></li>
+     <p><strong>Naming Strategy</strong>: A strategy that generates the names of ObjEntities, attributes and relationships.</p></li>
     <li>
-     <p><strong>Strip from table names</strong>: Regex that matches the part of the table name that needs to be stripped off generating ObjEntity name.</p></li>
+     <p><strong>Meaningful PK</strong>: Comma separated list of RegExp’s for tables that you want to have meaningful primary keys. By default no meaningful PKs are created.</p></li>
     <li>
-     <p><strong>Skip relationships loading</strong>: Whether to load relationships.</p></li>
+     <p><strong>Strip From Table Names</strong>: Regex that matches the part of the table name that needs to be stripped off generating ObjEntity name.</p></li>
     <li>
-     <p><strong>Skip primary key loading</strong>: Whether to load primary keys.</p></li>
+     <p><strong>Table Types</strong>: Table types to import. By default these are TABLE and VIEW.</p></li>
     <li>
-     <p><strong>Force datamap catalog</strong>: will set DbEntity catalog to one in the DataMap.</p></li>
+     <p><strong>Skip Relationships</strong>: Whether to load relationships.</p></li>
     <li>
-     <p><strong>Force datamap schema</strong>: will set DbEntity schema to one in the DataMap.</p></li>
+     <p><strong>Skip Primary Keys</strong>: Whether to load primary keys.</p></li>
     <li>
-     <p><strong>Use Java primitive types</strong>: Use primitive types (e.g. <strong>int</strong>) or Object types (e.g. <strong>java.lang.Integer</strong>).</p></li>
+     <p><strong>Force DataMap Catalog</strong>: will set DbEntity catalog to one in the DataMap.</p></li>
     <li>
-     <p><strong>Use old java.util.Date type</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p></li>
+     <p><strong>Force DataMap Schema</strong>: will set DbEntity schema to one in the DataMap.</p></li>
+    <li>
+     <p><strong>Use Java 7 Types</strong>: Use <strong>java.util.Date</strong> for all columns with <strong>DATE/TIME/TIMESTAMP</strong> types. By default <strong>java.time.</strong> types will be used.</p></li>
    </ul>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="datasource-selection"><a class="anchor" href="#datasource-selection"></a>4.4.2. DataSource selection</h4>
+  <h4 id="datasource-selection"><a class="anchor" href="#datasource-selection"></a>DataSource selection</h4>
   <div class="paragraph">
-   <p>Then you click <code>Run Import</code> or <code>Configure Connection</code> to set DataSource. If you don’t have any DataSource yet you can create one from this menu.</p>
+   <p>Click <code>Configure Connection</code> to set a DataSource (<code>Run Import</code> would also ask for it, if there is none yet). You can pick one of the saved DataSources, or enter the connection settings right in the dialog.</p>
   </div>
   <div class="imageblock text-center">
    <div class="content">
@@ -92,10 +101,10 @@ weight: 240
    </div>
   </div>
   <div class="paragraph">
-   <p>Datasource selection dialog.</p>
+   <p>DataSource configuration dialog.</p>
   </div>
   <div class="paragraph">
-   <p>Then click <code>continue</code> to start dbImport.</p>
+   <p>Then click <code>Continue</code>. Once the connection is configured, <code>Run Import</code> starts the import.</p>
   </div>
  </div>
 </div>

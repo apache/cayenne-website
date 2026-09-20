@@ -1,0 +1,84 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Persistent Object and its Lifecycle"
+description: "Cayenne Guide 5.0, Persistent Object and its Lifecycle"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 270
+---
+<div class="sect2">
+ <h3 id="persistent-object-and-its-lifecycle"><a class="anchor" href="#persistent-object-and-its-lifecycle"></a>Persistent Object and its Lifecycle</h3>
+ <div class="paragraph">
+  <p>Cayenne can persist Java objects that implement the <code>org.apache.cayenne.Persistent</code> interface. Generally, persistent classes are generated from the model as described above, so users do not have to worry about superclass and property implementation details.</p>
+ </div>
+ <div class="paragraph">
+  <p>The <code>Persistent</code> interface provides access to three persistence-related properties - <em>objectId</em>, <em>persistenceState</em> and <em>objectContext</em>. All three are initialized by the Cayenne runtime framework. Your application code should not attempt to change them. However, it is allowed to read them, which provides valuable runtime information. E.g. ObjectId can be used for a quick equality check of two objects, knowing persistence state would allow highlighting changed objects, etc.</p>
+ </div>
+ <div class="paragraph">
+  <p>Each persistent object belongs to a single ObjectContext, and can be in one of the following persistence states (as defined in <code>org.apache.cayenne.PersistenceState</code>) :</p>
+ </div>
+ <table id="persistenceStates" class="tableblock frame-all grid-all stretch table table-bordered">
+  <caption class="title">
+   Table 2. Persistence States
+  </caption>
+  <colgroup>
+   <col style="width: 20%;">
+   <col style="width: 80%;">
+  </colgroup>
+  <tbody>
+   <tr>
+    <td class="tableblock halign-center valign-middle">
+     <p class="tableblock"><strong>TRANSIENT</strong></p></td>
+    <td class="tableblock halign-left valign-top">
+     <p class="tableblock">The object is not registered with an ObjectContext and will not be persisted.</p></td>
+   </tr>
+   <tr>
+    <td class="tableblock halign-center valign-middle">
+     <p class="tableblock"><strong>NEW</strong></p></td>
+    <td class="tableblock halign-left valign-top">
+     <p class="tableblock">The object is freshly registered in an ObjectContext, but has not been saved to the database yet and there is no matching database row.</p></td>
+   </tr>
+   <tr>
+    <td class="tableblock halign-center valign-middle">
+     <p class="tableblock"><strong>COMMITTED</strong></p></td>
+    <td class="tableblock halign-left valign-top">
+     <p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, and the object state corresponds to the last known state of the matching database row.</p></td>
+   </tr>
+   <tr>
+    <td class="tableblock halign-center valign-middle">
+     <p class="tableblock"><strong>MODIFIED</strong></p></td>
+    <td class="tableblock halign-left valign-top">
+     <p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, but the object in-memory state has diverged from the last known state of the matching database row.</p></td>
+   </tr>
+   <tr>
+    <td class="tableblock halign-center valign-middle">
+     <p class="tableblock"><strong>HOLLOW</strong></p></td>
+    <td class="tableblock halign-left valign-top">
+     <p class="tableblock">The object is registered in an ObjectContext, there is a row in the database corresponding to this object, but the object state is unknown. Whenever an application tries to access a property of such object, Cayenne attempts reading its values from the database and "inflate" the object, turning it to COMMITTED.</p></td>
+   </tr>
+   <tr>
+    <td class="tableblock halign-center valign-middle">
+     <p class="tableblock"><strong>DELETED</strong></p></td>
+    <td class="tableblock halign-left valign-top">
+     <p class="tableblock">The object is registered in an ObjectContext and has been marked for deletion in-memory. The corresponding row in the database will get deleted upon ObjectContext commit, and the object state will be turned into TRANSIENT.</p></td>
+   </tr>
+  </tbody>
+ </table>
+</div>

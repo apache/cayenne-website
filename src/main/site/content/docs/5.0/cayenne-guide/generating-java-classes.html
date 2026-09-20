@@ -1,0 +1,37 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Generating Java Classes"
+description: "Cayenne Guide 5.0, Generating Java Classes"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 140
+---
+<div class="sect2">
+ <h3 id="generating-java-classes"><a class="anchor" href="#generating-java-classes"></a>Generating Java Classes</h3>
+ <div class="paragraph">
+  <p>Before using Cayenne in you code you need to generate java source code for persistent objects. This can be done with Modeler GUI or via <a href="/docs/5.0/cayenne-guide/maven_plugin#cgen">cgen</a> maven/ant plugin.</p>
+ </div>
+ <div class="paragraph">
+  <p>To generate classes in the Modeler select a DataMap, go to the <strong>Class Generation</strong> tab and click <strong>Generate</strong>.</p>
+ </div>
+ <div class="paragraph">
+  <p>The default settings are suitable for almost all cases. Change them only if you know what exactly you need to customize. The "Advanced options" and "Templates options" on the same tab let you control almost all aspects of code generation, including custom templates for Java code. See default Cayenne templates on GitHub as an example.</p>
+ </div>
+</div>

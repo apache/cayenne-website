@@ -1,0 +1,199 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Using custom data types"
+description: "Cayenne Guide 5.0, Using custom data types"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 670
+---
+<div class="sect2">
+ <h3 id="using-custom-data-types"><a class="anchor" href="#using-custom-data-types"></a>Using custom data types</h3>
+ <div class="sect3">
+  <h4 id="value-object-type"><a class="anchor" href="#value-object-type"></a>Value object type</h4>
+  <div class="paragraph">
+   <p><code>ValueObjectType</code> is a new and lightweight alternative to the Extended Types API described in the following section. In most cases is should be preferred as is it easier to understand and use. Currently only one case is known when <code>ExtendedType</code> should be used: when your value object can be mapped on different JDBC types.</p>
+  </div>
+  <div class="paragraph">
+   <p>In order to use your custom data type you should implement <code>ValueObjectType</code> describing it in terms of some type already known to Cayenne (e.g. backed by system or user ExtendedType). Let’s assume we want to support some data type called <code>Money</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class Money {
+    private BigDecimal value;
+
+    public Money(BigDecimal value) {
+        this.value = value;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    // .. some other business logic ..
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Here is how <code>ValueObjectType</code> that will allow to store our <code>Money</code> class as <code>BigDecimal</code> can be implemented:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class MoneyValueObjectType implements ValueObjectType&lt;Money, BigDecimal&gt; {
+
+    @Override
+    public Class&lt;BigDecimal&gt; getTargetType() {
+        return BigDecimal.class;
+    }
+
+    @Override
+    public Class&lt;Money&gt; getValueType() {
+        return Money.class;
+    }
+
+    @Override
+    public Money toJavaObject(BigDecimal value) {
+        return new Money(value);
+    }
+
+    @Override
+    public BigDecimal fromJavaObject(Money object) {
+        return object.getValue();
+    }
+
+    @Override
+    public String toCacheKey(Money object) {
+        return object.getValue().toString();
+    }
+}</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Last step is to register this new type in <code>CayenneRuntime</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("cayenne-project.xml")
+        .addModule(binder -&gt;
+                CoreModule.extend(binder)
+                        .addValueObjectType(MoneyValueObjectType.class))
+        .build();</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>More examples of implementation you can find in <a href="https://github.com/apache/cayenne/blob/master/cayenne/src/main/java/org/apache/cayenne/access/types/PeriodValueType.java">cayenne core</a>.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="extended-types"><a class="anchor" href="#extended-types"></a>Extended Types</h4>
+  <div class="paragraph">
+   <p>JDBC specification defines a set of "standard" database column types (defined in java.sql.Types class) and a very specific mapping of these types to Java Object Types, such as java.lang.String, java.math.BigDecimal, etc. Sometimes there is a need to use a custom Java type not known to JDBC driver and Cayenne allows to configure it. For this Cayenne needs to know how to instantiate this type from a database "primitive" value, and conversely, how to transform an object of the custom type to a JDBC-compatible object.</p>
+  </div>
+  <div class="sect4">
+   <h5 id="supporting-non-standard-types"><a class="anchor" href="#supporting-non-standard-types"></a>Supporting Non-Standard Types</h5>
+   <div class="paragraph">
+    <p>For supporting non-standard type you should define it via an interface <code>org.apache.cayenne.access.types.ExtendedType</code>. An implementation must provide <code>ExtendedType.getClassName()</code> method that returns a fully qualified Java class name for the supported custom type, and a number of methods that convert data between JDBC and custom type. The following example demonstrates how to add a custom DoubleArrayType to store <code>java.lang.Double[]</code> as a custom string in a database:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">/**
+ * Defines methods to read Java objects from JDBC ResultSets and write as parameters of
+ * PreparedStatements.
+ */
+public class DoubleArrayType implements ExtendedType&lt;Double[]&gt; {
+
+    private final String SEPARATOR = ",";
+
+    /**
+     * Returns a full name of Java class that this ExtendedType supports.
+     */
+    @Override
+    public String getClassName() {
+        return Double[].class.getCanonicalName();
+    }
+
+    /**
+     * Initializes a single parameter of a PreparedStatement with object value.
+     */
+    @Override
+    public void setJdbcObject(PreparedStatement statement, Double[] value,
+                              int pos, int type, int scale) throws Exception {
+
+        statement.setString(pos, toString(value));
+    }
+
+    /**
+     * Reads an object from JDBC ResultSet column, converting it to class returned by
+     * 'getClassName' method.
+     *
+     * @throws Exception if read error occurred, or an object can't be converted to a
+     *                   target Java class.
+     */
+    @Override
+    public Double[] materializeObject(ResultSet rs, int index, int type) throws Exception {
+        return fromString(rs.getString(index));
+    }
+
+    /**
+     * Reads an object from a stored procedure OUT parameter, converting it to class
+     * returned by 'getClassName' method.
+     *
+     * @throws Exception if read error occurred, or an object can't be converted to a
+     *                   target Java class.
+     */
+    @Override
+    public Double[] materializeObject(CallableStatement rs, int index, int type) throws Exception {
+        return fromString(rs.getString(index));
+    }
+
+    /**
+     * Converts the value to a String. Used for the database write, as well as by Cayenne for logging.
+     */
+    @Override
+    public String toString(Double[] value) {
+        return Arrays.stream(value).map(String::valueOf).collect(Collectors.joining(SEPARATOR));
+    }
+
+    private Double[] fromString(String string) {
+        return Arrays.stream(string.split(SEPARATOR)).map(Double::valueOf).toArray(Double[]::new);
+    }
+}</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">// add DoubleArrayType to list of user types
+CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("cayenne-project.xml")
+        .addModule(binder -&gt;
+                CoreModule.extend(binder)
+                        .addUserExtendedType(new DoubleArrayType()))
+        .build();</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="dbadapters-and-extended-types"><a class="anchor" href="#dbadapters-and-extended-types"></a>DbAdapters and Extended Types</h5>
+   <div class="paragraph">
+    <p>As shown in the example above, ExtendedTypes are stored by DbAdapter. In fact DbAdapters often install their own extended types to address incompatibilities, incompleteness and differences between JDBC drivers in handling "standard" JDBC types. For instance some drivers support reading large character columns (CLOB) as java.sql.Clob, but some other - as "character stream", etc. Adapters provided with Cayenne override <code>configureExtendedTypes()</code> method to install their own types, possibly substituting Cayenne defaults. Custom DbAdapters can use the same technique.</p>
+   </div>
+  </div>
+ </div>
+</div>

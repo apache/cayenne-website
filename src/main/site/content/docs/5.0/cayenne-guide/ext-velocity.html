@@ -21,15 +21,15 @@ description: "Cayenne Guide 5.0, Apache Velocity Extension"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 300
+weight: 780
 ---
 <div class="sect2">
- <h3 id="ext-velocity"><a class="anchor" href="#ext-velocity"></a>5.5. Apache Velocity Extension</h3>
+ <h3 id="ext-velocity"><a class="anchor" href="#ext-velocity"></a>Apache Velocity Extension</h3>
  <div class="paragraph">
   <p>Enables usage of full featured Apache Velocity templates in <code>SQLSelect</code> / <code>SQLExec</code> queries.</p>
  </div>
  <div class="sect3">
-  <h4 id="maven-6"><a class="anchor" href="#maven-6"></a>5.5.1. Maven</h4>
+  <h4 id="maven-6"><a class="anchor" href="#maven-6"></a>Maven</h4>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-XML XML" data-lang="XML">&lt;dependency&gt;
@@ -41,7 +41,7 @@ weight: 300
   </div>
  </div>
  <div class="sect3">
-  <h4 id="gradle-6"><a class="anchor" href="#gradle-6"></a>5.5.2. Gradle</h4>
+  <h4 id="gradle-6"><a class="anchor" href="#gradle-6"></a>Gradle</h4>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-Groovy Groovy" data-lang="Groovy">compile 'org.apache.cayenne:cayenne-velocity:5.0'</code></pre>
@@ -49,9 +49,9 @@ weight: 300
   </div>
  </div>
  <div class="sect3">
-  <h4 id="usage-5"><a class="anchor" href="#usage-5"></a>5.5.3. Usage</h4>
+  <h4 id="usage-5"><a class="anchor" href="#usage-5"></a>Usage</h4>
   <div class="paragraph">
-   <p>This module doesn’t require any additional setup. In addition of directives mentioned in <a href="/docs/5.0/cayenne-guide/queries#directives">this chapter</a>, this module also adds <code>#chain</code> and <code>#chunk</code> directives.</p>
+   <p>This module doesn’t require any additional setup. In addition of directives mentioned in <a href="/docs/5.0/cayenne-guide/sqlscripting#directives">this chapter</a>, this module also adds <code>#chain</code> and <code>#chunk</code> directives.</p>
   </div>
   <div class="paragraph">
    <p><code>#chain</code> and <code>#chunk</code> directives are used for conditional inclusion of SQL code. They are used together with <code>#chain</code> wrapping multiple <code>#chunks</code>. A chunk evaluates its parameter expression and if it is NULL suppresses rendering of the enclosed SQL block. A chain renders its prefix and its chunks joined by the operator. If all the chunks are suppressed, the chain itself is suppressed. This allows to work with otherwise hard to script SQL semantics. E.g. a WHERE clause can contain multiple conditions joined with AND or OR. Application code would like to exclude a condition if its right-hand parameter is not present (similar to Expression pruning discussed above). If all conditions are excluded, the entire WHERE clause should be excluded. chain/chunk allows to do that.</p>
@@ -74,7 +74,7 @@ weight: 300
    <div class="content">
     <pre class="highlight"><code>#chain('OR' 'WHERE')
     #chunk($name) NAME LIKE #bind($name) #end
-    #chunk($id) ARTIST_ID &gt; #bind($id) #end
+    #chunk($id) ID &gt; #bind($id) #end
 #end"</code></pre>
    </div>
   </div>

@@ -29,6 +29,9 @@ gulp.task('serve', ['build:all'], function() {
         server: {
             baseDir: global.hugoConfig.publicDir
         },
+        // The asset URLs are absolute, and point to the "host" below. Allow them to be loaded when the site is opened
+        // via another address (e.g. the "External" URL), as the browsers refuse to load cross-origin fonts otherwise
+        cors: true,
         open: false,
         host: argv.host,
         port: argv.port

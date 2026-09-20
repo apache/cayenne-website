@@ -1,0 +1,70 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · SQLSelect and SQLExec"
+description: "Cayenne Guide 5.0, SQLSelect and SQLExec"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 420
+---
+<div class="sect2">
+ <h3 id="sqlselect"><a class="anchor" href="#sqlselect"></a>SQLSelect and SQLExec</h3>
+ <div class="paragraph">
+  <p>SQL is very powerful and allows to manipulate data in ways that can not always be described as a graph of related entities. Cayenne acknowledges this fact and provides a facility to execute SQL, sometimes allowing to map results back to persistent objects. <code>SQLSelect</code> and <code>SQLExec</code> are a pair of queries that allow to run native SQL. <code>SQLSelect</code> can be used (as the name suggests) to select custom data in form of entities, separate columns, collection of <code>DataRow</code> or <code>Object[]</code>. <code>SQLExec</code> is designed to execute any SQL (e.g. updates, deletes, DDLs, etc.).</p>
+ </div>
+ <div class="paragraph">
+  <p>Both queries support advanced SQL templating, with variable substitution and special directives as described <a href="/docs/5.0/cayenne-guide/sqlscripting">in the next chapter</a>. Here we’ll just provide a few simple examples:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">// Selecting objects
+List&lt;Painting&gt; paintings = SQLSelect
+        .query(Painting.class, "SELECT * FROM PAINTING WHERE TITLE LIKE 'G%'")
+        .upperColumnNames()
+        .localCache()
+        .limit(100)
+        .select(context);
+
+// Selecting scalar values
+List&lt;String&gt; paintingNames = SQLSelect
+        .scalarQuery("SELECT TITLE FROM PAINTING WHERE ESTIMATED_PRICE &gt; 100000", String.class)
+        .select(context);
+
+// Selecting DataRow with predefined types
+List&lt;DataRow&gt; rows = SQLSelect
+        .dataRowQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
+        .select(context);
+
+// Selecting Object[] with predefined types
+List&lt;Object[]&gt; arrays = SQLSelect
+        .columnQuery("SELECT * FROM ARTIST", Integer.class, String.class, LocalDate.class)
+        .select(context);</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>And here is an example of how to use <code>SQLExec</code>:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">int inserted = SQLExec
+        .query("INSERT INTO ARTIST (ID, NAME) VALUES (55, 'Picasso')")
+        .update(context);</code></pre>
+  </div>
+ </div>
+</div>

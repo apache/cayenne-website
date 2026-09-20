@@ -1,0 +1,57 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Merging Multiple Projects"
+description: "Cayenne Guide 5.0, Merging Multiple Projects"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 240
+---
+<div class="sect2">
+ <h3 id="merging-multiple-projects"><a class="anchor" href="#merging-multiple-projects"></a>Merging Multiple Projects</h3>
+ <div class="paragraph">
+  <p>CayenneRuntime requires at least one mapping project to run. But it can also take multiple projects and merge them together in a single configuration. This way different parts of a database can be mapped independently from each other (even by different software providers), and combined in runtime when assembling an application. Doing it is as easy as passing multiple project locations to CayenneRuntime builder:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("com/example/cayenne-project.xml")
+        .addConfig("org/foo/cayenne-library1.xml")
+        .addConfig("org/foo/cayenne-library2.xml")
+        .build();</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>When the projects are merged, the following rules are applied:</p>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p>The order of projects matters during merge. If there are two conflicting metadata objects belonging to two projects, an object from the last project takes precedence over the object from the first one. This makes possible to override pieces of metadata. This is also similar to how DI modules are merged in Cayenne.</p></li>
+   <li>
+    <p>Runtime DataDomain name is set to the name of the last project in the list.</p></li>
+   <li>
+    <p>Runtime DataDomain properties are the same as the properties of the last project in the list. I.e. properties are not merged to avoid invalid combinations and unexpected runtime behavior.</p></li>
+   <li>
+    <p>If there are two or more DataMaps with the same name, only one DataMap is used in the merged project, the rest are discarded. Same precedence rules apply - DataMap from the project with the highest index in the project list overrides all other DataMaps with the same name.</p></li>
+   <li>
+    <p>DataNodes are not a part of the projects. After the merge the DataMaps are linked to the DataNodes as described above. If any DataMaps are not explicitly linked to DataNodes, their queries will be executed via the default DataNode. This makes it possible to build mapping "libraries" that are only associated with a specific database in runtime.</p></li>
+  </ul>
+ </div>
+</div>

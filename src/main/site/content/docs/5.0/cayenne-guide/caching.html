@@ -1,0 +1,66 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Caching and Fresh Data"
+description: "Cayenne Guide 5.0, Caching and Fresh Data"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 620
+---
+<div class="sect2">
+ <h3 id="caching"><a class="anchor" href="#caching"></a>Caching and Fresh Data</h3>
+ <div class="sect3">
+  <h4 id="object-caching"><a class="anchor" href="#object-caching"></a>Object Caching</h4>
+ </div>
+ <div class="sect3">
+  <h4 id="query-result-caching"><a class="anchor" href="#query-result-caching"></a>Query Result Caching</h4>
+  <div class="paragraph">
+   <p>Cayenne supports mostly transparent caching of the query results. There are two levels of the cache: local (i.e. results cached by the ObjectContext) and shared (i.e. the results cached at the stack level and shared between all contexts). Local cache is much faster then the shared one, but is limited to a single context. It is often used with a shared read-only ObjectContext.</p>
+  </div>
+  <div class="paragraph">
+   <p>To take advantage of query result caching, the first step is to mark your queries appropriately. Here is an example for ObjectSelect query. Other types of queries have similar API:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class).localCache("artists");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>This tells Cayenne that the query created here would like to use local cache of the context it is executed against. A vararg parameter to <code>localCache()</code> (or <code>sharedCache()</code>) method contains so called "cache groups". Those are arbitrary names that allow to categorize queries for the purpose of setting cache policies or explicit invalidation of the cache. More on that below.</p>
+  </div>
+  <div class="paragraph">
+   <p>The above API is enough for the caching to work, but by default your cache is an unmanaged LRU map. You can’t control its size, expiration policies, etc. For the managed cache, you will need to explicitly use one of the more advanced cache providers. Use can use <a href="/docs/5.0/cayenne-guide/ext-jcache">JCache integration module</a> to enable any of JCache API compatible caching providers.</p>
+  </div>
+  <div class="paragraph">
+   <p>Often "passive" cache expiration policies used by caching providers are not sufficient, and the users want real-time cache invalidation when the data changes. So in addition to those policies, the app can invalidate individual cache groups explicitly via <code>QueryCache</code>:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">QueryCache cache = runtime.getDataDomain().getQueryCache();
+cache.removeGroup("artists");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The above can be used e.g. to build UI for manual cache invalidation. It is also possible to automate cache refresh when certain entities are committed. This can be done with the help of <a href="/docs/5.0/cayenne-guide/ext-cache-invalidation">Cache invalidation extension</a>.</p>
+  </div>
+  <div class="paragraph">
+   <p>Finally you may cluster cache group events. They are very small and can be efficiently sent over the wire to other JVMs running Cayenne. An example of Cayenne setup with event clustering is <a href="https://github.com/andrus/wowodc13/tree/master/services/src/main/java/demo/services/cayenne">available on GitHub</a>.</p>
+  </div>
+ </div>
+</div>

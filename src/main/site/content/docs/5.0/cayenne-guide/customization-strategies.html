@@ -1,0 +1,104 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Customization Strategies"
+description: "Cayenne Guide 5.0, Customization Strategies"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 660
+---
+<div class="sect2">
+ <h3 id="customization-strategies"><a class="anchor" href="#customization-strategies"></a>Customization Strategies</h3>
+ <div class="paragraph">
+  <p>The previous section discussed how Cayenne DI works in general terms. Since Cayenne users will mostly be dealing with an existing Injector provided by CayenneRuntime, it is important to understand how to build custom extensions to a preconfigured container. As shown in "Starting and Stopping CayenneRuntime" chapter, custom extensions are done by writing an application DI module (or multiple modules) that configures service overrides. This section shows all the configuration possibilities in detail, including changing properties of the existing services, contributing services to standard service lists and maps, and overriding service implementations. All the code examples later in this section are assumed to be placed in an application module "configure" method:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">public class MyExtensionsModule implements Module {
+    public void configure(Binder binder) {
+        // customizations go here...
+    }
+}</code></pre>
+  </div>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = new MyExtensionsModule();
+CayenneRuntime runtime = CayenneRuntime.of()
+        .addConfig("com/example/cayenne-mydomain.xml")
+        .addModule(extensions)
+        .build();</code></pre>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="changing-properties-of-existing-services"><a class="anchor" href="#changing-properties-of-existing-services"></a>Changing Properties of Existing Services</h4>
+  <div class="paragraph">
+   <p>Many built-in Cayenne services change their behavior based on a value of some environment property. A user may change Cayenne behavior without even knowing which services are responsible for it, but setting a specific value of a known property. Supported property names are listed in "Appendix A".</p>
+  </div>
+  <div class="paragraph">
+   <p>There are two ways to set service properties. The most obvious one is to pass it to the JVM with -D flag on startup. E.g.</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code>$ java -Dcayenne.contexts_sync_strategy=false ...</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>A second one is to contribute a property to <code>o.a.c.configuration.DefaultRuntimeProperties.properties</code> map (see the next section on how to do that). This map contains the default property values and can accept application-specific values, overriding the defaults.</p>
+  </div>
+  <div class="paragraph">
+   <p>Note that if a property value is a name of a Java class, when this Java class is instantiated by Cayenne, the container performs injection of instance variables. So even the dynamically specified Java classes can use @Inject annotation to get a hold of other Cayenne services.</p>
+  </div>
+  <div class="paragraph">
+   <p>If the same property is specified both in the command line and in the properties map, the command-line value takes precedence. The map value will be ignored. This way Cayenne runtime can be reconfigured during deployment.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="contributing-to-service-collections"><a class="anchor" href="#contributing-to-service-collections"></a>Contributing to Service Collections</h4>
+  <div class="paragraph">
+   <p>Cayenne can be extended by adding custom objects to named maps or lists bound in DI. We are calling these lists/maps "service collections". A service collection allows things like appending a custom strategy to a list of built-in strategies. E.g. an application that needs to install a custom DbAdapter for some database type may contribute an instance of custom DbAdapterDetector to a <code>o.a.c.configuration.runtime.DefaultDbAdapterFactory.detectors</code> list:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">public class MyDbAdapterDetector implements DbAdapterDetector {
+    public DbAdapter createAdapter(DatabaseMetaData md) throws SQLException {
+        // check if we support this database and return custom adapter,
+        // or return null to let the other detectors handle it
+        return null;
+    }
+}</code></pre>
+   </div>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">CoreModule.extend(binder)
+        .addAdapterDetector(MyDbAdapterDetector.class);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The names of built-in collections are listed in "Appendix B".</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="alternative-service-implementations"><a class="anchor" href="#alternative-service-implementations"></a>Alternative Service Implementations</h4>
+  <div class="paragraph">
+   <p>As mentioned above, custom modules are loaded by CayenneRuntime after the built-in modules. So it is easy to redefine a built-in service in Cayenne by rebinding desired implementations or providers. To do that, first we need to know what those services to redefine are. While we describe some of them in the following sections, the best way to get a full list is to check the source code of the Cayenne version you are using and namely look in <code>org.apache.cayenne.configuration.runtime.CoreModule</code> - the main built-in module in Cayenne.</p>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,86 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Path Expressions"
+description: "Cayenne Guide 5.0, Path Expressions"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 340
+---
+<div class="sect2">
+ <h3 id="path-expressions"><a class="anchor" href="#path-expressions"></a>Path Expressions</h3>
+ <div class="paragraph">
+  <p>Before discussing how to build expressions, it is important to understand one group of expressions widely used in Cayenne - path expressions. There are two types of path expressions - object and database, used for navigating graphs of connected objects or joined DB tables, respectively. Object paths are much more commonly used, as, after all, Cayenne is supposed to provide a degree of isolation of the object model from the database. However, database paths are helpful in certain situations. The general structure of path expressions is the following:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code>[db:]segment[+][#alias][.segment[+][#alias]...]</code></pre>
+  </div>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p><code>db:</code> is an optional prefix indicating that the following path is a DB path. Otherwise it is an object path.</p></li>
+   <li>
+    <p><code>segment</code> is a name of a property (relationship or attribute in Cayenne terms) in the path. The path must have at least one segment; segments are separated by dot (".").</p></li>
+   <li>
+    <p><code>#alias</code> is an optional alias of a relationship segment, discussed below.</p></li>
+   <li>
+    <p>`` An "OUTER JOIN" path component. Currently "" only has effect when translated to SQL as OUTER JOIN. When evaluating expressions in memory, it is ignored.</p></li>
+  </ul>
+ </div>
+ <div class="paragraph">
+  <p>An object path expression represents a chain of property names rooted in a certain (unspecified during expression creation) object and "navigating" to its related value. E.g. a path expression "artist.name" might be a property path starting from a Painting object, pointing to the related Artist object, and then to its name attribute. A few more examples:</p>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p><code>name</code> - can be used to navigate (read) the "name" property of a Person (or any other type of object that has a "name" property).</p></li>
+   <li>
+    <p><code>artist.exhibits.closingDate</code> - can be used to navigate to a closing date of any of the exhibits of a Painting’s Artist object.</p></li>
+   <li>
+    <p><code>artist.exhibits+.closingDate</code> - same as the previous example, but when translated into SQL, an OUTER JOIN will be used for "exhibits".</p></li>
+  </ul>
+ </div>
+ <div class="paragraph">
+  <p>Similarly a database path expression is a dot-separated path through DB table joins and columns. In Cayenne joins are mapped as DbRelationships with some symbolic names (the closest concept to DbRelationship name in the DB world is a named foreign key constraint. But DbRelationship names are usually chosen arbitrarily, without regard to constraints naming or even constraints presence). A database path therefore might look like this - <code>db:dbrelationshipX.dbrelationshipY.COLUMN_Z"</code>. More specific examples:</p>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p><code>db:NAME</code> - can be used to navigate to a value in the "NAME" column of some unspecified table.</p></li>
+   <li>
+    <p><code>db:artist.artistExhibits.exhibit.CLOSING_DATE</code> - can be used to match a closing date of any of the exhibits of a related artist record.</p></li>
+  </ul>
+ </div>
+ <div class="paragraph">
+  <p>Cayenne supports "aliases" in path expressions. An alias is appended to a relationship segment after the <code>#</code> character:</p>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p><code>artist.exhibits.closingDate</code> - a path with no aliases</p></li>
+   <li>
+    <p><code>artist.exhibits#e.closingDate</code> - alias "e" is used for <code>artist.exhibits</code>.</p></li>
+  </ul>
+ </div>
+ <div class="paragraph">
+  <p>The main use of aliases is to allow users to control how SQL joins are generated if the same path is encountered more than once in any given <code>Expression</code>. Each alias for any given path would result in a separate join. Without aliases, a single join will be used for a group of matching paths.</p>
+ </div>
+</div>

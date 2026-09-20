@@ -16,15 +16,15 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
-title: "Cayenne Guide 5.0 · Appendix A. Configuration Properties"
-description: "Cayenne Guide 5.0, Appendix A. Configuration Properties"
+title: "Cayenne Guide 5.0 · Configuration Properties"
+description: "Cayenne Guide 5.0, Configuration Properties"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 360
+weight: 860
 ---
 <div class="sect1">
- <h2 id="appendix-a-configuration-properties"><a class="anchor" href="#appendix-a-configuration-properties"></a>7. Appendix A. Configuration Properties</h2>
+ <h2 id="appendix-a-configuration-properties"><a class="anchor" href="#appendix-a-configuration-properties"></a>Appendix A. Configuration Properties</h2>
  <div class="sectionbody">
   <div class="paragraph">
    <p>Note that the property names below are defined as constants in <code>org.apache.cayenne.configuration.Constants</code> interface.</p>
@@ -158,13 +158,13 @@ weight: 360
       </ul>
      </div></li>
     <li>
-     <p><code>cayenne.query_execution_time_logging_threshold</code> <em>(deprecated, ignored since 5.0)</em> used to define the minimum number of milliseconds a query must run before it is logged. The slow-query threshold warning was removed with the compact SQL logger redesign (CAY-2912).</p></li>
+     <p><code>cayenne.query_execution_time_logging_threshold</code> <em>(deprecated and ignored)</em> used to define the minimum number of milliseconds a query must run before it is logged. The slow-query threshold warning was removed with the compact SQL logger redesign (CAY-2912).</p></li>
     <li>
-     <p><code>cayenne.jdbc.log.batch.threshold</code> defines the maximum number of batch rows whose bindings are logged in full before the compact SQL logger truncates them to "first row .. elided count .. last row".</p>
+     <p><code>cayenne.jdbc.log.batch.threshold</code> defines the maximum number of batch rows whose bindings are logged in full before the compact SQL logger truncates them to "first rows .. elided count .. last rows".</p>
      <div class="ulist">
       <ul>
        <li>
-        <p>Default value: 3</p></li>
+        <p>Default value: 20</p></li>
       </ul>
      </div></li>
     <li>

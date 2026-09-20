@@ -21,10 +21,10 @@ description: "Cayenne Guide 5.0, Cayenne MCP Server"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 190
+weight: 720
 ---
 <div class="sect2">
- <h3 id="cayenne-mcp-server"><a class="anchor" href="#cayenne-mcp-server"></a>3.3. Cayenne MCP Server</h3>
+ <h3 id="cayenne-mcp-server"><a class="anchor" href="#cayenne-mcp-server"></a>Cayenne MCP Server</h3>
  <div class="paragraph">
   <p>The MCP server is a self-contained, stdio-based process that the AI agent launches on demand. It works with most agents (not only Claude). The MCP server is bundled with the platform-specific CayenneModeler and requires Java 21 or later on the system <code>PATH</code>. So to get it, first download the Modeler at <a href="https://cayenne.apache.org/download/" class="bare">https://cayenne.apache.org/download/</a> .</p>
  </div>
@@ -60,7 +60,7 @@ weight: 190
   <p>When installing the MCP, replace <code>/path/to/CayenneMCPServer.jar</code> mentioned in the instructions with the actual jar path:</p>
  </div>
  <div class="sect3">
-  <h4 id="installing-on-claude-code"><a class="anchor" href="#installing-on-claude-code"></a>3.3.1. Installing on Claude Code</h4>
+  <h4 id="installing-on-claude-code"><a class="anchor" href="#installing-on-claude-code"></a>Installing on Claude Code</h4>
   <div class="listingblock">
    <div class="content">
     <pre class="highlight"><code class="language-bash bash" data-lang="bash"># Register the MCP server (--scope user makes it available across all projects)
@@ -72,7 +72,7 @@ claude mcp list</code></pre>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="installing-on-cursor"><a class="anchor" href="#installing-on-cursor"></a>3.3.2. Installing on Cursor</h4>
+  <h4 id="installing-on-cursor"><a class="anchor" href="#installing-on-cursor"></a>Installing on Cursor</h4>
   <div class="paragraph">
    <p>Edit <code>~/.cursor/mcp.json</code> (global, all projects) or <code>.cursor/mcp.json</code> in your project (per-project):</p>
   </div>
@@ -90,7 +90,7 @@ claude mcp list</code></pre>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="installing-on-codex"><a class="anchor" href="#installing-on-codex"></a>3.3.3. Installing on Codex</h4>
+  <h4 id="installing-on-codex"><a class="anchor" href="#installing-on-codex"></a>Installing on Codex</h4>
   <div class="paragraph">
    <p>Add a <code>[mcp_servers.cayenne]</code> entry to <code>~/.codex/config.toml</code>:</p>
   </div>
@@ -103,7 +103,7 @@ args = ["-jar", "/path/to/CayenneMCPServer.jar"]</code></pre>
   </div>
  </div>
  <div class="sect3">
-  <h4 id="available-mcp-tools"><a class="anchor" href="#available-mcp-tools"></a>3.3.4. Available MCP Tools</h4>
+  <h4 id="available-mcp-tools"><a class="anchor" href="#available-mcp-tools"></a>Available MCP Tools</h4>
   <div class="paragraph">
    <p>The server exposes three tools. Your agent will discover them on its own, but it is useful to understand the capabilities and possible prompts. All tools operate on a Cayenne project descriptor (a <code>cayenne-*.xml</code> file) and take absolute paths — agents should resolve relative paths against the current workspace before invoking.</p>
   </div>
@@ -111,7 +111,7 @@ args = ["-jar", "/path/to/CayenneMCPServer.jar"]</code></pre>
    <p>If you are using the <code>apache-cayenne</code> Claude Code plugin, its skills (<code>cayenne-cgen</code>, <code>cayenne-modeler</code>, <code>cayenne-db-import</code>) call these tools automatically. You can verify the server is available with <code>claude mcp list</code> — look for an entry named <code>cayenne</code>.</p>
   </div>
   <div class="sect4">
-   <h5 id="open_project"><a class="anchor" href="#open_project"></a>3.3.4.1. open_project</h5>
+   <h5 id="open_project"><a class="anchor" href="#open_project"></a>open_project</h5>
    <div class="paragraph">
     <p>Launches CayenneModeler with the given project file pre-loaded. The call is non-blocking; the server waits for the Modeler to confirm a successful project load via a short startup handshake, then returns.</p>
    </div>
@@ -164,7 +164,7 @@ args = ["-jar", "/path/to/CayenneMCPServer.jar"]</code></pre>
    </div>
   </div>
   <div class="sect4">
-   <h5 id="cgen_run"><a class="anchor" href="#cgen_run"></a>3.3.4.2. cgen_run</h5>
+   <h5 id="cgen_run"><a class="anchor" href="#cgen_run"></a>cgen_run</h5>
    <div class="paragraph">
     <p>Runs the Cayenne class generator (<code>cgen</code>) for a single DataMap inside the project, using the <code>cgen</code> configuration stored in the DataMap XML. The tool returns a JSON report describing which files were written, which were already up-to-date, and any errors encountered.</p>
    </div>
@@ -225,7 +225,7 @@ args = ["-jar", "/path/to/CayenneMCPServer.jar"]</code></pre>
    </div>
   </div>
   <div class="sect4">
-   <h5 id="dbimport_run"><a class="anchor" href="#dbimport_run"></a>3.3.4.3. dbimport_run</h5>
+   <h5 id="dbimport_run"><a class="anchor" href="#dbimport_run"></a>dbimport_run</h5>
    <div class="paragraph">
     <p>Runs Cayenne reverse engineering (dbimport) for a single DataMap inside the project. The tool reads the JDBC connection from CayenneModeler preferences on the local machine (the agent doesn’t see the credentials). If the DataMap has a <code>&lt;reverse-engineering&gt;</code> block its filters are applied; otherwise the full database schema is imported. The DataMap XML is rewritten on disk with the merged schema, and a JSON summary of what changed is returned.</p>
    </div>

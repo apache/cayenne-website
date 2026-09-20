@@ -21,15 +21,15 @@ description: "Cayenne Guide 5.0, Maven Plugin"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
-weight: 330
+weight: 810
 ---
 <div class="sect2">
- <h3 id="maven_plugin"><a class="anchor" href="#maven_plugin"></a>6.1. Maven Plugin</h3>
+ <h3 id="maven_plugin"><a class="anchor" href="#maven_plugin"></a>Maven Plugin</h3>
  <div class="paragraph">
   <p>The full plugin Maven name is <code>org.apache.cayenne.plugins:cayenne-maven-plugin</code>. It can be executed as <code>mvn cayenne:&lt;goal&gt;</code>.</p>
  </div>
  <div class="sect3">
-  <h4 id="cgen"><a class="anchor" href="#cgen"></a>6.1.1. cgen</h4>
+  <h4 id="cgen"><a class="anchor" href="#cgen"></a>cgen</h4>
   <div class="paragraph">
    <p><code>cgen</code> is a goal that generates and maintains source (.java) files of persistent objects based on a DataMap. By default, it is bound to the generate-sources phase. If "makePairs" is set to "true" (which is the recommended default), this task will generate a pair of classes (superclass/subclass) for each ObjEntity in the DataMap. Superclasses should not be changed manually, since they are always overwritten. Subclasses are never overwritten and may be later customized by the user. If "makePairs" is set to "false", a single class will be generated for each ObjEntity.</p>
   </div>
@@ -215,7 +215,7 @@ weight: 330
      <td class="tableblock halign-left valign-middle">
       <p class="tableblock">boolean</p></td>
      <td class="tableblock halign-left valign-middle">
-      <p class="tableblock"><em>Deprecated and ignored since 5.0.</em> cgen always regenerates classes, so there is nothing left to force.</p></td>
+      <p class="tableblock"><em>Deprecated and ignored.</em> cgen always regenerates classes, so there is nothing left to force.</p></td>
     </tr>
     <tr>
      <td class="tableblock halign-left valign-middle">
@@ -253,9 +253,9 @@ weight: 330
   </div>
  </div>
  <div class="sect3">
-  <h4 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>6.1.2. cdbimport</h4>
+  <h4 id="mavenCdbimort"><a class="anchor" href="#mavenCdbimort"></a>cdbimport</h4>
   <div class="paragraph">
-   <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes. CDBImport plugin described in details in chapter <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a></p>
+   <p><code>cdbimport</code> is a <code>cayenne-maven-plugin</code> goal that generates a DataMap based on an existing database schema. By default, it is bound to the generate-sources phase. This allows you to generate your DataMap prior to building your project, possibly followed by "cgen" execution to generate the classes.</p>
   </div>
   <table id="cdbimportTable" class="tableblock frame-all grid-all stretch table table-bordered">
    <caption class="title">
@@ -324,7 +324,7 @@ weight: 330
      <td class="tableblock halign-left valign-middle">
       <p class="tableblock">No</p></td>
      <td class="tableblock halign-left valign-middle">
-      <p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a> chapter.</p></td>
+      <p class="tableblock">An object that contains detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/re-filtering">DB Import Filtering</a> and <a href="/docs/5.0/cayenne-guide/re-relationships-loading-control">Other DB Import Settings</a>.</p></td>
     </tr>
    </tbody>
   </table>
@@ -540,7 +540,7 @@ weight: 330
      <td class="tableblock halign-left valign-top">
       <div class="content">
        <div class="paragraph">
-        <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/db-first-flow">DB-First Flow</a> chapter. Here is some simple example:</p>
+        <p>Detailed reverse engineering rules about what DB objects should be processed. For full information about this parameter see <a href="/docs/5.0/cayenne-guide/re-filtering">DB Import Filtering</a>. Here is some simple example:</p>
        </div>
        <div class="listingblock">
         <div class="content">
@@ -593,7 +593,7 @@ weight: 330
   </div>
  </div>
  <div class="sect3">
-  <h4 id="cdbgen"><a class="anchor" href="#cdbgen"></a>6.1.3. cdbgen</h4>
+  <h4 id="cdbgen"><a class="anchor" href="#cdbgen"></a>cdbgen</h4>
   <div class="paragraph">
    <p><code>cdbgen</code> is a <code>cayenne-maven-plugin</code> goal that drops and/or generates tables in a database on Cayenne DataMap. By default, it is bound to the pre-integration-test phase.</p>
   </div>

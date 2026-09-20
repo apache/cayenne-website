@@ -1,0 +1,69 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · ObjectContext Nesting"
+description: "Cayenne Guide 5.0, ObjectContext Nesting"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 300
+---
+<div class="sect2">
+ <h3 id="objectcontext-nesting"><a class="anchor" href="#objectcontext-nesting"></a>ObjectContext Nesting</h3>
+ <div class="paragraph">
+  <p>In all the examples shown so far, an ObjectContext would directly connect to a database to select data or synchronize its state (either via commit or rollback). However, another context can be used in all these scenarios instead of a database. This concept is called ObjectContext "nesting". Nesting is a parent/child relationship between two contexts, where a child is a nested context and selects or commits its objects via a parent.</p>
+ </div>
+ <div class="paragraph">
+  <p>Nesting is useful to create isolated object editing areas (child contexts) that all need to be committed to an intermediate in-memory store (parent context), or rolled back without affecting changes already recorded in the parent. Think cascading GUI dialogs, or parallel AJAX requests coming to the same session.</p>
+ </div>
+ <div class="paragraph">
+  <p>In theory, Cayenne supports any number of nesting levels; however, applications should generally stay with one or two levels, as deep hierarchies will almost certainly degrade the performance of the deeply-nested child contexts. This is due to the fact that each context in a nesting chain has to update its own objects during most operations.</p>
+ </div>
+ <div class="paragraph">
+  <p>To create a nested context, use an instance of CayenneRuntime, passing it the desired parent:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">ObjectContext parent = runtime.newContext();
+ObjectContext nested = runtime.newContext(parent);</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>From here, a nested context operates just like a regular context (you can perform queries, create and delete objects, etc…​). The only difference is that commit and rollback operations can either be limited to synchronization with the parent, or cascade all the way to the database:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">// merges nested context changes into the parent context
+nested.commitChangesToParent();
+
+// regular 'commitChanges' cascades commit through the chain
+// of parent contexts all the way to the database
+nested.commitChanges();</code></pre>
+  </div>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">// unrolls all local changes, getting context in a state identical to parent
+nested.rollbackChangesLocally();
+
+// regular 'rollbackChanges' cascades rollback through the chain of contexts
+// all the way to the topmost parent
+nested.rollbackChanges();</code></pre>
+  </div>
+ </div>
+</div>

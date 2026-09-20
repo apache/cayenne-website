@@ -1,0 +1,141 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Prefetching"
+description: "Cayenne Guide 5.0, Prefetching"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 580
+---
+<div class="sect2">
+ <h3 id="prefetching-2"><a class="anchor" href="#prefetching-2"></a>Prefetching</h3>
+ <div class="paragraph">
+  <p>Prefetching is a technique that allows to bring back in one query not only the queried objects, but also objects related to them. In other words it is a controlled eager relationship resolving mechanism. Prefetching is discussed in the "Performance Tuning" chapter, as it is a powerful performance optimization method. However another common application of prefetching is to refresh stale object relationships, so more generally it can be viewed as a technique for managing subsets of the object graph.</p>
+ </div>
+ <div class="paragraph">
+  <p>Prefetching example:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect
+        .query(Artist.class)
+        .prefetch(Artist.PAINTINGS.disjoint()) <i class="conum" data-value="1"></i><b>(1)</b>
+        .select(context); <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+  </div>
+ </div>
+ <div class="colist arabic">
+  <table>
+   <tbody>
+    <tr>
+     <td><i class="conum" data-value="1"></i><b>1</b></td>
+     <td>Instructs Cayenne to prefetch one of Artist’s relationships.</td>
+    </tr>
+    <tr>
+     <td><i class="conum" data-value="2"></i><b>2</b></td>
+     <td>Query is executed as usual, but the resulting Artists will have their paintings "inflated"</td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+ <div class="paragraph">
+  <p>All types of relationships can be prefetched - to-one, to-many, flattened. A prefetch can span multiple relationships:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">query.prefetch(Artist.PAINTINGS.dot(Painting.GALLERY).disjoint());</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>A query can have multiple prefetches:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">query.prefetch(Artist.PAINTINGS.disjoint())
+        .prefetch(Artist.PAINTINGS.dot(Painting.GALLERY).disjoint());</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>If a query is fetching DataRows, all "disjoint" prefetches are ignored, only "joint" prefetches are executed (see prefetching semantics discussion below for what disjoint and joint prefetches mean).</p>
+ </div>
+ <div class="paragraph">
+  <p>A strategy to prefetch relationships is defined by prefetch "semantics". Depending on semantics, Cayenne would generate different types of queries. The end result is the same - query root objects with related objects fully resolved. However semantics can affect performance, in some cases significantly. There are 3 types of prefetch semantics defined as constants in <code>org.apache.cayenne.query.PrefetchTreeNode</code>:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code>PrefetchTreeNode.JOINT_PREFETCH_SEMANTICS
+PrefetchTreeNode.DISJOINT_PREFETCH_SEMANTICS
+PrefetchTreeNode.DISJOINT_BY_ID_PREFETCH_SEMANTICS</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p><strong>Disjoint prefetch semantics</strong> results in Cayenne generating one SQL statement for the main objects, and a separate statement for each prefetch path (hence "disjoint" - related objects are not fetched with the main query). Each additional SQL statement uses a qualifier of the main query plus a set of joins traversing the prefetch path between the main and related entity.</p>
+ </div>
+ <div class="paragraph">
+  <p>This strategy has an advantage of efficient JVM memory use, and faster overall result processing by Cayenne, but it requires (1+N) SQL statements to be executed, where N is the number of prefetched relationships.</p>
+ </div>
+ <div class="paragraph">
+  <p><strong>Disjoint-by-ID prefetch semantics</strong> is a variation of disjoint prefetch where related objects are matched against a set of IDs derived from the fetched main objects (or intermediate objects in a multi-step prefetch). Cayenne limits the size of the generated WHERE clause, as most DBs can’t parse arbitrary large SQL. So prefetch queries are broken into smaller queries. The size of is controlled by the DI property <code>Constants.MAX_ID_QUALIFIER_SIZE_PROPERTY</code> (the default number of conditions in the generated WHERE clause is 10000). Cayenne will generate (1 + N * M) SQL statements for each query using disjoint-by-ID prefetches, where N is the number of relationships to prefetch, and M is the number of queries for a given prefetch that is dependent on the number of objects in the result (ideally M = 1).</p>
+ </div>
+ <div class="paragraph">
+  <p>The advantage of this type of prefetch is that matching database rows by ID may be much faster than matching the qualifier of the original query. Moreover this is <strong>the only type of prefetch</strong> that can handle SelectQueries with <strong>fetch</strong> limit. Both joint and regular disjoint prefetches may produce invalid results or generate inefficient fetch-the-entire table SQL when fetch limit is in effect.</p>
+ </div>
+ <div class="paragraph">
+  <p>The disadvantage is that query SQL can get unwieldy for large result sets, as each object will have to have its own condition in the WHERE clause of the generated SQL.</p>
+ </div>
+ <div class="paragraph">
+  <p><strong>Joint prefetch semantics</strong> results in a single SQL statement for root objects and any number of jointly prefetched paths. Cayenne processes in memory a cartesian product of the entities involved, converting it to an object tree. It uses OUTER joins to connect prefetched entities.</p>
+ </div>
+ <div class="paragraph">
+  <p>Joint is the most efficient prefetch type of the three as far as generated SQL goes. There’s always just 1 SQL query generated. Its downsides are the potentially increased amount of data that needs to get across the network between the application server and the database, and more data processing that needs to be done on the Cayenne side.</p>
+ </div>
+ <div class="paragraph">
+  <p><code><a href="/docs/5.0/cayenne-guide/select">ObjectSelect</a></code> query supports all three types of semantics. You can mix and match them in the same query for different prefetches.</p>
+ </div>
+ <div class="paragraph">
+  <p><code><a href="/docs/5.0/cayenne-guide/sqlselect">SQLSelect</a></code> query supports "JOINT" and "DISJOINT_BY_ID". It does not work with "DISJOINT", as the query does not provide enough information to Cayenne to build dependent prefetch queries. So "DISJOINT" will result in exception. "JOINT" prefetching requires a bit of effort shaping the SQL to include the right columns in the result and label them properly to be convertible into object properties. The main rules to follow are:</p>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p>Include <em>all</em> columns from the root entity and every prefetched entity.</p></li>
+   <li>
+    <p>Label each prefetched entity columns as "dbRelationship.column".</p></li>
+  </ul>
+ </div>
+ <div class="paragraph">
+  <p>E.g.:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; objects = SQLSelect.query(Artist.class, "SELECT "
+                + "#result('ESTIMATED_PRICE' 'BigDecimal' '' 'paintings.ESTIMATED_PRICE'), "
+                + "#result('TITLE' 'String' '' 'paintings.TITLE'), "
+                + "#result('GALLERY_ID' 'int' '' 'paintings.GALLERY_ID'), "
+                + "#result('t1.ID' 'int' '' 'paintings.ID'), "
+                + "#result('t1.ARTIST_ID' 'int' '' 'paintings.ARTIST_ID'), "
+                + "#result('NAME' 'String'), "
+                + "#result('DATE_OF_BIRTH' 'java.time.LocalDate'), "
+                + "#result('t0.ID' 'int' '' 'ID') "
+                + "FROM ARTIST t0, PAINTING t1 "
+                + "WHERE t0.ID = t1.ARTIST_ID")
+        .addPrefetch(Artist.PAINTINGS.joint())
+        .select(context);</code></pre>
+  </div>
+ </div>
+</div>

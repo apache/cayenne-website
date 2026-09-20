@@ -1,0 +1,68 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Turning off Synchronization of ObjectContexts"
+description: "Cayenne Guide 5.0, Turning off Synchronization of ObjectContexts"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 630
+---
+<div class="sect2">
+ <h3 id="turning-off-synchronization-of-objectcontexts"><a class="anchor" href="#turning-off-synchronization-of-objectcontexts"></a>Turning off Synchronization of ObjectContexts</h3>
+ <div class="paragraph">
+  <p>By default when a single ObjectContext commits its changes, all other contexts in the same runtime receive an event that contains all the committed changes. This allows them to update their cached object state to match the latest committed data. There are however many problems with this ostensibly helpful feature. In short - it works well in environments with few contexts and in unclustered scenarios, such as single user desktop applications, or simple webapps with only a few users. More specifically:</p>
+ </div>
+ <div class="ulist">
+  <ul>
+   <li>
+    <p>The performance of synchronization is (probably worse than) O(N) where N is the number of peer ObjectContexts in the system. In a typical webapp N can be quite large. Besides for any given context, due to locking on synchronization, context own performance will depend not only on the queries that it runs, but also on external events that it does not control. This is unacceptable in most situations.</p></li>
+   <li>
+    <p>Commit events are untargeted - even contexts that do not hold a given updated object will receive the full event that they will have to process.</p></li>
+   <li>
+    <p>Clustering between JVMs doesn’t scale - apps with large volumes of commits will quickly saturate the network with events, while most of those will be thrown away on the receiving end as mentioned above.</p></li>
+   <li>
+    <p>Some contexts may not want to be refreshed. A refresh in the middle of an operation may lead to unpredictable results.</p></li>
+   <li>
+    <p>Synchronization will interfere with optimistic locking.</p></li>
+  </ul>
+ </div>
+ <div class="paragraph">
+  <p>So we’ve made a good case for disabling synchronization in most webapps. To do that, set to "false" the following DI property - <code>Constants.CONTEXTS_SYNC_PROPERTY</code>, using one of the standard Cayenne DI approaches. E.g. from command line:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code>$ java -Dcayenne.contexts_sync_strategy=false</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>Or by changing the standard properties Map in a custom extensions module:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">public class MyModule implements Module {
+
+    @Override
+    public void configure(Binder binder) {
+        CoreModule.extend(binder)
+                .setProperty(Constants.CONTEXTS_SYNC_PROPERTY, "false");
+    }
+}</code></pre>
+  </div>
+ </div>
+</div>

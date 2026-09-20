@@ -1,0 +1,53 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Paginated Queries"
+description: "Cayenne Guide 5.0, Paginated Queries"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 610
+---
+<div class="sect2">
+ <h3 id="paginated-queries"><a class="anchor" href="#paginated-queries"></a>Paginated Queries</h3>
+ <div class="paragraph">
+  <p>Enabling query pagination allows to load very large result sets in a Java app with very little memory overhead (much smaller than even the DataRows option discussed above). Moreover it is completely transparent to the application - a user gets what appears to be a list of Persistent objects - there’s no iterator to close or DataRows to convert to objects:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">// the fact that result is paginated is transparent
+List&lt;Artist&gt; artists =
+        ObjectSelect.query(Artist.class).pageSize(50).select(context);</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>Having said that, DataRows option can be combined with pagination, providing the best of both worlds:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;DataRow&gt; rows =
+        ObjectSelect.dataRowQuery(Artist.class).pageSize(50).select(context);</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>The way pagination works internally, it first fetches a list of IDs for the root entity of the query. This is very fast and initially takes very little memory. Then when an object is requested at an arbitrary index in the list, this object and adjacent objects (a "page" of objects that is determined by the query pageSize parameter) are fetched together by ID. Subsequent requests to the objects of this "page" are served from memory.</p>
+ </div>
+ <div class="paragraph">
+  <p>An obvious limitation of pagination is that if you eventually access all objects in the list, the memory use will end up being the same as with no pagination. However it is still a very useful approach. With some lists (e.g. multi-page search results) only a few top objects are normally accessed. At the same time pagination allows to estimate the full list size without fetching all the objects. And again - it is completely transparent and looks like a normal query.</p>
+ </div>
+</div>

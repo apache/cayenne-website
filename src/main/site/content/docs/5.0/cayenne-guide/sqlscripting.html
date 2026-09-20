@@ -1,0 +1,335 @@
+---
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing,
+#  software distributed under the License is distributed on an
+#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#  KIND, either express or implied.  See the License for the
+#  specific language governing permissions and limitations
+#  under the License.
+
+title: "Cayenne Guide 5.0 · Scripting SQL Queries"
+description: "Cayenne Guide 5.0, Scripting SQL Queries"
+cayenneVersion: "5.0"
+cayenneNoToc: true
+docId: cayenne-guide
+weight: 430
+---
+<div class="sect2">
+ <h3 id="sqlscripting"><a class="anchor" href="#sqlscripting"></a>Scripting SQL Queries</h3>
+ <div class="paragraph">
+  <p>A powerful feature of <code>SQLSelect</code> and <code>SQLExec</code> is that SQL string is treated by Cayenne as a dynamic template. Before creating a PreparedStatement, the String is evaluated, resolving its dynamic parts. The two main scripting elements are "variables" (that look like <code>$var</code>) and "directives" (that look like <code>#directive(p1 p2 p3)</code>). In the discussion below we’ll use both selecting and updating examples, as scripting works the same way for both <code>SQLSelect</code> and <code>SQLExec</code>.</p>
+ </div>
+ <div class="sect3">
+  <h4 id="variable-substitution"><a class="anchor" href="#variable-substitution"></a>Variable Substitution</h4>
+  <div class="paragraph">
+   <p>All variables in the template string are replaced from query parameters:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// this will generate SQL like this: "delete from PUBLIC.PAINTING"
+SQLExec query = SQLExec.query("delete from $tableName")
+        .params("tableName", "PUBLIC.PAINTING");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>Variable substitution within the text uses <code>object.toString()</code> method to replace the variable value. This may not be appropriate in all situations. E.g. passing a date object in a <code>WHERE</code> clause expression may be converted to a String not understood by the target DB SQL parser. In such cases variable should be wrapped in <code>#bind</code> directive as described below.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="directives"><a class="anchor" href="#directives"></a>Directives</h4>
+  <div class="paragraph">
+   <p>"Directives" look like <code>#directive(p1 p2 p3)</code> (notice the absence of comma between the arguments). The following directives are supported in SQL templates:</p>
+  </div>
+  <div class="sect4">
+   <h5 id="bind"><a class="anchor" href="#bind"></a>#bind</h5>
+   <div class="paragraph">
+    <p>Creates a <code>PreparedStatement</code> positional parameter in place of the directive, binding the value to it before statement execution. <code>#bind</code> is allowed in places where a "?" would be allowed in a PreparedStatement. And in such places it almost always makes sense to pass objects to the template via some flavor of <code>#bind</code> instead of inserting them inline.</p>
+   </div>
+   <div class="paragraph">
+    <p>Semantics:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bind(value)
+#bind(value jdbcType)
+#bind(value jdbcType scale)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Arguments:</p>
+   </div>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p><code>value</code> - can either be a char constant or a variable that is resolved from the query parameters. Note that the variable can be a collection, that will be automatically expanded into a list of individual value bindings. This is useful for instance to build IN conditions.</p></li>
+     <li>
+      <p><code>jdbcType</code> - is a JDBC data type of the parameter as defined in <code>java.sql.Types</code>.</p></li>
+     <li>
+      <p><code>scale</code> - An optional scale of the numeric value. Same as "scale" in PreparedStatement.</p></li>
+    </ul>
+   </div>
+   <div class="paragraph">
+    <p>Usage:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bind($xyz)
+#bind('str')
+#bind($xyz 'VARCHAR')
+#bind($xyz 'DECIMAL' 2)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Full example:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">update ARTIST set NAME = #bind($name) where ID = #bind($id)</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="bindequal"><a class="anchor" href="#bindequal"></a>#bindEqual</h5>
+   <div class="paragraph">
+    <p>Same as <code>#bind</code>, but also includes the "=" sign in front of the value binding. Look at the example below - we took the #bind example and replaced <code>"ID = #bind(..)"</code> with <code>"ID #bindEqual(..)"</code>. Motivation for this directive is to handle NULL SQL syntax. If the value is not null, <code>= ?</code> is generated, but if it is, the resulting SQL would look like <code>IS NULL</code>, which is compliant with what the DB expects.</p>
+   </div>
+   <div class="paragraph">
+    <p>Semantics:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindEqual(value)
+#bindEqual(value jdbcType)
+#bindEqual(value jdbcType scale)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Arguments: (same as #bind)</p>
+   </div>
+   <div class="paragraph">
+    <p>Usage:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindEqual($xyz)
+#bindEqual('str')
+#bindEqual($xyz 'VARCHAR')
+#bindEqual($xyz 'DECIMAL' 2)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Full example:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">update ARTIST set NAME = #bind($name) where ID #bindEqual($id)</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="bindnotequal"><a class="anchor" href="#bindnotequal"></a>#bindNotEqual</h5>
+   <div class="paragraph">
+    <p>This directive deals with the same issue as <code>#bindEqual</code> above, only it generates "!=" in front of the value (or <code>IS NOT NULL</code>).</p>
+   </div>
+   <div class="paragraph">
+    <p>Semantics:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindNotEqual(value)
+#bindNotEqual(value jdbcType)
+#bindNotEqual(value jdbcType scale)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Arguments: (same as #bind)</p>
+   </div>
+   <div class="paragraph">
+    <p>Usage:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindNotEqual($xyz)
+#bindNotEqual('str')
+#bindNotEqual($xyz 'VARCHAR')
+#bindNotEqual($xyz 'DECIMAL' 2)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Full example:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">update ARTIST set NAME = #bind($name) where ID #bindNotEqual($id)</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="bindobjectequal"><a class="anchor" href="#bindobjectequal"></a>#bindObjectEqual</h5>
+   <div class="paragraph">
+    <p>It can be tricky to use a Persistent object or an ObjectId in a binding, especially for tables with compound primary keys. This directive helps to handle such binding. It maps columns in the query to the names of Persistent object ID columns, extracts ID values from the object, and generates SQL like "COL1 = ? AND COL2 = ? …​" , binding positional parameters to ID values. It can also correctly handle null object. Also notice how we are specifying an array for multi-column PK.</p>
+   </div>
+   <div class="paragraph">
+    <p>Semantics:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindObjectEqual(value columns idColumns)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Arguments:</p>
+   </div>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p><code>value</code> - must be a variable that is resolved from the query parameters to a Persistent or ObjectId.</p></li>
+     <li>
+      <p><code>columns</code> - the names of the columns to generate in the SQL.</p></li>
+     <li>
+      <p><code>idColumn</code> - the names of the ID columns for a given entity. Must match the order of "columns" to match against.</p></li>
+    </ul>
+   </div>
+   <div class="paragraph">
+    <p>Usage:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindObjectEqual($a 't0.ID' 'ID')
+#bindObjectEqual($b ['t0.FK1', 't0.FK2'] ['PK1', 'PK2'])</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Full example:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">String sql = "SELECT * FROM PAINTING t0 WHERE #bindObjectEqual($a 't0.ARTIST_ID' 'ID' )";
+Artist artistParam = dali;
+
+SQLSelect&lt;Painting&gt; select = SQLSelect.query(Painting.class, sql)
+        .param("a", artistParam);</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="bindobjectnotequal"><a class="anchor" href="#bindobjectnotequal"></a>#bindObjectNotEqual</h5>
+   <div class="paragraph">
+    <p>Same as <code>#bindObjectEqual</code> above, only generates <code>!=</code> operator for value comparison (or <code>IS NOT NULL</code>).</p>
+   </div>
+   <div class="paragraph">
+    <p>Semantics:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindObjectNotEqual(value columns idColumns)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Arguments: (same as #bindObjectEqual)</p>
+   </div>
+   <div class="paragraph">
+    <p>Usage:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#bindObjectNotEqual($a 't0.ID' 'ID')
+#bindObjectNotEqual($b ['t0.FK1', 't0.FK2'] ['PK1', 'PK2'])</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Full example:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">String sql = "SELECT * FROM PAINTING t0 WHERE #bindObjectNotEqual($a 't0.ARTIST_ID' 'ID' )";
+Artist artistParam = dali;
+
+SQLSelect&lt;Painting&gt; select = SQLSelect.query(Painting.class, sql)
+        .param("a", artistParam);</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="result"><a class="anchor" href="#result"></a>#result</h5>
+   <div class="paragraph">
+    <p>Used around a column in <code>SELECT</code> clause to define the type conversion of the column value (e.g. it may force a conversion from Integer to Long) and/or define column name in the result (useful when fetching objects or DataRows).</p>
+   </div>
+   <div class="admonitionblock note">
+    <table>
+     <tbody>
+      <tr>
+       <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+       <td class="content">You don’t have to use <code>#result</code> for any given query if the default data types and column names coming from the query suit your needs. But if you do, you have to provide <code>#result</code> for every single result column, otherwise such column will be ignored.</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="paragraph">
+    <p>Semantics:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#result(column)
+#result(column javaType)
+#result(column javaType alias)
+#result(column javaType alias dataRowKey)</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Arguments:</p>
+   </div>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p><code>column</code> - the name of the column to render in SQL SELECT clause.</p></li>
+     <li>
+      <p><code>javaType</code> - a fully-qualified Java class name for a given result column. For simplicity most common Java types used in JDBC can be specified without a package. These include all numeric types, primitives, String, SQL dates, BigDecimal and BigInteger. So <code>"#result('A' 'String')"</code>, <code>"#result('B' 'java.lang.String')"</code> and <code>"#result('C' 'int')"</code> are all valid</p></li>
+     <li>
+      <p><code>alias</code> - specifies both the SQL alias of the column and the value key in the DataRow. If omitted, "column" value is used.</p></li>
+     <li>
+      <p><code>dataRowKey</code> - needed if SQL 'alias' is not appropriate as a DataRow key on the Cayenne side. One common case when this happens is when a DataRow retrieved from a query is mapped using joint prefetch keys (see below). In this case DataRow must use database path expressions for joint column keys, and their format is incompatible with most databases alias format.</p></li>
+    </ul>
+   </div>
+   <div class="paragraph">
+    <p>Usage:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>#result('NAME')
+#result('DATE_OF_BIRTH' 'java.util.Date')
+#result('DOB' 'java.util.Date' 'DATE_OF_BIRTH')
+#result('DOB' 'java.util.Date' '' 'artist.DATE_OF_BIRTH')
+#result('SALARY' 'float')</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Full example:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-SQL SQL" data-lang="SQL">SELECT #result('ID' 'int'), #result('NAME' 'String'), #result('DATE_OF_BIRTH' 'java.util.Date') FROM ARTIST</code></pre>
+    </div>
+   </div>
+   <div class="admonitionblock note">
+    <table>
+     <tbody>
+      <tr>
+       <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+       <td class="content">For advanced features you may look at the <a href="/docs/5.0/cayenne-guide/ext-velocity">Apache Velocity Extension</a></td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </div>
+</div>
