@@ -17,7 +17,7 @@
     <loc>https://cayenne.apache.org/docs/5.0/getting-started-guide/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/system-requirements/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/how_development_happens.html</loc>
@@ -38,7 +38,7 @@
     <loc>https://cayenne.apache.org/docs/4.2/cayenne-guide/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/setup/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-mapping-structure/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/code-repository.html</loc>
@@ -56,7 +56,7 @@
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-mapping-structure/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-project/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/success-stories.html</loc>
@@ -74,7 +74,7 @@
     <loc>https://cayenne.apache.org/docs/4.2/getting-started-rop/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-modeler/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/datamap/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/about/support/</loc>
@@ -83,7 +83,7 @@
     <loc>https://cayenne.apache.org/dev/building-cayenne.html</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-framework/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/datanode/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/3.1/upgrade-guide/</loc>
@@ -98,25 +98,109 @@
     <loc>https://cayenne.apache.org/docs/4.2/upgrade-guide/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/including-cayenne-in-project/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/dbentity/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/release-guide.html</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/starting-cayenne/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/objentity/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/running-unit-tests.html</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/persistent-objects-objectcontext/</loc>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/embeddable/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/dev/cms-guide.html</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/procedure/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/query/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-modeler/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/runModeler/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-modeler/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/generating-java-classes/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/modeling-generic-persistent-classes/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/modeling-primary-key-generation-strategy/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/including-cayenne-in-project/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/maven/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/gradle/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ant-etc/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/starting-cayenne/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/starting-and-stopping-cayenneruntime/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/connecting-to-a-database/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/merging-multiple-projects/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/persistent-objects-objectcontext/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/objectcontext/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/persistent-object-and-its-lifecycle/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/objectcontext-persistence-api/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-helper-class/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/objectcontext-nesting/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/generic-persistent-objects/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/transactions/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/expressions/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/path-expressions/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/creating-expressions-from-strings/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/creating-expressions-via-api/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/evaluate/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/orderings/</loc>
@@ -125,16 +209,91 @@
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/queries/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/select/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ql/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/sqlselect/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/sqlscripting/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/mappedselect-and-mappedexec/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/procedurecall/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/custom-queries/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/lifecycle-events/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/types-of-lifecycle-events/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/callbacks-on-persistent-objects/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/callbacks-on-non-persistent-listeners/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/combining-listeners-with-datachannel-filters/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/commit-log/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/basic-usage/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/restricting-to-annotated-entities/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/dispatching-events-outside-the-transaction/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/custom-entity-factory/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/performance-tuning/</loc>
   </url>
   <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/prefetching-2/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/data-rows/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/iterated-queries/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/paginated-queries/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/caching/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/turning-off-synchronization-of-objectcontexts/</loc>
+  </url>
+  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/customizing-cayenne-runtime/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/dependency-injection-container/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/customization-strategies/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/using-custom-data-types/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/noteworthy-built-in-services/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/agentic-coding/</loc>
@@ -147,21 +306,6 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/cayenne-mcp-server/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/db-first-flow/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-introduction/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-filtering/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-relationships-loading-control/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-modeler/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/additional-modules/</loc>
@@ -195,6 +339,12 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ant_tasks/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-filtering/</loc>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/re-relationships-loading-control/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/appendix-a-configuration-properties/</loc>
@@ -356,9 +506,6 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/doap/cayenne.rdf</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/getting-started-db-first/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/legacy/legacy-docs/</loc>

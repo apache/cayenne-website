@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.3">
+        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon-04cb17e028.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32-12431ee8eb.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16-4f316e4d55.png">
+        <link rel="manifest" href="/img/favicon/manifest-65e6aaa49e.json">
+        <link rel="mask-icon" href="/img/favicon/safari-pinned-tab-558c1991b1.svg" color="#dc5656">
+        <link rel="shortcut icon" href="/img/favicon/favicon-6cef91375b.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/img/favicon/mstile-144x144-34e7696278.png">
+        <meta name="msapplication-config" content="/img/favicon/browserconfig-82ff158058.xml">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
+        <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
+        <title>Cayenne Guide 5.0 · Object Query Language &middot; Apache Cayenne</title>
+    </head>
+    <body  class="cd-head">
+<header class="page-header">
+    <nav id="topbar" class="bg-dark" aria-label="breadcrumb" role="navigation">
+      <ul class="breadcrumb breadcrumb-sm breadcrumb-dark  container  mb-0">
+        <li class="breadcrumb-item dropdown">
+          <a class="dropdown-toggle  text-nowrap  pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="mw-15px  mr-1" src="/img/feather-641aa69d09.svg" />Apache Software Foundation</a>
+          <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="dropdown-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="dropdown-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="dropdown-item" href="https://www.apache.org/security/">Security</a>
+            <a class="dropdown-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="ml-1 mt-1 acevent" data-format="wide" data-mode="dark" data-width="120"></a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="https://cayenne.apache.org/">
+           <img src="/img/logo_mono_full-d7a19eef61.svg" alt="Apache Cayenne" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+          <ul class="navbar-nav  mt-3 mt-lg-0 mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/download/">DOWNLOAD</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/docs/4.2/getting-started-guide/">DOCUMENTATION</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/about/support/">SUPPORT</a>
+            </li>
+            
+          </ul>
+          <ul class="navbar-nav  flex-row justify-content-center  mt-2 mt-lg-0 mb-2 mb-lg-0 " id="social-links-menu">
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://github.com/apache/cayenne">
+                <img src="/img/icon_octocat_stars-c24dac94b8.svg" alt="GitHub" />
+              </a>
+            </li>
+            <li class="nav-item  d-flex">
+              <a class="nav-link  d-flex justify-content-center align-items-center" href="https://twitter.com/ApacheCayenne">
+                <img src="/img/icon_twitter-220a129d14.svg" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+<main>
+    <div class="cd-top-sidebar  bb">
+        <div class="container">
+            <div class="row no-gutters">
+                
+                <div class="col-12 col-lg-4 col-xl-3  br  cd-sidebar1">
+                    <ul class="nav" role="tablist">
+                        <li class="nav-item dropdown mw-100">
+                            <a class="nav-link dropdown-toggle text-truncate" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                Cayenne Version 5.0
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/docs/5.0/getting-started-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-8 col-xl-9">  </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters  ">
+            <div class="col-12 col-lg-4 col-xl-3  br  py-2  bg-gray-100  cd-sidebar">
+                <div class="tab-content" id="cd-docs-nav">
+                    
+                    <div class="cd-toc-item">
+                        
+                            <a class="cd-toc-link" href="/docs/5.0/getting-started-guide/">Getting Started</a>
+                        
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                        <span class="cd-toc-link active">Cayenne Guide</span><div id="toc" class="toc toc-side">
+ <div id="toctitle">
+  Table of Contents
+ </div>
+ <ul class="sectlevel1 nav">
+  <li><a href="/docs/5.0/cayenne-guide/system-requirements" class="nav-link" id="system-requirements">1. System Requirements</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" class="nav-link" id="cayenne-mapping-structure">2. Cayenne Mapping Structure</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/cayenne-project" class="nav-link" id="cayenne-project">Cayenne Project</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/datamap" class="nav-link" id="datamap">DataMap</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/datanode" class="nav-link" id="datanode">DataNode</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/dbentity" class="nav-link" id="dbentity">DbEntity</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objentity" class="nav-link" id="objentity">ObjEntity</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/embeddable" class="nav-link" id="embeddable">Embeddable</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/procedure" class="nav-link" id="procedure">Procedure</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/query" class="nav-link" id="query">Query</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" class="nav-link" id="cayenne-modeler">3. CayenneModeler Application</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/runModeler" class="nav-link" id="runModeler">Running CayenneModeler</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/re-modeler" class="nav-link" id="re-modeler">Reverse Engineering in Cayenne Modeler</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/generating-java-classes" class="nav-link" id="generating-java-classes">Generating Java Classes</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/modeling-generic-persistent-classes" class="nav-link" id="modeling-generic-persistent-classes">Modeling Generic Persistent Classes</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/modeling-primary-key-generation-strategy" class="nav-link" id="modeling-primary-key-generation-strategy">Modeling Primary Key Generation Strategy</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" class="nav-link" id="including-cayenne-in-project">4. Including Cayenne in a Project</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/maven" class="nav-link" id="maven">Maven</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/gradle" class="nav-link" id="gradle">Gradle</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ant-etc" class="nav-link" id="ant-etc">Ant, etc.</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" class="nav-link" id="starting-cayenne">5. Starting Cayenne</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/starting-and-stopping-cayenneruntime" class="nav-link" id="starting-and-stopping-cayenneruntime">Starting and Stopping CayenneRuntime</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/connecting-to-a-database" class="nav-link" id="connecting-to-a-database">Connecting to a Database</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/merging-multiple-projects" class="nav-link" id="merging-multiple-projects">Merging Multiple Projects</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" class="nav-link" id="persistent-objects-objectcontext">6. Persistent Objects and ObjectContext</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/objectcontext" class="nav-link" id="objectcontext">ObjectContext</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/persistent-object-and-its-lifecycle" class="nav-link" id="persistent-object-and-its-lifecycle">Persistent Object and its Lifecycle</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objectcontext-persistence-api" class="nav-link" id="objectcontext-persistence-api">ObjectContext Persistence API</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/cayenne-helper-class" class="nav-link" id="cayenne-helper-class">Cayenne Helper Class</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objectcontext-nesting" class="nav-link" id="objectcontext-nesting">ObjectContext Nesting</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/generic-persistent-objects" class="nav-link" id="generic-persistent-objects">Generic Persistent Objects</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/transactions" class="nav-link" id="transactions">Transactions</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/expressions" class="nav-link" id="expressions">7. Expressions</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/path-expressions" class="nav-link" id="path-expressions">Path Expressions</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/creating-expressions-from-strings" class="nav-link" id="creating-expressions-from-strings">Creating Expressions from Strings</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/creating-expressions-via-api" class="nav-link" id="creating-expressions-via-api">Creating Expressions via API</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/evaluate" class="nav-link" id="evaluate">Evaluating Expressions in Memory</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/orderings" class="nav-link" id="orderings">8. Orderings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/queries" class="nav-link" id="queries">9. Queries</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/select" class="nav-link" id="select">ObjectSelect</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ql" class="nav-link" id="ql">Object Query Language</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/sqlselect" class="nav-link" id="sqlselect">SQLSelect and SQLExec</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/sqlscripting" class="nav-link" id="sqlscripting">Scripting SQL Queries</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/mappedselect-and-mappedexec" class="nav-link" id="mappedselect-and-mappedexec">MappedSelect and MappedExec</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/procedurecall" class="nav-link" id="procedurecall">ProcedureCall</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/custom-queries" class="nav-link" id="custom-queries">Custom Queries</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" class="nav-link" id="lifecycle-events">10. Lifecycle Events</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/types-of-lifecycle-events" class="nav-link" id="types-of-lifecycle-events">Types of Lifecycle Events</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/callbacks-on-persistent-objects" class="nav-link" id="callbacks-on-persistent-objects">Callbacks on Persistent Objects</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/callbacks-on-non-persistent-listeners" class="nav-link" id="callbacks-on-non-persistent-listeners">Callbacks on Non-Persistent Listeners</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/combining-listeners-with-datachannel-filters" class="nav-link" id="combining-listeners-with-datachannel-filters">Combining Listeners with DataChannel filters</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/commit-log" class="nav-link" id="commit-log">11. Commit Log</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/basic-usage" class="nav-link" id="basic-usage">Basic Usage</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/restricting-to-annotated-entities" class="nav-link" id="restricting-to-annotated-entities">Restricting to Annotated Entities</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/dispatching-events-outside-the-transaction" class="nav-link" id="dispatching-events-outside-the-transaction">Dispatching Events Outside the Transaction</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/custom-entity-factory" class="nav-link" id="custom-entity-factory">Custom Entity Factory</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/performance-tuning" class="nav-link" id="performance-tuning">12. Performance Tuning</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/prefetching-2" class="nav-link" id="prefetching-2">Prefetching</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/data-rows" class="nav-link" id="data-rows">Data Rows</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/iterated-queries" class="nav-link" id="iterated-queries">Iterated Queries</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/paginated-queries" class="nav-link" id="paginated-queries">Paginated Queries</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/caching" class="nav-link" id="caching">Caching and Fresh Data</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/turning-off-synchronization-of-objectcontexts" class="nav-link" id="turning-off-synchronization-of-objectcontexts">Turning off Synchronization of ObjectContexts</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" class="nav-link" id="customizing-cayenne-runtime">13. Customizing Cayenne Runtime</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/dependency-injection-container" class="nav-link" id="dependency-injection-container">Dependency Injection Container</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/customization-strategies" class="nav-link" id="customization-strategies">Customization Strategies</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/using-custom-data-types" class="nav-link" id="using-custom-data-types">Using custom data types</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/noteworthy-built-in-services" class="nav-link" id="noteworthy-built-in-services">Noteworthy Built-in Services</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/agentic-coding" class="nav-link" id="agentic-coding">14. Agentic Coding</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/overview" class="nav-link" id="overview">Overview</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/apache-cayenne-claude-code-plugin" class="nav-link" id="apache-cayenne-claude-code-plugin"><code>apache-cayenne</code> Claude Code Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/cayenne-mcp-server" class="nav-link" id="cayenne-mcp-server">Cayenne MCP Server</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/additional-modules" class="nav-link" id="additional-modules">15. Additional Modules</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" class="nav-link" id="ext-cache-invalidation">Cache Invalidation Extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-crypto" class="nav-link" id="ext-crypto">Crypto extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-jcache" class="nav-link" id="ext-jcache">JCache integration</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" class="nav-link" id="ext-project-compatibility">Project compatibility extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-velocity" class="nav-link" id="ext-velocity">Apache Velocity Extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-osgi" class="nav-link" id="ext-osgi">Cayenne OSGI extension</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/build_tools" class="nav-link" id="build_tools">16. Build Tools</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/maven_plugin" class="nav-link" id="maven_plugin">Maven Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" class="nav-link" id="gradle_plugin">Gradle Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ant_tasks" class="nav-link" id="ant_tasks">Ant Tasks</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/re-filtering" class="nav-link" id="re-filtering">DB Import Filtering</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" class="nav-link" id="re-relationships-loading-control">Other DB Import Settings</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" class="nav-link" id="appendix-a-configuration-properties">Appendix A. Configuration Properties</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" class="nav-link" id="appendix-b-service-collections">Appendix B. Service Collections</a></li>
+ </ul>
+</div>
+                    </div>
+                    
+                    <div class="cd-toc-item">
+                        
+                        
+                        <a class="cd-toc-link" href="/docs/5.0/api/">JavaDoc</a></div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-8 col-xl-9  py-3 pl-lg-5  cd-content">
+
+
+
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+                <article>
+                    <header>
+                    </header>
+                    <section>
+                        <div class="sect2">
+ <h3 id="ql"><a class="anchor" href="#ql"></a>Object Query Language</h3>
+ <div class="paragraph">
+  <p>An <code>ObjectSelect</code> or a <code>ColumnSelect</code> can be created from a String. This is an alternative to the fluent API. E.g.:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect
+        .parse(Artist.class, "from Artist where name like $name order by dateOfBirth desc limit 10", "A%")
+        .select(context);</code></pre>
+  </div>
+ </div>
+ <div class="paragraph">
+  <p>The parser produces the same query object that the fluent API would, so everything said about <a href="/docs/5.0/cayenne-guide/select">ObjectSelect</a> above applies. The parsed query can be customized further with the fluent API before it is executed:</p>
+ </div>
+ <div class="listingblock">
+  <div class="content">
+   <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Artist&gt; artists = ObjectSelect
+        .parse(Artist.class, "from Artist where name like $name", "A%")
+        .localCache("artists")
+        .pageSize(50)
+        .select(context);</code></pre>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="query-structure"><a class="anchor" href="#query-structure"></a>Query Structure</h4>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code>[ select [ distinct ] columns ]
+from Entity
+[ where     expression ]
+[ having    expression ]
+[ order by  orderings ]
+[ limit n [ offset m ] ]
+[ prefetch  paths ]</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The clauses must follow in this order, and all of them, except for <code>from</code>, are optional (even <code>select</code>!). Here are the rules of the language:</p>
+  </div>
+  <div class="ulist">
+   <ul>
+    <li>
+     <p>There is a single root entity, named in the <code>from</code> clause. All other entities are reached via the relationship paths starting at the root (<code>paintings.gallery.name</code>), so there are no entity aliases and no explicit joins. Just like in expressions, a join is made outer by appending <code>` to a path component (`paintings</code>), and a join is split from the other joins over the same path with an alias (<code>paintings#p1</code>).</p></li>
+    <li>
+     <p>Every <code>expression</code> above, as well as every column and ordering, follows the syntax of Cayenne <a href="/docs/5.0/cayenne-guide/expressions">expressions</a>, the same one that <code>ExpressionFactory.exp(..)</code> takes. Anything that is valid in an expression is valid in a query: comparisons, <code>like</code>, <code>in</code>, <code>between</code>, arithmetics, functions, <code>db:</code> paths, etc.</p></li>
+    <li>
+     <p>The keywords are case-sensitive, and must be spelled exactly as shown here, which is also true for the expressions. The words that start the clauses are not reserved, and can be used as property names. The only reserved word is <code>self</code>, that denotes the root object. A property called "self" has to be written as <code>obj:self</code>.</p></li>
+    <li>
+     <p>A query with no <code>select</code> clause, or the one with <code>select self</code>, fetches the root objects and is an <code>ObjectSelect</code>. Any other <code>select</code> clause results in a <code>ColumnSelect</code>.</p></li>
+    <li>
+     <p>There is no <code>group by</code> clause. Just like with the fluent <code>ColumnSelect</code>, when any of the columns is an aggregate function, all the other columns become the grouping columns.</p></li>
+    <li>
+     <p>Only selecting queries are supported. There is no <code>update</code> or <code>delete</code>.</p></li>
+   </ul>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h4>
+  <div class="paragraph">
+   <p>A parameter is a name prefixed with <code>$</code>, the same as in expressions. The values are passed to the <code>parse(..)</code> method and are bound in the order in which the parameters first appear in the String. If the same name is used more than once, it takes a single value that is bound in all those places. A value can be anything that is a valid expression operand: a scalar, a collection for <code>in</code>, a persistent object to match a relationship, etc.:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;Painting&gt; paintings = ObjectSelect
+        .parse(Painting.class,
+                "from Painting where artist = $artist and estimatedPrice between $low and $high",
+                artist, 10, 500)
+        .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The parameters can be used anywhere in the expressions, including the nested selects. <code>limit</code> and <code>offset</code> only take integer literals.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="java-api"><a class="anchor" href="#java-api"></a>Java API</h4>
+  <div class="paragraph">
+   <p>There are four methods to parse a query, that differ in the type of the result:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// any query. Returns either an ObjectSelect or a ColumnSelect
+FluentSelect&lt;?, ?&gt; q1 = ObjectSelect.parse("from Artist");
+
+// a query of the root objects. "DataRow.class" is used to fetch the data rows instead of objects
+ObjectSelect&lt;Artist&gt; q2 = ObjectSelect.parse(Artist.class, "from Artist");
+ObjectSelect&lt;DataRow&gt; q3 = ObjectSelect.parse(DataRow.class, "from Artist");
+
+// a query with a single column
+ColumnSelect&lt;String&gt; q4 = ObjectSelect.parseColumn(String.class, "select name from Artist");
+
+// a query with multiple columns
+ColumnSelect&lt;Object[]&gt; q5 = ObjectSelect.parseColumns("select name, dateOfBirth from Artist");</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>The last three are there to avoid the type casts. They throw an exception if the query is of a different kind, e.g. if a <code>select</code> clause is passed to <code>parse(Artist.class, ..)</code>.</p>
+  </div>
+  <div class="paragraph">
+   <p>The parser needs no mapping information, so the names of entities and properties, as well as the types of the columns, are only checked when the query is executed.</p>
+  </div>
+ </div>
+ <div class="sect3">
+  <h4 id="examples"><a class="anchor" href="#examples"></a>Examples</h4>
+  <div class="paragraph">
+   <p>Each example shows a query String and the same query built with the fluent API.</p>
+  </div>
+  <div class="sect4">
+   <h5 id="objects-with-a-filter-ordering-and-a-limit"><a class="anchor" href="#objects-with-a-filter-ordering-and-a-limit"></a>Objects with a filter, ordering and a limit</h5>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from Artist where name like 'A%' order by dateOfBirth desc, name asc insensitive limit 10 offset 20</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(Artist.NAME.like("A%"))
+        .orderBy(Artist.DATE_OF_BIRTH.desc(), Artist.NAME.ascInsensitive())
+        .limit(10)
+        .offset(20);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>An ordering is an expression, optionally followed by <code>asc</code> (the default) or <code>desc</code>, and then optionally by <code>insensitive</code>.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="joins"><a class="anchor" href="#joins"></a>Joins</h5>
+   <div class="paragraph">
+    <p>The joins are implied by the paths. Here is an outer join, matching the artists with no paintings:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from Artist where paintings+ = null</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class).where(Artist.PAINTINGS.outer().isNull());</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>And here are two separate joins over the same relationship, matching the artists that have both paintings:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from Artist where paintings#p1.title = 'P1' and paintings#p2.title = 'P2'</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(Artist.PAINTINGS.alias("p1").dot(Painting.TITLE).eq("P1"))
+        .and(Artist.PAINTINGS.alias("p2").dot(Painting.TITLE).eq("P2"));</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="columns"><a class="anchor" href="#columns"></a>Columns</h5>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select name, dateOfBirth from Artist order by name</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Artist.class, Artist.NAME, Artist.DATE_OF_BIRTH)
+        .orderBy(Artist.NAME.asc());</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>The result is a <code>List&lt;Object[]&gt;</code>. With a single column it is a list of values:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select distinct gallery.name from Painting</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;String&gt; query = ObjectSelect
+        .columnQuery(Painting.class, Painting.GALLERY.dot(Gallery.NAME))
+        .distinct();</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>A column can be any expression, and it can have an alias (the same as <code>BaseProperty.alias(..)</code>):</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select upper(name) as upperName, length(trim(name)) as nameLength from Artist</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="aggregates"><a class="anchor" href="#aggregates"></a>Aggregates</h5>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select artist.name, sum(estimatedPrice), count(*)
+from Painting
+having sum(estimatedPrice) &gt; $min
+order by artist.name</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Painting.class,
+                Painting.ARTIST.dot(Artist.NAME),
+                Painting.ESTIMATED_PRICE.sum(),
+                PropertyFactory.COUNT)
+        .having(Painting.ESTIMATED_PRICE.sum().gt(min))
+        .orderBy(Painting.ARTIST.dot(Artist.NAME).asc());</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p><code>artist.name</code> becomes a grouping column here, as the other columns are aggregates.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="objects-as-columns"><a class="anchor" href="#objects-as-columns"></a>Objects as columns</h5>
+   <div class="paragraph">
+    <p><code>self</code> is the root object, and a relationship path is a related object. Here each row is an <code>Object[]</code> with an <code>Artist</code> and a <code>Long</code>:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select self, count(paintings+) from Artist order by count(paintings+) desc</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Artist.class, Artist.SELF, Artist.PAINTINGS.outer().count())
+        .orderBy(Artist.PAINTINGS.outer().count().desc());</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>A to-one relationship gives a related object in each row:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select title, artist, gallery from Painting</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Painting.class, Painting.TITLE, Painting.ARTIST, Painting.GALLERY);</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>With a to-many relationship a row is repeated for each related object. This is the same as <code>flat()</code> in the fluent API:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>select name, paintings from Artist</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ColumnSelect&lt;Object[]&gt; query = ObjectSelect
+        .columnQuery(Artist.class, Artist.NAME, Artist.PAINTINGS.flat());</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>In both cases a row with no related object is still present in the result, with a <code>null</code> in place of the object. To exclude such rows, add a condition to the <code>where</code> clause, e.g. <code>where exists paintings</code>.</p>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="subqueries-2"><a class="anchor" href="#subqueries-2"></a>Subqueries</h5>
+   <div class="paragraph">
+    <p>A nested select in parentheses can be used with <code>exists</code>, <code>not exists</code>, <code>in</code>, <code>not in</code>, <code>all</code> and <code>any</code>. It has the same structure as the main query, except for <code>prefetch</code>. Its paths are relative to its own root, and <code>enclosing(..)</code> is used to refer to the main query:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from Artist where exists (
+    from Painting where artist = enclosing(self) and estimatedPrice &gt; $price)</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(ExpressionFactory.exists(ObjectSelect.query(Painting.class)
+                .where(Painting.ARTIST.eq(Artist.SELF.enclosing()))
+                .and(Painting.ESTIMATED_PRICE.gt(price))));</code></pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p><code>enclosing(self)</code> is the root object of the enclosing query, <code>enclosing(name)</code> is its property, and <code>enclosing(enclosing(self))</code> goes two levels up.</p>
+   </div>
+   <div class="paragraph">
+    <p><code>in</code>, <code>all</code> and <code>any</code> take a nested select with a single column:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from Painting where artist.name in (select name from Artist where dateOfBirth &lt; $date)
+
+from Painting where estimatedPrice &gt; all (select estimatedPrice from Painting where title = 'P2')
+
+from Painting where estimatedPrice = any (select max(estimatedPrice) from Painting)</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Painting&gt; query = ObjectSelect.query(Painting.class)
+        .where(Painting.ARTIST.dot(Artist.NAME).in(
+                ObjectSelect.columnQuery(Artist.class, Artist.NAME)
+                        .where(Artist.DATE_OF_BIRTH.lt(date))));</code></pre>
+    </div>
+   </div>
+   <div class="admonitionblock note">
+    <table>
+     <tbody>
+      <tr>
+       <td class="icon"><i class="fa fa-info-circle fa-2x" title="Note"></i></td>
+       <td class="content">When there is no need for a nested select with its own conditions,<code>exists</code> over a path is shorter: <code>from Artist where not exists paintings</code>.</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="dbentity-as-a-root"><a class="anchor" href="#dbentity-as-a-root"></a>DbEntity as a root</h5>
+   <div class="paragraph">
+    <p>A root prefixed with <code>db:</code> is a name of a DbEntity. Such a query fetches the data rows, and all its paths are the DB paths, with no need for a <code>db:</code> prefix:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from db:ARTIST where NAME like 'A%' order by ID desc</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;DataRow&gt; query = ObjectSelect.dbQuery("ARTIST")
+        .where(ExpressionFactory.likeDbExp("NAME", "A%"))
+        .orderBy(new Ordering(ExpressionFactory.dbPathExp("ID"), SortOrder.DESCENDING));</code></pre>
+    </div>
+   </div>
+  </div>
+  <div class="sect4">
+   <h5 id="prefetching"><a class="anchor" href="#prefetching"></a>Prefetching</h5>
+   <div class="paragraph">
+    <p><code>prefetch</code> is a comma-separated list of relationship paths, each optionally followed by the prefetch semantics - <code>joint</code>, <code>disjoint</code> or <code>disjointById</code>. If omitted, Cayenne picks the default semantics, the same as with <code>prefetch(String, int)</code>:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code>from Artist where name = $name prefetch paintings joint, paintings.gallery</code></pre>
+    </div>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-java java" data-lang="java">ObjectSelect&lt;Artist&gt; query = ObjectSelect.query(Artist.class)
+        .where(Artist.NAME.eq(name))
+        .prefetch(Artist.PAINTINGS.joint())
+        .prefetch("paintings.gallery", PrefetchTreeNode.UNDEFINED_SEMANTICS);</code></pre>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+                    </section>
+                    <footer>
+                        <div class="row">
+                            <div class="col-6 col-md-3  text-center text-md-left">
+                                &nbsp;
+                            </div>
+                            <div class="col-18 col-md-9  text-center text-md-right">
+                                
+                                <a class="btn btn-link" href='/docs/5.0/cayenne-guide/sqlselect/'>
+                                    <span class="d-block d-md-none  text-muted">Next: </span>
+                                    Next: Cayenne Guide 5.0 · SQLSelect and SQLExec
+                                    <i class="small  fa fa-chevron-right  ml-3l2  d-none d-md-inline"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </footer>
+                </article>
+
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=5c836e39-be6b-4a21-a946-a97b5b69f172" />
+	        </div>
+	    </div>
+	</div>
+</main>
+
+<footer class="bg-dark">
+    <div class="footer-nav container  text-center text-lg-left  pb-3">
+        <div class="row  pt-5 pb-3">
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>About</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/why-cayenne.html">Why Cayenne?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/download/">Download</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/success-stories.html">Success Stories</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/support/">Support</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Documentation</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="/docs/4.0/getting-started-guide/">Getting Started (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-guide/">Getting Started (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-guide/">Getting Started (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.0/cayenne-guide/">Cayenne Guide (4.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/cayenne-guide/">Cayenne Guide (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/cayenne-guide/">Cayenne Guide (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/5.0/cayenne-guide/">Cayenne Guide (5.0)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.1/getting-started-db-first/">Database First tutorial (4.1)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/docs/4.2/getting-started-db-first/">Database First tutorial (4.2)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/legacy/legacy-docs/">Legacy Documentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>Collaboration</h4>
+                <ul class="list-unstyled">
+                    
+                    <li>
+                        <a href="https://issues.apache.org/jira/browse/CAY">Bug/Feature Tracker</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/mailing-lists.html">Mailing Lists</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/code-repository.html">Code Repository</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/dev/">Developer Guide</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/how-can-i-help.html">How can I help?</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contributors.html">Contributors</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/thanks.html">Thanks</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <h4>News</h4>
+                <ul class="list-multiline-items list-unstyled  mb-0">
+                    
+                    <li>
+                        <time datetime="2026-08-25 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Aug 25, 2026</time>
+                        <a href="/2026/08/cayenne-50m3-released/">Cayenne 5.0 Milestone 3 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
+                        <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
+                    </li>
+                    
+                    <li>
+                        <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
+                        <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
+                    </li>
+                    
+                </ul>
+                <a class="btn-link text-uppercase xsmall" href="https://cayenne.apache.org/news">
+                    More news
+                    <i class="fa fa-lg fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="mt-0 mb-3" />
+        <p class="copy xsmall text-center  mw-75 mx-auto mb-0">
+            Copyright © 2001-2026 Apache Software Foundation. Apache Cayenne, Cayenne, Apache, the Apache logo, and the Apache Cayenne project logo are trademarks of The Apache Software Foundation.
+            <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy policy</a>.
+            <img class="d-block  mx-auto mt-2" src="/img/logo_mono-3302daa3cf.svg" alt="Apache Cayenne" />
+        </p>
+        <p class="copy xsmall text-center mx-auto">
+            <a href="https://www.apache.org/">Foundation</a> |
+            <a href="https://www.apache.org/events/current-event.html">Events</a> |
+            <a href="https://www.apache.org/licenses/">License</a> |
+            <a href="https://www.apache.org/security/">Security</a> |
+            <a href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a> |
+            <a href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+        </p>
+    </div>
+</footer>
+
+    </body>
+</html>

@@ -102,7 +102,7 @@
                                 Cayenne Version 5.0
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/5.0/getting-started-db-first/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/5.0/getting-started-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -118,12 +118,6 @@
                     
                     <div class="cd-toc-item">
                         
-                            <a class="cd-toc-link" href="/docs/5.0/getting-started-db-first/">Database First Tutorial</a>
-                        
-                    </div>
-                    
-                    <div class="cd-toc-item">
-                        
                             <a class="cd-toc-link" href="/docs/5.0/getting-started-guide/">Getting Started</a>
                         
                     </div>
@@ -135,55 +129,121 @@
   Table of Contents
  </div>
  <ul class="sectlevel1 nav">
-  <li><a href="/docs/5.0/cayenne-guide/object-relational-mapping-with-cayenne" class="nav-link" id="object-relational-mapping-with-cayenne">1. Object Relational Mapping with Cayenne</a>
+  <li><a href="/docs/5.0/cayenne-guide/system-requirements" class="nav-link" id="system-requirements">1. System Requirements</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" class="nav-link" id="cayenne-mapping-structure">2. Cayenne Mapping Structure</a>
    <ul class="sectlevel2 nav">
-    <li><a href="/docs/5.0/cayenne-guide/setup" class="nav-link" id="setup">1.1. Setup</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/cayenne-mapping-structure" class="nav-link" id="cayenne-mapping-structure">1.2. Cayenne Mapping Structure</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" class="nav-link" id="cayenne-modeler">1.3. CayenneModeler Application</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/cayenne-project" class="nav-link" id="cayenne-project">Cayenne Project</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/datamap" class="nav-link" id="datamap">DataMap</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/datanode" class="nav-link" id="datanode">DataNode</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/dbentity" class="nav-link" id="dbentity">DbEntity</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objentity" class="nav-link" id="objentity">ObjEntity</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/embeddable" class="nav-link" id="embeddable">Embeddable</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/procedure" class="nav-link" id="procedure">Procedure</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/query" class="nav-link" id="query">Query</a></li>
    </ul></li>
-  <li><a href="/docs/5.0/cayenne-guide/cayenne-framework" class="nav-link" id="cayenne-framework">2. Cayenne Framework</a>
+  <li><a href="/docs/5.0/cayenne-guide/cayenne-modeler" class="nav-link" id="cayenne-modeler">3. CayenneModeler Application</a>
    <ul class="sectlevel2 nav">
-    <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" class="nav-link" id="including-cayenne-in-project">2.1. Including Cayenne in a Project</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" class="nav-link" id="starting-cayenne">2.2. Starting Cayenne</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" class="nav-link" id="persistent-objects-objectcontext">2.3. Persistent Objects and ObjectContext</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/expressions" class="nav-link" id="expressions">2.4. Expressions</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/orderings" class="nav-link" id="orderings">2.5. Orderings</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/queries" class="nav-link" id="queries">2.6. Queries</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" class="nav-link" id="lifecycle-events">2.7. Lifecycle Events</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/commit-log" class="nav-link" id="commit-log">2.8. Commit Log</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/performance-tuning" class="nav-link" id="performance-tuning">2.9. Performance Tuning</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" class="nav-link" id="customizing-cayenne-runtime">2.10. Customizing Cayenne Runtime</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/runModeler" class="nav-link" id="runModeler">Running CayenneModeler</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/re-modeler" class="nav-link" id="re-modeler">Reverse Engineering in Cayenne Modeler</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/generating-java-classes" class="nav-link" id="generating-java-classes">Generating Java Classes</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/modeling-generic-persistent-classes" class="nav-link" id="modeling-generic-persistent-classes">Modeling Generic Persistent Classes</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/modeling-primary-key-generation-strategy" class="nav-link" id="modeling-primary-key-generation-strategy">Modeling Primary Key Generation Strategy</a></li>
    </ul></li>
-  <li><a href="/docs/5.0/cayenne-guide/agentic-coding" class="nav-link" id="agentic-coding">3. Agentic Coding</a>
+  <li><a href="/docs/5.0/cayenne-guide/including-cayenne-in-project" class="nav-link" id="including-cayenne-in-project">4. Including Cayenne in a Project</a>
    <ul class="sectlevel2 nav">
-    <li><a href="/docs/5.0/cayenne-guide/overview" class="nav-link" id="overview">3.1. Overview</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/apache-cayenne-claude-code-plugin" class="nav-link" id="apache-cayenne-claude-code-plugin">3.2. <code>apache-cayenne</code> Claude Code Plugin</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/cayenne-mcp-server" class="nav-link" id="cayenne-mcp-server">3.3. Cayenne MCP Server</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/maven" class="nav-link" id="maven">Maven</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/gradle" class="nav-link" id="gradle">Gradle</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ant-etc" class="nav-link" id="ant-etc">Ant, etc.</a></li>
    </ul></li>
-  <li><a href="/docs/5.0/cayenne-guide/db-first-flow" class="nav-link" id="db-first-flow">4. DB-First Flow</a>
+  <li><a href="/docs/5.0/cayenne-guide/starting-cayenne" class="nav-link" id="starting-cayenne">5. Starting Cayenne</a>
    <ul class="sectlevel2 nav">
-    <li><a href="/docs/5.0/cayenne-guide/re-introduction" class="nav-link" id="re-introduction">4.1. Introduction</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/re-filtering" class="nav-link" id="re-filtering">4.2. Filtering</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" class="nav-link" id="re-relationships-loading-control">4.3. Other Settings</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/re-modeler" class="nav-link" id="re-modeler">4.4. Reverse Engineering in Cayenne Modeler</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/starting-and-stopping-cayenneruntime" class="nav-link" id="starting-and-stopping-cayenneruntime">Starting and Stopping CayenneRuntime</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/connecting-to-a-database" class="nav-link" id="connecting-to-a-database">Connecting to a Database</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/merging-multiple-projects" class="nav-link" id="merging-multiple-projects">Merging Multiple Projects</a></li>
    </ul></li>
-  <li><a href="/docs/5.0/cayenne-guide/additional-modules" class="nav-link" id="additional-modules">5. Additional Modules</a>
+  <li><a href="/docs/5.0/cayenne-guide/persistent-objects-objectcontext" class="nav-link" id="persistent-objects-objectcontext">6. Persistent Objects and ObjectContext</a>
    <ul class="sectlevel2 nav">
-    <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" class="nav-link" id="ext-cache-invalidation">5.1. Cache Invalidation Extension</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-crypto" class="nav-link" id="ext-crypto">5.2. Crypto extension</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-jcache" class="nav-link" id="ext-jcache">5.3. JCache integration</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" class="nav-link" id="ext-project-compatibility">5.4. Project compatibility extension</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-velocity" class="nav-link" id="ext-velocity">5.5. Apache Velocity Extension</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-osgi" class="nav-link" id="ext-osgi">5.6. Cayenne OSGI extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objectcontext" class="nav-link" id="objectcontext">ObjectContext</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/persistent-object-and-its-lifecycle" class="nav-link" id="persistent-object-and-its-lifecycle">Persistent Object and its Lifecycle</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objectcontext-persistence-api" class="nav-link" id="objectcontext-persistence-api">ObjectContext Persistence API</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/cayenne-helper-class" class="nav-link" id="cayenne-helper-class">Cayenne Helper Class</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/objectcontext-nesting" class="nav-link" id="objectcontext-nesting">ObjectContext Nesting</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/generic-persistent-objects" class="nav-link" id="generic-persistent-objects">Generic Persistent Objects</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/transactions" class="nav-link" id="transactions">Transactions</a></li>
    </ul></li>
-  <li><a href="/docs/5.0/cayenne-guide/build_tools" class="nav-link" id="build_tools">6. Build Tools</a>
+  <li><a href="/docs/5.0/cayenne-guide/expressions" class="nav-link" id="expressions">7. Expressions</a>
    <ul class="sectlevel2 nav">
-    <li><a href="/docs/5.0/cayenne-guide/maven_plugin" class="nav-link" id="maven_plugin">6.1. Maven Plugin</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" class="nav-link" id="gradle_plugin">6.2. Gradle Plugin</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ant_tasks" class="nav-link" id="ant_tasks">6.3. Ant Tasks</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/path-expressions" class="nav-link" id="path-expressions">Path Expressions</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/creating-expressions-from-strings" class="nav-link" id="creating-expressions-from-strings">Creating Expressions from Strings</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/creating-expressions-via-api" class="nav-link" id="creating-expressions-via-api">Creating Expressions via API</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/evaluate" class="nav-link" id="evaluate">Evaluating Expressions in Memory</a></li>
    </ul></li>
-  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" class="nav-link" id="appendix-a-configuration-properties">7. Appendix A. Configuration Properties</a></li>
-  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" class="nav-link" id="appendix-b-service-collections">8. Appendix B. Service Collections</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/orderings" class="nav-link" id="orderings">8. Orderings</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/queries" class="nav-link" id="queries">9. Queries</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/select" class="nav-link" id="select">ObjectSelect</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ql" class="nav-link" id="ql">Object Query Language</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/sqlselect" class="nav-link" id="sqlselect">SQLSelect and SQLExec</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/sqlscripting" class="nav-link" id="sqlscripting">Scripting SQL Queries</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/mappedselect-and-mappedexec" class="nav-link" id="mappedselect-and-mappedexec">MappedSelect and MappedExec</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/procedurecall" class="nav-link" id="procedurecall">ProcedureCall</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/custom-queries" class="nav-link" id="custom-queries">Custom Queries</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/lifecycle-events" class="nav-link" id="lifecycle-events">10. Lifecycle Events</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/types-of-lifecycle-events" class="nav-link" id="types-of-lifecycle-events">Types of Lifecycle Events</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/callbacks-on-persistent-objects" class="nav-link" id="callbacks-on-persistent-objects">Callbacks on Persistent Objects</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/callbacks-on-non-persistent-listeners" class="nav-link" id="callbacks-on-non-persistent-listeners">Callbacks on Non-Persistent Listeners</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/combining-listeners-with-datachannel-filters" class="nav-link" id="combining-listeners-with-datachannel-filters">Combining Listeners with DataChannel filters</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/commit-log" class="nav-link" id="commit-log">11. Commit Log</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/basic-usage" class="nav-link" id="basic-usage">Basic Usage</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/restricting-to-annotated-entities" class="nav-link" id="restricting-to-annotated-entities">Restricting to Annotated Entities</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/dispatching-events-outside-the-transaction" class="nav-link" id="dispatching-events-outside-the-transaction">Dispatching Events Outside the Transaction</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/custom-entity-factory" class="nav-link" id="custom-entity-factory">Custom Entity Factory</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/performance-tuning" class="nav-link" id="performance-tuning">12. Performance Tuning</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/prefetching-2" class="nav-link" id="prefetching-2">Prefetching</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/data-rows" class="nav-link" id="data-rows">Data Rows</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/iterated-queries" class="nav-link" id="iterated-queries">Iterated Queries</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/paginated-queries" class="nav-link" id="paginated-queries">Paginated Queries</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/caching" class="nav-link" id="caching">Caching and Fresh Data</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/turning-off-synchronization-of-objectcontexts" class="nav-link" id="turning-off-synchronization-of-objectcontexts">Turning off Synchronization of ObjectContexts</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/customizing-cayenne-runtime" class="nav-link" id="customizing-cayenne-runtime">13. Customizing Cayenne Runtime</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/dependency-injection-container" class="nav-link" id="dependency-injection-container">Dependency Injection Container</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/customization-strategies" class="nav-link" id="customization-strategies">Customization Strategies</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/using-custom-data-types" class="nav-link" id="using-custom-data-types">Using custom data types</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/noteworthy-built-in-services" class="nav-link" id="noteworthy-built-in-services">Noteworthy Built-in Services</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/agentic-coding" class="nav-link" id="agentic-coding">14. Agentic Coding</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/overview" class="nav-link" id="overview">Overview</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/apache-cayenne-claude-code-plugin" class="nav-link" id="apache-cayenne-claude-code-plugin"><code>apache-cayenne</code> Claude Code Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/cayenne-mcp-server" class="nav-link" id="cayenne-mcp-server">Cayenne MCP Server</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/additional-modules" class="nav-link" id="additional-modules">15. Additional Modules</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" class="nav-link" id="ext-cache-invalidation">Cache Invalidation Extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-crypto" class="nav-link" id="ext-crypto">Crypto extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-jcache" class="nav-link" id="ext-jcache">JCache integration</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" class="nav-link" id="ext-project-compatibility">Project compatibility extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-velocity" class="nav-link" id="ext-velocity">Apache Velocity Extension</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ext-osgi" class="nav-link" id="ext-osgi">Cayenne OSGI extension</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/build_tools" class="nav-link" id="build_tools">16. Build Tools</a>
+   <ul class="sectlevel2 nav">
+    <li><a href="/docs/5.0/cayenne-guide/maven_plugin" class="nav-link" id="maven_plugin">Maven Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/gradle_plugin" class="nav-link" id="gradle_plugin">Gradle Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/ant_tasks" class="nav-link" id="ant_tasks">Ant Tasks</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/re-filtering" class="nav-link" id="re-filtering">DB Import Filtering</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/re-relationships-loading-control" class="nav-link" id="re-relationships-loading-control">Other DB Import Settings</a></li>
+   </ul></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-a-configuration-properties" class="nav-link" id="appendix-a-configuration-properties">Appendix A. Configuration Properties</a></li>
+  <li><a href="/docs/5.0/cayenne-guide/appendix-b-service-collections" class="nav-link" id="appendix-b-service-collections">Appendix B. Service Collections</a></li>
  </ul>
 </div>
                     </div>
@@ -202,6 +262,102 @@
 
 
 
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -279,6 +435,10 @@
 
     
 
+    
+
+    
+
 
 
 
@@ -286,14 +446,14 @@
                     <header>
                     </header>
                     <section>
-                        <div><h2>5. Additional Modules</h2>
+                        <div><h2>15. Additional Modules</h2>
 <div id="index-section-toc"><ul>
-<li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation">5.1. Cache Invalidation Extension</a>
-<li><a href="/docs/5.0/cayenne-guide/ext-crypto">5.2. Crypto extension</a>
-<li><a href="/docs/5.0/cayenne-guide/ext-jcache">5.3. JCache integration</a>
-<li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility">5.4. Project compatibility extension</a>
-<li><a href="/docs/5.0/cayenne-guide/ext-velocity">5.5. Apache Velocity Extension</a>
-<li><a href="/docs/5.0/cayenne-guide/ext-osgi">5.6. Cayenne OSGI extension</a>
+<li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation">Cache Invalidation Extension</a>
+<li><a href="/docs/5.0/cayenne-guide/ext-crypto">Crypto extension</a>
+<li><a href="/docs/5.0/cayenne-guide/ext-jcache">JCache integration</a>
+<li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility">Project compatibility extension</a>
+<li><a href="/docs/5.0/cayenne-guide/ext-velocity">Apache Velocity Extension</a>
+<li><a href="/docs/5.0/cayenne-guide/ext-osgi">Cayenne OSGI extension</a>
 </ul></div></div>
 
                     </section>
