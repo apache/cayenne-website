@@ -125,7 +125,10 @@
  <ul class="sectlevel1 nav">
   <li><a href="#setup" class="nav-link">1. Setup</a>
    <ul class="sectlevel2 nav">
-    <li><a href="#prerequisites" class="nav-link">Prerequisites</a></li>
+    <li><a href="#basics" class="nav-link">Basics</a></li>
+    <li><a href="#cayennemodeler" class="nav-link">CayenneModeler</a></li>
+    <li><a href="#claude-code-optional" class="nav-link">Claude Code (optional)</a></li>
+    <li><a href="#mysql" class="nav-link">MySQL</a></li>
     <li><a href="#maven-project" class="nav-link">Maven Project</a></li>
    </ul></li>
   <li><a href="#importing-the-database" class="nav-link">2. Importing the Database</a>
@@ -196,64 +199,80 @@
  <h2 id="setup"><a class="anchor" href="#setup"></a>1. Setup</h2>
  <div class="sectionbody">
   <div class="paragraph">
-   <p>In this tutorial we’ll take an existing database, create a Cayenne model from it, generate Java classes from the model, and write a small application that creates, selects and deletes persistent objects. The model is created with CayenneModeler, a GUI tool that comes with Cayenne. If you are using the Claude Code AI agent, each modeling step also shows how to get the same result by asking Claude.</p>
+   <p>In this tutorial we’ll create a database schema, create a Cayenne model from it, generate Java classes from the model, and write a small application that creates, selects and deletes persistent objects. The model is created with CayenneModeler, a GUI tool that comes with Cayenne. If you are using the Claude Code AI agent, each modeling step also shows how to get the same result by asking Claude.</p>
   </div>
   <div class="sect2">
-   <h3 id="prerequisites"><a class="anchor" href="#prerequisites"></a>Prerequisites</h3>
-   <div class="sect3">
-    <h4 id="java"><a class="anchor" href="#java"></a>Java</h4>
-    <div class="paragraph">
-     <p>Cayenne 5.0 requires JDK 21 or newer.</p>
+   <h3 id="basics"><a class="anchor" href="#basics"></a>Basics</h3>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p>Cayenne 5.0 requires JDK 21 or newer.</p></li>
+     <li>
+      <p>Maven is used to build and run the tutorial application. All the commands in this tutorial are run in a terminal.</p></li>
+    </ul>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="cayennemodeler"><a class="anchor" href="#cayennemodeler"></a>CayenneModeler</h3>
+   <div class="paragraph">
+    <p>CayenneModeler is the GUI tool used in this tutorial to import the database schema, to edit the model and to generate Java classes. See the <a href="/docs/5.0/cayenne-guide/runModeler/">Running CayenneModeler</a> chapter of the Cayenne Guide on how to download and start it. The welcome screen of the Modeler looks like this:</p>
+   </div>
+   <div class="imageblock text-center">
+    <div class="content">
+     <img src="images/modeler-started.png" alt="modeler started" width="800">
     </div>
    </div>
-   <div class="sect3">
-    <h4 id="maven"><a class="anchor" href="#maven"></a>Maven</h4>
-    <div class="paragraph">
-     <p>Apache Maven is used to build and run the tutorial application. All the commands in this tutorial are run in a terminal.</p>
+  </div>
+  <div class="sect2">
+   <h3 id="claude-code-optional"><a class="anchor" href="#claude-code-optional"></a>Claude Code (optional)</h3>
+   <div class="paragraph">
+    <p>To follow the "With Claude" alternatives, install Claude Code and make it Cayenne-aware with the two pieces described in the <a href="/docs/5.0/cayenne-guide/agentic-coding/">Agentic Coding</a> chapter of the Cayenne Guide:</p>
+   </div>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p>The <a href="/docs/5.0/cayenne-guide/apache-cayenne-claude-code-plugin/"><code>apache-cayenne</code> Claude Code plugin</a>. It gives Claude the skills for most of the steps in this tutorial - importing the database and keeping the model in sync with it, cleaning up the names in the model, editing the model, generating Java classes, as well as writing queries and setting up Cayenne runtime in the application code.</p></li>
+     <li>
+      <p>The <a href="/docs/5.0/cayenne-guide/cayenne-mcp-server/">Cayenne MCP server</a>, that the plugin skills use to run the DB import and the class generation, and to open CayenneModeler. It comes with CayenneModeler, so you still need to download the Modeler.</p></li>
+    </ul>
+   </div>
+  </div>
+  <div class="sect2">
+   <h3 id="mysql"><a class="anchor" href="#mysql"></a>MySQL</h3>
+   <div class="paragraph">
+    <p>MySQL database server is used as a database in this tutorial. Any other database that has a JDBC driver would work just as well, with the appropriate changes to the driver name and the connection URL.</p>
+   </div>
+   <div class="paragraph">
+    <p>If you don’t have MySQL installed, an easy way to get it is to run it in Docker. Start a MySQL container, publishing its port on the local machine (replace <code>your-password</code> with a root password of your choice), and give the server a few seconds to start:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre>$ docker run -d --name cayenne-mysql -e MYSQL_ROOT_PASSWORD=your-password -p 3306:3306 mysql:8.4</pre>
     </div>
    </div>
-   <div class="sect3">
-    <h4 id="cayennemodeler"><a class="anchor" href="#cayennemodeler"></a>CayenneModeler</h4>
-    <div class="paragraph">
-     <p>CayenneModeler is the GUI tool used in this tutorial to import the database schema, to edit the model and to generate Java classes. Download the appropriate Cayenne distribution from <a href="https://cayenne.apache.org/download/" class="bare">https://cayenne.apache.org/download/</a> and launch the Modeler from it (e.g. <code>java -jar CayenneModeler.jar</code>, or open <code>CayenneModeler.app</code> on macOS). The welcome screen of the Modeler looks like this:</p>
-    </div>
-    <div class="imageblock text-center">
-     <div class="content">
-      <img src="images/modeler-started.png" alt="modeler started" width="800">
-     </div>
-    </div>
+   <div class="paragraph">
+    <p>The database is now available at <code>127.0.0.1:3306</code>, with <code>root</code> as the user name. When you are done with the tutorial, the container can be removed with <code>docker rm -f cayenne-mysql</code>. Here is the DB schema that will be used in this tutorial:</p>
    </div>
-   <div class="sect3">
-    <h4 id="claude-code-optional"><a class="anchor" href="#claude-code-optional"></a>Claude Code (optional)</h4>
-    <div class="paragraph">
-     <p>To follow the "With Claude" alternatives, install Claude Code, the <code>apache-cayenne</code> plugin and the Cayenne MCP server, as described in the <a href="/docs/5.0/cayenne-guide/agentic-coding/">Agentic Coding</a> chapter of the Cayenne Guide. The MCP server comes with CayenneModeler, so you still need to download the Modeler.</p>
-    </div>
-   </div>
-   <div class="sect3">
-    <h4 id="mysql"><a class="anchor" href="#mysql"></a>MySQL</h4>
-    <div class="paragraph">
-     <p>MySQL database server is used as a database in this tutorial. Any other database that has a JDBC driver would work just as well, with the appropriate changes to the driver name and the connection URL.</p>
-    </div>
-    <div class="paragraph">
-     <p>You can create the test database with any tools you are comfortable with. Here is the DB schema that will be used in this tutorial:</p>
-    </div>
-    <div class="listingblock">
-     <div class="content">
-      <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE SCHEMA IF NOT EXISTS cayenne_demo; USE cayenne_demo;
+   <div class="listingblock">
+    <div class="content">
+     <pre class="highlight"><code class="language-sql sql" data-lang="sql">CREATE SCHEMA IF NOT EXISTS cayenne_demo; USE cayenne_demo;
 CREATE TABLE artist (DATE_OF_BIRTH DATE NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
 CREATE TABLE gallery (ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
 CREATE TABLE painting (ARTIST_ID INT NULL, GALLERY_ID INT NULL, ID INT NOT NULL AUTO_INCREMENT, NAME VARCHAR(200) NULL, PRIMARY KEY (ID)) ENGINE=InnoDB;
 ALTER TABLE painting ADD FOREIGN KEY (ARTIST_ID) REFERENCES artist (ID) ON DELETE CASCADE;
 ALTER TABLE painting ADD FOREIGN KEY (GALLERY_ID) REFERENCES gallery (ID) ON DELETE CASCADE;</code></pre>
-     </div>
     </div>
-    <div class="paragraph">
-     <p>You can save it to the <code>cayenne_demo.sql</code> file and import to your database with the following command:</p>
-    </div>
-    <div class="listingblock">
-     <div class="content">
-      <pre>$ mysql &lt; cayenne_demo.sql</pre>
-     </div>
+   </div>
+   <div class="paragraph">
+    <p>Save it to a file and import to your database. You can do it with any tools you are comfortable with, e.g.:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre># CLI client
+$ mysql &lt; cayenne_demo.sql
+
+# Docker
+$ docker exec -i cayenne-mysql mysql -uroot -pyour-password &lt; cayenne_demo.sql</pre>
     </div>
    </div>
   </div>
@@ -419,17 +438,30 @@ $ cd cayenne-tutorial</pre>
   <div class="sect2">
    <h3 id="with-claude"><a class="anchor" href="#with-claude"></a>With Claude</h3>
    <div class="paragraph">
-    <p>Start Claude Code in the tutorial project directory and ask it to do the import:</p>
+    <p>With the <code>apache-cayenne</code> plugin installed (see <a href="#claude-code-optional">Claude Code (optional)</a>), Claude already knows how to do most of the steps in this tutorial, so you only need to describe what you want. There is one exception though. Claude does not know how to connect to your database, and it should not. The connection settings (including the password) are kept in the CayenneModeler preferences on your machine, and the Cayenne MCP server uses them to run the import on Claude’s behalf. So start in the Modeler, following these steps from the previous section:</p>
    </div>
-   <div class="quoteblock">
-    <blockquote>
-     <div class="paragraph">
-      <p>Create a Cayenne project in <code>src/main/resources</code> and import the <code>cayenne_demo</code> MySQL database into it. Use <code>org.example.cayenne.persistent</code> as the Java package.</p>
-     </div>
-    </blockquote>
+   <div class="ulist">
+    <ul>
+     <li>
+      <p><a href="#install-the-jdbc-driver">Install the JDBC Driver</a></p></li>
+     <li>
+      <p><a href="#create-a-project-and-a-datamap">Create a Project and a DataMap</a></p></li>
+     <li>
+      <p><a href="#connect-to-the-database">Connect to the Database</a></p></li>
+     <li>
+      <p><a href="#save-the-project">Save the Project</a> (you haven’t imported anything yet, but Claude needs the project files to work with)</p></li>
+    </ul>
    </div>
    <div class="paragraph">
-    <p>Claude does not know how to connect to your database, and it should not. So the first time it opens the project in CayenneModeler, and asks you to enter the connection settings on the "DB Import" tab, exactly as described in "Connect to the Database" above (this includes installing the JDBC driver). Once you save the connection, tell Claude to continue. It runs the import using the connection stored in the Modeler preferences, and reports the entities that were added to the model. The project files are the same as the ones created with the Modeler, so from here on you can mix the two approaches.</p>
+    <p>Now start Claude Code in the tutorial project directory and ask it to do the import:</p>
+   </div>
+   <div class="listingblock">
+    <div class="content">
+     <pre>Import the "cayenne_demo" MySQL database into the Cayenne project in src/main/resources</pre>
+    </div>
+   </div>
+   <div class="paragraph">
+    <p>Claude runs the import using the connection saved by the Modeler, and reports the entities that were added to the model. The result is the same as with "Run Import" in the Modeler, so from here on you can mix the two approaches.</p>
    </div>
   </div>
  </div>
@@ -468,12 +500,10 @@ ALTER TABLE cayenne_demo.painting_info ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
    </div>
    <div class="sect3">
     <h4 id="with-claude-2"><a class="anchor" href="#with-claude-2"></a>With Claude</h4>
-    <div class="quoteblock">
-     <blockquote>
-      <div class="paragraph">
-       <p>My database schema has changed. Sync the Cayenne model with the database.</p>
-      </div>
-     </blockquote>
+    <div class="listingblock">
+     <div class="content">
+      <pre>My database schema has changed. Sync the Cayenne model with the database.</pre>
+     </div>
     </div>
    </div>
   </div>
@@ -499,12 +529,11 @@ ALTER TABLE cayenne_demo.painting_info ADD FOREIGN KEY (PAINTING_ID) REFERENCES 
    <div class="paragraph">
     <p>With Claude simply describe the change:</p>
    </div>
-   <div class="quoteblock">
-    <blockquote>
-     <div class="paragraph">
-      <p>In the Cayenne model rename the <code>id</code> relationship of <code>Painting</code> to <code>info</code>, and change the delete rule of <code>Artist.paintings</code> to "Cascade".</p>
-     </div>
-    </blockquote>
+   <div class="listingblock">
+    <div class="content">
+     <pre>In the Cayenne model rename the "id" relationship of "Painting" to "info",
+and change the delete rule of "Artist.paintings" to "Cascade".</pre>
+    </div>
    </div>
   </div>
   <div class="sect2">
@@ -547,12 +576,11 @@ ALTER TABLE cayenne_demo.painting ADD COLUMN __service_column INT;</code></pre>
    </div>
    <div class="sect3">
     <h4 id="with-claude-3"><a class="anchor" href="#with-claude-3"></a>With Claude</h4>
-    <div class="quoteblock">
-     <blockquote>
-      <div class="paragraph">
-       <p>Exclude the <code>legacy_painting_info</code> table and all the <code>__service_column</code> columns from the Cayenne DB import, then sync the model with the database.</p>
-      </div>
-     </blockquote>
+    <div class="listingblock">
+     <div class="content">
+      <pre>Exclude the "legacy_painting_info" table and all the "__service_column" columns
+from the Cayenne DB import, then sync the model with the database.</pre>
+     </div>
     </div>
    </div>
   </div>
@@ -595,12 +623,10 @@ src/main/java/org/example/cayenne/persistent/auto/_PaintingInfo.java</pre>
   </div>
   <div class="sect2">
    <h3 id="with-claude-4"><a class="anchor" href="#with-claude-4"></a>With Claude</h3>
-   <div class="quoteblock">
-    <blockquote>
-     <div class="paragraph">
-      <p>Generate Java classes from the Cayenne model.</p>
-     </div>
-    </blockquote>
+   <div class="listingblock">
+    <div class="content">
+     <pre>Generate Java classes from the Cayenne model.</pre>
+    </div>
    </div>
   </div>
   <div class="sect2">
