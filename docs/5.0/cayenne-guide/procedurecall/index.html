@@ -102,7 +102,7 @@
                                 Cayenne Version 5.0
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/5.0/getting-started-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/5.0/getting-started-guide/">Version 5.0 (Beta)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -230,9 +230,7 @@
     <li><a href="/docs/5.0/cayenne-guide/ext-cache-invalidation" class="nav-link" id="ext-cache-invalidation">Cache Invalidation Extension</a></li>
     <li><a href="/docs/5.0/cayenne-guide/ext-crypto" class="nav-link" id="ext-crypto">Crypto extension</a></li>
     <li><a href="/docs/5.0/cayenne-guide/ext-jcache" class="nav-link" id="ext-jcache">JCache integration</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-project-compatibility" class="nav-link" id="ext-project-compatibility">Project compatibility extension</a></li>
     <li><a href="/docs/5.0/cayenne-guide/ext-velocity" class="nav-link" id="ext-velocity">Apache Velocity Extension</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/ext-osgi" class="nav-link" id="ext-osgi">Cayenne OSGI extension</a></li>
    </ul></li>
   <li><a href="/docs/5.0/cayenne-guide/build_tools" class="nav-link" id="build_tools">16. Build Tools</a>
    <ul class="sectlevel2 nav">
@@ -435,10 +433,6 @@
 
     
 
-    
-
-    
-
 
 
 
@@ -470,15 +464,15 @@ List&lt;QueryResult&gt; result = ProcedureCall.query("my_procedure")
   </div>
  </div>
  <div class="paragraph">
-  <p><code>QueryResult</code> is a sealed interface with <code>Select</code>, <code>Update</code>, <code>Iterator</code> and <code>OutParameters</code> variants, listed in the order the procedure produced them, so the items can be accessed by index or scanned with a pattern-matching switch. A stored procedure can return data back to the application as result sets or via OUT parameters. The values of OUT and INOUT parameters are reported as a separate <code>QueryResult.OutParameters</code> item of the result, a map keyed by parameter name:</p>
+  <p><code>QueryResult</code> is a sealed interface with <code>SelectResult</code>, <code>UpdateResult</code>, <code>ResultIterator</code> and <code>OutParametersResult</code> variants, listed in the order the procedure produced them, so the items can be accessed by index or scanned with a pattern-matching switch. A stored procedure can return data back to the application as result sets or via OUT parameters. The values of OUT and INOUT parameters are reported as a separate <code>OutParametersResult</code> item of the result, a map keyed by parameter name:</p>
  </div>
  <div class="listingblock">
   <div class="content">
    <pre class="highlight"><code class="language-java java" data-lang="java">for (QueryResult item : ProcedureCall.query("my_procedure").call(context)) {
     switch (item) {
-        case QueryResult.Select&lt;?&gt; select -&gt; process(select.objects());
-        case QueryResult.Update update -&gt; process(update.counts());
-        case QueryResult.OutParameters out -&gt; process(out.values().get("out_param"));
+        case SelectResult&lt;?&gt; select -&gt; process(select.objects());
+        case UpdateResult update -&gt; process(update.counts());
+        case OutParametersResult out -&gt; process(out.values().get("out_param"));
         default -&gt; {
         }
     }
@@ -629,6 +623,11 @@ List&lt;QueryResult&gt; result = ProcedureCall.query("my_procedure")
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2026-11-04 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 04, 2026</time>
+                        <a href="/2026/11/cayenne-50rc1-released/">Cayenne 5.0 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2026-08-25 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Aug 25, 2026</time>
                         <a href="/2026/08/cayenne-50m3-released/">Cayenne 5.0 Milestone 3 Released</a>
                     </li>
@@ -636,11 +635,6 @@ List&lt;QueryResult&gt; result = ProcedureCall.query("my_procedure")
                     <li>
                         <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
                         <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
-                        <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
                     </li>
                     
                 </ul>

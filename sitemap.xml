@@ -320,13 +320,7 @@
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-jcache/</loc>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-project-compatibility/</loc>
-  </url>
-  <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-velocity/</loc>
-  </url>
-  <url>
-    <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/ext-osgi/</loc>
   </url>
   <url>
     <loc>https://cayenne.apache.org/docs/5.0/cayenne-guide/build_tools/</loc>
@@ -354,14 +348,18 @@
   </url>
   <url>
     <loc>https://cayenne.apache.org/</loc>
-    <lastmod>2026-08-25T12:00:00+03:00</lastmod>
+    <lastmod>2026-11-04T12:00:00+03:00</lastmod>
   </url>
   <url>
-    <loc>https://cayenne.apache.org/2026/08/cayenne-50m3-released/</loc>
-    <lastmod>2026-08-25T12:00:00+03:00</lastmod>
+    <loc>https://cayenne.apache.org/2026/11/cayenne-50rc1-released/</loc>
+    <lastmod>2026-11-04T12:00:00+03:00</lastmod>
   </url>
   <url>
     <loc>https://cayenne.apache.org/news/</loc>
+    <lastmod>2026-11-04T12:00:00+03:00</lastmod>
+  </url>
+  <url>
+    <loc>https://cayenne.apache.org/2026/08/cayenne-50m3-released/</loc>
     <lastmod>2026-08-25T12:00:00+03:00</lastmod>
   </url>
   <url>

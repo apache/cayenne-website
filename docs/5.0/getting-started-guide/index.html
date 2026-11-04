@@ -102,7 +102,7 @@
                                 Cayenne Version 5.0
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/docs/5.0/getting-started-guide/">Version 5.0 (Alpha)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
+                                <a class="dropdown-item" href="/docs/5.0/getting-started-guide/">Version 5.0 (Beta)</a><a class="dropdown-item" href="/docs/4.2/getting-started-guide/">Version 4.2 (Stable)</a><a class="dropdown-item" href="/docs/4.1/getting-started-guide/">Version 4.1 (Stable)</a><a class="dropdown-item" href="/docs/4.0/getting-started-guide/">Version 4.0 (Aging)</a><a class="dropdown-item" href="/docs/3.1/getting-started-guide/">Version 3.1 (Legacy)</a>
                             </div>
                         </li>
                     </ul>
@@ -309,7 +309,7 @@ $ cd cayenne-tutorial</pre>
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne&lt;/artifactId&gt;
-            &lt;version&gt;5.0&lt;/version&gt;
+            &lt;version&gt;5.0-RC1&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;com.mysql&lt;/groupId&gt;
@@ -711,7 +711,7 @@ public class Main {
 
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.datasource.CayenneDataSource;
-import org.apache.cayenne.runtime.CayenneRuntime;
+import org.apache.cayenne.CayenneRuntime;
 
 import javax.sql.DataSource;
 
@@ -756,9 +756,9 @@ public class Main {
     <div class="listingblock">
      <div class="content">
       <pre>[main] INFO org.apache.cayenne.datasource.DriverDataSource - +++ Connecting: SUCCESS.
-[main] INFO org.apache.cayenne.configuration.xml.XMLDataChannelDescriptorLoader - Loading
+[main] INFO org.apache.cayenne.project.xml.XMLProjectLoader - Loading
     XML configuration resource from file:/.../cayenne-project.xml
-[main] INFO org.apache.cayenne.configuration.xml.XMLDataChannelDescriptorLoader - Loading
+[main] INFO org.apache.cayenne.project.xml.XMLProjectLoader - Loading
     XML DataMap resource from file:/.../datamap.map.xml
 [main] INFO org.apache.cayenne.configuration.runtime.DataDomainProvider - setting DataNode
     'cayenne-0' as default, used by all unlinked DataMaps</pre>
@@ -1096,6 +1096,11 @@ stein.setGallery(metropolitan);</code></pre>
                 <ul class="list-multiline-items list-unstyled  mb-0">
                     
                     <li>
+                        <time datetime="2026-11-04 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 04, 2026</time>
+                        <a href="/2026/11/cayenne-50rc1-released/">Cayenne 5.0 Release Candidate 1 Released</a>
+                    </li>
+                    
+                    <li>
                         <time datetime="2026-08-25 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Aug 25, 2026</time>
                         <a href="/2026/08/cayenne-50m3-released/">Cayenne 5.0 Milestone 3 Released</a>
                     </li>
@@ -1103,11 +1108,6 @@ stein.setGallery(metropolitan);</code></pre>
                     <li>
                         <time datetime="2026-06-24 12:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Jun 24, 2026</time>
                         <a href="/2026/06/cayenne-50m2-released/">Cayenne 5.0 Milestone 2 Released</a>
-                    </li>
-                    
-                    <li>
-                        <time datetime="2025-11-19 10:00:00 &#43;0300 &#43;0300" class="xsmall d-block">Nov 19, 2025</time>
-                        <a href="/2025/11/cayenne-423-released/">Cayenne 4.2.3 Released</a>
                     </li>
                     
                 </ul>
