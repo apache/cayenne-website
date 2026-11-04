@@ -26,7 +26,10 @@ weight: 440
 <div class="sect2">
  <h3 id="mappedselect-and-mappedexec"><a class="anchor" href="#mappedselect-and-mappedexec"></a>MappedSelect and MappedExec</h3>
  <div class="paragraph">
-  <p><code>MappedSelect</code> and <code>MappedExec</code> is a queries that are just a reference to another queries stored in the DataMap. The actual stored query can be SelectQuery, SQLTemplate, EJBQLQuery, etc. Difference between <code>MappedSelect</code> and <code>MappedExec</code> is (as reflected in their names) whether underlying query intended to select data or just to perform some generic SQL code.</p>
+  <p><code>MappedSelect</code> and <code>MappedExec</code> is a queries that are just a reference to another queries stored in the DataMap. The actual stored query can be ObjectSelect, SQLTemplate or ProcedureQuery. Difference between <code>MappedSelect</code> and <code>MappedExec</code> is (as reflected in their names) whether underlying query intended to select data or just to perform some generic SQL code.</p>
+ </div>
+ <div class="paragraph">
+  <p>An ObjectSelect stored in the DataMap is defined by a String in the <a href="/docs/5.0/cayenne-guide/ql">Object Query Language</a>, so it can be any query that the language supports, including the column queries and the queries rooted in a DbEntity. Its "$name" parameters are bound by name when the query is executed. A condition with a parameter that has no value is dropped from the query, so the same mapped query can be used both with and without its optional parameters.</p>
  </div>
  <div class="paragraph">
   <p>Here is example of how to use <code>MappedSelect</code>:</p>
@@ -46,7 +49,7 @@ weight: 440
    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;QueryResult&gt; result = MappedExec.query("updatePaintingTitle")
         .param("title", "Untitled")
         .execute(context);
-QueryResult.Update update = (QueryResult.Update) result.getFirst();
+UpdateResult update = (UpdateResult) result.getFirst();
 System.out.println("Rows updated: " + update.count());</code></pre>
   </div>
  </div>

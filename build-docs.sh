@@ -52,7 +52,7 @@ set -o pipefail
 # -mcp-server, -modeler, -project, -wocompat, ...) are deliberately left out. New extension
 # modules have to be added here by hand - an allow list is used on purpose, so that a new
 # internal module can't silently leak into the published API.
-JAVADOC_MODULES="cayenne-di,cayenne,cayenne-cache-invalidation,cayenne-crypto,cayenne-jcache,cayenne-lifecycle,cayenne-velocity,cayenne-osgi"
+JAVADOC_MODULES="cayenne-di,cayenne,cayenne-cache-invalidation,cayenne-crypto,cayenne-jcache,cayenne-velocity"
 
 # "cayenne-test-utilities" is dragged into the reactor by "-am", but is not public API.
 JAVADOC_EXCLUDES="org.apache.cayenne.test.*"

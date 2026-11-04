@@ -47,15 +47,15 @@ List&lt;QueryResult&gt; result = ProcedureCall.query("my_procedure")
   </div>
  </div>
  <div class="paragraph">
-  <p><code>QueryResult</code> is a sealed interface with <code>Select</code>, <code>Update</code>, <code>Iterator</code> and <code>OutParameters</code> variants, listed in the order the procedure produced them, so the items can be accessed by index or scanned with a pattern-matching switch. A stored procedure can return data back to the application as result sets or via OUT parameters. The values of OUT and INOUT parameters are reported as a separate <code>QueryResult.OutParameters</code> item of the result, a map keyed by parameter name:</p>
+  <p><code>QueryResult</code> is a sealed interface with <code>SelectResult</code>, <code>UpdateResult</code>, <code>ResultIterator</code> and <code>OutParametersResult</code> variants, listed in the order the procedure produced them, so the items can be accessed by index or scanned with a pattern-matching switch. A stored procedure can return data back to the application as result sets or via OUT parameters. The values of OUT and INOUT parameters are reported as a separate <code>OutParametersResult</code> item of the result, a map keyed by parameter name:</p>
  </div>
  <div class="listingblock">
   <div class="content">
    <pre class="highlight"><code class="language-java java" data-lang="java">for (QueryResult item : ProcedureCall.query("my_procedure").call(context)) {
     switch (item) {
-        case QueryResult.Select&lt;?&gt; select -&gt; process(select.objects());
-        case QueryResult.Update update -&gt; process(update.counts());
-        case QueryResult.OutParameters out -&gt; process(out.values().get("out_param"));
+        case SelectResult&lt;?&gt; select -&gt; process(select.objects());
+        case UpdateResult update -&gt; process(update.counts());
+        case OutParametersResult out -&gt; process(out.values().get("out_param"));
         default -&gt; {
         }
     }

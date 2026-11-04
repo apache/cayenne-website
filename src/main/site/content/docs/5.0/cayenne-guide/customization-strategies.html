@@ -98,7 +98,7 @@ CayenneRuntime runtime = CayenneRuntime.of()
  <div class="sect3">
   <h4 id="alternative-service-implementations"><a class="anchor" href="#alternative-service-implementations"></a>Alternative Service Implementations</h4>
   <div class="paragraph">
-   <p>As mentioned above, custom modules are loaded by CayenneRuntime after the built-in modules. So it is easy to redefine a built-in service in Cayenne by rebinding desired implementations or providers. To do that, first we need to know what those services to redefine are. While we describe some of them in the following sections, the best way to get a full list is to check the source code of the Cayenne version you are using and namely look in <code>org.apache.cayenne.configuration.runtime.CoreModule</code> - the main built-in module in Cayenne.</p>
+   <p>As mentioned above, custom modules are loaded by CayenneRuntime after the built-in modules. So it is easy to redefine a built-in service in Cayenne by rebinding desired implementations or providers. To do that, first we need to know what those services to redefine are. While we describe some of them in the following sections, the best way to get a full list is to check the source code of the Cayenne version you are using and namely look in <code>org.apache.cayenne.CoreModule</code> - the main built-in module in Cayenne.</p>
   </div>
  </div>
 </div>

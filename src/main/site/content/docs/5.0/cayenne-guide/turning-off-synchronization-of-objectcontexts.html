@@ -43,7 +43,7 @@ weight: 630
   </ul>
  </div>
  <div class="paragraph">
-  <p>So we’ve made a good case for disabling synchronization in most webapps. To do that, set to "false" the following DI property - <code>Constants.CONTEXTS_SYNC_PROPERTY</code>, using one of the standard Cayenne DI approaches. E.g. from command line:</p>
+  <p>So we’ve made a good case for disabling synchronization in most webapps. To do that, set to "false" the following DI property - <code>RuntimeProperties.CONTEXTS_SYNC_PROPERTY</code>, using one of the standard Cayenne DI approaches. E.g. from command line:</p>
  </div>
  <div class="listingblock">
   <div class="content">
@@ -60,7 +60,7 @@ weight: 630
     @Override
     public void configure(Binder binder) {
         CoreModule.extend(binder)
-                .setProperty(Constants.CONTEXTS_SYNC_PROPERTY, "false");
+                .setProperty(RuntimeProperties.CONTEXTS_SYNC_PROPERTY, "false");
     }
 }</code></pre>
   </div>

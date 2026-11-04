@@ -45,10 +45,10 @@ weight: 280
    <pre class="highlight"><code class="language-java java" data-lang="java">List&lt;QueryResult&gt; result = context.execute(query);
 for (QueryResult item : result) {
     switch (item) {
-        case QueryResult.Select&lt;?&gt; select -&gt; process(select.objects());
-        case QueryResult.Update update -&gt; process(update.counts());
-        case QueryResult.Iterator&lt;?&gt; iterator -&gt; process(iterator.iterator());
-        case QueryResult.OutParameters out -&gt; process(out.values());
+        case SelectResult&lt;?&gt; select -&gt; process(select.objects());
+        case UpdateResult update -&gt; process(update.counts());
+        case ResultIterator&lt;?&gt; iterator -&gt; process(iterator);
+        case OutParametersResult out -&gt; process(out.values());
     }
 }</code></pre>
   </div>

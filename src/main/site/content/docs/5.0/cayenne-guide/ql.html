@@ -48,6 +48,24 @@ weight: 410
   </div>
  </div>
  <div class="sect3">
+  <h4 id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h4>
+  <div class="paragraph">
+   <p>The values of the <code>$name</code> parameters of a query are bound either positionally, in the order of the first occurrence of the names in the String, as in the examples above, or by name from a <code>Map</code>. When bound by name, a parameter that has no value is dropped from the query together with the smallest condition that contains it, in the subqueries alike. So a single String can serve a search form with optional filters:</p>
+  </div>
+  <div class="listingblock">
+   <div class="content">
+    <pre class="highlight"><code class="language-java java" data-lang="java">// "$born" has no value, so its condition is dropped from the query
+List&lt;Artist&gt; artists = ObjectSelect
+        .parse(Artist.class, "from Artist where name like $name and dateOfBirth &gt; $born",
+                Map.of("name", "A%"))
+        .select(context);</code></pre>
+   </div>
+  </div>
+  <div class="paragraph">
+   <p>With no values at all the parameters are preserved in the parsed query, to be bound later.</p>
+  </div>
+ </div>
+ <div class="sect3">
   <h4 id="query-structure"><a class="anchor" href="#query-structure"></a>Query Structure</h4>
   <div class="listingblock">
    <div class="content">
@@ -56,7 +74,8 @@ from Entity
 [ where     expression ]
 [ having    expression ]
 [ order by  orderings ]
-[ limit n [ offset m ] ]
+[ limit n ]
+[ offset m ]
 [ prefetch  paths ]</code></pre>
    </div>
   </div>
@@ -81,7 +100,7 @@ from Entity
   </div>
  </div>
  <div class="sect3">
-  <h4 id="parameters"><a class="anchor" href="#parameters"></a>Parameters</h4>
+  <h4 id="parameters-2"><a class="anchor" href="#parameters-2"></a>Parameters</h4>
   <div class="paragraph">
    <p>A parameter is a name prefixed with <code>$</code>, the same as in expressions. The values are passed to the <code>parse(..)</code> method and are bound in the order in which the parameters first appear in the String. If the same name is used more than once, it takes a single value that is bound in all those places. A value can be anything that is a valid expression operand: a scalar, a collection for <code>in</code>, a persistent object to match a relationship, etc.:</p>
   </div>

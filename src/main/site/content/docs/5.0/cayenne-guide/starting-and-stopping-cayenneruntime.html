@@ -26,7 +26,7 @@ weight: 220
 <div class="sect2">
  <h3 id="starting-and-stopping-cayenneruntime"><a class="anchor" href="#starting-and-stopping-cayenneruntime"></a>Starting and Stopping CayenneRuntime</h3>
  <div class="paragraph">
-  <p>In runtime Cayenne is accessed via <code>org.apache.cayenne.runtime.CayenneRuntime</code>. CayenneRuntime is created by calling a convenient builder:</p>
+  <p>In runtime Cayenne is accessed via <code>org.apache.cayenne.CayenneRuntime</code>. CayenneRuntime is created by calling a convenient builder:</p>
  </div>
  <div class="listingblock">
   <div class="content">
@@ -44,7 +44,7 @@ weight: 220
  <div class="listingblock">
   <div class="content">
    <pre class="highlight"><code class="language-java java" data-lang="java">Module extensions = binder -&gt;
-        CoreModule.extend(binder).setProperty(Constants.EXTERNAL_TX_PROPERTY, "true");
+        CoreModule.extend(binder).setProperty(RuntimeProperties.EXTERNAL_TX_PROPERTY, "true");
 
 CayenneRuntime runtime = CayenneRuntime.of()
         .addConfig("com/example/cayenne-project.xml")

@@ -136,7 +136,7 @@ $ cd cayenne-tutorial</pre>
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.cayenne&lt;/groupId&gt;
             &lt;artifactId&gt;cayenne&lt;/artifactId&gt;
-            &lt;version&gt;5.0&lt;/version&gt;
+            &lt;version&gt;5.0-RC1&lt;/version&gt;
         &lt;/dependency&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;com.mysql&lt;/groupId&gt;
@@ -538,7 +538,7 @@ public class Main {
 
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.datasource.CayenneDataSource;
-import org.apache.cayenne.runtime.CayenneRuntime;
+import org.apache.cayenne.CayenneRuntime;
 
 import javax.sql.DataSource;
 
@@ -583,9 +583,9 @@ public class Main {
     <div class="listingblock">
      <div class="content">
       <pre>[main] INFO org.apache.cayenne.datasource.DriverDataSource - +++ Connecting: SUCCESS.
-[main] INFO org.apache.cayenne.configuration.xml.XMLDataChannelDescriptorLoader - Loading
+[main] INFO org.apache.cayenne.project.xml.XMLProjectLoader - Loading
     XML configuration resource from file:/.../cayenne-project.xml
-[main] INFO org.apache.cayenne.configuration.xml.XMLDataChannelDescriptorLoader - Loading
+[main] INFO org.apache.cayenne.project.xml.XMLProjectLoader - Loading
     XML DataMap resource from file:/.../datamap.map.xml
 [main] INFO org.apache.cayenne.configuration.runtime.DataDomainProvider - setting DataNode
     'cayenne-0' as default, used by all unlinked DataMaps</pre>
