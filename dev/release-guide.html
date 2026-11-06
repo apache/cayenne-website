@@ -107,6 +107,9 @@ More info can be found at <a href="https://www.apache.org/dev/release-signing.ht
 <em>~/.m2/settings.xml</em> and an appropriate password is setup. See <a href="https://www.apache.org/dev/publishing-maven-artifacts.html">this page</a>
 for details.</li>
 <li>Cayenne 5.0 requires Java 21, so the release must be built with JDK 21 or newer.</li>
+<li>Write access to <a href="https://github.com/apache/cayenne">apache/cayenne</a> on GitHub (to run the <code>release dist</code>
+workflow). The <a href="https://cli.github.com/">GitHub CLI</a> (<code>gh</code>) is handy to download its results, but optional.</li>
+<li>An SVN client, to stage the assemblies in <a href="https://dist.apache.org/repos/dist/">https://dist.apache.org/repos/dist/</a>.</li>
 </ul>
 
 
@@ -135,9 +138,11 @@ when an exclusion really is warranted it goes into <code>build-tools/rat-exclude
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd cayenne
 mvn release:clean
 mvn release:prepare -DpreparationGoals<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;clean install&#34;</span> -DautoVersionSubmodules<span style="color:#f92672">=</span>true
-mvn release:perform -P release <span style="color:#f92672">[</span>-Dgpg.keyname<span style="color:#f92672">=</span>B8AF90BF<span style="color:#f92672">]</span>
-</code></pre></div><p>The <code>release</code> profile (named <code>gpg</code> prior to 5.0-M4) does two things: it GPG-signs the artifacts,
-and it attaches a <code>-sources.jar</code> and a <code>-javadoc.jar</code>.</p>
+mvn release:perform <span style="color:#f92672">[</span>-Dgpg.keyname<span style="color:#f92672">=</span>B8AF90BF<span style="color:#f92672">]</span>
+</code></pre></div><p><code>release:perform</code> activates the <code>release</code> profile on its own (<code>releaseProfiles</code> in the root <code>pom.xml</code>).
+The profile (named <code>gpg</code> prior to 5.0-M4) does two things: it GPG-signs the artifacts,
+and it attaches a <code>-sources.jar</code> and a <code>-javadoc.jar</code>. <code>release:prepare</code> also pushes the release tag,
+which is the input for the next step.</p>
 </li>
 <li>
 <p>Close the staging repo. Login to <a href="https://repository.apache.org/">https://repository.apache.org/</a> with
@@ -152,58 +157,90 @@ be used by the people voting on Cayenne. It may look like this:
 
 <div class="pb-3"></div>
 <h2 id="releasing-downloadable-assemblies">Releasing Downloadable Assemblies</h2>
+<p>The assemblies are built by the <code>release dist</code> GitHub workflow from the release tag. Per the Apache
+<a href="https://www.apache.org/dev/release-distribution">Release Distribution policy</a> they are <strong>not</strong> signed in CI:
+the release manager downloads them and signs them locally with their own key.</p>
 <ul>
 <li>
-<p>Switch to the release tag created above.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/apache/cayenne.git --branch <span style="color:#e6db74">&#34;XXX&#34;</span> --depth <span style="color:#ae81ff">1</span>
-</code></pre></div></li>
-<li>
-<p>Build source package (it will be the basis for the binary packages built in the next steps) :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean install -Passembly,src
-</code></pre></div></li>
-<li>
-<p>Build binary assemblies. <em>Release manager may skip running unit tests from here, as shown
-below, although release evaluators should use the src assembly for <a href="running-unit-tests.html">unit testing</a>
-and other kinds of testing.</em> For further details on a general Cayenne build process check <a href="building-cayenne.html">this page</a>.</p>
+<p>Run the workflow. On GitHub go to Actions → <strong>release dist</strong> → <em>Run workflow</em>, keep <code>master</code> as the branch and
+enter the release tag, e.g. <code>5.0-RC1</code>. Other inputs:</p>
 <ul>
-<li>
-<p>Take <em>&ldquo;cayenne-assembly/target/cayenne-XXX-src.tar.gz&rdquo;</em>, unpack it somewhere, and
-perform binary builds from the unpacked directory (NOT FROM GIT CHECKOUT).</p>
+<li><code>java-version</code> - JDK to build with, <code>21</code> by default.</li>
+<li><code>sign-mac</code> - sign and notarize the Mac app. Not available yet, leave it off.</li>
+<li><code>dry-run</code> - for testing the workflow in a fork, see below.</li>
+</ul>
+<p>The workflow checks that the POM version at the tag equals the tag and is not a SNAPSHOT, runs RAT, builds the
+source release and checks its contents against git. Then it unpacks the source release and builds the generic,
+Mac and Windows assemblies from it (not from the git checkout), restoring the Gradle wrapper that is left out of
+the source release. Finally it writes a <code>.sha512</code> for each file.</p>
 </li>
 <li>
-<p>Per Apache release guidelines there shouldn&rsquo;t be any binaries in a release, so you need manually copy
-Gradle wrapper. Just copy <em>cayenne-gradle-plugin/gradle</em> folder to the corresponding folder in unpacked sources.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp -r ./cayenne-gradle-plugin/gradle ./cayenne-assembly/target/cayenne-XXX-src/cayenne-gradle-plugin/
+<p>When the run is green, its summary shows the tag and commit, lists the files with their size and SHA-512, and
+gives the commands for the next two steps.
+Download the <code>cayenne-X.X-dist</code> artifact (it is kept for 30 days):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gh run download &lt;run-id&gt; --repo apache/cayenne --name cayenne-X.X-dist --dir cayenne-X.X-dist
+</code></pre></div><p>Without <code>gh</code>, download it from the <em>Artifacts</em> section at the bottom of the run page. GitHub serves it as a zip,
+unpack it into a <code>cayenne-X.X-dist</code> folder:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">unzip cayenne-X.X-dist.zip -d cayenne-X.X-dist
 </code></pre></div></li>
 <li>
-<p>Build binary artifacts</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean package -Passembly,generic -DskipTests
+<p>Sign the files, from a checkout of the release tag (more on signing <a href="https://www.apache.org/dev/release-signing.html">here</a>):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">build-tools/release/sign-and-stage.sh cayenne-X.X-dist X.X <span style="color:#f92672">[</span>gpg-key-id<span style="color:#f92672">]</span>
+</code></pre></div><p>The script verifies the checksums, writes an ASCII-armored detached signature (<code>.asc</code>) for each file and verifies
+it, checks that your key is in <code>KEYS</code>, and prints (does not run) the <code>svn</code> commands to stage the files.</p>
+</li>
+<li>
+<p>Stage the assemblies, signatures and checksums in the SVN repo used for staging development releases:
+<a href="https://dist.apache.org/repos/dist/dev/cayenne/">https://dist.apache.org/repos/dist/dev/cayenne/</a>, in a
+separate folder for each release (see <a href="https://apache.org/legal/release-policy.html#stage">the infrastructure docs</a>).
+These are the commands printed by the script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">svn checkout --depth<span style="color:#f92672">=</span>empty https://dist.apache.org/repos/dist/dev/cayenne cayenne-dist-dev
+cd cayenne-dist-dev
+svn mkdir X.X
+cp ../cayenne-X.X-dist/cayenne-X.X* X.X/
+svn add X.X/*
+svn commit -m <span style="color:#e6db74">&#34;Cayenne X.X release candidate&#34;</span>
+</code></pre></div><p>Then check <code>https://dist.apache.org/repos/dist/dev/cayenne/X.X/</code> in a browser.</p>
+</li>
+<li>
+<p>To test the workflow in a fork, run it with <code>dry-run</code>: it then skips the repository check and accepts a
+SNAPSHOT version at the tag. Don&rsquo;t use the results of such a run for a release.</p>
+</li>
+</ul>
+<h3 id="building-the-assemblies-manually">Building the assemblies manually</h3>
+<p><em>NOTE</em>: Only needed if the GitHub workflow can&rsquo;t be used.</p>
+<p><em>Release manager may skip running unit tests here, although release
+evaluators should use the src assembly for <a href="running-unit-tests.html">unit testing</a> and other kinds of testing.</em>
+For further details on a general Cayenne build process check <a href="building-cayenne.html">this page</a>.</p>
+<ul>
+<li>
+<p>Check out the release tag and build the source package, the basis for the binary packages:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/apache/cayenne.git --branch <span style="color:#e6db74">&#34;X.X&#34;</span> --depth <span style="color:#ae81ff">1</span>
+cd cayenne
+mvn clean install -Passembly,src
+</code></pre></div></li>
+<li>
+<p>Unpack <em>cayenne-assembly/target/cayenne-X.X-src.tar.gz</em> and do the binary builds from the unpacked directory
+(NOT FROM GIT CHECKOUT). There are no binaries in a source release, so copy the Gradle wrapper there first:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp -r ./cayenne-gradle-plugin/gradle ./cayenne-assembly/target/cayenne-X.X-src/cayenne-gradle-plugin/
+</code></pre></div></li>
+<li>
+<p>Build the binary assemblies:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mvn clean install -Passembly,generic -DskipTests
 
-<span style="color:#75715e"># You will need to do this on OS X</span>
-mvn clean package -Passembly,mac -DskipTests
+<span style="color:#75715e"># You will need to do this on macOS</span>
+mvn clean install -Passembly,mac -DskipTests
 
 <span style="color:#75715e"># You will need to do this on Windows</span>
-mvn clean package -Passembly,windows -DskipTests
+mvn clean install -Passembly,windows -DskipTests
 </code></pre></div></li>
-</ul>
-</li>
 <li>
-<p>Signing assemblies</p>
-<p>You can find additional information in official Apache <a href="https://www.apache.org/dev/release-distribution">Release Distribution policy</a>
-and on <a href="https://www.apache.org/dev/release-signing.html">this page</a>.
-Release manager key must be in the project KEYS file. Signing is a manual
-procedure not included in the Ant or Maven script. Here is how it might
-work (&quot;-u&rdquo; option can be omitted if you have only one GPG key):</p>
+<p>Sign and checksum each file (&quot;-u&rdquo; can be omitted if you have only one GPG key), then stage them as above:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># repeat for every assembly: cayenne-X.X-src.tar.gz, cayenne-X.X.tar.gz (generic),</span>
 <span style="color:#75715e"># cayenne-X.X-win.zip and cayenne-X.X-macosx.dmg</span>
 gpg -a -b -u B8AF90BF cayenne-X.X.tar.gz
-gpg --print-md SHA512 cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512
+sha512sum cayenne-X.X.tar.gz &gt; cayenne-X.X.tar.gz.sha512   <span style="color:#75715e"># &#34;shasum -a 512&#34; on macOS</span>
 </code></pre></div></li>
-<li>
-<p>Assemblies, signature and checksum files are committed to the special SVN repo
-used for staging development releases: <a href="https://dist.apache.org/repos/dist/dev/cayenne/">https://dist.apache.org/repos/dist/dev/cayenne/</a>.
-Use a separate folder for each release. For more info on this repository check <a href="https://apache.org/legal/release-policy.html#stage">the infrastructure docs</a>.</p>
-</li>
 </ul>
 
 
@@ -318,8 +355,17 @@ staging repo, then clean up the tag and the two <code>[maven-release-plugin]</co
 </code></pre></div></li>
 <li>
 <p><strong>Nexus won&rsquo;t close the staging repo.</strong> &ldquo;Missing Signature&rdquo;, or missing sources / javadoc, means
-<code>-P release</code> was not active. Drop the repo and re-run <code>mvn release:perform -P release</code>.</p>
+the <code>release</code> profile was not active. Drop the repo and re-run <code>mvn release:perform -P release</code>.</p>
 </li>
+<li>
+<p><strong><code>release dist</code> fails at &ldquo;Check the version&rdquo;.</strong> The POM version at the tag must equal the tag and must not be a
+SNAPSHOT: check the tag name you entered, and that <code>release:prepare</code> pushed the tag. The workflow only reads the
+repository, so a failed run leaves nothing to clean up - fix the cause and run it again for the same tag.</p>
+</li>
+<li>
+<p><strong><code>sign-and-stage.sh</code> warns that the key is not in <code>KEYS</code>.</strong> Append it and publish <code>KEYS</code> before the vote:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>gpg --list-sigs &lt;fingerprint&gt; <span style="color:#f92672">&amp;&amp;</span> gpg --armor --export &lt;fingerprint&gt;<span style="color:#f92672">)</span> &gt;&gt; KEYS
+</code></pre></div></li>
 <li>
 <p><strong>GPG can&rsquo;t sign.</strong> Export <code>GPG_TTY=$(tty)</code> so the agent can prompt for the passphrase, and pass
 <code>-Dgpg.keyname</code> if you have more than one key. The <code>gpg.passphrase</code> property is deprecated in
