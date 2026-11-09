@@ -16,24 +16,27 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
-title: "Cayenne Guide 5.0 · apache-cayenne Claude Code Plugin"
-description: "Cayenne Guide 5.0, apache-cayenne Claude Code Plugin"
+title: "Cayenne Guide 5.0 · apache-cayenne-5 Claude Code Plugin"
+description: "Cayenne Guide 5.0, apache-cayenne-5 Claude Code Plugin"
 cayenneVersion: "5.0"
 cayenneNoToc: true
 docId: cayenne-guide
 weight: 710
 ---
 <div class="sect2">
- <h3 id="apache-cayenne-claude-code-plugin"><a class="anchor" href="#apache-cayenne-claude-code-plugin"></a><code>apache-cayenne</code> Claude Code Plugin</h3>
+ <h3 id="apache-cayenne-5-claude-code-plugin"><a class="anchor" href="#apache-cayenne-5-claude-code-plugin"></a><code>apache-cayenne-5</code> Claude Code Plugin</h3>
  <div class="paragraph">
-  <p>(Claude Code specific) Install the <code>apache-cayenne</code> plugin with Cayenne skills under Claude Code:</p>
+  <p>(Claude Code specific) Install the <code>apache-cayenne-5</code> plugin with Cayenne skills under Claude Code:</p>
  </div>
  <div class="listingblock">
   <div class="content">
    <pre class="highlight"><code class="language-bash bash" data-lang="bash">/plugin marketplace add apache/cayenne
-/plugin install apache-cayenne@apache-cayenne
+/plugin install apache-cayenne-5@apache-cayenne
 /reload-plugins</code></pre>
   </div>
+ </div>
+ <div class="paragraph">
+  <p>The plugin is versioned with Cayenne: <code>apache-cayenne-5</code> is for Cayenne 5.0, while <code>apache-cayenne-6</code> from the same marketplace is for Cayenne 6.0 and teaches API that doesn’t exist in 5.0. There is no unversioned plugin.</p>
  </div>
  <div class="paragraph">
   <p>The plugin adds skills for DataMap editing, class generation, reverse engineering, query writing, and runtime setup. The skills work best with the MCP server present (see the next chapter).</p>
