@@ -15,7 +15,7 @@
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="https://cayenne.apache.org/css/styles-9ee2e6e330.css"/>
         <script src="https://cayenne.apache.org/js/bundle-c0e6356367.js"></script>
-        <title>Cayenne Guide 5.0 · apache-cayenne Claude Code Plugin &middot; Apache Cayenne</title>
+        <title>Cayenne Guide 5.0 · apache-cayenne-5 Claude Code Plugin &middot; Apache Cayenne</title>
     </head>
     <body  class="cd-head">
 <header class="page-header">
@@ -222,7 +222,7 @@
   <li><a href="/docs/5.0/cayenne-guide/agentic-coding" class="nav-link" id="agentic-coding">14. Agentic Coding</a>
    <ul class="sectlevel2 nav">
     <li><a href="/docs/5.0/cayenne-guide/overview" class="nav-link" id="overview">Overview</a></li>
-    <li><a href="/docs/5.0/cayenne-guide/apache-cayenne-claude-code-plugin" class="nav-link" id="apache-cayenne-claude-code-plugin"><code>apache-cayenne</code> Claude Code Plugin</a></li>
+    <li><a href="/docs/5.0/cayenne-guide/apache-cayenne-5-claude-code-plugin" class="nav-link" id="apache-cayenne-5-claude-code-plugin"><code>apache-cayenne-5</code> Claude Code Plugin</a></li>
     <li><a href="/docs/5.0/cayenne-guide/cayenne-mcp-server" class="nav-link" id="cayenne-mcp-server">Cayenne MCP Server</a></li>
    </ul></li>
   <li><a href="/docs/5.0/cayenne-guide/additional-modules" class="nav-link" id="additional-modules">15. Additional Modules</a>
@@ -441,16 +441,19 @@
                     </header>
                     <section>
                         <div class="sect2">
- <h3 id="apache-cayenne-claude-code-plugin"><a class="anchor" href="#apache-cayenne-claude-code-plugin"></a><code>apache-cayenne</code> Claude Code Plugin</h3>
+ <h3 id="apache-cayenne-5-claude-code-plugin"><a class="anchor" href="#apache-cayenne-5-claude-code-plugin"></a><code>apache-cayenne-5</code> Claude Code Plugin</h3>
  <div class="paragraph">
-  <p>(Claude Code specific) Install the <code>apache-cayenne</code> plugin with Cayenne skills under Claude Code:</p>
+  <p>(Claude Code specific) Install the <code>apache-cayenne-5</code> plugin with Cayenne skills under Claude Code:</p>
  </div>
  <div class="listingblock">
   <div class="content">
    <pre class="highlight"><code class="language-bash bash" data-lang="bash">/plugin marketplace add apache/cayenne
-/plugin install apache-cayenne@apache-cayenne
+/plugin install apache-cayenne-5@apache-cayenne
 /reload-plugins</code></pre>
   </div>
+ </div>
+ <div class="paragraph">
+  <p>The plugin is versioned with Cayenne: <code>apache-cayenne-5</code> is for Cayenne 5.0, while <code>apache-cayenne-6</code> from the same marketplace is for Cayenne 6.0 and teaches API that doesn’t exist in 5.0. There is no unversioned plugin.</p>
  </div>
  <div class="paragraph">
   <p>The plugin adds skills for DataMap editing, class generation, reverse engineering, query writing, and runtime setup. The skills work best with the MCP server present (see the next chapter).</p>
